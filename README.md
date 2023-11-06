@@ -11,17 +11,17 @@
 #### Start instance
 
 `npm run start:misp`
-Instance will be running at: http://localhost
+Instance will be running at: https://localhost
 
 #### generate your key here:
 
-http://localhost/auth_keys/index
+https://localhost/auth_keys/index
 
 copy the template.env file to .env and replace the PUBLIC_MISP_KEY with your key
 
 #### Update cors settings:
 
-http://localhost/servers/serverSettings/Security
+https://localhost/servers/serverSettings/Security
 
 search for Security.allow_cors and set to true. See: https://github.com/MISP/MISP/pull/4157
 
