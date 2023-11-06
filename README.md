@@ -23,7 +23,8 @@ copy the template.env file to .env and replace the PUBLIC_MISP_KEY with your key
 
 https://localhost/servers/serverSettings/Security
 
-search for Security.allow_cors and set to true. See: https://github.com/MISP/MISP/pull/4157
+- search for Security.allow_cors and set to true. See: https://github.com/MISP/MISP/pull/4157
+- also search for Security.cors_origins and set to \* for testing purposes
 
 ## Develope
 
