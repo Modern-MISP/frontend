@@ -1,2 +1,1 @@
-Home
-<a href="/user">My User</a>
+<h1>Home</h1>

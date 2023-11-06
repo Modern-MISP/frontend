@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-	color: rgb(32, 32, 198);
-	text-decoration: underline;
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
 }
