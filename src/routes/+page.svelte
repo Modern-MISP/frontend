@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { GET } from '$lib/api';
+	const tags = GET('/tags', {});
+</script>
+
+<h1>Request to /tags</h1>
+{#await tags then value}
+	<pre>
+        {JSON.stringify(value, null, 2)}
+    </pre>
+{/await}

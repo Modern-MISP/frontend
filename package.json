@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"start:misp": "docker compose -f misp-docker/docker-compose.yml up",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,7 +15,8 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"story:dev": "histoire dev",
 		"story:build": "histoire build",
-		"story:preview": "histoire preview"
+		"story:preview": "histoire preview",
+		"gen:api-types": "openapi-typescript https://raw.githubusercontent.com/MISP/MISP/develop/app/webroot/doc/openapi.yaml -o src/lib/api/misp.d.ts"
 	},
 	"devDependencies": {
 		"@histoire/plugin-svelte": "^0.17.4",
@@ -27,6 +29,8 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
 		"histoire": "^0.17.4",
+		"openapi-fetch": "^0.8.1",
+		"openapi-typescript": "^6.7.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
 		"svelte": "^4.0.5",
