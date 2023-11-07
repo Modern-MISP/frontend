@@ -13,6 +13,10 @@
 `npm run start:misp`
 Instance will be running at: https://localhost
 
+- Email: admin@admin.test
+- Password: admin
+
+
 #### generate your key here:
 
 https://localhost/auth_keys/index
