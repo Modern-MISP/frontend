@@ -40,6 +40,8 @@ For testing with admin permissions just set both vars to the key generated in th
 ### Start misp instance to use as api
 
 `npm run start:misp`
+- Email: admin@admin.test
+- Password: admin
 
 ### Start sveltekit
 
