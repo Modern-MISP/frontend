@@ -11,12 +11,14 @@
 	import PinOffIcon from 'svelte-material-icons/PinOff.svelte';
 	import EyeIcon from 'svelte-material-icons/EyeCircleOutline.svelte';
 	import SearchIcon from 'svelte-material-icons/Magnify.svelte';
+	import SettingsIcon from 'svelte-material-icons/Cog.svelte';
 	import { page } from '$app/stores';
+	import { settings } from '$lib/stores';
 
-	let openMenu = false;
+	let openMenu = $settings.openOnInit;
 </script>
 
-<div class="absolute w-[100vw] h-full flex flex-row macchiato bg-base text-text">
+<div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
 	{#if openMenu}
 		<div class="bg-mantle p-2 relative rounded-md flex flex-col gap-6">
 			<div class="flex gap-3 px-6 pt-6">
@@ -39,11 +41,15 @@
 					<div class=" text-2xl ml-auto rounded-full"><PinOffIcon /></div>
 				</a>
 
-				<div class="flex gap-2 w-60 items-center p-4 hover:text-sky cursor-pointer">
-					<div class=" text-2xl rounded-full"><AdminIcon /></div>
-					<span> Admin/Settings </span>
+				<a
+					href="settings"
+					class:text-sky={$page.url.href.includes('settings')}
+					class="flex gap-2 w-60 items-center p-4 hover:text-sky cursor-pointer"
+				>
+					<div class=" text-2xl rounded-full"><SettingsIcon /></div>
+					<span> Settings </span>
 					<div class=" text-2xl ml-auto rounded-full"><PinIcon /></div>
-				</div>
+				</a>
 			</div>
 			<div class="px-6">
 				<hr />
@@ -82,11 +88,19 @@
 		<div class="bg-mantle p-4 pt-8 relative rounded-md flex flex-col gap-6 items-center">
 			<div class="h-10 w-10 rounded-full bg-text">.</div>
 			<hr class="w-full" />
-			<div class=" text-2xl rounded-full"><EventIcon /></div>
-			<div class=" text-2xl rounded-full"><AdminIcon /></div>
+			<a
+				href="event"
+				class:text-sky={$page.url.href.includes('event')}
+				class=" text-2xl rounded-full hover:text-sky cursor-pointer"><EventIcon /></a
+			>
+			<a
+				href="settings"
+				class:text-sky={$page.url.href.includes('settings')}
+				class=" text-2xl rounded-full hover:text-sky cursor-pointer"><SettingsIcon /></a
+			>
 			<hr class="w-full" />
-			<div class=" text-2xl rounded-full"><EventIcon /></div>
-			<div class=" text-2xl rounded-full"><ProfileIcon /></div>
+			<div class=" text-2xl rounded-full hover:text-sky cursor-pointer"><EventIcon /></div>
+			<div class=" text-2xl rounded-full hover:text-sky cursor-pointer"><ProfileIcon /></div>
 			<hr class="w-full mt-auto" />
 			<button
 				on:click={() => (openMenu = true)}
