@@ -17,7 +17,8 @@ const createSettingsStore = <T>(init: T) => {
 
 let init = {
 	theme: 'mocha',
-	openOnInit: true
+	openOnInit: true,
+	tableMaxSize: false
 };
 
 if (browser) {
