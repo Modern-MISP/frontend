@@ -26,6 +26,7 @@
 		"@types/lodash-es": "^4.17.11",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
+		"@xyflow/svelte": "^0.0.26",
 		"autoprefixer": "^10.4.16",
 		"cypress": "^13.4.0",
 		"date-fns": "^2.30.0",

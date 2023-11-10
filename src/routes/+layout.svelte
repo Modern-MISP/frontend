@@ -12,6 +12,7 @@
 	import EyeIcon from 'svelte-material-icons/EyeCircleOutline.svelte';
 	import SearchIcon from 'svelte-material-icons/Magnify.svelte';
 	import SettingsIcon from 'svelte-material-icons/Cog.svelte';
+	import WorkFlowIcon from 'svelte-material-icons/SitemapOutline.svelte';
 	import { page } from '$app/stores';
 	import { settings } from '$lib/stores';
 
@@ -48,6 +49,15 @@
 				>
 					<div class=" text-2xl rounded-full"><SettingsIcon /></div>
 					<span> Settings </span>
+					<div class=" text-2xl ml-auto rounded-full"><PinIcon /></div>
+				</a>
+				<a
+					href="workflow"
+					class:text-sky={$page.url.href.includes('workflow')}
+					class="flex gap-2 w-60 items-center p-4 hover:text-sky cursor-pointer"
+				>
+					<div class=" text-2xl rounded-full"><WorkFlowIcon /></div>
+					<span> Workflow </span>
 					<div class=" text-2xl ml-auto rounded-full"><PinIcon /></div>
 				</a>
 			</div>
@@ -129,7 +139,7 @@
 				</div>
 			</div>
 		</div>
-		<main class="m-8 relative overflow-auto">
+		<main class="m-8 relative overflow-auto h-full">
 			<slot />
 		</main>
 	</div>
