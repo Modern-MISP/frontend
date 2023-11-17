@@ -5,6 +5,7 @@
 	import { settings } from '$lib/stores';
 
 	export let data: PageData;
+	console.log(data);
 
 	let x = map(
 		data.events,

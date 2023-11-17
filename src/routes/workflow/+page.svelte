@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Background, BackgroundVariant, MiniMap, SvelteFlow, type Node } from '@xyflow/svelte';
 	import { writable } from 'svelte/store';
+	import CustomNode from './CustomNode.svelte';
 
 	const nodes = writable<Node[]>([
 		{
@@ -14,7 +15,7 @@
 			id: '2',
 			data: { label: 'Node' },
 			position: { x: 0, y: 150 },
-			class: '!bg-surface0'
+			class: '!bg-overlay0'
 		},
 		{
 			id: '3',
@@ -22,6 +23,13 @@
 			data: { label: 'Not connected' },
 			position: { x: 200, y: 250 },
 			class: '!bg-surface0'
+		},
+		{
+			id: '4',
+			type: 'custom',
+			data: { name: 'Tyler Weary', job: 'Designer', emoji: '🤓' },
+
+			position: { x: -200, y: 200 }
 		}
 	]);
 
@@ -32,11 +40,16 @@
 			target: '2'
 		}
 	]);
+
+	const nodeTypes = {
+		custom: CustomNode
+	};
 </script>
 
 <SvelteFlow
 	{nodes}
 	{edges}
+	{nodeTypes}
 	fitView
 	on:nodeclick={(event) => console.log('on node click', event)}
 	class="text-text"

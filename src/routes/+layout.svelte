@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import ChevronLeft from 'svelte-material-icons/ChevronLeft.svelte';
 	import ChevronDown from 'svelte-material-icons/ChevronDown.svelte';
 	import ChevronUp from 'svelte-material-icons/ChevronUp.svelte';
@@ -17,8 +17,15 @@
 	import { settings } from '$lib/stores';
 
 	let openMenu = $settings.openOnInit;
+
+	function navigateWithKeyboard({ key }: KeyboardEvent) {
+		if (key === 'm') {
+			openMenu = !openMenu;
+		}
+	}
 </script>
 
+<svelte:window on:keypress={navigateWithKeyboard} />
 <div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
 	{#if openMenu}
 		<div class="bg-mantle p-2 relative rounded-md flex flex-col gap-6">
