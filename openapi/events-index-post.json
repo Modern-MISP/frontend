@@ -1,0 +1,1818 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HarToOpenApi",
+    "version": "1.0.0",
+    "description": "OpenAPI spec generated from HAR data for localhost on 2023-11-17T17:12:13.620Z"
+  },
+  "paths": {
+    "/events/index": {
+      "options": {
+        "description": "",
+        "operationId": "optionsEventsIndex",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost"
+          }
+        ],
+        "summary": "Options Events Index"
+      },
+      "parameters": [],
+      "post": {
+        "description": "",
+        "operationId": "postEventsIndex",
+        "parameters": [
+          {
+            "description": "authorization",
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "default": "PGBOxu4y6LvlimIW62Gy2BydRgcOrExHRFQaSyeh",
+              "example": "PGBOxu4y6LvlimIW62Gy2BydRgcOrExHRFQaSyeh",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {},
+              "schema": {
+                "additionalProperties": false,
+                "title": "EventsIndexPostRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "EventTag": [
+                      {
+                        "Tag": {
+                          "colour": "#1b4687",
+                          "id": "1",
+                          "is_galaxy": false,
+                          "name": "abc"
+                        },
+                        "event_id": "1",
+                        "id": "1",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "1"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "7",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:firearms=\"Glock G43X - 764503037894\""
+                        },
+                        "event_id": "1",
+                        "id": "2",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "7"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "8",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:guidelines=\"Hacking campaign websites, spreading misinformation on the election process, registered parties/candidates, or results\""
+                        },
+                        "event_id": "1",
+                        "id": "3",
+                        "local": true,
+                        "relationship_type": "",
+                        "tag_id": "8"
+                      }
+                    ],
+                    "GalaxyCluster": [
+                      {
+                        "Galaxy": {
+                          "description": "Common firearms galaxy",
+                          "enabled": true,
+                          "icon": "fire",
+                          "id": "19",
+                          "local_only": false,
+                          "name": "Firearms",
+                          "namespace": "Firearms",
+                          "type": "firearms",
+                          "uuid": "94af82d1-d62b-45a7-8c99-83c421cc0f3b",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
+                        ],
+                        "collection_uuid": "94af82d1-d62b-45a7-8c99-83c421cc0f3b",
+                        "default": true,
+                        "deleted": false,
+                        "description": "",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "19",
+                        "id": "1927",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "BRAND": [
+                            "Glock"
+                          ],
+                          "Classification": [
+                            "Firearm"
+                          ],
+                          "Rounds": [
+                            "10"
+                          ],
+                          "SKU": [
+                            "764503037894"
+                          ],
+                          "Unit of Measure": [
+                            "Each"
+                          ],
+                          "caliber": [
+                            "9mm"
+                          ],
+                          "manufacturer": [
+                            "PX4350201"
+                          ],
+                          "name": [
+                            "Glock G43X"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://www.impactguns.com",
+                        "tag_id": "7",
+                        "tag_name": "misp-galaxy:firearms=\"Glock G43X - 764503037894\"",
+                        "type": "firearms",
+                        "uuid": "ee0352b0-527a-49f7-9bcb-25687cea7a7b",
+                        "value": "Glock G43X - 764503037894",
+                        "version": "2"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "Universal Development and Security Guidelines as Applicable to Election Technology.",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "17",
+                          "kill_chain_order": {
+                            "example-of-threats": [
+                              "setup | party/candidate-registration",
+                              "setup | electoral-rolls",
+                              "campaign | campaign-IT",
+                              "all-phases | governement-IT",
+                              "voting | election-technology",
+                              "campaign/public-communication | media/press"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Election guidelines",
+                          "namespace": "misp",
+                          "type": "guidelines",
+                          "uuid": "c1dc03b2-89b3-42a5-9d41-782ef726435a",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "NIS Cooperation Group"
+                        ],
+                        "collection_uuid": "c1dc03b2-89b3-42a5-9d41-782ef726435a",
+                        "default": true,
+                        "deleted": false,
+                        "description": "Hacking government websites, spreading misinformation on the election process, registered parties/candidates, or results",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "17",
+                        "id": "1858",
+                        "local": true,
+                        "locked": false,
+                        "meta": {
+                          "date": [
+                            "March 2018."
+                          ],
+                          "kill_chain": [
+                            "example-of-threats:all-phases | governement-IT"
+                          ],
+                          "refs": [
+                            "https://www.ria.ee/sites/default/files/content-editors/kuberturve/cyber_security_of_election_technology.pdf"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "Open Sources",
+                        "tag_id": "8",
+                        "tag_name": "misp-galaxy:guidelines=\"Hacking campaign websites, spreading misinformation on the election process, registered parties/candidates, or results\"",
+                        "type": "guidelines",
+                        "uuid": "aba7358c-d37c-4be4-940c-5b6196140651",
+                        "value": "Hacking campaign websites, spreading misinformation on the election process, registered parties/candidates, or results",
+                        "version": "2"
+                      }
+                    ],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "5",
+                    "date": "2023-11-06",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "1",
+                    "info": "Test event! fd",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "1699304714",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "2",
+                    "timestamp": "1700213831",
+                    "uuid": "fde7dd88-dac4-455a-a496-2a79fe616456"
+                  },
+                  {
+                    "EventTag": [
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "9",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:ammunitions=\"Fiocchi 12 Gauge Ammo #8 - 250 Rounds of 1 oz. #8 Shot (Lead) Ammunition\""
+                        },
+                        "event_id": "2",
+                        "id": "4",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "9"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#001270",
+                          "id": "6",
+                          "is_galaxy": false,
+                          "name": "estimative-language:likelihood-probability=\"unlikely\""
+                        },
+                        "event_id": "2",
+                        "id": "5",
+                        "local": false,
+                        "relationship_type": "custom",
+                        "tag_id": "6"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "10",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:mitre-attack-pattern=\"Cloud API - T1059.009\""
+                        },
+                        "event_id": "2",
+                        "id": "6",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "10"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "11",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:ammunitions=\"Fiocchi 12 Gauge Ammo - 250 Rounds of 2\""
+                        },
+                        "event_id": "2",
+                        "id": "7",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "11"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "12",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:atrm=\"AZT602 - Steal Service Principal Certificate\""
+                        },
+                        "event_id": "2",
+                        "id": "8",
+                        "local": true,
+                        "relationship_type": "",
+                        "tag_id": "12"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "13",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:atrm=\"AZT604 - Azure KeyVault Dumping\""
+                        },
+                        "event_id": "2",
+                        "id": "9",
+                        "local": true,
+                        "relationship_type": "",
+                        "tag_id": "13"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "14",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:mitre-attack-pattern=\"Cloud Services - T1021.007\""
+                        },
+                        "event_id": "2",
+                        "id": "10",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "14"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "15",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:mitre-attack-pattern=\"Cloud Groups - T1069.003\""
+                        },
+                        "event_id": "2",
+                        "id": "11",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "15"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "16",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:mitre-attack-pattern=\"Determine centralization of IT management - T1285\""
+                        },
+                        "event_id": "2",
+                        "id": "12",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "16"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#0088cc",
+                          "id": "17",
+                          "is_galaxy": true,
+                          "name": "misp-galaxy:mitre-attack-pattern=\"Bash History - T1139\""
+                        },
+                        "event_id": "2",
+                        "id": "13",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "17"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#001585",
+                          "id": "5",
+                          "is_galaxy": false,
+                          "name": "estimative-language:likelihood-probability=\"roughly-even-chance\""
+                        },
+                        "event_id": "2",
+                        "id": "14",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "5"
+                      },
+                      {
+                        "Tag": {
+                          "colour": "#001899",
+                          "id": "2",
+                          "is_galaxy": false,
+                          "name": "estimative-language:likelihood-probability=\"likely\""
+                        },
+                        "event_id": "2",
+                        "id": "15",
+                        "local": false,
+                        "relationship_type": "",
+                        "tag_id": "2"
+                      }
+                    ],
+                    "GalaxyCluster": [
+                      {
+                        "Galaxy": {
+                          "description": "Common ammunitions galaxy",
+                          "enabled": true,
+                          "icon": "battery-full",
+                          "id": "2",
+                          "local_only": false,
+                          "name": "Ammunitions",
+                          "namespace": "Ammunitions",
+                          "type": "ammunitions",
+                          "uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
+                        ],
+                        "collection_uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
+                        "default": true,
+                        "deleted": false,
+                        "description": "",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "2",
+                        "id": "46",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "caliber": [
+                            "12 Gauge Ammo"
+                          ],
+                          "description": [
+                            "250 Rounds of 1 oz. #8 Shot (Lead) Ammunition"
+                          ],
+                          "manufacturer": [
+                            "Fiocchi"
+                          ],
+                          "name": [
+                            "Fiocchi 12 Gauge Ammo"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://ammo.com/",
+                        "tag_id": "9",
+                        "tag_name": "misp-galaxy:ammunitions=\"Fiocchi 12 Gauge Ammo #8 - 250 Rounds of 1 oz. #8 Shot (Lead) Ammunition\"",
+                        "type": "ammunitions",
+                        "uuid": "7a6d4f9b-a496-4984-8553-9dc442cbd697",
+                        "value": "Fiocchi 12 Gauge Ammo #8 - 250 Rounds of 1 oz. #8 Shot (Lead) Ammunition",
+                        "version": "1"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "ATT&CK Tactic",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "25",
+                          "kill_chain_order": {
+                            "mitre-attack": [
+                              "reconnaissance",
+                              "resource-development",
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact"
+                            ],
+                            "mitre-mobile-attack": [
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact",
+                              "network-effects",
+                              "remote-service-effects"
+                            ],
+                            "mitre-pre-attack": [
+                              "priority-definition-planning",
+                              "priority-definition-direction",
+                              "target-selection",
+                              "technical-information-gathering",
+                              "people-information-gathering",
+                              "organizational-information-gathering",
+                              "technical-weakness-identification",
+                              "people-weakness-identification",
+                              "organizational-weakness-identification",
+                              "adversary-opsec",
+                              "establish-&-maintain-infrastructure",
+                              "persona-development",
+                              "build-capabilities",
+                              "test-capabilities",
+                              "stage-capabilities"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Attack Pattern",
+                          "namespace": "mitre-attack",
+                          "type": "mitre-attack-pattern",
+                          "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
+                          "version": "9"
+                        },
+                        "authors": [
+                          "MITRE"
+                        ],
+                        "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
+                        "default": true,
+                        "deleted": false,
+                        "description": "Adversaries may abuse cloud APIs to execute malicious commands. APIs available in cloud environments provide various functionalities and are a feature-rich method for programmatic access to nearly all aspects of a tenant. These APIs may be utilized through various methods such as command line interpreters (CLIs), in-browser Cloud Shells, [PowerShell](https://attack.mitre.org/techniques/T1059/001) modules like Azure for PowerShell(Citation: A), or software developer kits (SDKs) available for languages such as [Python](https://attack.mitre.org/techniques/T1059/006).  \n\nCloud API functionality may allow for administrative access across all major services in a tenant such as compute, storage, identity and access management (IAM), networking, and security policies.\n\nWith proper permissions (often via use of credentials such as [Application Access Token](https://attack.mitre.org/techniques/T1550/001) and [Web Session Cookie](https://attack.mitre.org/techniques/T1550/004)), adversaries may abuse cloud APIs to invoke various functions that execute malicious actions. For example, CLI and PowerShell functionality may be accessed through binaries installed on cloud-hosted or on-premises hosts or accessed through a browser-based cloud shell offered by many cloud platforms (such as AWS, Azure, and GCP). These cloud shells are often a packaged unified environment to use CLI and/or scripting modules hosted as a container in the cloud environment.  ",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "25",
+                        "id": "11729",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "external_id": [
+                            "T1059.009"
+                          ],
+                          "kill_chain": [
+                            "mitre-attack:execution"
+                          ],
+                          "mitre_data_sources": [
+                            "Command: Command Execution"
+                          ],
+                          "mitre_platforms": [
+                            "IaaS",
+                            "Azure AD",
+                            "Office 365",
+                            "SaaS",
+                            "Google Workspace"
+                          ],
+                          "refs": [
+                            "https://attack.mitre.org/techniques/T1059/009",
+                            "https://github.com/Azure/azure-powershell"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/mitre/cti",
+                        "tag_id": "10",
+                        "tag_name": "misp-galaxy:mitre-attack-pattern=\"Cloud API - T1059.009\"",
+                        "type": "mitre-attack-pattern",
+                        "uuid": "55bb4471-ff1f-43b4-88c1-c9384ec47abf",
+                        "value": "Cloud API - T1059.009",
+                        "version": "25"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "Common ammunitions galaxy",
+                          "enabled": true,
+                          "icon": "battery-full",
+                          "id": "2",
+                          "local_only": false,
+                          "name": "Ammunitions",
+                          "namespace": "Ammunitions",
+                          "type": "ammunitions",
+                          "uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
+                        ],
+                        "collection_uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
+                        "default": true,
+                        "deleted": false,
+                        "description": "",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "2",
+                        "id": "44",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "caliber": [
+                            "12 Gauge Ammo"
+                          ],
+                          "description": [
+                            "250 Rounds of 2"
+                          ],
+                          "manufacturer": [
+                            "Fiocchi"
+                          ],
+                          "name": [
+                            "Fiocchi 12 Gauge Ammo"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://ammo.com/",
+                        "tag_id": "11",
+                        "tag_name": "misp-galaxy:ammunitions=\"Fiocchi 12 Gauge Ammo - 250 Rounds of 2\"",
+                        "type": "ammunitions",
+                        "uuid": "129e7ee1-9949-4d86-a27e-623d8e5bdde0",
+                        "value": "Fiocchi 12 Gauge Ammo - 250 Rounds of 2",
+                        "version": "1"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "The purpose of the Azure Threat Research Matrix (ATRM) is to educate readers on the potential of Azure-based tactics, techniques, and procedures (TTPs). It is not to teach how to weaponize or specifically abuse them. For this reason, some specific commands will be obfuscated or parts will be omitted to prevent abuse.",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "4",
+                          "kill_chain_order": {
+                            "ATRM-tactics": [
+                              "Reconnaissance",
+                              "Initial Access",
+                              "Execution",
+                              "Privilege Escalation",
+                              "Persistence",
+                              "Credential Access",
+                              "Exfiltration"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Azure Threat Research Matrix",
+                          "namespace": "atrm",
+                          "type": "atrm",
+                          "uuid": "b541a056-154c-41e7-8a56-41db3f871c00",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "Microsoft",
+                          "Karl Fosaaen",
+                          "Nestori Syynimaa",
+                          "Ryan Cobb",
+                          "Roberto Rodriguez",
+                          "Manuel Berrueta",
+                          "Jonny Johnson",
+                          "Dor Edry",
+                          "Ram Pliskin",
+                          "Nikhil Mittal",
+                          "MITRE ATT&CK",
+                          "AlertIQ"
+                        ],
+                        "collection_uuid": "b541a056-154c-41e7-8a56-41db3f871c00",
+                        "default": true,
+                        "deleted": false,
+                        "description": "If a Runbook is utilizing a 'RunAs' account, then an adversary may manipulate the Runbook to reveal the certificate the Service Principal is using for authentication.",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "4",
+                        "id": "956",
+                        "local": true,
+                        "locked": false,
+                        "meta": {
+                          "kill_chain": [
+                            "ATRM-tactics:Credential Access"
+                          ],
+                          "refs": [
+                            "https://microsoft.github.io/Azure-Threat-Research-Matrix/CredentialAccess/AZT602/AZT602-1"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/microsoft/Azure-Threat-Research-Matrix",
+                        "tag_id": "12",
+                        "tag_name": "misp-galaxy:atrm=\"AZT602 - Steal Service Principal Certificate\"",
+                        "type": "atrm",
+                        "uuid": "027b05da-cabb-507c-a4b5-3a6c73859390",
+                        "value": "AZT602 - Steal Service Principal Certificate",
+                        "version": "1"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "The purpose of the Azure Threat Research Matrix (ATRM) is to educate readers on the potential of Azure-based tactics, techniques, and procedures (TTPs). It is not to teach how to weaponize or specifically abuse them. For this reason, some specific commands will be obfuscated or parts will be omitted to prevent abuse.",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "4",
+                          "kill_chain_order": {
+                            "ATRM-tactics": [
+                              "Reconnaissance",
+                              "Initial Access",
+                              "Execution",
+                              "Privilege Escalation",
+                              "Persistence",
+                              "Credential Access",
+                              "Exfiltration"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Azure Threat Research Matrix",
+                          "namespace": "atrm",
+                          "type": "atrm",
+                          "uuid": "b541a056-154c-41e7-8a56-41db3f871c00",
+                          "version": "1"
+                        },
+                        "authors": [
+                          "Microsoft",
+                          "Karl Fosaaen",
+                          "Nestori Syynimaa",
+                          "Ryan Cobb",
+                          "Roberto Rodriguez",
+                          "Manuel Berrueta",
+                          "Jonny Johnson",
+                          "Dor Edry",
+                          "Ram Pliskin",
+                          "Nikhil Mittal",
+                          "MITRE ATT&CK",
+                          "AlertIQ"
+                        ],
+                        "collection_uuid": "b541a056-154c-41e7-8a56-41db3f871c00",
+                        "default": true,
+                        "deleted": false,
+                        "description": "An adverary may access an Azure KeyVault in an attempt to view secrets, certificates, or keys.",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "4",
+                        "id": "958",
+                        "local": true,
+                        "locked": false,
+                        "meta": {
+                          "kill_chain": [
+                            "ATRM-tactics:Credential Access"
+                          ],
+                          "refs": [
+                            "https://microsoft.github.io/Azure-Threat-Research-Matrix/CredentialAccess/AZT604/AZT604"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/microsoft/Azure-Threat-Research-Matrix",
+                        "tag_id": "13",
+                        "tag_name": "misp-galaxy:atrm=\"AZT604 - Azure KeyVault Dumping\"",
+                        "type": "atrm",
+                        "uuid": "a23579ef-ddd3-5370-a2aa-2651f93b27d7",
+                        "value": "AZT604 - Azure KeyVault Dumping",
+                        "version": "1"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "ATT&CK Tactic",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "25",
+                          "kill_chain_order": {
+                            "mitre-attack": [
+                              "reconnaissance",
+                              "resource-development",
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact"
+                            ],
+                            "mitre-mobile-attack": [
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact",
+                              "network-effects",
+                              "remote-service-effects"
+                            ],
+                            "mitre-pre-attack": [
+                              "priority-definition-planning",
+                              "priority-definition-direction",
+                              "target-selection",
+                              "technical-information-gathering",
+                              "people-information-gathering",
+                              "organizational-information-gathering",
+                              "technical-weakness-identification",
+                              "people-weakness-identification",
+                              "organizational-weakness-identification",
+                              "adversary-opsec",
+                              "establish-&-maintain-infrastructure",
+                              "persona-development",
+                              "build-capabilities",
+                              "test-capabilities",
+                              "stage-capabilities"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Attack Pattern",
+                          "namespace": "mitre-attack",
+                          "type": "mitre-attack-pattern",
+                          "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
+                          "version": "9"
+                        },
+                        "authors": [
+                          "MITRE"
+                        ],
+                        "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
+                        "default": true,
+                        "deleted": false,
+                        "description": "Adversaries may log into accessible cloud services within a compromised environment using [Valid Accounts](https://attack.mitre.org/techniques/T1078) that are synchronized with or federated to on-premises user identities. The adversary may then perform management actions or access cloud-hosted resources as the logged-on user. \n\nMany enterprises federate centrally managed user identities to cloud services, allowing users to login with their domain credentials in order to access the cloud control plane. Similarly, adversaries may connect to available cloud services through the web console or through the cloud command line interface (CLI) (e.g., [Cloud API](https://attack.mitre.org/techniques/T1059/009)), using commands such as <code>Connect-AZAccount</code> for Azure PowerShell, <code>Connect-MgGraph</code> for Microsoft Graph PowerShell, and <code>gcloud auth login</code> for the Google Cloud CLI.\n\nIn some cases, adversaries may be able to authenticate to these services via [Application Access Token](https://attack.mitre.org/techniques/T1550/001) instead of a username and password. ",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "25",
+                        "id": "11686",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "external_id": [
+                            "T1021.007"
+                          ],
+                          "kill_chain": [
+                            "mitre-attack:lateral-movement"
+                          ],
+                          "mitre_data_sources": [
+                            "Logon Session: Logon Session Creation"
+                          ],
+                          "mitre_platforms": [
+                            "Office 365",
+                            "Azure AD",
+                            "SaaS",
+                            "IaaS",
+                            "Google Workspace"
+                          ],
+                          "refs": [
+                            "https://attack.mitre.org/techniques/T1021/007"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/mitre/cti",
+                        "tag_id": "14",
+                        "tag_name": "misp-galaxy:mitre-attack-pattern=\"Cloud Services - T1021.007\"",
+                        "type": "mitre-attack-pattern",
+                        "uuid": "8861073d-d1b8-4941-82ce-dce621d398f0",
+                        "value": "Cloud Services - T1021.007",
+                        "version": "25"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "ATT&CK Tactic",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "25",
+                          "kill_chain_order": {
+                            "mitre-attack": [
+                              "reconnaissance",
+                              "resource-development",
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact"
+                            ],
+                            "mitre-mobile-attack": [
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact",
+                              "network-effects",
+                              "remote-service-effects"
+                            ],
+                            "mitre-pre-attack": [
+                              "priority-definition-planning",
+                              "priority-definition-direction",
+                              "target-selection",
+                              "technical-information-gathering",
+                              "people-information-gathering",
+                              "organizational-information-gathering",
+                              "technical-weakness-identification",
+                              "people-weakness-identification",
+                              "organizational-weakness-identification",
+                              "adversary-opsec",
+                              "establish-&-maintain-infrastructure",
+                              "persona-development",
+                              "build-capabilities",
+                              "test-capabilities",
+                              "stage-capabilities"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Attack Pattern",
+                          "namespace": "mitre-attack",
+                          "type": "mitre-attack-pattern",
+                          "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
+                          "version": "9"
+                        },
+                        "authors": [
+                          "MITRE"
+                        ],
+                        "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
+                        "default": true,
+                        "deleted": false,
+                        "description": "Adversaries may attempt to find cloud groups and permission settings. The knowledge of cloud permission groups can help adversaries determine the particular roles of users and groups within an environment, as well as which users are associated with a particular group.\n\nWith authenticated access there are several tools that can be used to find permissions groups. The <code>Get-MsolRole</code> PowerShell cmdlet can be used to obtain roles and permissions groups for Exchange and Office 365 accounts (Citation: Microsoft Msolrole)(Citation: GitHub Raindance).\n\nAzure CLI (AZ CLI) and the Google Cloud Identity Provider API also provide interfaces to obtain permissions groups. The command <code>az ad user get-member-groups</code> will list groups associated to a user account for Azure while the API endpoint <code>GET https://cloudidentity.googleapis.com/v1/groups</code> lists group resources available to a user for Google.(Citation: Microsoft AZ CLI)(Citation: Black Hills Red Teaming MS AD Azure, 2018)(Citation: Google Cloud Identity API Documentation) In AWS, the commands `ListRolePolicies` and `ListAttachedRolePolicies` allow users to enumerate the policies attached to a role.(Citation: Palo Alto Unit 42 Compromised Cloud Compute Credentials 2022)\n\nAdversaries may attempt to list ACLs for objects to determine the owner and other accounts with access to the object, for example, via the AWS <code>GetBucketAcl</code> API (Citation: AWS Get Bucket ACL). Using this information an adversary can target accounts with permissions to a given object or leverage accounts they have already compromised to access the object.",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "25",
+                        "id": "11716",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "external_id": [
+                            "T1069.003"
+                          ],
+                          "kill_chain": [
+                            "mitre-attack:discovery"
+                          ],
+                          "mitre_data_sources": [
+                            "Application Log: Application Log Content",
+                            "Command: Command Execution",
+                            "Group: Group Enumeration",
+                            "Group: Group Metadata",
+                            "Process: Process Creation"
+                          ],
+                          "mitre_platforms": [
+                            "Azure AD",
+                            "Office 365",
+                            "SaaS",
+                            "IaaS",
+                            "Google Workspace"
+                          ],
+                          "refs": [
+                            "https://attack.mitre.org/techniques/T1069/003",
+                            "https://cloud.google.com/identity/docs/reference/rest",
+                            "https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html",
+                            "https://docs.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest",
+                            "https://docs.microsoft.com/en-us/powershell/module/msonline/get-msolrole?view=azureadps-1.0",
+                            "https://github.com/True-Demon/raindance",
+                            "https://unit42.paloaltonetworks.com/compromised-cloud-compute-credentials/",
+                            "https://www.blackhillsinfosec.com/red-teaming-microsoft-part-1-active-directory-leaks-via-azure/"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/mitre/cti",
+                        "tag_id": "15",
+                        "tag_name": "misp-galaxy:mitre-attack-pattern=\"Cloud Groups - T1069.003\"",
+                        "type": "mitre-attack-pattern",
+                        "uuid": "16e94db9-b5b1-4cd0-b851-f38fbd0a70f2",
+                        "value": "Cloud Groups - T1069.003",
+                        "version": "25"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "ATT&CK Tactic",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "25",
+                          "kill_chain_order": {
+                            "mitre-attack": [
+                              "reconnaissance",
+                              "resource-development",
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact"
+                            ],
+                            "mitre-mobile-attack": [
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact",
+                              "network-effects",
+                              "remote-service-effects"
+                            ],
+                            "mitre-pre-attack": [
+                              "priority-definition-planning",
+                              "priority-definition-direction",
+                              "target-selection",
+                              "technical-information-gathering",
+                              "people-information-gathering",
+                              "organizational-information-gathering",
+                              "technical-weakness-identification",
+                              "people-weakness-identification",
+                              "organizational-weakness-identification",
+                              "adversary-opsec",
+                              "establish-&-maintain-infrastructure",
+                              "persona-development",
+                              "build-capabilities",
+                              "test-capabilities",
+                              "stage-capabilities"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Attack Pattern",
+                          "namespace": "mitre-attack",
+                          "type": "mitre-attack-pattern",
+                          "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
+                          "version": "9"
+                        },
+                        "authors": [
+                          "MITRE"
+                        ],
+                        "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
+                        "default": true,
+                        "deleted": false,
+                        "description": "This object is deprecated as its content has been merged into the enterprise domain. Please see the [PRE](http://attack.mitre.org/matrices/enterprise/pre/) matrix for its replacement. The prior content of this page has been preserved [here](https://attack.mitre.org/versions/v7/techniques/T1285).\n\nDetermining if a \"corporate\" help desk exists, the degree of access and control it has, and whether there are \"edge\" units that may have different support processes and standards. (Citation: SANSCentratlizeManagement)",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "25",
+                        "id": "11121",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "external_id": [
+                            "T1285"
+                          ],
+                          "kill_chain": [
+                            "mitre-pre-attack:organizational-information-gathering"
+                          ],
+                          "refs": [
+                            "https://attack.mitre.org/techniques/T1285"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/mitre/cti",
+                        "tag_id": "16",
+                        "tag_name": "misp-galaxy:mitre-attack-pattern=\"Determine centralization of IT management - T1285\"",
+                        "type": "mitre-attack-pattern",
+                        "uuid": "a7dff5d5-99f9-4a7e-ac54-a64113c28121",
+                        "value": "Determine centralization of IT management - T1285",
+                        "version": "25"
+                      },
+                      {
+                        "Galaxy": {
+                          "description": "ATT&CK Tactic",
+                          "enabled": true,
+                          "icon": "map",
+                          "id": "25",
+                          "kill_chain_order": {
+                            "mitre-attack": [
+                              "reconnaissance",
+                              "resource-development",
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact"
+                            ],
+                            "mitre-mobile-attack": [
+                              "initial-access",
+                              "execution",
+                              "persistence",
+                              "privilege-escalation",
+                              "defense-evasion",
+                              "credential-access",
+                              "discovery",
+                              "lateral-movement",
+                              "collection",
+                              "command-and-control",
+                              "exfiltration",
+                              "impact",
+                              "network-effects",
+                              "remote-service-effects"
+                            ],
+                            "mitre-pre-attack": [
+                              "priority-definition-planning",
+                              "priority-definition-direction",
+                              "target-selection",
+                              "technical-information-gathering",
+                              "people-information-gathering",
+                              "organizational-information-gathering",
+                              "technical-weakness-identification",
+                              "people-weakness-identification",
+                              "organizational-weakness-identification",
+                              "adversary-opsec",
+                              "establish-&-maintain-infrastructure",
+                              "persona-development",
+                              "build-capabilities",
+                              "test-capabilities",
+                              "stage-capabilities"
+                            ]
+                          },
+                          "local_only": false,
+                          "name": "Attack Pattern",
+                          "namespace": "mitre-attack",
+                          "type": "mitre-attack-pattern",
+                          "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
+                          "version": "9"
+                        },
+                        "authors": [
+                          "MITRE"
+                        ],
+                        "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
+                        "default": true,
+                        "deleted": false,
+                        "description": "Bash keeps track of the commands users type on the command-line with the \"history\" utility. Once a user logs out, the history is flushed to the user’s <code>.bash_history</code> file. For each user, this file resides at the same location: <code>~/.bash_history</code>. Typically, this file keeps track of the user’s last 500 commands. Users often type usernames and passwords on the command-line as parameters to programs, which then get saved to this file when they log out. Attackers can abuse this by looking through the file for potential credentials. (Citation: External to DA, the OS X Way)",
+                        "distribution": "3",
+                        "extends_uuid": "",
+                        "extends_version": "0",
+                        "galaxy_id": "25",
+                        "id": "11941",
+                        "local": false,
+                        "locked": false,
+                        "meta": {
+                          "external_id": [
+                            "T1139"
+                          ],
+                          "kill_chain": [
+                            "mitre-attack:credential-access"
+                          ],
+                          "mitre_platforms": [
+                            "Linux",
+                            "macOS"
+                          ],
+                          "refs": [
+                            "http://www.slideshare.net/StephanBorosh/external-to-da-the-os-x-way",
+                            "https://attack.mitre.org/techniques/T1139"
+                          ]
+                        },
+                        "org_id": "0",
+                        "orgc_id": "0",
+                        "published": false,
+                        "relationship_type": "",
+                        "sharing_group_id": null,
+                        "source": "https://github.com/mitre/cti",
+                        "tag_id": "17",
+                        "tag_name": "misp-galaxy:mitre-attack-pattern=\"Bash History - T1139\"",
+                        "type": "mitre-attack-pattern",
+                        "uuid": "44dca04b-808d-46ca-b25f-d85236d4b9f8",
+                        "value": "Bash History - T1139",
+                        "version": "25"
+                      }
+                    ],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "4",
+                    "date": "2023-11-07",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "2",
+                    "info": "test events",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "0",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "1",
+                    "timestamp": "1700132551",
+                    "uuid": "f12e630c-d4ab-4c66-9ff8-fa2138a2daca"
+                  },
+                  {
+                    "EventTag": [],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "0",
+                    "date": "2023-11-10",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "3",
+                    "info": "test2",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "0",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "1",
+                    "timestamp": "1699642550",
+                    "uuid": "ac5d46b0-96b5-4df1-99c3-1fe6671e233e"
+                  },
+                  {
+                    "EventTag": [],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "0",
+                    "date": "2023-11-10",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "4",
+                    "info": "test3",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "0",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "1",
+                    "timestamp": "1699643441",
+                    "uuid": "35185e48-0ac8-46b6-a453-03f0ce06530c"
+                  },
+                  {
+                    "EventTag": [],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "0",
+                    "date": "2023-11-11",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "5",
+                    "info": "test4",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "0",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "1",
+                    "timestamp": "1699701909",
+                    "uuid": "848923f3-693a-4fb3-8e06-eb6a477c88f6"
+                  },
+                  {
+                    "EventTag": [],
+                    "Org": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "Orgc": {
+                      "id": "1",
+                      "name": "ORGNAME",
+                      "uuid": "89d36323-c71f-4de5-839e-9d803a75b12d"
+                    },
+                    "analysis": "0",
+                    "attribute_count": "0",
+                    "date": "2023-11-11",
+                    "disable_correlation": false,
+                    "distribution": "1",
+                    "extends_uuid": "",
+                    "id": "6",
+                    "info": "test5",
+                    "locked": false,
+                    "org_id": "1",
+                    "orgc_id": "1",
+                    "proposal_email_lock": false,
+                    "protected": null,
+                    "publish_timestamp": "0",
+                    "published": false,
+                    "sharing_group_id": "0",
+                    "sighting_timestamp": "0",
+                    "threat_level_id": "1",
+                    "timestamp": "1699701953",
+                    "uuid": "7f00f228-0285-4b5b-8526-965562c5b217"
+                  }
+                ],
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "EventTag": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "Tag": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "colour": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "format": "integer",
+                                  "type": "string"
+                                },
+                                "is_galaxy": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [],
+                              "title": "Tag",
+                              "type": "object"
+                            },
+                            "event_id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "local": {
+                              "type": "boolean"
+                            },
+                            "relationship_type": {
+                              "enum": [
+                                "",
+                                "custom"
+                              ],
+                              "title": "RelationshipType",
+                              "type": "string"
+                            },
+                            "tag_id": {
+                              "format": "integer",
+                              "type": "string"
+                            }
+                          },
+                          "required": [],
+                          "title": "EventTag",
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "GalaxyCluster": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "Galaxy": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "description": {
+                                  "type": "string"
+                                },
+                                "enabled": {
+                                  "type": "boolean"
+                                },
+                                "icon": {
+                                  "enum": [
+                                    "fire",
+                                    "map",
+                                    "battery-full"
+                                  ],
+                                  "title": "Icon",
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "format": "integer",
+                                  "type": "string"
+                                },
+                                "kill_chain_order": {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "ATRM-tactics": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "example-of-threats": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "mitre-attack": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "mitre-mobile-attack": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "mitre-pre-attack": {
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    }
+                                  },
+                                  "required": [],
+                                  "title": "KillChainOrder",
+                                  "type": "object"
+                                },
+                                "local_only": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "namespace": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "uuid": {
+                                  "format": "uuid",
+                                  "type": "string"
+                                },
+                                "version": {
+                                  "format": "integer",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [],
+                              "title": "Galaxy",
+                              "type": "object"
+                            },
+                            "authors": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "collection_uuid": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "default": {
+                              "type": "boolean"
+                            },
+                            "deleted": {
+                              "type": "boolean"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "distribution": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "extends_uuid": {
+                              "type": "string"
+                            },
+                            "extends_version": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "galaxy_id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "local": {
+                              "type": "boolean"
+                            },
+                            "locked": {
+                              "type": "boolean"
+                            },
+                            "meta": {
+                              "additionalProperties": {
+                                "items": {
+                                  "type": "string",
+                                  "x-qt-uri-extensions": [
+                                    ".html",
+                                    ".pdf"
+                                  ],
+                                  "x-qt-uri-protocols": [
+                                    "http",
+                                    "https"
+                                  ]
+                                },
+                                "type": "array"
+                              },
+                              "type": "object"
+                            },
+                            "org_id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "orgc_id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "published": {
+                              "type": "boolean"
+                            },
+                            "relationship_type": {
+                              "type": "string"
+                            },
+                            "sharing_group_id": {
+                              "nullable": true
+                            },
+                            "source": {
+                              "type": "string",
+                              "x-qt-uri-protocols": [
+                                "https"
+                              ]
+                            },
+                            "tag_id": {
+                              "format": "integer",
+                              "type": "string"
+                            },
+                            "tag_name": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "uuid": {
+                              "format": "uuid",
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            },
+                            "version": {
+                              "format": "integer",
+                              "type": "string"
+                            }
+                          },
+                          "required": [],
+                          "title": "GalaxyCluster",
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "Org": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "format": "integer",
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "uuid": {
+                            "format": "uuid",
+                            "type": "string"
+                          }
+                        },
+                        "required": [],
+                        "title": "Org",
+                        "type": "object"
+                      },
+                      "Orgc": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "format": "integer",
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "uuid": {
+                            "format": "uuid",
+                            "type": "string"
+                          }
+                        },
+                        "required": [],
+                        "title": "Org",
+                        "type": "object"
+                      },
+                      "analysis": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "attribute_count": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "date": {
+                        "format": "date",
+                        "type": "string"
+                      },
+                      "disable_correlation": {
+                        "type": "boolean"
+                      },
+                      "distribution": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "extends_uuid": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "info": {
+                        "type": "string"
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "org_id": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "orgc_id": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "proposal_email_lock": {
+                        "type": "boolean"
+                      },
+                      "protected": {
+                        "nullable": true
+                      },
+                      "publish_timestamp": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "published": {
+                        "type": "boolean"
+                      },
+                      "sharing_group_id": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "sighting_timestamp": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "threat_level_id": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "format": "integer",
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "format": "uuid",
+                        "type": "string"
+                      }
+                    },
+                    "required": [],
+                    "title": "EventsIndexPostRequestElement",
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "X-Result-Count": {
+                "description": "Custom header X-Result-Count",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "http://localhost"
+          }
+        ],
+        "summary": "Post Events Index"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "authorization": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      }
+    }
+  }
+}
