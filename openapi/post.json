@@ -1,2832 +1,2798 @@
 {
-  "openapi": "3.0.3",
-  "info": {
-    "title": "misp-posts",
-    "description": "This is a sample description about this spec.",
-    "termsOfService": "",
-    "contact": {
-      "email": ""
+  "/attributes/add/{event_id}": {
+    "post": {
+      "summary": "add Attributes",
+      "description": "POST a MISP Attribute JSON to this API to create an Attribute.",
+      "operationId": "addAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "to_ids": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "string"
+                },
+                "encrypt": {
+                  "type": "string"
+                },
+                "first_seen": {
+                  "type": "string"
+                },
+                "last_seen": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value",
+                "type"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
     },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.0"
+    "parameters": [
+      {
+        "in": "path",
+        "name": "event_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
   },
-  "externalDocs": {
-    "description": "Find out more about spec",
-    "url": ""
+  "/attributes/edit/{attribute_id}": {
+    "post": {
+      "summary": "edit Attributes",
+      "description": "POST a MISP Attribute JSON to this API to update an Attribute. If the timestamp is set, it has to be newer than the existing Attribute.",
+      "operationId": "editAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "to_ids": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "encrypt": {
+                  "type": "string"
+                },
+                "first_seen": {
+                  "type": "string"
+                },
+                "last_seen": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "attribute_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
   },
-  "servers": [
-    {
-      "url": "",
-      "description": "",
-      "varibles": {}
-    }
-  ],
-  "tags": [
-    {
-      "name": "Default",
-      "description": ""
-    }
-  ],
-  "paths": {
-    "/attribute/add/{event_id}": {
-      "post": {
-        "summary": "add Attribute",
-        "description": "POST a MISP Attribute JSON to this API to create an Attribute.",
-        "operationId": "addAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "category": {
-                    "type": "string"
-                  },
-                  "to_ids": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "comment": {
-                    "type": "string"
-                  },
-                  "data": {
-                    "type": "string"
-                  },
-                  "encrypt": {
-                    "type": "string"
-                  },
-                  "first_seen": {
-                    "type": "string"
-                  },
-                  "last_seen": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  }
+  "/attributes/deleteSelected/{event_id}": {
+    "post": {
+      "summary": "deleteSelected Attributes",
+      "description": "POST a list of attribute IDs in JSON format to this API to delete the given attributes. This API also expects an event ID passed via the URL or via the event_id key. The id key also takes 'all' as a parameter for a wildcard search to mass delete attributes. If you want the function to also hard-delete already soft-deleted attributes, pass the allow_hard_delete key.",
+      "operationId": "deleteSelectedAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "string"
                 },
-                "required": [
-                  "value",
-                  "type"
-                ]
-              }
+                "allow_hard_delete": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
             }
           }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "event_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
         }
-      ]
-    },
-    "/attribute/edit/{attribute_id}": {
-      "post": {
-        "summary": "edit Attribute",
-        "description": "POST a MISP Attribute JSON to this API to update an Attribute. If the timestamp is set, it has to be newer than the existing Attribute.",
-        "operationId": "editAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "category": {
-                    "type": "string"
-                  },
-                  "to_ids": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "comment": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "encrypt": {
-                    "type": "string"
-                  },
-                  "first_seen": {
-                    "type": "string"
-                  },
-                  "last_seen": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
       },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "attribute_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
+      "responses": {}
     },
-    "/attribute/deleteSelected/{event_id}": {
-      "post": {
-        "summary": "deleteSelected Attribute",
-        "description": "POST a list of attribute IDs in JSON format to this API to delete the given attributes. This API also expects an event ID passed via the URL or via the event_id key. The id key also takes 'all' as a parameter for a wildcard search to mass delete attributes. If you want the function to also hard-delete already soft-deleted attributes, pass the allow_hard_delete key.",
-        "operationId": "deleteSelectedAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "event_id": {
-                    "type": "string"
-                  },
-                  "allow_hard_delete": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
+    "parameters": [
+      {
+        "in": "path",
+        "name": "event_id",
+        "description": "",
+        "schema": {
+          "type": "string"
         },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "event_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/attribute/restSearch": {
-      "post": {
-        "summary": "restSearch Attribute",
-        "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
-        "operationId": "restSearchAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "page": {
-                    "type": "string"
-                  },
-                  "limit": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "category": {
-                    "type": "string"
-                  },
-                  "org": {
-                    "type": "string"
-                  },
-                  "tags": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "last": {
-                    "type": "string"
-                  },
-                  "eventid": {
-                    "type": "string"
-                  },
-                  "withAttachments": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "publish_timestamp": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "attribute_timestamp": {
-                    "type": "string"
-                  },
-                  "enforceWarninglist": {
-                    "type": "string"
-                  },
-                  "to_ids": {
-                    "type": "string"
-                  },
-                  "deleted": {
-                    "type": "string"
-                  },
-                  "includeEventUuid": {
-                    "type": "string"
-                  },
-                  "includeEventTags": {
-                    "type": "string"
-                  },
-                  "event_timestamp": {
-                    "type": "string"
-                  },
-                  "threat_level_id": {
-                    "type": "string"
-                  },
-                  "eventinfo": {
-                    "type": "string"
-                  },
-                  "sharinggroup": {
-                    "type": "string"
-                  },
-                  "includeProposals": {
-                    "type": "string"
-                  },
-                  "includeDecayScore": {
-                    "type": "string"
-                  },
-                  "includeFullModel": {
-                    "type": "string"
-                  },
-                  "decayingModel": {
-                    "type": "string"
-                  },
-                  "excludeDecayed": {
-                    "type": "string"
-                  },
-                  "score": {
-                    "type": "string"
-                  },
-                  "first_seen": {
-                    "type": "string"
-                  },
-                  "last_seen": {
-                    "type": "string"
-                  },
-                  "returnFormat": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "returnFormat"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/attribute/addTag": {
-      "post": {
-        "summary": "addTag Attribute",
-        "description": "Add a tag or a tag collection to an attribute.",
-        "operationId": "addTagAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "attribute": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "attribute",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/attribute/removeTag": {
-      "post": {
-        "summary": "removeTag Attribute",
-        "description": "Remove a tag from an attribute.",
-        "operationId": "removeTagAttribute",
-        "tags": [
-          "attribute"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "attribute": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "attribute",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/community/requestAccess/{uuid}": {
-      "post": {
-        "summary": "requestAccess Community",
-        "description": "POST a request object describing yourself and your organisation to request access to the desired community.",
-        "operationId": "requestAccessCommunity",
-        "tags": [
-          "community"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "org_name": {
-                    "type": "string"
-                  },
-                  "org_uuid": {
-                    "type": "string"
-                  },
-                  "sync": {
-                    "type": "string"
-                  },
-                  "org_description": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "message": {
-                    "type": "string"
-                  },
-                  "anonymise": {
-                    "type": "string"
-                  },
-                  "gpgkey": {
-                    "type": "string"
-                  },
-                  "mock": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "uuid",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/event/add": {
-      "post": {
-        "summary": "add Event",
-        "description": "POST a MISP Event JSON to this API to create an Event. Contained objects can also be included (such as attributes, objects, tags, etc).",
-        "operationId": "addEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "threat_level_id": {
-                    "type": "string"
-                  },
-                  "analysis": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "Attribute": {
-                    "type": "string"
-                  },
-                  "Object": {
-                    "type": "string"
-                  },
-                  "Shadow_Attribute": {
-                    "type": "string"
-                  },
-                  "EventTag": {
-                    "type": "string"
-                  },
-                  "info": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "info"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/event/edit/{event_id}": {
-      "post": {
-        "summary": "edit Event",
-        "description": "POST a MISP Event JSON to this API to update an Event. Contained objects can also be included (such as attributes, objects, tags, etc). If the timestamp is set, it has to be newer than the existing Attribute.",
-        "operationId": "editEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "info": {
-                    "type": "string"
-                  },
-                  "threat_level_id": {
-                    "type": "string"
-                  },
-                  "analysis": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "Attribute": {
-                    "type": "string"
-                  },
-                  "Object": {
-                    "type": "string"
-                  },
-                  "Shadow_Attribute": {
-                    "type": "string"
-                  },
-                  "EventTag": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "event_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/event/index": {
-      "post": {
-        "summary": "index Event",
-        "description": "POST a JSON filter object to this API to get the meta-data about matching events.",
-        "operationId": "indexEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "all": {
-                    "type": "string"
-                  },
-                  "attribute": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "string"
-                  },
-                  "eventid": {
-                    "type": "string"
-                  },
-                  "datefrom": {
-                    "type": "string"
-                  },
-                  "dateuntil": {
-                    "type": "string"
-                  },
-                  "org": {
-                    "type": "string"
-                  },
-                  "eventinfo": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  },
-                  "tags": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharinggroup": {
-                    "type": "string"
-                  },
-                  "analysis": {
-                    "type": "string"
-                  },
-                  "threatlevel": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "hasproposal": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "publishtimestamp": {
-                    "type": "string"
-                  },
-                  "publish_timestamp": {
-                    "type": "string"
-                  },
-                  "minimal": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/event/restSearch": {
-      "post": {
-        "summary": "restSearch Event",
-        "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
-        "operationId": "restSearchEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "page": {
-                    "type": "string"
-                  },
-                  "limit": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "category": {
-                    "type": "string"
-                  },
-                  "org": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  },
-                  "tags": {
-                    "type": "string"
-                  },
-                  "event_tags": {
-                    "type": "string"
-                  },
-                  "searchall": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "last": {
-                    "type": "string"
-                  },
-                  "eventid": {
-                    "type": "string"
-                  },
-                  "withAttachments": {
-                    "type": "string"
-                  },
-                  "metadata": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "string"
-                  },
-                  "publish_timestamp": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "enforceWarninglist": {
-                    "type": "string"
-                  },
-                  "sgReferenceOnly": {
-                    "type": "string"
-                  },
-                  "eventinfo": {
-                    "type": "string"
-                  },
-                  "sharinggroup": {
-                    "type": "string"
-                  },
-                  "excludeLocalTags": {
-                    "type": "string"
-                  },
-                  "threat_level_id": {
-                    "type": "string"
-                  },
-                  "returnFormat": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "returnFormat"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/event/addTag": {
-      "post": {
-        "summary": "addTag Event",
-        "description": "Add a tag or a tag collection to an event.",
-        "operationId": "addTagEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "event": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/event/removeTag": {
-      "post": {
-        "summary": "removeTag Event",
-        "description": "Remove a tag from an event.",
-        "operationId": "removeTagEvent",
-        "tags": [
-          "event"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "event": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/eventgraph/add": {
-      "post": {
-        "summary": "add Eventgraph",
-        "description": "POST a network in JSON format to this API to to keep an history of it",
-        "operationId": "addEventgraph",
-        "tags": [
-          "eventgraph"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "network_name": {
-                    "type": "string"
-                  },
-                  "event_id": {
-                    "type": "string"
-                  },
-                  "network_json": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "event_id",
-                  "network_json"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/eventreport/add": {
-      "post": {
-        "summary": "add Eventreport",
-        "description": "POST a report in JSON format to create a report for the provided event",
-        "operationId": "addEventreport",
-        "tags": [
-          "eventreport"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/eventreport/edit": {
-      "post": {
-        "summary": "edit Eventreport",
-        "description": "POST a report in JSON format to update the report",
-        "operationId": "editEventreport",
-        "tags": [
-          "eventreport"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "content": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/feed/add": {
-      "post": {
-        "summary": "add Feed",
-        "description": "POST a MISP Feed descriptor JSON to this API to add a Feed.",
-        "operationId": "addFeed",
-        "tags": [
-          "feed"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "enabled": {
-                    "type": "string"
-                  },
-                  "caching_enabled": {
-                    "type": "string"
-                  },
-                  "lookup_visible": {
-                    "type": "string"
-                  },
-                  "delete_local_file": {
-                    "type": "string"
-                  },
-                  "headers": {
-                    "type": "string"
-                  },
-                  "fixed_event": {
-                    "type": "string"
-                  },
-                  "target_event": {
-                    "type": "string"
-                  },
-                  "settings": {
-                    "type": "string"
-                  },
-                  "publish": {
-                    "type": "string"
-                  },
-                  "override_ids": {
-                    "type": "string"
-                  },
-                  "delta_merge": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "tag_id": {
-                    "type": "string"
-                  },
-                  "pull_rules": {
-                    "type": "string"
-                  },
-                  "rules": {
-                    "type": "string"
-                  },
-                  "event_id": {
-                    "type": "string"
-                  },
-                  "source_format": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "input_source": {
-                    "type": "string"
-                  },
-                  "provider": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "source_format",
-                  "url",
-                  "name",
-                  "input_source",
-                  "provider"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/feed/edit/{feed_id}": {
-      "post": {
-        "summary": "edit Feed",
-        "description": "POST a MISP Feed descriptor JSON to this API to edit a Feed.",
-        "operationId": "editFeed",
-        "tags": [
-          "feed"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "source_format": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "enabled": {
-                    "type": "string"
-                  },
-                  "caching_enabled": {
-                    "type": "string"
-                  },
-                  "lookup_visible": {
-                    "type": "string"
-                  },
-                  "provider": {
-                    "type": "string"
-                  },
-                  "input_source": {
-                    "type": "string"
-                  },
-                  "delete_local_file": {
-                    "type": "string"
-                  },
-                  "headers": {
-                    "type": "string"
-                  },
-                  "fixed_event": {
-                    "type": "string"
-                  },
-                  "target_event": {
-                    "type": "string"
-                  },
-                  "settings": {
-                    "type": "string"
-                  },
-                  "publish": {
-                    "type": "string"
-                  },
-                  "override_ids": {
-                    "type": "string"
-                  },
-                  "delta_merge": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "tag_id": {
-                    "type": "string"
-                  },
-                  "pull_rules": {
-                    "type": "string"
-                  },
-                  "rules": {
-                    "type": "string"
-                  },
-                  "event_id": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "feed_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/feed/previewIndex/{feed_id}": {
-      "post": {
-        "summary": "previewIndex Feed",
-        "description": "Sending a GET request to this endpoint will show the parsed feed in JSON format.",
-        "operationId": "previewIndexFeed",
-        "tags": [
-          "feed"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "feed_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/galaxycluster/add/{galaxy_id}": {
-      "post": {
-        "summary": "add Galaxycluster",
-        "description": "POST a MISP GalaxyCluster JSON to this API to create a GalaxyCluster. Contained objects can also be included (such as relations, elements, tags, etc).",
-        "operationId": "addGalaxycluster",
-        "tags": [
-          "galaxycluster"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "version": {
-                    "type": "string"
-                  },
-                  "extends_uuid": {
-                    "type": "string"
-                  },
-                  "extends_version": {
-                    "type": "string"
-                  },
-                  "elements": {
-                    "type": "string"
-                  },
-                  "GalaxyClusterRelation": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "value",
-                  "description"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "galaxy_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/galaxycluster/edit/{cluster_id}": {
-      "post": {
-        "summary": "edit Galaxycluster",
-        "description": "POST a MISP GalaxyCluster JSON to this API to edit a GalaxyCluster",
-        "operationId": "editGalaxycluster",
-        "tags": [
-          "galaxycluster"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "version": {
-                    "type": "string"
-                  },
-                  "extends_uuid": {
-                    "type": "string"
-                  },
-                  "extends_version": {
-                    "type": "string"
-                  },
-                  "elements": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "value",
-                  "description"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "cluster_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/galaxycluster/restSearch": {
-      "post": {
-        "summary": "restSearch Galaxycluster",
-        "description": "Search MISP using a list of filter parameters and return the data in the selected format. This API allows pagination via the page and limit parameters.",
-        "operationId": "restSearchGalaxycluster",
-        "tags": [
-          "galaxycluster"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "page": {
-                    "type": "string"
-                  },
-                  "limit": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "galaxy_id": {
-                    "type": "string"
-                  },
-                  "galaxy_uuid": {
-                    "type": "string"
-                  },
-                  "version": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "orgc_id": {
-                    "type": "string"
-                  },
-                  "tag_name": {
-                    "type": "string"
-                  },
-                  "custom": {
-                    "type": "string"
-                  },
-                  "minimal": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "elements": {
-                    "type": "string"
-                  },
-                  "extends_uuid": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/galaxyclusterrelation/add": {
-      "post": {
-        "summary": "add Galaxyclusterrelation",
-        "description": "POST a MISP GalaxyClusterRelation JSON to this API to create a GalaxyCluster relation. Contained objects can also be included (such as tags).",
-        "operationId": "addGalaxyclusterrelation",
-        "tags": [
-          "galaxyclusterrelation"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "tags": {
-                    "type": "string"
-                  },
-                  "galaxy_cluster_uuid": {
-                    "type": "string"
-                  },
-                  "referenced_galaxy_cluster_uuid": {
-                    "type": "string"
-                  },
-                  "referenced_galaxy_cluster_type": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "galaxy_cluster_uuid",
-                  "referenced_galaxy_cluster_uuid",
-                  "referenced_galaxy_cluster_type"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/galaxyclusterrelation/edit/{relation_id}": {
-      "post": {
-        "summary": "edit Galaxyclusterrelation",
-        "description": "POST a MISP GalaxyClusterRelation JSON to this API to edit a GalaxyCluster relation. Contained objects can also be included (such as tags).",
-        "operationId": "editGalaxyclusterrelation",
-        "tags": [
-          "galaxyclusterrelation"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "tags": {
-                    "type": "string"
-                  },
-                  "galaxy_cluster_uuid": {
-                    "type": "string"
-                  },
-                  "referenced_galaxy_cluster_uuid": {
-                    "type": "string"
-                  },
-                  "referenced_galaxy_cluster_type": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "galaxy_cluster_uuid",
-                  "referenced_galaxy_cluster_uuid",
-                  "referenced_galaxy_cluster_type"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "relation_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/log/admin_index": {
-      "post": {
-        "summary": "admin_index Log",
-        "description": "POST a filter object to receive a JSON with the log entries matching the query. A simple get request will return the entire DB. You can use the filter parameters as url parameters with a GET request such as: https://path.to.my.misp/admin/logs/page:1/limit:200 - to run substring queries simply append/prepend/encapsulate the search term with %. All restSearch rules apply.",
-        "operationId": "admin_indexLog",
-        "tags": [
-          "log"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "created": {
-                    "type": "string"
-                  },
-                  "model": {
-                    "type": "string"
-                  },
-                  "model_id": {
-                    "type": "string"
-                  },
-                  "action": {
-                    "type": "string"
-                  },
-                  "user_id": {
-                    "type": "string"
-                  },
-                  "change": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "org": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "ip": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/log/event_index": {
-      "post": {
-        "summary": "event_index Log",
-        "description": "Simply run a get request on this endpoint to get the relevant log entries for a given event. This functionality is open to any user having access to a given event.",
-        "operationId": "event_indexLog",
-        "tags": [
-          "log"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/organisation/admin_add": {
-      "post": {
-        "summary": "admin_add Organisation",
-        "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
-        "operationId": "admin_addOrganisation",
-        "tags": [
-          "organisation"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "description": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "nationality": {
-                    "type": "string"
-                  },
-                  "sector": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "contacts": {
-                    "type": "string"
-                  },
-                  "local": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/organisation/admin_edit": {
-      "post": {
-        "summary": "admin_edit Organisation",
-        "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
-        "operationId": "admin_editOrganisation",
-        "tags": [
-          "organisation"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "description": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "nationality": {
-                    "type": "string"
-                  },
-                  "sector": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "contacts": {
-                    "type": "string"
-                  },
-                  "local": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/role/admin_add": {
-      "post": {
-        "summary": "admin_add Role",
-        "description": "POST a Role object in JSON format to this API to create a new role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
-        "operationId": "admin_addRole",
-        "tags": [
-          "role"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "perm_delegate": {
-                    "type": "string"
-                  },
-                  "perm_sync": {
-                    "type": "string"
-                  },
-                  "perm_admin": {
-                    "type": "string"
-                  },
-                  "perm_audit": {
-                    "type": "string"
-                  },
-                  "perm_auth": {
-                    "type": "string"
-                  },
-                  "perm_site_admin": {
-                    "type": "string"
-                  },
-                  "perm_regexp_access": {
-                    "type": "string"
-                  },
-                  "perm_tagger": {
-                    "type": "string"
-                  },
-                  "perm_galaxy_editor": {
-                    "type": "string"
-                  },
-                  "perm_template": {
-                    "type": "string"
-                  },
-                  "perm_sharing_group": {
-                    "type": "string"
-                  },
-                  "perm_tag_editor": {
-                    "type": "string"
-                  },
-                  "default_role": {
-                    "type": "string"
-                  },
-                  "perm_sighting": {
-                    "type": "string"
-                  },
-                  "permission": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/role/admin_edit": {
-      "post": {
-        "summary": "admin_edit Role",
-        "description": "POST a Role object in JSON format to this API to edit a role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
-        "operationId": "admin_editRole",
-        "tags": [
-          "role"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "perm_delegate": {
-                    "type": "string"
-                  },
-                  "perm_sync": {
-                    "type": "string"
-                  },
-                  "perm_admin": {
-                    "type": "string"
-                  },
-                  "perm_audit": {
-                    "type": "string"
-                  },
-                  "perm_auth": {
-                    "type": "string"
-                  },
-                  "perm_site_admin": {
-                    "type": "string"
-                  },
-                  "perm_regexp_access": {
-                    "type": "string"
-                  },
-                  "perm_tagger": {
-                    "type": "string"
-                  },
-                  "perm_galaxy_editor": {
-                    "type": "string"
-                  },
-                  "perm_template": {
-                    "type": "string"
-                  },
-                  "perm_sharing_group": {
-                    "type": "string"
-                  },
-                  "perm_tag_editor": {
-                    "type": "string"
-                  },
-                  "default_role": {
-                    "type": "string"
-                  },
-                  "perm_sighting": {
-                    "type": "string"
-                  },
-                  "permission": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/server/add": {
-      "post": {
-        "summary": "add Server",
-        "description": "POST an Server object in JSON format to this API to add a server.",
-        "operationId": "addServer",
-        "tags": [
-          "server"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "push": {
-                    "type": "string"
-                  },
-                  "pull": {
-                    "type": "string"
-                  },
-                  "push_sightings": {
-                    "type": "string"
-                  },
-                  "push_rules": {
-                    "type": "string"
-                  },
-                  "pull_rules": {
-                    "type": "string"
-                  },
-                  "submitted_cert": {
-                    "type": "string"
-                  },
-                  "submitted_client_cert": {
-                    "type": "string"
-                  },
-                  "json": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "remote_org_id": {
-                    "type": "string"
-                  },
-                  "authkey": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "url",
-                  "name",
-                  "remote_org_id",
-                  "authkey"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/server/edit": {
-      "post": {
-        "summary": "edit Server",
-        "description": "POST an Server object in JSON format to this API to edit a server.",
-        "operationId": "editServer",
-        "tags": [
-          "server"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "url": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "authkey": {
-                    "type": "string"
-                  },
-                  "json": {
-                    "type": "string"
-                  },
-                  "push": {
-                    "type": "string"
-                  },
-                  "pull": {
-                    "type": "string"
-                  },
-                  "push_sightings": {
-                    "type": "string"
-                  },
-                  "push_rules": {
-                    "type": "string"
-                  },
-                  "pull_rules": {
-                    "type": "string"
-                  },
-                  "submitted_cert": {
-                    "type": "string"
-                  },
-                  "submitted_client_cert": {
-                    "type": "string"
-                  },
-                  "remote_org_id": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/server/serverSettings": {
-      "post": {
-        "summary": "serverSettings Server",
-        "description": "Send a GET request to this endpoint to get a full diagnostic along with all currently set settings of the current instance. This will also include the worker status",
-        "operationId": "serverSettingsServer",
-        "tags": [
-          "server"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/sighting/restSearch/{context}": {
-      "post": {
-        "summary": "restSearch Sighting",
-        "description": "Search MISP sightings using a list of filter parameters and return the data in the JSON format. The search is available on an event, attribute or instance level, just select the scope via the URL (/sighting/restSearch/event vs /sighting/restSearch/attribute vs /sighting/restSearch/). id or uuid MUST be provided if context is set.",
-        "operationId": "restSearchSighting",
-        "tags": [
-          "sighting"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "from": {
-                    "type": "string"
-                  },
-                  "to": {
-                    "type": "string"
-                  },
-                  "last": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "source": {
-                    "type": "string"
-                  },
-                  "includeAttribute": {
-                    "type": "string"
-                  },
-                  "includeEvent": {
-                    "type": "string"
-                  },
-                  "includeUuid": {
-                    "type": "string"
-                  },
-                  "returnFormat": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "returnFormat"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "context",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/sharinggroup/add": {
-      "post": {
-        "summary": "add Sharinggroup",
-        "description": "POST a Sharing Group object in JSON format to this API to add a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
-        "operationId": "addSharinggroup",
-        "tags": [
-          "sharinggroup"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "description": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "organisation_uuid": {
-                    "type": "string"
-                  },
-                  "active": {
-                    "type": "string"
-                  },
-                  "created": {
-                    "type": "string"
-                  },
-                  "modified": {
-                    "type": "string"
-                  },
-                  "roaming": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "releasability": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "releasability"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/sharinggroup/edit": {
-      "post": {
-        "summary": "edit Sharinggroup",
-        "description": "POST a Sharing Group object in JSON format to this API to edit a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
-        "operationId": "editSharinggroup",
-        "tags": [
-          "sharinggroup"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "releasability": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "organisation_uuid": {
-                    "type": "string"
-                  },
-                  "active": {
-                    "type": "string"
-                  },
-                  "created": {
-                    "type": "string"
-                  },
-                  "modified": {
-                    "type": "string"
-                  },
-                  "roaming": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/tag/add": {
-      "post": {
-        "summary": "add Tag",
-        "description": "POST a Tag object in JSON format to this API to create a new tag.",
-        "operationId": "addTag",
-        "tags": [
-          "tag"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "colour": {
-                    "type": "string"
-                  },
-                  "exportable": {
-                    "type": "string"
-                  },
-                  "hide_tag": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "user_id": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/tag/edit/{tag_id}": {
-      "post": {
-        "summary": "edit Tag",
-        "description": "POST or PUT a Tag object in JSON format to this API to create a edit an existing tag.",
-        "operationId": "editTag",
-        "tags": [
-          "tag"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "colour": {
-                    "type": "string"
-                  },
-                  "exportable": {
-                    "type": "string"
-                  },
-                  "hide_tag": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "user_id": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "tag_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/tag/removeTagFromObject": {
-      "post": {
-        "summary": "removeTagFromObject Tag",
-        "description": "Untag an event or attribute. Tag can be the id or the name.",
-        "operationId": "removeTagFromObjectTag",
-        "tags": [
-          "tag"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "uuid",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/tag/attachTagToObject": {
-      "post": {
-        "summary": "attachTagToObject Tag",
-        "description": "Attach a Tag to an object, refenced by an UUID. Tag can either be a tag id or a tag name.",
-        "operationId": "attachTagToObjectTag",
-        "tags": [
-          "tag"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "uuid": {
-                    "type": "string"
-                  },
-                  "tag": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "uuid",
-                  "tag"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/tag/search/{tag_name}": {
-      "post": {
-        "summary": "search Tag",
-        "description": "GET or POST the tags to search for as a raw string or as a list. The strict_tag_name_only parameter only returns tags matching exactly the tag name (thus, skipping synonyms and cluster's value)",
-        "operationId": "searchTag",
-        "tags": [
-          "tag"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "tag_name",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/user/admin_add": {
-      "post": {
-        "summary": "admin_add User",
-        "description": "POST a User object in JSON format to this API to create a new user.",
-        "operationId": "admin_addUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "password": {
-                    "type": "string"
-                  },
-                  "external_auth_required": {
-                    "type": "string"
-                  },
-                  "external_auth_key": {
-                    "type": "string"
-                  },
-                  "enable_password": {
-                    "type": "string"
-                  },
-                  "nids_sid": {
-                    "type": "string"
-                  },
-                  "server_id": {
-                    "type": "string"
-                  },
-                  "gpgkey": {
-                    "type": "string"
-                  },
-                  "certif_public": {
-                    "type": "string"
-                  },
-                  "autoalert": {
-                    "type": "string"
-                  },
-                  "contactalert": {
-                    "type": "string"
-                  },
-                  "disabled": {
-                    "type": "string"
-                  },
-                  "change_pw": {
-                    "type": "string"
-                  },
-                  "termsaccepted": {
-                    "type": "string"
-                  },
-                  "newsread": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "role_id": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "email",
-                  "org_id",
-                  "role_id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/user/admin_edit": {
-      "post": {
-        "summary": "admin_edit User",
-        "description": "POST a User object in JSON format to this API to edit a user.",
-        "operationId": "admin_editUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "role_id": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "external_auth_required": {
-                    "type": "string"
-                  },
-                  "external_auth_key": {
-                    "type": "string"
-                  },
-                  "enable_password": {
-                    "type": "string"
-                  },
-                  "nids_sid": {
-                    "type": "string"
-                  },
-                  "server_id": {
-                    "type": "string"
-                  },
-                  "gpgkey": {
-                    "type": "string"
-                  },
-                  "certif_public": {
-                    "type": "string"
-                  },
-                  "autoalert": {
-                    "type": "string"
-                  },
-                  "contactalert": {
-                    "type": "string"
-                  },
-                  "disabled": {
-                    "type": "string"
-                  },
-                  "change_pw": {
-                    "type": "string"
-                  },
-                  "termsaccepted": {
-                    "type": "string"
-                  },
-                  "newsread": {
-                    "type": "string"
-                  }
-                },
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/user/admin_quickEmail": {
-      "post": {
-        "summary": "admin_quickEmail User",
-        "description": "POST a body and a subject in a JSON to send an e-mail through MISP to the user ID given in the URL",
-        "operationId": "admin_quickEmailUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "subject": {
-                    "type": "string"
-                  },
-                  "body": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "subject",
-                  "body"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/user/change_pw": {
-      "post": {
-        "summary": "change_pw User",
-        "description": "POST a password via a JSON object containing the password key to reset the given user's password.",
-        "operationId": "change_pwUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "password": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "password"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/user/statistics/{tab}": {
-      "post": {
-        "summary": "statistics User",
-        "description": "Simply GET the url endpoint to view the API output of the statistics API. Additional statistics are available via the following tab-options similar to the UI: data, orgs, users, tags, attributehistogram, sightings, attackMatrix",
-        "operationId": "statisticsUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "tab",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/user/totp_delete/{user_id}": {
-      "post": {
-        "summary": "totp_delete User",
-        "description": "Simply do a DELETE or POST request to the url",
-        "operationId": "totp_deleteUser",
-        "tags": [
-          "user"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "user_id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/usersetting/setSetting": {
-      "post": {
-        "summary": "setSetting Usersetting",
-        "description": "POST a User setting object in JSON format to this API to create a new setting or update the equivalent existing setting. Admins/site admins can specify a user ID besides their own.",
-        "operationId": "setSettingUsersetting",
-        "tags": [
-          "usersetting"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "string"
-                  },
-                  "setting": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "setting",
-                  "value"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/usersetting/delete/{id}": {
-      "post": {
-        "summary": "delete Usersetting",
-        "description": "POST or DELETE to this API to delete an existing setting.",
-        "operationId": "deleteUsersetting",
-        "tags": [
-          "usersetting"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "description": "",
-          "schema": {
-            "type": "string"
-          },
-          "required": true
-        }
-      ]
-    },
-    "/warninglist/checkValue": {
-      "post": {
-        "summary": "checkValue Warninglist",
-        "description": "POST a JSON list with value(s) to check against the warninglists to get a JSON dictionary as a response with any hits, if there are any (with the key being the passed value triggering a warning).",
-        "operationId": "checkValueWarninglist",
-        "tags": [
-          "warninglist"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "[]": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "[]"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    },
-    "/warninglist/toggleEnable": {
-      "post": {
-        "summary": "toggleEnable Warninglist",
-        "description": "POST a json object with a single or a list of warninglist IDsIDs, or alternatively a (list of) substring(s) that match the names of warninglist(s) to toggle whether they're enabled or disabled. Specify the optional enabled boolean flag if you would like to enforce the outcome state. Not setting this flag will just toggle the current state.",
-        "operationId": "toggleEnableWarninglist",
-        "tags": [
-          "warninglist"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "enabled": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {}
-      },
-      "parameters": []
-    }
+        "required": true
+      }
+    ]
   },
-  "components": {}
+  "/attributes/restSearch": {
+    "post": {
+      "summary": "restSearch Attributes",
+      "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
+      "operationId": "restSearchAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "string"
+                },
+                "limit": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "org": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "last": {
+                  "type": "string"
+                },
+                "eventid": {
+                  "type": "string"
+                },
+                "withAttachments": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "publish_timestamp": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "attribute_timestamp": {
+                  "type": "string"
+                },
+                "enforceWarninglist": {
+                  "type": "string"
+                },
+                "to_ids": {
+                  "type": "string"
+                },
+                "deleted": {
+                  "type": "string"
+                },
+                "includeEventUuid": {
+                  "type": "string"
+                },
+                "includeEventTags": {
+                  "type": "string"
+                },
+                "event_timestamp": {
+                  "type": "string"
+                },
+                "threat_level_id": {
+                  "type": "string"
+                },
+                "eventinfo": {
+                  "type": "string"
+                },
+                "sharinggroup": {
+                  "type": "string"
+                },
+                "includeProposals": {
+                  "type": "string"
+                },
+                "includeDecayScore": {
+                  "type": "string"
+                },
+                "includeFullModel": {
+                  "type": "string"
+                },
+                "decayingModel": {
+                  "type": "string"
+                },
+                "excludeDecayed": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "string"
+                },
+                "first_seen": {
+                  "type": "string"
+                },
+                "last_seen": {
+                  "type": "string"
+                },
+                "returnFormat": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "returnFormat"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/attributes/addTag": {
+    "post": {
+      "summary": "addTag Attributes",
+      "description": "Add a tag or a tag collection to an attribute.",
+      "operationId": "addTagAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attribute": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "attribute",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/attributes/removeTag": {
+    "post": {
+      "summary": "removeTag Attributes",
+      "description": "Remove a tag from an attribute.",
+      "operationId": "removeTagAttributes",
+      "tags": [
+        "attributes"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attribute": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "attribute",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/communities/requestAccess/{uuid}": {
+    "post": {
+      "summary": "requestAccess Communities",
+      "description": "POST a request object describing yourself and your organisation to request access to the desired community.",
+      "operationId": "requestAccessCommunities",
+      "tags": [
+        "communities"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "org_name": {
+                  "type": "string"
+                },
+                "org_uuid": {
+                  "type": "string"
+                },
+                "sync": {
+                  "type": "string"
+                },
+                "org_description": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "anonymise": {
+                  "type": "string"
+                },
+                "gpgkey": {
+                  "type": "string"
+                },
+                "mock": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "uuid",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/events/add": {
+    "post": {
+      "summary": "add Events",
+      "description": "POST a MISP Event JSON to this API to create an Event. Contained objects can also be included (such as attributes, objects, tags, etc).",
+      "operationId": "addEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "threat_level_id": {
+                  "type": "string"
+                },
+                "analysis": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "Attribute": {
+                  "type": "string"
+                },
+                "Object": {
+                  "type": "string"
+                },
+                "Shadow_Attribute": {
+                  "type": "string"
+                },
+                "EventTag": {
+                  "type": "string"
+                },
+                "info": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "info"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/events/edit/{event_id}": {
+    "post": {
+      "summary": "edit Events",
+      "description": "POST a MISP Event JSON to this API to update an Event. Contained objects can also be included (such as attributes, objects, tags, etc). If the timestamp is set, it has to be newer than the existing Attribute.",
+      "operationId": "editEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "type": "string"
+                },
+                "threat_level_id": {
+                  "type": "string"
+                },
+                "analysis": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "Attribute": {
+                  "type": "string"
+                },
+                "Object": {
+                  "type": "string"
+                },
+                "Shadow_Attribute": {
+                  "type": "string"
+                },
+                "EventTag": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "event_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/events/index": {
+    "post": {
+      "summary": "index Events",
+      "description": "POST a JSON filter object to this API to get the meta-data about matching events.",
+      "operationId": "indexEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "all": {
+                  "type": "string"
+                },
+                "attribute": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "string"
+                },
+                "eventid": {
+                  "type": "string"
+                },
+                "datefrom": {
+                  "type": "string"
+                },
+                "dateuntil": {
+                  "type": "string"
+                },
+                "org": {
+                  "type": "string"
+                },
+                "eventinfo": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharinggroup": {
+                  "type": "string"
+                },
+                "analysis": {
+                  "type": "string"
+                },
+                "threatlevel": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "hasproposal": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "publishtimestamp": {
+                  "type": "string"
+                },
+                "publish_timestamp": {
+                  "type": "string"
+                },
+                "minimal": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/events/restSearch": {
+    "post": {
+      "summary": "restSearch Events",
+      "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
+      "operationId": "restSearchEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "string"
+                },
+                "limit": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "org": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "string"
+                },
+                "event_tags": {
+                  "type": "string"
+                },
+                "searchall": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "last": {
+                  "type": "string"
+                },
+                "eventid": {
+                  "type": "string"
+                },
+                "withAttachments": {
+                  "type": "string"
+                },
+                "metadata": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "string"
+                },
+                "publish_timestamp": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "enforceWarninglist": {
+                  "type": "string"
+                },
+                "sgReferenceOnly": {
+                  "type": "string"
+                },
+                "eventinfo": {
+                  "type": "string"
+                },
+                "sharinggroup": {
+                  "type": "string"
+                },
+                "excludeLocalTags": {
+                  "type": "string"
+                },
+                "threat_level_id": {
+                  "type": "string"
+                },
+                "returnFormat": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "returnFormat"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/events/addTag": {
+    "post": {
+      "summary": "addTag Events",
+      "description": "Add a tag or a tag collection to an event.",
+      "operationId": "addTagEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "event",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/events/removeTag": {
+    "post": {
+      "summary": "removeTag Events",
+      "description": "Remove a tag from an event.",
+      "operationId": "removeTagEvents",
+      "tags": [
+        "events"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "event",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/eventgraph/add": {
+    "post": {
+      "summary": "add Eventgraph",
+      "description": "POST a network in JSON format to this API to to keep an history of it",
+      "operationId": "addEventgraph",
+      "tags": [
+        "eventgraph"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "network_name": {
+                  "type": "string"
+                },
+                "event_id": {
+                  "type": "string"
+                },
+                "network_json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "event_id",
+                "network_json"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/eventreports/add": {
+    "post": {
+      "summary": "add Eventreports",
+      "description": "POST a report in JSON format to create a report for the provided event",
+      "operationId": "addEventreports",
+      "tags": [
+        "eventreports"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distribution": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/eventreports/edit": {
+    "post": {
+      "summary": "edit Eventreports",
+      "description": "POST a report in JSON format to update the report",
+      "operationId": "editEventreports",
+      "tags": [
+        "eventreports"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/feeds/add": {
+    "post": {
+      "summary": "add Feeds",
+      "description": "POST a MISP Feed descriptor JSON to this API to add a Feed.",
+      "operationId": "addFeeds",
+      "tags": [
+        "feeds"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "string"
+                },
+                "caching_enabled": {
+                  "type": "string"
+                },
+                "lookup_visible": {
+                  "type": "string"
+                },
+                "delete_local_file": {
+                  "type": "string"
+                },
+                "headers": {
+                  "type": "string"
+                },
+                "fixed_event": {
+                  "type": "string"
+                },
+                "target_event": {
+                  "type": "string"
+                },
+                "settings": {
+                  "type": "string"
+                },
+                "publish": {
+                  "type": "string"
+                },
+                "override_ids": {
+                  "type": "string"
+                },
+                "delta_merge": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "tag_id": {
+                  "type": "string"
+                },
+                "pull_rules": {
+                  "type": "string"
+                },
+                "rules": {
+                  "type": "string"
+                },
+                "event_id": {
+                  "type": "string"
+                },
+                "source_format": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "input_source": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_format",
+                "url",
+                "name",
+                "input_source",
+                "provider"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/feeds/edit/{feed_id}": {
+    "post": {
+      "summary": "edit Feeds",
+      "description": "POST a MISP Feed descriptor JSON to this API to edit a Feed.",
+      "operationId": "editFeeds",
+      "tags": [
+        "feeds"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "source_format": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "string"
+                },
+                "caching_enabled": {
+                  "type": "string"
+                },
+                "lookup_visible": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "input_source": {
+                  "type": "string"
+                },
+                "delete_local_file": {
+                  "type": "string"
+                },
+                "headers": {
+                  "type": "string"
+                },
+                "fixed_event": {
+                  "type": "string"
+                },
+                "target_event": {
+                  "type": "string"
+                },
+                "settings": {
+                  "type": "string"
+                },
+                "publish": {
+                  "type": "string"
+                },
+                "override_ids": {
+                  "type": "string"
+                },
+                "delta_merge": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "tag_id": {
+                  "type": "string"
+                },
+                "pull_rules": {
+                  "type": "string"
+                },
+                "rules": {
+                  "type": "string"
+                },
+                "event_id": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "feed_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/feeds/previewIndex/{feed_id}": {
+    "post": {
+      "summary": "previewIndex Feeds",
+      "description": "Sending a GET request to this endpoint will show the parsed feed in JSON format.",
+      "operationId": "previewIndexFeeds",
+      "tags": [
+        "feeds"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "feed_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/galaxyclusters/add/{galaxy_id}": {
+    "post": {
+      "summary": "add Galaxyclusters",
+      "description": "POST a MISP GalaxyCluster JSON to this API to create a GalaxyCluster. Contained objects can also be included (such as relations, elements, tags, etc).",
+      "operationId": "addGalaxyclusters",
+      "tags": [
+        "galaxyclusters"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                },
+                "extends_uuid": {
+                  "type": "string"
+                },
+                "extends_version": {
+                  "type": "string"
+                },
+                "elements": {
+                  "type": "string"
+                },
+                "GalaxyClusterRelation": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value",
+                "description"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "galaxy_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/galaxyclusters/edit/{cluster_id}": {
+    "post": {
+      "summary": "edit Galaxyclusters",
+      "description": "POST a MISP GalaxyCluster JSON to this API to edit a GalaxyCluster",
+      "operationId": "editGalaxyclusters",
+      "tags": [
+        "galaxyclusters"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                },
+                "extends_uuid": {
+                  "type": "string"
+                },
+                "extends_version": {
+                  "type": "string"
+                },
+                "elements": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value",
+                "description"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "cluster_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/galaxyclusters/restSearch": {
+    "post": {
+      "summary": "restSearch Galaxyclusters",
+      "description": "Search MISP using a list of filter parameters and return the data in the selected format. This API allows pagination via the page and limit parameters.",
+      "operationId": "restSearchGalaxyclusters",
+      "tags": [
+        "galaxyclusters"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "string"
+                },
+                "limit": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "galaxy_id": {
+                  "type": "string"
+                },
+                "galaxy_uuid": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                },
+                "distribution": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "orgc_id": {
+                  "type": "string"
+                },
+                "tag_name": {
+                  "type": "string"
+                },
+                "custom": {
+                  "type": "string"
+                },
+                "minimal": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "elements": {
+                  "type": "string"
+                },
+                "extends_uuid": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/galaxyclusterrelations/add": {
+    "post": {
+      "summary": "add Galaxyclusterrelations",
+      "description": "POST a MISP GalaxyClusterRelation JSON to this API to create a GalaxyCluster relation. Contained objects can also be included (such as tags).",
+      "operationId": "addGalaxyclusterrelations",
+      "tags": [
+        "galaxyclusterrelations"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "string"
+                },
+                "galaxy_cluster_uuid": {
+                  "type": "string"
+                },
+                "referenced_galaxy_cluster_uuid": {
+                  "type": "string"
+                },
+                "referenced_galaxy_cluster_type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "galaxy_cluster_uuid",
+                "referenced_galaxy_cluster_uuid",
+                "referenced_galaxy_cluster_type"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/galaxyclusterrelations/edit/{relation_id}": {
+    "post": {
+      "summary": "edit Galaxyclusterrelations",
+      "description": "POST a MISP GalaxyClusterRelation JSON to this API to edit a GalaxyCluster relation. Contained objects can also be included (such as tags).",
+      "operationId": "editGalaxyclusterrelations",
+      "tags": [
+        "galaxyclusterrelations"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distribution": {
+                  "type": "string"
+                },
+                "sharing_group_id": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "string"
+                },
+                "galaxy_cluster_uuid": {
+                  "type": "string"
+                },
+                "referenced_galaxy_cluster_uuid": {
+                  "type": "string"
+                },
+                "referenced_galaxy_cluster_type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "galaxy_cluster_uuid",
+                "referenced_galaxy_cluster_uuid",
+                "referenced_galaxy_cluster_type"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "relation_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/logs/admin_index": {
+    "post": {
+      "summary": "admin_index Logs",
+      "description": "POST a filter object to receive a JSON with the log entries matching the query. A simple get request will return the entire DB. You can use the filter parameters as url parameters with a GET request such as: https://path.to.my.misp/admin/logs/page:1/limit:200 - to run substring queries simply append/prepend/encapsulate the search term with %. All restSearch rules apply.",
+      "operationId": "admin_indexLogs",
+      "tags": [
+        "logs"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string"
+                },
+                "model": {
+                  "type": "string"
+                },
+                "model_id": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "string"
+                },
+                "change": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "org": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "ip": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/logs/event_index": {
+    "post": {
+      "summary": "event_index Logs",
+      "description": "Simply run a get request on this endpoint to get the relevant log entries for a given event. This functionality is open to any user having access to a given event.",
+      "operationId": "event_indexLogs",
+      "tags": [
+        "logs"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/organisations/admin_add": {
+    "post": {
+      "summary": "admin_add Organisations",
+      "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
+      "operationId": "admin_addOrganisations",
+      "tags": [
+        "organisations"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "nationality": {
+                  "type": "string"
+                },
+                "sector": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "contacts": {
+                  "type": "string"
+                },
+                "local": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/organisations/admin_edit": {
+    "post": {
+      "summary": "admin_edit Organisations",
+      "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
+      "operationId": "admin_editOrganisations",
+      "tags": [
+        "organisations"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "nationality": {
+                  "type": "string"
+                },
+                "sector": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "contacts": {
+                  "type": "string"
+                },
+                "local": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/roles/admin_add": {
+    "post": {
+      "summary": "admin_add Roles",
+      "description": "POST a Role object in JSON format to this API to create a new role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
+      "operationId": "admin_addRoles",
+      "tags": [
+        "roles"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "perm_delegate": {
+                  "type": "string"
+                },
+                "perm_sync": {
+                  "type": "string"
+                },
+                "perm_admin": {
+                  "type": "string"
+                },
+                "perm_audit": {
+                  "type": "string"
+                },
+                "perm_auth": {
+                  "type": "string"
+                },
+                "perm_site_admin": {
+                  "type": "string"
+                },
+                "perm_regexp_access": {
+                  "type": "string"
+                },
+                "perm_tagger": {
+                  "type": "string"
+                },
+                "perm_galaxy_editor": {
+                  "type": "string"
+                },
+                "perm_template": {
+                  "type": "string"
+                },
+                "perm_sharing_group": {
+                  "type": "string"
+                },
+                "perm_tag_editor": {
+                  "type": "string"
+                },
+                "default_role": {
+                  "type": "string"
+                },
+                "perm_sighting": {
+                  "type": "string"
+                },
+                "permission": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/roles/admin_edit": {
+    "post": {
+      "summary": "admin_edit Roles",
+      "description": "POST a Role object in JSON format to this API to edit a role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
+      "operationId": "admin_editRoles",
+      "tags": [
+        "roles"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "perm_delegate": {
+                  "type": "string"
+                },
+                "perm_sync": {
+                  "type": "string"
+                },
+                "perm_admin": {
+                  "type": "string"
+                },
+                "perm_audit": {
+                  "type": "string"
+                },
+                "perm_auth": {
+                  "type": "string"
+                },
+                "perm_site_admin": {
+                  "type": "string"
+                },
+                "perm_regexp_access": {
+                  "type": "string"
+                },
+                "perm_tagger": {
+                  "type": "string"
+                },
+                "perm_galaxy_editor": {
+                  "type": "string"
+                },
+                "perm_template": {
+                  "type": "string"
+                },
+                "perm_sharing_group": {
+                  "type": "string"
+                },
+                "perm_tag_editor": {
+                  "type": "string"
+                },
+                "default_role": {
+                  "type": "string"
+                },
+                "perm_sighting": {
+                  "type": "string"
+                },
+                "permission": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/servers/add": {
+    "post": {
+      "summary": "add Servers",
+      "description": "POST an Server object in JSON format to this API to add a server.",
+      "operationId": "addServers",
+      "tags": [
+        "servers"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "push": {
+                  "type": "string"
+                },
+                "pull": {
+                  "type": "string"
+                },
+                "push_sightings": {
+                  "type": "string"
+                },
+                "push_rules": {
+                  "type": "string"
+                },
+                "pull_rules": {
+                  "type": "string"
+                },
+                "submitted_cert": {
+                  "type": "string"
+                },
+                "submitted_client_cert": {
+                  "type": "string"
+                },
+                "json": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "remote_org_id": {
+                  "type": "string"
+                },
+                "authkey": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url",
+                "name",
+                "remote_org_id",
+                "authkey"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/servers/edit": {
+    "post": {
+      "summary": "edit Servers",
+      "description": "POST an Server object in JSON format to this API to edit a server.",
+      "operationId": "editServers",
+      "tags": [
+        "servers"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "authkey": {
+                  "type": "string"
+                },
+                "json": {
+                  "type": "string"
+                },
+                "push": {
+                  "type": "string"
+                },
+                "pull": {
+                  "type": "string"
+                },
+                "push_sightings": {
+                  "type": "string"
+                },
+                "push_rules": {
+                  "type": "string"
+                },
+                "pull_rules": {
+                  "type": "string"
+                },
+                "submitted_cert": {
+                  "type": "string"
+                },
+                "submitted_client_cert": {
+                  "type": "string"
+                },
+                "remote_org_id": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/servers/serverSettings": {
+    "post": {
+      "summary": "serverSettings Servers",
+      "description": "Send a GET request to this endpoint to get a full diagnostic along with all currently set settings of the current instance. This will also include the worker status",
+      "operationId": "serverSettingsServers",
+      "tags": [
+        "servers"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/sightings/restSearch/{context}": {
+    "post": {
+      "summary": "restSearch Sightings",
+      "description": "Search MISP sightings using a list of filter parameters and return the data in the JSON format. The search is available on an event, attribute or instance level, just select the scope via the URL (/sighting/restSearch/event vs /sighting/restSearch/attribute vs /sighting/restSearch/). id or uuid MUST be provided if context is set.",
+      "operationId": "restSearchSightings",
+      "tags": [
+        "sightings"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "last": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "includeAttribute": {
+                  "type": "string"
+                },
+                "includeEvent": {
+                  "type": "string"
+                },
+                "includeUuid": {
+                  "type": "string"
+                },
+                "returnFormat": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "returnFormat"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "context",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/sharinggroups/add": {
+    "post": {
+      "summary": "add Sharinggroups",
+      "description": "POST a Sharing Group object in JSON format to this API to add a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
+      "operationId": "addSharinggroups",
+      "tags": [
+        "sharinggroups"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "organisation_uuid": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string"
+                },
+                "modified": {
+                  "type": "string"
+                },
+                "roaming": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "releasability": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "releasability"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/sharinggroups/edit": {
+    "post": {
+      "summary": "edit Sharinggroups",
+      "description": "POST a Sharing Group object in JSON format to this API to edit a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
+      "operationId": "editSharinggroups",
+      "tags": [
+        "sharinggroups"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "releasability": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "organisation_uuid": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "string"
+                },
+                "created": {
+                  "type": "string"
+                },
+                "modified": {
+                  "type": "string"
+                },
+                "roaming": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/tags/add": {
+    "post": {
+      "summary": "add Tags",
+      "description": "POST a Tag object in JSON format to this API to create a new tag.",
+      "operationId": "addTags",
+      "tags": [
+        "tags"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "colour": {
+                  "type": "string"
+                },
+                "exportable": {
+                  "type": "string"
+                },
+                "hide_tag": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/tags/edit/{tag_id}": {
+    "post": {
+      "summary": "edit Tags",
+      "description": "POST or PUT a Tag object in JSON format to this API to create a edit an existing tag.",
+      "operationId": "editTags",
+      "tags": [
+        "tags"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "colour": {
+                  "type": "string"
+                },
+                "exportable": {
+                  "type": "string"
+                },
+                "hide_tag": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "tag_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/tags/removeTagFromObject": {
+    "post": {
+      "summary": "removeTagFromObject Tags",
+      "description": "Untag an event or attribute. Tag can be the id or the name.",
+      "operationId": "removeTagFromObjectTags",
+      "tags": [
+        "tags"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uuid",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/tags/attachTagToObject": {
+    "post": {
+      "summary": "attachTagToObject Tags",
+      "description": "Attach a Tag to an object, refenced by an UUID. Tag can either be a tag id or a tag name.",
+      "operationId": "attachTagToObjectTags",
+      "tags": [
+        "tags"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uuid",
+                "tag"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/tags/search/{tag_name}": {
+    "post": {
+      "summary": "search Tags",
+      "description": "GET or POST the tags to search for as a raw string or as a list. The strict_tag_name_only parameter only returns tags matching exactly the tag name (thus, skipping synonyms and cluster's value)",
+      "operationId": "searchTags",
+      "tags": [
+        "tags"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "tag_name",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/users/admin_add": {
+    "post": {
+      "summary": "admin_add Users",
+      "description": "POST a User object in JSON format to this API to create a new user.",
+      "operationId": "admin_addUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string"
+                },
+                "external_auth_required": {
+                  "type": "string"
+                },
+                "external_auth_key": {
+                  "type": "string"
+                },
+                "enable_password": {
+                  "type": "string"
+                },
+                "nids_sid": {
+                  "type": "string"
+                },
+                "server_id": {
+                  "type": "string"
+                },
+                "gpgkey": {
+                  "type": "string"
+                },
+                "certif_public": {
+                  "type": "string"
+                },
+                "autoalert": {
+                  "type": "string"
+                },
+                "contactalert": {
+                  "type": "string"
+                },
+                "disabled": {
+                  "type": "string"
+                },
+                "change_pw": {
+                  "type": "string"
+                },
+                "termsaccepted": {
+                  "type": "string"
+                },
+                "newsread": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "role_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "org_id",
+                "role_id"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/users/admin_edit": {
+    "post": {
+      "summary": "admin_edit Users",
+      "description": "POST a User object in JSON format to this API to edit a user.",
+      "operationId": "admin_editUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "org_id": {
+                  "type": "string"
+                },
+                "role_id": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "external_auth_required": {
+                  "type": "string"
+                },
+                "external_auth_key": {
+                  "type": "string"
+                },
+                "enable_password": {
+                  "type": "string"
+                },
+                "nids_sid": {
+                  "type": "string"
+                },
+                "server_id": {
+                  "type": "string"
+                },
+                "gpgkey": {
+                  "type": "string"
+                },
+                "certif_public": {
+                  "type": "string"
+                },
+                "autoalert": {
+                  "type": "string"
+                },
+                "contactalert": {
+                  "type": "string"
+                },
+                "disabled": {
+                  "type": "string"
+                },
+                "change_pw": {
+                  "type": "string"
+                },
+                "termsaccepted": {
+                  "type": "string"
+                },
+                "newsread": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/users/admin_quickEmail": {
+    "post": {
+      "summary": "admin_quickEmail Users",
+      "description": "POST a body and a subject in a JSON to send an e-mail through MISP to the user ID given in the URL",
+      "operationId": "admin_quickEmailUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "subject",
+                "body"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/users/change_pw": {
+    "post": {
+      "summary": "change_pw Users",
+      "description": "POST a password via a JSON object containing the password key to reset the given user's password.",
+      "operationId": "change_pwUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/users/statistics/{tab}": {
+    "post": {
+      "summary": "statistics Users",
+      "description": "Simply GET the url endpoint to view the API output of the statistics API. Additional statistics are available via the following tab-options similar to the UI: data, orgs, users, tags, attributehistogram, sightings, attackMatrix",
+      "operationId": "statisticsUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "tab",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/users/totp_delete/{user_id}": {
+    "post": {
+      "summary": "totp_delete Users",
+      "description": "Simply do a DELETE or POST request to the url",
+      "operationId": "totp_deleteUsers",
+      "tags": [
+        "users"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "user_id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/usersettings/setSetting": {
+    "post": {
+      "summary": "setSetting Usersettings",
+      "description": "POST a User setting object in JSON format to this API to create a new setting or update the equivalent existing setting. Admins/site admins can specify a user ID besides their own.",
+      "operationId": "setSettingUsersettings",
+      "tags": [
+        "usersettings"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "setting": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "setting",
+                "value"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/usersettings/delete/{id}": {
+    "post": {
+      "summary": "delete Usersettings",
+      "description": "POST or DELETE to this API to delete an existing setting.",
+      "operationId": "deleteUsersettings",
+      "tags": [
+        "usersettings"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "description": "",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    ]
+  },
+  "/warninglists/checkValue": {
+    "post": {
+      "summary": "checkValue Warninglists",
+      "description": "POST a JSON list with value(s) to check against the warninglists to get a JSON dictionary as a response with any hits, if there are any (with the key being the passed value triggering a warning).",
+      "operationId": "checkValueWarninglists",
+      "tags": [
+        "warninglists"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "[]": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "[]"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  },
+  "/warninglists/toggleEnable": {
+    "post": {
+      "summary": "toggleEnable Warninglists",
+      "description": "POST a json object with a single or a list of warninglist IDsIDs, or alternatively a (list of) substring(s) that match the names of warninglist(s) to toggle whether they're enabled or disabled. Specify the optional enabled boolean flag if you would like to enforce the outcome state. Not setting this flag will just toggle the current state.",
+      "operationId": "toggleEnableWarninglists",
+      "tags": [
+        "warninglists"
+      ],
+      "parameters": [],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "enabled": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      },
+      "responses": {}
+    },
+    "parameters": []
+  }
 }
