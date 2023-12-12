@@ -1,6 +1,6 @@
 <script>
 	import { settings } from '$lib/stores';
-	import Checkbox from '$lib/components/Checkbox.svelte';
+	import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 	import Select from '$lib/components/Select.svelte';
 	import SettingsEntry from './SettingsEntry.svelte';
 </script>
