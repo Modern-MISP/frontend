@@ -13,6 +13,10 @@
 `npm run start:misp`
 Instance will be running at: https://localhost
 
+- Email: admin@admin.test
+- Password: admin
+
+
 #### generate your key here:
 
 https://localhost/auth_keys/index
@@ -40,6 +44,8 @@ For testing with admin permissions just set both vars to the key generated in th
 ### Start misp instance to use as api
 
 `npm run start:misp`
+- Email: admin@admin.test
+- Password: admin
 
 ### Start sveltekit
 
