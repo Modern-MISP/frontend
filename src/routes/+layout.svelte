@@ -1,21 +1,8 @@
 <script lang="ts">
-	import ChevronLeft from 'svelte-material-icons/ChevronLeft.svelte';
-	import ChevronDown from 'svelte-material-icons/ChevronDown.svelte';
-	import ChevronUp from 'svelte-material-icons/ChevronUp.svelte';
-	import ChevronRight from 'svelte-material-icons/ChevronRight.svelte';
-	import EventIcon from 'svelte-material-icons/Calendar.svelte';
-	import AdminIcon from 'svelte-material-icons/ShieldCrown.svelte';
-	import ProfileIcon from 'svelte-material-icons/Account.svelte';
-	import ProfileCircle from 'svelte-material-icons/AccountCircle.svelte';
-	import PinIcon from 'svelte-material-icons/Pin.svelte';
-	import PinOffIcon from 'svelte-material-icons/PinOff.svelte';
-	import EyeIcon from 'svelte-material-icons/EyeCircleOutline.svelte';
-	import SearchIcon from 'svelte-material-icons/Magnify.svelte';
-	import SettingsIcon from 'svelte-material-icons/Cog.svelte';
-	import WorkFlowIcon from 'svelte-material-icons/SitemapOutline.svelte';
 	import { page } from '$app/stores';
 	import { settings } from '$lib/stores';
 	import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
+	import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
 
 	let openMenu = $settings.openOnInit;
 
@@ -29,7 +16,7 @@
 <svelte:window on:keypress={navigateWithKeyboard} />
 <div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
 	{#if openMenu}
-		<div class="relative flex flex-col gap-6 p-2 rounded-md bg-mantle">
+		<!-- <div class="relative flex flex-col gap-6 p-2 rounded-md bg-mantle">
 			<div class="flex gap-3 px-6 pt-6">
 				<div class="w-10 h-10 rounded-full bg-text">.</div>
 				<h1 class="text-4xl font-bold">MISP</h1>
@@ -101,32 +88,9 @@
 					</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	{:else}
-		<div class="relative flex flex-col items-center gap-6 p-4 pt-8 rounded-md bg-mantle">
-			<div class="w-10 h-10 rounded-full bg-text">.</div>
-			<hr class="w-full" />
-			<a
-				href="event"
-				class:text-sky={$page.url.href.includes('event')}
-				class="text-2xl rounded-full cursor-pointer hover:text-sky"><EventIcon /></a
-			>
-			<a
-				href="settings"
-				class:text-sky={$page.url.href.includes('settings')}
-				class="text-2xl rounded-full cursor-pointer hover:text-sky"><SettingsIcon /></a
-			>
-			<hr class="w-full" />
-			<div class="text-2xl rounded-full cursor-pointer hover:text-sky"><EventIcon /></div>
-			<div class="text-2xl rounded-full cursor-pointer hover:text-sky"><ProfileIcon /></div>
-			<hr class="w-full mt-auto" />
-			<button
-				on:click={() => (openMenu = true)}
-				class="text-2xl rounded-full cursor-pointer hover:text-sky"
-			>
-				<ChevronRight />
-			</button>
-		</div>
+		<SideMenu />
 	{/if}
 
 	<div class="flex flex-col h-full min-w-0 grow">

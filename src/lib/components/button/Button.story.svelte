@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Hst } from '@histoire/plugin-svelte';
-	import SearchIcon from 'svelte-material-icons/Magnify.svelte';
-	import Button from './Button.svelte';
 	import { themes } from '$lib/stores';
+	import type { Hst } from '@histoire/plugin-svelte';
+	import Icon from '@iconify/svelte';
+	import Button from './Button.svelte';
 	export let Hst: Hst;
 
 	let theme = 'macchiato';
@@ -16,7 +16,7 @@
 	<div class={theme}>
 		<Button>
 			<b>name</b>
-			<SearchIcon />
+			<Icon icon="mdi-light:home" class="w-8 h-8" />
 		</Button>
 	</div>
 </Hst.Story>

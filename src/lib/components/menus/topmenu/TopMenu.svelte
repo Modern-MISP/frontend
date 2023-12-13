@@ -2,17 +2,14 @@
 	import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 	import Input from '$lib/components/input/Input.svelte';
 	import { mode } from '$lib/stores';
-	import ProfileCircle from 'svelte-material-icons/AccountCircle.svelte';
-	import SearchIcon from 'svelte-material-icons/Magnify.svelte';
+	import Icon from '@iconify/svelte';
 </script>
 
 <div
-	class="flex flex-row items-center justify-between gap-4 p-4 ml-4 rounded-md bg-mantle text-text"
+	class="flex flex-row items-center justify-between gap-4 p-4 ml-4 rounded-xl bg-mantle text-text"
 >
-	<Input placeholder="Search">
-		<svelte:fragment slot="icon">
-			<SearchIcon class="w-8 h-8" />
-		</svelte:fragment>
+	<Input placeholder="search">
+		<Icon icon="mdi:magnify" slot="icon" class="w-10 h-10" />
 	</Input>
 	<div class="flex items-center gap-6">
 		<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -24,7 +21,9 @@
 			<span class="text-xs">View mode</span>
 		</label>
 		<div class="flex flex-col items-center gap-1">
-			<div class="text-2xl rounded-full"><ProfileCircle /></div>
+			<div class="text-2xl rounded-full">
+				<Icon icon="mdi:account-circle" />
+			</div>
 			<span class="text-xs">admin@admin.test</span>
 		</div>
 	</div>
