@@ -1,6 +1,10 @@
 stages:
     - uml
 
+default:
+    tags:
+        - docker # I think this tag is required to make the CI runner accept the jobs
+
 generate-uml:
     stage: uml
     image: node:latest
