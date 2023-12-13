@@ -1,7 +1,7 @@
 <script>
 	import { settings, themes } from '$lib/stores';
 	import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/components/form/Select.svelte';
 	import SettingsEntry from './SettingsEntry.svelte';
 </script>
 

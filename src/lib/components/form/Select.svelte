@@ -1,5 +1,6 @@
 <script lang="ts" generics="T extends string">
-	import ChevronDown from 'svelte-material-icons/ChevronDown.svelte';
+	import Icon from '@iconify/svelte';
+
 	export let options: readonly { value: T; label: string }[];
 	export let value: T;
 </script>
@@ -12,6 +13,6 @@
 	</select>
 
 	<div class="absolute text-xl right-1">
-		<ChevronDown />
+		<Icon icon="mdi:chevron-down" />
 	</div>
 </div>

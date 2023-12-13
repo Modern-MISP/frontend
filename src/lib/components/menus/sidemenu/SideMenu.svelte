@@ -12,7 +12,7 @@
 	<slot name="logo">
 		<div class="w-10 h-10 rounded-full bg-text" />
 	</slot>
-	<hr class="w-full" />
+	<hr class="w-full border-text" />
 	<slot>
 		{#each routes as { href, icon, name }}
 			<a
@@ -25,7 +25,7 @@
 		{/each}
 	</slot>
 
-	<hr class="w-full mt-auto" />
+	<hr class="w-full mt-auto border-text" />
 	<button
 		on:click={() => (isOpen = true)}
 		class="text-2xl rounded-full cursor-pointer hover:text-sky"
