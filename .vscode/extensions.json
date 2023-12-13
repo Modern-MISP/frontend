@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"antfu.iconify",
+		"bradlc.vscode-tailwindcss",
+		"fivethree.vscode-svelte-snippets",
+		"esbenp.prettier-vscode",
+		"svelte.svelte-vscode"
+	]
+}
