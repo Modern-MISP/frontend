@@ -11,8 +11,9 @@ generate-uml:
     script:
         - apt update
         - apt install -y plantuml
-        - git checkout ${CI_COMMIT_BRANCH}
         - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+        - git checkout ${CI_COMMIT_BRANCH}
+        - git pull
         - npm install
         - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
         - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
