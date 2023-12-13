@@ -1,5 +1,5 @@
 <script>
-	import { settings } from '$lib/stores';
+	import { settings, themes } from '$lib/stores';
 	import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 	import Select from '$lib/components/Select.svelte';
 	import SettingsEntry from './SettingsEntry.svelte';
@@ -13,14 +13,6 @@
 		<Checkbox bind:checked={$settings.tableMaxSize} />
 	</SettingsEntry>
 	<SettingsEntry label="Theme">
-		<Select
-			options={[
-				{ value: 'mocha', label: 'Mocha' },
-				{ value: 'macchiato', label: 'Macchiato' },
-				{ value: 'frappe', label: 'Frappe' },
-				{ value: 'latte', label: 'Latte' }
-			]}
-			bind:value={$settings.theme}
-		/>
+		<Select options={themes} bind:value={$settings.theme} />
 	</SettingsEntry>
 </div>

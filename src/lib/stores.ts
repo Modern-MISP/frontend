@@ -15,7 +15,11 @@ const createSettingsStore = <T>(init: T) => {
 	};
 };
 
-let init = {
+let init: {
+	theme: Themes;
+	openOnInit: boolean;
+	tableMaxSize: boolean;
+} = {
 	theme: 'mocha',
 	openOnInit: true,
 	tableMaxSize: false
@@ -27,3 +31,14 @@ if (browser) {
 }
 
 export const settings = createSettingsStore(init);
+
+export type Themes = (typeof themes)[number]['value'];
+export const themes = [
+	{ value: 'mocha', label: 'Mocha' },
+	{ value: 'macchiato', label: 'Macchiato' },
+	{ value: 'frappe', label: 'Frappe' },
+	{ value: 'latte', label: 'Latte' }
+] as const;
+
+export type Modi = 'view' | 'edit';
+export const mode = writable<Modi>('view');
