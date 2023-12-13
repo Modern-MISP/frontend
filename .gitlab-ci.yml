@@ -1,0 +1,22 @@
+stages:
+    - uml
+
+generate-uml:
+    stage: uml
+    image: node:latest
+    script:
+        - apt update
+        - apt install -y plantuml
+        - git checkout ${CI_COMMIT_BRANCH}
+        - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+        - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
+        - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
+        - plantuml -tsvg uml.plantuml
+        - mkdir -p docs
+        - mv uml.svg docs/
+        - git add docs/
+        - git config user.name uml-pipeline
+        - git config user.email feathecutie@disroot.org
+        - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'"
+        - git push -o ci.skip
+
