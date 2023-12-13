@@ -22,6 +22,6 @@ generate-uml:
         - git add docs/
         - git config user.name uml-pipeline
         - git config user.email uml-pipeline@example.com
-        - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'"
+        - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
         - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
 
