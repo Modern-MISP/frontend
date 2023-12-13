@@ -12,8 +12,6 @@ generate-uml:
         - apt update
         - apt install -y plantuml
         - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
-        - git checkout ${CI_COMMIT_BRANCH}
-        - git pull
         - npm install
         - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
         - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
@@ -24,5 +22,5 @@ generate-uml:
         - git config user.name uml-pipeline
         - git config user.email feathecutie@disroot.org
         - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'"
-        - git push -o ci.skip
+        - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
 
