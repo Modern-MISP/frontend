@@ -10,17 +10,18 @@ generate-uml:
     image: node:latest
     script:
         - apt update
-        - apt install -y plantuml
+        - apt install -y default-jre graphviz
+        - wget https://github.com/plantuml/plantuml/releases/download/v1.2023.13/plantuml-1.2023.13.jar
         - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
         - npm install
         - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
         - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
-        - plantuml -tsvg uml.plantuml
+        - java -jar plantuml-1.2023.13.jar -tsvg uml.plantuml
         - mkdir -p docs
         - mv uml.svg docs/
         - git add docs/
         - git config user.name uml-pipeline
-        - git config user.email feathecutie@disroot.org
+        - git config user.email uml-pipeline@example.com
         - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'"
         - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
 
