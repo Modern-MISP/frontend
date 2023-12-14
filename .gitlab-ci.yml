@@ -1,27 +1,51 @@
 stages:
-    - uml
+    - generate_plantuml
+    - generate_uml_svg
+    - push_uml_svg
 
 default:
     tags:
-        - docker # I think this tag is required to make the CI runner accept the jobs
+        - docker # Tag is required to make the CI runner accept the jobs
 
-generate-uml:
-    stage: uml
+generate_plantuml:
+    stage: generate_plantuml
     image: node:latest
     script:
-        - apt update
-        - apt install -y default-jre graphviz
-        - wget https://github.com/plantuml/plantuml/releases/download/v1.2023.13/plantuml-1.2023.13.jar
-        - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
         - npm install
         - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
         - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
-        - java -jar plantuml-1.2023.13.jar -tsvg uml.plantuml
+    artifacts:
+      paths:
+        - uml.plantuml
+
+generate_uml_svg:
+    stage: generate_uml_svg
+    image: 
+      name: docker.io/plantuml/plantuml
+      entrypoint: [""]
+    script:
         - mkdir -p docs
-        - mv uml.svg docs/
-        - git add docs/
-        - git config user.name uml-pipeline
-        - git config user.email uml-pipeline@example.com
-        - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
-        - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
+        - cat uml.plantuml | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/uml.svg
+    artifacts:
+      paths:
+        - docs/uml.svg
+
+push_uml_svg:
+  stage: push_uml_svg
+  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  rules:
+    - if: $CI_COMMIT_TAG != null
+      when: never
+    # Never run for scheduled pipelines
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: manual
+  script:
+     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+     - git add docs/
+     - git config user.name uml-pipeline
+     - git config user.email uml-pipeline@example.com
+     - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
+     - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
 
