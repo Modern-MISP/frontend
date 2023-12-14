@@ -15,8 +15,8 @@
 		{ icon: 'mdi:email', name: 'email', value: 'Email', displayComp: Pill },
 		{ icon: 'mdi:key', name: 'key', value: 'Key', displayComp: Pill },
 		{ icon: 'mdi:information', name: 'info', value: 'Info', displayComp: Info },
-		{ icon: 'mdi:tag', name: 'tags', value: 'Tags', displayComp: Tags },
-		{ icon: 'mdi:clock', name: 'date', value: 'Date', displayComp: DatePill }
+		{ icon: 'mdi:clock', name: 'date', value: 'Date', displayComp: DatePill },
+		{ icon: 'mdi:tag', name: 'tags', value: 'Tags', displayComp: Tags }
 	] as const;
 </script>
 

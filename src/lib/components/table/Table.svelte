@@ -7,7 +7,7 @@
 	export let header: T;
 	export let data: FlatUnion<MapNameToDisplayComp<T>>[];
 
-	// Will comment this later. Basically maps header[number]["name"] as key for new data entry, where the value is either typeof displayComp prop or a string
+	// TODO: Will comment this later. Basically maps header[number]["name"] as key for new data entry, where the value is either typeof displayComp prop or a string
 	type MapNameToDisplayComp<T extends readonly { name: string; displayComp?: unknown }[]> = {
 		[K in keyof T]: {
 			readonly [P in T[K]['name']]: T[K]['displayComp'] extends ConstructorOfATypedSvelteComponent
