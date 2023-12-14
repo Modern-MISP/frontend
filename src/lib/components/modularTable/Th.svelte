@@ -6,7 +6,7 @@
 </script>
 
 <th>
-	<div class="flex items-center gap-2 text-xl">
+	<div class="flex items-center gap-2 p-4 text-xl">
 		<Icon {icon} />
 		<span>
 			{value}

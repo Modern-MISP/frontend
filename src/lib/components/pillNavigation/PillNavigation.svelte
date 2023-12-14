@@ -3,7 +3,7 @@
 
 	export let routes: { name: string; icon: string; href: string }[] = [];
 
-	export let action: 'add' | 'remove' | 'list' | 'edit' = 'list';
+	export let action: 'add' | 'remove' | 'list' | 'edit' | 'view' = 'list';
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">

@@ -1,5 +1,5 @@
 <div class="text-lg rounded-lg text-text bg-surface0">
-	<table class="border-separate border-spacing-8">
+	<table class="border-separate">
 		<slot />
 	</table>
 </div>

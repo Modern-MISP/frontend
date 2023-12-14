@@ -1,5 +1,9 @@
 <script lang="ts" generics=" T extends readonly HeaderEntry[] ">
+	import Td from '../modularTable/Td.svelte';
+
+	import { goto } from '$app/navigation';
 	import type { FlatUnion } from '$lib/util/ts.util';
+	import { stringify } from 'postcss';
 
 	import Table from '../modularTable/Table.svelte';
 	import Th from '../modularTable/Th.svelte';
@@ -16,6 +20,7 @@
 				: string;
 		};
 	}[number];
+	export let urlCb: (id: string) => string = (id: string) => `/${id}`;
 </script>
 
 <Table>
@@ -28,7 +33,7 @@
 	{#each data as row}
 		<tr>
 			{#each header as { name, displayComp }}
-				<td>
+				<Td href={'id' in row && typeof row.id === 'string' ? urlCb(row.id) : undefined}>
 					<span class="text-lg">
 						{#if displayComp}
 							<!-- FIXME: This should be correct. -->
@@ -37,7 +42,7 @@
 							{row[name]}
 						{/if}
 					</span>
-				</td>
+				</Td>
 			{/each}
 		</tr>
 	{/each}
