@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { themes } from '$lib/stores';
 	import type { Hst } from '@histoire/plugin-svelte';
-	import Table from './Table.svelte';
-	import DatePill from './entries/DatePill.svelte';
-	import Info from './entries/Info.svelte';
-	import Pill from './entries/Pill.svelte';
-	import Tags from './entries/Tags.svelte';
+	import DynTable from './DynTable.svelte';
+	import DatePill from '../pill/DatePill.svelte';
+	import Info from '../info/Info.svelte';
+	import Pill from '../pill/Pill.svelte';
+	import Tags from '../pill/PillCollection.svelte';
 	export let Hst: Hst;
 
 	let theme = 'macchiato';
@@ -26,7 +26,7 @@
 	</svelte:fragment>
 
 	<div class={theme}>
-		<Table
+		<DynTable
 			{header}
 			data={[
 				{

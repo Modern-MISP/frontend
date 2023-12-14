@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Pill from './Pill.svelte';
+	import Pill from '$lib/components/pill/Pill.svelte';
 
-	export let tags: { icon: string; text: string; class: string }[];
+	export let tags: Pill['$$prop_def'][];
 </script>
 
 <div class="flex flex-wrap gap-2">

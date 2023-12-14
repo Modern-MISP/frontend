@@ -3,10 +3,10 @@
 	import { themes } from '$lib/stores';
 	import Table from './Table.svelte';
 	import Th from './Th.svelte';
-	import Pill from '../table/entries/Pill.svelte';
-	import Info from '../table/entries/Info.svelte';
-	import Tags from '../table/entries/Tags.svelte';
-	import DatePill from '../table/entries/DatePill.svelte';
+	import Pill from '../pill/Pill.svelte';
+	import Info from '../info/Info.svelte';
+	import Tags from '../pill/PillCollection.svelte';
+	import DatePill from '../pill/DatePill.svelte';
 	export let Hst: Hst;
 
 	let theme = 'macchiato';
@@ -66,7 +66,7 @@
 			{#each data as row}
 				<tr>
 					<td>
-						<span>
+						<span class="text-lg">
 							{row.id}
 						</span>
 					</td>

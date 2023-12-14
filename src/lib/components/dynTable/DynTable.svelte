@@ -1,7 +1,8 @@
 <script lang="ts" generics=" T extends readonly HeaderEntry[] ">
 	import type { FlatUnion } from '$lib/util/ts.util';
-	import Icon from '@iconify/svelte';
 
+	import Table from '../modularTable/Table.svelte';
+	import Th from '../modularTable/Th.svelte';
 	import type { HeaderEntry } from './HeaderEntry.interface';
 
 	export let header: T;
@@ -17,36 +18,27 @@
 	}[number];
 </script>
 
-<div class="rounded-lg text-text bg-surface0">
-	<table class="border-separate border-spacing-8">
+<Table>
+	<tr>
+		{#each header as head}
+			<Th {...head} />
+		{/each}
+	</tr>
+
+	{#each data as row}
 		<tr>
-			{#each header as { value, icon }}
-				<th>
-					<div class="flex items-center gap-2 text-xl">
-						<Icon {icon} />
-						<span>
-							{value}
-						</span>
-					</div>
-				</th>
+			{#each header as { name, displayComp }}
+				<td>
+					<span class="text-lg">
+						{#if displayComp}
+							<!-- FIXME: This should be correct. -->
+							<svelte:component this={displayComp} {...row[name]} />
+						{:else}
+							{row[name]}
+						{/if}
+					</span>
+				</td>
 			{/each}
 		</tr>
-
-		{#each data as row}
-			<tr class="border-2 border-text">
-				{#each header as { name, displayComp }}
-					<td>
-						<span class="text-lg">
-							{#if displayComp}
-								<!-- FIXME: This should be correct. -->
-								<svelte:component this={displayComp} {...row[name]} />
-							{:else}
-								{row[name]}
-							{/if}
-						</span>
-					</td>
-				{/each}
-			</tr>
-		{/each}
-	</table>
-</div>
+	{/each}
+</Table>
