@@ -1,9 +1,20 @@
-<script lang="ts" generics="T extends string">
+<script lang="ts" generics=" T extends readonly HeaderEntry[] ">
+	import type { FlatUnion } from '$lib/util/ts.util';
 	import Icon from '@iconify/svelte';
 
-	export let header: { name: T; value: string; icon: string }[];
+	import type { HeaderEntry } from './HeaderEntry.interface';
 
-	export let data: Record<T, string>[];
+	export let header: T;
+	export let data: FlatUnion<MapNameToDisplayComp<T>>[];
+
+	// Will comment this later. Basically maps header[number]["name"] as key for new data entry, where the value is either typeof displayComp prop or a string
+	type MapNameToDisplayComp<T extends readonly { name: string; displayComp?: unknown }[]> = {
+		[K in keyof T]: {
+			readonly [P in T[K]['name']]: T[K]['displayComp'] extends ConstructorOfATypedSvelteComponent
+				? ConstructorParameters<T[K]['displayComp']>[number]['props']
+				: string;
+		};
+	}[number];
 </script>
 
 <div class="rounded-lg text-text bg-surface0">
@@ -23,10 +34,15 @@
 
 		{#each data as row}
 			<tr class="border-2 border-text">
-				{#each header as { name }}
+				{#each header as { name, displayComp }}
 					<td>
 						<span class="text-lg">
-							{row[name]}
+							{#if displayComp}
+								<!-- FIXME: This should be correct. -->
+								<svelte:component this={displayComp} {...row[name]} />
+							{:else}
+								{row[name]}
+							{/if}
 						</span>
 					</td>
 				{/each}
