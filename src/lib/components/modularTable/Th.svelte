@@ -3,10 +3,13 @@
 
 	export let value: string;
 	export let icon: string;
+
+	export let clazz = '';
+	export { clazz as class };
 </script>
 
-<th>
-	<div class="flex items-center gap-2 p-4 text-xl">
+<th class="sticky top-0 bg-surface1">
+	<div class="flex items-center gap-2 p-6 text-xl {clazz}">
 		<Icon {icon} />
 		<span>
 			{value}

@@ -24,26 +24,29 @@
 </script>
 
 <Table>
-	<tr>
-		{#each header as head}
-			<Th {...head} />
-		{/each}
-	</tr>
-
-	{#each data as row}
+	<thead>
 		<tr>
-			{#each header as { name, displayComp }}
-				<Td href={'id' in row && typeof row.id === 'string' ? urlCb(row.id) : undefined}>
-					<span class="text-lg">
-						{#if displayComp}
-							<!-- FIXME: This should be correct. -->
-							<svelte:component this={displayComp} {...row[name]} />
-						{:else}
-							{row[name]}
-						{/if}
-					</span>
-				</Td>
+			{#each header as head}
+				<Th {...head} />
 			{/each}
 		</tr>
-	{/each}
+	</thead>
+	<tbody>
+		{#each data as row}
+			<tr>
+				{#each header as { name, displayComp }}
+					<Td href={'id' in row && typeof row.id === 'string' ? urlCb(row.id) : undefined}>
+						<span class="text-lg">
+							{#if displayComp}
+								<!-- FIXME: This should be correct. -->
+								<svelte:component this={displayComp} {...row[name]} />
+							{:else}
+								{row[name]}
+							{/if}
+						</span>
+					</Td>
+				{/each}
+			</tr>
+		{/each}
+	</tbody>
 </Table>
