@@ -1,7 +1,7 @@
 export interface HeaderEntry {
-	name: string;
-	value: string;
-	icon: string;
-	displayComp?: ConstructorOfATypedSvelteComponent;
-	class?: string;
+  name: string;
+  value: string;
+  icon: string;
+  displayComp?: ConstructorOfATypedSvelteComponent;
+  class?: string;
 }
