@@ -12,6 +12,8 @@
 	import { currentAction, currentRoute } from '$lib/stores';
 	import type { PageData } from './$types';
 	import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
+	import Card from '$lib/components/card/Card.svelte';
+	import CardRow from '$lib/components/card/CardRow.svelte';
 	$currentRoute = [
 		{
 			name: 'Galaxy',
@@ -99,49 +101,49 @@
 </script>
 
 <div class="flex w-full gap-2">
-	<div class="flex flex-col w-full gap-4 p-4 rounded-lg bg-surface0">
-		<div class="flex justify-between text-lg">
+	<Card class="gap-4">
+		<CardRow>
 			<span class="font-bold">Name</span>
 			<span>{info?.name ?? 'unknown'}</span>
-		</div>
+		</CardRow>
 
-		<div class="flex justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">Description</span>
 			<span class="pl-10">{info?.description ?? 'unknown'}</span>
-		</div>
+		</CardRow>
 
-		<div class="flex justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">Namespace</span>
 			<span>{info?.namespace ?? 'unknown'}</span>
-		</div>
-	</div>
+		</CardRow>
+	</Card>
 
-	<div class="flex flex-col w-full gap-4 p-4 rounded-lg bg-surface0">
-		<div class="flex justify-between text-lg">
+	<Card class="gap-4">
+		<CardRow>
 			<span class="font-bold">Version</span>
 			<span>{info?.version ?? 'unknown'}</span>
-		</div>
+		</CardRow>
 
-		<div class="flex justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">Id</span>
 			<span>{info?.id ?? 'unknown'}</span>
-		</div>
+		</CardRow>
 
-		<div class="flex justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">UUID</span>
 			<span>{info?.uuid ?? 'unknown'}</span>
-		</div>
+		</CardRow>
 
-		<div class="flex items-center justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">Enabled</span>
 			<Boolean isTrue={info.enabled} />
-		</div>
+		</CardRow>
 
-		<div class="flex items-center justify-between text-lg">
+		<CardRow>
 			<span class="font-bold">Local Only</span>
 			<Boolean isTrue={info.local_only} />
-		</div>
-	</div>
+		</CardRow>
+	</Card>
 </div>
 
 <DynTable {header} data={tableData} />
