@@ -30,4 +30,4 @@
 	];
 </script>
 
-<Pill {...numberLookUp[distribution]} class="!w-full" />
+<Pill {...numberLookUp[distribution]} />

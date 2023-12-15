@@ -5,7 +5,7 @@
 		{
 			name: 'Galaxy',
 			icon: 'streamline:galaxy-2-solid',
-			href: 'galaxy'
+			href: '/galaxy'
 		},
 		{
 			name: $page.params.id,

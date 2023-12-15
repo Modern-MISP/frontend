@@ -1,17 +1,15 @@
 <script lang="ts">
-	import Boolean from '$lib/components/boolean/Boolean.svelte';
 	import Info from '$lib/components/info/Info.svelte';
 	import { currentAction, currentRoute } from '$lib/stores';
 
-	import DynTable from '$lib/components/dynTable/DynTable.svelte';
-	import type { PageData } from './$types';
-	import PillCollection from '$lib/components/pill/PillCollection.svelte';
-	import Pill from '$lib/components/pill/Pill.svelte';
-	import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
-	import { format } from 'date-fns';
 	import { DATE_FORMAT } from '$lib/components/config';
-	import type { HeaderEntry } from '$lib/components/dynTable/HeaderEntry.interface';
+	import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
+	import DynTable from '$lib/components/dynTable/DynTable.svelte';
+	import Pill from '$lib/components/pill/Pill.svelte';
+	import PillCollection from '$lib/components/pill/PillCollection.svelte';
 	import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+	import { format } from 'date-fns';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -55,7 +53,8 @@
 			icon: 'mdi:share',
 			name: 'distribution',
 			value: 'Distribution',
-			displayComp: DistributionPill
+			displayComp: DistributionPill,
+			class: 'w-64'
 		},
 
 		{ icon: 'ph:hash-bold', name: 'attribute_count', value: 'Attr.', displayComp: Pill },

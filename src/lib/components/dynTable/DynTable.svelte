@@ -20,7 +20,7 @@
 				: string;
 		};
 	}[number];
-	export let urlCb: (id: string) => string = (id: string) => `/${id}`;
+	export let urlCb: (id: string) => string | undefined = (id: string) => undefined;
 </script>
 
 <Table>
@@ -33,7 +33,7 @@
 	</thead>
 	<tbody>
 		{#each data as row}
-			<tr>
+			<tr class="hover:bg-sky">
 				{#each header as { name, displayComp }}
 					<Td href={'id' in row && typeof row.id === 'string' ? urlCb(row.id) : undefined}>
 						<span class="text-lg">

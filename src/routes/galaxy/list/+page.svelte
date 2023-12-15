@@ -14,7 +14,7 @@
 		{
 			name: 'Galaxy',
 			icon: 'streamline:galaxy-2-solid',
-			href: 'galaxy'
+			href: '/galaxy'
 		}
 	];
 	$currentAction = 'list';
@@ -57,8 +57,8 @@
 			namespace: { text: x?.namespace ?? '' },
 			description: { text: x?.description ?? '' },
 			version: { text: x?.version ?? '', class: 'm-auto px-6' },
-			enabled: { isTrue: x?.enabled ?? '' },
-			local_only: { isTrue: x?.local_only ?? '' }
+			enabled: { isTrue: x?.enabled ?? '', class: 'm-auto' },
+			local_only: { isTrue: x?.local_only ?? '', class: 'm-auto' }
 		}));
 </script>
 

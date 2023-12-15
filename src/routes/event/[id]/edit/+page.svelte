@@ -5,7 +5,7 @@
 		{
 			name: 'Events',
 			icon: 'mdi:calendar-outline',
-			href: 'event'
+			href: '/event'
 		},
 		{
 			name: $page.params.id,
