@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 	import Input from '$lib/components/input/Input.svelte';
-	import { mode } from '$lib/stores';
 	import Icon from '@iconify/svelte';
+
+	export let mode: 'view' | 'edit' = 'view';
 </script>
 
 <div
@@ -15,8 +16,8 @@
 		<!-- svelte-ignore a11y-label-has-associated-control -->
 		<label class="flex flex-col items-center gap-1">
 			<Checkbox
-				checked={$mode === 'edit'}
-				on:change={() => ($mode = $mode === 'view' ? 'edit' : 'view')}
+				checked={mode === 'edit'}
+				on:change={() => (mode = mode === 'view' ? 'edit' : 'view')}
 			/>
 			<span class="text-xs">View mode</span>
 		</label>

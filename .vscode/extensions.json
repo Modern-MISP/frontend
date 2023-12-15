@@ -5,6 +5,7 @@
 		"fivethree.vscode-svelte-snippets",
 		"esbenp.prettier-vscode",
 		"svelte.svelte-vscode",
+		"streetsidesoftware.code-spell-checker",
 		"dbaeumer.vscode-eslint"
 	]
 }

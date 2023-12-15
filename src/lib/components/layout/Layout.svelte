@@ -2,6 +2,7 @@
 	import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
 	import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
 	import PillNavigation from '../pillNavigation/PillNavigation.svelte';
+	import Pill from '../pill/Pill.svelte';
 	export let routes = [
 		{
 			name: 'Events',
@@ -30,7 +31,7 @@
 		}
 	];
 
-	export let currentRoute = [
+	export let currentRoute: PillNavigation['$$prop_def']['routes'] = [
 		{
 			name: 'Admin',
 			icon: 'mdi:shield-account',
@@ -42,6 +43,8 @@
 			href: 'settings'
 		}
 	];
+
+	export let currentAction: PillNavigation['$$prop_def']['action'] = 'add';
 </script>
 
 <div class="absolute w-[100vw] h-full flex flex-row bg-base text-text">
@@ -53,7 +56,8 @@
 		<TopMenu />
 
 		<main class="relative h-full m-8 overflow-auto">
-			<PillNavigation routes={currentRoute} action="add" />
+			<PillNavigation routes={currentRoute} action={currentAction} />
+			<br />
 			<slot />
 		</main>
 	</div>

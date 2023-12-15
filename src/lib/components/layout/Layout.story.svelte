@@ -14,6 +14,19 @@
 	</svelte:fragment>
 
 	<div class={theme}>
-		<Layout />
+		<Layout
+			currentRoute={[
+				{
+					name: 'Admin',
+					icon: 'mdi:shield-account',
+					href: 'admin'
+				},
+				{
+					name: 'Users',
+					icon: 'mdi:account',
+					href: 'settings'
+				}
+			]}
+		/>
 	</div>
 </Hst.Story>

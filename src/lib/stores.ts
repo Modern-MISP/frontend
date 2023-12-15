@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
+import type PillNavigation from '$lib/components/pillNavigation/PillNavigation.svelte';
 const createSettingsStore = <T>(init: T) => {
 	const { subscribe, set, update } = writable<T>(init);
 
@@ -41,4 +42,7 @@ export const themes = [
 ] as const;
 
 export type Modi = 'view' | 'edit';
+
 export const mode = writable<Modi>('view');
+export const currentRoute = writable<PillNavigation['$$prop_def']['routes']>();
+export const currentAction = writable<PillNavigation['$$prop_def']['action']>('add');
