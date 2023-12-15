@@ -1,19 +1,19 @@
 <script lang="ts">
-	import type { Hst } from '@histoire/plugin-svelte';
-	import TopMenu from './TopMenu.svelte';
-	import { themes } from '$lib/stores';
+  import type { Hst } from '@histoire/plugin-svelte';
+  import TopMenu from './TopMenu.svelte';
+  import { themes } from '$lib/stores';
 
-	export let Hst: Hst;
+  export let Hst: Hst;
 
-	let theme = 'macchiato';
+  let theme = 'macchiato';
 </script>
 
 <Hst.Story>
-	<svelte:fragment slot="controls">
-		<Hst.Select title="Theme" bind:value={theme} options={themes} />
-	</svelte:fragment>
+  <svelte:fragment slot="controls">
+    <Hst.Select title="Theme" bind:value={theme} options={themes} />
+  </svelte:fragment>
 
-	<div class={theme}>
-		<TopMenu />
-	</div>
+  <div class={theme}>
+    <TopMenu />
+  </div>
 </Hst.Story>
