@@ -41,9 +41,8 @@
 	<div class="flex flex-col h-full min-w-0 grow">
 		<TopMenu bind:mode={$mode} />
 
-		<main class="relative h-full m-8 overflow-auto">
+		<main class="relative flex flex-col h-full gap-6 m-8 overflow-hidden">
 			<PillNavigation routes={$currentRoute} action={$currentAction} />
-			<br />
 			<slot />
 		</main>
 	</div>
