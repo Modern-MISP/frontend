@@ -32,7 +32,8 @@ generate_uml_svg:
 
 push_uml_svg:
   stage: push_uml_svg
-  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  # image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  image: buildpack-deps:latest
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
