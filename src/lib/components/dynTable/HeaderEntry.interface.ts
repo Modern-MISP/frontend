@@ -3,4 +3,5 @@ export interface HeaderEntry {
 	value: string;
 	icon: string;
 	displayComp?: ConstructorOfATypedSvelteComponent;
+	class?: string;
 }

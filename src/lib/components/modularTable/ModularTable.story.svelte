@@ -77,7 +77,7 @@
 						<Info text={row.info} />
 					</td>
 					<td>
-						<Tags tags={row.tags} />
+						<Tags pills={row.tags} />
 					</td>
 					<td>
 						<DatePill date={row.date} />

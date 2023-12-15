@@ -38,7 +38,7 @@
 					},
 					date: { date: new Date() },
 					tags: {
-						tags: [
+						pills: [
 							{ icon: 'mdi:email', text: 'admin@admin.test', class: '!bg-red !text-white' },
 							{ icon: 'mdi:email', text: 'asdf', class: '!bg-peach !text-white' }
 						]
@@ -53,7 +53,7 @@
 					},
 					date: { date: new Date() },
 					tags: {
-						tags: [
+						pills: [
 							{ icon: 'mdi:email', text: 'admin@admin.test', class: '!bg-red !text-white' },
 							{ icon: 'mdi:email', text: 'asdf', class: '!bg-peach !text-white' }
 						]

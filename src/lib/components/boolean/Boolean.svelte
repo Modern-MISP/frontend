@@ -6,4 +6,4 @@
 	$: text = isTrue === 'true' || isTrue ? 'Yes' : 'No';
 </script>
 
-<Info {text} class="text-white font-bold px-4 m-auto {isTrue ? 'bg-green' : 'bg-red'}" />
+<Info {text} class="text-white font-bold px-4 m-auto {isTrue ? '!bg-green' : '!bg-red'}" />

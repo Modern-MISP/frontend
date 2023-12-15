@@ -50,18 +50,16 @@
 
 	const tableData: DynTable<typeof header>['$$prop_def']['data'] = galaxies
 		.map((x) => x.Galaxy)
-		.map((x) => {
-			return {
-				id: x?.id ?? '',
-				icon: { text: x?.icon ?? '' },
-				name: { text: x?.name ?? '' },
-				namespace: { text: x?.namespace ?? '' },
-				description: { text: x?.description ?? '' },
-				version: { text: x?.version ?? '', class: 'm-auto px-6' },
-				enabled: { isTrue: x?.enabled ?? '' },
-				local_only: { isTrue: x?.local_only ?? '' }
-			};
-		});
+		.map((x) => ({
+			id: x?.id ?? '',
+			icon: { text: x?.icon ?? '' },
+			name: { text: x?.name ?? '' },
+			namespace: { text: x?.namespace ?? '' },
+			description: { text: x?.description ?? '' },
+			version: { text: x?.version ?? '', class: 'm-auto px-6' },
+			enabled: { isTrue: x?.enabled ?? '' },
+			local_only: { isTrue: x?.local_only ?? '' }
+		}));
 </script>
 
 <DynTable urlCb={(id) => `/galaxy/${id}/view`} {header} data={tableData} />
