@@ -3,7 +3,7 @@
 
 	export let routes: { name: string; icon: string; href: string }[] = [];
 
-	export let action: 'add' | 'remove' | 'list' | 'edit' | 'view' = 'list';
+	export let action: 'add' | 'remove' | 'list' | 'edit' | 'view' | 'error' = 'list';
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">
@@ -16,7 +16,7 @@
 		<Icon icon="mdi:chevron-right" class="w-8 h-8 text-sky " />
 	{/each}
 
-	<span class="text-sky">
+	<span class="text-sky" class:text-red={action === 'error'}>
 		{action.slice(0, 1).toUpperCase() + action.slice(1)}
 	</span>
 </div>
