@@ -37,6 +37,7 @@ module.exports = {
 				'jsdoc/require-jsdoc': [
 					'warn',
 					{
+						publicOnly: true,
 						contexts: [
 							// 'ExportNamedDeclaration:has(VariableDeclaration)',
 							// 'ExportNamedDeclaration:has(ExportSpecifier)'
