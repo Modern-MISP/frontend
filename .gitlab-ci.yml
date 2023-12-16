@@ -1,39 +1,92 @@
 stages:
-    - generate_plantuml
-    - generate_uml_svg
-    - push_uml_svg
+  - pre-build
+  - build
+  - test
+  - deploy
 
 default:
-    tags:
-        - docker # Tag is required to make the CI runner accept the jobs
+  tags:
+    - docker # Tag is required to make the CI runner accept the jobs
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+
+# === pre-build stage ===
+
+install_dependencies:
+  image: node:latest
+  stage: pre-build
+  script:
+    - npm ci
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - node_modules
+      - .svelte-kit
+
+# === build stage ===
+
+build_production:
+  image: node:latest
+  stage: build
+  script:
+    - cp $ENV_FILE .env
+    - npm run build
+    - mv build dist_production
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist_production
+
+# build staging:
+#   image: node:latest
+#   stage: build
+#   script:
+#     - npm run build -- --mode staging
+#     - mv build dist_staging
+#   artifacts:
+#     expire_in: 1 week
+#     paths:
+#       - dist_staging
+
 
 generate_plantuml:
-    stage: generate_plantuml
-    image: node:latest
-    script:
-        - npm install
-        - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
-        - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
-    artifacts:
-      paths:
-        - uml.plantuml
+  stage: build
+  image: node:latest
+  script:
+    - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
+    - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
+  artifacts:
+    paths:
+      - uml.plantuml
+
+# === test stage ===
 
 generate_uml_svg:
-    stage: generate_uml_svg
-    image: 
-      name: docker.io/plantuml/plantuml
-      entrypoint: [""]
-    script:
-        - mkdir -p docs
-        - cat uml.plantuml | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/uml.svg
-    artifacts:
-      paths:
-        - docs/uml.svg
+  stage: test
+  image: 
+    name: docker.io/plantuml/plantuml
+    entrypoint: [""]
+  script:
+    - mkdir -p docs
+    - cat uml.plantuml | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/uml.svg
+  artifacts:
+    paths:
+      - docs/uml.svg
+
+unit_tests:
+  stage: test
+  image: node:latest
+  script:
+      - npm run test:unit
+
+# === deploy stage ===
 
 push_uml_svg:
-  stage: push_uml_svg
-  # image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
-  image: buildpack-deps:latest
+  stage: deploy
+  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
@@ -50,3 +103,17 @@ push_uml_svg:
      - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
      - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
 
+ftp_deploy:
+  stage: deploy
+  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+      when: manual
+    - if: $CI_COMMIT_BRANCH == "main"
+  environment:
+    name: Production
+  script:
+    - apt-get update -qq && apt-get install -y -qq lftp
+    - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_production/ ./ --parallel=10 -X .htaccess"
+  dependencies:
+    - build_production
