@@ -1,19 +1,12 @@
 <script lang="ts">
   import { page } from '$app/stores';
-
   import Boolean from '$lib/components/boolean/Boolean.svelte';
-  import Info from '$lib/components/info/Info.svelte';
-
-  import Pill from '$lib/components/pill/Pill.svelte';
-
   import DynTable from '$lib/components/dynTable/DynTable.svelte';
-
-  import PillCollection from '$lib/components/pill/PillCollection.svelte';
-  import { currentAction, currentRoute } from '$lib/stores';
-  import type { PageData } from './$types';
-  import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
+  import { currentAction, currentRoute } from '$lib/stores';
+  import type { PageData } from './$types';
+
   $currentRoute = [
     {
       name: 'Galaxy',
@@ -30,74 +23,9 @@
 
   export let data: PageData;
 
-  const header = [
-    { icon: 'mdi:id-card', name: 'id', value: 'ID' },
-    { icon: 'mdi:circle', name: 'value', value: 'Value', displayComp: Info },
-    { icon: 'mdi:information', name: 'description', value: 'Description', displayComp: Info },
-    {
-      icon: 'material-symbols:work-outline',
-      name: 'org',
-      value: 'Organisations',
-      displayComp: PillCollection
-    },
-    { icon: 'ph:hash-bold', name: 'event_count', value: 'Events', displayComp: Pill },
-    // { icon: 'ph:hash-bold', name: 'relations', value: 'Relations', displayComp: PillCollection },
+  const { header, tableData, galaxy } = data;
 
-    {
-      icon: 'mdi:checkbox-marked-outline',
-      name: 'default',
-      value: 'Default',
-      displayComp: Boolean
-    },
-    {
-      icon: 'mdi:web-sync',
-      name: 'published',
-      value: 'Published',
-      displayComp: Boolean
-    },
-
-    {
-      icon: 'mdi:web',
-      name: 'distribution',
-      value: 'Distribution',
-      displayComp: DistributionPill,
-      class: 'w-56'
-    }
-  ] as const;
-
-  console.log(data.galaxy.GalaxyCluster);
-
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data.galaxy.GalaxyCluster.map(
-    (x) => ({
-      id: x.id,
-      value: { text: x.value },
-      description: { text: x.description || 'none' },
-      org: {
-        class: 'flex-col',
-        pills: [
-          {
-            icon: 'material-symbols:work-outline',
-            text: x.org_id ?? 'unknown'
-          },
-
-          {
-            icon: 'mdi:account-outline',
-            text: x.orgc_id ?? 'unknown'
-          }
-        ]
-      },
-      event_count: {
-        icon: 'ph:hash-bold',
-        text: '!apiResponse'
-      },
-      // relations: { text: x.relations },
-      default: { isTrue: x.default, class: 'm-auto' },
-      published: { isTrue: x.published, class: 'm-auto' },
-      distribution: { distribution: +x.distribution }
-    })
-  );
-
-  const info = data.galaxy.Galaxy;
+  const info = galaxy.Galaxy;
 </script>
 
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
