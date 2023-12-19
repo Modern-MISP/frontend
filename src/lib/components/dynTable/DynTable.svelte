@@ -7,7 +7,6 @@
 
   import Table from '../modularTable/Table.svelte';
   import Th from '../modularTable/Th.svelte';
-  import type { HeaderEntry } from './HeaderEntry.interface';
 
   export let header: T;
   export let data: FlatUnion<MapNameToDisplayComp<T>>[];
