@@ -14,8 +14,9 @@
 </script>
 
 <aside
-  class="relative flex flex-col w-20 h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in rounded-xl bg-mantle text-text shrink-0"
+  class="fixed z-20 flex flex-col w-0 h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:!flex lg:w-20 rounded-xl bg-mantle text-text shrink-0"
   class:!w-80={isOpen}
+  class:hidden={!isOpen}
 >
   <slot name="logo">
     <div class="flex h-10 gap-12 px-5 overflow-hidden text-2xl" class:text-4xl={isOpen}>

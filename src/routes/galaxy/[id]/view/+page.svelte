@@ -100,7 +100,7 @@
   const info = data.galaxy.Galaxy;
 </script>
 
-<div class="flex w-full gap-2">
+<div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
   <Card class="gap-4">
     <CardRow>
       <span class="font-bold">Name</span>
