@@ -18,12 +18,36 @@
     {
       name: 'Workflows',
       icon: 'material-symbols:network-node',
-      href: '/workflows'
+      href: '/workflows',
+      children: [
+        {
+          name: 'Admin',
+          icon: 'mdi-shield-account',
+          href: '/admin'
+        },
+        {
+          name: 'Settings',
+          icon: 'mdi-cog',
+          href: '/settings'
+        }
+      ]
     },
     {
       name: 'Admin',
       icon: 'mdi-shield-account',
-      href: '/admin'
+      href: '/admin',
+      children: [
+        {
+          name: 'Admin',
+          icon: 'mdi-shield-account',
+          href: '/admin'
+        },
+        {
+          name: 'Settings',
+          icon: 'mdi-cog',
+          href: '/settings'
+        }
+      ]
     },
     {
       name: 'Settings',
@@ -33,7 +57,7 @@
   ];
 </script>
 
-<div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
+<div class="absolute w-[100vw] h-full flex flex-row bg-base text-text p-2 {$settings.theme}">
   <slot name="sideMenu">
     <SideMenu {routes} activeRoute={$page.url.toString()} />
   </slot>
