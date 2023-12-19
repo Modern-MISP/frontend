@@ -18,19 +18,7 @@
     {
       name: 'Workflows',
       icon: 'material-symbols:network-node',
-      href: '/workflows',
-      children: [
-        {
-          name: 'Admin',
-          icon: 'mdi-shield-account',
-          href: '/admin'
-        },
-        {
-          name: 'Settings',
-          icon: 'mdi-cog',
-          href: '/settings'
-        }
-      ]
+      href: '/workflows'
     },
     {
       name: 'Admin',
@@ -38,14 +26,20 @@
       href: '/admin',
       children: [
         {
-          name: 'Admin',
-          icon: 'mdi-shield-account',
-          href: '/admin'
+          name: 'Users',
+          icon: 'mdi:account',
+          href: '/users'
         },
         {
-          name: 'Settings',
-          icon: 'mdi-cog',
-          href: '/settings'
+          name: 'Keys',
+          icon: 'mdi:key',
+          href: '/keys'
+        },
+
+        {
+          name: 'Remote Server',
+          icon: 'mdi:server',
+          href: '/servers'
         }
       ]
     },
