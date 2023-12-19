@@ -2,6 +2,8 @@ import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 import type PillNavigation from '$lib/components/pillNavigation/PillNavigation.svelte';
 const createSettingsStore = <T>(init: T) => {
+  console.log(init);
+
   const { subscribe, set, update } = writable<T>(init);
 
   function saveOnSet(value: T) {
@@ -28,7 +30,16 @@ let init: {
 
 if (browser) {
   const localSettings = JSON.parse(localStorage.getItem('settings') || '{}');
-  if (localSettings) init = localSettings;
+  if (isSetting(localSettings)) init = localSettings;
+}
+
+/**
+ * TODO: finish this typeguard
+ */
+function isSetting(toCheck: unknown): toCheck is typeof init {
+  return (
+    typeof toCheck === 'object' && toCheck !== null && 'theme' in toCheck && 'openOnInit' in toCheck
+  );
 }
 
 export const settings = createSettingsStore(init);
