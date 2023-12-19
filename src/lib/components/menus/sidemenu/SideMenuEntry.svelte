@@ -28,7 +28,7 @@
   <div class="flex items-center gap-4">
     <Icon {icon} class="mx-auto shrink-0" />
     {#if isMenuOpen}
-      <span class="line-clamp-1" transition:fade={FADE_OPTIONS}>
+      <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
         {name}
       </span>
     {/if}
