@@ -1,9 +1,15 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
 
+  /**
+   * The current route displayed with a name and an icon. Navigate to href on click
+   */
   export let routes: { name: string; icon: string; href: string }[] = [];
 
-  export let action: 'add' | 'remove' | 'list' | 'edit' | 'view' | 'error' = 'list';
+  /**
+   * The action that is currently selected for this page.
+   */
+  export let action: string = 'list';
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">

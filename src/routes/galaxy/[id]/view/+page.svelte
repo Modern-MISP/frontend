@@ -6,21 +6,6 @@
   import CardRow from '$lib/components/card/CardRow.svelte';
   import { currentAction, currentRoute } from '$lib/stores';
   import type { PageData } from './$types';
-
-  $currentRoute = [
-    {
-      name: 'Galaxy',
-      icon: 'streamline:galaxy-2-solid',
-      href: '/galaxy'
-    },
-    {
-      name: $page.params.id,
-      icon: 'mdi:id-card',
-      href: '/galaxy/list'
-    }
-  ];
-  $currentAction = 'view';
-
   export let data: PageData;
 
   const { header, tableData, galaxy } = data;

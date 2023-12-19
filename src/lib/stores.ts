@@ -2,8 +2,6 @@ import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 import type PillNavigation from '$lib/components/pillNavigation/PillNavigation.svelte';
 const createSettingsStore = <T>(init: T) => {
-  console.log(init);
-
   const { subscribe, set, update } = writable<T>(init);
 
   function saveOnSet(value: T) {

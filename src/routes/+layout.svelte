@@ -4,52 +4,28 @@
   import PillNavigation from '$lib/components/pillNavigation/PillNavigation.svelte';
   import { currentAction, currentRoute, mode, settings } from '$lib/stores';
   import { page } from '$app/stores';
-  export let routes = [
-    {
-      name: 'Events',
-      icon: 'mdi-calendar',
-      href: '/event'
-    },
-    {
-      name: 'Galaxies',
-      icon: 'streamline:galaxy-2-solid',
-      href: '/galaxy'
-    },
-    {
-      name: 'Workflows',
-      icon: 'material-symbols:network-node',
-      href: '/workflows'
-    },
-    {
-      name: 'Admin',
-      icon: 'mdi-shield-account',
-      href: '/admin',
-      children: [
-        {
-          name: 'Users',
-          icon: 'mdi:account',
-          href: '/users'
-        },
-        {
-          name: 'Keys',
-          icon: 'mdi:key',
-          href: '/keys'
-        },
+  import { routes } from './routes';
+  import { flatMap } from 'lodash-es';
 
-        {
-          name: 'Remote Server',
-          icon: 'mdi:server',
-          href: '/servers'
-        }
-      ]
-    },
-    {
-      name: 'Settings',
-      icon: 'mdi-cog',
-      href: '/settings'
-    }
+  let isOpen = $settings.openOnInit;
+
+  const idEntry = (name: string) => ({
+    name,
+    icon: 'mdi:id-card',
+    href: '../list'
+  });
+
+  $: $currentAction = $page.url.href.split('/').pop() as any; // TODO:: write typeguard with fallback. If filter are available via "?"" parameters you should change this.
+
+  /**
+   * Add all routes from {@link "./routes.ts"} that are included in the current url. If the route has a id parameter also include the id
+   */
+  $: $currentRoute = [
+    ...routes
+      .flatMap((x) => [x, ...(x.children || [])])
+      .filter(({ href }) => $page.url.href.includes(href)),
+    ...($page.params.id ? [idEntry($page.params.id)] : [])
   ];
-  let isOpen = false;
 </script>
 
 <div class="fixed w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme} p-2">
