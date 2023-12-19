@@ -23,7 +23,25 @@
     {
       name: 'Admin',
       icon: 'mdi-shield-account',
-      href: '/admin'
+      href: '/admin',
+      children: [
+        {
+          name: 'Users',
+          icon: 'mdi:account',
+          href: '/users'
+        },
+        {
+          name: 'Keys',
+          icon: 'mdi:key',
+          href: '/keys'
+        },
+
+        {
+          name: 'Remote Server',
+          icon: 'mdi:server',
+          href: '/servers'
+        }
+      ]
     },
     {
       name: 'Settings',
@@ -31,17 +49,20 @@
       href: '/settings'
     }
   ];
+  let isOpen = false;
 </script>
 
-<div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
+<div class="fixed w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme} p-2">
   <slot name="sideMenu">
-    <SideMenu {routes} activeRoute={$page.url.toString()} />
+    <SideMenu {routes} activeRoute={$page.url.toString()} bind:isOpen />
   </slot>
 
   <div class="flex flex-col h-full min-w-0 grow">
-    <TopMenu bind:mode={$mode} />
+    <div class="ml-0 lg:ml-4">
+      <TopMenu bind:mode={$mode} bind:isOpen />
+    </div>
 
-    <main class="relative flex flex-col h-full gap-6 m-8 overflow-hidden">
+    <main class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <PillNavigation routes={$currentRoute} action={$currentAction} />
       <slot />
     </main>

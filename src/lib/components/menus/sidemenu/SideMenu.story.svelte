@@ -6,31 +6,49 @@
 
   let theme = 'macchiato';
 
-  let routes = [
+  export let routes = [
     {
       name: 'Events',
       icon: 'mdi-calendar',
-      href: 'event'
+      href: '/event'
     },
     {
       name: 'Galaxies',
       icon: 'streamline:galaxy-2-solid',
-      href: 'galaxy'
+      href: '/galaxy'
     },
     {
       name: 'Workflows',
       icon: 'material-symbols:network-node',
-      href: 'workflows'
+      href: '/workflows'
     },
     {
       name: 'Admin',
       icon: 'mdi-shield-account',
-      href: 'admin'
+      href: '/admin',
+      children: [
+        {
+          name: 'Users',
+          icon: 'mdi:account',
+          href: '/users'
+        },
+        {
+          name: 'Keys',
+          icon: 'mdi:key',
+          href: '/keys'
+        },
+
+        {
+          name: 'Remote Server',
+          icon: 'mdi:server',
+          href: '/servers'
+        }
+      ]
     },
     {
       name: 'Settings',
       icon: 'mdi-cog',
-      href: 'settings'
+      href: '/settings'
     }
   ];
 </script>

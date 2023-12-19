@@ -4,4 +4,5 @@ export interface HeaderEntry {
   icon: string;
   displayComp?: ConstructorOfATypedSvelteComponent;
   class?: string;
+  // sortKey?: FlatUnion<MapNameToDisplayComp<this>>[]
 }
