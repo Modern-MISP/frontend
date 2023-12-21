@@ -6,6 +6,7 @@
 		"esbenp.prettier-vscode",
 		"svelte.svelte-vscode",
 		"streetsidesoftware.code-spell-checker",
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"jebbs.plantuml"
 	]
 }
