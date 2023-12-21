@@ -14,7 +14,7 @@
     href: '../list'
   });
 
-  $: $currentAction = $page.url.href.split('/').pop() as any; // TODO:: write typeguard with fallback. If filter are available via "?"" parameters you should change this.
+  $: $currentAction = $page.url.href.split('/').pop();
 
   /**
    * Add all routes from {@link "./routes.ts"} that are included in the current url. If the route has a id parameter also include the id
