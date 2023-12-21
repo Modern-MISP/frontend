@@ -13,8 +13,8 @@
 </script>
 
 <aside
-  class="fixed z-20 flex flex-col w-0 h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:!flex lg:w-20 rounded-xl bg-mantle text-text shrink-0"
-  class:!w-80={isOpen}
+  class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:!flex lg:w-20 rounded-xl bg-mantle text-text shrink-0 w-full"
+  class:lg:w-80={isOpen}
   class:hidden={!isOpen}
 >
   <slot name="logo">
@@ -27,7 +27,7 @@
   </slot>
 
   <SideMenuDivider />
-  <nav class="flex flex-col justify-center w-full gap-2">
+  <nav class="flex flex-col justify-center w-full gap-2 overflow-auto">
     <slot>
       {#each routes as route}
         <div class="flex flex-col px-5 rounded-2xl" class:bg-crust={isOpen}>

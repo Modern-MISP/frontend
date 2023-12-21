@@ -21,14 +21,14 @@
 
 <a
   href={children && !isChild && isMenuOpen ? null : href}
-  class="flex items-center justify-between h-16 gap-8 text-2xl transition-all duration-200 cursor-pointer hover:text-sky"
+  class="flex items-center justify-between h-16 gap-8 text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
 >
   <div class="flex items-center gap-4">
     <Icon {icon} class="mx-auto shrink-0" />
     {#if isMenuOpen}
-      <span class="line-clamp-1" transition:fade={FADE_OPTIONS}>
+      <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
         {name}
       </span>
     {/if}
