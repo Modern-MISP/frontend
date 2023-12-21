@@ -21,7 +21,7 @@
 
 <a
   href={children && !isChild && isMenuOpen ? null : href}
-  class="flex items-center justify-between h-16 gap-8 text-2xl transition-all duration-200 cursor-pointer hover:text-sky"
+  class="flex items-center justify-between h-16 gap-8 text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
 >
