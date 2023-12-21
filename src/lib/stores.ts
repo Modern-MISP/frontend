@@ -28,7 +28,16 @@ let init: {
 
 if (browser) {
   const localSettings = JSON.parse(localStorage.getItem('settings') || '{}');
-  if (localSettings) init = localSettings;
+  if (isSetting(localSettings)) init = localSettings;
+}
+
+/**
+ * TODO: finish this typeguard
+ */
+function isSetting(toCheck: unknown): toCheck is typeof init {
+  return (
+    typeof toCheck === 'object' && toCheck !== null && 'theme' in toCheck && 'openOnInit' in toCheck
+  );
 }
 
 export const settings = createSettingsStore(init);

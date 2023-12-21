@@ -1,4 +1,4 @@
-export interface HeaderEntry {
+declare interface HeaderEntry {
   name: string;
   value: string;
   icon: string;

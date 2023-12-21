@@ -1,21 +1,10 @@
 <script lang="ts">
-  import { currentAction, currentRoute } from '$lib/stores';
-
   import DynTable from '$lib/components/dynTable/DynTable.svelte';
   import type { PageData } from './$types';
 
   export let data: PageData;
 
   const { tableData, header } = data;
-
-  $currentRoute = [
-    {
-      name: 'Galaxy',
-      icon: 'streamline:galaxy-2-solid',
-      href: '/galaxy'
-    }
-  ];
-  $currentAction = 'list';
 </script>
 
 <DynTable urlCb={(id) => `/galaxy/${id}/view`} {header} data={tableData} />
