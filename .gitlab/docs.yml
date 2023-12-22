@@ -44,7 +44,7 @@ generate_mkdocs:
     - source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
-      site
+      - site
 
 push_docs:
   stage: push_docs
