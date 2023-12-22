@@ -1,0 +1,21 @@
+@startuml
+set separator ::
+skinparam groupInheritance 5
+skinparam defaultFontName Cantarell
+skinparam packageStyle Rectangle
+skinparam class {
+  BackgroundColor<<Component>> #f6f2ff
+  BackgroundColor<<ErrorPage>> #edd1e1
+  BackgroundColor<<Layout>> #f8ffe5
+  BackgroundColor<<Page>> #fff0e5
+}
+class "SideMenu" as src/lib/components/menus/sidemenu/SideMenu.svelte << (C, #9977DD) Component >> {
+  __ Properties __
+  +isOpen?: <color:#DF8E1D><i> </i></color><color:#8839EF>boolean</color>
+  +routes?: <color:#DF8E1D><i> Route[]</i></color>
+  +activeRoute?: <color:#DF8E1D><i> </i></color><color:#8839EF>string</color><color:#DF8E1D><i> </i></color><color:#179299>|</color><color:#DF8E1D><i> </i></color><color:#8839EF><i>null</i></color>
+  __ Slots __
+  +logo
+  +default
+}
+@enduml

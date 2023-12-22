@@ -1,0 +1,18 @@
+@startuml
+set separator ::
+skinparam groupInheritance 5
+skinparam defaultFontName Cantarell
+skinparam packageStyle Rectangle
+skinparam class {
+  BackgroundColor<<Component>> #f6f2ff
+  BackgroundColor<<ErrorPage>> #edd1e1
+  BackgroundColor<<Layout>> #f8ffe5
+  BackgroundColor<<Page>> #fff0e5
+}
+class "Checkbox" as src/lib/components/checkbox/Checkbox.svelte << (C, #9977DD) Component >> {
+  __ Properties __
+  +checked: <color:#DF8E1D><i> </i></color><color:#8839EF>boolean</color>
+  __ Events __
+  +change: <color:#DF8E1D><i> Event</i></color>
+}
+@enduml
