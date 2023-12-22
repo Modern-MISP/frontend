@@ -1,0 +1,14 @@
+@startuml
+set separator ::
+skinparam groupInheritance 5
+skinparam defaultFontName Cantarell
+skinparam packageStyle Rectangle
+skinparam class {
+  BackgroundColor<<Component>> #f6f2ff
+  BackgroundColor<<ErrorPage>> #edd1e1
+  BackgroundColor<<Layout>> #f8ffe5
+  BackgroundColor<<Page>> #fff0e5
+}
+class "/admin/servers/[id]/view" as src/routes/admin/servers/[id]/view/+page.svelte.js << (P, #FF7700) Page >> {
+}
+@enduml

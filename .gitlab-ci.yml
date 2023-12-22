@@ -19,7 +19,11 @@ install_dependencies:
   image: node:latest
   stage: pre-build
   script:
-    - npm ci
+    - npm ci --cache .npm --prefer-offline
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
   artifacts:
     expire_in: 1 week
     paths:
@@ -51,30 +55,14 @@ build_production:
 #     paths:
 #       - dist_staging
 
-
-generate_plantuml:
+docs:
   stage: build
-  image: node:latest
-  script:
-    - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
-    - npx @feathecutie/svelte-to-uml@latest . ./uml.plantuml
-  artifacts:
-    paths:
-      - uml.plantuml
+  trigger:
+    include: .gitlab/docs.yml
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
 
 # === test stage ===
-
-generate_uml_svg:
-  stage: test
-  image: 
-    name: docker.io/plantuml/plantuml
-    entrypoint: [""]
-  script:
-    - mkdir -p docs
-    - cat uml.plantuml | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/uml.svg
-  artifacts:
-    paths:
-      - docs/uml.svg
 
 unit_tests:
   stage: test
@@ -82,26 +70,8 @@ unit_tests:
   script:
       - npm run test:unit
 
-# === deploy stage ===
 
-push_uml_svg:
-  stage: deploy
-  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
-  rules:
-    - if: $CI_COMMIT_TAG != null
-      when: never
-    # Never run for scheduled pipelines
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_PIPELINE_SOURCE == "push"
-      when: manual
-  script:
-     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
-     - git add docs/
-     - git config user.name uml-pipeline
-     - git config user.email uml-pipeline@example.com
-     - git commit -m "Auto-generated UML for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
-     - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
+# === deploy stage ===
 
 ftp_deploy:
   stage: deploy

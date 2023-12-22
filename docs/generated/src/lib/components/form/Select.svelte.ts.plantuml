@@ -1,0 +1,17 @@
+@startuml
+set separator ::
+skinparam groupInheritance 5
+skinparam defaultFontName Cantarell
+skinparam packageStyle Rectangle
+skinparam class {
+  BackgroundColor<<Component>> #f6f2ff
+  BackgroundColor<<ErrorPage>> #edd1e1
+  BackgroundColor<<Layout>> #f8ffe5
+  BackgroundColor<<Page>> #fff0e5
+}
+class "Select" as src/lib/components/form/Select.svelte.ts<T extends string> << (C, #9977DD) Component >> {
+  __ Properties __
+  +options: <color:#DF8E1D><i> </i></color><color:#8839EF>readonly</color><color:#DF8E1D><i> </i></color><color:#7C7F93>{</color><color:#DF8E1D><i> </i></color><color:#4C4F69><i>value</i></color><color:#179299>:</color><color:#DF8E1D><i> T</i></color><color:#7C7F93>;</color><color:#DF8E1D><i> </i></color><color:#4C4F69><i>label</i></color><color:#179299>:</color><color:#DF8E1D><i> </i></color><color:#8839EF>string</color><color:#7C7F93>;</color><color:#DF8E1D><i> </i></color><color:#7C7F93>}</color><color:#DF8E1D><i>[]</i></color>
+  +value: <color:#DF8E1D><i> T</i></color>
+}
+@enduml

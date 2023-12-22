@@ -1,0 +1,17 @@
+@startuml
+set separator ::
+skinparam groupInheritance 5
+skinparam defaultFontName Cantarell
+skinparam packageStyle Rectangle
+skinparam class {
+  BackgroundColor<<Component>> #f6f2ff
+  BackgroundColor<<ErrorPage>> #edd1e1
+  BackgroundColor<<Layout>> #f8ffe5
+  BackgroundColor<<Page>> #fff0e5
+}
+class "PillNavigation" as src/lib/components/pillNavigation/PillNavigation.svelte.ts << (C, #9977DD) Component >> {
+  __ Properties __
+  +<i>The current route displayed with a name and an icon. Navigate to href on click</i>\nroutes?: <color:#DF8E1D><i> </i></color><color:#7C7F93>{</color><color:#DF8E1D><i> </i></color><color:#4C4F69><i>name</i></color><color:#179299>:</color><color:#DF8E1D><i> </i></color><color:#8839EF>string</color><color:#7C7F93>;</color><color:#DF8E1D><i> </i></color><color:#4C4F69><i>icon</i></color><color:#179299>:</color><color:#DF8E1D><i> </i></color><color:#8839EF>string</color><color:#7C7F93>;</color><color:#DF8E1D><i> </i></color><color:#4C4F69><i>href</i></color><color:#179299>:</color><color:#DF8E1D><i> </i></color><color:#8839EF>string</color><color:#7C7F93>;</color><color:#DF8E1D><i> </i></color><color:#7C7F93>}</color><color:#DF8E1D><i>[]</i></color>
+  +<i>The action that is currently selected for this page.</i>\naction?: <color:#DF8E1D><i> </i></color><color:#8839EF>string</color>
+}
+@enduml
