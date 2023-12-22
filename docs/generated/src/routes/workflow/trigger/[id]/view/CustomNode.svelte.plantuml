@@ -1,7 +1,6 @@
 @startuml
 set separator ::
 skinparam groupInheritance 5
-skinparam defaultFontName Cantarell
 skinparam packageStyle Rectangle
 skinparam class {
   BackgroundColor<<Component>> #f6f2ff

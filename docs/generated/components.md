@@ -8,8 +8,6 @@
 
 #### href: `string | undefined`
 
-
-
 ### Slots
 
 #### default
@@ -30,15 +28,9 @@
 
 #### value: `string`
 
-
-
 #### icon: `string`
 
-
-
 #### class: `string | undefined`
-
-
 
 ### Events
 
@@ -50,19 +42,13 @@
 
 ### Props
 
-T extends readonly HeaderEntry\[]
+`T extends readonly HeaderEntry[]`
 
 #### header: `T`
 
-
-
 #### data: `FlatUnion<MapNameToDisplayComp<T>>[]`
 
-
-
 #### urlCb: `((id: string) => string | undefined) | undefined`
-
-
 
 ## Info
 
@@ -72,11 +58,7 @@ T extends readonly HeaderEntry\[]
 
 #### text: `string | undefined`
 
-
-
 #### class: `string | undefined`
-
-
 
 ### Slots
 
@@ -90,23 +72,13 @@ T extends readonly HeaderEntry\[]
 
 #### label: `string | undefined`
 
-
-
 #### text: `string | undefined`
-
-
 
 #### icon: `string | undefined`
 
-
-
 #### class: `string | undefined`
 
-
-
 #### style: `string | undefined`
-
-
 
 ### Slots
 
@@ -120,8 +92,6 @@ T extends readonly HeaderEntry\[]
 
 #### distribution: `number | undefined`
 
-
-
 ## PillCollection
 
 ![UML Representation of PillCollection](src/lib/components/pill/PillCollection.svelte.svg)
@@ -130,11 +100,7 @@ T extends readonly HeaderEntry\[]
 
 #### pills: `{ label?: string | undefined; text?: string | undefined; icon?: string | undefined; class?: string | undefined; style?: string | undefined; }[]`
 
-
-
 #### class: `string | undefined`
-
-
 
 ## Boolean
 
@@ -144,11 +110,7 @@ T extends readonly HeaderEntry\[]
 
 #### isTrue: `string | boolean | undefined`
 
-
-
 #### class: `string | undefined`
-
-
 
 ## PillNavigation
 
@@ -158,11 +120,11 @@ T extends readonly HeaderEntry\[]
 
 #### routes: `{ name: string; icon: string; href: string; }[] | undefined`
 
-
+The current route displayed with a name and an icon. Navigate to href on click
 
 #### action: `string | undefined`
 
-
+The action that is currently selected for this page.
 
 ## Button
 
@@ -171,8 +133,6 @@ T extends readonly HeaderEntry\[]
 ### Props
 
 #### class: `string | undefined`
-
-
 
 ### Slots
 
@@ -190,8 +150,6 @@ T extends readonly HeaderEntry\[]
 
 #### class: `string | undefined`
 
-
-
 ### Slots
 
 #### default
@@ -203,8 +161,6 @@ T extends readonly HeaderEntry\[]
 ### Props
 
 #### class: `string | undefined`
-
-
 
 ### Slots
 
@@ -218,8 +174,6 @@ T extends readonly HeaderEntry\[]
 
 #### checked: `boolean`
 
-
-
 ### Events
 
 #### change: `Event`
@@ -232,23 +186,17 @@ T extends readonly HeaderEntry\[]
 
 #### date: `Date`
 
-
-
 ## Select
 
 ![UML Representation of Select](src/lib/components/form/Select.svelte.svg)
 
 ### Props
 
-T extends string
+`T extends string`
 
 #### options: `readonly { value: T; label: string; }[]`
 
-
-
 #### value: `T`
-
-
 
 ## Input
 
@@ -258,19 +206,11 @@ T extends string
 
 #### placeholder: `string`
 
-
-
 #### name: `string | undefined`
-
-
 
 #### value: `string | undefined`
 
-
-
 #### class: `string | undefined`
-
-
 
 ### Slots
 
@@ -294,11 +234,7 @@ T extends string
 
 #### mode: `"view" | "edit" | undefined`
 
-
-
 #### isOpen: `boolean | undefined`
-
-
 
 ## SideMenuDivider
 
@@ -308,8 +244,6 @@ T extends string
 
 #### class: `string | undefined`
 
-
-
 ## SideMenuEntry
 
 ![UML Representation of SideMenuEntry](src/lib/components/menus/sidemenu/SideMenuEntry.svelte.svg)
@@ -318,31 +252,17 @@ T extends string
 
 #### name: `string`
 
-
-
 #### icon: `string`
-
-
 
 #### href: `string`
 
-
-
 #### active: `boolean | undefined`
-
-
 
 #### isMenuOpen: `boolean | undefined`
 
-
-
 #### children: `Route[] | undefined`
 
-
-
 #### isChild: `boolean | undefined`
-
-
 
 ## SideMenu
 
@@ -352,15 +272,9 @@ T extends string
 
 #### isOpen: `boolean | undefined`
 
-
-
 #### routes: `Route[] | undefined`
 
-
-
 #### activeRoute: `string | null | undefined`
-
-
 
 ### Slots
 
@@ -376,15 +290,9 @@ T extends string
 
 #### routes: `{ name: string; icon: string; href: string; }[] | undefined`
 
-
-
 #### currentRoute: `{ name: string; icon: string; href: string; }[] | undefined`
 
-
-
 #### currentAction: `string | undefined`
-
-
 
 ### Slots
 
@@ -400,8 +308,6 @@ T extends string
 
 #### label: `string`
 
-
-
 ### Slots
 
 #### default
@@ -414,47 +320,24 @@ T extends string
 
 #### id: `string`
 
-
-
 #### data: `any`
-
-
 
 #### dragHandle: `string | undefined`
 
-
-
 #### type: `string | undefined`
-
-
 
 #### selected: `boolean | undefined`
 
-
-
 #### isConnectable: `boolean | undefined`
-
-
 
 #### zIndex: `number | undefined`
 
-
-
 #### xPos: `number`
-
-
 
 #### yPos: `number`
 
-
-
 #### dragging: `boolean`
-
-
 
 #### targetPosition: `Position | undefined`
 
-
-
 #### sourcePosition: `Position | undefined`
-

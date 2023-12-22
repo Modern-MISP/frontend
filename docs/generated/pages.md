@@ -24,8 +24,6 @@
 
 #### data: `{ data: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } | un...`
 
-
-
 ## /admin/servers
 
 ![UML Representation of /admin/servers](src/routes/admin/servers/+page.svelte.svg)
@@ -45,8 +43,6 @@
 ### Props
 
 #### data: `{ data: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } | un...`
-
-
 
 ## /admin/users
 
@@ -68,8 +64,6 @@
 
 #### data: `{ data: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } | un...`
 
-
-
 ## /event
 
 ![UML Representation of /event](src/routes/event/+page.svelte.svg)
@@ -90,8 +84,6 @@
 
 #### data: `{ events: ({ id?: string | undefined; } & { org_id?: string | undefined; distribution?: "0" | "1" | "2" | "3" | "4" | "5" | undefined; info?: string | undefined; orgc_id?: string | undefined; ... 14 more ...; event_creator_email?: string | undefined; } & { ...; })[]; header: readonly [...]; tableData: FlatUnion<...>...`
 
-
-
 ## /galaxy
 
 ![UML Representation of /galaxy](src/routes/galaxy/+page.svelte.svg)
@@ -108,8 +100,6 @@
 
 #### data: `{ galaxy: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } | ...`
 
-
-
 ## /galaxy/list
 
 ![UML Representation of /galaxy/list](src/routes/galaxy/list/+page.svelte.svg)
@@ -117,8 +107,6 @@
 ### Props
 
 #### data: `{ galaxies: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } ...`
-
-
 
 ## /settings
 
@@ -144,8 +132,6 @@
 
 #### data: `{ data: { Tag?: ({ id?: string | undefined; } & { name?: string | undefined; colour?: string | undefined; exportable?: boolean | undefined; org_id?: string | undefined; user_id?: string | undefined; ... 4 more ...; inherited?: number | undefined; })[] | undefined; }; tableData: FlatUnion<...>[]; header: readonly [.....`
 
-
-
 ## /workflow/modules
 
 ![UML Representation of /workflow/modules](src/routes/workflow/modules/+page.svelte.svg)
@@ -166,8 +152,6 @@
 
 #### data: `{ data: Record<string, never> | { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more...`
 
-
-
 ## /workflow/trigger
 
 ![UML Representation of /workflow/trigger](src/routes/workflow/trigger/+page.svelte.svg)
@@ -187,4 +171,3 @@
 ### Props
 
 #### data: `{ data: { Galaxy?: { id?: string | undefined; uuid?: string | undefined; name?: string | undefined; type?: string | undefined; description?: string | undefined; version?: string | undefined; icon?: string | undefined; namespace?: string | undefined; kill_chain_order?: Record<...> | ... 1 more ... | undefined; } | un...`
-
