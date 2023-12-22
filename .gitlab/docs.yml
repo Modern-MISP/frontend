@@ -1,7 +1,7 @@
 stages:
   - generate_docs
   - generate_uml_svg
-  - generate_pdf
+  - generate_mkdocs
   - push_docs
 
 default:
@@ -37,17 +37,14 @@ generate_uml_svg:
     paths:
       - docs
 
-generate_pdf:
-  stage: generate_pdf
-  image: hub.cert.kit.edu:5000/kit-cert-latex:latest
+generate_mkdocs:
+  stage: generate_mkdocs
+  image: hub.cert.kit.edu:5000/mkdocs
   script:
-     - apt-get update
-     - apt-get -y install librsvg2-bin
-     - cd docs/generated
-     - pandoc document.md -s -V linkcolor=blue --pdf-engine=lualatex -f markdown-implicit_figures+inline_code_attributes --toc -N -o document.pdf
+    - source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
-      - docs
+      site
 
 push_docs:
   stage: push_docs
@@ -64,6 +61,7 @@ push_docs:
       when: manual
   script:
      - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+     - cp site/pdf/document.pdf docs/generated
      - git add docs/
      - git config user.name uml-pipeline
      - git config user.email uml-pipeline@example.com

@@ -1,0 +1,16 @@
+site_name: MMISP Frontend Documentation
+docs_dir: docs/generated
+
+theme:
+  name: "material"
+
+nav:
+  - components.md
+  - pages.md
+  - layouts.md
+  - errorpages.md
+
+plugins:
+  - search
+  - with-pdf
+
