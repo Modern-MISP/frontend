@@ -1,8 +1,8 @@
 import { GET } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
-import Pill from '$lib/components/pill/Pill.svelte';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';

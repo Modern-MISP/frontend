@@ -1,6 +1,6 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
