@@ -1,9 +1,16 @@
 <script lang="ts">
+  import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
 
-  export let routes: { name: string; icon: string; href: string }[] = [];
+  /**
+   * The route that will be displayed in the pill navigation.
+   */
+  export let routes: Route[] = [];
 
-  export let action: 'add' | 'remove' | 'list' | 'edit' | 'view' | 'error' = 'list';
+  /**
+   * The action that will be displayed in the pill navigation.
+   */
+  export let action: string;
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">

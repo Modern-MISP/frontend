@@ -1,8 +1,17 @@
 <script>
   let clazz = '';
+  /**
+   * Additional classes to be applied to this component
+   */
   export { clazz as class };
 </script>
 
-<div class="flex flex-col w-full p-4 rounded-lg bg-surface0 {clazz}">
+<!-- 
+  @component
+  A card with a slot for content.
+  Sets the default padding and border radius. You can override this by passing your own classes.
+  
+ -->
+<div class="flex gap-4 flex-col text-text w-full p-4 rounded-lg bg-surface0 {clazz}">
   <slot />
 </div>

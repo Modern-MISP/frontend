@@ -4,14 +4,31 @@
   import SideMenuDivider from './SideMenuDivider.svelte';
   import SideMenuEntry from './SideMenuEntry.svelte';
   import { FADE_OPTIONS } from './config';
+  import type { SideMenuRoute } from './SideMenu.model';
 
+  /**
+   * The current state of the side menu. It is exportable to be able to change it from other components.
+   */
   export let isOpen = false;
 
-  export let routes: Route[] = [];
+  /**
+   * The routes to be displayed in the side menu.
+   */
+  export let routes: SideMenuRoute[] = [];
 
+  /**
+   * The current route that is active. Should probably always be the current url ($page.url.href).
+   */
   export let activeRoute: string | null = null;
 </script>
 
+<!-- 
+  @component
+  The side menu component. It contains the {@link SideMenuEntry} and {@link SideMenuDivider} components.
+  You can override the default SideMenuEntry list display by using the default slot.
+  You can also override the logo by using the "logo" slot.
+  If you do that do not forget the set fade options otherwise it may look weird.
+ -->
 <aside
   class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:!flex lg:w-20 rounded-xl bg-mantle text-text shrink-0 w-full"
   class:lg:w-80={isOpen}

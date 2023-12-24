@@ -1,15 +1,36 @@
 <script lang="ts">
+  /**
+   * the placeholder of the input.
+   */
   export let placeholder: string;
+  /**
+   * the name of the input. Used for the label and for form submission
+   */
   export let name = 'default';
+
+  /**
+   * the current value of the input
+   */
   export let value = '';
 
-  let clazz = '';
+  /**
+   * Additional classes to be applied.
+   */
   export { clazz as class };
+
+  let clazz = '';
 </script>
+
+<!-- 
+  @component
+  The default input component. You can add a prefix icon inside of the "icon" slot and / or a suffix icon in the "suffix" slot.
+  You should set the name prop, if you want to use this component inside of a form.
+  You can also set the value prop, if you want to set an initial value. Or bind to it if you want to use this outside of a form.
+  You can also set the placeholder prop, if you want to set an placeholder. This is recommended.
+ -->
 
 <label class="relative flex items-center gap-2 px-2 py-2 bg-crust text-text rounded-lg {clazz}">
   <slot name="icon" />
-  <slot />
   <input
     type="text"
     id={name}

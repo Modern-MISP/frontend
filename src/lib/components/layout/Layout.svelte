@@ -1,51 +1,31 @@
 <script lang="ts">
-  import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
+  import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
+  import type { Route } from '$lib/models/Route.interface';
+  import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
   import PillNavigation from '../pillNavigation/PillNavigation.svelte';
-  import Pill from '../pill/Pill.svelte';
-  export let routes = [
-    {
-      name: 'Events',
-      icon: 'mdi-calendar',
-      href: 'event'
-    },
-    {
-      name: 'Galaxies',
-      icon: 'streamline:galaxy-2-solid',
-      href: 'galaxy'
-    },
-    {
-      name: 'Workflows',
-      icon: 'material-symbols:network-node',
-      href: 'workflows'
-    },
-    {
-      name: 'Admin',
-      icon: 'mdi-shield-account',
-      href: 'admin'
-    },
-    {
-      name: 'Settings',
-      icon: 'mdi-cog',
-      href: 'settings'
-    }
-  ];
+  /**
+   * The routes to be displayed in the side menu.
+   */
+  export let routes: SideMenuRoute[];
 
-  export let currentRoute: PillNavigation['$$prop_def']['routes'] = [
-    {
-      name: 'Admin',
-      icon: 'mdi:shield-account',
-      href: 'admin'
-    },
-    {
-      name: 'Users',
-      icon: 'mdi:account',
-      href: 'settings'
-    }
-  ];
+  /**
+   * The current route to be displayed in the {@link PillNavigation}.
+   */
+  export let currentRoute: Route[] = [];
 
-  export let currentAction: PillNavigation['$$prop_def']['action'] = 'add';
+  /**
+   * The current action to be displayed in the {@link PillNavigation}.
+   */
+  export let currentAction: string = 'add';
 </script>
+
+<!-- 
+  @component
+  The basic component for the layout of the application. It contains the {@link SideMenu}, {@link TopMenu} and {@link PillNavigation} components.
+  The body goes inside of the default slot. 
+  You can also override the {@link SideMenu} by using the "sideMenu" slot.
+ -->
 
 <div class="absolute w-[100vw] h-full flex flex-row bg-base text-text">
   <slot name="sideMenu">

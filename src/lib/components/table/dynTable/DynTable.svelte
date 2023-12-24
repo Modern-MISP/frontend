@@ -1,12 +1,12 @@
 <script lang="ts" generics=" T extends readonly HeaderEntry[] ">
   import { sortBy } from 'lodash-es';
 
-  import Td from '../modularTable/Td.svelte';
+  import Td from '../../table/modularTable/Td.svelte';
 
   import type { FlatUnion } from '$lib/util/ts.util';
 
-  import Table from '../modularTable/Table.svelte';
-  import Th from '../modularTable/Th.svelte';
+  import Table from '../../table/modularTable/Table.svelte';
+  import Th from '../../table/modularTable/Th.svelte';
 
   export let header: T;
   export let data: FlatUnion<MapNameToDisplayComp<T>>[];

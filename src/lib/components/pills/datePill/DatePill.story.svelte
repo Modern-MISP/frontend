@@ -2,7 +2,7 @@
   import type { Hst } from '@histoire/plugin-svelte';
   import { themes } from '$lib/stores';
   import { addDays, addWeeks } from 'date-fns';
-  import DatePill from './DatePill.svelte';
+  import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
   export let Hst: Hst;
 
   let olderThenWeek = addWeeks(new Date(), 2);

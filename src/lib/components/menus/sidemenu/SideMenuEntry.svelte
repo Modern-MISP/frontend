@@ -3,14 +3,38 @@
   import { fade } from 'svelte/transition';
   import { FADE_OPTIONS } from './config';
   import SideMenuDivider from './SideMenuDivider.svelte';
+  import type { Route } from '$lib/models/Route.interface';
 
+  /**
+   * The name to be displayed in this side menu entry.
+   */
   export let name: string;
+  /**
+   * The icon to be displayed in this side menu entry.
+   */
   export let icon: string;
+  /**
+   * The href to be used in this side menu entry => link to a page.
+   */
   export let href: string;
+  /**
+   * Whether this side menu entry is active or not. => meaning being highlighted.
+   */
   export let active = false;
+
+  /**
+   * Whether the parent side menu is open or not.
+   */
   export let isMenuOpen = false;
+
+  /**
+   * The children of this side menu entry. => They will be displayed as subentries.
+   */
   export let children: Route[] | undefined = undefined;
 
+  /**
+   * Whether this side menu entry is a child of another SideMenuEntry. Meaning it being a subentry.
+   */
   export let isChild = false;
 
   let isOpen = false;
@@ -18,6 +42,12 @@
   // Close submenues on main menu close
   $: if (!isMenuOpen) isOpen = false;
 </script>
+
+<!-- 
+  @component
+  The side menu entry component. It can be opened by clicking on it, when the parent side menu is open.
+  If it is open all the children will be displayed as subentries using this component.
+ -->
 
 <a
   href={children && !isChild && isMenuOpen ? null : href}
