@@ -1,15 +1,16 @@
 <script lang="ts">
+  import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
 
   /**
-   * The current route displayed with a name and an icon. Navigate to href on click
+   * The route that will be displayed in the pill navigation.
    */
-  export let routes: { name: string; icon: string; href: string }[] = [];
+  export let routes: Route[] = [];
 
   /**
-   * The action that is currently selected for this page.
+   * The action that will be displayed in the pill navigation.
    */
-  export let action: string = 'list';
+  export let action: string;
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">

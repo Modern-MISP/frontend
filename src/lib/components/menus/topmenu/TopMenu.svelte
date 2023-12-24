@@ -3,10 +3,23 @@
   import Input from '$lib/components/input/Input.svelte';
   import Icon from '@iconify/svelte';
 
+  /**
+   * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
+   */
   export let mode: 'view' | 'edit' = 'view';
 
+  /**
+   * Whether the side menu is open or not. TODO: probably should search for a better solution for this.
+   */
   export let isOpen = false;
 </script>
+
+<!-- 
+  @component
+  The top menu component. It contains the {@link Input} and {@link Checkbox} components.
+  Also the switch for changes between view and edit mode is located here.
+  
+ -->
 
 <div class="flex flex-row items-center justify-between gap-4 p-4 rounded-xl bg-mantle text-text">
   <div class="flex items-center gap-4">

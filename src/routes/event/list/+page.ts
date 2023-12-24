@@ -4,10 +4,10 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { DATE_FORMAT } from '$lib/components/config';
-import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
-import Pill from '$lib/components/pill/Pill.svelte';
-import PillCollection from '$lib/components/pill/PillCollection.svelte';
+import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { format } from 'date-fns';
 

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Pill from '$lib/components/pill/Pill.svelte';
+  import Pill from '$lib/components/pills//pill/Pill.svelte';
 
+  // TODO: Docs
   export let pills: Pill['$$prop_def'][];
 
   let clazz: string = '';

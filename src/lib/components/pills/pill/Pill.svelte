@@ -1,6 +1,8 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
 
+  // TODO: Docs
+
   export let label: string | undefined = undefined;
   export let text = '';
   export let icon: string | undefined = undefined;

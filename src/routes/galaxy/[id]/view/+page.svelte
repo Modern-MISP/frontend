@@ -1,6 +1,6 @@
 <script lang="ts">
   import Boolean from '$lib/components/boolean/Boolean.svelte';
-  import DynTable from '$lib/components/dynTable/DynTable.svelte';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
   import type { PageData } from './$types';

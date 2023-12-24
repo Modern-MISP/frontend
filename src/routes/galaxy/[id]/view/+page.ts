@@ -5,12 +5,12 @@ import type { PageLoad } from './$types';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import Pill from '$lib/components/pill/Pill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
-import PillCollection from '$lib/components/pill/PillCollection.svelte';
-import DistributionPill from '$lib/components/distributionPill/DistributionPill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
 
 export const load: PageLoad = async ({ params }) => {
   const {

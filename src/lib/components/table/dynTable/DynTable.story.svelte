@@ -2,10 +2,10 @@
   import { themes } from '$lib/stores';
   import type { Hst } from '@histoire/plugin-svelte';
   import DynTable from './DynTable.svelte';
-  import DatePill from '../pill/DatePill.svelte';
-  import Info from '../info/Info.svelte';
-  import Pill from '../pill/Pill.svelte';
-  import Tags from '../pill/PillCollection.svelte';
+  import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+  import Info from '$lib/components/info/Info.svelte';
+  import Pill from '$lib/components/pills/pill/Pill.svelte';
+  import Tags from '$lib/components//pills//pillCollection/PillCollection.svelte';
   export let Hst: Hst;
 
   let theme = 'macchiato';

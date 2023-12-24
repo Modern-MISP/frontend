@@ -5,7 +5,7 @@ import type { PageLoad } from './$types';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/galaxies');
