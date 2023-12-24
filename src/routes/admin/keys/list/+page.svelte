@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { currentAction, currentRoute } from '$lib/stores';
-
-  import DynTable from '$lib/components/dynTable/DynTable.svelte';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import type { PageData } from './$types';
 
   export let data: PageData;

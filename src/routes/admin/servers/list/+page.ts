@@ -1,7 +1,7 @@
 import { GET } from '$lib/api';
+import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type DynTable from '$lib/components/dynTable/DynTable.svelte';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/galaxies');
