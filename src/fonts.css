@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope'), url(/fonts/manrope/variable/Manrope[wght].woff2) format('woff2'),
+    url(/fonts/manrope/variable/Manrope[wght].ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  src: local('Source Code Pro'),
+    url(/fonts/sourceCodePro/SourceCodePro-VariableFont_wght) format('ttf');
+}
+
+@font-face {
+  font-family: 'MesloLGS';
+  font-weight: 400;
+  src: local('Source Code Pro'), url(/fonts/mesloLGS/mesloLGSNerdFont-Reguler.ttf) format('ttf');
+}
