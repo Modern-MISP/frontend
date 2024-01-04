@@ -1,5 +1,10 @@
-<script>
-  import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
-  goto(`${$page.url}/list`, { replaceState: true });
+<script lang="ts">
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  const { tableData, header } = data;
 </script>
+
+<DynTable urlCb={(id) => `${id}/view`} {header} data={tableData} />

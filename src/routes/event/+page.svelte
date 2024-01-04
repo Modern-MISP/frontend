@@ -1,10 +1,9 @@
-<script>
-  import { goto } from '$app/navigation';
+<script lang="ts">
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import type { PageData } from './$types';
+  export let data: PageData;
 
-  goto('/event/list', { replaceState: true });
+  const { tableData, header } = data;
 </script>
 
-<div class="flex flex-col gap-4 text-sky">
-  <a href="/event/edit">Edit</a>
-  <a href="/event/view">View</a>
-</div>
+<DynTable urlCb={(id) => `/event/${id}/view`} {header} data={tableData} />

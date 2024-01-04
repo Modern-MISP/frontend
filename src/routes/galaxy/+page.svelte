@@ -1,10 +1,10 @@
-<script>
-  import { goto } from '$app/navigation';
+<script lang="ts">
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import type { PageData } from './$types';
 
-  goto('/galaxy/list', { replaceState: true });
+  export let data: PageData;
+
+  const { tableData, header } = data;
 </script>
 
-<div class="flex flex-col gap-4 text-sky">
-  <a href="/galaxy/edit">Edit</a>
-  <a href="/galaxy/view">View</a>
-</div>
+<DynTable urlCb={(id) => `/galaxy/${id}/view`} {header} data={tableData} />

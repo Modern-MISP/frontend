@@ -21,4 +21,6 @@
   ];
 </script>
 
-<Layout {routes} currentRoute={$currentRoute} />
+<Layout {routes} currentRoute={$currentRoute}>
+  <slot /></Layout
+>

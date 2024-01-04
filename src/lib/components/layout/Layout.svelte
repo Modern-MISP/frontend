@@ -2,7 +2,7 @@
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
-  import { settings } from '$lib/stores';
+  import { mode, settings } from '$lib/stores';
   import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
   import Breadcrumbs from '../pillNavigation/Breadcrumbs.svelte';
   /**
@@ -14,6 +14,8 @@
    * The current route to be displayed in the {@link Breadcrumbs}.
    */
   export let currentRoute: Route[] = [];
+
+  let isOpen = false;
 </script>
 
 <!-- 
@@ -23,17 +25,18 @@
   You can also override the {@link SideMenu} by using the "sideMenu" slot.
  -->
 
-<div class="absolute w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme}">
+<div class="fixed w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme} p-2">
   <slot name="sideMenu">
-    <SideMenu {routes} />
+    <SideMenu {routes} bind:isOpen />
   </slot>
 
   <div class="flex flex-col h-full min-w-0 grow">
-    <TopMenu />
+    <div class="ml-0 lg:ml-4">
+      <TopMenu bind:mode={$mode} bind:isOpen />
+    </div>
 
-    <main class="relative h-full m-8 overflow-auto">
+    <main class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <Breadcrumbs routes={currentRoute} />
-      <br />
       <slot />
     </main>
   </div>

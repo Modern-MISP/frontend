@@ -2,6 +2,7 @@
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import Icon from '@iconify/svelte';
+  import { capitalize } from 'lodash-es';
 
   /**
    * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
@@ -41,7 +42,7 @@
         checked={mode === 'edit'}
         on:change={() => (mode = mode === 'view' ? 'edit' : 'view')}
       />
-      <span class="text-xs">View mode</span>
+      <span class="text-xs">{capitalize(mode)} mode</span>
     </label>
     <div class="flex flex-col items-center gap-1">
       <div class="text-2xl rounded-full">
