@@ -7,7 +7,7 @@
   const idEntry = (name: string) => ({
     name,
     icon: 'mdi:id-card',
-    href: '../list'
+    href: './'
   });
 
   /**
