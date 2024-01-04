@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Hst } from '@histoire/plugin-svelte';
   import { themes } from '$lib/stores';
-  import PillNavigation from './PillNavigation.svelte';
+  import BreadCrumbs from './Breadcrumbs.svelte';
   export let Hst: Hst;
 
   let theme = 'macchiato';
@@ -25,6 +25,6 @@
   </svelte:fragment>
 
   <div class={theme}>
-    <PillNavigation {routes} action="add" />
+    <BreadCrumbs {routes} />
   </div>
 </Hst.Story>

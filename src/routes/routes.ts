@@ -1,4 +1,6 @@
-export let routes: Route[] = [
+import type { SideMenuRoute } from '$lib/components/menus/sidemenu/SideMenu.model';
+
+export const routes: SideMenuRoute[] = [
   {
     name: 'Events',
     icon: 'mdi-calendar',

@@ -6,11 +6,6 @@
    * The route that will be displayed in the pill navigation.
    */
   export let routes: Route[] = [];
-
-  /**
-   * The action that will be displayed in the pill navigation.
-   */
-  export let action: string;
 </script>
 
 <div class="flex items-center text-lg font-medium text-text">
@@ -22,8 +17,4 @@
 
     <Icon icon="mdi:chevron-right" class="w-8 h-8 text-sky " />
   {/each}
-
-  <span class="text-sky" class:text-red={action === 'error'}>
-    {action.slice(0, 1).toUpperCase() + action.slice(1)}
-  </span>
 </div>

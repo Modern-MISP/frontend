@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores';
-  import { currentAction, currentRoute } from '$lib/stores';
+  import { currentRoute } from '$lib/stores';
 
   $currentRoute = [
     {
@@ -9,8 +9,6 @@
       href: '/error'
     }
   ];
-
-  $currentAction = 'error';
 </script>
 
 <div class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-red">
