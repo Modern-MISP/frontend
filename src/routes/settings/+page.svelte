@@ -1,7 +1,7 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import Select from '$lib/components/form/Select.svelte';
-  import { currentAction, currentRoute, settings, themes } from '$lib/stores';
+  import { currentRoute, settings, themes } from '$lib/stores';
   import SettingsEntry from './SettingsEntry.svelte';
   $currentRoute = [
     {
@@ -15,7 +15,6 @@
       href: 'settings'
     }
   ];
-  $currentAction = 'edit';
 </script>
 
 <div class="flex flex-col rounded-lg">
