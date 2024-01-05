@@ -4,7 +4,7 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Events',
     icon: 'mdi-calendar',
-    href: '/event'
+    href: '/events'
   },
   {
     name: 'Tags',
@@ -14,22 +14,22 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Galaxies',
     icon: 'streamline:galaxy-2-solid',
-    href: '/galaxy'
+    href: '/galaxies'
   },
   {
     name: 'Workflows',
     icon: 'material-symbols:network-node',
-    href: '/workflow',
+    href: '/workflows',
     children: [
       {
-        name: 'Trigger',
+        name: 'Triggers',
         icon: 'material-symbols:line-start-diamond',
-        href: '/workflow/trigger'
+        href: '/workflows/triggers'
       },
       {
         name: 'Modules',
         icon: 'material-symbols:package-2-outline',
-        href: '/workflow/modules'
+        href: '/workflows/modules'
       }
     ]
   },

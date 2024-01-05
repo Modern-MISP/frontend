@@ -7,4 +7,4 @@
   const { tableData, header } = data;
 </script>
 
-<DynTable urlCb={(id) => `/galaxy/${id}`} {header} data={tableData} />
+<DynTable urlCb={(id) => `/galaxies/${id}`} {header} data={tableData} />
