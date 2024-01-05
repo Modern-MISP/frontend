@@ -4,7 +4,7 @@
   import type { Route } from '$lib/models/Route.interface';
   import { mode, settings } from '$lib/stores';
   import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
-  import Breadcrumbs from '../pillNavigation/Breadcrumbs.svelte';
+  import Breadcrumbs from '../breadcrumbs/Breadcrumbs.svelte';
   /**
    * The routes to be displayed in the side menu.
    */
@@ -20,7 +20,7 @@
 
 <!-- 
   @component
-  The basic component for the layout of the application. It contains the {@link SideMenu}, {@link TopMenu} and {@link PillNavigation} components.
+  The basic component for the layout of the application. It contains the {@link SideMenu}, {@link TopMenu} and {@link Breadcrumbs} components.
   The body goes inside of the default slot. 
   You can also override the {@link SideMenu} by using the "sideMenu" slot.
  -->

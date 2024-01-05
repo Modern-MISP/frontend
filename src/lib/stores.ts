@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
-import type BreadCrumbs from '$lib/components/pillNavigation/Breadcrumbs.svelte';
+import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
