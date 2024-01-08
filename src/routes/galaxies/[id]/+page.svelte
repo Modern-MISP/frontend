@@ -1,3 +1,7 @@
+<!--
+  Show all information about a single galaxy, including its clusters.
+-->
+
 <script lang="ts">
   import Boolean from '$lib/components/boolean/Boolean.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';

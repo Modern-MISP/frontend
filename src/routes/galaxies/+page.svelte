@@ -1,3 +1,7 @@
+<!--
+  A list of all galaxies.
+-->
+
 <script lang="ts">
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import type { PageData } from './$types';
