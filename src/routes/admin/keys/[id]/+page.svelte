@@ -4,7 +4,7 @@
   import View from './ViewKey.svelte';
 </script>
 
-{#if $mode === 'view'}
+{#if $mode === 'edit'}
   <Edit />
 {:else}
   <View />
