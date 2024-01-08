@@ -31,6 +31,7 @@
    * The children of this side menu entry. => They will be displayed as subentries.
    */
   export let children: Route[] | undefined = undefined;
+  $: children = children?.every(({hidden}) => hidden) ? undefined : children?.filter(x => !x.hidden);
 
   /**
    * Whether this side menu entry is a child of another SideMenuEntry. Meaning it being a subentry.

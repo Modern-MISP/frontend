@@ -14,7 +14,15 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Galaxies',
     icon: 'streamline:galaxy-2-solid',
-    href: '/galaxies'
+    href: '/galaxies',
+    children: [
+      {
+        name: 'Clusters',
+        icon: 'carbon:assembly-cluster',
+        href: '/galaxies/clusters',
+        hidden: true,
+      }
+    ]
   },
   {
     name: 'Workflows',

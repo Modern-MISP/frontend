@@ -63,4 +63,4 @@
   </Card>
 </div>
 
-<DynTable {header} data={tableData} />
+<DynTable urlCb={(id) => `/galaxies/clusters/${id}`} {header} data={tableData} />
