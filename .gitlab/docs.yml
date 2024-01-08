@@ -4,9 +4,14 @@ stages:
   - generate_mkdocs
   - push_docs
 
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "parent_pipeline"
+
 default:
   tags:
     - docker # Tag is required to make the CI runner accept the jobs
+
 
 variables:
   SOURCE_DATE_EPOCH: 0
