@@ -54,8 +54,9 @@
   class="flex items-center justify-between h-16 gap-8 text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
+  title={name}
 >
-  <div class="flex items-center gap-4" title={name}>
+  <div class="flex items-center gap-4">
     <Icon {icon} class="mx-auto shrink-0" />
     {#if isMenuOpen}
       <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
