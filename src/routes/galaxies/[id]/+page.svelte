@@ -1,7 +1,3 @@
-<!--
-  Show all information about a single galaxy, including its clusters.
--->
-
 <script lang="ts">
   import Boolean from '$lib/components/boolean/Boolean.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
@@ -16,6 +12,11 @@
   const info = galaxy.Galaxy;
 </script>
 
+<!--
+  @component
+  
+  Show all information about a single galaxy, including its clusters.
+-->
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
   <Card class="gap-4">
     <CardRow>
