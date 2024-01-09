@@ -9,23 +9,22 @@ participant "'Add Reference' Menu" as addreferencemenu <<Component>>
 end box
 database "Backend API" as api
 
-activate user
 activate api
 activate eventgraph
 note over eventgraph : Unreferenced objects/attributes displayed
 
 
-user -> optmenu: Clicks " Add Reference " button
+user -> optmenu: click " Add Reference " button
 activate optmenu
 
-optmenu -> eventgraph: Initiates adding reference action
+optmenu -> eventgraph: initiate "add reference" action
 deactivate optmenu
 
-eventgraph -> user: Allows dragging an edge from node to node
+eventgraph -> user: allow dragging an edge from node to node
 
-user -> eventgraph: Drags a new reference from an object to an attribute
+user -> eventgraph: drag new reference from an object to an attribute
 
-eventgraph -> addreferencemenu: Initiates entering attribute values action
+eventgraph -> addreferencemenu: initiate "enter attribute values" action
 
 
 activate addreferencemenu
@@ -33,15 +32,15 @@ note over addreferencemenu: Reference menu displayed
 
 addreferencemenu --> user:input form for attributes of new reference
 
-user -> addreferencemenu: Submits the form
+user -> addreferencemenu: submit filled form
 
-addreferencemenu -> api: Sends save request
+addreferencemenu -> api: send save request
 
-api --> addreferencemenu: OK
+api --> addreferencemenu: success
 deactivate addreferencemenu
 
-eventgraph -> eventgraph: Adds newly added edge
+eventgraph -> eventgraph: add newly added edge
 
-note over eventgraph : New reference is added
+note over eventgraph : New reference added
 
 @enduml
