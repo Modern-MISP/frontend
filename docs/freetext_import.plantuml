@@ -32,10 +32,14 @@ activate freetextdialogue
 attributelist -> freetextdialogue : open freetext import dialogue
 user -> freetextdialogue : enter inputs
 user -> freetextdialogue : click create
-freetextdialogue -> freetextdialogue : suggest attributes
-user -> freetextdialogue : change internal value
-freetextdialogue -> freetextdialogue : update internal value
-user -> freetextdialogue : click save
+
+freetextdialogue -> createattributesview : suggest attributes
+activate createattributesview
+user -> createattributesview : change internal value
+createattributesview -> createattributesview : update internal value
+user -> createattributesview : click save
+createattributesview -> freetextdialogue : update values
+deactivate createattributesview
 
 freetextdialogue -> api : PATCH event
 api --> freetextdialogue : success
