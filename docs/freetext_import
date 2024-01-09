@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+
+actor User as user
+box "Frontend"
+participant "Event View" as eventview
+participant "Attribute List" as attributelist
+participant "Freetext Import Dialogue" as freetextdialogue
+participant "Create Attributes View" as createattributesview
+participant "Top Menu" as topmenu <<Component>>
+participant "Layout" as layout <<Component>>
+end box
+database "Backend API" as api
+
+note over eventview : event view is displayed
+
+activate eventview
+user -> eventview : click on attributes
+eventview --> user : redirect to /events/[id]/attributes
+deactivate eventview
+
+activate attributelist
+attributelist -> api : GET attributes
+api --> attributelist : event attributes
+
+user -> topmenu : toggle edit mode
+topmenu --> layout : state changes
+layout -> attributelist : enter edit mode
+user -> attributelist : click freetext import dialogue
+
+activate freetextdialogue
+attributelist -> freetextdialogue : open freetext import dialogue
+user -> freetextdialogue : enter inputs
+user -> freetextdialogue : click create
+freetextdialogue -> freetextdialogue : suggest attributes
+user -> freetextdialogue : change internal value
+freetextdialogue -> freetextdialogue : update internal value
+user -> freetextdialogue : click save
+
+freetextdialogue -> api : PATCH event
+api --> freetextdialogue : success
+freetextdialogue -> attributelist : update value
+deactivate freetextdialogue
+
+attributelist -> layout : exit edit mode
+deactivate attributelist
+layout -> topmenu : view mode
+@enduml
