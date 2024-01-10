@@ -1,21 +1,27 @@
 import { GET } from '$lib/api';
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/galaxies');
+  const { data, error: mispError, response } = await GET('/servers');
 
   if (mispError) throw error(response.status, mispError.message);
 
-  const header = [] as const;
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+  const header = [
+    col({
+      icon: 'mdi:id-card',
+      key: 'id',
+      label: 'ID',
+      value: (x) => x.Server?.id ?? 'unknown'
+    })
+  ];
 
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data
-    .map((x) => x.Galaxy)
-    .map((x) => ({}));
   return {
     data,
-    tableData,
+    tableData: data,
     header
   };
 };

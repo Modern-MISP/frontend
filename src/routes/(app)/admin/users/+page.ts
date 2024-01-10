@@ -2,139 +2,106 @@ import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/admin/users');
 
   if (mispError) throw error(response.status, mispError.message);
 
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+
   const header = [
-    { icon: 'mdi:id-card', name: 'id', value: 'ID' },
-
-    {
+    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.User?.id ?? 'unknown' }),
+    col({
       icon: 'material-symbols:work-outline',
-      name: 'org',
-      value: 'Organisations',
-      displayComp: Info
-    },
-    {
+      key: 'org',
+      label: 'Organisations',
+      display: Info,
+      value: (x) => ({ text: x.Organisation?.name ?? 'unknown' })
+    }),
+    col({
       icon: 'mdi:lock-outline',
-      name: 'role',
-      value: 'Role',
-      displayComp: Info
-    },
+      key: 'role',
+      label: 'Role',
+      display: Info,
+      value: (x) => ({ text: x.Role?.name ?? 'unknown' })
+    }),
 
-    {
+    col({
       icon: 'mdi:email-outline',
-      name: 'email',
-      value: 'Email',
-      displayComp: Info
-    },
+      key: 'email',
+      label: 'Email',
+      display: Info,
+      value: (x) => ({ text: x.User?.email ?? 'unknown' })
+    }),
 
-    {
+    col({
       icon: 'mdi:id-card',
-      name: 'nids_sid',
-      value: 'NIDS SID',
-      displayComp: Info,
-      class: 'whitespace-nowrap'
-    },
-    {
+      key: 'nids_sid',
+      label: 'NIDS SID',
+      display: Info,
+      // class: 'whitespace-nowrap',
+      value: (x) => ({ text: x.User?.nids_sid ?? 'unknown' })
+    }),
+    col({
       icon: 'mdi:clock-outline',
-      name: 'last_login',
-      value: 'Last Login',
-      displayComp: DatePill,
-      class: 'whitespace-nowrap'
-    },
-    {
+      key: 'last_login',
+      label: 'Last Login',
+      display: DatePill,
+      // class: 'whitespace-nowrap',
+      value: (x) => ({ date: new Date(+(x.User?.last_login || 0) * 1000) })
+    }),
+    col({
       icon: 'mdi:clock-outline',
-      name: 'created',
-      value: 'Created',
-      displayComp: DatePill
-    },
-    {
+      key: 'created',
+      label: 'Created',
+      display: DatePill,
+      value: (x) => ({ date: new Date(+(x.User?.date_created || 0) * 1000) })
+    }),
+    col({
       icon: 'mdi:lock-outline',
-      name: 'totp',
-      value: 'TOTP',
-      displayComp: Boolean
-    },
+      key: 'totp',
+      label: 'TOTP',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.User?.authkey === 'true' })
+    }),
 
-    {
+    col({
       icon: 'mdi:account-outline',
-      name: 'contact',
-      value: 'Contact',
-      displayComp: Boolean
-    },
-    {
+      key: 'contact',
+      label: 'Contact',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.User?.contactalert })
+    }),
+    col({
       icon: 'mdi:bell-outline',
-      name: 'notification',
-      value: 'Notification',
-      displayComp: Boolean
-    },
-    {
+      key: 'notification',
+      label: 'Notification',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.User?.autoalert })
+    }),
+    col({
       icon: 'mdi:key-outline',
-      name: 'pgp_key',
-      value: 'PGP',
-      displayComp: Boolean
-    },
-    {
+      key: 'pgp_key',
+      label: 'PGP',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.User?.gpgkey === 'true' })
+    }),
+    col({
       icon: 'mdi:scale-balance',
-      name: 'terms',
-      value: 'Terms',
-      displayComp: Boolean
-    }
-  ] as const;
-
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data.map((x) => ({
-    created: {
-      date: new Date()
-    },
-    email: {
-      text: x.User?.email
-    },
-    id: x.User?.id,
-    last_login: {
-      date: new Date(+(x.User?.last_login || 0) * 1000)
-    },
-    nids_sid: {
-      text: x.User?.nids_sid
-    },
-    role: {
-      text: x.Role?.name,
-      class: 'whitespace-nowrap'
-    },
-    org: {
-      text: x.Organisation?.name
-    },
-    notification: {
-      isTrue: x.User?.autoalert,
-      class: 'mx-auto'
-    },
-    contact: {
-      isTrue: x.User?.contactalert,
-      class: 'mx-auto'
-    },
-    pgp_key: {
-      isTrue: x.User?.gpgkey,
-
-      class: 'mx-auto'
-    },
-    terms: {
-      isTrue: x.User?.termsaccepted,
-
-      class: 'mx-auto'
-    },
-    totp: {
-      isTrue: x.User?.authkey,
-
-      class: 'mx-auto'
-    }
-  }));
+      label: 'terms',
+      key: 'Terms',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.User?.termsaccepted })
+    })
+  ];
   return {
     data,
-    tableData,
+    tableData: data,
     header
   };
 };

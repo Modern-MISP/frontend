@@ -5,55 +5,72 @@ import type { PageLoad } from './$types';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/galaxies');
 
   if (mispError) throw error(response.status, mispError.message);
 
-  const header = [
-    { icon: 'mdi:id-card', name: 'id', value: 'ID' },
-    { icon: 'mdi:circle', name: 'icon', value: 'Icon', displayComp: Info },
-    { icon: 'mdi:circle', name: 'name', value: 'Name', displayComp: Info },
-    { icon: 'mdi:telescope', name: 'namespace', value: 'Namespace', displayComp: Info },
-    { icon: 'mdi:information', name: 'description', value: 'Description', displayComp: Info },
-    {
-      icon: 'mdi:circle',
-      name: 'version',
-      value: 'Version',
-      displayComp: Info
-    },
-    {
-      icon: 'mdi:checkbox-marked-outline',
-      name: 'enabled',
-      value: 'Enabled',
-      displayComp: Boolean
-    },
-    {
-      icon: 'mdi:cloud-off-outline',
-      name: 'local_only',
-      value: 'Local only',
-      class: 'whitespace-nowrap',
-      displayComp: Boolean
-    }
-  ] as const;
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data
-    .map((x) => x.Galaxy)
-    .map((x) => ({
-      id: x?.id ?? '',
-      icon: { text: x?.icon ?? '' },
-      name: { text: x?.name ?? '' },
-      namespace: { text: x?.namespace ?? '' },
-      description: { text: x?.description ?? '' },
-      version: { text: x?.version ?? '', class: 'm-auto px-6' },
-      enabled: { isTrue: x?.enabled ?? '', class: 'm-auto' },
-      local_only: { isTrue: x?.local_only ?? '', class: 'm-auto' }
-    }));
+  const header = [
+    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.Galaxy?.id ?? 'unknown' }),
+    col({
+      icon: 'mdi:circle',
+      key: 'icon',
+      label: 'Icon',
+      display: Info,
+      value: (x) => ({ text: x.Galaxy?.icon ?? 'unknown' })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'name',
+      label: 'Name',
+      display: Info,
+      value: (x) => ({ text: x.Galaxy?.name ?? 'unknown' })
+    }),
+    col({
+      icon: 'mdi:telescope',
+      key: 'namespace',
+      label: 'Namespace',
+      display: Info,
+      value: (x) => ({ text: x.Galaxy?.namespace ?? 'unknown' })
+    }),
+    col({
+      icon: 'mdi:information',
+      key: 'description',
+      label: 'Description',
+      display: Info,
+      value: (x) => ({ text: x.Galaxy?.description ?? 'unknown', class: 'line-clamp-4' })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'version',
+      label: 'Version',
+      display: Info,
+      value: (x) => ({ text: x.Galaxy?.version ?? 'unknown', class: 'm-auto px-6' })
+    }),
+    col({
+      icon: 'mdi:checkbox-marked-outline',
+      key: 'enabled',
+      label: 'Enabled',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.Galaxy?.enabled === 'true', class: 'm-auto' })
+    }),
+    col({
+      icon: 'mdi:cloud-off-outline',
+      key: 'local_only',
+      label: 'Local only',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.Galaxy?.local_only === 'true', class: 'm-auto' })
+    })
+  ];
+
   return {
     galaxies: data,
-    tableData,
+    tableData: data,
     header
   };
 };

@@ -7,4 +7,4 @@
   const { tableData, header } = data;
 </script>
 
-<DynTable urlCb={(id) => `${id}`} {header} data={tableData} />
+<DynTable href={({ id }) => `/workflows/triggers/${id}`} {header} data={tableData} />

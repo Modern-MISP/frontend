@@ -1,26 +1,28 @@
-<script lang="ts" generics=" T extends readonly HeaderEntry[] ">
-  import { sortBy } from 'lodash-es';
+<script
+  lang="ts"
+  generics="T extends IRecord[], 
+ "
+>
+  import type { DynTableHeadExtent } from './DynTable.model';
 
-  import Td from '../../table/modularTable/Td.svelte';
+  import type { ITableHead } from '$lib/models/ITableHead.interface';
+  import Table from '../modularTable/Table.svelte';
+  import Td from '../modularTable/Td.svelte';
+  import Th from '../modularTable/Th.svelte';
 
-  import type { FlatUnion } from '$lib/util/ts.util';
+  /**
+   * The header of the table. Also includes the icon and the href.
+   */
+  export let header: (ITableHead<T[number]> & DynTableHeadExtent)[];
+  /**
+   * The data that will be displayed in the table.
+   */
+  export let data: T;
 
-  import Table from '../../table/modularTable/Table.svelte';
-  import Th from '../../table/modularTable/Th.svelte';
-
-  export let header: T;
-  export let data: FlatUnion<MapNameToDisplayComp<T>>[];
-
-  export let urlCb: (id: string) => string | undefined = (id: string) => undefined;
-
-  // TODO: Will comment this later. Basically maps header[number]["name"] as key for new data entry, where the value is either typeof displayComp prop or a string
-  type MapNameToDisplayComp<T extends readonly { name: string; displayComp?: unknown }[]> = {
-    [K in keyof T]: {
-      readonly [P in T[K]['name']]: T[K]['displayComp'] extends ConstructorOfATypedSvelteComponent
-        ? ConstructorParameters<T[K]['displayComp']>[number]['props']
-        : string;
-    };
-  }[number];
+  /**
+   * The callback that will be called when the user clicks on the row.
+   */
+  export let href: ((row: T[number]) => string | undefined) | undefined = undefined;
 </script>
 
 <Table>
@@ -30,7 +32,7 @@
         <Th
           {...head}
           on:click={() => {
-            data = sortBy(data, (x) => x[head.name].text);
+            // data = sortBy(data, (x) => x[head.name].text);
           }}
         />
       {/each}
@@ -39,14 +41,14 @@
   <tbody>
     {#each data as row}
       <tr class="hover:bg-sky">
-        {#each header as { name, displayComp }}
-          <Td href={'id' in row && typeof row.id === 'string' ? urlCb(row.id) : undefined}>
+        {#each header as { value, display }}
+          {@const v = value(row)}
+          <Td href={href && href(row)}>
             <span class="text-lg">
-              {#if displayComp}
-                <!-- FIXME: This should be correct. -->
-                <svelte:component this={displayComp} {...row[name]} />
+              {#if display && typeof v != 'string'}
+                <svelte:component this={display} {...v} />
               {:else}
-                {row[name]}
+                {v}
               {/if}
             </span>
           </Td>

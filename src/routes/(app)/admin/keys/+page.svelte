@@ -7,4 +7,4 @@
   const { tableData, header } = data;
 </script>
 
-<DynTable urlCb={(id) => `/admin/keys/${id}`} {header} data={tableData} />
+<DynTable {header} data={tableData} />

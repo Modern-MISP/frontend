@@ -1,85 +1,92 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import Info from '$lib/components/info/Info.svelte';
+import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/workflows/moduleIndex');
+  console.log(data);
 
   if (mispError) throw error(response.status, mispError.message);
 
-  const header = [
-    { icon: 'mdi:id-card', name: 'id', value: 'ID' },
-    { icon: 'mdi:circle', name: 'name', value: 'Name', displayComp: Info },
-    {
-      icon: 'mdi:information-outline',
-      name: 'description',
-      value: 'Description',
-      displayComp: Info
-    },
-    {
-      icon: 'mdi:circle',
-      name: 'type',
-      value: 'Type',
-      displayComp: Info
-    },
-    {
-      icon: 'material-symbols:conversion-path',
-      name: 'version',
-      value: 'Version',
-      displayComp: Info
-    },
-    {
-      icon: 'mdi:cancel',
-      name: 'blocking',
-      value: 'Blocking',
-      displayComp: Boolean
-    },
-    {
-      icon: 'mdi:circle',
-      name: 'misp_core',
-      value: 'Misp Core Format',
-      displayComp: Boolean
-    },
-    {
-      icon: 'mdi:circle',
-      name: 'misp_module',
-      value: 'Misp Module',
-      displayComp: Boolean
-    },
-    {
-      icon: 'mdi:circle',
-      name: 'custom',
-      value: 'Custom',
-      displayComp: Boolean
-    },
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
-    {
+  const header = [
+    // col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
+    col({
+      icon: 'mdi:circle',
+      key: 'name',
+      label: 'Name',
+      display: Info,
+      value: (x) => ({ text: x.name })
+    }),
+    col({
+      icon: 'mdi:information-outline',
+      key: 'description',
+      label: 'Description',
+      display: Info,
+      value: (x) => ({ text: x.description })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'type',
+      label: 'Type',
+      display: Info,
+      value: (x) => ({ text: x.module_type })
+    }),
+    col({
+      icon: 'material-symbols:conversion-path',
+      key: 'version',
+      label: 'Version',
+      display: Info,
+      value: (x) => ({ text: x.version })
+    }),
+    col({
+      icon: 'mdi:cancel',
+      key: 'blocking',
+      label: 'Blocking',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.blocking })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'misp_core',
+      label: 'Misp Core Format',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.expect_misp_core_format })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'misp_module',
+      label: 'Misp Module',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.misp_module })
+    }),
+    col({
+      icon: 'mdi:circle',
+      key: 'custom',
+      label: 'Custom',
+      display: Boolean,
+      value: (x) => ({ isTrue: x.is_custom })
+    }),
+
+    col({
       icon: 'mdi:checkbox-outline',
-      name: 'enabled',
-      value: 'Enabled',
-      displayComp: Boolean
-    }
-  ] as const;
+      key: 'enabled',
+      label: 'Enabled',
+      display: Boolean,
+      value: (x) => ({ isTrue: !x.disabled })
+    })
+  ];
 
   if (!data) throw error(500, 'No data returned');
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data.map((x) => ({
-    id: x.id,
-    name: { text: x.name },
-    description: { text: x.description },
-    type: { text: x.module_type, class: 'm-auto px-6' },
-    version: { text: x.version, class: 'm-auto px-6' },
-    blocking: { isTrue: x.blocking, class: 'm-auto' },
-    misp_core: { isTrue: x.expect_misp_core_format, class: 'm-auto' },
-    misp_module: { isTrue: x.misp_module, class: 'm-auto' },
-    custom: { isTrue: x.is_custom, class: 'm-auto' },
-    enabled: { isTrue: !x.disabled, class: 'm-auto' }
-  }));
+
   return {
     data,
-    tableData,
+    tableData: data,
     header
   };
 };

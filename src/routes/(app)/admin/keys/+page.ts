@@ -1,108 +1,115 @@
 import { GET } from '$lib/api';
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+import Info from '$lib/components/info/Info.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Info from '$lib/components/info/Info.svelte';
-import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/auth_keys');
 
   if (mispError) throw error(response.status, mispError.message);
 
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+
   const header = [
-    { icon: 'mdi:id-card', name: 'id', value: 'ID' },
-    {
+    col({
+      icon: 'mdi:id-card',
+      key: 'id',
+      label: 'ID',
+      value: (x) => x.AuthKey?.id ?? ''
+    }),
+
+    col({
       icon: 'mdi:account-outline',
-      name: 'user',
-      value: 'User',
-      displayComp: HrefPill
-    },
-    {
+      key: 'user',
+      label: 'User',
+      value: (x) => ({
+        icon: 'mdi:account-outline',
+        text: x.User?.email,
+        href: `/admin/users/${x.User?.id}`
+      }),
+      display: HrefPill
+    }),
+
+    col({
       icon: 'mdi:key-outline',
-      name: 'key',
-      value: 'Key',
-      displayComp: Info
-    },
-    {
+      key: 'key',
+      label: 'Key',
+      display: Info,
+      value: (x) => ({
+        text: x.AuthKey?.authkey_end + '••••••••••••••' + x.AuthKey?.authkey_end
+      })
+    }),
+    col({
       icon: 'mdi:information-outline',
-      name: 'comment',
-      value: 'Comment',
-      displayComp: Info
-    },
-    {
+      key: 'comment',
+      label: 'Comment',
+      value: (x) => ({
+        text: x.AuthKey?.comment || 'No Comment',
+        class: 'line-clamp-3'
+      }),
+      display: Info
+    }),
+    col({
       icon: 'mdi:clock-alert-outline',
-      name: 'expiration',
-      value: 'Expiration',
-      displayComp: RelativeDatePill
-    },
-    {
+      key: 'expiration',
+      label: 'Expiration',
+      value: (x) => ({
+        date:
+          (x.AuthKey?.expiration &&
+            +x.AuthKey.expiration !== 0 &&
+            new Date(+x.AuthKey.expiration * 1000)) ||
+          null
+      }),
+      display: RelativeDatePill
+    }),
+    col({
       icon: 'mdi:clock-outline',
-      name: 'last_used',
-      value: 'Last used',
-      displayComp: DatePill,
-      class: 'whitespace-nowrap'
-    },
-    {
+      key: 'last_used',
+      label: 'Last used',
+      value: (x) => ({
+        date: (x.AuthKey?.last_used && new Date(+x.AuthKey?.last_used * 1000)) || null
+      }),
+      display: DatePill
+      // class: 'whitespace-nowrap'
+    }),
+    col({
       icon: 'mdi:eye-circle-outline',
-      name: 'last_seen_ip',
-      value: 'Last seen IP',
-      displayComp: Info,
-      class: 'whitespace-nowrap'
-    },
-    {
+      key: 'last_seen_ip',
+      label: 'Last seen Ip',
+      value: (x) => ({
+        text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
+      }),
+      display: Info
+      // class: 'whitespace-nowrap'
+    }),
+    col({
       icon: 'ph:hash-bold',
-      name: 'ip_count',
-      value: 'IP count',
-      displayComp: PillCollection
-    }
-  ] as const;
+      key: 'ip_count',
+      label: 'Attr.',
+      value: (x) => ({
+        pills: [
+          {
+            label: 'Seen',
+            text: x.AuthKey?.unique_ips?.length
+          },
+          {
+            label: 'Allowed',
+            text: x.AuthKey?.allowed_ips?.length ?? 'All'
+          }
+        ]
+      }),
+      display: PillCollection
+    })
+  ];
 
-  console.log(data);
-
-  const tableData: DynTable<typeof header>['$$prop_def']['data'] = data.map((x) => ({
-    id: x.AuthKey?.id,
-    user: {
-      icon: 'mdi:account-outline',
-      text: x.User?.email,
-      href: `/admin/users/${x.User?.id}/view`
-    },
-    expiration: {
-      date: +x.AuthKey?.expiration && new Date(+x.AuthKey?.expiration * 1000) // "0" evaluates to false is js. Thats the reason this works XD
-    },
-    last_seen_ip: {
-      text: x.AuthKey.unique_ips?.[0] ?? 'Never seen'
-    },
-    last_used: {
-      date: x.AuthKey?.last_used && new Date(+x.AuthKey?.last_used * 1000),
-      onNullText: 'Never'
-    },
-    key: {
-      text: x.AuthKey?.authkey_end + '••••••••••••••' + x.AuthKey?.authkey_end
-    },
-    comment: {
-      text: x.AuthKey?.comment,
-      class: 'line-clamp-3'
-    },
-    ip_count: {
-      pills: [
-        {
-          label: 'Seen',
-          text: x.AuthKey?.unique_ips?.length
-        },
-        {
-          label: 'Allowed',
-          text: x.AuthKey?.allowed_ips?.length ?? 'All'
-        }
-      ]
-    }
-  }));
   return {
-    data,
-    tableData,
-    header
+    header,
+    tableData: data
   };
 };

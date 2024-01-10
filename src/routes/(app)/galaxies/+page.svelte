@@ -1,7 +1,11 @@
 <script lang="ts">
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+
   import type { PageData } from './$types';
 
+  /**
+   * The data that will be displayed on this page
+   */
   export let data: PageData;
 
   const { tableData, header } = data;
@@ -12,4 +16,4 @@
   
   A list of all galaxies.
 -->
-<DynTable urlCb={(id) => `/galaxies/${id}`} {header} data={tableData} />
+<DynTable href={(x) => `/galaxies/${x.Galaxy?.id}`} {header} data={tableData} />

@@ -57,7 +57,7 @@
   on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
   title={name}
 >
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4" title={name}>
     <Icon {icon} class="mx-auto shrink-0" />
     {#if isMenuOpen}
       <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>

@@ -38,6 +38,12 @@
       icon: 'mdi:circle'
     }
   ];
+
+  let clazz: string = '';
+  /**
+   * Override the pill class
+   */
+  export { clazz as class };
 </script>
 
 <!-- 
@@ -45,4 +51,4 @@
   Converts a distribution number to the equivalent text. Uses the {@link Pill} component to display the text and icon
  -->
 
-<Pill {...numberLookUp[distribution]} />
+<Pill {...numberLookUp[distribution]} class={clazz} />

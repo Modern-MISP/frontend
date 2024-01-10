@@ -1,23 +1,38 @@
 <script lang="ts">
+  import Info from '$lib/components/info/Info.svelte';
   import { themes } from '$lib/stores';
   import type { Hst } from '@histoire/plugin-svelte';
+  import { createTableHeadGenerator } from '../TableBuilder';
+  import type { DynTableHeadExtent } from './DynTable.model';
   import DynTable from './DynTable.svelte';
-  import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-  import Info from '$lib/components/info/Info.svelte';
-  import Pill from '$lib/components/pills/pill/Pill.svelte';
-  import Tags from '$lib/components//pills//pillCollection/PillCollection.svelte';
+  import { TABLE_DATA } from './exampleTableData';
+  import Boolean from '$lib/components/boolean/Boolean.svelte';
+
   export let Hst: Hst;
 
   let theme = 'macchiato';
 
+  const data = TABLE_DATA;
+  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+
   const header = [
-    { icon: 'mdi:home', name: 'id', value: 'ID' },
-    { icon: 'mdi:email', name: 'email', value: 'Email', displayComp: Pill },
-    { icon: 'mdi:key', name: 'key', value: 'Key', displayComp: Pill },
-    { icon: 'mdi:information', name: 'info', value: 'Info', displayComp: Info },
-    { icon: 'mdi:clock', name: 'date', value: 'Date', displayComp: DatePill },
-    { icon: 'mdi:tag', name: 'tags', value: 'Tags', displayComp: Tags }
-  ] as const;
+    col({ key: 'id', icon: 'mdi:id-card', label: 'ID', value: (x) => x.id }),
+    col({
+      key: 'boolean',
+      icon: 'mdi:check',
+      label: 'Boolean',
+      display: Boolean,
+      value: (x) => ({ isTrue: !x.disabled })
+    }),
+    col({ key: 'name', icon: 'mdi:account-outline', label: 'Name', value: (x) => x.name }),
+    col({
+      key: 'description',
+      icon: 'mdi:information-outline',
+      label: 'Description',
+      display: Info,
+      value: (x) => ({ text: x.description })
+    })
+  ];
 </script>
 
 <Hst.Story>
@@ -26,40 +41,6 @@
   </svelte:fragment>
 
   <div class={theme}>
-    <DynTable
-      {header}
-      data={[
-        {
-          id: '1',
-          email: { icon: 'mdi:email', text: 'admin@admin.test' },
-          key: { icon: 'mdi:key', text: 'ABC*********DEF' },
-          info: {
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'
-          },
-          date: { date: new Date() },
-          tags: {
-            pills: [
-              { icon: 'mdi:email', text: 'admin@admin.test', class: '!bg-red !text-white' },
-              { icon: 'mdi:email', text: 'asdf', class: '!bg-peach !text-white' }
-            ]
-          }
-        },
-        {
-          id: '2',
-          email: { icon: 'mdi:email', text: 'admin@admin.test' },
-          key: { icon: 'mdi:key', text: 'ABC*********DEF' },
-          info: {
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'
-          },
-          date: { date: new Date() },
-          tags: {
-            pills: [
-              { icon: 'mdi:email', text: 'admin@admin.test', class: '!bg-red !text-white' },
-              { icon: 'mdi:email', text: 'asdf', class: '!bg-peach !text-white' }
-            ]
-          }
-        }
-      ]}
-    />
+    <DynTable {header} {data} />
   </div>
 </Hst.Story>

@@ -57,11 +57,11 @@
   <div class={theme}>
     <Table>
       <tr>
-        <Th icon="mdi:id-card" value="ID" />
-        <Th icon="mdi:email" value="Email" />
-        <Th icon="mdi:information" value="Info" />
-        <Th icon="mdi:tag" value="Tags" />
-        <Th icon="mdi:clock" value="Time" />
+        <Th icon="mdi:id-card" label="ID" />
+        <Th icon="mdi:email" label="Email" />
+        <Th icon="mdi:information" label="Info" />
+        <Th icon="mdi:tag" label="Tags" />
+        <Th icon="mdi:clock" label="Time" />
       </tr>
 
       {#each data as row}
