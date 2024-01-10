@@ -19,4 +19,11 @@
   <p class="text-xl">
     {$page.error?.message}
   </p>
+
+  {#if $page.status === 403}
+    <span>
+      Goto
+      <a href="/login" class="underline text-sky">login</a>
+    </span>
+  {/if}
 </div>
