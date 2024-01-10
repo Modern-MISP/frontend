@@ -1,0 +1,44 @@
+<script lang="ts">
+  import Button from '$lib/components/button/Button.svelte';
+  import Input from '$lib/components/input/Input.svelte';
+  import Icon from '@iconify/svelte';
+  import { login } from './authMock';
+  import { goto } from '$app/navigation';
+
+  let error: string | null = null;
+
+  async function submit({ currentTarget }: SubmitEvent) {
+    if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
+
+    const data = new FormData(currentTarget);
+    const entries: any = Object.fromEntries(data.entries());
+    try {
+      const res = await login(entries);
+      if (res) {
+        localStorage.setItem('authToken', 'Bearer: secür.it.be');
+        goto('/events');
+      }
+    } catch (e) {
+      console.warn(e.body.message);
+      error = e.body.message;
+    }
+  }
+</script>
+
+<form class="flex flex-col gap-4 m-auto w-80" method="post" on:submit|preventDefault={submit}>
+  <h1 class="text-4xl font-bold text-white">
+    Login
+    <hr />
+  </h1>
+  <Input name="email" placeholder="Email" icon="mdi:email-outline" />
+  <Input name="password" placeholder="Password" icon="mdi:lock-outline" />
+  <Button class="py-2 !w-fit self-end gap-2">
+    Login
+    <Icon icon="mdi:chevron-right" />
+  </Button>
+  {#if error}
+    <div class="text-red">
+      {error}
+    </div>
+  {/if}
+</form>

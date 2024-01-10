@@ -2,9 +2,9 @@
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
-  import { mode, settings } from '$lib/stores';
-  import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
+  import { mode } from '$lib/stores';
   import Breadcrumbs from '../breadcrumbs/Breadcrumbs.svelte';
+  import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
   /**
    * The routes to be displayed in the side menu.
    */
@@ -25,7 +25,7 @@
   You can also override the {@link SideMenu} by using the "sideMenu" slot.
  -->
 
-<div class="fixed w-[100vw] h-full flex flex-row bg-base text-text {$settings.theme} p-2">
+<div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
   <slot name="sideMenu">
     <SideMenu {routes} bind:isOpen />
   </slot>

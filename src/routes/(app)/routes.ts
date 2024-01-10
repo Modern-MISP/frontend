@@ -20,7 +20,7 @@ export const routes: SideMenuRoute[] = [
         name: 'Clusters',
         icon: 'carbon:assembly-cluster',
         href: '/galaxies/clusters',
-        hidden: true,
+        hidden: true
       }
     ]
   },
