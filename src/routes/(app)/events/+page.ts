@@ -17,7 +17,7 @@ export const load: PageLoad = async () => {
     data,
     error: mispError,
     response
-  } = await POST('/events/index', { body: { page: 0, limit: 50 } });
+  } = await POST('/events/index', { body: { page: 1, limit: 50 } });
 
   if (mispError) throw error(response.status, mispError.message);
 
