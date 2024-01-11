@@ -57,14 +57,14 @@ export const load: PageLoad = async () => {
       key: 'enabled',
       label: 'Enabled',
       display: Boolean,
-      value: (x) => ({ isTrue: x.Galaxy?.enabled === 'true', class: 'm-auto' })
+      value: (x) => ({ isTrue: x.Galaxy?.enabled, class: 'm-auto' })
     }),
     col({
       icon: 'mdi:cloud-off-outline',
       key: 'local_only',
       label: 'Local only',
       display: Boolean,
-      value: (x) => ({ isTrue: x.Galaxy?.local_only === 'true', class: 'm-auto' })
+      value: (x) => ({ isTrue: x.Galaxy?.local_only, class: 'm-auto' })
     })
   ];
 
