@@ -1,6 +1,8 @@
 import { browser } from '$app/environment';
-import { writable } from 'svelte/store';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
+import type { ComponentType, SvelteComponent } from 'svelte';
+import { writable } from 'svelte/store';
+import type { ActionBarEntry } from './models/ActionBarEntry.interface';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
@@ -15,6 +17,8 @@ const createSettingsStore = <T>(init: T) => {
     update
   };
 };
+
+export const actionBarEntries = writable<Array<ActionBarEntry>>([]);
 
 let init: {
   theme: Themes;
