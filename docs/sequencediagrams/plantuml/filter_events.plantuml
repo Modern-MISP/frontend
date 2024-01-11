@@ -17,7 +17,7 @@ note over eventlist : Unfiltered events list is displayed
 user -> topmenu: click " Filter " button
 activate topmenu
 
-topmenu -> filter: initiate filter action
+topmenu -> filter: initiate " filter " action
 activate filter
 note over filter: Filter menu is displayed
 
