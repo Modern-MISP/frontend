@@ -22,6 +22,7 @@ export const load: PageLoad = async () => {
   if (mispError) throw error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+  console.log(data);
 
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
@@ -101,6 +102,7 @@ export const load: PageLoad = async () => {
       value: (x) => ({ icon: 'ph:hash-bold', text: x.attribute_count })
     }),
 
+    // TODO: probably use DatePills
     col({
       icon: 'mdi:clock-outline',
       key: 'dates',
