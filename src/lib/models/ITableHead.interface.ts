@@ -5,7 +5,6 @@ export type ITableHead<
   DisplayComp extends SvelteComponent | undefined = SvelteComponent | undefined,
   DefaultValueReturn = string
 > = {
-  key: string;
   label: string;
   display?: DisplayComp extends SvelteComponent ? ComponentType<DisplayComp> : undefined;
   value: (
