@@ -21,5 +21,5 @@
 </script>
 
 <a {href}>
-  <Pill {label} {text} {icon} class="text-blue-400" />
+  <Pill {label} {text} {icon} class="!text-blue-400" />
 </a>
