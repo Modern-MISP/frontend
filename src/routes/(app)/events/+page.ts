@@ -4,13 +4,14 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { DATE_FORMAT } from '$lib/components/config';
-import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { format } from 'date-fns';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
 export const load: PageLoad = async () => {
   const {
@@ -90,8 +91,8 @@ export const load: PageLoad = async () => {
       icon: 'mdi:share',
       key: 'distribution',
       label: 'Distribution',
-      display: DistributionPill,
-      value: (x) => ({ distribution: +(x.distribution ?? 0) })
+      display: LookupPill,
+      value: (x) => ({ value: +(x.distribution ?? 0), numberLookUp: DISTRIBUTION_LOOKUP })
     }),
 
     col({

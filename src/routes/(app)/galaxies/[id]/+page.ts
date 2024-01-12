@@ -7,10 +7,11 @@ import Info from '$lib/components/info/Info.svelte';
 
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
-import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
 export const load: PageLoad = async ({ params }) => {
   const {
@@ -88,10 +89,10 @@ export const load: PageLoad = async ({ params }) => {
     }),
     col({
       icon: 'mdi:web',
-      key: 'default',
-      label: 'Default',
-      display: DistributionPill,
-      value: (x) => ({ distribution: +x.distribution, class: '!w-56' })
+      key: 'distribution',
+      label: 'Distribution',
+      display: LookupPill,
+      value: (x) => ({ value: +x.distribution, class: '!w-56', numberLookUp: DISTRIBUTION_LOOKUP })
     })
   ];
 
