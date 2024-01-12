@@ -52,8 +52,5 @@
     "vite": "^4.4.2",
     "vitest": "^0.34.0"
   },
-  "type": "module",
-  "dependencies": {
-    "@catppuccin/palette": "^1.0.3"
-  }
+  "type": "module"
 }
