@@ -6,12 +6,11 @@ box "Frontend"
 participant "Event Graph" as eventgraph
 participant "Options Menu" as optmenu <<Component>>
 participant "'Add Reference' Menu" as addreferencemenu <<Component>>
-participant TopMenu as topmenu <<Component>>
+participant "Top Menu" as topmenu <<Component>>
 participant Layout as layout <<Component>>
 end box
 database "Backend API" as api
 
-activate api
 activate eventgraph
 note over eventgraph : Unreferenced objects/attributes displayed
 
@@ -26,13 +25,15 @@ activate optmenu
 optmenu -> eventgraph: initiate "add reference" action
 deactivate optmenu
 
-eventgraph -> user: allow dragging an edge from node to node
+group "add reference" action
+eventgraph -> user: allow to drag \nan edge from node to node
 
 user -> eventgraph: drag new reference
+end
 
-eventgraph -> addreferencemenu: initiate "enter values" action
+eventgraph -> addreferencemenu: initiate "enter reference values" action
 
-
+group "enter reference values" action
 activate addreferencemenu
 note over addreferencemenu: Reference menu displayed
 
@@ -44,6 +45,7 @@ addreferencemenu -> api: send save request
 
 api --> addreferencemenu: success
 deactivate addreferencemenu
+end
 
 eventgraph -> layout : exit edit mode
 deactivate eventgraph

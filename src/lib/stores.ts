@@ -1,6 +1,9 @@
 import { browser } from '$app/environment';
-import { writable } from 'svelte/store';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
+import { writable } from 'svelte/store';
+import type { ActionBarEntry } from './models/ActionBarEntry.interface';
+import type { Modus } from './models/Modus';
+import type { ComponentProps } from 'svelte';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
@@ -15,6 +18,8 @@ const createSettingsStore = <T>(init: T) => {
     update
   };
 };
+
+export const actionBarEntries = writable<ActionBarEntry[]>([]);
 
 let init: {
   theme: Themes;
@@ -31,9 +36,7 @@ if (browser) {
   if (isSetting(localSettings)) init = localSettings;
 }
 
-/**
- * TODO: finish this typeguard
- */
+// TODO: finish this typeguard
 function isSetting(toCheck: unknown): toCheck is typeof init {
   return (
     typeof toCheck === 'object' && toCheck !== null && 'theme' in toCheck && 'openOnInit' in toCheck
@@ -50,7 +53,5 @@ export const themes = [
   { value: 'latte', label: 'Latte' }
 ] as const;
 
-export type Modi = 'view' | 'edit';
-
-export const mode = writable<Modi>('view');
-export const currentRoute = writable<BreadCrumbs['$$prop_def']['routes']>();
+export const mode = writable<Modus>('edit');
+export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();

@@ -1,5 +1,5 @@
 import { GET } from '$lib/api';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';

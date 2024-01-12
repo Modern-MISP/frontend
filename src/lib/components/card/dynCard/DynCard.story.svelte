@@ -1,6 +1,6 @@
 <script lang="ts" generics="T">
   import Info from '$lib/components/info/Info.svelte';
-  import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+  import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import { TABLE_DATA } from '$lib/components/table/dynTable/exampleTableData';
   import DynCard from './DynCard.svelte';
   import type { Hst } from '@histoire/plugin-svelte';

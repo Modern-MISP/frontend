@@ -3,10 +3,11 @@
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
   import Info from '$lib/components/info/Info.svelte';
-  import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+  import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
   import type { PageData } from './$types';
 
   /** Data that is provided +page.ts on page load. */
@@ -61,6 +62,7 @@
       <span class="font-bold">Authors</span>
       <PillCollection
         pills={info?.authors.map((a) => ({ icon: 'streamline:user-circle-single', text: a }))}
+        class="pl-4"
       />
     </CardRow>
 
@@ -113,7 +115,7 @@
 
     <CardRow>
       <span class="font-bold">Distribution</span>
-      <DistributionPill distribution={info.distribution} />
+      <LookupPill value={+info.distribution} options={DISTRIBUTION_LOOKUP} />
     </CardRow>
 
     <CardRow>

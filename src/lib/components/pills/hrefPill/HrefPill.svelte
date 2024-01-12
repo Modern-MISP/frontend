@@ -20,6 +20,12 @@
   export let href: string;
 </script>
 
+<!-- 
+  @component
+  A pill component that also acts as a link. This pills text will be blue:
+
+ -->
+
 <a {href}>
-  <Pill {label} {text} {icon} class="text-blue-400" />
+  <Pill {label} {text} {icon} class="!text-blue-400" />
 </a>
