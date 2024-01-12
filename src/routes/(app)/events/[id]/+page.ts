@@ -1,12 +1,11 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import AnalysisPill from '$lib/components/pills/analysisPill/AnalysisPill.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-import ThreatLevelPill from '$lib/components/pills/threatLevelPill/ThreatLevelPill.svelte';
 import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -25,16 +24,18 @@ export const load: PageLoad = async ({ params }) => {
     col({ key: 'info', label: 'Info', value: (x) => x?.info ?? 'unknown' }),
     col({
       label: 'Threat Level',
-      display: ThreatLevelPill,
+      display: LookupPill,
       value: (x) => ({
-        threatLevel: +(x?.threat_level_id ?? 1) - 1
+        value: +(x?.threat_level_id ?? 1) - 1,
+        numberLookUp: THREAT_LEVEL_LOOKUP
       })
     }),
     col({
       label: 'Analysis',
-      display: AnalysisPill,
+      display: LookupPill,
       value: (x) => ({
-        analysis: +(x?.analysis ?? 1)
+        value: +(x?.analysis ?? 1),
+        numberLookUp: ANALYSIS_LOOKUP
       })
     }),
     col({
@@ -80,9 +81,10 @@ export const load: PageLoad = async ({ params }) => {
     col({ label: 'UUID', value: (x) => x?.uuid ?? 'unknown' }),
     col({
       label: 'Distribution',
-      display: DistributionPill,
+      display: LookupPill,
       value: (x) => ({
-        distribution: +(x?.distribution ?? 1)
+        value: +(x?.distribution ?? 1),
+        numberLookUp: DISTRIBUTION_LOOKUP
       })
     }),
     col({
