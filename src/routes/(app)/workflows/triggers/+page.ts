@@ -22,7 +22,7 @@ export const load: PageLoad = async () => {
       key: 'name',
       label: 'Name',
       value: (x) => ({ text: x.name ?? 'unknown' }),
-      display: Info,
+      display: Info
     }),
     col({
       icon: 'mdi:telescope',
@@ -36,64 +36,66 @@ export const load: PageLoad = async () => {
       key: 'overhead',
       label: 'Overhead',
       value: (x) => ({ threatLevel: x.trigger_overhead }),
-      display: ThreatLevelPill,
+      display: ThreatLevelPill
     }),
     col({
       icon: 'mdi:information',
       key: 'description',
       label: 'Description',
       value: (x) => ({ text: x.description ?? '' }),
-      display: Info,
+      display: Info
     }),
     col({
       icon: 'material-symbols:network-node',
       key: 'workflow',
       label: 'Workflow',
       value: (x) => ({ icon: 'material-symbols:network-node', text: x.Workflow?.id ?? 'unknown' }),
-      display: Pill,
+      display: Pill
     }),
     col({
       icon: 'mdi:run',
       key: 'run-counter',
       label: 'Run Count',
       value: (x) => ({ label: '#', text: x.Workflow?.counter ?? 'unknown' }),
-      display: Pill,
+      display: Pill
     }),
     col({
       icon: 'mdi:checkbox-marked-outline',
       key: 'enabled',
       label: 'Enabled',
       value: (x) => ({ isTrue: !x.disabled }),
-      display: Boolean,
+      display: Boolean
     }),
     col({
       icon: 'mdi:block-helper',
       key: 'blocking',
       label: 'Blocking',
       value: (x) => ({ isTrue: x.blocking }),
-      display: Boolean,
+      display: Boolean
     }),
     col({
       icon: 'mdi:circle',
       key: 'misp-core-format',
       label: 'Core Format',
       value: (x) => ({ isTrue: x.misp_core_format }),
-      display: Boolean,
+      display: Boolean
     }),
     col({
       icon: 'mdi:bug',
       key: 'debug-enabled',
       label: 'Debug',
       value: (x) => ({ isTrue: x.Workflow?.debug_enabled }),
-      display: Boolean,
+      display: Boolean
     }),
     col({
       icon: 'mdi:update',
       key: 'last-updated',
       label: 'Last Updated',
-      value: (x) => ({ date: x.Workflow?.timestamp ? new Date(+x.Workflow.timestamp * 1000) : null }),
-      display: DatePill,
-    }),
+      value: (x) => ({
+        date: x.Workflow?.timestamp ? new Date(+x.Workflow.timestamp * 1000) : null
+      }),
+      display: DatePill
+    })
   ] as const;
 
   return {
