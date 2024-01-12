@@ -61,6 +61,7 @@
       <span class="font-bold">Authors</span>
       <PillCollection
         pills={info?.authors.map((a) => ({ icon: 'streamline:user-circle-single', text: a }))}
+        class="pl-4"
       />
     </CardRow>
 
