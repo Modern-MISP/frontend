@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Info from '$lib/components/info/Info.svelte';
+  import Pill from '../pills/pill/Pill.svelte';
 
   /**
    * Displays a boolean value as a text using the {@link Info} component.
@@ -24,4 +24,4 @@
   
  -->
 
-<Info {text} class="text-white font-bold px-4 {isTrue ? '!bg-green' : '!bg-red'} {clazz}" />
+<Pill {text} class="text-white font-bold px-2 {isTrue ? '!bg-green' : '!bg-red'} {clazz}" />
