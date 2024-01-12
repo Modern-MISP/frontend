@@ -10,6 +10,10 @@
    * Because of the template variable you should have full type safety if using consts as options.
    */
   export let value: T;
+  /**
+   * Name of this select. Used for forms.
+   */
+  export let name: string | undefined = undefined;
 </script>
 
 <!-- 
@@ -23,6 +27,7 @@
 <div class="relative flex items-center rounded-md bg-crust text-text">
   <select
     class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-crust pe-3"
+    {name}
     bind:value
   >
     {#each options as { value, label }}

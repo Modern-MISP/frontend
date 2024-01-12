@@ -1,10 +1,12 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
+  import { createEventDispatcher } from 'svelte';
+  import type { HTMLInputTypeAttribute } from 'svelte/elements';
 
   /**
    * the placeholder of the input.
    */
-  export let placeholder: string;
+  export let placeholder: string | undefined = undefined;
   /**
    * the name of the input. Used for the label and for form submission
    */
@@ -21,11 +23,18 @@
   export let icon: string | undefined = undefined;
 
   /**
+   * the type of the input
+   */
+  export let type: HTMLInputTypeAttribute = 'text';
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
 
   let clazz = '';
+
+  const dispatch = createEventDispatcher<{ value: string }>();
 </script>
 
 <!-- 
@@ -43,24 +52,35 @@
     {/if}
   </slot>
   <input
-    type="text"
+    on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
+    on:blur
+    on:focus
     id={name}
     {placeholder}
     {name}
-    bind:value
-    on:blur
-    on:focus
+    {type}
+    {value}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer"
   />
-  <label
-    for={name}
-    class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
+  {#if placeholder}
+    <label
+      for={name}
+      class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
 			peer-placeholder-shown:text-text peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
 			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0"
-    class:peer-placeholder-shown:left-9={$$slots.icon || icon}
-  >
-    {placeholder}</label
-  >
-
+      class:peer-placeholder-shown:left-9={$$slots.icon || icon}
+    >
+      {placeholder}</label
+    >
+  {/if}
   <slot name="suffix" />
 </label>
+
+<style lang="postcss">
+  input::-webkit-inner-spin-button,
+  input::-webkit-calendar-picker-indicator {
+    background-color: theme('colors.sky.DEFAULT');
+    display: none;
+    -webkit-appearance: none;
+  }
+</style>
