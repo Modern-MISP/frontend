@@ -4,11 +4,12 @@
   import Icon from '@iconify/svelte';
   import ActionBar from './actionbar/ActionBar.svelte';
   import ToggleModeEntry from './actionbar/ToggleModeEntry.svelte';
+  import type { Modus } from '$lib/models/Modus';
 
   /**
    * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
    */
-  export let mode: 'view' | 'edit' = 'view';
+  export let mode: Modus = 'view';
 
   /**
    * Whether the side menu is open or not. TODO: probably should search for a better solution for this.

@@ -2,7 +2,7 @@
   import Info from '$lib/components/info/Info.svelte';
   import { themes } from '$lib/stores';
   import type { Hst } from '@histoire/plugin-svelte';
-  import { createTableHeadGenerator } from '../TableBuilder';
+  import { createTableHeadGenerator } from '../../../util/tableBuilder.util';
   import type { DynTableHeadExtent } from './DynTable.model';
   import DynTable from './DynTable.svelte';
   import { TABLE_DATA } from './exampleTableData';

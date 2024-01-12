@@ -5,15 +5,16 @@
 >
   import type { DynTableHeadExtent } from './DynTable.model';
 
-  import type { ITableHead } from '$lib/models/ITableHead.interface';
+  import type { TableHead } from '$lib/models/TableHead.interface';
   import Table from '../modularTable/Table.svelte';
   import Td from '../modularTable/Td.svelte';
   import Th from '../modularTable/Th.svelte';
 
   /**
    * The header of the table. Also includes the icon and the href.
+   * When setting this it is recommended to use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util}
    */
-  export let header: (ITableHead<T[number]> & DynTableHeadExtent)[];
+  export let header: (TableHead<T[number]> & DynTableHeadExtent)[];
   /**
    * The data that will be displayed in the table.
    */

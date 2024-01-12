@@ -4,24 +4,26 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { DATE_FORMAT } from '$lib/components/config';
-import DistributionPill from '$lib/components/pills/distributionPill/DistributionPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { format } from 'date-fns';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
 export const load: PageLoad = async () => {
   const {
     data,
     error: mispError,
     response
-  } = await POST('/events/index', { body: { page: 0, limit: 50 } });
+  } = await POST('/events/index', { body: { page: 1, limit: 50 } });
 
   if (mispError) throw error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+  console.log(data);
 
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
@@ -89,8 +91,8 @@ export const load: PageLoad = async () => {
       icon: 'mdi:share',
       key: 'distribution',
       label: 'Distribution',
-      display: DistributionPill,
-      value: (x) => ({ distribution: +(x.distribution ?? 0) })
+      display: LookupPill,
+      value: (x) => ({ value: +(x.distribution ?? 0), options: DISTRIBUTION_LOOKUP })
     }),
 
     col({
@@ -101,6 +103,7 @@ export const load: PageLoad = async () => {
       value: (x) => ({ icon: 'ph:hash-bold', text: x.attribute_count })
     }),
 
+    // TODO: probably use DatePills
     col({
       icon: 'mdi:clock-outline',
       key: 'dates',

@@ -2,7 +2,7 @@ import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';

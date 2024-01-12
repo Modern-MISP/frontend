@@ -26,24 +26,26 @@
   export let style = '';
 </script>
 
-<div
-  class="flex items-center gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}"
-  {style}
->
-  {#if icon && !label}
-    <div class="flex items-center gap-1 py-1 pl-2">
-      <Icon {icon} />
-    </div>
-  {/if}
-  {#if label}
-    <div class="flex items-center gap-1 px-2 py-1 bg-crust">
+<!-- 
+  @component
+  A pill component. A pill is a small rounded rectangle with a label and/or text and/or icon.
+
+  @slot The content of the pill. If no slot is provided, the text prop will be used.
+ -->
+
+<div class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}" {style}>
+  {#if icon || label}
+    <div class="flex items-center gap-2 px-2 py-1 text-white bg-crust">
       {#if icon}
         <Icon {icon} />
       {/if}
-      {label}
+
+      {#if label}
+        {label}
+      {/if}
     </div>
   {/if}
-  <span class="px-2 py-1 pl-0 line-clamp-1">
+  <span class="px-2 py-1 line-clamp-1" class:pl-0={icon || label}>
     <slot>
       {text}
     </slot>
