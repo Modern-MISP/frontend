@@ -9,7 +9,7 @@
   /**
    * The array that props of a pill.
    */
-  export let numberLookUp: ComponentProps<Pill>[];
+  export let options: ComponentProps<Pill>[];
 
   let clazz = '';
 
@@ -28,4 +28,4 @@
     - 3: high
  -->
 
-<Pill {...numberLookUp[value]} class={clazz} />
+<Pill {...options[value]} class={clazz} />

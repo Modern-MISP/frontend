@@ -115,7 +115,7 @@
 
     <CardRow>
       <span class="font-bold">Distribution</span>
-      <LookupPill value={+info.distribution} numberLookUp={DISTRIBUTION_LOOKUP} />
+      <LookupPill value={+info.distribution} options={DISTRIBUTION_LOOKUP} />
     </CardRow>
 
     <CardRow>

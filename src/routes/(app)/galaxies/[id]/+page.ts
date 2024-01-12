@@ -92,7 +92,7 @@ export const load: PageLoad = async ({ params }) => {
       key: 'distribution',
       label: 'Distribution',
       display: LookupPill,
-      value: (x) => ({ value: +x.distribution, class: '!w-56', numberLookUp: DISTRIBUTION_LOOKUP })
+      value: (x) => ({ value: +x.distribution, class: '!w-56', options: DISTRIBUTION_LOOKUP })
     })
   ];
 

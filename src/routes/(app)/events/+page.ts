@@ -92,7 +92,7 @@ export const load: PageLoad = async () => {
       key: 'distribution',
       label: 'Distribution',
       display: LookupPill,
-      value: (x) => ({ value: +(x.distribution ?? 0), numberLookUp: DISTRIBUTION_LOOKUP })
+      value: (x) => ({ value: +(x.distribution ?? 0), options: DISTRIBUTION_LOOKUP })
     }),
 
     col({

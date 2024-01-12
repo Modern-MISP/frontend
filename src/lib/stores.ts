@@ -56,5 +56,5 @@ export const themes = [
 
 export type Modi = 'view' | 'edit';
 
-export const mode = writable<Modi>('view');
+export const mode = writable<Modi>('edit');
 export const currentRoute = writable<BreadCrumbs['$$prop_def']['routes']>();

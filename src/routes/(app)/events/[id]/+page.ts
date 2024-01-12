@@ -27,7 +27,7 @@ export const load: PageLoad = async ({ params }) => {
       display: LookupPill,
       value: (x) => ({
         value: +(x?.threat_level_id ?? 1) - 1,
-        numberLookUp: THREAT_LEVEL_LOOKUP
+        options: THREAT_LEVEL_LOOKUP
       })
     }),
     col({
@@ -35,7 +35,7 @@ export const load: PageLoad = async ({ params }) => {
       display: LookupPill,
       value: (x) => ({
         value: +(x?.analysis ?? 1),
-        numberLookUp: ANALYSIS_LOOKUP
+        options: ANALYSIS_LOOKUP
       })
     }),
     col({
@@ -84,7 +84,7 @@ export const load: PageLoad = async ({ params }) => {
       display: LookupPill,
       value: (x) => ({
         value: +(x?.distribution ?? 1),
-        numberLookUp: DISTRIBUTION_LOOKUP
+        options: DISTRIBUTION_LOOKUP
       })
     }),
     col({
