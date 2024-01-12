@@ -35,9 +35,11 @@
       <TopMenu bind:mode={$mode} bind:isOpen />
     </div>
 
-    <main class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
+    <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <Breadcrumbs routes={currentRoute} />
-      <slot />
-    </main>
+      <main class="relative flex max-h-full overflow-hidden grow">
+        <slot />
+      </main>
+    </div>
   </div>
 </div>
