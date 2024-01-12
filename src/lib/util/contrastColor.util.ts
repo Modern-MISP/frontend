@@ -1,5 +1,8 @@
 /**
+ * A small utility function to determine if a color should be black or white based on another color.
+ *
  * Credits: https://gist.github.com/jurv/bff64ce786dd5f6058f9d94e3c70fe47
+ * @returns true if the color should be black, false if the color should be white.
  */
 
 export function shouldTextBeBlack(backgroundColor: string) {

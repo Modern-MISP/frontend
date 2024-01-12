@@ -1,11 +1,12 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+  import type { Modus } from '$lib/models/Modus';
   import { capitalize } from 'lodash-es';
 
   /**
    * The current mode of this Entry.
    */
-  export let mode: 'view' | 'edit' = 'view';
+  export let mode: Modus = 'view';
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->

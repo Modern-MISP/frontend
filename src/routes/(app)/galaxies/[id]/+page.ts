@@ -8,7 +8,7 @@ import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';

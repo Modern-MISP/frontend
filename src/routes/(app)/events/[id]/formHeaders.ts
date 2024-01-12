@@ -1,4 +1,4 @@
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';

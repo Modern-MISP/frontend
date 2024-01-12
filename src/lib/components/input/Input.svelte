@@ -42,7 +42,7 @@
   The default input component. You can add a prefix icon inside of the "icon" slot and / or a suffix icon in the "suffix" slot.
   You should set the name prop, if you want to use this component inside of a form.
   You can also set the value prop, if you want to set an initial value. Or bind to it if you want to use this outside of a form.
-  You can also set the placeholder prop, if you want to set an placeholder. This is recommended.
+  You can also set the placeholder prop, if you want to set an placeholder. 
  -->
 
 <label class="relative flex items-center gap-2 px-2 py-2 bg-crust text-text rounded-lg {clazz}">

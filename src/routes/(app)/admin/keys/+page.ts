@@ -4,7 +4,7 @@ import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';

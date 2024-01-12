@@ -10,14 +10,6 @@
 <!-- 
   @component
   A button with a slot for content.
-
-  @example 
-  ```svelte
-  <Button>
-      <b>name</b>
-      <Icon icon="mdi-light:home" class="w-8 h-8" />
-  </Button>
-  ```
  -->
 
 <button

@@ -32,7 +32,7 @@
     <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
     {#each example as _, i}
       <Hst.Variant title={'' + i}>
-        <LookupPill value={i} numberLookUp={example} />
+        <LookupPill value={i} options={example} />
       </Hst.Variant>
     {/each}
   </div>

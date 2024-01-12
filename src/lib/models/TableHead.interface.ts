@@ -1,6 +1,6 @@
 import type { ComponentProps, ComponentType, SvelteComponent } from 'svelte';
 
-export type ITableHead<
+export type TableHead<
   Value,
   DisplayComp extends SvelteComponent | undefined = SvelteComponent | undefined,
   DefaultValueReturn = string

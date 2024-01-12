@@ -21,11 +21,7 @@
 
 <!-- 
   @component
-  Converts a threat level number to the equivalent text. Uses the {@link Pill} component to display the text and icon.
-    - 0: undefined
-    - 1: low
-    - 2: medium
-    - 3: high
+  Converts the value given by the value prop to an entry from the lookup and displays the result as a pill.
  -->
 
 <Pill {...options[value]} class={clazz} />

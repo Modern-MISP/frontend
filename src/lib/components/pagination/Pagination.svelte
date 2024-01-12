@@ -12,6 +12,11 @@
   export let length: number = 25;
 </script>
 
+<!-- 
+  @component
+  A pagination component that allows the user to navigate through the pages.
+ -->
+
 <div class="grid w-full max-w-6xl grid-flow-col gap-2 mx-auto">
   <button on:click={() => (page > 1 ? page-- : undefined)} class="h-full">
     <Icon icon="mdi:chevron-left" class="w-auto h-full hover:text-sky" />
