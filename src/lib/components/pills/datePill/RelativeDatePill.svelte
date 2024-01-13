@@ -31,7 +31,7 @@
 
 <!-- 
   @component
-  Displays a date in a pill. The color of the pill is based on the date.
+  Displays a relative date in a pill. The color of the pill is based on the date.
   - If the date is in the past, the pill will be red.
   - If the date is over one week in the future, the pill will be green.
   - If the date is less then one week in the future, the pill will be orange.

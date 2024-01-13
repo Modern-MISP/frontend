@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
 import { writable } from 'svelte/store';
 import type { ActionBarEntry } from './models/ActionBarEntry.interface';
-import type { Modus } from './models/Modus';
+import type { Mode } from './models/Mode';
 import type { ComponentProps } from 'svelte';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
@@ -53,5 +53,5 @@ export const themes = [
   { value: 'latte', label: 'Latte' }
 ] as const;
 
-export const mode = writable<Modus>('edit');
+export const mode = writable<Mode>('edit');
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();

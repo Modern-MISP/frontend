@@ -1,9 +1,11 @@
 <script lang="ts">
   import Pill from '../pills/pill/Pill.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type Info from '$lib/components/info/Info.svelte';
 
   /**
    * Displays a boolean value as a text using the {@link Info} component.
-   * Also parses strings to boolean. String most be either 'true' or 'false'.
+   * Also parses strings to booleans. String must be either 'true' or 'false'.
    */
   export let isTrue: boolean | string = true;
 
@@ -19,7 +21,7 @@
 
 <!-- 
   @component
-  Displays a boolean value as a text using the {@link Info } component.
+  Displays a boolean value as a text using the {@link Info} component.
   The background is green if the value is true and red if the value is false.
   
  -->
