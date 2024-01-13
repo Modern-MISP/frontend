@@ -36,7 +36,8 @@ generate_uml_svg:
     name: docker.io/plantuml/plantuml
     entrypoint: [""]
   script:
-    - find docs -type f -name *.plantuml -exec java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg {} \;
+    - find docs/generated -type f -name *.plantuml -exec java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg {} \;
+    - find docs/sequencediagrams/plantuml/ -type f -name *.plantuml -exec sh -c "cat '{}' | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/sequencediagrams/svg/\$(basename '{}' .plantuml).svg" \;
   artifacts:
     paths:
       - docs

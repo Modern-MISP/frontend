@@ -1,15 +1,18 @@
-<script>
+<script lang="ts">
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type Card from './Card.svelte';
   let clazz = '';
   /**
-   * Additional classes to be applied to this component
+   * Additional classes to be applied to this component.
    */
   export { clazz as class };
 </script>
 
 <!-- 
   @component
-  If you want too display rows inside of a card, use this component.
-  You should probably just input two children to the slot. Because of the flexbox, the children will at the outsides of the row (justify between). 
+  This component should be used to display rows inside of a {@link Card}.
+
+  It's recommended to only use up to two children in the slot, which will be displayed at both ends of the row.
   
  -->
 <div class="flex justify-between items-center text-lg {clazz}">

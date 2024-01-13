@@ -7,6 +7,11 @@ export const routes: SideMenuRoute[] = [
     href: '/events'
   },
   {
+    name: 'Attributes',
+    icon: 'mdi:flag',
+    href: '/attributes'
+  },
+  {
     name: 'Tags',
     icon: 'mdi:tag',
     href: '/tags'

@@ -21,9 +21,7 @@
 
 <!-- 
   @component
-  Displays a collection of pills. You can specify the pill component that should be used for each pill by setting the base prop.
-  @prop pills - The pills that should be displayed.
-  @prop base - The pill component to be used for each pill.
+  Displays a collection of pills. The pill component that should be used for each pill can be specified by setting the `base` prop.
  -->
 
 <div class="flex flex-wrap gap-2 {clazz}">

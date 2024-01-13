@@ -3,15 +3,16 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The route that will be displayed in the pill navigation.
+   * The route that will be displayed in the breadcrumbs.
    */
   export let routes: Route[] = [];
 </script>
 
 <!-- 
   @component
-  Displays a pill navigation with the given routes.
+  Displays a [breadcrumb trail](https://en.wikipedia.org/wiki/Breadcrumb_navigation) with the given routes.
  -->
+
 <div class="flex items-center text-lg font-medium text-text">
   {#each routes as { href, icon, name }, i}
     <a {href} class="flex items-center gap-2 rounded-full cursor-pointer hover:text-sky">

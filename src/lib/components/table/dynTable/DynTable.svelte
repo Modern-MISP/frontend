@@ -1,8 +1,4 @@
-<script
-  lang="ts"
-  generics="T extends IRecord[], 
- "
->
+<script lang="ts" generics="T extends IRecord[]">
   import type { DynTableHeadExtent } from './DynTable.model';
 
   import type { TableHead } from '$lib/models/TableHead.interface';
@@ -12,20 +8,29 @@
 
   /**
    * The header of the table. Also includes the icon and the href.
-   * When setting this it is recommended to use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util}
+   * When setting this, it's recommended to use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util}.
    */
   export let header: (TableHead<T[number]> & DynTableHeadExtent)[];
   /**
    * The data that will be displayed in the table.
    */
   export let data: T;
-
   /**
    * The callback that will be called when the user clicks on the row.
    */
   export let href: ((row: T[number]) => string | undefined) | undefined = undefined;
 </script>
 
+<!--
+  @component
+  Creates a dynamic {@link Table} using the `header` and `data` props.
+
+  The `header` props specifies the columns of the table,
+  while the `data` prop provides rows of data that conform to the structure of the header.
+
+  Type safety of this is enforced at compile time using Typescript.
+  
+-->
 <Table>
   <thead>
     <tr>
