@@ -8,6 +8,8 @@ theme:
 
 nav:
   - intro.md
+  - overview.md
+  - dnyRendering.md
   - sequence_diagrams.md
   - generated/components.md
   - generated/pages.md
