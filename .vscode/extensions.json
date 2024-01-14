@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"antfu.iconify",
+		"bradlc.vscode-tailwindcss",
+		"fivethree.vscode-svelte-snippets",
+		"esbenp.prettier-vscode",
+		"svelte.svelte-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"dbaeumer.vscode-eslint",
+		"jebbs.plantuml"
+	]
+}

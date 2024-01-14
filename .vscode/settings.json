@@ -1,3 +1,14 @@
 {
-	"cSpell.words": ["MISP"]
+  "cSpell.words": [
+    "catppuccin",
+    "clazz",
+    "histoire",
+    "iconify",
+    "misp",
+    "MISP",
+    "openapi",
+    "tailwindcss",
+    "xyflow"
+  ],
+  "eslint.validate": ["svelte"] // Not sure if this is needed but I couldn't make eslint work in svelte files otherwise
 }

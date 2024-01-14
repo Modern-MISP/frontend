@@ -1,0 +1,38 @@
+@startuml "Filter Events"
+hide footbox
+
+actor User as user
+box "Frontend"
+participant "Events List" as eventlist
+participant "Action Bar" as topmenu <<Component>>
+participant "Filter Menu" as filter <<Component>>
+end box
+database "Backend API" as api
+
+activate eventlist
+note over eventlist : Unfiltered events list is displayed
+
+user -> topmenu: click " Filter " button
+activate topmenu
+
+topmenu -> filter: initiate " filter " action
+activate filter
+note over filter: Filter menu is displayed
+
+filter --> user: filter menu options
+deactivate topmenu
+
+user -> filter: specify filter criteria
+
+filter -> api: send filter request
+
+api --> filter: filtered events list data
+
+filter -> eventlist: send filtered list
+
+eventlist-> eventlist: update display with filtered list
+deactivate filter
+
+note over eventlist : Filtered events list is displayed
+
+@enduml

@@ -3,546 +3,545 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/attributes/restSearch": {
+  '/attributes/restSearch': {
     /**
      * [restSearch] Get a filtered and paginated list of attributes
      * @description **This is the recommended endpoint for searching attributes.**
      */
-    post: operations["restSearchAttributes"];
+    post: operations['restSearchAttributes'];
   };
-  "/attributes/add/{eventId}": {
+  '/attributes/add/{eventId}': {
     /** Add an attribute */
-    post: operations["addAttribute"];
+    post: operations['addAttribute'];
   };
-  "/attributes/edit/{attributeId}": {
+  '/attributes/edit/{attributeId}': {
     /** Edit an attribute */
-    put: operations["editAttribute"];
+    put: operations['editAttribute'];
   };
-  "/attributes/delete/{attributeId}": {
+  '/attributes/delete/{attributeId}': {
     /** Delete an attribute */
-    delete: operations["deleteAttribute"];
+    delete: operations['deleteAttribute'];
   };
-  "/attributes/restore/{attributeId}": {
+  '/attributes/restore/{attributeId}': {
     /** Restore an attribute */
-    post: operations["restoreAttribute"];
+    post: operations['restoreAttribute'];
   };
-  "/attributes/addTag/{attributeId}/{tagId}/local:{local}": {
+  '/attributes/addTag/{attributeId}/{tagId}/local:{local}': {
     /** Add a tag to an attribute */
-    post: operations["tagAttribute"];
+    post: operations['tagAttribute'];
   };
-  "/attributes/removeTag/{attributeId}/{tagId}": {
+  '/attributes/removeTag/{attributeId}/{tagId}': {
     /** Remove a tag from an attribute */
-    post: operations["untagAttribute"];
+    post: operations['untagAttribute'];
   };
-  "/attributes": {
+  '/attributes': {
     /** Get a list of attributes */
-    get: operations["getAttributes"];
+    get: operations['getAttributes'];
   };
-  "/attributes/view/{attributeId}": {
+  '/attributes/view/{attributeId}': {
     /** Get an attribute by ID */
-    get: operations["getAttributeById"];
+    get: operations['getAttributeById'];
   };
-  "/attributes/attributeStatistics/{context}/{percentage}": {
+  '/attributes/attributeStatistics/{context}/{percentage}': {
     /** Get the count of attributes per category */
-    get: operations["getAttributeStatistics"];
+    get: operations['getAttributeStatistics'];
   };
-  "/attributes/describeTypes": {
+  '/attributes/describeTypes': {
     /** Get a list of the available attribute types */
-    get: operations["describeAttributeTypes"];
+    get: operations['describeAttributeTypes'];
   };
-  "/events/restSearch": {
+  '/events/restSearch': {
     /**
      * [restSearch] Get a filtered and paginated list of events
      * @description **This is the recommended endpoint for searching events.**
      */
-    post: operations["restSearchEvents"];
+    post: operations['restSearchEvents'];
   };
-  "/events/add": {
+  '/events/add': {
     /** Add event */
-    post: operations["addEvent"];
+    post: operations['addEvent'];
   };
-  "/events/edit/{eventId}": {
+  '/events/edit/{eventId}': {
     /** Edit event */
-    put: operations["editEvent"];
+    put: operations['editEvent'];
   };
-  "/events/delete/{eventId}": {
+  '/events/delete/{eventId}': {
     /** Delete event */
-    delete: operations["deleteEvent"];
+    delete: operations['deleteEvent'];
   };
-  "/events": {
+  '/events': {
     /** Get a list of events */
-    get: operations["getEvents"];
+    get: operations['getEvents'];
   };
-  "/events/index": {
+  '/events/index': {
     /** Search events */
-    post: operations["searchEvents"];
+    post: operations['searchEvents'];
   };
-  "/events/view/{eventId}": {
+  '/events/view/{eventId}': {
     /** Get event by ID */
-    get: operations["getEventById"];
+    get: operations['getEventById'];
   };
-  "/events/publish/{eventId}": {
+  '/events/publish/{eventId}': {
     /** Publish an event */
-    post: operations["publishEvent"];
+    post: operations['publishEvent'];
   };
-  "/events/unpublish/{eventId}": {
+  '/events/unpublish/{eventId}': {
     /** Unpublish an event */
-    post: operations["unpublishEvent"];
+    post: operations['unpublishEvent'];
   };
-  "/events/addTag/{eventId}/{tagId}/local:{local}": {
+  '/events/addTag/{eventId}/{tagId}/local:{local}': {
     /** Add event tag */
-    post: operations["tagEvent"];
+    post: operations['tagEvent'];
   };
-  "/events/removeTag/{eventId}/{tagId}": {
+  '/events/removeTag/{eventId}/{tagId}': {
     /** Remove event tag */
-    post: operations["untagEvent"];
+    post: operations['untagEvent'];
   };
-  "/galaxies": {
+  '/galaxies': {
     /** Get galaxies */
-    get: operations["getGalaxies"];
+    get: operations['getGalaxies'];
     /** Search galaxies */
-    post: operations["searchGalaxies"];
+    post: operations['searchGalaxies'];
   };
-  "/galaxies/view/{galaxyId}": {
+  '/galaxies/view/{galaxyId}': {
     /** Get galaxy by ID */
-    get: operations["getGalaxyById"];
+    get: operations['getGalaxyById'];
   };
-  "/galaxies/update": {
+  '/galaxies/update': {
     /** Force update the galaxies with the galaxy json definitions */
-    post: operations["updateGalaxies"];
+    post: operations['updateGalaxies'];
   };
-  "/galaxies/delete/{galaxyId}": {
+  '/galaxies/delete/{galaxyId}': {
     /** Delete a galaxy */
-    delete: operations["deleteGalaxy"];
+    delete: operations['deleteGalaxy'];
   };
-  "/galaxies/import": {
+  '/galaxies/import': {
     /** Import a galaxy cluster */
-    post: operations["importGalaxyCluster"];
+    post: operations['importGalaxyCluster'];
   };
-  "/galaxies/export/{galaxyId}": {
+  '/galaxies/export/{galaxyId}': {
     /** Export galaxy clusters */
-    post: operations["exportGalaxyClusters"];
+    post: operations['exportGalaxyClusters'];
   };
-  "/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}": {
+  '/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}': {
     /** Attach the galaxy cluster tag a given entity */
-    post: operations["attachGalaxyCluster"];
+    post: operations['attachGalaxyCluster'];
   };
-  "/galaxy_clusters/add/{galaxyId}": {
+  '/galaxy_clusters/add/{galaxyId}': {
     /** Add galaxy cluster */
-    post: operations["addGalaxyCluster"];
+    post: operations['addGalaxyCluster'];
   };
-  "/galaxy_clusters/edit/{galaxyClusterId}": {
+  '/galaxy_clusters/edit/{galaxyClusterId}': {
     /** Edit galaxy cluster */
-    put: operations["editGalaxyCluster"];
+    put: operations['editGalaxyCluster'];
   };
-  "/galaxy_clusters/index/{galaxyId}": {
+  '/galaxy_clusters/index/{galaxyId}': {
     /** Get galaxy clusters */
-    get: operations["getGalaxyClusters"];
+    get: operations['getGalaxyClusters'];
     /** Search galaxy clusters */
-    post: operations["searchGalaxyClusters"];
+    post: operations['searchGalaxyClusters'];
   };
-  "/galaxy_clusters/view/{galaxyClusterId}": {
+  '/galaxy_clusters/view/{galaxyClusterId}': {
     /** Get galaxy cluster by ID */
-    get: operations["getGalaxyClusterById"];
+    get: operations['getGalaxyClusterById'];
   };
-  "/galaxy_clusters/publish/{galaxyClusterId}": {
+  '/galaxy_clusters/publish/{galaxyClusterId}': {
     /** Publish galaxy cluster */
-    post: operations["publishGalaxyCluster"];
+    post: operations['publishGalaxyCluster'];
   };
-  "/galaxy_clusters/unpublish/{galaxyClusterId}": {
+  '/galaxy_clusters/unpublish/{galaxyClusterId}': {
     /** Unpublish galaxy cluster */
-    post: operations["unpublishGalaxyCluster"];
+    post: operations['unpublishGalaxyCluster'];
   };
-  "/galaxy_clusters/delete/{galaxyClusterId}": {
+  '/galaxy_clusters/delete/{galaxyClusterId}': {
     /** Delete galaxy cluster */
-    post: operations["deleteGalaxyCluster"];
+    post: operations['deleteGalaxyCluster'];
   };
-  "/galaxy_clusters/restore/{galaxyClusterId}": {
+  '/galaxy_clusters/restore/{galaxyClusterId}': {
     /** Restore galaxy cluster */
-    post: operations["restoreGalaxyCluster"];
+    post: operations['restoreGalaxyCluster'];
   };
-  "/users/initiatePasswordReset/{userId}/{firstTimeReset}": {
+  '/users/initiatePasswordReset/{userId}/{firstTimeReset}': {
     /** Reset user password */
-    post: operations["resetUserPassword"];
+    post: operations['resetUserPassword'];
   };
-  "/admin/users/add": {
+  '/admin/users/add': {
     /** Add user */
-    post: operations["addUser"];
+    post: operations['addUser'];
   };
-  "/admin/users/edit/{userId}": {
+  '/admin/users/edit/{userId}': {
     /** Edit user */
-    put: operations["editUser"];
+    put: operations['editUser'];
   };
-  "/admin/users/delete/{userId}": {
+  '/admin/users/delete/{userId}': {
     /** Delete user */
-    delete: operations["deleteUser"];
+    delete: operations['deleteUser'];
   };
-  "/admin/users": {
+  '/admin/users': {
     /** Get users */
-    get: operations["getUsers"];
+    get: operations['getUsers'];
   };
-  "/admin/users/view/{userId}": {
+  '/admin/users/view/{userId}': {
     /** Get user by ID */
-    get: operations["getUserById"];
+    get: operations['getUserById'];
   };
-  "/users/totp_delete/{userId}": {
+  '/users/totp_delete/{userId}': {
     /** Delete user TOTP */
-    delete: operations["deleteUserTotp"];
+    delete: operations['deleteUserTotp'];
   };
-  "/admin/organisations/add": {
+  '/admin/organisations/add': {
     /** Add organisation */
-    post: operations["addOrganisation"];
+    post: operations['addOrganisation'];
   };
-  "/admin/organisations/edit/{organisationId}": {
+  '/admin/organisations/edit/{organisationId}': {
     /** Edit organisation */
-    put: operations["editOrganisation"];
+    put: operations['editOrganisation'];
   };
-  "/admin/organisations/delete/{organisationId}": {
+  '/admin/organisations/delete/{organisationId}': {
     /** Delete organisation */
-    delete: operations["deleteOrganisation"];
+    delete: operations['deleteOrganisation'];
   };
-  "/admin/logs": {
+  '/admin/logs': {
     /** Get instance logs */
-    post: operations["getLogs"];
+    post: operations['getLogs'];
   };
-  "/organisations": {
+  '/organisations': {
     /** Get organisations */
-    get: operations["getOrganisations"];
+    get: operations['getOrganisations'];
   };
-  "/organisations/view/{organisationId}": {
+  '/organisations/view/{organisationId}': {
     /** Get organisation by ID */
-    get: operations["getOrganisationById"];
+    get: operations['getOrganisationById'];
   };
-  "/servers/add": {
+  '/servers/add': {
     /** Add server */
-    post: operations["addServer"];
+    post: operations['addServer'];
   };
-  "/servers/edit/{serverId}": {
+  '/servers/edit/{serverId}': {
     /** Edit server */
-    put: operations["editServer"];
+    put: operations['editServer'];
   };
-  "/servers/delete/{serverId}": {
+  '/servers/delete/{serverId}': {
     /** Delete server */
-    post: operations["deleteServer"];
+    post: operations['deleteServer'];
   };
-  "/servers": {
+  '/servers': {
     /** Get servers */
-    get: operations["getServers"];
+    get: operations['getServers'];
   };
-  "/servers/pull/{serverId}/{pullTechnique}": {
+  '/servers/pull/{serverId}/{pullTechnique}': {
     /** Pull server */
-    get: operations["pullServer"];
+    get: operations['pullServer'];
   };
-  "/servers/push/{serverId}/{pushTechnique}": {
+  '/servers/push/{serverId}/{pushTechnique}': {
     /** Push server */
-    get: operations["pushServer"];
+    get: operations['pushServer'];
   };
-  "/servers/getVersion": {
+  '/servers/getVersion': {
     /** Get current instance version */
-    get: operations["getServerVersion"];
+    get: operations['getServerVersion'];
   };
-  "/servers/getPyMISPVersion": {
+  '/servers/getPyMISPVersion': {
     /** Get current instance PyMISP version */
-    get: operations["getPyMISPVersion"];
+    get: operations['getPyMISPVersion'];
   };
-  "/servers/serverSettings": {
+  '/servers/serverSettings': {
     /** Get current instance settings and diagnostics */
-    get: operations["getServerSettings"];
+    get: operations['getServerSettings'];
   };
-  "/servers/getWorkers": {
+  '/servers/getWorkers': {
     /** Get workers */
-    get: operations["getWorkers"];
+    get: operations['getWorkers'];
   };
-  "/servers/startWorker/{workerType}": {
+  '/servers/startWorker/{workerType}': {
     /** Start worker */
-    post: operations["startWorker"];
+    post: operations['startWorker'];
   };
-  "/servers/stopWorker/{workerPid}": {
+  '/servers/stopWorker/{workerPid}': {
     /** Stop worker */
-    post: operations["stopWorker"];
+    post: operations['stopWorker'];
   };
-  "/servers/killAllWorkers": {
+  '/servers/killAllWorkers': {
     /** Kill all workers */
-    post: operations["killAllWorkers"];
+    post: operations['killAllWorkers'];
   };
-  "/servers/restartWorkers": {
+  '/servers/restartWorkers': {
     /** Restart workers */
-    post: operations["restartWorkers"];
+    post: operations['restartWorkers'];
   };
-  "/servers/restartDeadWorkers": {
+  '/servers/restartDeadWorkers': {
     /** Restart dead workers */
-    post: operations["restartDeadWorkers"];
+    post: operations['restartDeadWorkers'];
   };
-  "/servers/update": {
+  '/servers/update': {
     /** Update server */
-    post: operations["updateServer"];
+    post: operations['updateServer'];
   };
-  "/servers/cache": {
+  '/servers/cache': {
     /** Cache server */
-    post: operations["cacheServer"];
+    post: operations['cacheServer'];
   };
-  "/servers/createSync": {
+  '/servers/createSync': {
     /** Create sync */
-    post: operations["createSync"];
+    post: operations['createSync'];
   };
-  "/servers/getInstanceUUID": {
+  '/servers/getInstanceUUID': {
     /** Get instance UUID */
-    get: operations["getServerUuid"];
+    get: operations['getServerUuid'];
   };
-  "/servers/getSetting/{settingName}": {
+  '/servers/getSetting/{settingName}': {
     /** Get server setting by name */
-    get: operations["getServerSetting"];
+    get: operations['getServerSetting'];
   };
-  "/servers/serverSettingsEdit/{settingName}": {
+  '/servers/serverSettingsEdit/{settingName}': {
     /** Edit server setting */
-    post: operations["editServerSetting"];
+    post: operations['editServerSetting'];
   };
-  "/servers/import": {
+  '/servers/import': {
     /** Import server */
-    post: operations["importServer"];
+    post: operations['importServer'];
   };
-  "/sharing_groups/add": {
+  '/sharing_groups/add': {
     /** Add a sharing group */
-    post: operations["addSharingGroup"];
+    post: operations['addSharingGroup'];
   };
-  "/sharing_groups/edit/{sharingGroupId}": {
+  '/sharing_groups/edit/{sharingGroupId}': {
     /** Edit a sharing group */
-    post: operations["editSharingGroup"];
+    post: operations['editSharingGroup'];
   };
-  "/sharing_groups/delete/{sharingGroupId}": {
+  '/sharing_groups/delete/{sharingGroupId}': {
     /** Delete a sharing group */
-    delete: operations["deleteSharingGroup"];
+    delete: operations['deleteSharingGroup'];
   };
-  "/sharing_groups": {
+  '/sharing_groups': {
     /** Get a list of sharing groups */
-    get: operations["getSharingGroup"];
+    get: operations['getSharingGroup'];
   };
-  "/sharing_groups/view/{sharingGroupId}": {
+  '/sharing_groups/view/{sharingGroupId}': {
     /** Get a sharing group by ID */
-    get: operations["getSharingGroupById"];
+    get: operations['getSharingGroupById'];
   };
-  "/sharing_groups/addOrg/{sharingGroupId}/{organisationId}": {
+  '/sharing_groups/addOrg/{sharingGroupId}/{organisationId}': {
     /** Add an organisation to a sharing group */
-    post: operations["addOrganisationToSharingGroup"];
+    post: operations['addOrganisationToSharingGroup'];
   };
-  "/sharing_groups/removeOrg/{sharingGroupId}/{organisationId}": {
+  '/sharing_groups/removeOrg/{sharingGroupId}/{organisationId}': {
     /** Remove an organisation from a sharing group */
-    post: operations["removeOrganisationFromSharingGroup"];
+    post: operations['removeOrganisationFromSharingGroup'];
   };
-  "/sharing_groups/addServer/{sharingGroupId}/{serverId}": {
+  '/sharing_groups/addServer/{sharingGroupId}/{serverId}': {
     /** Add a server to a sharing group */
-    post: operations["addServerToSharingGroup"];
+    post: operations['addServerToSharingGroup'];
   };
-  "/sharing_groups/removeServer/{sharingGroupServerId}/{serverId}": {
+  '/sharing_groups/removeServer/{sharingGroupServerId}/{serverId}': {
     /** Remove a server from a sharing group */
-    post: operations["removeServerFromSharingGroup"];
+    post: operations['removeServerFromSharingGroup'];
   };
-  "/feeds": {
+  '/feeds': {
     /** Get a list of feeds */
-    get: operations["getFeeds"];
+    get: operations['getFeeds'];
   };
-  "/feeds/view/{feedId}": {
+  '/feeds/view/{feedId}': {
     /** Get a feed by ID */
-    get: operations["getFeedById"];
+    get: operations['getFeedById'];
   };
-  "/feeds/add": {
+  '/feeds/add': {
     /** Add a feed */
-    post: operations["addFeed"];
+    post: operations['addFeed'];
   };
-  "/feeds/edit/{feedId}": {
+  '/feeds/edit/{feedId}': {
     /** Edit a feed */
-    put: operations["editFeed"];
+    put: operations['editFeed'];
   };
-  "/feeds/enable/{feedId}": {
+  '/feeds/enable/{feedId}': {
     /** Enable feed */
-    post: operations["enableFeed"];
+    post: operations['enableFeed'];
   };
-  "/feeds/disable/{feedId}": {
+  '/feeds/disable/{feedId}': {
     /** Disable feed */
-    post: operations["disableFeed"];
+    post: operations['disableFeed'];
   };
-  "/feeds/cacheFeeds/{cacheFeedsScope}": {
+  '/feeds/cacheFeeds/{cacheFeedsScope}': {
     /** Cache feeds */
-    post: operations["cacheFeeds"];
+    post: operations['cacheFeeds'];
   };
-  "/feeds/fetchFromFeed/{feedId}": {
+  '/feeds/fetchFromFeed/{feedId}': {
     /** Fetch from feed by ID */
-    post: operations["fetchFromFeed"];
+    post: operations['fetchFromFeed'];
   };
-  "/feeds/fetchFromAllFeeds": {
+  '/feeds/fetchFromAllFeeds': {
     /** Fetch from all feeds */
-    post: operations["fetchFromAllFeeds"];
+    post: operations['fetchFromAllFeeds'];
   };
-  "/warninglists": {
+  '/warninglists': {
     /** Get a list of warninglists */
-    get: operations["getWarninglists"];
+    get: operations['getWarninglists'];
     /** Search warninglists */
-    post: operations["searchWarninglists"];
+    post: operations['searchWarninglists'];
   };
-  "/warninglists/toggleEnable": {
+  '/warninglists/toggleEnable': {
     /** Enable/disable warninglists */
-    post: operations["toggleEnableWarninglist"];
+    post: operations['toggleEnableWarninglist'];
   };
-  "/warninglists/view/{warninglistId}": {
+  '/warninglists/view/{warninglistId}': {
     /** Get warninglist by ID */
-    get: operations["getWarninglistById"];
+    get: operations['getWarninglistById'];
   };
-  "/warninglists/checkValue": {
+  '/warninglists/checkValue': {
     /** Check if a list of values matches any warninglists */
-    post: operations["checkValueWarninglistsMatches"];
+    post: operations['checkValueWarninglistsMatches'];
   };
-  "/warninglists/update": {
+  '/warninglists/update': {
     /** Update warninglists */
-    post: operations["updateWarninglists"];
+    post: operations['updateWarninglists'];
   };
-  "/noticelists": {
+  '/noticelists': {
     /** Get a list of noticelists */
-    get: operations["getNoticelists"];
+    get: operations['getNoticelists'];
   };
-  "/noticelists/view/{noticelistId}": {
+  '/noticelists/view/{noticelistId}': {
     /** Get a noticelist by ID */
-    get: operations["getNoticelistById"];
+    get: operations['getNoticelistById'];
   };
-  "/noticelists/toggleEnable/{noticelistId}": {
+  '/noticelists/toggleEnable/{noticelistId}': {
     /** Enable/disable noticelist */
-    post: operations["toggleEnableNoticelist"];
+    post: operations['toggleEnableNoticelist'];
   };
-  "/noticelists/update": {
+  '/noticelists/update': {
     /** Update noticelists */
-    post: operations["updateNoticelists"];
+    post: operations['updateNoticelists'];
   };
-  "/objects/restsearch": {
+  '/objects/restsearch': {
     /**
      * [restSearch] Get a filtered and paginated list of objects
      * @description **This is the recommended endpoint for searching objects.**
      */
-    post: operations["restSearchObjects"];
+    post: operations['restSearchObjects'];
   };
-  "/objects/add/{eventId}/{objectTemplateId}": {
+  '/objects/add/{eventId}/{objectTemplateId}': {
     /** Add an object to an event */
-    post: operations["addObject"];
+    post: operations['addObject'];
   };
-  "/objects/view/{objectId}": {
+  '/objects/view/{objectId}': {
     /** Get object by ID */
-    get: operations["getObjectById"];
+    get: operations['getObjectById'];
   };
-  "/objects/delete/{objectId}/{hardDelete}": {
+  '/objects/delete/{objectId}/{hardDelete}': {
     /** Delete object */
-    delete: operations["deleteObject"];
+    delete: operations['deleteObject'];
   };
-  "/sightings/index/{eventId}": {
+  '/sightings/index/{eventId}': {
     /** Get sightings by event ID */
-    get: operations["getSightingsByEventId"];
+    get: operations['getSightingsByEventId'];
   };
-  "/sightings/add": {
+  '/sightings/add': {
     /** Add sightings of a list of values */
-    post: operations["addSightingByValue"];
+    post: operations['addSightingByValue'];
   };
-  "/sightings/add/{attributeId}": {
+  '/sightings/add/{attributeId}': {
     /** Add sighting of an attribute */
-    post: operations["addSighting"];
+    post: operations['addSighting'];
   };
-  "/sightings/delete/{sightingId}": {
+  '/sightings/delete/{sightingId}': {
     /** Delete sighting */
-    post: operations["deleteSighting"];
+    post: operations['deleteSighting'];
   };
-  "/tags": {
+  '/tags': {
     /** Get tags */
-    get: operations["getTags"];
+    get: operations['getTags'];
   };
-  "/tags/view/{tagId}": {
+  '/tags/view/{tagId}': {
     /** Get tag by ID */
-    get: operations["getTagById"];
+    get: operations['getTagById'];
   };
-  "/tags/add": {
+  '/tags/add': {
     /** Add tag */
-    post: operations["addTag"];
+    post: operations['addTag'];
   };
-  "/tags/delete/{tagId}": {
+  '/tags/delete/{tagId}': {
     /** Delete tag */
-    post: operations["deleteTag"];
+    post: operations['deleteTag'];
   };
-  "/tags/edit/{tagId}": {
+  '/tags/edit/{tagId}': {
     /** Edit tag */
-    post: operations["editTag"];
+    post: operations['editTag'];
   };
-  "/tags/search/{tagSearchTerm}": {
+  '/tags/search/{tagSearchTerm}': {
     /** Search tag */
-    get: operations["searchTag"];
+    get: operations['searchTag'];
   };
-  "/auth_keys": {
+  '/auth_keys': {
     /** Get auth keys */
-    get: operations["getAuthKeys"];
+    get: operations['getAuthKeys'];
     /** Search auth keys */
-    post: operations["searchAuthKeys"];
+    post: operations['searchAuthKeys'];
   };
-  "/auth_keys/add/{userId}": {
+  '/auth_keys/add/{userId}': {
     /** Add auth keys */
-    post: operations["addAuthKey"];
+    post: operations['addAuthKey'];
   };
-  "/auth_keys/view/{authKeyId}": {
+  '/auth_keys/view/{authKeyId}': {
     /** View auth key */
-    get: operations["getAuthKeyById"];
+    get: operations['getAuthKeyById'];
   };
-  "/auth_keys/edit/{authKeyId}": {
+  '/auth_keys/edit/{authKeyId}': {
     /** Edit auth key */
-    post: operations["editAuthKey"];
+    post: operations['editAuthKey'];
   };
-  "/auth_keys/delete/{authKeyId}": {
+  '/auth_keys/delete/{authKeyId}': {
     /** Delete auth key */
-    delete: operations["deleteAuthKey"];
+    delete: operations['deleteAuthKey'];
   };
-  "/user_settings": {
+  '/user_settings': {
     /** Get user settings */
-    get: operations["getUserSettings"];
+    get: operations['getUserSettings'];
     /** Search user settings */
-    post: operations["searchUserSettings"];
+    post: operations['searchUserSettings'];
   };
-  "/user_settings/view/{userSettingId}": {
+  '/user_settings/view/{userSettingId}': {
     /** Get user setting by id */
-    get: operations["getUserSettingById"];
+    get: operations['getUserSettingById'];
   };
-  "/user_settings/setSetting/{userId}/{userSettingName}": {
+  '/user_settings/setSetting/{userId}/{userSettingName}': {
     /** Set user setting */
-    post: operations["setUserSetting"];
+    post: operations['setUserSetting'];
   };
-  "/user_settings/getSetting/{userId}/{userSettingName}": {
+  '/user_settings/getSetting/{userId}/{userSettingName}': {
     /** Get user setting by id */
-    get: operations["getUserSettingByName"];
+    get: operations['getUserSettingByName'];
   };
-  "/user_settings/delete/{userSettingId}": {
+  '/user_settings/delete/{userSettingId}': {
     /** Delete user setting by id */
-    delete: operations["deleteUserSettingById"];
+    delete: operations['deleteUserSettingById'];
   };
-  "/taxonomies": {
+  '/taxonomies': {
     /** Get taxonomies */
-    get: operations["getTaxonomies"];
+    get: operations['getTaxonomies'];
   };
-  "/taxonomies/view/{taxonomyIdParameter}": {
+  '/taxonomies/view/{taxonomyIdParameter}': {
     /** Get a taxonomy by ID */
-    get: operations["getTaxonomyById"];
+    get: operations['getTaxonomyById'];
   };
-  "/taxonomies/enable/{taxonomyIdParameter}": {
+  '/taxonomies/enable/{taxonomyIdParameter}': {
     /** Enable taxonomy */
-    post: operations["enableTaxonomy"];
+    post: operations['enableTaxonomy'];
   };
-  "/taxonomies/disable/{taxonomyIdParameter}": {
+  '/taxonomies/disable/{taxonomyIdParameter}': {
     /** Disable taxonomy */
-    post: operations["disableTaxonomy"];
+    post: operations['disableTaxonomy'];
   };
-  "/taxonomies/update": {
+  '/taxonomies/update': {
     /** Update taxonomies */
-    post: operations["updateTaxonomies"];
+    post: operations['updateTaxonomies'];
   };
-  "/taxonomies/taxonomy_tags/{taxonomyIdParameter}": {
+  '/taxonomies/taxonomy_tags/{taxonomyIdParameter}': {
     /** Get a taxonomy extended with tags used in events and attributes. */
-    get: operations["getTaxonomyTags"];
+    get: operations['getTaxonomyTags'];
   };
-  "/taxonomies/export/{taxonomyIdParameter}": {
+  '/taxonomies/export/{taxonomyIdParameter}': {
     /** Export taxonomy. */
-    get: operations["exportTaxonomy"];
+    get: operations['exportTaxonomy'];
   };
 }
 
@@ -553,52 +552,254 @@ export interface components {
     /** @example 12345 */
     AttributeId: string;
     /** @enum {string} */
-    AttributeType: "md5" | "sha1" | "sha256" | "filename" | "pdb" | ("filename|md5") | ("filename|sha1") | ("filename|sha256") | "ip-src" | "ip-dst" | "hostname" | "domain" | ("domain|ip") | "email" | "email-src" | "eppn" | "email-dst" | "email-subject" | "email-attachment" | "email-body" | "float" | "git-commit-id" | "url" | "http-method" | "user-agent" | "ja3-fingerprint-md5" | "jarm-fingerprint" | "favicon-mmh3" | "hassh-md5" | "hasshserver-md5" | "regkey" | ("regkey|value") | "AS" | "snort" | "bro" | "zeek" | "community-id" | "pattern-in-file" | "pattern-in-traffic" | "pattern-in-memory" | "pattern-filename" | "pgp-public-key" | "pgp-private-key" | "yara" | "stix2-pattern" | "sigma" | "gene" | "kusto-query" | "mime-type" | "identity-card-number" | "cookie" | "vulnerability" | "cpe" | "weakness" | "attachment" | "malware-sample" | "link" | "comment" | "text" | "hex" | "other" | "named pipe" | "mutex" | "process-state" | "target-user" | "target-email" | "target-machine" | "target-org" | "target-location" | "target-external" | "btc" | "dash" | "xmr" | "iban" | "bic" | "bank-account-nr" | "aba-rtn" | "bin" | "cc-number" | "prtn" | "phone-number" | "threat-actor" | "campaign-name" | "campaign-id" | "malware-type" | "uri" | "authentihash" | "vhash" | "ssdeep" | "imphash" | "telfhash" | "pehash" | "impfuzzy" | "sha224" | "sha384" | "sha512" | "sha512/224" | "sha512/256" | "sha3-224" | "sha3-256" | "sha3-384" | "sha3-512" | "tlsh" | "cdhash" | ("filename|authentihash") | ("filename|vhash") | ("filename|ssdeep") | ("filename|imphash") | ("filename|impfuzzy") | ("filename|pehash") | ("filename|sha224") | ("filename|sha384") | ("filename|sha512") | ("filename|sha512/224") | ("filename|sha512/256") | ("filename|sha3-224") | ("filename|sha3-256") | ("filename|sha3-384") | ("filename|sha3-512") | ("filename|tlsh") | "windows-scheduled-task" | "windows-service-name" | "windows-service-displayname" | "whois-registrant-email" | "whois-registrant-phone" | "whois-registrant-name" | "whois-registrant-org" | "whois-registrar" | "whois-creation-date" | "x509-fingerprint-sha1" | "x509-fingerprint-md5" | "x509-fingerprint-sha256" | "dns-soa-email" | "size-in-bytes" | "counter" | "datetime" | "port" | ("ip-dst|port") | ("ip-src|port") | ("hostname|port") | "mac-address" | "mac-eui-64" | "email-dst-display-name" | "email-src-display-name" | "email-header" | "email-reply-to" | "email-x-mailer" | "email-mime-boundary" | "email-thread-index" | "email-message-id" | "github-username" | "github-repository" | "github-organisation" | "jabber-id" | "twitter-id" | "dkim" | "dkim-signature" | "first-name" | "middle-name" | "last-name" | "full-name" | "date-of-birth" | "place-of-birth" | "gender" | "passport-number" | "passport-country" | "passport-expiration" | "redress-number" | "nationality" | "visa-number" | "issue-date-of-the-visa" | "primary-residence" | "country-of-residence" | "special-service-request" | "frequent-flyer-number" | "travel-details" | "payment-details" | "place-port-of-original-embarkation" | "place-port-of-clearance" | "place-port-of-onward-foreign-destination" | "passenger-name-record-locator-number" | "mobile-application-id" | "chrome-extension-id" | "cortex" | "boolean" | "anonymised";
+    AttributeType:
+      | 'md5'
+      | 'sha1'
+      | 'sha256'
+      | 'filename'
+      | 'pdb'
+      | 'filename|md5'
+      | 'filename|sha1'
+      | 'filename|sha256'
+      | 'ip-src'
+      | 'ip-dst'
+      | 'hostname'
+      | 'domain'
+      | 'domain|ip'
+      | 'email'
+      | 'email-src'
+      | 'eppn'
+      | 'email-dst'
+      | 'email-subject'
+      | 'email-attachment'
+      | 'email-body'
+      | 'float'
+      | 'git-commit-id'
+      | 'url'
+      | 'http-method'
+      | 'user-agent'
+      | 'ja3-fingerprint-md5'
+      | 'jarm-fingerprint'
+      | 'favicon-mmh3'
+      | 'hassh-md5'
+      | 'hasshserver-md5'
+      | 'regkey'
+      | 'regkey|value'
+      | 'AS'
+      | 'snort'
+      | 'bro'
+      | 'zeek'
+      | 'community-id'
+      | 'pattern-in-file'
+      | 'pattern-in-traffic'
+      | 'pattern-in-memory'
+      | 'pattern-filename'
+      | 'pgp-public-key'
+      | 'pgp-private-key'
+      | 'yara'
+      | 'stix2-pattern'
+      | 'sigma'
+      | 'gene'
+      | 'kusto-query'
+      | 'mime-type'
+      | 'identity-card-number'
+      | 'cookie'
+      | 'vulnerability'
+      | 'cpe'
+      | 'weakness'
+      | 'attachment'
+      | 'malware-sample'
+      | 'link'
+      | 'comment'
+      | 'text'
+      | 'hex'
+      | 'other'
+      | 'named pipe'
+      | 'mutex'
+      | 'process-state'
+      | 'target-user'
+      | 'target-email'
+      | 'target-machine'
+      | 'target-org'
+      | 'target-location'
+      | 'target-external'
+      | 'btc'
+      | 'dash'
+      | 'xmr'
+      | 'iban'
+      | 'bic'
+      | 'bank-account-nr'
+      | 'aba-rtn'
+      | 'bin'
+      | 'cc-number'
+      | 'prtn'
+      | 'phone-number'
+      | 'threat-actor'
+      | 'campaign-name'
+      | 'campaign-id'
+      | 'malware-type'
+      | 'uri'
+      | 'authentihash'
+      | 'vhash'
+      | 'ssdeep'
+      | 'imphash'
+      | 'telfhash'
+      | 'pehash'
+      | 'impfuzzy'
+      | 'sha224'
+      | 'sha384'
+      | 'sha512'
+      | 'sha512/224'
+      | 'sha512/256'
+      | 'sha3-224'
+      | 'sha3-256'
+      | 'sha3-384'
+      | 'sha3-512'
+      | 'tlsh'
+      | 'cdhash'
+      | 'filename|authentihash'
+      | 'filename|vhash'
+      | 'filename|ssdeep'
+      | 'filename|imphash'
+      | 'filename|impfuzzy'
+      | 'filename|pehash'
+      | 'filename|sha224'
+      | 'filename|sha384'
+      | 'filename|sha512'
+      | 'filename|sha512/224'
+      | 'filename|sha512/256'
+      | 'filename|sha3-224'
+      | 'filename|sha3-256'
+      | 'filename|sha3-384'
+      | 'filename|sha3-512'
+      | 'filename|tlsh'
+      | 'windows-scheduled-task'
+      | 'windows-service-name'
+      | 'windows-service-displayname'
+      | 'whois-registrant-email'
+      | 'whois-registrant-phone'
+      | 'whois-registrant-name'
+      | 'whois-registrant-org'
+      | 'whois-registrar'
+      | 'whois-creation-date'
+      | 'x509-fingerprint-sha1'
+      | 'x509-fingerprint-md5'
+      | 'x509-fingerprint-sha256'
+      | 'dns-soa-email'
+      | 'size-in-bytes'
+      | 'counter'
+      | 'datetime'
+      | 'port'
+      | 'ip-dst|port'
+      | 'ip-src|port'
+      | 'hostname|port'
+      | 'mac-address'
+      | 'mac-eui-64'
+      | 'email-dst-display-name'
+      | 'email-src-display-name'
+      | 'email-header'
+      | 'email-reply-to'
+      | 'email-x-mailer'
+      | 'email-mime-boundary'
+      | 'email-thread-index'
+      | 'email-message-id'
+      | 'github-username'
+      | 'github-repository'
+      | 'github-organisation'
+      | 'jabber-id'
+      | 'twitter-id'
+      | 'dkim'
+      | 'dkim-signature'
+      | 'first-name'
+      | 'middle-name'
+      | 'last-name'
+      | 'full-name'
+      | 'date-of-birth'
+      | 'place-of-birth'
+      | 'gender'
+      | 'passport-number'
+      | 'passport-country'
+      | 'passport-expiration'
+      | 'redress-number'
+      | 'nationality'
+      | 'visa-number'
+      | 'issue-date-of-the-visa'
+      | 'primary-residence'
+      | 'country-of-residence'
+      | 'special-service-request'
+      | 'frequent-flyer-number'
+      | 'travel-details'
+      | 'payment-details'
+      | 'place-port-of-original-embarkation'
+      | 'place-port-of-clearance'
+      | 'place-port-of-onward-foreign-destination'
+      | 'passenger-name-record-locator-number'
+      | 'mobile-application-id'
+      | 'chrome-extension-id'
+      | 'cortex'
+      | 'boolean'
+      | 'anonymised';
     /** @example 127.0.0.1 */
     AttributeValue: string;
     /** @enum {string} */
-    AttributeCategory: "Internal reference" | "Targeting data" | "Antivirus detection" | "Payload delivery" | "Artifacts dropped" | "Payload installation" | "Persistence mechanism" | "Network activity" | "Payload type" | "Attribution" | "External analysis" | "Financial fraud" | "Support Tool" | "Social network" | "Person" | "Other";
+    AttributeCategory:
+      | 'Internal reference'
+      | 'Targeting data'
+      | 'Antivirus detection'
+      | 'Payload delivery'
+      | 'Artifacts dropped'
+      | 'Payload installation'
+      | 'Persistence mechanism'
+      | 'Network activity'
+      | 'Payload type'
+      | 'Attribution'
+      | 'External analysis'
+      | 'Financial fraud'
+      | 'Support Tool'
+      | 'Social network'
+      | 'Person'
+      | 'Other';
     /** @example logged source ip */
     AttributeComment: string;
-    AttributeEventUUID: components["schemas"]["UUID"];
+    AttributeEventUUID: components['schemas']['UUID'];
     /**
      * Format: byte
      * @description base64 representation of the attachment
      */
     AttributeAttachment: string;
     AttributeNoId: {
-      event_id?: components["schemas"]["EventId"];
-      object_id?: components["schemas"]["ObjectId"];
-      object_relation?: components["schemas"]["NullableObjectRelation"];
-      category?: components["schemas"]["AttributeCategory"];
-      type?: components["schemas"]["AttributeType"];
-      value?: components["schemas"]["AttributeValue"];
-      to_ids?: components["schemas"]["ToIDS"];
-      uuid?: components["schemas"]["UUID"];
-      timestamp?: components["schemas"]["NullableTimestamp"];
-      distribution?: components["schemas"]["DistributionLevelId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
-      comment?: components["schemas"]["AttributeComment"];
-      deleted?: components["schemas"]["SoftDeletedFlag"];
-      disable_correlation?: components["schemas"]["DisableCorrelationFlag"];
-      first_seen?: components["schemas"]["NullableMicroTimestamp"];
-      last_seen?: components["schemas"]["NullableMicroTimestamp"];
+      event_id?: components['schemas']['EventId'];
+      object_id?: components['schemas']['ObjectId'];
+      object_relation?: components['schemas']['NullableObjectRelation'];
+      category?: components['schemas']['AttributeCategory'];
+      type?: components['schemas']['AttributeType'];
+      value?: components['schemas']['AttributeValue'];
+      to_ids?: components['schemas']['ToIDS'];
+      uuid?: components['schemas']['UUID'];
+      timestamp?: components['schemas']['NullableTimestamp'];
+      distribution?: components['schemas']['DistributionLevelId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
+      comment?: components['schemas']['AttributeComment'];
+      deleted?: components['schemas']['SoftDeletedFlag'];
+      disable_correlation?: components['schemas']['DisableCorrelationFlag'];
+      first_seen?: components['schemas']['NullableMicroTimestamp'];
+      last_seen?: components['schemas']['NullableMicroTimestamp'];
     };
     Attribute: {
-      id?: components["schemas"]["AttributeId"];
-    } & components["schemas"]["AttributeNoId"];
-    ExtendedAttribute: components["schemas"]["Attribute"] & {
-      data?: components["schemas"]["AttributeAttachment"];
-      event_uuid?: components["schemas"]["UUID"];
-      decay_score?: components["schemas"]["DecayScoreList"];
+      id?: components['schemas']['AttributeId'];
+    } & components['schemas']['AttributeNoId'];
+    ExtendedAttribute: components['schemas']['Attribute'] & {
+      data?: components['schemas']['AttributeAttachment'];
+      event_uuid?: components['schemas']['UUID'];
+      decay_score?: components['schemas']['DecayScoreList'];
     };
-    AttributeList: components["schemas"]["Attribute"][];
-    AttributeRestSearchListItem: components["schemas"]["ExtendedAttribute"] & {
-      Event?: components["schemas"]["Event"];
-      Object?: components["schemas"]["Object"];
-      Tag?: components["schemas"]["TagList"];
+    AttributeList: components['schemas']['Attribute'][];
+    AttributeRestSearchListItem: components['schemas']['ExtendedAttribute'] & {
+      Event?: components['schemas']['Event'];
+      Object?: components['schemas']['Object'];
+      Tag?: components['schemas']['TagList'];
     };
-    AttributeRestSearchList: components["schemas"]["AttributeRestSearchListItem"][];
+    AttributeRestSearchList: components['schemas']['AttributeRestSearchListItem'][];
     /**
      * @description Dictionary of attribute types/categories showing the ammount of occurences/percentage.
      * @example [
@@ -626,8 +827,8 @@ export interface components {
        * }
        */
       sane_defaults?: Record<string, never>;
-      types?: components["schemas"]["AttributeType"][];
-      categories?: components["schemas"]["AttributeCategory"][];
+      types?: components['schemas']['AttributeType'][];
+      categories?: components['schemas']['AttributeCategory'][];
       /**
        * @example {
        *   "Internal reference": [
@@ -648,55 +849,55 @@ export interface components {
       category_type_mappings?: Record<string, never>;
     };
     AttributeRestSearchFilter: {
-      page?: components["schemas"]["PageSearchFilter"];
-      limit?: components["schemas"]["LimitSearchFilter"];
-      value?: components["schemas"]["AttributeValue"];
-      value1?: components["schemas"]["AttributeValue"];
-      value2?: components["schemas"]["AttributeValue"];
-      type?: components["schemas"]["AttributeType"];
-      category?: components["schemas"]["AttributeCategory"];
-      org?: components["schemas"]["OrganisationId"] | components["schemas"]["OrganisationName"];
-      tags?: components["schemas"]["TagsRestSearchFilter"];
-      from?: components["schemas"]["DateRestSearchFilter"];
-      to?: components["schemas"]["DateRestSearchFilter"];
-      last?: components["schemas"]["LastRestSearchFilter"];
-      eventid?: components["schemas"]["EventId"];
-      withAttachments?: components["schemas"]["WithAttachmentsRestSearchFilter"];
-      uuid?: components["schemas"]["UUID"];
-      publish_timestamp?: components["schemas"]["Timestamp"];
-      published?: components["schemas"]["PublishedFlag"];
-      timestamp?: components["schemas"]["Timestamp"];
-      attribute_timestamp?: components["schemas"]["Timestamp"];
-      enforceWarninglist?: components["schemas"]["EnforceWarninglistRestSearchFilter"];
-      to_ids?: components["schemas"]["ToIDSRestSearchFlag"];
-      deleted?: components["schemas"]["SoftDeletedFlag"];
-      event_timestamp?: components["schemas"]["Timestamp"];
-      threat_level_id?: components["schemas"]["ThreatLevelId"];
+      page?: components['schemas']['PageSearchFilter'];
+      limit?: components['schemas']['LimitSearchFilter'];
+      value?: components['schemas']['AttributeValue'];
+      value1?: components['schemas']['AttributeValue'];
+      value2?: components['schemas']['AttributeValue'];
+      type?: components['schemas']['AttributeType'];
+      category?: components['schemas']['AttributeCategory'];
+      org?: components['schemas']['OrganisationId'] | components['schemas']['OrganisationName'];
+      tags?: components['schemas']['TagsRestSearchFilter'];
+      from?: components['schemas']['DateRestSearchFilter'];
+      to?: components['schemas']['DateRestSearchFilter'];
+      last?: components['schemas']['LastRestSearchFilter'];
+      eventid?: components['schemas']['EventId'];
+      withAttachments?: components['schemas']['WithAttachmentsRestSearchFilter'];
+      uuid?: components['schemas']['UUID'];
+      publish_timestamp?: components['schemas']['Timestamp'];
+      published?: components['schemas']['PublishedFlag'];
+      timestamp?: components['schemas']['Timestamp'];
+      attribute_timestamp?: components['schemas']['Timestamp'];
+      enforceWarninglist?: components['schemas']['EnforceWarninglistRestSearchFilter'];
+      to_ids?: components['schemas']['ToIDSRestSearchFlag'];
+      deleted?: components['schemas']['SoftDeletedFlag'];
+      event_timestamp?: components['schemas']['Timestamp'];
+      threat_level_id?: components['schemas']['ThreatLevelId'];
       /** @description Quick event description */
       eventinfo?: string;
-      sharinggroup?: components["schemas"]["SharingGroupIDRestSearchFilter"];
-      decayingModel?: components["schemas"]["DecayingModelRestSearchFilter"];
-      score?: components["schemas"]["DecayingModelScoreRestSearchFilter"];
+      sharinggroup?: components['schemas']['SharingGroupIDRestSearchFilter'];
+      decayingModel?: components['schemas']['DecayingModelRestSearchFilter'];
+      score?: components['schemas']['DecayingModelScoreRestSearchFilter'];
       /** @description Seen within the last x amount of time, where x can be defined in days, hours, minutes (for example 5d or 12h or 30m) */
       first_seen?: string;
       /** @description Seen within the last x amount of time, where x can be defined in days, hours, minutes (for example 5d or 12h or 30m) */
       last_seen?: string;
-      includeEventUuid?: components["schemas"]["IncludeEventUUIDRestSearchFlag"];
-      includeEventTags?: components["schemas"]["IncludeEventTagsRestSearchFlag"];
-      includeProposals?: components["schemas"]["IncludeProposalsRestSearchFlag"];
-      requested_attributes?: components["schemas"]["RequestedAttributesRestSearchFilter"];
-      includeContext?: components["schemas"]["IncludeContextRestSearchFlag"];
-      headerless?: components["schemas"]["HeaderlessRestSearchFlag"];
-      includeWarninglistHits?: components["schemas"]["IncludeWarninglistHitsRestSearchFlag"];
-      attackGalaxy?: components["schemas"]["AttackGalaxyRestSearchFilter"];
-      object_relation?: components["schemas"]["ObjectRelationRestSearchFilter"];
-      includeSightings?: components["schemas"]["IncludeSightingDbRestSearchFlag"];
-      includeCorrelations?: components["schemas"]["IncludeCorrelationsRestSearchFlag"];
-      modelOverrides?: components["schemas"]["ModelOverridesRestSearchFilter"];
-      includeDecayScore?: components["schemas"]["IncludeDecayScoreRestSearchFlag"];
-      includeFullModel?: components["schemas"]["IncludeFullModelRestSearchFlag"];
-      excludeDecayed?: components["schemas"]["ExcludeDecayedRestSearchFlag"];
-      returnFormat?: components["schemas"]["AttributesRestSearchReturnFormat"];
+      includeEventUuid?: components['schemas']['IncludeEventUUIDRestSearchFlag'];
+      includeEventTags?: components['schemas']['IncludeEventTagsRestSearchFlag'];
+      includeProposals?: components['schemas']['IncludeProposalsRestSearchFlag'];
+      requested_attributes?: components['schemas']['RequestedAttributesRestSearchFilter'];
+      includeContext?: components['schemas']['IncludeContextRestSearchFlag'];
+      headerless?: components['schemas']['HeaderlessRestSearchFlag'];
+      includeWarninglistHits?: components['schemas']['IncludeWarninglistHitsRestSearchFlag'];
+      attackGalaxy?: components['schemas']['AttackGalaxyRestSearchFilter'];
+      object_relation?: components['schemas']['ObjectRelationRestSearchFilter'];
+      includeSightings?: components['schemas']['IncludeSightingDbRestSearchFlag'];
+      includeCorrelations?: components['schemas']['IncludeCorrelationsRestSearchFlag'];
+      modelOverrides?: components['schemas']['ModelOverridesRestSearchFilter'];
+      includeDecayScore?: components['schemas']['IncludeDecayScoreRestSearchFlag'];
+      includeFullModel?: components['schemas']['IncludeFullModelRestSearchFlag'];
+      excludeDecayed?: components['schemas']['ExcludeDecayedRestSearchFlag'];
+      returnFormat?: components['schemas']['AttributesRestSearchReturnFormat'];
     };
     DecayingModelParameters: {
       /**
@@ -739,19 +940,19 @@ export interface components {
     FullDecayingModel: {
       /** @example 12345 */
       id?: string;
-      uuid?: components["schemas"]["UUID"];
+      uuid?: components['schemas']['UUID'];
       /** @example Phishing model */
       name?: string;
       /** @example Simple model to rapidly decay phishing website. */
       description?: string;
-      parameters?: components["schemas"]["DecayingModelParameters"];
-      attribute_types?: components["schemas"]["AttributeType"][];
-      org_id?: components["schemas"]["OrganisationId"];
+      parameters?: components['schemas']['DecayingModelParameters'];
+      attribute_types?: components['schemas']['AttributeType'][];
+      org_id?: components['schemas']['OrganisationId'];
       enabled?: boolean;
       all_orgs?: boolean;
       ref?: string[];
       /** @enum {string} */
-      formula?: "Polynomial";
+      formula?: 'Polynomial';
       /** @example 2 */
       version?: string;
       default?: boolean;
@@ -769,9 +970,11 @@ export interface components {
        */
       base_score?: number;
       decayed?: boolean;
-      DecayingModel?: components["schemas"]["DecayingModel"] | components["schemas"]["FullDecayingModel"];
+      DecayingModel?:
+        | components['schemas']['DecayingModel']
+        | components['schemas']['FullDecayingModel'];
     };
-    DecayScoreList: components["schemas"]["DecayScore"][];
+    DecayScoreList: components['schemas']['DecayScore'][];
     /** @example 12345 */
     EventId: string;
     /** @example logged source ip */
@@ -780,96 +983,96 @@ export interface components {
     EventAttributeCount: string;
     EventProposalEmailLock: boolean;
     EventOrganisation: {
-      id?: components["schemas"]["OrganisationId"];
-      name?: components["schemas"]["OrganisationName"];
-      uuid?: components["schemas"]["UUID"];
+      id?: components['schemas']['OrganisationId'];
+      name?: components['schemas']['OrganisationName'];
+      uuid?: components['schemas']['UUID'];
     };
     /** @example 12345 */
     EventTagId: string;
     EventTag: {
-      id?: components["schemas"]["EventTagId"];
-      event_id?: components["schemas"]["EventId"];
-      tag_id?: components["schemas"]["TagId"];
-      local?: components["schemas"]["IsLocal"];
-      Tag?: components["schemas"]["Tag"];
+      id?: components['schemas']['EventTagId'];
+      event_id?: components['schemas']['EventId'];
+      tag_id?: components['schemas']['TagId'];
+      local?: components['schemas']['IsLocal'];
+      Tag?: components['schemas']['Tag'];
     };
-    EventTagList: components["schemas"]["EventTag"][];
+    EventTagList: components['schemas']['EventTag'][];
     EventReport: Record<string, never>;
     EventNoId: {
-      org_id?: components["schemas"]["OrganisationId"];
-      distribution?: components["schemas"]["DistributionLevelId"];
-      info?: components["schemas"]["EventInfo"];
-      orgc_id?: components["schemas"]["OrganisationId"];
-      uuid?: components["schemas"]["UUID"];
+      org_id?: components['schemas']['OrganisationId'];
+      distribution?: components['schemas']['DistributionLevelId'];
+      info?: components['schemas']['EventInfo'];
+      orgc_id?: components['schemas']['OrganisationId'];
+      uuid?: components['schemas']['UUID'];
       /** @example 1991-01-15 */
       date?: string;
-      published?: components["schemas"]["PublishedFlag"];
-      analysis?: components["schemas"]["AnalysisLevelId"];
-      attribute_count?: components["schemas"]["EventAttributeCount"];
-      timestamp?: components["schemas"]["NullableTimestamp"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
-      proposal_email_lock?: components["schemas"]["EventProposalEmailLock"];
-      locked?: components["schemas"]["IsLocked"];
-      threat_level_id?: components["schemas"]["ThreatLevelId"];
-      publish_timestamp?: components["schemas"]["Timestamp"];
-      sighting_timestamp?: components["schemas"]["Timestamp"];
-      disable_correlation?: components["schemas"]["DisableCorrelationFlag"];
-      extends_uuid?: components["schemas"]["ExtendsUUID"];
+      published?: components['schemas']['PublishedFlag'];
+      analysis?: components['schemas']['AnalysisLevelId'];
+      attribute_count?: components['schemas']['EventAttributeCount'];
+      timestamp?: components['schemas']['NullableTimestamp'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
+      proposal_email_lock?: components['schemas']['EventProposalEmailLock'];
+      locked?: components['schemas']['IsLocked'];
+      threat_level_id?: components['schemas']['ThreatLevelId'];
+      publish_timestamp?: components['schemas']['Timestamp'];
+      sighting_timestamp?: components['schemas']['Timestamp'];
+      disable_correlation?: components['schemas']['DisableCorrelationFlag'];
+      extends_uuid?: components['schemas']['ExtendsUUID'];
       /** Format: email */
       event_creator_email?: string;
     };
     Event: {
-      id?: components["schemas"]["EventId"];
-    } & components["schemas"]["EventNoId"];
-    ExtendedEvent: components["schemas"]["Event"] & {
-      Feed?: components["schemas"]["Feed"];
-      Org?: components["schemas"]["EventOrganisation"];
-      Orgc?: components["schemas"]["EventOrganisation"];
-      Attribute?: components["schemas"]["AttributeList"];
-      ShadowAttribute?: components["schemas"]["AttributeList"];
+      id?: components['schemas']['EventId'];
+    } & components['schemas']['EventNoId'];
+    ExtendedEvent: components['schemas']['Event'] & {
+      Feed?: components['schemas']['Feed'];
+      Org?: components['schemas']['EventOrganisation'];
+      Orgc?: components['schemas']['EventOrganisation'];
+      Attribute?: components['schemas']['AttributeList'];
+      ShadowAttribute?: components['schemas']['AttributeList'];
       RelatedEvent?: {
-          Event?: components["schemas"]["ExtendedEvent"];
-        }[];
-      Galaxy?: components["schemas"]["Galaxy"][];
-      Object?: components["schemas"]["Object"][];
-      EventReport?: components["schemas"]["EventReport"][];
-      Tag?: components["schemas"]["TagList"];
+        Event?: components['schemas']['ExtendedEvent'];
+      }[];
+      Galaxy?: components['schemas']['Galaxy'][];
+      Object?: components['schemas']['Object'][];
+      EventReport?: components['schemas']['EventReport'][];
+      Tag?: components['schemas']['TagList'];
     };
     CreatedEvent: {
-      Event?: components["schemas"]["ExtendedEvent"] & {
+      Event?: components['schemas']['ExtendedEvent'] & {
         /** Format: email */
         event_creator_email?: string;
-        Galaxy?: components["schemas"]["Galaxy"][];
-        Object?: components["schemas"]["Object"][];
-        EventReport?: components["schemas"]["EventReport"][];
+        Galaxy?: components['schemas']['Galaxy'][];
+        Object?: components['schemas']['Object'][];
+        EventReport?: components['schemas']['EventReport'][];
       };
     };
     UpdatedEvent: {
-      Event?: components["schemas"]["ExtendedEvent"] & {
+      Event?: components['schemas']['ExtendedEvent'] & {
         /** Format: email */
         event_creator_email?: string;
-        Galaxy?: components["schemas"]["Galaxy"][];
-        Object?: components["schemas"]["Object"][];
-        EventReport?: components["schemas"]["EventReport"][];
-        Tag?: components["schemas"]["Tag"][];
+        Galaxy?: components['schemas']['Galaxy'][];
+        Object?: components['schemas']['Object'][];
+        EventReport?: components['schemas']['EventReport'][];
+        Tag?: components['schemas']['Tag'][];
       };
     };
     SlimEvent: {
-      id: components["schemas"]["EventId"];
-      timestamp: components["schemas"]["Timestamp"];
-      sighting_timestamp: components["schemas"]["Timestamp"];
-      published: components["schemas"]["PublishedFlag"];
-      uuid: components["schemas"]["UUID"];
-      orgc_uuid: components["schemas"]["UUID"];
+      id: components['schemas']['EventId'];
+      timestamp: components['schemas']['Timestamp'];
+      sighting_timestamp: components['schemas']['Timestamp'];
+      published: components['schemas']['PublishedFlag'];
+      uuid: components['schemas']['UUID'];
+      orgc_uuid: components['schemas']['UUID'];
     };
-    EventList: components["schemas"]["Event"][];
-    ExtendedEventList: components["schemas"]["ExtendedEvent"][];
-    SlimEventList: components["schemas"]["SlimEvent"][];
-    EventRestSearchList: ({
-        Event?: components["schemas"]["ExtendedEvent"] & {
-          Event?: components["schemas"]["SlimEvent"];
-        };
-      })[];
+    EventList: components['schemas']['Event'][];
+    ExtendedEventList: components['schemas']['ExtendedEvent'][];
+    SlimEventList: components['schemas']['SlimEvent'][];
+    EventRestSearchList: {
+      Event?: components['schemas']['ExtendedEvent'] & {
+        Event?: components['schemas']['SlimEvent'];
+      };
+    }[];
     /** @example 12345 */
     ObjectId: string;
     /** @example ail-leak */
@@ -883,111 +1086,111 @@ export interface components {
     /** @example sensor */
     NullableObjectRelation: string | null;
     Object: {
-      id?: components["schemas"]["ObjectId"];
-      name?: components["schemas"]["ObjectName"];
-      "meta-category"?: components["schemas"]["ObjectMetaCategory"];
-      description?: components["schemas"]["ObjectDescription"];
-      template_uuid?: components["schemas"]["UUID"];
-      template_version?: components["schemas"]["ObjectTemplateVersion"];
-      event_id?: components["schemas"]["EventId"];
-      uuid?: components["schemas"]["UUID"];
-      timestamp?: components["schemas"]["Timestamp"];
-      distribution?: components["schemas"]["DistributionLevelId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
+      id?: components['schemas']['ObjectId'];
+      name?: components['schemas']['ObjectName'];
+      'meta-category'?: components['schemas']['ObjectMetaCategory'];
+      description?: components['schemas']['ObjectDescription'];
+      template_uuid?: components['schemas']['UUID'];
+      template_version?: components['schemas']['ObjectTemplateVersion'];
+      event_id?: components['schemas']['EventId'];
+      uuid?: components['schemas']['UUID'];
+      timestamp?: components['schemas']['Timestamp'];
+      distribution?: components['schemas']['DistributionLevelId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
       comment?: string;
       deleted?: boolean;
-      first_seen?: components["schemas"]["NullableMicroTimestamp"];
-      last_seen?: components["schemas"]["NullableMicroTimestamp"];
-      Attribute?: components["schemas"]["Attribute"][];
+      first_seen?: components['schemas']['NullableMicroTimestamp'];
+      last_seen?: components['schemas']['NullableMicroTimestamp'];
+      Attribute?: components['schemas']['Attribute'][];
     };
-    ExtendedObject: components["schemas"]["Object"] & {
+    ExtendedObject: components['schemas']['Object'] & {
       Event?: {
-        id?: components["schemas"]["EventId"];
-        info?: components["schemas"]["EventInfo"];
-        org_id?: components["schemas"]["OrganisationId"];
-        orgc_id?: components["schemas"]["OrganisationId"];
+        id?: components['schemas']['EventId'];
+        info?: components['schemas']['EventInfo'];
+        org_id?: components['schemas']['OrganisationId'];
+        orgc_id?: components['schemas']['OrganisationId'];
       };
     };
     /** @example 12345 */
     ObjectTemplateId: string;
     ObjectRestSearchList: {
-      Object?: components["schemas"]["Object"];
+      Object?: components['schemas']['Object'];
     };
     ObjectRestSearchFilter: {
-      page?: components["schemas"]["PageSearchFilter"];
-      limit?: components["schemas"]["LimitSearchFilter"];
-      quickFilter?: components["schemas"]["SearchAllRestSearchFilter"];
-      searchall?: components["schemas"]["SearchAllRestSearchFilter"];
-      timestamp?: components["schemas"]["Timestamp"];
-      object_name?: components["schemas"]["ObjectName"];
-      object_template_uuid?: components["schemas"]["UUID"];
-      object_template_version?: components["schemas"]["ObjectTemplateVersion"];
-      eventid?: components["schemas"]["EventId"];
-      eventinfo?: components["schemas"]["EventInfo"];
+      page?: components['schemas']['PageSearchFilter'];
+      limit?: components['schemas']['LimitSearchFilter'];
+      quickFilter?: components['schemas']['SearchAllRestSearchFilter'];
+      searchall?: components['schemas']['SearchAllRestSearchFilter'];
+      timestamp?: components['schemas']['Timestamp'];
+      object_name?: components['schemas']['ObjectName'];
+      object_template_uuid?: components['schemas']['UUID'];
+      object_template_version?: components['schemas']['ObjectTemplateVersion'];
+      eventid?: components['schemas']['EventId'];
+      eventinfo?: components['schemas']['EventInfo'];
       /**
        * @description If true matches both true and false values for `to_ids` and `published`
        * @default false
        */
       ignore?: boolean;
-      from?: components["schemas"]["DateRestSearchFilter"];
-      to?: components["schemas"]["DateRestSearchFilter"];
-      date?: components["schemas"]["DateRestSearchFilter"];
-      tags?: components["schemas"]["TagsRestSearchFilter"];
-      last?: components["schemas"]["LastRestSearchFilter"];
-      event_timestamp?: components["schemas"]["Timestamp"];
-      publish_timestamp?: components["schemas"]["Timestamp"];
-      org?: components["schemas"]["OrganisationId"] | components["schemas"]["OrganisationName"];
-      uuid?: components["schemas"]["UUID"];
-      value?: components["schemas"]["AttributeValue"];
-      type?: components["schemas"]["AttributeType"];
-      category?: components["schemas"]["AttributeCategory"];
-      object_relation?: components["schemas"]["ObjectRelationRestSearchFilter"];
-      attribute_timestamp?: components["schemas"]["Timestamp"];
-      first_seen?: components["schemas"]["NullableMicroTimestamp"];
-      last_seen?: components["schemas"]["NullableMicroTimestamp"];
-      comment?: components["schemas"]["AttributeComment"];
-      to_ids?: components["schemas"]["ToIDSRestSearchFlag"];
-      published?: components["schemas"]["PublishedFlag"];
-      deleted?: components["schemas"]["SoftDeletedFlag"];
-      withAttachments?: components["schemas"]["WithAttachmentsRestSearchFilter"];
-      enforceWarninglist?: components["schemas"]["EnforceWarninglistRestSearchFilter"];
-      includeAllTags?: components["schemas"]["IncludeAllTagsRestSearchFilter"];
-      includeEventUuid?: components["schemas"]["IncludeEventUUIDRestSearchFlag"];
-      include_event_uuid?: components["schemas"]["IncludeEventUUIDRestSearchFlag"];
-      includeEventTags?: components["schemas"]["IncludeEventTagsRestSearchFlag"];
-      includeProposals?: components["schemas"]["IncludeProposalsRestSearchFlag"];
-      includeWarninglistHits?: components["schemas"]["IncludeWarninglistHitsRestSearchFlag"];
-      includeContext?: components["schemas"]["IncludeContextRestSearchFlag"];
-      includeSightings?: components["schemas"]["IncludeContextRestSearchFlag"];
-      includeSightingdb?: components["schemas"]["IncludeSightingDbRestSearchFlag"];
-      includeCorrelations?: components["schemas"]["IncludeCorrelationsRestSearchFlag"];
-      includeDecayScore?: components["schemas"]["IncludeDecayScoreRestSearchFlag"];
-      includeFullModel?: components["schemas"]["IncludeFullModelRestSearchFlag"];
-      allow_proposal_blocking?: components["schemas"]["AllowProposalBlockingRestSearchFlag"];
-      metadata?: components["schemas"]["MetadataRestSearchFilter"];
-      attackGalaxy?: components["schemas"]["AttackGalaxyRestSearchFilter"];
-      excludeDecayed?: components["schemas"]["ExcludeDecayedRestSearchFlag"];
-      decayingModel?: components["schemas"]["DecayingModelRestSearchFilter"];
-      modelOverrides?: components["schemas"]["ModelOverridesRestSearchFilter"];
-      score?: components["schemas"]["DecayingModelScoreRestSearchFilter"];
-      returnFormat?: components["schemas"]["ObjectsRestSearchReturnFormat"];
+      from?: components['schemas']['DateRestSearchFilter'];
+      to?: components['schemas']['DateRestSearchFilter'];
+      date?: components['schemas']['DateRestSearchFilter'];
+      tags?: components['schemas']['TagsRestSearchFilter'];
+      last?: components['schemas']['LastRestSearchFilter'];
+      event_timestamp?: components['schemas']['Timestamp'];
+      publish_timestamp?: components['schemas']['Timestamp'];
+      org?: components['schemas']['OrganisationId'] | components['schemas']['OrganisationName'];
+      uuid?: components['schemas']['UUID'];
+      value?: components['schemas']['AttributeValue'];
+      type?: components['schemas']['AttributeType'];
+      category?: components['schemas']['AttributeCategory'];
+      object_relation?: components['schemas']['ObjectRelationRestSearchFilter'];
+      attribute_timestamp?: components['schemas']['Timestamp'];
+      first_seen?: components['schemas']['NullableMicroTimestamp'];
+      last_seen?: components['schemas']['NullableMicroTimestamp'];
+      comment?: components['schemas']['AttributeComment'];
+      to_ids?: components['schemas']['ToIDSRestSearchFlag'];
+      published?: components['schemas']['PublishedFlag'];
+      deleted?: components['schemas']['SoftDeletedFlag'];
+      withAttachments?: components['schemas']['WithAttachmentsRestSearchFilter'];
+      enforceWarninglist?: components['schemas']['EnforceWarninglistRestSearchFilter'];
+      includeAllTags?: components['schemas']['IncludeAllTagsRestSearchFilter'];
+      includeEventUuid?: components['schemas']['IncludeEventUUIDRestSearchFlag'];
+      include_event_uuid?: components['schemas']['IncludeEventUUIDRestSearchFlag'];
+      includeEventTags?: components['schemas']['IncludeEventTagsRestSearchFlag'];
+      includeProposals?: components['schemas']['IncludeProposalsRestSearchFlag'];
+      includeWarninglistHits?: components['schemas']['IncludeWarninglistHitsRestSearchFlag'];
+      includeContext?: components['schemas']['IncludeContextRestSearchFlag'];
+      includeSightings?: components['schemas']['IncludeContextRestSearchFlag'];
+      includeSightingdb?: components['schemas']['IncludeSightingDbRestSearchFlag'];
+      includeCorrelations?: components['schemas']['IncludeCorrelationsRestSearchFlag'];
+      includeDecayScore?: components['schemas']['IncludeDecayScoreRestSearchFlag'];
+      includeFullModel?: components['schemas']['IncludeFullModelRestSearchFlag'];
+      allow_proposal_blocking?: components['schemas']['AllowProposalBlockingRestSearchFlag'];
+      metadata?: components['schemas']['MetadataRestSearchFilter'];
+      attackGalaxy?: components['schemas']['AttackGalaxyRestSearchFilter'];
+      excludeDecayed?: components['schemas']['ExcludeDecayedRestSearchFlag'];
+      decayingModel?: components['schemas']['DecayingModelRestSearchFilter'];
+      modelOverrides?: components['schemas']['ModelOverridesRestSearchFilter'];
+      score?: components['schemas']['DecayingModelScoreRestSearchFilter'];
+      returnFormat?: components['schemas']['ObjectsRestSearchReturnFormat'];
     };
     /** @example 12345 */
     SightingId: string;
     Sighting: {
-      id?: components["schemas"]["SightingId"];
-      attribute_id?: components["schemas"]["AttributeId"];
-      event_id?: components["schemas"]["EventId"];
-      org_id?: components["schemas"]["OrganisationId"];
-      date_sighting?: components["schemas"]["Timestamp"];
-      uuid?: components["schemas"]["UUID"];
+      id?: components['schemas']['SightingId'];
+      attribute_id?: components['schemas']['AttributeId'];
+      event_id?: components['schemas']['EventId'];
+      org_id?: components['schemas']['OrganisationId'];
+      date_sighting?: components['schemas']['Timestamp'];
+      uuid?: components['schemas']['UUID'];
       source?: string;
       type?: string;
-      attribute_uuid?: components["schemas"]["UUID"];
+      attribute_uuid?: components['schemas']['UUID'];
       Organisation?: {
-        id?: components["schemas"]["OrganisationId"];
-        uuid?: components["schemas"]["UUID"];
-        name?: components["schemas"]["OrganisationName"];
+        id?: components['schemas']['OrganisationId'];
+        uuid?: components['schemas']['UUID'];
+        name?: components['schemas']['OrganisationName'];
       };
     };
     /** @example 12345 */
@@ -1003,14 +1206,14 @@ export interface components {
     /** @example misp */
     GalaxyNamespace: string;
     Galaxy: {
-      id?: components["schemas"]["GalaxyId"];
-      uuid?: components["schemas"]["UUID"];
-      name?: components["schemas"]["GalaxyName"];
-      type?: components["schemas"]["GalaxyType"];
-      description?: components["schemas"]["GalaxyDescription"];
-      version?: components["schemas"]["GalaxyVersion"];
-      icon?: components["schemas"]["Icon"];
-      namespace?: components["schemas"]["GalaxyNamespace"];
+      id?: components['schemas']['GalaxyId'];
+      uuid?: components['schemas']['UUID'];
+      name?: components['schemas']['GalaxyName'];
+      type?: components['schemas']['GalaxyType'];
+      description?: components['schemas']['GalaxyDescription'];
+      version?: components['schemas']['GalaxyVersion'];
+      icon?: components['schemas']['Icon'];
+      namespace?: components['schemas']['GalaxyNamespace'];
       /**
        * @example {
        *   "fraud-tactics": [
@@ -1045,95 +1248,95 @@ export interface components {
     /** @example Military */
     GalaxyElementValue: string;
     GalaxyElement: {
-      id?: components["schemas"]["GalaxyElementId"];
-      galaxy_cluster_id?: components["schemas"]["GalaxyClusterId"];
-      key?: components["schemas"]["GalaxyElementKey"];
-      value?: components["schemas"]["GalaxyElementValue"];
+      id?: components['schemas']['GalaxyElementId'];
+      galaxy_cluster_id?: components['schemas']['GalaxyClusterId'];
+      key?: components['schemas']['GalaxyElementKey'];
+      value?: components['schemas']['GalaxyElementValue'];
     };
-    GalaxyElementList: components["schemas"]["GalaxyElement"][];
-    GalaxyClusterRelationList: components["schemas"]["GalaxyElement"][];
+    GalaxyElementList: components['schemas']['GalaxyElement'][];
+    GalaxyClusterRelationList: components['schemas']['GalaxyElement'][];
     GalaxyClusterNoId: {
-      uuid?: components["schemas"]["UUID"];
-      collection_uuid?: components["schemas"]["UUID"];
-      type?: components["schemas"]["GalaxyClusterType"];
-      value?: components["schemas"]["GalaxyClusterValue"];
-      tag_name?: components["schemas"]["TagName"];
-      description?: components["schemas"]["GalaxyClusterDescription"];
-      galaxy_id?: components["schemas"]["GalaxyId"];
-      source?: components["schemas"]["GalaxyClusterSource"];
-      authors?: components["schemas"]["GalaxyClusterAuthors"];
-      version?: components["schemas"]["GalaxyClusterVersion"];
-      distribution?: components["schemas"]["DistributionLevelId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
-      org_id?: components["schemas"]["OrganisationId"];
-      orgc_id?: components["schemas"]["OrganisationId"];
-      default?: components["schemas"]["IsDefault"];
-      locked?: components["schemas"]["IsLocked"];
-      extends_uuid?: components["schemas"]["ExtendsUUID"];
-      extends_version?: components["schemas"]["GalaxyClusterVersion"];
-      published?: components["schemas"]["PublishedFlag"];
-      deleted?: components["schemas"]["SoftDeletedFlag"];
-      GalaxyElement?: components["schemas"]["GalaxyElement"][];
+      uuid?: components['schemas']['UUID'];
+      collection_uuid?: components['schemas']['UUID'];
+      type?: components['schemas']['GalaxyClusterType'];
+      value?: components['schemas']['GalaxyClusterValue'];
+      tag_name?: components['schemas']['TagName'];
+      description?: components['schemas']['GalaxyClusterDescription'];
+      galaxy_id?: components['schemas']['GalaxyId'];
+      source?: components['schemas']['GalaxyClusterSource'];
+      authors?: components['schemas']['GalaxyClusterAuthors'];
+      version?: components['schemas']['GalaxyClusterVersion'];
+      distribution?: components['schemas']['DistributionLevelId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
+      org_id?: components['schemas']['OrganisationId'];
+      orgc_id?: components['schemas']['OrganisationId'];
+      default?: components['schemas']['IsDefault'];
+      locked?: components['schemas']['IsLocked'];
+      extends_uuid?: components['schemas']['ExtendsUUID'];
+      extends_version?: components['schemas']['GalaxyClusterVersion'];
+      published?: components['schemas']['PublishedFlag'];
+      deleted?: components['schemas']['SoftDeletedFlag'];
+      GalaxyElement?: components['schemas']['GalaxyElement'][];
     };
     /** @description MISP galaxy is a simple method to express a large object called cluster that can be attached to MISP events or attributes. */
     GalaxyCluster: {
-      id?: components["schemas"]["GalaxyClusterId"];
-    } & components["schemas"]["GalaxyClusterNoId"];
+      id?: components['schemas']['GalaxyClusterId'];
+    } & components['schemas']['GalaxyClusterNoId'];
     /** @description A galaxy cluster with all it's details. */
-    ExtendedGalaxyCluster: components["schemas"]["GalaxyCluster"] & {
-      Galaxy?: components["schemas"]["Galaxy"];
-      GalaxyClusterRelation?: components["schemas"]["GalaxyClusterRelationList"];
-      Org?: components["schemas"]["Organisation"];
-      Orgc?: components["schemas"]["Organisation"];
+    ExtendedGalaxyCluster: components['schemas']['GalaxyCluster'] & {
+      Galaxy?: components['schemas']['Galaxy'];
+      GalaxyClusterRelation?: components['schemas']['GalaxyClusterRelationList'];
+      Org?: components['schemas']['Organisation'];
+      Orgc?: components['schemas']['Organisation'];
       /** Format: int32 */
       tag_count?: number;
-      tag_id?: components["schemas"]["TagId"];
+      tag_id?: components['schemas']['TagId'];
     };
     /** @description A galaxy with it's galaxy cluster details. */
     ExtendedGalaxy: {
-      Galaxy?: components["schemas"]["Galaxy"];
-      GalaxyCluster?: components["schemas"]["GalaxyCluster"][];
+      Galaxy?: components['schemas']['Galaxy'];
+      GalaxyCluster?: components['schemas']['GalaxyCluster'][];
     };
     /** @description Galaxy and clusters representation in misp-galaxy format. */
     GalaxyMispFormat: {
-      name?: components["schemas"]["GalaxyName"];
-      type?: components["schemas"]["GalaxyType"];
-      authors?: components["schemas"]["GalaxyClusterAuthors"];
-      version?: boolean | components["schemas"]["GalaxyClusterVersion"];
-      uuid?: components["schemas"]["UUID"];
-      source?: components["schemas"]["GalaxyClusterSource"];
+      name?: components['schemas']['GalaxyName'];
+      type?: components['schemas']['GalaxyType'];
+      authors?: components['schemas']['GalaxyClusterAuthors'];
+      version?: boolean | components['schemas']['GalaxyClusterVersion'];
+      uuid?: components['schemas']['UUID'];
+      source?: components['schemas']['GalaxyClusterSource'];
       values?: {
-          description?: components["schemas"]["GalaxyClusterDescription"];
-          uuid?: components["schemas"]["UUID"];
-          value?: components["schemas"]["GalaxyClusterValue"];
-          extends_uuid?: components["schemas"]["ExtendsUUID"];
-          extends_Version?: components["schemas"]["GalaxyClusterVersion"];
-          /**
-           * @description Each Galaxy element associated to this cluster represents a key-value property.
-           * @example [
-           *   {
-           *     "categories": "botnet"
-           *   },
-           *   {
-           *     "refs": "http://example.com"
-           *   },
-           *   {
-           *     "aliases": [
-           *       "malware",
-           *       "win32",
-           *       "windows"
-           *     ]
-           *   },
-           *   {
-           *     "topics": [
-           *       "Windows",
-           *       "Malware"
-           *     ]
-           *   }
-           * ]
-           */
-          meta?: Record<string, never>;
-        }[];
+        description?: components['schemas']['GalaxyClusterDescription'];
+        uuid?: components['schemas']['UUID'];
+        value?: components['schemas']['GalaxyClusterValue'];
+        extends_uuid?: components['schemas']['ExtendsUUID'];
+        extends_Version?: components['schemas']['GalaxyClusterVersion'];
+        /**
+         * @description Each Galaxy element associated to this cluster represents a key-value property.
+         * @example [
+         *   {
+         *     "categories": "botnet"
+         *   },
+         *   {
+         *     "refs": "http://example.com"
+         *   },
+         *   {
+         *     "aliases": [
+         *       "malware",
+         *       "win32",
+         *       "windows"
+         *     ]
+         *   },
+         *   {
+         *     "topics": [
+         *       "Windows",
+         *       "Malware"
+         *     ]
+         *   }
+         * ]
+         */
+        meta?: Record<string, never>;
+      }[];
     };
     /**
      * @description Text search term to find a matching galaxy name, namespace, description, kill_chain_order or uuid.
@@ -1141,9 +1344,9 @@ export interface components {
      */
     GalaxyValueSearchFilter: string;
     ImportGalaxyClusterItem: {
-      GalaxyCluster?: components["schemas"]["GalaxyClusterNoId"];
+      GalaxyCluster?: components['schemas']['GalaxyClusterNoId'];
       Galaxy?: {
-        uuid?: components["schemas"]["UUID"];
+        uuid?: components['schemas']['UUID'];
       };
     };
     /** @example 12345 */
@@ -1157,28 +1360,28 @@ export interface components {
     /** @default false */
     HideTagFlag: boolean;
     TagNoId: {
-      name?: components["schemas"]["TagName"];
-      colour?: components["schemas"]["TagColour"];
-      exportable?: components["schemas"]["IsExportable"];
-      org_id?: components["schemas"]["OrganisationId"];
-      user_id?: components["schemas"]["UserId"];
-      hide_tag?: components["schemas"]["HideTagFlag"];
-      numerical_value?: components["schemas"]["TagNumericalValue"];
-      is_galaxy?: components["schemas"]["IsGalaxy"];
-      is_custom_galaxy?: components["schemas"]["IsCustomGalaxy"];
-      inherited?: components["schemas"]["IsInherited"];
+      name?: components['schemas']['TagName'];
+      colour?: components['schemas']['TagColour'];
+      exportable?: components['schemas']['IsExportable'];
+      org_id?: components['schemas']['OrganisationId'];
+      user_id?: components['schemas']['UserId'];
+      hide_tag?: components['schemas']['HideTagFlag'];
+      numerical_value?: components['schemas']['TagNumericalValue'];
+      is_galaxy?: components['schemas']['IsGalaxy'];
+      is_custom_galaxy?: components['schemas']['IsCustomGalaxy'];
+      inherited?: components['schemas']['IsInherited'];
     };
     /** @description A tag is a simple method to classify an event with a simple string. The tag name can be freely chosen. The tag name can be also chosen from a fixed machine-tag vocabulary called MISP taxonomies */
     Tag: {
-      id?: components["schemas"]["TagId"];
-    } & components["schemas"]["TagNoId"];
-    TagList: components["schemas"]["Tag"][];
+      id?: components['schemas']['TagId'];
+    } & components['schemas']['TagNoId'];
+    TagList: components['schemas']['Tag'][];
     /** @example 12345 */
     TagCollectionId: string;
     ExtendedTag: {
-      Tag?: components["schemas"]["Tag"];
-      Taxonomy?: components["schemas"]["Taxonomy"];
-      TaxonomyPredicate?: components["schemas"]["TaxonomyPredicate"];
+      Tag?: components['schemas']['Tag'];
+      Taxonomy?: components['schemas']['Taxonomy'];
+      TaxonomyPredicate?: components['schemas']['TaxonomyPredicate'];
     };
     /** @example 12345 */
     TaxonomyId: string;
@@ -1191,10 +1394,10 @@ export interface components {
     /** @example 5 */
     TaxonomyVersion: string;
     Taxonomy: {
-      id?: components["schemas"]["TaxonomyId"];
-      namespace?: components["schemas"]["TaxonomyNamespace"];
-      description?: components["schemas"]["TaxonomyDescription"];
-      version?: components["schemas"]["TaxonomyVersion"];
+      id?: components['schemas']['TaxonomyId'];
+      namespace?: components['schemas']['TaxonomyNamespace'];
+      description?: components['schemas']['TaxonomyDescription'];
+      version?: components['schemas']['TaxonomyVersion'];
       enabled?: boolean;
       exclusive?: boolean;
       required?: boolean;
@@ -1206,19 +1409,19 @@ export interface components {
     /** @example Disclosure is not limited.  Sources may use TLP:WHITE when information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release. Subject to standard copyright rules, TLP:WHITE information may be distributed without restriction. */
     TaxonomyPredicateDescription: string;
     TaxonomyPredicate: {
-      id?: components["schemas"]["TaxonomyPredicateId"];
-      taxonomy_id?: components["schemas"]["TaxonomyId"];
-      value?: components["schemas"]["TaxonomyPredicateValue"];
-      expanded?: components["schemas"]["TaxonomyPredicateExpanded"];
+      id?: components['schemas']['TaxonomyPredicateId'];
+      taxonomy_id?: components['schemas']['TaxonomyId'];
+      value?: components['schemas']['TaxonomyPredicateValue'];
+      expanded?: components['schemas']['TaxonomyPredicateExpanded'];
       /** @example #ffffff */
       colour?: string;
-      description?: components["schemas"]["TaxonomyPredicateDescription"];
+      description?: components['schemas']['TaxonomyPredicateDescription'];
       exclusive?: boolean;
       numerical_value?: number | null;
     };
     TaxonomyPredicateExport: {
-      value?: components["schemas"]["TaxonomyPredicateValue"];
-      expanded?: components["schemas"]["TaxonomyPredicateExpanded"];
+      value?: components['schemas']['TaxonomyPredicateValue'];
+      expanded?: components['schemas']['TaxonomyPredicateExpanded'];
     };
     TaxonomyEntryExport: {
       /** @example spam */
@@ -1229,17 +1432,17 @@ export interface components {
       description?: string;
     };
     TaxonomyValueExport: {
-      predicate?: components["schemas"]["TaxonomyPredicateValue"];
-      entry?: components["schemas"]["TaxonomyEntryExport"][];
+      predicate?: components['schemas']['TaxonomyPredicateValue'];
+      entry?: components['schemas']['TaxonomyEntryExport'][];
     };
     TaxonomyEntry: {
-      tag?: components["schemas"]["TagName"];
+      tag?: components['schemas']['TagName'];
       expanded?: string;
       description?: string;
       exclusive_predicate?: boolean;
       existing_tag?: boolean;
     };
-    ExtendedTaxonomyEntry: components["schemas"]["UserNoId"] & {
+    ExtendedTaxonomyEntry: components['schemas']['UserNoId'] & {
       events?: number;
       attributes?: number;
     };
@@ -1336,26 +1539,40 @@ export interface components {
     /** @example 12345 */
     UserSettingId: string;
     /** @enum {string} */
-    UserSettingName: "publish_alert_filter" | "dashboard_access" | "dashboard" | "homepage" | "default_restsearch_parameters" | "tag_numerical_value_override" | "event_index_hide_columns";
+    UserSettingName:
+      | 'publish_alert_filter'
+      | 'dashboard_access'
+      | 'dashboard'
+      | 'homepage'
+      | 'default_restsearch_parameters'
+      | 'tag_numerical_value_override'
+      | 'event_index_hide_columns';
     UserSetting: {
-      id?: components["schemas"]["UserSettingId"];
-      setting?: components["schemas"]["UserSettingName"];
-      value?: components["schemas"]["DashboardUserSetting"] | components["schemas"]["PublishAlertFilterUserSetting"] | components["schemas"]["DashboardAccessUserSetting"] | components["schemas"]["HomepageUserSetting"] | components["schemas"]["DefaultRestSearchParametersUserSetting"] | components["schemas"]["TagNumbericalValueOverrideUserSetting"] | components["schemas"]["EventIndexHideColumnsUserSetting"];
-      user_id?: components["schemas"]["UserId"];
-      timestamp?: components["schemas"]["Timestamp"];
+      id?: components['schemas']['UserSettingId'];
+      setting?: components['schemas']['UserSettingName'];
+      value?:
+        | components['schemas']['DashboardUserSetting']
+        | components['schemas']['PublishAlertFilterUserSetting']
+        | components['schemas']['DashboardAccessUserSetting']
+        | components['schemas']['HomepageUserSetting']
+        | components['schemas']['DefaultRestSearchParametersUserSetting']
+        | components['schemas']['TagNumbericalValueOverrideUserSetting']
+        | components['schemas']['EventIndexHideColumnsUserSetting'];
+      user_id?: components['schemas']['UserId'];
+      timestamp?: components['schemas']['Timestamp'];
     };
     ViewUserSettings: {
-      publish_alert_filter?: components["schemas"]["PublishAlertFilterUserSetting"];
-      dashboard_access?: components["schemas"]["DashboardAccessUserSetting"];
-      dashboard?: components["schemas"]["DashboardUserSetting"][];
-      homepage?: components["schemas"]["HomepageUserSetting"];
-      default_restsearch_parameters?: components["schemas"]["DefaultRestSearchParametersUserSetting"];
-      tag_numerical_value_override?: components["schemas"]["TagNumbericalValueOverrideUserSetting"];
-      event_index_hide_columns?: components["schemas"]["EventIndexHideColumnsUserSetting"];
+      publish_alert_filter?: components['schemas']['PublishAlertFilterUserSetting'];
+      dashboard_access?: components['schemas']['DashboardAccessUserSetting'];
+      dashboard?: components['schemas']['DashboardUserSetting'][];
+      homepage?: components['schemas']['HomepageUserSetting'];
+      default_restsearch_parameters?: components['schemas']['DefaultRestSearchParametersUserSetting'];
+      tag_numerical_value_override?: components['schemas']['TagNumbericalValueOverrideUserSetting'];
+      event_index_hide_columns?: components['schemas']['EventIndexHideColumnsUserSetting'];
     };
     UserNoId: {
-      org_id?: components["schemas"]["OrganisationId"];
-      server_id?: components["schemas"]["ServerId"];
+      org_id?: components['schemas']['OrganisationId'];
+      server_id?: components['schemas']['ServerId'];
       /** Format: email */
       email?: string;
       autoalert?: boolean;
@@ -1364,46 +1581,46 @@ export interface components {
        * @example 894c8d095180c7ea28789092e96ca6424199aa4f
        */
       authkey?: string | null;
-      invited_by?: components["schemas"]["UserId"];
+      invited_by?: components['schemas']['UserId'];
       gpgkey?: string | null;
       certif_public?: string | null;
       /** @example 4000000 */
       nids_sid?: string;
       termsaccepted?: boolean;
-      newsread?: components["schemas"]["Timestamp"];
-      role_id?: components["schemas"]["RoleId"];
+      newsread?: components['schemas']['Timestamp'];
+      role_id?: components['schemas']['RoleId'];
       /**
        * @description Password change required.
        * @enum {string}
        */
-      change_pw?: "0" | "1";
+      change_pw?: '0' | '1';
       contactalert?: boolean;
       disabled?: boolean;
       /** Format: date-time */
       expiration?: string | null;
-      current_login?: components["schemas"]["Timestamp"];
-      last_login?: components["schemas"]["Timestamp"];
+      current_login?: components['schemas']['Timestamp'];
+      last_login?: components['schemas']['Timestamp'];
       force_logout?: boolean;
-      date_created?: components["schemas"]["Timestamp"];
-      date_modified?: components["schemas"]["Timestamp"];
+      date_created?: components['schemas']['Timestamp'];
+      date_modified?: components['schemas']['Timestamp'];
     };
     User: {
-      id?: components["schemas"]["UserId"];
-    } & components["schemas"]["UserNoId"];
-    ExtendedUser: components["schemas"]["User"] & {
-      User?: components["schemas"]["User"];
-      Role?: components["schemas"]["Role"];
-      UserSetting?: components["schemas"]["ViewUserSettings"];
+      id?: components['schemas']['UserId'];
+    } & components['schemas']['UserNoId'];
+    ExtendedUser: components['schemas']['User'] & {
+      User?: components['schemas']['User'];
+      Role?: components['schemas']['Role'];
+      UserSetting?: components['schemas']['ViewUserSettings'];
     };
     UserListItem: {
-      User?: components["schemas"]["User"];
-      Role?: components["schemas"]["Role"];
+      User?: components['schemas']['User'];
+      Role?: components['schemas']['Role'];
       Organisation?: {
-        id?: components["schemas"]["OrganisationId"];
-        name?: components["schemas"]["OrganisationName"];
+        id?: components['schemas']['OrganisationId'];
+        name?: components['schemas']['OrganisationName'];
       };
     };
-    UserList: components["schemas"]["UserListItem"][];
+    UserList: components['schemas']['UserListItem'][];
     /** @example 12345 */
     OrganisationId: string;
     /** @example ORGNAME */
@@ -1411,16 +1628,16 @@ export interface components {
     /** @example ADMIN */
     OrganisationType: string | null;
     OrganisationNoId: {
-      name?: components["schemas"]["OrganisationName"];
+      name?: components['schemas']['OrganisationName'];
       /** @example 2021-06-14 14:29:19 */
       date_created?: string;
       /** @example 2021-06-14 14:29:19 */
       date_modified?: string;
       description?: string;
-      type?: components["schemas"]["OrganisationType"];
+      type?: components['schemas']['OrganisationType'];
       nationality?: string;
       sector?: string;
-      created_by?: components["schemas"]["UserId"];
+      created_by?: components['schemas']['UserId'];
       uuid?: string;
       contacts?: string | null;
       local?: boolean;
@@ -1431,22 +1648,22 @@ export interface components {
       created_by_email?: string | null;
     };
     Organisation: {
-      id?: components["schemas"]["OrganisationId"];
-    } & components["schemas"]["OrganisationNoId"];
+      id?: components['schemas']['OrganisationId'];
+    } & components['schemas']['OrganisationNoId'];
     OrganisationListItem: {
-      Organisation?: components["schemas"]["Organisation"];
+      Organisation?: components['schemas']['Organisation'];
     };
-    OrganisationList: components["schemas"]["OrganisationListItem"][];
+    OrganisationList: components['schemas']['OrganisationListItem'][];
     /** @example 12345 */
     ServerId: string;
     /** @example Phising Server */
     ServerName: string;
     ServerNoId: {
-      name?: components["schemas"]["ServerName"];
+      name?: components['schemas']['ServerName'];
       /** @example https://misppriv.circl.lu */
       url?: string;
-      authkey?: components["schemas"]["AuthKeyRaw"];
-      org_id?: components["schemas"]["OrganisationId"];
+      authkey?: components['schemas']['AuthKeyRaw'];
+      org_id?: components['schemas']['OrganisationId'];
       push?: boolean;
       pull?: boolean;
       push_sightings?: boolean;
@@ -1457,7 +1674,7 @@ export interface components {
       /** @example 12345 */
       lastpushedid?: string | null;
       organization?: string | null;
-      remote_org_id?: components["schemas"]["OrganisationId"];
+      remote_org_id?: components['schemas']['OrganisationId'];
       publish_without_email?: boolean;
       unpublish_event?: boolean;
       self_signed?: boolean;
@@ -1489,15 +1706,15 @@ export interface components {
       cache_timestamp?: boolean;
     };
     Server: {
-      id?: components["schemas"]["ServerId"];
-    } & components["schemas"]["ServerNoId"];
+      id?: components['schemas']['ServerId'];
+    } & components['schemas']['ServerNoId'];
     ServerListItem: {
-      Server?: components["schemas"]["Server"];
-      Organisation?: components["schemas"]["Organisation"];
-      RemoteOrg?: components["schemas"]["Organisation"];
-      User?: components["schemas"]["User"][];
+      Server?: components['schemas']['Server'];
+      Organisation?: components['schemas']['Organisation'];
+      RemoteOrg?: components['schemas']['Organisation'];
+      User?: components['schemas']['User'][];
     };
-    ServerList: components["schemas"]["ServerListItem"][];
+    ServerList: components['schemas']['ServerListItem'][];
     PhpServerSetting: {
       /** @example The maximum duration that a script can run (does not affect the background workers). A too low number will break long running scripts like comprehensive API exports */
       explanation?: string;
@@ -1536,7 +1753,7 @@ export interface components {
        * @example string
        * @enum {string}
        */
-      type?: "string" | "boolean" | "numeric";
+      type?: 'string' | 'boolean' | 'numeric';
       null?: boolean | null;
       /** @example Enrichment */
       subGroup?: string | null;
@@ -1565,7 +1782,7 @@ export interface components {
     };
     WorkersStatus: {
       ok?: boolean;
-      workers?: components["schemas"]["Worker"][];
+      workers?: components['schemas']['Worker'][];
       /** @example 0 */
       jobCount?: number | null;
     };
@@ -1581,12 +1798,12 @@ export interface components {
     /** @example CIRCL OSINT Feed */
     FeedName: string;
     /** @enum {string} */
-    FeedSourceFormat: "1" | "csv" | "freetext" | "misp";
+    FeedSourceFormat: '1' | 'csv' | 'freetext' | 'misp';
     /**
      * @description Specify whether the source (url field) is a directory (local) or an genuine url (network).
      * @enum {string}
      */
-    FeedInputSource: "local" | "network";
+    FeedInputSource: 'local' | 'network';
     /**
      * @description Headers to be passed with the requests. All separated by
      *
@@ -1620,36 +1837,36 @@ export interface components {
     /** @description The IDS flags will be set to On for this feed */
     FeedForceToIDSFlag: boolean;
     FeedEnabledFlag: boolean;
-    FeedCacheTimestamp: (components["schemas"]["Timestamp"] | boolean) | null;
+    FeedCacheTimestamp: (components['schemas']['Timestamp'] | boolean) | null;
     FeedNoId: {
-      name?: components["schemas"]["FeedName"];
-      provider?: components["schemas"]["FeedProvider"];
-      url?: components["schemas"]["FeedUrl"];
-      rules?: components["schemas"]["FeedRules"];
-      enabled?: components["schemas"]["FeedEnabledFlag"];
-      distribution?: components["schemas"]["DistributionLevelId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
-      tag_id?: components["schemas"]["TagId"];
-      default?: components["schemas"]["IsDefault"];
-      source_format?: components["schemas"]["FeedSourceFormat"];
-      fixed_event?: components["schemas"]["FeedFixedEvent"];
-      delta_merge?: components["schemas"]["FeedDeltaMergeFlag"];
-      event_id?: components["schemas"]["EventId"];
-      publish?: components["schemas"]["PublishedFlag"];
-      override_ids?: components["schemas"]["FeedOverrideIDSFlag"];
-      settings?: components["schemas"]["FeedSettings"];
-      input_source?: components["schemas"]["FeedInputSource"];
-      delete_local_file?: components["schemas"]["FeedDeleteLocalFileFlag"];
-      lookup_visible?: components["schemas"]["FeedLookupVisibleFlag"];
-      headers?: components["schemas"]["FeedHeaders"];
-      caching_enabled?: components["schemas"]["FeedCachingEnabledFlag"];
-      force_to_ids?: components["schemas"]["FeedForceToIDSFlag"];
-      orgc_id?: components["schemas"]["OrganisationId"];
-      cache_timestamp?: components["schemas"]["FeedCacheTimestamp"];
+      name?: components['schemas']['FeedName'];
+      provider?: components['schemas']['FeedProvider'];
+      url?: components['schemas']['FeedUrl'];
+      rules?: components['schemas']['FeedRules'];
+      enabled?: components['schemas']['FeedEnabledFlag'];
+      distribution?: components['schemas']['DistributionLevelId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
+      tag_id?: components['schemas']['TagId'];
+      default?: components['schemas']['IsDefault'];
+      source_format?: components['schemas']['FeedSourceFormat'];
+      fixed_event?: components['schemas']['FeedFixedEvent'];
+      delta_merge?: components['schemas']['FeedDeltaMergeFlag'];
+      event_id?: components['schemas']['EventId'];
+      publish?: components['schemas']['PublishedFlag'];
+      override_ids?: components['schemas']['FeedOverrideIDSFlag'];
+      settings?: components['schemas']['FeedSettings'];
+      input_source?: components['schemas']['FeedInputSource'];
+      delete_local_file?: components['schemas']['FeedDeleteLocalFileFlag'];
+      lookup_visible?: components['schemas']['FeedLookupVisibleFlag'];
+      headers?: components['schemas']['FeedHeaders'];
+      caching_enabled?: components['schemas']['FeedCachingEnabledFlag'];
+      force_to_ids?: components['schemas']['FeedForceToIDSFlag'];
+      orgc_id?: components['schemas']['OrganisationId'];
+      cache_timestamp?: components['schemas']['FeedCacheTimestamp'];
     };
     Feed: {
-      id?: components["schemas"]["FeedId"];
-    } & components["schemas"]["FeedNoId"];
+      id?: components['schemas']['FeedId'];
+    } & components['schemas']['FeedNoId'];
     /** @example 3 */
     WarninglistId: string;
     WarninglistEntry: {
@@ -1657,17 +1874,17 @@ export interface components {
       id?: string;
       /** @example 10.128.0.0/24 */
       value?: string;
-      warninglist_id?: components["schemas"]["WarninglistId"];
+      warninglist_id?: components['schemas']['WarninglistId'];
     };
     Warninglist: {
-      id?: components["schemas"]["WarninglistId"];
+      id?: components['schemas']['WarninglistId'];
       /** @example List of known domains to know external IP */
       name?: string;
       /**
        * @example cidr
        * @enum {string}
        */
-      type?: "cidr" | "hostname" | "substring" | "string" | "regex";
+      type?: 'cidr' | 'hostname' | 'substring' | 'string' | 'regex';
       description?: string;
       /** @example 10 */
       version?: string;
@@ -1679,21 +1896,23 @@ export interface components {
        * @example domain, hostname, domain|ip, uri, url
        */
       valid_attributes?: string;
-      WarninglistEntry?: components["schemas"]["WarninglistEntry"][];
+      WarninglistEntry?: components['schemas']['WarninglistEntry'][];
     };
-    WarninglistsIdFilter: components["schemas"]["WarninglistId"] | components["schemas"]["WarninglistId"][];
+    WarninglistsIdFilter:
+      | components['schemas']['WarninglistId']
+      | components['schemas']['WarninglistId'][];
     WarninglistsNameFilter: string | string[];
     /** @example 3 */
     NoticelistId: string;
     NoticelistEntry: {
       /** @example 1234 */
       id?: string;
-      noticelist_id?: components["schemas"]["NoticelistId"];
+      noticelist_id?: components['schemas']['NoticelistId'];
       data?: {
         scope?: string[];
         field?: string[];
         value?: string[];
-        tags?: components["schemas"]["TagName"][];
+        tags?: components['schemas']['TagName'][];
         message?: {
           /** @example This attribute is likely to contain personal data and the data subject is likely to be directly identifiable. */
           en?: string;
@@ -1701,14 +1920,14 @@ export interface components {
       };
     };
     Noticelist: {
-      id?: components["schemas"]["NoticelistId"];
+      id?: components['schemas']['NoticelistId'];
       /** @example List of known domains to know external IP */
       name?: string;
       /**
        * @example cidr
        * @enum {string}
        */
-      type?: "cidr" | "hostname" | "substring" | "string" | "regex";
+      type?: 'cidr' | 'hostname' | 'substring' | 'string' | 'regex';
       description?: string;
       /** @example 10 */
       version?: string;
@@ -1720,15 +1939,15 @@ export interface components {
        * @example domain, hostname, domain|ip, uri, url
        */
       valid_attributes?: string;
-      NoticelistEntry?: components["schemas"]["NoticelistEntry"][];
+      NoticelistEntry?: components['schemas']['NoticelistEntry'][];
     };
     /** @example 3 */
     RoleId: string;
     /** @example ORGNAME */
     RoleName: string;
     Role: {
-      id?: components["schemas"]["RoleId"];
-      name?: components["schemas"]["RoleName"];
+      id?: components['schemas']['RoleId'];
+      name?: components['schemas']['RoleName'];
       perm_add?: boolean;
       perm_modify?: boolean;
       perm_modify_org?: boolean;
@@ -1773,22 +1992,22 @@ export interface components {
     SharingGroupDescription: string;
     SharingGroupReleasability: string;
     SlimSharingGroupNoId: {
-      uuid?: components["schemas"]["UUID"];
-      name?: components["schemas"]["SharingGroupName"];
-      description?: components["schemas"]["SharingGroupDescription"];
-      releasability?: components["schemas"]["SharingGroupReleasability"];
+      uuid?: components['schemas']['UUID'];
+      name?: components['schemas']['SharingGroupName'];
+      description?: components['schemas']['SharingGroupDescription'];
+      releasability?: components['schemas']['SharingGroupReleasability'];
       local?: boolean;
       active?: boolean;
       /** @example 6 */
       org_count?: string;
     };
     SlimSharingGroup: {
-      id?: components["schemas"]["SharingGroupId"];
-    } & components["schemas"]["SlimSharingGroupNoId"];
-    SharingGroupNoId: components["schemas"]["SlimSharingGroupNoId"] & {
-      organisation_uuid?: components["schemas"]["UUID"];
-      org_id?: components["schemas"]["OrganisationId"];
-      sync_user_id?: components["schemas"]["UserId"];
+      id?: components['schemas']['SharingGroupId'];
+    } & components['schemas']['SlimSharingGroupNoId'];
+    SharingGroupNoId: components['schemas']['SlimSharingGroupNoId'] & {
+      organisation_uuid?: components['schemas']['UUID'];
+      org_id?: components['schemas']['OrganisationId'];
+      sync_user_id?: components['schemas']['UserId'];
       /** Format: datetime */
       created?: string;
       /** Format: datetime */
@@ -1796,42 +2015,97 @@ export interface components {
       roaming?: boolean;
     };
     SharingGroup: {
-      id?: components["schemas"]["SharingGroupId"];
-    } & components["schemas"]["SharingGroupNoId"];
+      id?: components['schemas']['SharingGroupId'];
+    } & components['schemas']['SharingGroupNoId'];
     SharingGroupOrganisation: {
-      id?: components["schemas"]["SharingGroupOrganisationId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
-      org_id?: components["schemas"]["OrganisationId"];
+      id?: components['schemas']['SharingGroupOrganisationId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
+      org_id?: components['schemas']['OrganisationId'];
       extend?: boolean;
       Organisation?: {
-        id?: components["schemas"]["OrganisationId"];
-        name?: components["schemas"]["OrganisationName"];
-        uuid?: components["schemas"]["UUID"];
+        id?: components['schemas']['OrganisationId'];
+        name?: components['schemas']['OrganisationName'];
+        uuid?: components['schemas']['UUID'];
       };
     };
     SharingGroupServer: {
       all_orgs?: boolean;
-      server_id?: components["schemas"]["ServerId"];
-      sharing_group_id?: components["schemas"]["SharingGroupId"];
+      server_id?: components['schemas']['ServerId'];
+      sharing_group_id?: components['schemas']['SharingGroupId'];
       Server?: {
-        id?: components["schemas"]["ServerId"];
-        name?: components["schemas"]["ServerName"];
+        id?: components['schemas']['ServerId'];
+        name?: components['schemas']['ServerName'];
       };
     };
     SharingGroupListItem: {
-      SharingGroup?: components["schemas"]["SlimSharingGroup"];
+      SharingGroup?: components['schemas']['SlimSharingGroup'];
       Organisation?: {
-        id?: components["schemas"]["OrganisationId"];
-        name?: components["schemas"]["OrganisationName"];
-        uuid?: components["schemas"]["UUID"];
+        id?: components['schemas']['OrganisationId'];
+        name?: components['schemas']['OrganisationName'];
+        uuid?: components['schemas']['UUID'];
       };
-      SharingGroupOrg?: components["schemas"]["SharingGroupOrganisation"][];
-      SharingGroupServer?: components["schemas"]["SharingGroupServer"][];
+      SharingGroupOrg?: components['schemas']['SharingGroupOrganisation'][];
+      SharingGroupServer?: components['schemas']['SharingGroupServer'][];
       editable?: boolean;
       deletable?: boolean;
     };
     /** @enum {string} */
-    LogActionType: "accept" | "accept_delegation" | "acceptRegistrations" | "add" | "admin_email" | "attachTags" | "auth" | "auth_fail" | "blocklisted" | "captureRelations" | "change_pw" | "delete" | "disable" | "discard" | "discardRegistrations" | "edit" | "email" | "enable" | "enrichment" | "error" | "export" | "fetchEvent" | "file_upload" | "galaxy" | "include_formula" | "login" | "login_fail" | "logout" | "merge" | "pruneUpdateLogs" | "publish" | "publish_sightings" | "publish alert" | "pull" | "purge_events" | "push" | "registration" | "registration_error" | "remove_dead_workers" | "request" | "request_delegation" | "reset_auth_key" | "send_mail" | "security" | "serverSettingsEdit" | "tag" | "undelete" | "update" | "update_database" | "update_db_worker" | "upgrade_24" | "upload_sample" | "version_warning" | "warning" | "wipe_default";
+    LogActionType:
+      | 'accept'
+      | 'accept_delegation'
+      | 'acceptRegistrations'
+      | 'add'
+      | 'admin_email'
+      | 'attachTags'
+      | 'auth'
+      | 'auth_fail'
+      | 'blocklisted'
+      | 'captureRelations'
+      | 'change_pw'
+      | 'delete'
+      | 'disable'
+      | 'discard'
+      | 'discardRegistrations'
+      | 'edit'
+      | 'email'
+      | 'enable'
+      | 'enrichment'
+      | 'error'
+      | 'export'
+      | 'fetchEvent'
+      | 'file_upload'
+      | 'galaxy'
+      | 'include_formula'
+      | 'login'
+      | 'login_fail'
+      | 'logout'
+      | 'merge'
+      | 'pruneUpdateLogs'
+      | 'publish'
+      | 'publish_sightings'
+      | 'publish alert'
+      | 'pull'
+      | 'purge_events'
+      | 'push'
+      | 'registration'
+      | 'registration_error'
+      | 'remove_dead_workers'
+      | 'request'
+      | 'request_delegation'
+      | 'reset_auth_key'
+      | 'send_mail'
+      | 'security'
+      | 'serverSettingsEdit'
+      | 'tag'
+      | 'undelete'
+      | 'update'
+      | 'update_database'
+      | 'update_db_worker'
+      | 'upgrade_24'
+      | 'upload_sample'
+      | 'version_warning'
+      | 'warning'
+      | 'wipe_default';
     /** @example 12345 */
     LogId: string;
     /** @example Attribute (448272) from Event (1): Other/text foo */
@@ -1841,19 +2115,19 @@ export interface components {
     /** @example Organisation "ORGNAME" (1) added by User "SYSTEM" (0). */
     LogDescription: string;
     Log: {
-      id?: components["schemas"]["LogId"];
-      title?: components["schemas"]["LogTitle"];
+      id?: components['schemas']['LogId'];
+      title?: components['schemas']['LogTitle'];
       /** Format: datetime */
       created?: string;
-      model?: components["schemas"]["ModelName"];
-      model_id?: components["schemas"]["ModelId"];
-      action?: components["schemas"]["LogActionType"];
-      user_id?: components["schemas"]["UserId"];
-      change?: components["schemas"]["LogChange"];
+      model?: components['schemas']['ModelName'];
+      model_id?: components['schemas']['ModelId'];
+      action?: components['schemas']['LogActionType'];
+      user_id?: components['schemas']['UserId'];
+      change?: components['schemas']['LogChange'];
       /** Format: email */
       email?: string;
-      org?: components["schemas"]["OrganisationName"];
-      description?: components["schemas"]["LogDescription"];
+      org?: components['schemas']['OrganisationName'];
+      description?: components['schemas']['LogDescription'];
       /** @example 10.0.0.10 */
       ip?: string;
     };
@@ -1870,7 +2144,7 @@ export interface components {
      *
      * @enum {string}
      */
-    DistributionLevelId: "0" | "1" | "2" | "3" | "4" | "5";
+    DistributionLevelId: '0' | '1' | '2' | '3' | '4' | '5';
     /**
      * @description Represents the threat level.
      *   * `1` - High
@@ -1880,7 +2154,7 @@ export interface components {
      *
      * @enum {string}
      */
-    ThreatLevelId: "1" | "2" | "3" | "4";
+    ThreatLevelId: '1' | '2' | '3' | '4';
     /**
      * @description Represents the analysis maturity level.
      *   * `0` - Initial
@@ -1889,7 +2163,7 @@ export interface components {
      *
      * @enum {string}
      */
-    AnalysisLevelId: "0" | "1" | "2";
+    AnalysisLevelId: '0' | '1' | '2';
     /** @default true */
     ToIDS: boolean;
     /**
@@ -1959,11 +2233,11 @@ export interface components {
      * @default asc
      * @enum {string|null}
      */
-    DirectionSearchField: "asc" | "desc" | null;
+    DirectionSearchField: 'asc' | 'desc' | null;
     /** @description You can use any of the valid time related filters (examples: 7d, timestamps, [14d, 7d] for ranges, etc.) */
     DateRestSearchFilter: string | null;
     /** @description Interval described by two dates */
-    DateIntervalRestSearchFilter: components["schemas"]["DateRestSearchFilter"][];
+    DateIntervalRestSearchFilter: components['schemas']['DateRestSearchFilter'][];
     /** @description Events published within the last x amount of time, where x can be defined in days, hours, minutes (for example 5d or 12h or 30m), ISO 8601 datetime format or timestamp */
     LastRestSearchFilter: number | string | null;
     TagsRestSearchFilter: string[] | null;
@@ -2042,26 +2316,139 @@ export interface components {
      * @default false
      */
     ExcludeDecayedRestSearchFlag: boolean;
-    ModelOverridesRestSearchFilter: components["schemas"]["DecayingModelParameters"];
+    ModelOverridesRestSearchFilter: components['schemas']['DecayingModelParameters'];
     /** @example 12345 */
     ModelId: string;
     /** @enum {string} */
-    ModelName: "AdminSetting" | "Allowedlist" | "AttachmentScan" | "Attribute" | "AttributeTag" | "AuditLog" | "AuthKey" | "Bruteforce" | "Cerebrate" | "Community" | "CorrelationExclusion" | "Correlation" | "Dashboard" | "DecayingModelMapping" | "DecayingModel" | "EventBlocklist" | "EventDelegation" | "EventGraph" | "EventLock" | "Event" | "EventReport" | "EventTag" | "FavouriteTag" | "Feed" | "FuzzyCorrelateSsdeep" | "GalaxyClusterBlocklist" | "GalaxyCluster" | "GalaxyClusterRelation" | "GalaxyClusterRelationTag" | "GalaxyElement" | "Galaxy" | "Inbox" | "Job" | "Log" | "MispObject" | "Module" | "News" | "NoticelistEntry" | "Noticelist" | "NotificationLog" | "ObjectReference" | "ObjectRelationship" | "ObjectTemplateElement" | "ObjectTemplate" | "Organisation" | "OrgBlocklist" | "Post" | "Regexp" | "RestClientHistory" | "Role" | "Server" | "ShadowAttribute" | "SharingGroupOrg" | "SharingGroup" | "SharingGroupServer" | "SightingdbOrg" | "Sightingdb" | "Sighting" | "TagCollection" | "TagCollectionTag" | "Tag" | "Task" | "TaxonomyEntry" | "Taxonomy" | "TaxonomyPredicate" | "TemplateElementAttribute" | "TemplateElementFile" | "TemplateElement" | "TemplateElementText" | "Template" | "TemplateTag" | "Thread" | "ThreatLevel" | "User" | "UserSetting" | "WarninglistEntry" | "Warninglist" | "WarninglistType";
+    ModelName:
+      | 'AdminSetting'
+      | 'Allowedlist'
+      | 'AttachmentScan'
+      | 'Attribute'
+      | 'AttributeTag'
+      | 'AuditLog'
+      | 'AuthKey'
+      | 'Bruteforce'
+      | 'Cerebrate'
+      | 'Community'
+      | 'CorrelationExclusion'
+      | 'Correlation'
+      | 'Dashboard'
+      | 'DecayingModelMapping'
+      | 'DecayingModel'
+      | 'EventBlocklist'
+      | 'EventDelegation'
+      | 'EventGraph'
+      | 'EventLock'
+      | 'Event'
+      | 'EventReport'
+      | 'EventTag'
+      | 'FavouriteTag'
+      | 'Feed'
+      | 'FuzzyCorrelateSsdeep'
+      | 'GalaxyClusterBlocklist'
+      | 'GalaxyCluster'
+      | 'GalaxyClusterRelation'
+      | 'GalaxyClusterRelationTag'
+      | 'GalaxyElement'
+      | 'Galaxy'
+      | 'Inbox'
+      | 'Job'
+      | 'Log'
+      | 'MispObject'
+      | 'Module'
+      | 'News'
+      | 'NoticelistEntry'
+      | 'Noticelist'
+      | 'NotificationLog'
+      | 'ObjectReference'
+      | 'ObjectRelationship'
+      | 'ObjectTemplateElement'
+      | 'ObjectTemplate'
+      | 'Organisation'
+      | 'OrgBlocklist'
+      | 'Post'
+      | 'Regexp'
+      | 'RestClientHistory'
+      | 'Role'
+      | 'Server'
+      | 'ShadowAttribute'
+      | 'SharingGroupOrg'
+      | 'SharingGroup'
+      | 'SharingGroupServer'
+      | 'SightingdbOrg'
+      | 'Sightingdb'
+      | 'Sighting'
+      | 'TagCollection'
+      | 'TagCollectionTag'
+      | 'Tag'
+      | 'Task'
+      | 'TaxonomyEntry'
+      | 'Taxonomy'
+      | 'TaxonomyPredicate'
+      | 'TemplateElementAttribute'
+      | 'TemplateElementFile'
+      | 'TemplateElement'
+      | 'TemplateElementText'
+      | 'Template'
+      | 'TemplateTag'
+      | 'Thread'
+      | 'ThreatLevel'
+      | 'User'
+      | 'UserSetting'
+      | 'WarninglistEntry'
+      | 'Warninglist'
+      | 'WarninglistType';
     /**
      * @description Format of the response payload
      * @enum {string}
      */
-    EventsRestSearchReturnFormat: "json" | "xml" | "csv" | "text" | "stix" | "stix2" | "stix-json" | "attack" | "attack-sightings" | "cache" | "count" | "hashes" | "netfilter" | "opendata" | "openioc" | "rpz" | "snort" | "suricata" | "yara" | "yara-json";
+    EventsRestSearchReturnFormat:
+      | 'json'
+      | 'xml'
+      | 'csv'
+      | 'text'
+      | 'stix'
+      | 'stix2'
+      | 'stix-json'
+      | 'attack'
+      | 'attack-sightings'
+      | 'cache'
+      | 'count'
+      | 'hashes'
+      | 'netfilter'
+      | 'opendata'
+      | 'openioc'
+      | 'rpz'
+      | 'snort'
+      | 'suricata'
+      | 'yara'
+      | 'yara-json';
     /**
      * @description Format of the response payload
      * @enum {string}
      */
-    AttributesRestSearchReturnFormat: "json" | "xml" | "csv" | "text" | "hashes" | "cache" | "count" | "netfilter" | "opendata" | "openioc" | "rpz" | "snort" | "suricata" | "yara" | "yara-json";
+    AttributesRestSearchReturnFormat:
+      | 'json'
+      | 'xml'
+      | 'csv'
+      | 'text'
+      | 'hashes'
+      | 'cache'
+      | 'count'
+      | 'netfilter'
+      | 'opendata'
+      | 'openioc'
+      | 'rpz'
+      | 'snort'
+      | 'suricata'
+      | 'yara'
+      | 'yara-json';
     /**
      * @description Format of the response payload
      * @enum {string}
      */
-    ObjectsRestSearchReturnFormat: "json";
+    ObjectsRestSearchReturnFormat: 'json';
     /**
      * @description Filter by the attribute object relation value
      * @example filepath
@@ -2070,21 +2457,21 @@ export interface components {
     /** @example 12345 */
     AuthKeyId: string;
     AuthKey: {
-      id?: components["schemas"]["AuthKeyId"];
-      uuid?: components["schemas"]["UUID"];
+      id?: components['schemas']['AuthKeyId'];
+      uuid?: components['schemas']['UUID'];
       authkey_start?: string;
       authkey_end?: string;
-      created?: components["schemas"]["Timestamp"];
+      created?: components['schemas']['Timestamp'];
       /**
        * Format: datetime
        * @example 1970-01-01 00:00:00
        */
       expiration?: string | null;
-      read_only?: components["schemas"]["IsReadOnly"];
-      user_id?: components["schemas"]["UserId"];
+      read_only?: components['schemas']['IsReadOnly'];
+      user_id?: components['schemas']['UserId'];
       comment?: string;
       allowed_ips?: string[] | null;
-      last_used?: components["schemas"]["NullableTimestamp"];
+      last_used?: components['schemas']['NullableTimestamp'];
     };
     ApiError: {
       name: string;
@@ -2121,21 +2508,21 @@ export interface components {
     /** @description An attribute */
     AttributeResponse: {
       content: {
-        "application/json": {
-          Attribute?: components["schemas"]["Attribute"];
+        'application/json': {
+          Attribute?: components['schemas']['Attribute'];
         };
       };
     };
     /** @description A list of attributes */
     AttributeListResponse: {
       content: {
-        "application/json": components["schemas"]["AttributeList"];
+        'application/json': components['schemas']['AttributeList'];
       };
     };
     /** @description Delete attribute response */
     DeleteAttributeResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Attribute deleted. */
           message?: string;
         };
@@ -2144,7 +2531,7 @@ export interface components {
     /** @description Add attribute tag response */
     AddAttributeTagResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description `true` if the tag was succesfully added, `false` if it failed */
           saved?: boolean;
           /**
@@ -2161,7 +2548,7 @@ export interface components {
     /** @description Remove attribute tag response */
     RemoveAttributeTagResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description `true` if the tag was succesfully removed, `false` if it failed */
           saved?: boolean;
           /**
@@ -2178,14 +2565,14 @@ export interface components {
     /** @description Rest search attributes response */
     AttributesRestSearchResponse: {
       headers: {
-        "X-Result-Count": components["headers"]["X-Result-Count"];
-        "X-Export-Module-Used": components["headers"]["X-Export-Module-Used"];
-        "X-Response-Format": components["headers"]["X-Response-Format"];
+        'X-Result-Count': components['headers']['X-Result-Count'];
+        'X-Export-Module-Used': components['headers']['X-Export-Module-Used'];
+        'X-Response-Format': components['headers']['X-Response-Format'];
       };
       content: {
-        "application/json": {
+        'application/json': {
           response?: {
-            Attribute?: components["schemas"]["AttributeRestSearchList"];
+            Attribute?: components['schemas']['AttributeRestSearchList'];
           };
         };
       };
@@ -2193,31 +2580,31 @@ export interface components {
     /** @description Attribute statistics response */
     AttributeStatisticsResponse: {
       content: {
-        "application/json": components["schemas"]["AttributeStatisticsResponse"];
+        'application/json': components['schemas']['AttributeStatisticsResponse'];
       };
     };
     /** @description Describe attribute categories and types response */
     DescribeAttributeTypesResponse: {
       content: {
-        "application/json": components["schemas"]["DescribeAttributeTypesResponse"];
+        'application/json': components['schemas']['DescribeAttributeTypesResponse'];
       };
     };
     /** @description A freshly created event */
     AddEventResponse: {
       content: {
-        "application/json": components["schemas"]["CreatedEvent"];
+        'application/json': components['schemas']['CreatedEvent'];
       };
     };
     /** @description A freshly updated event */
     EditEventResponse: {
       content: {
-        "application/json": components["schemas"]["UpdatedEvent"];
+        'application/json': components['schemas']['UpdatedEvent'];
       };
     };
     /** @description Delete event response */
     DeleteEventResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description `true` if the event was succesfully deleted, `false` if it failed */
           saved?: boolean;
           /** @description `true` if the event was succesfully deleted, `false` if it failed */
@@ -2239,7 +2626,7 @@ export interface components {
     /** @description Add event tag response */
     AddEventTagResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description `true` if the tag was succesfully added, `false` if it failed */
           saved?: boolean;
           /**
@@ -2256,7 +2643,7 @@ export interface components {
     /** @description Remove event tag response */
     RemoveEventTagResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description `true` if the tag was succesfully removed, `false` if it failed */
           saved?: boolean;
           /**
@@ -2273,37 +2660,37 @@ export interface components {
     /** @description A list of events with extended properties */
     ExtendedEventListResponse: {
       headers: {
-        "X-Result-Count": components["headers"]["X-Result-Count"];
+        'X-Result-Count': components['headers']['X-Result-Count'];
       };
       content: {
-        "application/json": components["schemas"]["ExtendedEventList"];
+        'application/json': components['schemas']['ExtendedEventList'];
       };
     };
     /** @description An event with extended properties */
     ExtendedEventResponse: {
       content: {
-        "application/json": {
-          Event?: components["schemas"]["ExtendedEvent"];
+        'application/json': {
+          Event?: components['schemas']['ExtendedEvent'];
         };
       };
     };
     /** @description Rest search events response */
     EventsRestSearchResponse: {
       headers: {
-        "X-Result-Count": components["headers"]["X-Result-Count"];
-        "X-Export-Module-Used": components["headers"]["X-Export-Module-Used"];
-        "X-Response-Format": components["headers"]["X-Response-Format"];
+        'X-Result-Count': components['headers']['X-Result-Count'];
+        'X-Export-Module-Used': components['headers']['X-Export-Module-Used'];
+        'X-Response-Format': components['headers']['X-Response-Format'];
       };
       content: {
-        "application/json": {
-          response?: components["schemas"]["EventRestSearchList"];
+        'application/json': {
+          response?: components['schemas']['EventRestSearchList'];
         };
       };
     };
     /** @description Publish event response */
     PublishEventResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Publish */
           name?: string;
           /** @example Job queued */
@@ -2317,7 +2704,7 @@ export interface components {
     /** @description Unpublish event response */
     UnpublishEventResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Event unpublished. */
@@ -2332,21 +2719,21 @@ export interface components {
     /** @description A list of galaxies */
     GalaxyListResponse: {
       content: {
-        "application/json": {
-            Galaxy?: components["schemas"]["Galaxy"];
-          }[];
+        'application/json': {
+          Galaxy?: components['schemas']['Galaxy'];
+        }[];
       };
     };
     /** @description A extended galaxy response */
     ExtendedGalaxyResponse: {
       content: {
-        "application/json": components["schemas"]["ExtendedGalaxy"];
+        'application/json': components['schemas']['ExtendedGalaxy'];
       };
     };
     /** @description Update galaxies response */
     UpdateGalaxiesResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description Present and `true` if the galaxies were succesfully updated. */
           saved?: boolean | null;
           /** @description Present and `true` if the galaxies were succesfully updated. */
@@ -2363,7 +2750,7 @@ export interface components {
     /** @description Delete galaxy response */
     DeleteGalaxyResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description Present and `true` if the galaxy was succesfully removed. */
           saved?: boolean | null;
           /** @description Present and `true` if the galaxy was succesfully removed. */
@@ -2380,7 +2767,7 @@ export interface components {
     /** @description Import galaxy cluster response */
     ImportGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description Present and `true` if the galaxy was succesfully imported. */
           saved?: boolean | null;
           /** @description Present and `true` if the galaxy was succesfully imported. */
@@ -2397,13 +2784,15 @@ export interface components {
     /** @description Export galaxy clusters response */
     ExportGalaxyClustersResponse: {
       content: {
-        "application/json": components["schemas"]["GalaxyCluster"][] | components["schemas"]["GalaxyMispFormat"];
+        'application/json':
+          | components['schemas']['GalaxyCluster'][]
+          | components['schemas']['GalaxyMispFormat'];
       };
     };
     /** @description Attach galaxy cluster response */
     AttachGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @description Present and `true` if the galaxy cluster was succesfully attached. */
           saved?: boolean;
           /**
@@ -2418,31 +2807,31 @@ export interface components {
     /** @description Galaxy cluster by ID response */
     GalaxyClusterResponse: {
       content: {
-        "application/json": {
-          GalaxyCluster?: components["schemas"]["GalaxyCluster"];
+        'application/json': {
+          GalaxyCluster?: components['schemas']['GalaxyCluster'];
         };
       };
     };
     /** @description Extended galaxy cluster by ID response */
     ExtendedGalaxyClusterResponse: {
       content: {
-        "application/json": {
-          GalaxyCluster?: components["schemas"]["ExtendedGalaxyCluster"];
+        'application/json': {
+          GalaxyCluster?: components['schemas']['ExtendedGalaxyCluster'];
         };
       };
     };
     /** @description Get galaxy clusters response */
     GalaxyClusterListResponse: {
       content: {
-        "application/json": {
-            GalaxyCluster?: components["schemas"]["GalaxyCluster"];
-          }[];
+        'application/json': {
+          GalaxyCluster?: components['schemas']['GalaxyCluster'];
+        }[];
       };
     };
     /** @description Publish galaxy cluster response */
     PublishGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Publish job queued. Job ID: 4e9d26c275a7b190fcab10029df8c6b6 */
           message?: string;
         };
@@ -2451,7 +2840,7 @@ export interface components {
     /** @description Unpublish galaxy cluster response */
     UnpublishGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example GalaxyCluster unpublished */
@@ -2466,7 +2855,7 @@ export interface components {
     /** @description Delete galaxy cluster response */
     DeleteGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Galaxy cluster successfuly soft deleted. */
@@ -2481,7 +2870,7 @@ export interface components {
     /** @description Restore galaxy cluster response */
     RestoreGalaxyClusterResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example GalaxyCluster restored */
@@ -2496,7 +2885,7 @@ export interface components {
     /** @description Reset user password response */
     ResetUserPasswordResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           /** @example New credentials sent. */
           success?: string;
@@ -2506,25 +2895,25 @@ export interface components {
     /** @description User response */
     UserResponse: {
       content: {
-        "application/json": components["schemas"]["User"];
+        'application/json': components['schemas']['User'];
       };
     };
     /** @description User list response */
     UserListResponse: {
       content: {
-        "application/json": components["schemas"]["UserList"];
+        'application/json': components['schemas']['UserList'];
       };
     };
     /** @description Extended user response */
     ExtendedUserResponse: {
       content: {
-        "application/json": components["schemas"]["ExtendedUser"];
+        'application/json': components['schemas']['ExtendedUser'];
       };
     };
     /** @description Delete user response */
     DeleteUserResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example User deleted. */
@@ -2539,7 +2928,7 @@ export interface components {
     /** @description Delete user TOTP response */
     DeleteUserTotpResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example User TOTP deleted. */
@@ -2556,19 +2945,19 @@ export interface components {
     /** @description Organisation list response */
     OrganisationResponse: {
       content: {
-        "application/json": components["schemas"]["Organisation"];
+        'application/json': components['schemas']['Organisation'];
       };
     };
     /** @description Organisation list response */
     OrganisationListResponse: {
       content: {
-        "application/json": components["schemas"]["OrganisationList"];
+        'application/json': components['schemas']['OrganisationList'];
       };
     };
     /** @description Delete organisation response */
     DeleteOrganisationResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Organisation deleted */
@@ -2583,21 +2972,21 @@ export interface components {
     /** @description Server response */
     ServerResponse: {
       content: {
-        "application/json": {
-          Server?: components["schemas"]["Server"];
+        'application/json': {
+          Server?: components['schemas']['Server'];
         };
       };
     };
     /** @description Server list response */
     ServerListResponse: {
       content: {
-        "application/json": components["schemas"]["ServerList"];
+        'application/json': components['schemas']['ServerList'];
       };
     };
     /** @description Delete server response */
     DeleteServerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Server deleted */
@@ -2612,7 +3001,7 @@ export interface components {
     /** @description Pull server response */
     PullServerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Pull queued for background execution. Job ID: 1 */
@@ -2627,7 +3016,7 @@ export interface components {
     /** @description Push server response */
     PushServerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Push queued for background execution. Job ID: 1 */
@@ -2642,20 +3031,20 @@ export interface components {
     /** @description Server version */
     ServerVersionResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example 2.4.142 */
           version?: string;
           perm_sync?: boolean | null;
           perm_sighting?: boolean | null;
           perm_galaxy_editor?: boolean | null;
-          request_encoding?: ("gzip" | "br")[];
+          request_encoding?: ('gzip' | 'br')[];
         };
       };
     };
     /** @description Server PyMISP version */
     ServerPyMISPVersionResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example 2.4.142 */
           version?: string;
         };
@@ -2664,7 +3053,7 @@ export interface components {
     /** @description Server settings and diagnostics */
     ServerSettingsResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           version?: {
             /** @example v2.4.142 */
             current?: string;
@@ -2674,10 +3063,10 @@ export interface components {
             upToDate?: string;
           };
           phpSettings?: {
-            max_execution_time?: components["schemas"]["PhpServerSetting"];
-            memory_limit?: components["schemas"]["PhpServerSetting"];
-            upload_max_filesize?: components["schemas"]["PhpServerSetting"];
-            post_max_size?: components["schemas"]["PhpServerSetting"];
+            max_execution_time?: components['schemas']['PhpServerSetting'];
+            memory_limit?: components['schemas']['PhpServerSetting'];
+            upload_max_filesize?: components['schemas']['PhpServerSetting'];
+            post_max_size?: components['schemas']['PhpServerSetting'];
           };
           /** @example FAIL: Failed to load GnuPG */
           gpgStatus?: string;
@@ -2688,12 +3077,12 @@ export interface components {
           stix?: {
             /** @example 1 */
             operational?: number;
-            stix?: components["schemas"]["ServerPackageVersion"];
-            cybox?: components["schemas"]["ServerPackageVersion"];
-            mixbox?: components["schemas"]["ServerPackageVersion"];
-            maec?: components["schemas"]["ServerPackageVersion"];
-            stix2?: components["schemas"]["ServerPackageVersion"];
-            pymisp?: components["schemas"]["ServerPackageVersion"];
+            stix?: components['schemas']['ServerPackageVersion'];
+            cybox?: components['schemas']['ServerPackageVersion'];
+            mixbox?: components['schemas']['ServerPackageVersion'];
+            maec?: components['schemas']['ServerPackageVersion'];
+            stix2?: components['schemas']['ServerPackageVersion'];
+            pymisp?: components['schemas']['ServerPackageVersion'];
           };
           moduleStatus?: {
             /** @example 1 */
@@ -2913,7 +3302,7 @@ export interface components {
            * }
            */
           redisInfo?: Record<string, never>;
-          finalSettings?: components["schemas"]["MispSetting"][];
+          finalSettings?: components['schemas']['MispSetting'][];
           extensions?: {
             cli?: {
               /** @example 7.4.3 */
@@ -2934,12 +3323,12 @@ export interface components {
             extensions?: Record<string, never>;
           };
           workers?: {
-            cache?: components["schemas"]["WorkersStatus"];
-            default?: components["schemas"]["WorkersStatus"];
-            email?: components["schemas"]["WorkersStatus"];
-            prio?: components["schemas"]["WorkersStatus"];
-            update?: components["schemas"]["WorkersStatus"];
-            scheduler?: components["schemas"]["WorkersStatus"];
+            cache?: components['schemas']['WorkersStatus'];
+            default?: components['schemas']['WorkersStatus'];
+            email?: components['schemas']['WorkersStatus'];
+            prio?: components['schemas']['WorkersStatus'];
+            update?: components['schemas']['WorkersStatus'];
+            scheduler?: components['schemas']['WorkersStatus'];
             proc_accessible?: boolean;
             controls?: boolean;
           };
@@ -2949,7 +3338,7 @@ export interface components {
     /** @description Start worker response */
     StartWorkerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Worker start signal sent */
@@ -2964,7 +3353,7 @@ export interface components {
     /** @description Stop worker response */
     StopWorkerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Worker stop signal sent */
@@ -2979,7 +3368,7 @@ export interface components {
     /** @description Kill all workers response */
     KillAllWorkersResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Killing workers. */
@@ -2994,7 +3383,7 @@ export interface components {
     /** @description Restart workers response */
     RestartWorkersResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Restarting workers. */
@@ -3009,7 +3398,7 @@ export interface components {
     /** @description Restart dead workers response */
     RestartDeadWorkersResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Restarting workers. */
@@ -3024,13 +3413,13 @@ export interface components {
     /** @description Stop worker response */
     GetWorkersResponse: {
       content: {
-        "application/json": {
-          cache?: components["schemas"]["WorkersStatus"];
-          default?: components["schemas"]["WorkersStatus"];
-          email?: components["schemas"]["WorkersStatus"];
-          prio?: components["schemas"]["WorkersStatus"];
-          update?: components["schemas"]["WorkersStatus"];
-          scheduler?: components["schemas"]["WorkersStatus"];
+        'application/json': {
+          cache?: components['schemas']['WorkersStatus'];
+          default?: components['schemas']['WorkersStatus'];
+          email?: components['schemas']['WorkersStatus'];
+          prio?: components['schemas']['WorkersStatus'];
+          update?: components['schemas']['WorkersStatus'];
+          scheduler?: components['schemas']['WorkersStatus'];
           proc_accessible?: boolean;
           controls?: boolean;
         };
@@ -3039,15 +3428,15 @@ export interface components {
     /** @description Update server response */
     UpdateServerResponse: {
       content: {
-        "application/json": {
-          results?: (components["schemas"]["UpdateServerResultItem"] | string)[];
+        'application/json': {
+          results?: (components['schemas']['UpdateServerResultItem'] | string)[];
         };
       };
     };
     /** @description Cache server response */
     CacheServerResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Server caching job initiated. */
@@ -3062,15 +3451,15 @@ export interface components {
     /** @description Create server sync */
     CreateSyncResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           Server?: {
             /** @example https://misppriv.circl.lu */
             url?: string;
-            uuid?: components["schemas"]["UUID"];
-            authkey?: components["schemas"]["AuthKeyRaw"];
+            uuid?: components['schemas']['UUID'];
+            authkey?: components['schemas']['AuthKeyRaw'];
             Organisation?: {
-              name?: components["schemas"]["OrganisationName"];
-              uuid?: components["schemas"]["UUID"];
+              name?: components['schemas']['OrganisationName'];
+              uuid?: components['schemas']['UUID'];
             };
           };
         };
@@ -3079,21 +3468,21 @@ export interface components {
     /** @description Get instance UUID response */
     GetInstanceUUIDResponse: {
       content: {
-        "application/json": {
-          uuid?: components["schemas"]["UUID"];
+        'application/json': {
+          uuid?: components['schemas']['UUID'];
         };
       };
     };
     /** @description Get setting response */
     GetServerSettingResponse: {
       content: {
-        "application/json": components["schemas"]["MispSetting"];
+        'application/json': components['schemas']['MispSetting'];
       };
     };
     /** @description Edit setting response */
     EditServerSettingResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Field updated */
@@ -3108,11 +3497,11 @@ export interface components {
     /** @description Get sharing group response */
     SharingGroupResponse: {
       content: {
-        "application/json": {
-          SharingGroup?: components["schemas"]["SharingGroup"];
-          Organisation?: components["schemas"]["Organisation"];
-          SharingGroupOrg?: components["schemas"]["SharingGroupOrganisation"][];
-          SharingGroupServer?: components["schemas"]["SharingGroupServer"][];
+        'application/json': {
+          SharingGroup?: components['schemas']['SharingGroup'];
+          Organisation?: components['schemas']['Organisation'];
+          SharingGroupOrg?: components['schemas']['SharingGroupOrganisation'][];
+          SharingGroupServer?: components['schemas']['SharingGroupServer'][];
           editable?: boolean;
           deletable?: boolean;
         };
@@ -3121,15 +3510,15 @@ export interface components {
     /** @description Get sharing groups response */
     SharingGroupListResponse: {
       content: {
-        "application/json": {
-          response?: components["schemas"]["SharingGroupListItem"][];
+        'application/json': {
+          response?: components['schemas']['SharingGroupListItem'][];
         };
       };
     };
     /** @description Delete sharing group response */
     DeleteSharingGroupResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example SharingGroup deleted */
@@ -3144,7 +3533,7 @@ export interface components {
     /** @description Add organisation to a sharing group response */
     AddOrganisationToSharingGroupResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Organisation added to the sharing group. */
@@ -3159,7 +3548,7 @@ export interface components {
     /** @description Remove organisation from a sharing group response */
     RemoveOrganisationFromSharingGroupResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Organisation removed from the sharing group. */
@@ -3174,7 +3563,7 @@ export interface components {
     /** @description Add server to a sharing group response */
     AddServerToSharingGroupResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Server added to the sharing group. */
@@ -3189,7 +3578,7 @@ export interface components {
     /** @description Remove server from a sharing group response */
     RemoveServerFromSharingGroupResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Server removed from the sharing group. */
@@ -3204,23 +3593,23 @@ export interface components {
     /** @description Get feeds response */
     FeedListResponse: {
       content: {
-        "application/json": {
-            Feed?: components["schemas"]["Feed"];
-          }[];
+        'application/json': {
+          Feed?: components['schemas']['Feed'];
+        }[];
       };
     };
     /** @description Get feed response */
     FeedResponse: {
       content: {
-        "application/json": {
-          Feed?: components["schemas"]["Feed"];
+        'application/json': {
+          Feed?: components['schemas']['Feed'];
         };
       };
     };
     /** @description Enable feed response */
     EnableFeedResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Feed enabled. */
           name?: string;
           /** @example Feed enabled. */
@@ -3233,7 +3622,7 @@ export interface components {
     /** @description Disable feed response */
     DisableFeedResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Feed disabled. */
           name?: string;
           /** @example Feed disabled. */
@@ -3246,7 +3635,7 @@ export interface components {
     /** @description Cache feeds response */
     CacheFeedsResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Feed caching job initiated. */
           name?: string;
           /** @example Feed caching job initiated. */
@@ -3259,7 +3648,7 @@ export interface components {
     /** @description Fetch feed response */
     FetchFromFeedResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Pull queued for background execution. */
           result?: string;
         };
@@ -3268,7 +3657,7 @@ export interface components {
     /** @description Fetch all feeds response */
     FetchFromAllFeedsResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Pull queued for background execution. */
           result?: string;
         };
@@ -3277,17 +3666,17 @@ export interface components {
     /** @description Get warninglists response */
     WarninglistListResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           Warninglists?: {
-              Warninglist?: components["schemas"]["Warninglist"];
-            }[];
+            Warninglist?: components['schemas']['Warninglist'];
+          }[];
         };
       };
     };
     /** @description Toggle enable warninglists response */
     WarninglistToggleEnabledResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           /** @example 1 warninglist(s) disabled */
           success?: string;
@@ -3297,21 +3686,21 @@ export interface components {
     /** @description Get warninglists response */
     WarninglistResponse: {
       content: {
-        "application/json": {
-          Warninglist?: components["schemas"]["Warninglist"];
+        'application/json': {
+          Warninglist?: components['schemas']['Warninglist'];
         };
       };
     };
     /** @description List of values matching warninglists response */
     WarninglistMatchListResponse: {
       content: {
-        "application/json": Record<string, never>;
+        'application/json': Record<string, never>;
       };
     };
     /** @description List of values matching warninglists response */
     UpdateWarninglistsResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean | null;
           /** @example Successfully updated 1 warninglists. */
@@ -3326,23 +3715,23 @@ export interface components {
     /** @description Get noticelists response */
     NoticelistListResponse: {
       content: {
-        "application/json": {
-            Noticelist?: components["schemas"]["Noticelist"];
-          }[];
+        'application/json': {
+          Noticelist?: components['schemas']['Noticelist'];
+        }[];
       };
     };
     /** @description Get noticelist response */
     NoticelistResponse: {
       content: {
-        "application/json": {
-          Noticelist?: components["schemas"]["Noticelist"];
+        'application/json': {
+          Noticelist?: components['schemas']['Noticelist'];
         };
       };
     };
     /** @description Toggle enable noticelist response */
     NoticelistToggleEnableResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Noticelist enabled. */
@@ -3357,7 +3746,7 @@ export interface components {
     /** @description Toggle enable noticelist response */
     UpdateNoticelistsResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Successfully updated 1 noticelists. */
@@ -3372,23 +3761,23 @@ export interface components {
     /** @description Object response */
     ObjectResponse: {
       content: {
-        "application/json": {
-          Object?: components["schemas"]["Object"];
+        'application/json': {
+          Object?: components['schemas']['Object'];
         };
       };
     };
     /** @description Extended object response */
     ExtendedObjectResponse: {
       content: {
-        "application/json": {
-          Object?: components["schemas"]["ExtendedObject"];
+        'application/json': {
+          Object?: components['schemas']['ExtendedObject'];
         };
       };
     };
     /** @description Delete object response */
     DeleteObjectResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Object deleted */
@@ -3403,32 +3792,32 @@ export interface components {
     /** @description Rest search objects response */
     ObjectsRestSearchResponse: {
       headers: {
-        "X-Result-Count": components["headers"]["X-Result-Count"];
-        "X-Export-Module-Used": components["headers"]["X-Export-Module-Used"];
-        "X-Response-Format": components["headers"]["X-Response-Format"];
+        'X-Result-Count': components['headers']['X-Result-Count'];
+        'X-Export-Module-Used': components['headers']['X-Export-Module-Used'];
+        'X-Response-Format': components['headers']['X-Response-Format'];
       };
       content: {
-        "application/json": {
-          response?: components["schemas"]["ObjectRestSearchList"][];
+        'application/json': {
+          response?: components['schemas']['ObjectRestSearchList'][];
         };
       };
     };
     /** @description Get sightings response */
     SightingListResponse: {
       content: {
-        "application/json": components["schemas"]["Sighting"][];
+        'application/json': components['schemas']['Sighting'][];
       };
     };
     /** @description Add sighting response */
     SightingResponse: {
       content: {
-        "application/json": components["schemas"]["Sighting"];
+        'application/json': components['schemas']['Sighting'];
       };
     };
     /** @description Delete sighting response */
     DeleteSightingResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Sighting successfully deleted. */
@@ -3443,21 +3832,21 @@ export interface components {
     /** @description Tag list response */
     TagListResponse: {
       content: {
-        "application/json": {
-          Tag?: components["schemas"]["TagList"];
+        'application/json': {
+          Tag?: components['schemas']['TagList'];
         };
       };
     };
     /** @description Tag response */
     TagResponse: {
       content: {
-        "application/json": components["schemas"]["Tag"];
+        'application/json': components['schemas']['Tag'];
       };
     };
     /** @description Delete tag response */
     DeleteTagResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @example Tag deleted. */
           name?: string;
           /** @example Tag deleted. */
@@ -3470,54 +3859,54 @@ export interface components {
     /** @description Tag response */
     EditTagResponse: {
       content: {
-        "application/json": {
-          Tag?: components["schemas"]["Tag"];
+        'application/json': {
+          Tag?: components['schemas']['Tag'];
         };
       };
     };
     /** @description Search tag response */
     SearchTagResponse: {
       content: {
-        "application/json": components["schemas"]["ExtendedTag"][];
+        'application/json': components['schemas']['ExtendedTag'][];
       };
     };
     /** @description Get logs response */
     GetLogsResponse: {
       content: {
-        "application/json": {
-            Log?: components["schemas"]["Log"];
-          }[];
+        'application/json': {
+          Log?: components['schemas']['Log'];
+        }[];
       };
     };
     /** @description Get auth keys response */
     GetAuthKeysResponse: {
       content: {
-        "application/json": {
-            AuthKey?: components["schemas"]["AuthKey"];
-            User?: {
-              id?: components["schemas"]["UserId"];
-              /** Format: email */
-              email?: string;
-            };
-          }[];
+        'application/json': {
+          AuthKey?: components['schemas']['AuthKey'];
+          User?: {
+            id?: components['schemas']['UserId'];
+            /** Format: email */
+            email?: string;
+          };
+        }[];
       };
     };
     /** @description Auth key response */
     AddAuthKeyResponse: {
       content: {
-        "application/json": {
-          AuthKey?: components["schemas"]["AuthKey"];
+        'application/json': {
+          AuthKey?: components['schemas']['AuthKey'];
         };
       };
     };
     /** @description Auth key response */
     AuthKeyResponse: {
       content: {
-        "application/json": {
-          AuthKey?: components["schemas"]["AuthKey"];
+        'application/json': {
+          AuthKey?: components['schemas']['AuthKey'];
           User?: {
-            id?: components["schemas"]["UserId"];
-            org_id?: components["schemas"]["OrganisationId"];
+            id?: components['schemas']['UserId'];
+            org_id?: components['schemas']['OrganisationId'];
             /** Format: email */
             email?: string | null;
           };
@@ -3527,7 +3916,7 @@ export interface components {
     /** @description Delete auth key response */
     DeleteAuthKeyResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example AuthKey deleted. */
@@ -3542,23 +3931,23 @@ export interface components {
     /** @description Get user settings response */
     GetUserSettingsResponse: {
       content: {
-        "application/json": {
-            UserSetting?: components["schemas"]["UserSetting"];
-          }[];
+        'application/json': {
+          UserSetting?: components['schemas']['UserSetting'];
+        }[];
       };
     };
     /** @description Get user setting response */
     UserSettingResponse: {
       content: {
-        "application/json": {
-          UserSetting?: components["schemas"]["UserSetting"];
+        'application/json': {
+          UserSetting?: components['schemas']['UserSetting'];
         };
       };
     };
     /** @description Delete user setting response */
     DeleteUserSettingResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Setting deleted. */
@@ -3573,28 +3962,28 @@ export interface components {
     /** @description Get taxonomies response */
     GetTaxonomiesResponse: {
       content: {
-        "application/json": {
-            Taxonomy?: components["schemas"]["Taxonomy"];
-            /** @description Amount of related tags to this taxonomy. */
-            total_count?: number;
-            /** @description Amount of active related tags to this taxonomy. */
-            current_count?: number;
-          }[];
+        'application/json': {
+          Taxonomy?: components['schemas']['Taxonomy'];
+          /** @description Amount of related tags to this taxonomy. */
+          total_count?: number;
+          /** @description Amount of active related tags to this taxonomy. */
+          current_count?: number;
+        }[];
       };
     };
     /** @description Get taxonomy response */
     TaxonomiesResponse: {
       content: {
-        "application/json": {
-          Taxonomy?: components["schemas"]["Taxonomy"];
-          entries?: components["schemas"]["TaxonomyEntry"][];
+        'application/json': {
+          Taxonomy?: components['schemas']['Taxonomy'];
+          entries?: components['schemas']['TaxonomyEntry'][];
         };
       };
     };
     /** @description Enable taxonomy response */
     EnableTaxonomyResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Taxonomy enabled */
@@ -3609,7 +3998,7 @@ export interface components {
     /** @description Disable taxonomy response */
     DisableTaxonomyResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Taxonomy disabled */
@@ -3624,7 +4013,7 @@ export interface components {
     /** @description Update taxonomies response */
     UpdateTaxonomiesResponse: {
       content: {
-        "application/json": {
+        'application/json': {
           saved?: boolean;
           success?: boolean;
           /** @example Successfully updated 120 taxonomy libraries. */
@@ -3639,153 +4028,164 @@ export interface components {
     /** @description Get taxonomy tags response */
     GetTaxonomyTagsResponse: {
       content: {
-        "application/json": {
-          Taxonomy?: components["schemas"]["Taxonomy"];
-          entries?: components["schemas"]["ExtendedTaxonomyEntry"][];
+        'application/json': {
+          Taxonomy?: components['schemas']['Taxonomy'];
+          entries?: components['schemas']['ExtendedTaxonomyEntry'][];
         };
       };
     };
     /** @description Export taxonomy response */
     ExportTaxonomyTagsResponse: {
       content: {
-        "application/json": {
-          namespace?: components["schemas"]["TaxonomyNamespace"];
-          description?: components["schemas"]["TaxonomyDescription"];
+        'application/json': {
+          namespace?: components['schemas']['TaxonomyNamespace'];
+          description?: components['schemas']['TaxonomyDescription'];
           version?: number;
           exclusive?: boolean;
-          predicates?: components["schemas"]["TaxonomyPredicateExport"][];
-          values?: components["schemas"]["TaxonomyValueExport"][];
+          predicates?: components['schemas']['TaxonomyPredicateExport'][];
+          values?: components['schemas']['TaxonomyValueExport'][];
         };
       };
     };
     /** @description Unexpected API error */
     ApiErrorResponse: {
       content: {
-        "application/json": components["schemas"]["ApiError"];
+        'application/json': components['schemas']['ApiError'];
       };
     };
     /** @description The specified resource was not found */
     NotFoundApiErrorResponse: {
       content: {
-        "application/json": components["schemas"]["NotFoundApiError"];
+        'application/json': components['schemas']['NotFoundApiError'];
       };
     };
     /** @description The specified resource was not found */
     NotFoundUserTotpDeleteResponse: {
       content: {
-        "application/json": components["schemas"]["NotFoundUserTotpDeleteError"];
+        'application/json': components['schemas']['NotFoundUserTotpDeleteError'];
       };
     };
     /** @description Authentication failed. Please make sure you pass the API key of an API enabled user along in the Authorization header. */
     UnauthorizedApiErrorResponse: {
       content: {
-        "application/json": components["schemas"]["UnauthorizedApiError"];
+        'application/json': components['schemas']['UnauthorizedApiError'];
       };
     };
   };
   parameters: {
     /** @description UUID or numeric ID of the event */
-    eventIdParameter: components["schemas"]["EventId"] | components["schemas"]["UUID"];
+    eventIdParameter: components['schemas']['EventId'] | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the attribute */
-    attributeIdParameter: components["schemas"]["AttributeId"] | components["schemas"]["UUID"];
+    attributeIdParameter: components['schemas']['AttributeId'] | components['schemas']['UUID'];
     /** @description Numeric ID of the attribute */
-    tagIdParameter: components["schemas"]["TagId"];
+    tagIdParameter: components['schemas']['TagId'];
     /** @description Whether the object should be attached locally or not to the target */
-    localParameter: components["schemas"]["Local"];
+    localParameter: components['schemas']['Local'];
     /** @description Tag search term */
     tagSearchTermParameter: string;
     /** @description UUID or numeric ID of the galaxy */
-    galaxyIdParameter: components["schemas"]["GalaxyId"] | components["schemas"]["UUID"];
+    galaxyIdParameter: components['schemas']['GalaxyId'] | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the galaxy cluster */
-    galaxyClusterIdParameter: components["schemas"]["GalaxyClusterId"] | components["schemas"]["UUID"];
+    galaxyClusterIdParameter:
+      | components['schemas']['GalaxyClusterId']
+      | components['schemas']['UUID'];
     /** @description Numeric ID of the user */
-    userIdParameter: components["schemas"]["UserId"];
+    userIdParameter: components['schemas']['UserId'];
     /** @description First time reset is set to `1` only  for new user registrations. */
-    firstTimeResetParameter: "0" | "1";
+    firstTimeResetParameter: '0' | '1';
     /** @description UUID or numeric ID of the organisation */
-    organisationIdParameter: components["schemas"]["OrganisationId"] | components["schemas"]["UUID"];
+    organisationIdParameter:
+      | components['schemas']['OrganisationId']
+      | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the server */
-    serverIdParameter: components["schemas"]["ServerId"] | components["schemas"]["UUID"];
+    serverIdParameter: components['schemas']['ServerId'] | components['schemas']['UUID'];
     /** @description Pull technique to be used for pulling events from this instance. */
-    pullTechniqueParameter: "full" | "incremental" | "pull_relevant_clusters";
+    pullTechniqueParameter: 'full' | 'incremental' | 'pull_relevant_clusters';
     /** @description Push technique to be used for pushing events to this instance. */
-    pushTechniqueParameter: "full" | "incremental";
+    pushTechniqueParameter: 'full' | 'incremental';
     /** @description Worker type. */
-    workerTypeParameter: "default" | "email" | "scheduler" | "cache" | "prio" | "update";
+    workerTypeParameter: 'default' | 'email' | 'scheduler' | 'cache' | 'prio' | 'update';
     /** @description Worker PID. */
     workerPidParameter: string;
     /** @description Setting name. */
     settingNameParameter: string;
     /** @description UUID or numeric ID of the sharing group */
-    sharingGroupIdParameter: components["schemas"]["SharingGroupId"] | components["schemas"]["UUID"];
+    sharingGroupIdParameter:
+      | components['schemas']['SharingGroupId']
+      | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the sharing group server */
-    sharingGroupServerIdParameter: components["schemas"]["SharingGroupServerId"];
+    sharingGroupServerIdParameter: components['schemas']['SharingGroupServerId'];
     /** @description UUID or numeric ID of the feed */
-    feedIdParameter: components["schemas"]["FeedId"] | components["schemas"]["UUID"];
+    feedIdParameter: components['schemas']['FeedId'] | components['schemas']['UUID'];
     /** @description Numeric ID of the warninglist */
-    warninglistIdParameter: components["schemas"]["WarninglistId"];
+    warninglistIdParameter: components['schemas']['WarninglistId'];
     /** @description Numeric ID of the noticelist */
-    noticelistIdParameter: components["schemas"]["NoticelistId"];
+    noticelistIdParameter: components['schemas']['NoticelistId'];
     /** @description UUID or numeric ID of the sighting */
-    sightingIdParameter: components["schemas"]["SightingId"];
+    sightingIdParameter: components['schemas']['SightingId'];
     /** @description Cache feeds strategy */
-    cacheFeedsScopeParameter: "all" | "csv" | "freetext";
+    cacheFeedsScopeParameter: 'all' | 'csv' | 'freetext';
     /** @description UUID or numeric ID of the target entity (Event, Attribute or TagCollection) */
-    attachTargetIdParameter: components["schemas"]["EventId"] | components["schemas"]["AttributeId"] | components["schemas"]["TagCollectionId"];
+    attachTargetIdParameter:
+      | components['schemas']['EventId']
+      | components['schemas']['AttributeId']
+      | components['schemas']['TagCollectionId'];
     /** @description Type of the target entity to attach to the galaxy cluster. */
-    attachTargetTypeParameter: "event" | "attribute" | "tag_collection";
+    attachTargetTypeParameter: 'event' | 'attribute' | 'tag_collection';
     /** @description Context of the statistics. */
-    attributeStatisticsContextParameter: "type" | "category";
+    attributeStatisticsContextParameter: 'type' | 'category';
     /** @description `0` to show attribute count, `1` for showing percentages */
     attributeStatisticsPercentageParameter: number;
     /** @description UUID or numeric ID of the object */
-    objectIdParameter: components["schemas"]["ObjectId"] | components["schemas"]["UUID"];
+    objectIdParameter: components['schemas']['ObjectId'] | components['schemas']['UUID'];
     /** @description `1` for hard delete the entity, `0` for soft deletion. */
-    hardDeleteParameter: "0" | "1";
+    hardDeleteParameter: '0' | '1';
     /** @description UUID or numeric ID of the object template */
-    objectTemplateIdParameter: components["schemas"]["ObjectTemplateId"] | components["schemas"]["UUID"];
+    objectTemplateIdParameter:
+      | components['schemas']['ObjectTemplateId']
+      | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the auth key */
-    authKeyIdParameter: components["schemas"]["AuthKeyId"] | components["schemas"]["UUID"];
+    authKeyIdParameter: components['schemas']['AuthKeyId'] | components['schemas']['UUID'];
     /** @description UUID or numeric ID of the user setting */
-    userSettingIdParameter: components["schemas"]["UserSettingId"];
+    userSettingIdParameter: components['schemas']['UserSettingId'];
     /** @description Name of the user setting */
-    userSettingNameParameter: components["schemas"]["UserSettingName"];
+    userSettingNameParameter: components['schemas']['UserSettingName'];
     /** @description Numeric ID of the taxonomy */
-    taxonomyIdParameter: components["schemas"]["TaxonomyId"];
+    taxonomyIdParameter: components['schemas']['TaxonomyId'];
   };
   requestBodies: {
     AddAttributeRequest: {
       content: {
-        "application/json": components["schemas"]["AttributeNoId"];
+        'application/json': components['schemas']['AttributeNoId'];
       };
     };
     EditAttributeRequest: {
       content: {
-        "application/json": components["schemas"]["Attribute"];
+        'application/json': components['schemas']['Attribute'];
       };
     };
     RestSearchAttributesRequest: {
       content: {
-        "application/json": components["schemas"]["AttributeRestSearchFilter"];
+        'application/json': components['schemas']['AttributeRestSearchFilter'];
       };
     };
     AddEventRequest: {
       content: {
-        "application/json": components["schemas"]["EventNoId"];
+        'application/json': components['schemas']['EventNoId'];
       };
     };
     EditEventRequest: {
       content: {
-        "application/json": components["schemas"]["EventNoId"];
+        'application/json': components['schemas']['EventNoId'];
       };
     };
     SearchEventRequest: {
       content: {
-        "application/json": {
-          page?: components["schemas"]["PageSearchFilter"];
-          limit?: components["schemas"]["LimitSearchFilter"];
-          sort?: components["schemas"]["SortSearchField"];
-          direction?: components["schemas"]["DirectionSearchField"];
+        'application/json': {
+          page?: components['schemas']['PageSearchFilter'];
+          limit?: components['schemas']['LimitSearchFilter'];
+          sort?: components['schemas']['SortSearchField'];
+          direction?: components['schemas']['DirectionSearchField'];
           /**
            * @description Returns a minimal version of the event, only events with `attributeCount` > 0 will be returned
            * @default false
@@ -3796,7 +4196,7 @@ export interface components {
            * @example covert channel
            */
           attribute?: string | null;
-          eventid?: components["schemas"]["EventId"];
+          eventid?: components['schemas']['EventId'];
           /**
            * Format: date
            * @description Event creation date is greater or equal
@@ -3819,7 +4219,7 @@ export interface components {
            * @example Phishing campaing
            */
           eventinfo?: string | null;
-          tag?: components["schemas"]["TagName"];
+          tag?: components['schemas']['TagName'];
           /**
            * @description Filter events by matching *any* of the event tags of a given list of tag names
            * @example [
@@ -3827,11 +4227,11 @@ export interface components {
            *   "cycat:scope=\"exploit\""
            * ]
            */
-          tags?: components["schemas"]["TagName"][] | null;
-          distribution?: components["schemas"]["DistributionLevelId"];
-          sharinggroup?: components["schemas"]["SharingGroupId"];
-          analysis?: components["schemas"]["AnalysisLevelId"];
-          threatlevel?: components["schemas"]["ThreatLevelId"];
+          tags?: components['schemas']['TagName'][] | null;
+          distribution?: components['schemas']['DistributionLevelId'];
+          sharinggroup?: components['schemas']['SharingGroupId'];
+          analysis?: components['schemas']['AnalysisLevelId'];
+          threatlevel?: components['schemas']['ThreatLevelId'];
           /**
            * Format: email
            * @description Filter events by matching the event creator user email
@@ -3868,73 +4268,73 @@ export interface components {
     };
     RestSearchEventsRequest: {
       content: {
-        "application/json": {
-          page?: components["schemas"]["PageSearchFilter"];
-          limit?: components["schemas"]["LimitSearchFilter"];
-          value?: components["schemas"]["AttributeValue"];
-          type?: components["schemas"]["AttributeType"];
-          category?: components["schemas"]["AttributeCategory"];
-          org?: components["schemas"]["OrganisationId"] | components["schemas"]["OrganisationName"];
-          tags?: components["schemas"]["TagsRestSearchFilter"];
-          event_tags?: components["schemas"]["TagsRestSearchFilter"];
-          searchall?: components["schemas"]["SearchAllRestSearchFilter"];
-          from?: components["schemas"]["DateRestSearchFilter"];
-          to?: components["schemas"]["DateRestSearchFilter"];
-          last?: components["schemas"]["LastRestSearchFilter"];
-          eventid?: components["schemas"]["EventId"];
-          withAttachments?: components["schemas"]["WithAttachmentsRestSearchFilter"];
-          sharinggroup?: components["schemas"]["SharingGroupIDRestSearchFilter"];
-          metadata?: components["schemas"]["MetadataRestSearchFilter"];
-          uuid?: components["schemas"]["UUID"];
-          publish_timestamp?: components["schemas"]["Timestamp"];
-          timestamp?: components["schemas"]["Timestamp"];
-          published?: components["schemas"]["PublishedFlag"];
-          enforceWarninglist?: components["schemas"]["EnforceWarninglistRestSearchFilter"];
+        'application/json': {
+          page?: components['schemas']['PageSearchFilter'];
+          limit?: components['schemas']['LimitSearchFilter'];
+          value?: components['schemas']['AttributeValue'];
+          type?: components['schemas']['AttributeType'];
+          category?: components['schemas']['AttributeCategory'];
+          org?: components['schemas']['OrganisationId'] | components['schemas']['OrganisationName'];
+          tags?: components['schemas']['TagsRestSearchFilter'];
+          event_tags?: components['schemas']['TagsRestSearchFilter'];
+          searchall?: components['schemas']['SearchAllRestSearchFilter'];
+          from?: components['schemas']['DateRestSearchFilter'];
+          to?: components['schemas']['DateRestSearchFilter'];
+          last?: components['schemas']['LastRestSearchFilter'];
+          eventid?: components['schemas']['EventId'];
+          withAttachments?: components['schemas']['WithAttachmentsRestSearchFilter'];
+          sharinggroup?: components['schemas']['SharingGroupIDRestSearchFilter'];
+          metadata?: components['schemas']['MetadataRestSearchFilter'];
+          uuid?: components['schemas']['UUID'];
+          publish_timestamp?: components['schemas']['Timestamp'];
+          timestamp?: components['schemas']['Timestamp'];
+          published?: components['schemas']['PublishedFlag'];
+          enforceWarninglist?: components['schemas']['EnforceWarninglistRestSearchFilter'];
           /** @description Will only return the sharing group ID */
           sgReferenceOnly?: boolean;
-          requested_attributes?: components["schemas"]["RequestedAttributesRestSearchFilter"];
-          includeContext?: components["schemas"]["IncludeContextRestSearchFlag"];
-          headerless?: components["schemas"]["HeaderlessRestSearchFlag"];
-          includeWarninglistHits?: components["schemas"]["IncludeWarninglistHitsRestSearchFlag"];
-          attackGalaxy?: components["schemas"]["AttackGalaxyRestSearchFilter"];
-          to_ids?: components["schemas"]["ToIDS"];
-          deleted?: components["schemas"]["SoftDeletedFlag"];
-          excludeLocalTags?: components["schemas"]["ExcludeLocalTagsRestSearchFilter"];
-          date?: components["schemas"]["DateRestSearchFilter"];
-          includeSightingdb?: components["schemas"]["IncludeSightingDbRestSearchFlag"];
-          tag?: components["schemas"]["TagName"];
-          object_relation?: components["schemas"]["ObjectRelationRestSearchFilter"];
-          threat_level_id?: components["schemas"]["ThreatLevelId"];
-          returnFormat?: components["schemas"]["EventsRestSearchReturnFormat"];
+          requested_attributes?: components['schemas']['RequestedAttributesRestSearchFilter'];
+          includeContext?: components['schemas']['IncludeContextRestSearchFlag'];
+          headerless?: components['schemas']['HeaderlessRestSearchFlag'];
+          includeWarninglistHits?: components['schemas']['IncludeWarninglistHitsRestSearchFlag'];
+          attackGalaxy?: components['schemas']['AttackGalaxyRestSearchFilter'];
+          to_ids?: components['schemas']['ToIDS'];
+          deleted?: components['schemas']['SoftDeletedFlag'];
+          excludeLocalTags?: components['schemas']['ExcludeLocalTagsRestSearchFilter'];
+          date?: components['schemas']['DateRestSearchFilter'];
+          includeSightingdb?: components['schemas']['IncludeSightingDbRestSearchFlag'];
+          tag?: components['schemas']['TagName'];
+          object_relation?: components['schemas']['ObjectRelationRestSearchFilter'];
+          threat_level_id?: components['schemas']['ThreatLevelId'];
+          returnFormat?: components['schemas']['EventsRestSearchReturnFormat'];
         };
       };
     };
     SearchGalaxyRequest: {
       content: {
-        "application/json": {
-          value?: components["schemas"]["GalaxyValueSearchFilter"];
+        'application/json': {
+          value?: components['schemas']['GalaxyValueSearchFilter'];
         };
       };
     };
     ImportGalaxyClusterRequest: {
       content: {
-        "application/json": components["schemas"]["ImportGalaxyClusterItem"][];
+        'application/json': components['schemas']['ImportGalaxyClusterItem'][];
       };
     };
     ExportGalaxyClusterRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           Galaxy?: {
             /** @description `true` to filter out galaxy clusters with `default=true` set. */
             default?: boolean;
             /** @description `true` to filter out galaxy clusters with `default=false` set */
             custom?: boolean;
-            distribution?: components["schemas"]["DistributionLevelId"];
+            distribution?: components['schemas']['DistributionLevelId'];
             /**
              * @description If set to `misp-galaxy` result set is in the misp-galaxy format.
              * @enum {string}
              */
-            format?: "default" | "misp-galaxy";
+            format?: 'default' | 'misp-galaxy';
             /** @description `true` returns the response as a json file attachment, `false` returns the response in the response body. */
             download?: boolean;
           };
@@ -3943,7 +4343,7 @@ export interface components {
     };
     AttachGalaxyClusterRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           Galaxy?: {
             /**
              * Format: int32
@@ -3957,9 +4357,9 @@ export interface components {
     };
     SearchGalaxyClustersRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           /** @enum {string} */
-          context?: "all" | "default" | "org" | "deleted";
+          context?: 'all' | 'default' | 'org' | 'deleted';
           /**
            * @description Search galaxy clusters by matching any value, description, uuid or galaxy elements values.
            * @example botnet
@@ -3970,34 +4370,34 @@ export interface components {
     };
     AddGalaxyClusterRequest?: {
       content: {
-        "application/json": components["schemas"]["GalaxyCluster"];
+        'application/json': components['schemas']['GalaxyCluster'];
       };
     };
     EditGalaxyClusterRequest?: {
       content: {
-        "application/json": components["schemas"]["GalaxyCluster"];
+        'application/json': components['schemas']['GalaxyCluster'];
       };
     };
     AddUserRequest?: {
       content: {
-        "application/json": components["schemas"]["UserNoId"];
+        'application/json': components['schemas']['UserNoId'];
       };
     };
     EditUserRequest?: {
       content: {
-        "application/json": components["schemas"]["User"];
+        'application/json': components['schemas']['User'];
       };
     };
     AddOrganisationRequest?: {
       content: {
-        "application/json": components["schemas"]["OrganisationNoId"];
+        'application/json': components['schemas']['OrganisationNoId'];
       };
     };
     EditOrganisationRequest?: {
       content: {
-        "application/json": {
-          name?: components["schemas"]["OrganisationName"];
-          type?: components["schemas"]["OrganisationType"];
+        'application/json': {
+          name?: components['schemas']['OrganisationName'];
+          type?: components['schemas']['OrganisationType'];
           nationality?: string | null;
           sector?: string | null;
           contacts?: string | null;
@@ -4011,103 +4411,103 @@ export interface components {
     };
     AddServerRequest?: {
       content: {
-        "application/json": components["schemas"]["ServerNoId"];
+        'application/json': components['schemas']['ServerNoId'];
       };
     };
     EditServerRequest?: {
       content: {
-        "application/json": components["schemas"]["Server"];
+        'application/json': components['schemas']['Server'];
       };
     };
     EditServerSettingRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           value?: string | boolean | number | Record<string, never>;
         };
       };
     };
     ImportServerRequest?: {
       content: {
-        "application/json": {
-          name?: components["schemas"]["ServerName"];
+        'application/json': {
+          name?: components['schemas']['ServerName'];
           /** @example https://misppriv.circl.lu */
           url?: string;
-          uuid?: components["schemas"]["UUID"];
-          authkey?: components["schemas"]["AuthKeyRaw"];
+          uuid?: components['schemas']['UUID'];
+          authkey?: components['schemas']['AuthKeyRaw'];
           Organisation?: {
-            name?: components["schemas"]["OrganisationName"];
+            name?: components['schemas']['OrganisationName'];
           };
         };
       };
     };
     AddSharingGroupRequest?: {
       content: {
-        "application/json": components["schemas"]["SharingGroupNoId"];
+        'application/json': components['schemas']['SharingGroupNoId'];
       };
     };
     EditSharingGroupRequest?: {
       content: {
-        "application/json": components["schemas"]["SharingGroup"];
+        'application/json': components['schemas']['SharingGroup'];
       };
     };
     AddFeedRequest?: {
       content: {
-        "application/json": {
-          name?: components["schemas"]["FeedName"];
-          provider?: components["schemas"]["FeedProvider"];
-          url?: components["schemas"]["FeedUrl"];
-          rules?: components["schemas"]["FeedRules"];
-          enabled?: components["schemas"]["FeedEnabledFlag"];
-          distribution?: components["schemas"]["DistributionLevelId"];
-          sharing_group_id?: components["schemas"]["SharingGroupId"];
-          tag_id?: components["schemas"]["TagId"];
-          source_format?: components["schemas"]["FeedSourceFormat"];
-          fixed_event?: components["schemas"]["FeedFixedEvent"];
-          delta_merge?: components["schemas"]["FeedDeltaMergeFlag"];
-          event_id?: components["schemas"]["EventId"];
-          publish?: components["schemas"]["PublishedFlag"];
-          override_ids?: components["schemas"]["FeedOverrideIDSFlag"];
-          input_source?: components["schemas"]["FeedInputSource"];
-          delete_local_file?: components["schemas"]["FeedDeleteLocalFileFlag"];
-          lookup_visible?: components["schemas"]["FeedLookupVisibleFlag"];
-          headers?: components["schemas"]["FeedHeaders"];
-          caching_enabled?: components["schemas"]["FeedCachingEnabledFlag"];
-          force_to_ids?: components["schemas"]["FeedForceToIDSFlag"];
-          orgc_id?: components["schemas"]["OrganisationId"];
+        'application/json': {
+          name?: components['schemas']['FeedName'];
+          provider?: components['schemas']['FeedProvider'];
+          url?: components['schemas']['FeedUrl'];
+          rules?: components['schemas']['FeedRules'];
+          enabled?: components['schemas']['FeedEnabledFlag'];
+          distribution?: components['schemas']['DistributionLevelId'];
+          sharing_group_id?: components['schemas']['SharingGroupId'];
+          tag_id?: components['schemas']['TagId'];
+          source_format?: components['schemas']['FeedSourceFormat'];
+          fixed_event?: components['schemas']['FeedFixedEvent'];
+          delta_merge?: components['schemas']['FeedDeltaMergeFlag'];
+          event_id?: components['schemas']['EventId'];
+          publish?: components['schemas']['PublishedFlag'];
+          override_ids?: components['schemas']['FeedOverrideIDSFlag'];
+          input_source?: components['schemas']['FeedInputSource'];
+          delete_local_file?: components['schemas']['FeedDeleteLocalFileFlag'];
+          lookup_visible?: components['schemas']['FeedLookupVisibleFlag'];
+          headers?: components['schemas']['FeedHeaders'];
+          caching_enabled?: components['schemas']['FeedCachingEnabledFlag'];
+          force_to_ids?: components['schemas']['FeedForceToIDSFlag'];
+          orgc_id?: components['schemas']['OrganisationId'];
         };
       };
     };
     EditFeedRequest?: {
       content: {
-        "application/json": {
-          id?: components["schemas"]["FeedId"];
-          name?: components["schemas"]["FeedName"];
-          provider?: components["schemas"]["FeedProvider"];
-          url?: components["schemas"]["FeedUrl"];
-          rules?: components["schemas"]["FeedRules"];
-          enabled?: components["schemas"]["FeedEnabledFlag"];
-          distribution?: components["schemas"]["DistributionLevelId"];
-          sharing_group_id?: components["schemas"]["SharingGroupId"];
-          tag_id?: components["schemas"]["TagId"];
-          source_format?: components["schemas"]["FeedSourceFormat"];
-          fixed_event?: components["schemas"]["FeedFixedEvent"];
-          delta_merge?: components["schemas"]["FeedDeltaMergeFlag"];
-          event_id?: components["schemas"]["EventId"];
-          publish?: components["schemas"]["PublishedFlag"];
-          override_ids?: components["schemas"]["FeedOverrideIDSFlag"];
-          input_source?: components["schemas"]["FeedInputSource"];
-          delete_local_file?: components["schemas"]["FeedDeleteLocalFileFlag"];
-          lookup_visible?: components["schemas"]["FeedLookupVisibleFlag"];
-          headers?: components["schemas"]["FeedHeaders"];
-          caching_enabled?: components["schemas"]["FeedCachingEnabledFlag"];
-          force_to_ids?: components["schemas"]["FeedForceToIDSFlag"];
-          orgc_id?: components["schemas"]["OrganisationId"];
+        'application/json': {
+          id?: components['schemas']['FeedId'];
+          name?: components['schemas']['FeedName'];
+          provider?: components['schemas']['FeedProvider'];
+          url?: components['schemas']['FeedUrl'];
+          rules?: components['schemas']['FeedRules'];
+          enabled?: components['schemas']['FeedEnabledFlag'];
+          distribution?: components['schemas']['DistributionLevelId'];
+          sharing_group_id?: components['schemas']['SharingGroupId'];
+          tag_id?: components['schemas']['TagId'];
+          source_format?: components['schemas']['FeedSourceFormat'];
+          fixed_event?: components['schemas']['FeedFixedEvent'];
+          delta_merge?: components['schemas']['FeedDeltaMergeFlag'];
+          event_id?: components['schemas']['EventId'];
+          publish?: components['schemas']['PublishedFlag'];
+          override_ids?: components['schemas']['FeedOverrideIDSFlag'];
+          input_source?: components['schemas']['FeedInputSource'];
+          delete_local_file?: components['schemas']['FeedDeleteLocalFileFlag'];
+          lookup_visible?: components['schemas']['FeedLookupVisibleFlag'];
+          headers?: components['schemas']['FeedHeaders'];
+          caching_enabled?: components['schemas']['FeedCachingEnabledFlag'];
+          force_to_ids?: components['schemas']['FeedForceToIDSFlag'];
+          orgc_id?: components['schemas']['OrganisationId'];
         };
       };
     };
     WarninglistsSearchRequest?: {
       content: {
-        "application/x-www-form-urlencoded": {
+        'application/x-www-form-urlencoded': {
           /** @description Search term to be used to match warninglists name, description or type. */
           value?: string | null;
           enabled?: boolean | null;
@@ -4116,21 +4516,21 @@ export interface components {
     };
     WarninglistsToggleEnableRequest?: {
       content: {
-        "application/x-www-form-urlencoded": {
-          id?: components["schemas"]["WarninglistsIdFilter"];
-          name?: components["schemas"]["WarninglistsNameFilter"];
+        'application/x-www-form-urlencoded': {
+          id?: components['schemas']['WarninglistsIdFilter'];
+          name?: components['schemas']['WarninglistsNameFilter'];
           enabled?: boolean;
         };
       };
     };
     WarninglistCheckValuesRequest?: {
       content: {
-        "application/json": string[];
+        'application/json': string[];
       };
     };
     ToggleEnableNoticelistRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           Noticelist?: {
             /**
              * @description Id of the noticelist to enable/disable.
@@ -4143,55 +4543,57 @@ export interface components {
     };
     RestSearchObjectsRequest: {
       content: {
-        "application/json": components["schemas"]["ObjectRestSearchFilter"];
+        'application/json': components['schemas']['ObjectRestSearchFilter'];
       };
     };
     AddObjectRequest?: {
       content: {
-        "application/json": {
+        'application/json': {
           Attribute?: {
-              category?: components["schemas"]["AttributeCategory"];
-              value?: components["schemas"]["AttributeValue"];
-              to_ids?: components["schemas"]["ToIDS"];
-              disable_correlation?: components["schemas"]["DisableCorrelationFlag"];
-              distribution?: components["schemas"]["DistributionLevelId"];
-              comment?: components["schemas"]["AttributeComment"];
-              object_relation?: components["schemas"]["ObjectRelation"];
-            }[];
+            category?: components['schemas']['AttributeCategory'];
+            value?: components['schemas']['AttributeValue'];
+            to_ids?: components['schemas']['ToIDS'];
+            disable_correlation?: components['schemas']['DisableCorrelationFlag'];
+            distribution?: components['schemas']['DistributionLevelId'];
+            comment?: components['schemas']['AttributeComment'];
+            object_relation?: components['schemas']['ObjectRelation'];
+          }[];
         };
       };
     };
     AddSightingsRequest?: {
       content: {
-        "application/json": {
-          values?: components["schemas"]["AttributeValue"][];
-          timestamp?: components["schemas"]["NullableTimestamp"];
-          filters?: components["schemas"]["AttributeRestSearchFilter"];
+        'application/json': {
+          values?: components['schemas']['AttributeValue'][];
+          timestamp?: components['schemas']['NullableTimestamp'];
+          filters?: components['schemas']['AttributeRestSearchFilter'];
         };
       };
     };
     AddTagRequest?: {
       content: {
-        "application/json": components["schemas"]["TagNoId"];
+        'application/json': components['schemas']['TagNoId'];
       };
     };
     EditTagRequest?: {
       content: {
-        "application/json": components["schemas"]["TagNoId"];
+        'application/json': components['schemas']['TagNoId'];
       };
     };
     GetLogsRequest?: {
       content: {
-        "application/json": {
-          page?: components["schemas"]["PageSearchFilter"];
-          limit?: components["schemas"]["LimitSearchFilter"];
-          id?: components["schemas"]["LogId"];
-          title?: components["schemas"]["LogTitle"];
-          created?: components["schemas"]["DateRestSearchFilter"] | components["schemas"]["DateIntervalRestSearchFilter"];
-          model?: components["schemas"]["ModelName"];
-          model_id?: components["schemas"]["ModelId"];
-          action?: components["schemas"]["LogActionType"];
-          user_id?: components["schemas"]["UserId"];
+        'application/json': {
+          page?: components['schemas']['PageSearchFilter'];
+          limit?: components['schemas']['LimitSearchFilter'];
+          id?: components['schemas']['LogId'];
+          title?: components['schemas']['LogTitle'];
+          created?:
+            | components['schemas']['DateRestSearchFilter']
+            | components['schemas']['DateIntervalRestSearchFilter'];
+          model?: components['schemas']['ModelName'];
+          model_id?: components['schemas']['ModelId'];
+          action?: components['schemas']['LogActionType'];
+          user_id?: components['schemas']['UserId'];
           /**
            * @description Text search for log change property
            * @example %name () => (ORGNAME)%
@@ -4216,35 +4618,35 @@ export interface components {
     };
     GetAuthKeyRequest?: {
       content: {
-        "application/json": {
-          page?: components["schemas"]["PageSearchFilter"];
-          limit?: components["schemas"]["LimitSearchFilter"];
-          id?: components["schemas"]["AuthKeyId"];
-          uuid?: components["schemas"]["UUID"];
+        'application/json': {
+          page?: components['schemas']['PageSearchFilter'];
+          limit?: components['schemas']['LimitSearchFilter'];
+          id?: components['schemas']['AuthKeyId'];
+          uuid?: components['schemas']['UUID'];
           /** @description Search term matching the first 4 characers of the authkey */
           authkey_start?: string;
           /** @description Search term matching the last 4 characers of the authkey */
           authkey_end?: string;
-          created?: components["schemas"]["DateRestSearchFilter"];
-          expiration?: components["schemas"]["DateRestSearchFilter"];
-          read_only?: components["schemas"]["IsReadOnly"];
-          user_id?: components["schemas"]["UserId"];
+          created?: components['schemas']['DateRestSearchFilter'];
+          expiration?: components['schemas']['DateRestSearchFilter'];
+          read_only?: components['schemas']['IsReadOnly'];
+          user_id?: components['schemas']['UserId'];
           comment?: string;
           /**
            * @description Stringified JSON array of the IP addresses.
            * @example ["127.0.0.1","127.0.0.2"]
            */
           allowed_ips?: string;
-          last_used?: components["schemas"]["DateRestSearchFilter"];
+          last_used?: components['schemas']['DateRestSearchFilter'];
         };
       };
     };
     AddAuthKeyRequest?: {
       content: {
-        "application/json": {
-          uuid?: components["schemas"]["UUID"];
-          read_only?: components["schemas"]["IsReadOnly"];
-          user_id?: components["schemas"]["UserId"];
+        'application/json': {
+          uuid?: components['schemas']['UUID'];
+          read_only?: components['schemas']['IsReadOnly'];
+          user_id?: components['schemas']['UserId'];
           comment?: string;
           allowed_ips?: string[] | null;
         };
@@ -4252,8 +4654,8 @@ export interface components {
     };
     EditAuthKeyRequest?: {
       content: {
-        "application/json": {
-          read_only?: components["schemas"]["IsReadOnly"];
+        'application/json': {
+          read_only?: components['schemas']['IsReadOnly'];
           comment?: string;
           allowed_ips?: string[] | null;
         };
@@ -4261,26 +4663,75 @@ export interface components {
     };
     GetUserSettingRequest?: {
       content: {
-        "application/json": {
-          id?: components["schemas"]["UserSettingId"];
-          setting?: components["schemas"]["UserSettingName"];
-          user_id?: components["schemas"]["UserId"];
+        'application/json': {
+          id?: components['schemas']['UserSettingId'];
+          setting?: components['schemas']['UserSettingName'];
+          user_id?: components['schemas']['UserId'];
         };
       };
     };
     SetUserSettingRequest?: {
       content: {
-        "application/json": components["schemas"]["DashboardUserSetting"] | components["schemas"]["PublishAlertFilterUserSetting"] | components["schemas"]["DashboardAccessUserSetting"] | components["schemas"]["HomepageUserSetting"] | components["schemas"]["DefaultRestSearchParametersUserSetting"] | components["schemas"]["TagNumbericalValueOverrideUserSetting"] | components["schemas"]["EventIndexHideColumnsUserSetting"];
+        'application/json':
+          | components['schemas']['DashboardUserSetting']
+          | components['schemas']['PublishAlertFilterUserSetting']
+          | components['schemas']['DashboardAccessUserSetting']
+          | components['schemas']['HomepageUserSetting']
+          | components['schemas']['DefaultRestSearchParametersUserSetting']
+          | components['schemas']['TagNumbericalValueOverrideUserSetting']
+          | components['schemas']['EventIndexHideColumnsUserSetting'];
       };
     };
   };
   headers: {
     /** @description Result set count */
-    "X-Result-Count": number;
+    'X-Result-Count': number;
     /** @description Export module used */
-    "X-Export-Module-Used": "json" | "xml" | "csv" | "text" | "download" | "stix" | "stix2" | "stix-json" | "attack" | "attack-sightings" | "cache" | "count" | "hashes" | "netfilter" | "opendata" | "openioc" | "rpz" | "snort" | "suricata" | "yara" | "yara-json";
+    'X-Export-Module-Used':
+      | 'json'
+      | 'xml'
+      | 'csv'
+      | 'text'
+      | 'download'
+      | 'stix'
+      | 'stix2'
+      | 'stix-json'
+      | 'attack'
+      | 'attack-sightings'
+      | 'cache'
+      | 'count'
+      | 'hashes'
+      | 'netfilter'
+      | 'opendata'
+      | 'openioc'
+      | 'rpz'
+      | 'snort'
+      | 'suricata'
+      | 'yara'
+      | 'yara-json';
     /** @description Response format */
-    "X-Response-Format": "json" | "xml" | "csv" | "text" | "download" | "stix" | "stix2" | "stix-json" | "attack" | "attack-sightings" | "cache" | "count" | "hashes" | "netfilter" | "opendata" | "openioc" | "rpz" | "snort" | "suricata" | "yara" | "yara-json";
+    'X-Response-Format':
+      | 'json'
+      | 'xml'
+      | 'csv'
+      | 'text'
+      | 'download'
+      | 'stix'
+      | 'stix2'
+      | 'stix-json'
+      | 'attack'
+      | 'attack-sightings'
+      | 'cache'
+      | 'count'
+      | 'hashes'
+      | 'netfilter'
+      | 'opendata'
+      | 'openioc'
+      | 'rpz'
+      | 'snort'
+      | 'suricata'
+      | 'yara'
+      | 'yara-json';
   };
   pathItems: never;
 }
@@ -4290,148 +4741,147 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /**
    * [restSearch] Get a filtered and paginated list of attributes
    * @description **This is the recommended endpoint for searching attributes.**
    */
   restSearchAttributes: {
-    requestBody: components["requestBodies"]["RestSearchAttributesRequest"];
+    requestBody: components['requestBodies']['RestSearchAttributesRequest'];
     responses: {
-      200: components["responses"]["AttributesRestSearchResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributesRestSearchResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add an attribute */
   addAttribute: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["AddAttributeRequest"];
+    requestBody: components['requestBodies']['AddAttributeRequest'];
     responses: {
-      200: components["responses"]["AttributeResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit an attribute */
   editAttribute: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditAttributeRequest"];
+    requestBody: components['requestBodies']['EditAttributeRequest'];
     responses: {
-      200: components["responses"]["AttributeResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete an attribute */
   deleteAttribute: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteAttributeResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteAttributeResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Restore an attribute */
   restoreAttribute: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AttributeResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add a tag to an attribute */
   tagAttribute: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
-        tagId: components["parameters"]["tagIdParameter"];
-        local: components["parameters"]["localParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
+        tagId: components['parameters']['tagIdParameter'];
+        local: components['parameters']['localParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AddAttributeTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddAttributeTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Remove a tag from an attribute */
   untagAttribute: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
-        tagId: components["parameters"]["tagIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
+        tagId: components['parameters']['tagIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["RemoveAttributeTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RemoveAttributeTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of attributes */
   getAttributes: {
     responses: {
-      200: components["responses"]["AttributeListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get an attribute by ID */
   getAttributeById: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AttributeResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get the count of attributes per category */
   getAttributeStatistics: {
     parameters: {
       path: {
-        context: components["parameters"]["attributeStatisticsContextParameter"];
-        percentage: components["parameters"]["attributeStatisticsPercentageParameter"];
+        context: components['parameters']['attributeStatisticsContextParameter'];
+        percentage: components['parameters']['attributeStatisticsPercentageParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AttributeStatisticsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttributeStatisticsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of the available attribute types */
   describeAttributeTypes: {
     responses: {
-      200: components["responses"]["DescribeAttributeTypesResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DescribeAttributeTypesResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /**
@@ -4439,1106 +4889,1106 @@ export interface operations {
    * @description **This is the recommended endpoint for searching events.**
    */
   restSearchEvents: {
-    requestBody: components["requestBodies"]["RestSearchEventsRequest"];
+    requestBody: components['requestBodies']['RestSearchEventsRequest'];
     responses: {
-      200: components["responses"]["EventsRestSearchResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EventsRestSearchResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add event */
   addEvent: {
-    requestBody: components["requestBodies"]["AddEventRequest"];
+    requestBody: components['requestBodies']['AddEventRequest'];
     responses: {
-      200: components["responses"]["AddEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit event */
   editEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditEventRequest"];
+    requestBody: components['requestBodies']['EditEventRequest'];
     responses: {
-      200: components["responses"]["EditEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EditEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete event */
   deleteEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of events */
   getEvents: {
     responses: {
-      200: components["responses"]["ExtendedEventListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedEventListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search events */
   searchEvents: {
-    requestBody: components["requestBodies"]["SearchEventRequest"];
+    requestBody: components['requestBodies']['SearchEventRequest'];
     responses: {
-      200: components["responses"]["ExtendedEventListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedEventListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get event by ID */
   getEventById: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ExtendedEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Publish an event */
   publishEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["PublishEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['PublishEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Unpublish an event */
   unpublishEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["UnpublishEventResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UnpublishEventResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add event tag */
   tagEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
-        tagId: components["parameters"]["tagIdParameter"];
-        local: components["parameters"]["localParameter"];
+        eventId: components['parameters']['eventIdParameter'];
+        tagId: components['parameters']['tagIdParameter'];
+        local: components['parameters']['localParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AddEventTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddEventTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Remove event tag */
   untagEvent: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
-        tagId: components["parameters"]["tagIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
+        tagId: components['parameters']['tagIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["RemoveEventTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RemoveEventTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get galaxies */
   getGalaxies: {
     responses: {
-      200: components["responses"]["GalaxyListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search galaxies */
   searchGalaxies: {
-    requestBody: components["requestBodies"]["SearchGalaxyRequest"];
+    requestBody: components['requestBodies']['SearchGalaxyRequest'];
     responses: {
-      200: components["responses"]["GalaxyListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get galaxy by ID */
   getGalaxyById: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ExtendedGalaxyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedGalaxyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Force update the galaxies with the galaxy json definitions */
   updateGalaxies: {
     responses: {
-      200: components["responses"]["UpdateGalaxiesResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UpdateGalaxiesResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete a galaxy */
   deleteGalaxy: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteGalaxyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteGalaxyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Import a galaxy cluster */
   importGalaxyCluster: {
-    requestBody: components["requestBodies"]["ImportGalaxyClusterRequest"];
+    requestBody: components['requestBodies']['ImportGalaxyClusterRequest'];
     responses: {
-      200: components["responses"]["ImportGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ImportGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Export galaxy clusters */
   exportGalaxyClusters: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["ExportGalaxyClusterRequest"];
+    requestBody: components['requestBodies']['ExportGalaxyClusterRequest'];
     responses: {
-      200: components["responses"]["ExportGalaxyClustersResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExportGalaxyClustersResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Attach the galaxy cluster tag a given entity */
   attachGalaxyCluster: {
     parameters: {
       path: {
-        attachTargetId: components["parameters"]["attachTargetIdParameter"];
-        attachTargetType: components["parameters"]["attachTargetTypeParameter"];
-        local: components["parameters"]["localParameter"];
+        attachTargetId: components['parameters']['attachTargetIdParameter'];
+        attachTargetType: components['parameters']['attachTargetTypeParameter'];
+        local: components['parameters']['localParameter'];
       };
     };
-    requestBody: components["requestBodies"]["AttachGalaxyClusterRequest"];
+    requestBody: components['requestBodies']['AttachGalaxyClusterRequest'];
     responses: {
-      200: components["responses"]["AttachGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AttachGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add galaxy cluster */
   addGalaxyCluster: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["AddGalaxyClusterRequest"];
+    requestBody: components['requestBodies']['AddGalaxyClusterRequest'];
     responses: {
-      200: components["responses"]["GalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit galaxy cluster */
   editGalaxyCluster: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditGalaxyClusterRequest"];
+    requestBody: components['requestBodies']['EditGalaxyClusterRequest'];
     responses: {
-      200: components["responses"]["GalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get galaxy clusters */
   getGalaxyClusters: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["GalaxyClusterListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyClusterListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search galaxy clusters */
   searchGalaxyClusters: {
     parameters: {
       path: {
-        galaxyId: components["parameters"]["galaxyIdParameter"];
+        galaxyId: components['parameters']['galaxyIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["SearchGalaxyClustersRequest"];
+    requestBody: components['requestBodies']['SearchGalaxyClustersRequest'];
     responses: {
-      200: components["responses"]["GalaxyClusterListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GalaxyClusterListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get galaxy cluster by ID */
   getGalaxyClusterById: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ExtendedGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Publish galaxy cluster */
   publishGalaxyCluster: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["PublishGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['PublishGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Unpublish galaxy cluster */
   unpublishGalaxyCluster: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["UnpublishGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UnpublishGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete galaxy cluster */
   deleteGalaxyCluster: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Restore galaxy cluster */
   restoreGalaxyCluster: {
     parameters: {
       path: {
-        galaxyClusterId: components["parameters"]["galaxyClusterIdParameter"];
+        galaxyClusterId: components['parameters']['galaxyClusterIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["RestoreGalaxyClusterResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RestoreGalaxyClusterResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Reset user password */
   resetUserPassword: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
-        firstTimeReset: components["parameters"]["firstTimeResetParameter"];
+        userId: components['parameters']['userIdParameter'];
+        firstTimeReset: components['parameters']['firstTimeResetParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ResetUserPasswordResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ResetUserPasswordResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add user */
   addUser: {
-    requestBody: components["requestBodies"]["AddUserRequest"];
+    requestBody: components['requestBodies']['AddUserRequest'];
     responses: {
-      200: components["responses"]["UserResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit user */
   editUser: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
+        userId: components['parameters']['userIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditUserRequest"];
+    requestBody: components['requestBodies']['EditUserRequest'];
     responses: {
-      200: components["responses"]["UserResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete user */
   deleteUser: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
+        userId: components['parameters']['userIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteUserResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteUserResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get users */
   getUsers: {
     responses: {
-      200: components["responses"]["UserListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get user by ID */
   getUserById: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
+        userId: components['parameters']['userIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ExtendedUserResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedUserResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete user TOTP */
   deleteUserTotp: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
+        userId: components['parameters']['userIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteUserTotpResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundUserTotpDeleteResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteUserTotpResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundUserTotpDeleteResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add organisation */
   addOrganisation: {
-    requestBody: components["requestBodies"]["AddOrganisationRequest"];
+    requestBody: components['requestBodies']['AddOrganisationRequest'];
     responses: {
-      200: components["responses"]["OrganisationResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['OrganisationResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit organisation */
   editOrganisation: {
     parameters: {
       path: {
-        organisationId: components["parameters"]["organisationIdParameter"];
+        organisationId: components['parameters']['organisationIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditOrganisationRequest"];
+    requestBody: components['requestBodies']['EditOrganisationRequest'];
     responses: {
-      200: components["responses"]["OrganisationResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['OrganisationResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete organisation */
   deleteOrganisation: {
     parameters: {
       path: {
-        organisationId: components["parameters"]["organisationIdParameter"];
+        organisationId: components['parameters']['organisationIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteOrganisationResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteOrganisationResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get instance logs */
   getLogs: {
-    requestBody: components["requestBodies"]["GetLogsRequest"];
+    requestBody: components['requestBodies']['GetLogsRequest'];
     responses: {
-      200: components["responses"]["GetLogsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetLogsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get organisations */
   getOrganisations: {
     responses: {
-      200: components["responses"]["OrganisationListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['OrganisationListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get organisation by ID */
   getOrganisationById: {
     parameters: {
       path: {
-        organisationId: components["parameters"]["organisationIdParameter"];
+        organisationId: components['parameters']['organisationIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["OrganisationResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['OrganisationResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add server */
   addServer: {
-    requestBody: components["requestBodies"]["AddServerRequest"];
+    requestBody: components['requestBodies']['AddServerRequest'];
     responses: {
-      200: components["responses"]["ServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit server */
   editServer: {
     parameters: {
       path: {
-        serverId: components["parameters"]["serverIdParameter"];
+        serverId: components['parameters']['serverIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditServerRequest"];
+    requestBody: components['requestBodies']['EditServerRequest'];
     responses: {
-      200: components["responses"]["ServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete server */
   deleteServer: {
     parameters: {
       path: {
-        serverId: components["parameters"]["serverIdParameter"];
+        serverId: components['parameters']['serverIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get servers */
   getServers: {
     responses: {
-      200: components["responses"]["ServerListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Pull server */
   pullServer: {
     parameters: {
       path: {
-        serverId: components["parameters"]["serverIdParameter"];
-        pullTechnique: components["parameters"]["pullTechniqueParameter"];
+        serverId: components['parameters']['serverIdParameter'];
+        pullTechnique: components['parameters']['pullTechniqueParameter'];
       };
     };
     responses: {
-      200: components["responses"]["PullServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['PullServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Push server */
   pushServer: {
     parameters: {
       path: {
-        serverId: components["parameters"]["serverIdParameter"];
-        pushTechnique: components["parameters"]["pushTechniqueParameter"];
+        serverId: components['parameters']['serverIdParameter'];
+        pushTechnique: components['parameters']['pushTechniqueParameter'];
       };
     };
     responses: {
-      200: components["responses"]["PushServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['PushServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get current instance version */
   getServerVersion: {
     responses: {
-      200: components["responses"]["ServerVersionResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerVersionResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get current instance PyMISP version */
   getPyMISPVersion: {
     responses: {
-      200: components["responses"]["ServerPyMISPVersionResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerPyMISPVersionResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get current instance settings and diagnostics */
   getServerSettings: {
     responses: {
-      200: components["responses"]["ServerSettingsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerSettingsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get workers */
   getWorkers: {
     responses: {
-      200: components["responses"]["GetWorkersResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetWorkersResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Start worker */
   startWorker: {
     parameters: {
       path: {
-        workerType: components["parameters"]["workerTypeParameter"];
+        workerType: components['parameters']['workerTypeParameter'];
       };
     };
     responses: {
-      200: components["responses"]["StartWorkerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['StartWorkerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Stop worker */
   stopWorker: {
     parameters: {
       path: {
-        workerPid: components["parameters"]["workerPidParameter"];
+        workerPid: components['parameters']['workerPidParameter'];
       };
     };
     responses: {
-      200: components["responses"]["StopWorkerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['StopWorkerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Kill all workers */
   killAllWorkers: {
     responses: {
-      200: components["responses"]["KillAllWorkersResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['KillAllWorkersResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Restart workers */
   restartWorkers: {
     responses: {
-      200: components["responses"]["RestartWorkersResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RestartWorkersResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Restart dead workers */
   restartDeadWorkers: {
     responses: {
-      200: components["responses"]["RestartDeadWorkersResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RestartDeadWorkersResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Update server */
   updateServer: {
     responses: {
-      200: components["responses"]["UpdateServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UpdateServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Cache server */
   cacheServer: {
     responses: {
-      200: components["responses"]["CacheServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['CacheServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Create sync */
   createSync: {
     responses: {
-      200: components["responses"]["CreateSyncResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['CreateSyncResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get instance UUID */
   getServerUuid: {
     responses: {
-      200: components["responses"]["GetInstanceUUIDResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetInstanceUUIDResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get server setting by name */
   getServerSetting: {
     parameters: {
       path: {
-        settingName: components["parameters"]["settingNameParameter"];
+        settingName: components['parameters']['settingNameParameter'];
       };
     };
     responses: {
-      200: components["responses"]["GetServerSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetServerSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit server setting */
   editServerSetting: {
     parameters: {
       path: {
-        settingName: components["parameters"]["settingNameParameter"];
+        settingName: components['parameters']['settingNameParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditServerSettingRequest"];
+    requestBody: components['requestBodies']['EditServerSettingRequest'];
     responses: {
-      200: components["responses"]["EditServerSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EditServerSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Import server */
   importServer: {
-    requestBody: components["requestBodies"]["ImportServerRequest"];
+    requestBody: components['requestBodies']['ImportServerRequest'];
     responses: {
-      200: components["responses"]["ServerResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ServerResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add a sharing group */
   addSharingGroup: {
-    requestBody: components["requestBodies"]["AddSharingGroupRequest"];
+    requestBody: components['requestBodies']['AddSharingGroupRequest'];
     responses: {
-      200: components["responses"]["SharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit a sharing group */
   editSharingGroup: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditSharingGroupRequest"];
+    requestBody: components['requestBodies']['EditSharingGroupRequest'];
     responses: {
-      200: components["responses"]["SharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete a sharing group */
   deleteSharingGroup: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteSharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteSharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of sharing groups */
   getSharingGroup: {
     responses: {
-      200: components["responses"]["SharingGroupListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SharingGroupListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a sharing group by ID */
   getSharingGroupById: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["SharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add an organisation to a sharing group */
   addOrganisationToSharingGroup: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
-        organisationId: components["parameters"]["organisationIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
+        organisationId: components['parameters']['organisationIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AddOrganisationToSharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddOrganisationToSharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Remove an organisation from a sharing group */
   removeOrganisationFromSharingGroup: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
-        organisationId: components["parameters"]["organisationIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
+        organisationId: components['parameters']['organisationIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["RemoveOrganisationFromSharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RemoveOrganisationFromSharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add a server to a sharing group */
   addServerToSharingGroup: {
     parameters: {
       path: {
-        sharingGroupId: components["parameters"]["sharingGroupIdParameter"];
-        serverId: components["parameters"]["serverIdParameter"];
+        sharingGroupId: components['parameters']['sharingGroupIdParameter'];
+        serverId: components['parameters']['serverIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AddServerToSharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddServerToSharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Remove a server from a sharing group */
   removeServerFromSharingGroup: {
     parameters: {
       path: {
-        sharingGroupServerId: components["parameters"]["sharingGroupServerIdParameter"];
-        serverId: components["parameters"]["serverIdParameter"];
+        sharingGroupServerId: components['parameters']['sharingGroupServerIdParameter'];
+        serverId: components['parameters']['serverIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["RemoveServerFromSharingGroupResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['RemoveServerFromSharingGroupResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of feeds */
   getFeeds: {
     responses: {
-      200: components["responses"]["FeedListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FeedListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a feed by ID */
   getFeedById: {
     parameters: {
       path: {
-        feedId: components["parameters"]["feedIdParameter"];
+        feedId: components['parameters']['feedIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["FeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add a feed */
   addFeed: {
-    requestBody: components["requestBodies"]["AddFeedRequest"];
+    requestBody: components['requestBodies']['AddFeedRequest'];
     responses: {
-      200: components["responses"]["FeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit a feed */
   editFeed: {
     parameters: {
       path: {
-        feedId: components["parameters"]["feedIdParameter"];
+        feedId: components['parameters']['feedIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditFeedRequest"];
+    requestBody: components['requestBodies']['EditFeedRequest'];
     responses: {
-      200: components["responses"]["FeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Enable feed */
   enableFeed: {
     parameters: {
       path: {
-        feedId: components["parameters"]["feedIdParameter"];
+        feedId: components['parameters']['feedIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["EnableFeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EnableFeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Disable feed */
   disableFeed: {
     parameters: {
       path: {
-        feedId: components["parameters"]["feedIdParameter"];
+        feedId: components['parameters']['feedIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DisableFeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DisableFeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Cache feeds */
   cacheFeeds: {
     parameters: {
       path: {
-        cacheFeedsScope: components["parameters"]["cacheFeedsScopeParameter"];
+        cacheFeedsScope: components['parameters']['cacheFeedsScopeParameter'];
       };
     };
     responses: {
-      200: components["responses"]["CacheFeedsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['CacheFeedsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Fetch from feed by ID */
   fetchFromFeed: {
     parameters: {
       path: {
-        feedId: components["parameters"]["feedIdParameter"];
+        feedId: components['parameters']['feedIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["FetchFromFeedResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FetchFromFeedResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Fetch from all feeds */
   fetchFromAllFeeds: {
     responses: {
-      200: components["responses"]["FetchFromAllFeedsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['FetchFromAllFeedsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of warninglists */
   getWarninglists: {
     responses: {
-      200: components["responses"]["WarninglistListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['WarninglistListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search warninglists */
   searchWarninglists: {
-    requestBody: components["requestBodies"]["WarninglistsSearchRequest"];
+    requestBody: components['requestBodies']['WarninglistsSearchRequest'];
     responses: {
-      200: components["responses"]["WarninglistListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['WarninglistListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Enable/disable warninglists */
   toggleEnableWarninglist: {
-    requestBody: components["requestBodies"]["WarninglistsToggleEnableRequest"];
+    requestBody: components['requestBodies']['WarninglistsToggleEnableRequest'];
     responses: {
-      200: components["responses"]["WarninglistToggleEnabledResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['WarninglistToggleEnabledResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get warninglist by ID */
   getWarninglistById: {
     parameters: {
       path: {
-        warninglistId: components["parameters"]["warninglistIdParameter"];
+        warninglistId: components['parameters']['warninglistIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["WarninglistResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['WarninglistResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Check if a list of values matches any warninglists */
   checkValueWarninglistsMatches: {
-    requestBody: components["requestBodies"]["WarninglistCheckValuesRequest"];
+    requestBody: components['requestBodies']['WarninglistCheckValuesRequest'];
     responses: {
-      200: components["responses"]["WarninglistMatchListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['WarninglistMatchListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Update warninglists */
   updateWarninglists: {
     responses: {
-      200: components["responses"]["UpdateWarninglistsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UpdateWarninglistsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a list of noticelists */
   getNoticelists: {
     responses: {
-      200: components["responses"]["NoticelistListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['NoticelistListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a noticelist by ID */
   getNoticelistById: {
     parameters: {
       path: {
-        noticelistId: components["parameters"]["noticelistIdParameter"];
+        noticelistId: components['parameters']['noticelistIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["NoticelistResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['NoticelistResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Enable/disable noticelist */
   toggleEnableNoticelist: {
     parameters: {
       path: {
-        noticelistId: components["parameters"]["noticelistIdParameter"];
+        noticelistId: components['parameters']['noticelistIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["NoticelistToggleEnableResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['NoticelistToggleEnableResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Update noticelists */
   updateNoticelists: {
     responses: {
-      200: components["responses"]["UpdateNoticelistsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UpdateNoticelistsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /**
@@ -5546,402 +5996,402 @@ export interface operations {
    * @description **This is the recommended endpoint for searching objects.**
    */
   restSearchObjects: {
-    requestBody: components["requestBodies"]["RestSearchObjectsRequest"];
+    requestBody: components['requestBodies']['RestSearchObjectsRequest'];
     responses: {
-      200: components["responses"]["ObjectsRestSearchResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ObjectsRestSearchResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add an object to an event */
   addObject: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
-        objectTemplateId: components["parameters"]["objectTemplateIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
+        objectTemplateId: components['parameters']['objectTemplateIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["AddObjectRequest"];
+    requestBody: components['requestBodies']['AddObjectRequest'];
     responses: {
-      200: components["responses"]["ObjectResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ObjectResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get object by ID */
   getObjectById: {
     parameters: {
       path: {
-        objectId: components["parameters"]["objectIdParameter"];
+        objectId: components['parameters']['objectIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["ExtendedObjectResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExtendedObjectResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete object */
   deleteObject: {
     parameters: {
       path: {
-        objectId: components["parameters"]["objectIdParameter"];
-        hardDelete: components["parameters"]["hardDeleteParameter"];
+        objectId: components['parameters']['objectIdParameter'];
+        hardDelete: components['parameters']['hardDeleteParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteObjectResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteObjectResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get sightings by event ID */
   getSightingsByEventId: {
     parameters: {
       path: {
-        eventId: components["parameters"]["eventIdParameter"];
+        eventId: components['parameters']['eventIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["SightingListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SightingListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add sightings of a list of values */
   addSightingByValue: {
-    requestBody: components["requestBodies"]["AddSightingsRequest"];
+    requestBody: components['requestBodies']['AddSightingsRequest'];
     responses: {
-      200: components["responses"]["SightingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SightingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add sighting of an attribute */
   addSighting: {
     parameters: {
       path: {
-        attributeId: components["parameters"]["attributeIdParameter"];
+        attributeId: components['parameters']['attributeIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["SightingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SightingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete sighting */
   deleteSighting: {
     parameters: {
       path: {
-        sightingId: components["parameters"]["sightingIdParameter"];
+        sightingId: components['parameters']['sightingIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteSightingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteSightingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get tags */
   getTags: {
     responses: {
-      200: components["responses"]["TagListResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['TagListResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get tag by ID */
   getTagById: {
     parameters: {
       path: {
-        tagId: components["parameters"]["tagIdParameter"];
+        tagId: components['parameters']['tagIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["TagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['TagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add tag */
   addTag: {
-    requestBody: components["requestBodies"]["AddTagRequest"];
+    requestBody: components['requestBodies']['AddTagRequest'];
     responses: {
-      200: components["responses"]["TagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['TagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete tag */
   deleteTag: {
     parameters: {
       path: {
-        tagId: components["parameters"]["tagIdParameter"];
+        tagId: components['parameters']['tagIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit tag */
   editTag: {
     parameters: {
       path: {
-        tagId: components["parameters"]["tagIdParameter"];
+        tagId: components['parameters']['tagIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditTagRequest"];
+    requestBody: components['requestBodies']['EditTagRequest'];
     responses: {
-      200: components["responses"]["EditTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EditTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search tag */
   searchTag: {
     parameters: {
       path: {
-        tagSearchTerm: components["parameters"]["tagSearchTermParameter"];
+        tagSearchTerm: components['parameters']['tagSearchTermParameter'];
       };
     };
     responses: {
-      200: components["responses"]["SearchTagResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['SearchTagResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get auth keys */
   getAuthKeys: {
     responses: {
-      200: components["responses"]["GetAuthKeysResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetAuthKeysResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search auth keys */
   searchAuthKeys: {
-    requestBody: components["requestBodies"]["GetAuthKeyRequest"];
+    requestBody: components['requestBodies']['GetAuthKeyRequest'];
     responses: {
-      200: components["responses"]["GetAuthKeysResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetAuthKeysResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Add auth keys */
   addAuthKey: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
+        userId: components['parameters']['userIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["AddAuthKeyRequest"];
+    requestBody: components['requestBodies']['AddAuthKeyRequest'];
     responses: {
-      200: components["responses"]["AddAuthKeyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AddAuthKeyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** View auth key */
   getAuthKeyById: {
     parameters: {
       path: {
-        authKeyId: components["parameters"]["authKeyIdParameter"];
+        authKeyId: components['parameters']['authKeyIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["AuthKeyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AuthKeyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Edit auth key */
   editAuthKey: {
     parameters: {
       path: {
-        authKeyId: components["parameters"]["authKeyIdParameter"];
+        authKeyId: components['parameters']['authKeyIdParameter'];
       };
     };
-    requestBody: components["requestBodies"]["EditAuthKeyRequest"];
+    requestBody: components['requestBodies']['EditAuthKeyRequest'];
     responses: {
-      200: components["responses"]["AuthKeyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['AuthKeyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete auth key */
   deleteAuthKey: {
     parameters: {
       path: {
-        authKeyId: components["parameters"]["authKeyIdParameter"];
+        authKeyId: components['parameters']['authKeyIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteAuthKeyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteAuthKeyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get user settings */
   getUserSettings: {
     responses: {
-      200: components["responses"]["GetUserSettingsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetUserSettingsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Search user settings */
   searchUserSettings: {
-    requestBody: components["requestBodies"]["GetUserSettingRequest"];
+    requestBody: components['requestBodies']['GetUserSettingRequest'];
     responses: {
-      200: components["responses"]["GetUserSettingsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetUserSettingsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get user setting by id */
   getUserSettingById: {
     parameters: {
       path: {
-        userSettingId: components["parameters"]["userSettingIdParameter"];
+        userSettingId: components['parameters']['userSettingIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["UserSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Set user setting */
   setUserSetting: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
-        userSettingName: components["parameters"]["userSettingNameParameter"];
+        userId: components['parameters']['userIdParameter'];
+        userSettingName: components['parameters']['userSettingNameParameter'];
       };
     };
-    requestBody: components["requestBodies"]["SetUserSettingRequest"];
+    requestBody: components['requestBodies']['SetUserSettingRequest'];
     responses: {
-      200: components["responses"]["UserSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get user setting by id */
   getUserSettingByName: {
     parameters: {
       path: {
-        userId: components["parameters"]["userIdParameter"];
-        userSettingName: components["parameters"]["userSettingNameParameter"];
+        userId: components['parameters']['userIdParameter'];
+        userSettingName: components['parameters']['userSettingNameParameter'];
       };
     };
     responses: {
-      200: components["responses"]["UserSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UserSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Delete user setting by id */
   deleteUserSettingById: {
     parameters: {
       path: {
-        userSettingId: components["parameters"]["userSettingIdParameter"];
+        userSettingId: components['parameters']['userSettingIdParameter'];
       };
     };
     responses: {
-      200: components["responses"]["DeleteUserSettingResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DeleteUserSettingResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get taxonomies */
   getTaxonomies: {
     responses: {
-      200: components["responses"]["GetTaxonomiesResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetTaxonomiesResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a taxonomy by ID */
   getTaxonomyById: {
     responses: {
-      200: components["responses"]["TaxonomiesResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['TaxonomiesResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Enable taxonomy */
   enableTaxonomy: {
     responses: {
-      200: components["responses"]["EnableTaxonomyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['EnableTaxonomyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Disable taxonomy */
   disableTaxonomy: {
     responses: {
-      200: components["responses"]["DisableTaxonomyResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['DisableTaxonomyResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Update taxonomies */
   updateTaxonomies: {
     responses: {
-      200: components["responses"]["UpdateTaxonomiesResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['UpdateTaxonomiesResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Get a taxonomy extended with tags used in events and attributes. */
   getTaxonomyTags: {
     responses: {
-      200: components["responses"]["GetTaxonomyTagsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['GetTaxonomyTagsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
   /** Export taxonomy. */
   exportTaxonomy: {
     responses: {
-      200: components["responses"]["ExportTaxonomyTagsResponse"];
-      403: components["responses"]["UnauthorizedApiErrorResponse"];
-      404: components["responses"]["NotFoundApiErrorResponse"];
-      default: components["responses"]["ApiErrorResponse"];
+      200: components['responses']['ExportTaxonomyTagsResponse'];
+      403: components['responses']['UnauthorizedApiErrorResponse'];
+      404: components['responses']['NotFoundApiErrorResponse'];
+      default: components['responses']['ApiErrorResponse'];
     };
   };
 }

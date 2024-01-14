@@ -1,0 +1,59 @@
+@startuml "Add Reference between Object and attribute in Event-Graph"
+hide footbox
+
+actor User as user
+box "Frontend"
+participant "Event Graph" as eventgraph <<Component>>
+participant "Action Bar" as optmenu <<Component>>
+participant "'Add Reference' Menu" as addreferencemenu <<Component>>
+participant "Top Menu" as topmenu <<Component>>
+participant Layout as layout <<Component>>
+end box
+database "Backend API" as api
+
+activate eventgraph
+note over eventgraph : Unreferenced objects/attributes displayed
+
+user -> topmenu : toggle edit mode
+topmenu --> layout : state changes
+layout -> eventgraph : enter edit mode
+activate eventgraph
+
+user -> optmenu: click " Add Reference " button
+activate optmenu
+
+optmenu -> eventgraph: initiate "add reference" action
+deactivate optmenu
+
+group "add reference" action
+eventgraph -> user: allow to drag \nan edge from node to node
+
+user -> eventgraph: drag new reference
+end
+
+eventgraph -> addreferencemenu: initiate "enter reference values" action
+
+group "enter reference values" action
+activate addreferencemenu
+note over addreferencemenu: Reference menu displayed
+
+addreferencemenu --> user:input form for attributes of new reference
+
+user -> addreferencemenu: submit filled form
+
+addreferencemenu -> api: send save request
+
+api --> addreferencemenu: success
+deactivate addreferencemenu
+end
+
+eventgraph -> layout : exit edit mode
+deactivate eventgraph
+layout -> topmenu : view mode
+
+
+eventgraph -> eventgraph: add newly added edge
+
+note over eventgraph : New reference added
+
+@enduml
