@@ -53,5 +53,5 @@ export const themes = [
   { value: 'latte', label: 'Latte' }
 ] as const;
 
-export const mode = writable<Mode>('edit');
+export const mode = writable<Mode>('view');
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();

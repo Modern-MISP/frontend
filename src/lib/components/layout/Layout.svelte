@@ -40,7 +40,7 @@
 
     <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <Breadcrumbs routes={currentRoute} />
-      <main class="relative flex max-h-full overflow-hidden grow">
+      <main class="relative flex flex-col max-h-full gap-4 overflow-hidden grow">
         <slot />
       </main>
     </div>
