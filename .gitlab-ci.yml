@@ -1,0 +1,91 @@
+stages:
+  - pre-build
+  - build
+  - test
+  - deploy
+
+default:
+  tags:
+    - docker # Tag is required to make the CI runner accept the jobs
+  image:
+    name: node:latest
+    pull_policy: if-not-present
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+
+# === pre-build stage ===
+
+install_dependencies:
+  stage: pre-build
+  script:
+    - npm ci --cache .npm --prefer-offline
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - .svelte-kit
+
+# === build stage ===
+
+build_production:
+  stage: build
+  script:
+    - cp $ENV_FILE .env
+    - npm run build
+    - mv build dist_production
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist_production
+
+# build staging:
+#   image: node:latest
+#   stage: build
+#   script:
+#     - npm run build -- --mode staging
+#     - mv build dist_staging
+#   artifacts:
+#     expire_in: 1 week
+#     paths:
+#       - dist_staging
+
+docs:
+  stage: build
+  trigger:
+    include: .gitlab/docs.yml
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+
+# === test stage ===
+
+unit_tests:
+  stage: test
+  script:
+      - npm run test:unit
+
+
+# === deploy stage ===
+
+ftp_deploy:
+  stage: deploy
+  image:
+    name: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+    pull_policy: if-not-present
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+      when: manual
+    - if: $CI_COMMIT_BRANCH == "main"
+  environment:
+    name: Production
+  script:
+    - apt-get update -qq && apt-get install -y -qq lftp
+    - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_production/ ./ --parallel=10 -X .htaccess"
+  dependencies:
+    - build_production
