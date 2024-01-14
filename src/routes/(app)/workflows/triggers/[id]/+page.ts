@@ -1,23 +1,25 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import { filter } from 'lodash-es';
+import Info from '$lib/components/info/Info.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/workflows/triggers');
+export const load: PageLoad = async ({ params }) => {
+  const { data, error: mispError, response } = await GET('/workflows/triggers'); // TODO: check for alternative endpoint/solution
 
   if (mispError) throw error(response.status, mispError.message);
 
-  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+  const trigger = filter(data, (x) => x.id === params.id).at(0) ?? {};
 
-  const header = [
+  const col = createTableHeadGenerator<typeof trigger>();
+
+  const infoHeader = [
     col({
       icon: 'mdi:id-card',
       key: 'name',
@@ -36,7 +38,7 @@ export const load: PageLoad = async () => {
       icon: 'mdi:head-alert',
       key: 'overhead',
       label: 'Overhead',
-      value: (x) => ({ value: x.trigger_overhead, options: THREAT_LEVEL_LOOKUP }),
+      value: (x) => ({ vlaue: x.trigger_overhead, options: THREAT_LEVEL_LOOKUP }),
       display: LookupPill
     }),
     col({
@@ -97,10 +99,10 @@ export const load: PageLoad = async () => {
       }),
       display: DatePill
     })
-  ] as const;
+  ];
 
   return {
-    tableData: data,
-    header
+    trigger,
+    infoHeader
   };
 };
