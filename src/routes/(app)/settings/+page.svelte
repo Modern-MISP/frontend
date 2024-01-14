@@ -17,6 +17,11 @@
   ];
 </script>
 
+<!--
+  @component
+  Exposes various global settings of the application.
+-->
+
 <div class="flex flex-col rounded-lg">
   <SettingsEntry label="Menu is open per default">
     <Checkbox bind:checked={$settings.openOnInit} />

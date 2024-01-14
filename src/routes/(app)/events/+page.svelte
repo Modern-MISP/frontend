@@ -34,6 +34,12 @@
   $: loadMore(page);
 </script>
 
+<!--
+  @component
+  Displays a list of all events.
+  
+-->
+
 <DynTable href={({ id }) => `/events/${id}`} {header} data={tableData} />
 
 <Pagination bind:page />

@@ -4,6 +4,11 @@
   import View from './ViewKey.svelte';
 </script>
 
+<!--
+  @component
+  Displays information about a specific auth key, specified by `id`.
+  
+-->
 {#if $mode === 'edit'}
   <Edit />
 {:else}
