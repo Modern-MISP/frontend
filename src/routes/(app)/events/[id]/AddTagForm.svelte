@@ -5,6 +5,9 @@
   import Select from '$lib/components/form/Select.svelte';
   import CheckBox from '$lib/components/checkbox/Checkbox.svelte';
   import Button from '$lib/components/button/Button.svelte';
+  import Pill from '$lib/components/pills/pill/Pill.svelte';
+
+  let color = '';
 </script>
 
 <div class="flex flex-col gap-1">
@@ -59,7 +62,12 @@
       </CardRow>
       <CardRow>
         <span>Color</span>
-        <Input name="colour" />
+        <Input
+          name="colour"
+          class="w-20"
+          type="color"
+          on:value={({ detail }) => (color = detail)}
+        />
       </CardRow>
     </Card>
   </form>
