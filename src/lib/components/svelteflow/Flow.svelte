@@ -19,7 +19,15 @@
   export let snapGrid: [number, number] = [25, 25];
 </script>
 
+<!--
+  @component
+  
+  This component contains a node-based editor or interactive diagram provided by
+  [SvelteFlow](https://svelteflow.dev/).
 
+  It acts like a canvas.
+  All elements, such as nodes, edges and controls, are rendered inside.
+-->
 <SvelteFlow {nodes} {edges} {snapGrid} {nodeTypes} fitView on:nodeclick class="text-text">
   <div class="!text-base">
     <Background
