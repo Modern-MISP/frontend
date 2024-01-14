@@ -9,8 +9,6 @@ participant "Filter Menu" as filter <<Component>>
 end box
 database "Backend API" as api
 
-activate api
-
 activate eventlist
 note over eventlist : Unfiltered events list is displayed
 
