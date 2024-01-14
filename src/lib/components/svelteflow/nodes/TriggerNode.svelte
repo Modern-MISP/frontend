@@ -8,6 +8,11 @@
   export let data: $$Props['data'];
 </script>
 
+<!--
+  @component
+  
+  A node representing a workflow trigger.
+-->
 <BaseNode {...data}>
   <div class="flex">
     {data.label}

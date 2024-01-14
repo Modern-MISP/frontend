@@ -5,6 +5,7 @@
   import type { Node, Edge } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
 
+  /** The data that will be displayed on this page. */
   export let data: PageData;
 
   const { trigger, infoHeader } = data;
@@ -45,6 +46,12 @@
   }
 </script>
 
+<!--
+  @component
+  
+  All the information about a specific workflow trigger,
+  including an interactive node-based diagram for visualizing the workflow.
+-->
 <div class="flex flex-row">
   <div class="flex-col basis-1/3">
     <DynCard header={infoHeader} data={trigger} />
