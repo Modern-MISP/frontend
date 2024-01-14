@@ -1,13 +1,14 @@
 import { GET } from '$lib/api';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Info from '$lib/components/info/Info.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import Info from '$lib/components/info/Info.svelte';
-import ThreatLevelPill from '$lib/components/pills/threatLevelPill/ThreatLevelPill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
-import Boolean from '$lib/components/boolean/Boolean.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/workflows/triggers');
@@ -35,8 +36,8 @@ export const load: PageLoad = async () => {
       icon: 'mdi:head-alert',
       key: 'overhead',
       label: 'Overhead',
-      value: (x) => ({ threatLevel: x.trigger_overhead }),
-      display: ThreatLevelPill
+      value: (x) => ({ value: x.trigger_overhead, options: THREAT_LEVEL_LOOKUP }),
+      display: LookupPill
     }),
     col({
       icon: 'mdi:information',
