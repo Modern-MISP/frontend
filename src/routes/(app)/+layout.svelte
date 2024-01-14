@@ -21,6 +21,13 @@
   ];
 </script>
 
+<!--
+  @component
+  App Layout. Used for all routes besides [`/login`](pages.md#/login).
+  Contains the {@link Layout} component, in which each page's content is inserted into via the component's default slot.
+  
+-->
+
 <Layout {routes} currentRoute={$currentRoute}>
   <slot /></Layout
 >
