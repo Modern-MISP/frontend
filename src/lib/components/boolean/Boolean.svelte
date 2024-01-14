@@ -19,7 +19,7 @@
 
 <!-- 
   @component
-  Displays a boolean value as a text using the {@link Info} component.
+  Displays a boolean value as a text using the {@link Pill} component.
   The background is green if the value is true and red if the value is false.
   
  -->

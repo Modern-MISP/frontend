@@ -6,8 +6,8 @@
   @component
   
   Root layout. Used to apply the theme and render the full application. 
-  The theme works with css variables and tailwind. Basically you can apply ever class from  
-{@link https://github.com/catppuccin/tailwindcss} to any element, and the theme will change the colors with css variables.
+  The theme is based on css variables and [tailwindcss](https://tailwindcss.com/).
+  Elements using the proper tailwind classes will be themed automatically according to the current theme when placed in this layout.
   
 -->
 <body class="{$settings.theme} bg-base w-full h-[100vh] flex">
