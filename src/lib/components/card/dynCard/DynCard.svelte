@@ -1,17 +1,28 @@
 <script lang="ts" generics="T">
-  import type { ITableHead } from '$lib/models/ITableHead.interface';
+  import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
   /**
    * The header of the table. Also includes the icon and the href.
    */
-  export let header: ITableHead<T>[];
+  export let header: TableHead<T>[];
   /**
    * The data that will be displayed in the table.
    */
   export let data: T;
 </script>
+
+<!-- 
+  @component
+  A card that displays the data of the given header.
+
+  This works dynamically similar to the {@link DynTable} component. So you should probably use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util} to create the header.
+ -->
 
 <Card class="gap-4">
   {#each header as { label, value, display }}

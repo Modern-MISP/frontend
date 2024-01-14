@@ -2,7 +2,7 @@
   import Pill from '../pill/Pill.svelte';
 
   /**
-   * The label of the pill. Will be placed on the left side of the pill. The background of the label is bg-crust.
+   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
    */
   export let label: string | undefined = undefined;
   /**
@@ -13,12 +13,17 @@
    * The icon of the pill. Will be placed on the left side of the pill. If a label is present, the icon will be placed on the left side of the label.
    */
   export let icon: string | undefined = undefined;
-
   /**
-   * The link of the pill => the page where to navigate of pill is clicked.
+   * The target URL of the pill, which will be navigated to when the pill is clicked.
    */
   export let href: string;
 </script>
+
+<!-- 
+  @component
+  A pill component that acts as a link. This pills text will be blue:
+
+ -->
 
 <a {href}>
   <Pill {label} {text} {icon} class="!text-blue-400" />

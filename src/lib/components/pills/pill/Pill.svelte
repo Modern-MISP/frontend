@@ -2,7 +2,7 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The label of the pill. Will be placed on the left side of the pill. The background of the label is bg-crust.
+   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
    */
   export let label: string | undefined = undefined;
   /**
@@ -19,9 +19,8 @@
    * Class that should be applied to the pill.
    */
   export { clazz as class };
-
   /**
-   * Some style overrides. It is better practice to use the class prop. But is you have many different values. For example the colors of tags. You should use this prop. (using this style prop looks better then the class bg-[#${color}])
+   * Some style overrides. When possible, the `class` prop should be used instead.
    */
   export let style = '';
 </script>
@@ -33,25 +32,19 @@
   @slot The content of the pill. If no slot is provided, the text prop will be used.
  -->
 
-<!-- FIXME: padding if label or icon not set -->
-<div
-  class="flex items-center gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}"
-  {style}
->
-  {#if icon && !label}
-    <div class="flex items-center gap-1 py-1 pl-2">
-      <Icon {icon} />
-    </div>
-  {/if}
-  {#if label}
-    <div class="flex items-center gap-1 px-2 py-1 text-white bg-crust">
+<div class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}" {style}>
+  {#if icon || label}
+    <div class="flex items-center gap-2 px-2 py-1 text-white bg-crust">
       {#if icon}
         <Icon {icon} />
       {/if}
-      {label}
+
+      {#if label}
+        {label}
+      {/if}
     </div>
   {/if}
-  <span class="px-2 py-1 pl-0 line-clamp-1">
+  <span class="px-2 py-1 line-clamp-1" class:pl-0={icon || label}>
     <slot>
       {text}
     </slot>

@@ -1,17 +1,16 @@
 <script lang="ts">
   /**
-   * The url to navigate to when clicking on the td.
+   * The url to navigate to when clicking on the `td`.
    */
   export let href: string | undefined = undefined;
 </script>
 
 <!-- 
   @component
-  @slot - The content of the td.
-  @prop href - The url to navigate to when clicking on the td.
-
-  Create an td element for the table with specific styling.
+  Creates an HTML [`td`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) element for the table with specific styling.
   
+  @slot - The content of the td.
+
  -->
 
 <a class="border-t-[1px] border-text h-full table-cell" {href}>

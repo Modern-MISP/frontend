@@ -4,11 +4,12 @@
   import Icon from '@iconify/svelte';
   import ActionBar from './actionbar/ActionBar.svelte';
   import ToggleModeEntry from './actionbar/ToggleModeEntry.svelte';
+  import type { Mode } from '$lib/models/Mode';
 
   /**
    * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
    */
-  export let mode: 'view' | 'edit' = 'view';
+  export let mode: Mode = 'view';
 
   /**
    * Whether the side menu is open or not. TODO: probably should search for a better solution for this.
@@ -18,8 +19,9 @@
 
 <!-- 
   @component
-  The top menu component. It contains the {@link Input} and {@link Checkbox} components.
-  Also the switch for changes between view and edit mode is located here.
+  The top menu component.
+
+  The search bar and the {@link ActionBar} are located here.
   
  -->
 

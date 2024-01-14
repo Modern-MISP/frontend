@@ -5,7 +5,7 @@ import type { PageLoad } from './$types';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import { createTableHeadGenerator } from '$lib/components/table/TableBuilder';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 export const load: PageLoad = async () => {

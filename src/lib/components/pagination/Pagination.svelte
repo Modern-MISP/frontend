@@ -2,15 +2,20 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The current page
+   * The current page.
    */
   export let page: number;
 
   /**
-   * The total number of pages
+   * The total number of pages.
    */
   export let length: number = 25;
 </script>
+
+<!-- 
+  @component
+  A pagination component that allows the user to navigate through pages of a list.
+ -->
 
 <div class="grid w-full max-w-6xl grid-flow-col gap-2 mx-auto">
   <button on:click={() => (page > 1 ? page-- : undefined)} class="h-full">

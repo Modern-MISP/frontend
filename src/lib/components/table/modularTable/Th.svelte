@@ -2,11 +2,11 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The label of the column
+   * The label of the column.
    */
   export let label: string;
   /**
-   * The icon of the column
+   * The icon of the column.
    */
   export let icon: string;
 
@@ -19,12 +19,10 @@
 
 <!-- 
   @component
-  
-  @slot - The content of the th.
-  @prop label - The label of the column
+  Creates an HTML [`th`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) element for the table with specific styling.
 
-  
-  
+  @slot - The content of the th.
+   
  -->
 
 <th class="sticky top-0 bg-surface1 {clazz}" on:click>

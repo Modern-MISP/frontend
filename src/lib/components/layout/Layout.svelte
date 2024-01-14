@@ -20,9 +20,12 @@
 
 <!-- 
   @component
-  The basic component for the layout of the application. It contains the {@link SideMenu}, {@link TopMenu} and {@link Breadcrumbs} components.
-  The body goes inside of the default slot. 
-  You can also override the {@link SideMenu} by using the "sideMenu" slot.
+  The basic component for the layout of the application.
+
+  This Component is intended to be used in [Layouts](layouts.md#layouts),
+  where the page body will automatically be inserted into the default slot.
+
+  You can also override the {@link SideMenu} by using the `sideMenu` slot.
  -->
 
 <div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
@@ -35,9 +38,11 @@
       <TopMenu bind:mode={$mode} bind:isOpen />
     </div>
 
-    <main class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
+    <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <Breadcrumbs routes={currentRoute} />
-      <slot />
-    </main>
+      <main class="relative flex max-h-full overflow-hidden grow">
+        <slot />
+      </main>
+    </div>
   </div>
 </div>

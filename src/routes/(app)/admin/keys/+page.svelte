@@ -7,4 +7,10 @@
   const { tableData, header } = data;
 </script>
 
+<!--
+  @component
+  
+  
+-->
+
 <DynTable {header} data={tableData} />
