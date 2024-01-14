@@ -1,13 +1,20 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-  import type { Modus } from '$lib/models/Modus';
+  import type { Mode } from '$lib/models/Mode';
   import { capitalize } from 'lodash-es';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type ActionBar from './ActionBar.svelte';
 
   /**
    * The current mode of this Entry.
    */
-  export let mode: Modus = 'view';
+  export let mode: Mode = 'view';
 </script>
+
+<!--
+  @component
+  The {@link ActionBar} entry responsible for toggling modes.
+-->
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <label class="flex flex-col items-center gap-1">

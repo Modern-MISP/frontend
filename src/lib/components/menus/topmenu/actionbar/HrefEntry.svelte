@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FastActionsEntry from './ActionBarEntry.svelte';
+  import ActionBarEntry from './ActionBarEntry.svelte';
 
   /**
    * The label of this ActionBar entry.
@@ -15,6 +15,11 @@
   export let action: string | undefined = undefined;
 </script>
 
+<!--
+  @component
+  An {@link ActionBarEntry} that acts as a link to the specified URL.
+-->
+
 <a href={action}>
-  <FastActionsEntry {label} {icon} />
+  <ActionBarEntry {label} {icon} />
 </a>

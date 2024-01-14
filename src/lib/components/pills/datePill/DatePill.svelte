@@ -22,7 +22,7 @@
 
 <!-- 
   @component
-  Displays a date in a pill with the default format. You can configure the format in the config.ts file.
+  Displays a date in a pill with the default format. The date format can be configured in the `config.ts` file.
  -->
 
 <Pill icon="mdi:clock" class={clazz}>

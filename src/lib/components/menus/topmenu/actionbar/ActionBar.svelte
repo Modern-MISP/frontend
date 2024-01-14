@@ -17,6 +17,7 @@
     
     The action bar contains actions that can be performed when in edit mode.
 -->
+
 {#if entries.length > 0}
   <div class="flex flex-row items-center justify-between gap-4 text-text" in:slide>
     {#each entries as entry}

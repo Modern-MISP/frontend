@@ -2,6 +2,10 @@
   import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
   /**
    * The header of the table. Also includes the icon and the href.

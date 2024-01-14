@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   let clazz = '';
   /**
-   * Additional classes to be applied to this component
+   * Additional classes to be applied to this component.
    */
   export { clazz as class };
 </script>

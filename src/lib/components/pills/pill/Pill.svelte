@@ -2,7 +2,7 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The label of the pill. Will be placed on the left side of the pill. The background of the label is bg-crust.
+   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
    */
   export let label: string | undefined = undefined;
   /**
@@ -19,9 +19,8 @@
    * Class that should be applied to the pill.
    */
   export { clazz as class };
-
   /**
-   * Some style overrides. It is better practice to use the class prop. But is you have many different values. For example the colors of tags. You should use this prop. (using this style prop looks better then the class bg-[#${color}])
+   * Some style overrides. When possible, the `class` prop should be used instead.
    */
   export let style = '';
 </script>

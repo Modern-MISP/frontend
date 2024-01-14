@@ -15,6 +15,11 @@
   export let action: () => void;
 </script>
 
+<!--
+  @component
+  An {@link ActionBarEntry} with an `on:click` callback action associated with it.
+-->
+
 <button on:click={action}>
   <ActionBarEntry {icon} {label} />
 </button>

@@ -1,10 +1,9 @@
 <!-- 
   @component
+  Creates an HTML [`table`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element with specific styling.
 
-  @slot the full table. 
-  @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table
+  @slot The full table. 
   
-  Create an table element with specific styling.
   
  -->
 <div class="w-full h-full overflow-auto text-lg rounded-lg text-text bg-surface0">

@@ -118,12 +118,12 @@ export const load: PageLoad = async () => {
 
           {
             label: 'modified',
-            text: format(x.timestamp ? new Date(+x.timestamp) : new Date(), DATE_FORMAT)
+            text: format(x.timestamp ? new Date(+x.timestamp * 1000) : new Date(), DATE_FORMAT)
           },
           {
             label: 'published',
             text: format(
-              x.publish_timestamp ? new Date(+x.publish_timestamp) : new Date(),
+              x.publish_timestamp ? new Date(+x.publish_timestamp * 1000) : new Date(),
               DATE_FORMAT
             )
           }
