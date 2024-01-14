@@ -1,6 +1,6 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-  import type { Mode as Mode } from '$lib/models/Mode';
+  import type { Mode } from '$lib/models/Mode';
   import { capitalize } from 'lodash-es';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type ActionBar from './ActionBar.svelte';

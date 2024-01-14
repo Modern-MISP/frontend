@@ -14,7 +14,7 @@
 
 <button
   on:click
-  class="flex justify-between p-4 rounded-md bg-crust w-full items-center text-text text-lg font-bold {clazz}"
+  class="flex justify-between p-4 rounded-md bg-crust w-full items-center text-lg font-bold {clazz}"
 >
   <slot />
 </button>

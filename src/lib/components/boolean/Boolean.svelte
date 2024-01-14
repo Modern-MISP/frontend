@@ -1,16 +1,14 @@
 <script lang="ts">
   import Pill from '../pills/pill/Pill.svelte';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import type Info from '$lib/components/info/Info.svelte';
 
   /**
-   * Displays a boolean value as a text using the {@link Info} component.
+   * Displays a boolean value as a text using the {@link Pill} component.
    * Also parses strings to booleans. String must be either 'true' or 'false'.
    */
   export let isTrue: boolean | string = true;
 
   /**
-   * Additional classes to be applied to the {@link Info} component.
+   * Additional classes to be applied to the {@link Pill} component.
    */
   export { clazz as class };
 
