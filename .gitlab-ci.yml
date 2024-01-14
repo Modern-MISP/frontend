@@ -7,6 +7,9 @@ stages:
 default:
   tags:
     - docker # Tag is required to make the CI runner accept the jobs
+  image:
+    name: node:latest
+    pull_policy: if-not-present
 
 workflow:
   rules:
@@ -16,7 +19,6 @@ workflow:
 # === pre-build stage ===
 
 install_dependencies:
-  image: node:latest
   stage: pre-build
   script:
     - npm ci --cache .npm --prefer-offline
@@ -33,7 +35,6 @@ install_dependencies:
 # === build stage ===
 
 build_production:
-  image: node:latest
   stage: build
   script:
     - cp $ENV_FILE .env
@@ -66,7 +67,6 @@ docs:
 
 unit_tests:
   stage: test
-  image: node:latest
   script:
       - npm run test:unit
 
@@ -75,7 +75,9 @@ unit_tests:
 
 ftp_deploy:
   stage: deploy
-  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  image:
+    name: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+    pull_policy: if-not-present
   rules:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
       when: manual

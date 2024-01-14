@@ -38,7 +38,7 @@ export const load: PageLoad = async ({ params }) => {
       icon: 'mdi:head-alert',
       key: 'overhead',
       label: 'Overhead',
-      value: (x) => ({ vlaue: x.trigger_overhead, options: THREAT_LEVEL_LOOKUP }),
+      value: (x) => ({ value: x.trigger_overhead, options: THREAT_LEVEL_LOOKUP }),
       display: LookupPill
     }),
     col({
