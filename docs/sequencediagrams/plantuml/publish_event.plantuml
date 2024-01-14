@@ -24,6 +24,7 @@ api --> eventlist : success
 eventlist --> eventlist : update value
 
 eventlist -> layout : exit edit mode
+deactivate eventlist
 layout -> topmenu : view mode
 deactivate eventlist
 @enduml
