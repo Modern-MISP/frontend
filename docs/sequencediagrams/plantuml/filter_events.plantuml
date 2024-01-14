@@ -4,7 +4,7 @@ hide footbox
 actor User as user
 box "Frontend"
 participant "Events List" as eventlist
-participant "Options Bar" as topmenu <<Component>>
+participant "Action Bar" as topmenu <<Component>>
 participant "Filter Menu" as filter <<Component>>
 end box
 database "Backend API" as api
