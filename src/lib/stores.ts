@@ -4,6 +4,7 @@ import { writable } from 'svelte/store';
 import type { ActionBarEntry } from './models/ActionBarEntry.interface';
 import type { Mode } from './models/Mode';
 import type { ComponentProps } from 'svelte';
+import { INITIAL_SETTINGS } from './settings';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
@@ -20,16 +21,7 @@ const createSettingsStore = <T>(init: T) => {
 };
 
 export const actionBarEntries = writable<ActionBarEntry[]>([]);
-
-let init: {
-  theme: Themes;
-  openOnInit: boolean;
-  tableMaxSize: boolean;
-} = {
-  theme: 'mocha',
-  openOnInit: true,
-  tableMaxSize: false
-};
+let init = INITIAL_SETTINGS;
 
 if (browser) {
   const localSettings = JSON.parse(localStorage.getItem('settings') || '{}');
