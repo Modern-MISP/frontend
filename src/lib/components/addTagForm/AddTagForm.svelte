@@ -69,6 +69,7 @@
           on:value={({ detail }) => (color = detail)}
         />
       </CardRow>
+      <Pill />
     </Card>
   </form>
   <Card class="h-min">
