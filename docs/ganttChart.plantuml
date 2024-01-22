@@ -1,0 +1,17 @@
+@startgantt
+[Table Filter] requires 7 days
+[Edit Mode] requires 5 days
+[Edit Actions] requires 3 day
+-- Pages --
+[List Events] requires 4 days
+[Add Event] requires 4 days
+[Edit Event] requires 4 days
+[View Event] requires 4 days
+[List Galaxies] requires 4 days
+[View Galaxy] requires 4 days
+[Edit Galaxy] requires 4 days
+[View Workflow] requires 4 days
+[Edit Workflow] requires 4 days
+[Edit Event] requires 4 days
+
+@endgantt
