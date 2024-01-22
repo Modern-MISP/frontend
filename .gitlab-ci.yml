@@ -6,7 +6,8 @@ stages:
 
 default:
   tags:
-    - docker # Tag is required to make the CI runner accept the jobs
+    - registry-access # Tag is required to make the CI runner accept the jobs
+
   image:
     name: node:latest
     pull_policy: if-not-present
