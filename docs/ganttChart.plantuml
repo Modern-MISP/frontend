@@ -13,6 +13,7 @@ today is colored in lightblue
 [Edit Mode setup] requires 5 days and is 20% complete
 [Edit Actions] requires 4 days and is 0% complete
 [SvelteFlow setup] requires 5 days and is 70% complete
+[Write Phase Report] requires 5 days and is 0% complete
 -- Pages --
 [List Pages] requires 7 days and is 80% complete
 note bottom
@@ -67,8 +68,10 @@ Project starts 2024-01-15
 [View Pages] -> [View Pages > Edit Mode]
 [SvelteFlow setup] -> [Workflows]
 [SvelteFlow setup] -> [Event Graph]
-[Import Galaxy] ends 2024-02-06
-[Abgabe] happens at 2024-02-09
+2024-02-05 to 2024-02-11 is closed and are named [Pause Klausurenphase]
+[Import Galaxy] ends 2024-02-12
+[Write Phase Report] ends at 2024-02-16
+[Abgabe] happens at 2024-02-16
 
 
 ' [List Pages > Filter] displays on same row as [List Pages]
