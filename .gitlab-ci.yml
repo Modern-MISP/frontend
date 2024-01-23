@@ -1,3 +1,6 @@
+# include:
+#   - template: Code-Quality.gitlab-ci.yml
+
 stages:
   - pre-build
   - build
@@ -66,7 +69,20 @@ docs:
 unit_tests:
   stage: test
   script:
-      - npm run test:unit
+      - npx vitest run --reporter junit --outputFile report.xml
+  artifacts:
+    reports:
+      junit: report.xml
+
+eslint:
+  stage: test
+  script:
+    - npx eslint --format gitlab .
+  dependencies:
+    - install_dependencies
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
 
 
 # === deploy stage ===
