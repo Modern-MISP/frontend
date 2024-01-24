@@ -13,4 +13,4 @@
   
 -->
 
-<DynTable href={(x) => `/servers/${x.Server?.id}`} {header} data={tableData} />
+<DynTable href={(x) => `/admin/servers/${x.Server?.id}`} {header} data={tableData} />

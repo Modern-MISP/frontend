@@ -42,7 +42,7 @@ export const load: PageLoad = async () => {
       label: 'Key',
       display: Info,
       value: (x) => ({
-        text: x.AuthKey?.authkey_end + '••••••••••••••' + x.AuthKey?.authkey_end
+        text: x.AuthKey?.authkey_start + '••••••••••••••' + x.AuthKey?.authkey_end
       })
     }),
     col({
