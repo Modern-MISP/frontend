@@ -69,7 +69,7 @@ docs:
 unit_tests:
   stage: test
   script:
-      - npx vitest run --reporter junit --outputFile report.xml
+    - npx vitest run --reporter junit --outputFile report.xml
   artifacts:
     reports:
       junit: report.xml
@@ -83,7 +83,6 @@ eslint:
   artifacts:
     reports:
       codequality: gl-code-quality-report.json
-
 
 # === deploy stage ===
 

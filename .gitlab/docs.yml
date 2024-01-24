@@ -13,7 +13,6 @@ default:
     - kit-intranet # Tag is required to make the CI runner accept the jobs
   image: node:latest
 
-
 variables:
   SOURCE_DATE_EPOCH: 0
 
@@ -32,9 +31,9 @@ generate_docs:
 
 generate_uml_svg:
   stage: generate_uml_svg
-  image: 
+  image:
     name: docker.io/plantuml/plantuml
-    entrypoint: [""]
+    entrypoint: ['']
   script:
     - find docs -type f -name *.plantuml -exec sh -c "cat '{}' | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > \$(dirname '{}')/\$(basename '{}' .plantuml).svg" \;
     - mv docs/sequencediagrams/plantuml/*.svg docs/sequencediagrams/svg/
@@ -65,12 +64,12 @@ push_docs:
     - if: $CI_PIPELINE_SOURCE == "parent_pipeline"
       when: manual
   script:
-     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
-     - cp site/pdf/document.pdf docs/
-     - cp docs/generated/uml.svg docs/
-     - rm -r docs/generated/
-     - git add docs/
-     - git config user.name uml-pipeline
-     - git config user.email uml-pipeline@example.com
-     - git commit -m "Auto-generated docs for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
-     - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
+    - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+    - cp site/pdf/document.pdf docs/
+    - cp docs/generated/uml.svg docs/
+    - rm -r docs/generated/
+    - git add docs/
+    - git config user.name uml-pipeline
+    - git config user.email uml-pipeline@example.com
+    - git commit -m "Auto-generated docs for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
+    - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
