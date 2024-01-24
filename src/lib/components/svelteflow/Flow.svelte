@@ -5,7 +5,8 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge
+    type Edge,
+    MiniMap
   } from '@xyflow/svelte';
   import TriggerNode from './nodes/TriggerNode.svelte';
   import type { Writable } from 'svelte/store';
@@ -47,6 +48,7 @@
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
   elementsSelectable={$mode === 'edit'}
+  proOptions={{ hideAttribution: true }}
 >
   <div class="!text-base">
     <Background class="!bg-base" variant={BackgroundVariant.Dots} size={2} />
