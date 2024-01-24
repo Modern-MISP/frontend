@@ -5,11 +5,13 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge
+    type Edge,
+    MiniMap
   } from '@xyflow/svelte';
   import TriggerNode from './nodes/TriggerNode.svelte';
   import type { Writable } from 'svelte/store';
   import ModuleNode from './nodes/ModuleNode.svelte';
+  import { mode } from '$lib/stores';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;
@@ -35,10 +37,22 @@
   It acts like a canvas.
   All elements, such as nodes, edges and controls, are rendered inside.
 -->
-<SvelteFlow {nodes} {edges} {snapGrid} {nodeTypes} fitView on:nodeclick class="text-text">
+<SvelteFlow
+  {nodes}
+  {edges}
+  {snapGrid}
+  {nodeTypes}
+  fitView
+  on:nodeclick
+  class="text-text"
+  nodesDraggable={$mode === 'edit'}
+  nodesConnectable={$mode === 'edit'}
+  elementsSelectable={$mode === 'edit'}
+  proOptions={{ hideAttribution: true }}
+>
   <div class="!text-base">
     <Background class="!bg-base" variant={BackgroundVariant.Dots} size={2} />
-    <Controls position="top-right" />
+    <Controls position="top-right" showLock={false} />
     <slot />
   </div>
 </SvelteFlow>

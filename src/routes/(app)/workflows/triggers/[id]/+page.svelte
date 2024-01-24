@@ -34,7 +34,6 @@
       type: 'module',
       data: { label: module.name },
       position: { x: module.pos_x, y: module.pos_y },
-      class: '!bg-surface1'
     });
     $edges.push({
       id: `1-${i}`,
