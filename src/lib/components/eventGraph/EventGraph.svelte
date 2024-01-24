@@ -9,6 +9,8 @@
 
   const edges: Writable<Edge[]> = writable([]);
 
+  // TODO: fix lint error properly
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let tableView: 'objects' | 'attributes' = 'objects';
 
   type Event = Record<string, unknown>;
@@ -16,6 +18,8 @@
   /**
    * The Event to be displayed on this page.
    */
+  // TODO: fix lint error properly
+  // eslint-disable-next-line svelte/valid-compile
   export let event: Event;
 </script>
 

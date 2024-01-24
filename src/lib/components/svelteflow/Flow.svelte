@@ -5,8 +5,7 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge,
-    MiniMap
+    type Edge
   } from '@xyflow/svelte';
   import TriggerNode from './nodes/TriggerNode.svelte';
   import type { Writable } from 'svelte/store';

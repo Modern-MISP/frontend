@@ -11,7 +11,7 @@
     if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
 
     const data = new FormData(currentTarget);
-    const entries: any = Object.fromEntries(data.entries());
+    const entries = Object.fromEntries(data.entries());
     try {
       const res = await login(entries);
       if (res) {
