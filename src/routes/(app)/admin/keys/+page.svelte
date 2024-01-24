@@ -13,4 +13,4 @@
   
 -->
 
-<DynTable {header} data={tableData} />
+<DynTable {header} data={tableData} href={(x) => `/admin/keys/${x.AuthKey?.id}`} />h
