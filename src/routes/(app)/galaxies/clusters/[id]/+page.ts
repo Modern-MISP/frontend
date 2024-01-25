@@ -7,13 +7,14 @@ import Info from '$lib/components/info/Info.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
   } = await GET('/galaxy_clusters/view/{galaxyClusterId}', {
-    params: { path: { galaxyClusterId: params.id } }
+    params: { path: { galaxyClusterId: params.id } },
+    fetch
   });
 
   if (mispError) throw error(response.status, mispError.message);

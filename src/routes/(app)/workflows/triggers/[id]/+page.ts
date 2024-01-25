@@ -10,8 +10,8 @@ import Info from '$lib/components/info/Info.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 
-export const load: PageLoad = async ({ params }) => {
-  const { data, error: mispError, response } = await GET('/workflows/triggers'); // TODO: check for alternative endpoint/solution
+export const load: PageLoad = async ({ params, fetch }) => {
+  const { data, error: mispError, response } = await GET('/workflows/triggers', { fetch }); // TODO: check for alternative endpoint/solution
 
   if (mispError) throw error(response.status, mispError.message);
 

@@ -10,8 +10,8 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/workflows/triggers');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/workflows/triggers', { fetch });
 
   if (mispError) throw error(response.status, mispError.message);
 
