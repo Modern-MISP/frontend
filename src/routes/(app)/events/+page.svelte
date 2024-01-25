@@ -26,8 +26,6 @@
     if (response.ok && _data) {
       tableData = _data;
     }
-
-    throw new Error('Error fetching more data');
   };
 
   $: page = 1;
