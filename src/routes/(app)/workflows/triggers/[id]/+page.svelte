@@ -33,7 +33,7 @@
       id: `${i}`,
       type: 'module',
       data: { label: module.name },
-      position: { x: module.pos_x, y: module.pos_y },
+      position: { x: module.pos_x, y: module.pos_y }
     });
     $edges.push({
       id: `1-${i}`,

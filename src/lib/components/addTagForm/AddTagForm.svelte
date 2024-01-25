@@ -7,6 +7,8 @@
   import Button from '$lib/components/button/Button.svelte';
   import Pill from '$lib/components/pills/pill/Pill.svelte';
 
+  // TODO: fix lint error properly
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let color = '';
 </script>
 

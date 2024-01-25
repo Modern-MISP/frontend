@@ -4,7 +4,6 @@ import type { PageLoad } from '../../[id]/$types';
 
 import Info from '$lib/components/info/Info.svelte';
 
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 

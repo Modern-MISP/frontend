@@ -15,4 +15,3 @@ They are the files called `+layout.svelte` in the `src/routes` directory of this
 See [here](https://kit.svelte.dev/docs/routing#layout) for general documentation about SvelteKit Layouts.
 
 Note that the inter-component dependencies and the specifics of exposed props, slots and events may not fully represent the final state of the application, as agreed upon with our supervisors.
-
