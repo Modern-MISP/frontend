@@ -12,6 +12,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
   if (mispError) throw error(response.status, mispError.message);
 
   return {
-    event: data.Event
+    event: data.Event!
   };
 };
