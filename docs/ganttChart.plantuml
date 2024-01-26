@@ -1,4 +1,4 @@
-@startgantt
+@startgantt implementation_plan
 printscale daily zoom 1.6
 
 header Modern MISP Frontend
@@ -8,14 +8,14 @@ today is colored in lightblue
 
 [Layout / Menus] requires 4 days
 [Action Bar] requires 3 days
-[Setup CI] requires 3 days and is 60% complete
+[Setup CI] requires 3 days and is 95% complete
 [Table Filter] requires 7 days and is 0% complete
-[Edit Mode setup] requires 5 days and is 20% complete
+[Edit Mode setup] requires 5 days and is 70% complete
 [Edit Actions] requires 4 days and is 0% complete
-[SvelteFlow setup] requires 5 days and is 70% complete
+[SvelteFlow setup] requires 5 days and is 100% complete
 [Write Phase Report] requires 5 days and is 0% complete
 -- Pages --
-[List Pages] requires 7 days and is 80% complete
+[List Pages] requires 8 days and is 90% complete and is colored in red
 note bottom
     Pages that consist of a
     single table listing data.
