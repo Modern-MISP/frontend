@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord[]">
+  import { derived, type Readable } from 'svelte/store';
+
   import type { DynTableHeadExtent } from './DynTable.model';
 
   import type { TableHead } from '$lib/models/TableHead.interface';
@@ -10,7 +12,7 @@
    * The header of the table. Also includes the icon and the href.
    * When setting this, it's recommended to use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function.
    */
-  export let header: (TableHead<T[number]> & DynTableHeadExtent)[];
+  export let header: Readable<TableHead<T[number]> & DynTableHeadExtent>[];
   /**
    * The data that will be displayed in the table.
    */
@@ -19,6 +21,8 @@
    * The callback that will be called when the user clicks on the row.
    */
   export let href: ((row: T[number]) => string | undefined) | undefined = undefined;
+
+  const store = derived(header, (arr) => arr);
 </script>
 
 <!--
@@ -34,7 +38,7 @@
 <Table>
   <thead>
     <tr>
-      {#each header as head}
+      {#each $store as head}
         <Th
           {...head}
           on:click={() => {
@@ -47,7 +51,7 @@
   <tbody>
     {#each data as row}
       <tr class="hover:bg-sky">
-        {#each header as { value }}
+        {#each $store as { value }}
           {@const v = value(row)}
           <Td href={href && href(row)}>
             <span class="text-lg">

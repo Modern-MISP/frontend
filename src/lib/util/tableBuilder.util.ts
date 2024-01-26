@@ -4,8 +4,11 @@ import type { SvelteComponent } from 'svelte';
 import { derived } from 'svelte/store';
 
 /**
+ * NOTE: This comment is heavily outdated, will be changed at a later point.
+ * TODO: Change this doc comment
+ *
  * ## What does this do?
- * Generates a function wich with you can create table head entries. Each entry must have  a label. Optionally you can add a display component. If you provide a display component the value function must return the props for the display component. If you don't provide a display component the value function must return a string.
+ * Generates a function with which you can create table head entries. Each entry must have  a label. Optionally you can add a display component. If you provide a display component the value function must return the props for the display component. If you don't provide a display component the value function must return a string.
  * Additionally you can extends the table head entry with your own properties by passing the type in as the "E" generic. You also should pass the type you want to provide to any column as the "T" generic.
  *
  * That way you will create an object where the key maps to a value that will be displayable by the component you provided in the display property.
@@ -43,23 +46,15 @@ import { derived } from 'svelte/store';
  * @template E The type of the additional properties that are necessary for one table head entry.
  * @returns A function that will create a table head object with the correct types.
  */
+
 export function createTableHeadGenerator<
   T,
   E extends Record<string, unknown> = Record<string, unknown>
 >() {
-  function createTableHead<K extends SvelteComponent | undefined = undefined>(
-    tableHead: TableHead<T, K> & E
-  ) {
-    return tableHead;
-  }
-  return createTableHead;
-}
-
-export function createTableHeadGenerator2<T>() {
   return function <
     K extends SvelteComponent | undefined = undefined,
     L extends SvelteComponent | undefined = undefined
-  >(view: TableHead<T, K>, edit: Partial<TableHead<T, L>> = {}) {
+  >(view: TableHead<T, K> & E, edit: Partial<TableHead<T, L> & E> = {}) {
     return derived(mode, (m) => (m === 'edit' ? { ...view, ...edit } : view));
   };
 }
