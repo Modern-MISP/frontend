@@ -47,12 +47,12 @@
   <tbody>
     {#each data as row}
       <tr class="hover:bg-sky">
-        {#each header as { value, display }}
+        {#each header as { value }}
           {@const v = value(row)}
           <Td href={href && href(row)}>
             <span class="text-lg">
-              {#if display && typeof v != 'string'}
-                <svelte:component this={display} {...v} />
+              {#if typeof v !== 'string'}
+                <svelte:component this={v.display} {...v.props} />
               {:else}
                 {v}
               {/if}

@@ -4,11 +4,11 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
-
+import Input from '$lib/components/input/Input.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { createTableHeadGenerator, createTableHeadGenerator2 } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
@@ -96,54 +96,50 @@ export const load: PageLoad = async ({ params, fetch }) => {
     })
   ];
 
-  const col2 = createTableHeadGenerator<typeof data.Galaxy>();
-  // const left = [([data.Galaxy ?? {}], DynCard, {});
+  const fac = createTableHeadGenerator2<typeof data.Galaxy>();
 
   const left = [
-    col2({
-      key: 'name',
-      label: 'Name',
-      value: (x) => x?.name ?? 'unknown'
-    }),
-    col2({
-      key: 'description',
+    fac(
+      {
+        label: 'Name',
+        value: (x) => x?.name ?? 'unknown'
+      },
+      {
+        value: (x) => ({ display: Input, props: { value: x?.name ?? 'unknown' } })
+      }
+    ),
+    fac({
       label: 'Description',
       display: Info,
       value: (x) => ({
         text: x?.description ?? 'unknown'
       })
     }),
-    col2({
-      key: 'namespace',
+    fac({
       label: 'Namespace',
       value: (x) => x?.namespace ?? 'unknown'
     })
   ];
 
   const right = [
-    col2({
-      key: 'version',
+    fac({
       label: 'Version',
       value: (x) => x?.version ?? 'unknown'
     }),
-    col2({
-      key: 'id',
+    fac({
       label: 'ID',
       value: (x) => x?.id ?? 'unknown'
     }),
-    col2({
-      key: 'uuid',
+    fac({
       label: 'UUID',
       value: (x) => x?.uuid ?? 'unknown'
     }),
-    col2({
-      key: 'enabled',
+    fac({
       label: 'Enabled',
       display: Boolean,
       value: (x) => ({ isTrue: x?.enabled ?? false })
     }),
-    col2({
-      key: 'local_only',
+    fac({
       label: 'Local Only',
       display: Boolean,
       value: (x) => ({ isTrue: x?.local_only ?? false })

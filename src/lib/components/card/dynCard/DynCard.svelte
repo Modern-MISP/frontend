@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+  import { derived, type Readable } from 'svelte/store';
+
   import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
@@ -10,11 +12,13 @@
   /**
    * The header of the table. Also includes the icon and the href.
    */
-  export let header: TableHead<T>[];
+  export let header: Readable<TableHead<T>>[];
   /**
    * The data that will be displayed in the table.
    */
   export let data: T;
+
+  const store = derived(header, (arr) => arr);
 </script>
 
 <!-- 
@@ -25,13 +29,14 @@
  -->
 
 <Card class="gap-4">
-  {#each header as { label, value, display }}
+  {#each $store as { label, value }}
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>
-      {#if display}
-        <svelte:component this={display} {...value(data)} />
+      {@const v = value(data)}
+      {#if typeof v !== 'string'}
+        <svelte:component this={v.display} {...v.props} />
       {:else}
-        <span>{value(data)}</span>
+        <span>{v}</span>
       {/if}
     </CardRow>
   {/each}

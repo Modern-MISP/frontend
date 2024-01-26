@@ -1,6 +1,6 @@
 <script lang="ts">
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
 
   /** Data that is displayed on this page. */

@@ -1,5 +1,7 @@
 import type { TableHead } from '$lib/models/TableHead.interface';
+import { mode } from '$lib/stores';
 import type { SvelteComponent } from 'svelte';
+import { derived } from 'svelte/store';
 
 /**
  * ## What does this do?
@@ -51,4 +53,13 @@ export function createTableHeadGenerator<
     return tableHead;
   }
   return createTableHead;
+}
+
+export function createTableHeadGenerator2<T>() {
+  return function <
+    K extends SvelteComponent | undefined = undefined,
+    L extends SvelteComponent | undefined = undefined
+  >(view: TableHead<T, K>, edit: Partial<TableHead<T, L>> = {}) {
+    return derived(mode, (m) => (m === 'edit' ? { ...view, ...edit } : view));
+  };
 }
