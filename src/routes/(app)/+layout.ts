@@ -3,5 +3,5 @@ import { error } from '@sveltejs/kit';
 
 export const load = async () => {
   const token = localStorage.getItem('authToken');
-  if (PUBLIC_DISABLE_AUTH === 'false' && !token) throw error(403, 'No Permissions!');
+  if (PUBLIC_DISABLE_AUTH === 'false' && !token) error(403, 'No Permissions!');
 };

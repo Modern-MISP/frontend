@@ -13,7 +13,7 @@ import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 export const load: PageLoad = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await GET('/workflows/triggers', { fetch }); // TODO: check for alternative endpoint/solution
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const trigger = filter(data, (x) => x.id === params.id).at(0) ?? {};
 

@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ fetch }) => {
     response
   } = await POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   console.log(data);
