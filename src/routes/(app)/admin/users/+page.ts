@@ -10,7 +10,7 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/admin/users');
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 

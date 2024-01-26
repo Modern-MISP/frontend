@@ -10,7 +10,7 @@ export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/workflows/moduleIndex');
   console.log(data);
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
@@ -82,7 +82,7 @@ export const load: PageLoad = async () => {
     })
   ];
 
-  if (!data) throw error(500, 'No data returned');
+  if (!data) error(500, 'No data returned');
 
   return {
     data,

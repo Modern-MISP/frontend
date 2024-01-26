@@ -11,7 +11,7 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/tags');
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<
     NonNullable<(typeof data)['Tag']>[number],

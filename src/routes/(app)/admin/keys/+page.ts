@@ -12,7 +12,7 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async () => {
   const { data, error: mispError, response } = await GET('/auth_keys');
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 

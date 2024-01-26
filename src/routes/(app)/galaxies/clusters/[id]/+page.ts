@@ -16,7 +16,7 @@ export const load: PageLoad = async ({ params }) => {
     params: { path: { galaxyClusterId: params.id } }
   });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
   const col = createTableHeadGenerator<
     (typeof data.GalaxyCluster.GalaxyElement)[number], // FIXME: make typesafe
     DynTableHeadExtent

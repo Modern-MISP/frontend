@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ params }) => {
     response
   } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } } });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<
     Required<(typeof data)['GalaxyCluster']>[number],

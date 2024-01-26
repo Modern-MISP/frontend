@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ params }) => {
     response
   } = await GET('/events/view/{eventId}', { params: { path: { eventId: params.id } } });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   return {
     event: data.Event
