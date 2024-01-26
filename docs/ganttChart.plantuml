@@ -3,6 +3,7 @@ printscale daily zoom 1.6
 
 header Modern MISP Frontend
 title Implementierungsphase
+footer last rendered %date("YYYY-MM-dd HH:mm' UTC'")
 
 today is colored in lightblue
 
