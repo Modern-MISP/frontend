@@ -8,8 +8,8 @@ import Info from '$lib/components/info/Info.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/galaxies');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/galaxies', { fetch });
 
   if (mispError) throw error(response.status, mispError.message);
 

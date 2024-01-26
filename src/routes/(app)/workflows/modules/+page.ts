@@ -6,8 +6,8 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/workflows/moduleIndex');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/workflows/moduleIndex', { fetch });
   console.log(data);
 
   if (mispError) throw error(response.status, mispError.message);

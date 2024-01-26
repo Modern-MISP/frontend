@@ -9,8 +9,8 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/auth_keys');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/auth_keys', { fetch });
 
   if (mispError) throw error(response.status, mispError.message);
 
