@@ -1,6 +1,6 @@
 import { POST } from '$lib/api';
 import Info from '$lib/components/info/Info.svelte';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { DATE_FORMAT } from '$lib/components/config';
@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ fetch }) => {
     response
   } = await POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   console.log(data);

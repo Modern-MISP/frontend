@@ -13,12 +13,13 @@
     const data = new FormData(currentTarget);
     const entries = Object.fromEntries(data.entries());
     try {
-      const res = await login(entries);
+      const res = await login(entries as { email: string; password: string });
       if (res) {
         localStorage.setItem('authToken', 'Bearer: secür.it.be');
         goto('/events');
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
       console.warn(e.body.message);
       error = e.body.message;
     }
