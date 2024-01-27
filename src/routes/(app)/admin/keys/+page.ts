@@ -6,15 +6,18 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/auth_keys', { fetch });
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+  const col = createTableHeadGenerator<
+    (typeof data)[number] & { AuthKey?: { unique_ips?: string[] } },
+    DynTableHeadExtent
+  >();
 
   const header = [
     col({
@@ -29,20 +32,24 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'user',
       label: 'User',
       value: (x) => ({
-        icon: 'mdi:account-outline',
-        text: x.User?.email,
-        href: `/admin/users/${x.User?.id}`
-      }),
-      display: HrefPill
+        display: HrefPill,
+        props: {
+          icon: 'mdi:account-outline',
+          text: x.User?.email,
+          href: `/admin/users/${x.User?.id}`
+        }
+      })
     }),
 
     col({
       icon: 'mdi:key-outline',
       key: 'key',
       label: 'Key',
-      display: Info,
       value: (x) => ({
-        text: x.AuthKey?.authkey_start + '••••••••••••••' + x.AuthKey?.authkey_end
+        display: Info,
+        props: {
+          text: x.AuthKey?.authkey_start + '••••••••••••••' + x.AuthKey?.authkey_end
+        }
       })
     }),
     col({
@@ -50,32 +57,38 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'comment',
       label: 'Comment',
       value: (x) => ({
-        text: x.AuthKey?.comment || 'No Comment',
-        class: 'line-clamp-3'
-      }),
-      display: Info
+        display: Info,
+        props: {
+          text: x.AuthKey?.comment || 'No Comment',
+          class: 'line-clamp-3'
+        }
+      })
     }),
     col({
       icon: 'mdi:clock-alert-outline',
       key: 'expiration',
       label: 'Expiration',
       value: (x) => ({
-        date:
-          (x.AuthKey?.expiration &&
-            +x.AuthKey.expiration !== 0 &&
-            new Date(+x.AuthKey.expiration * 1000)) ||
-          null
-      }),
-      display: RelativeDatePill
+        display: RelativeDatePill,
+        props: {
+          date:
+            (x.AuthKey?.expiration &&
+              +x.AuthKey.expiration !== 0 &&
+              new Date(+x.AuthKey.expiration * 1000)) ||
+            null
+        }
+      })
     }),
     col({
       icon: 'mdi:clock-outline',
       key: 'last_used',
       label: 'Last used',
       value: (x) => ({
-        date: (x.AuthKey?.last_used && new Date(+x.AuthKey?.last_used * 1000)) || null
-      }),
-      display: DatePill
+        display: DatePill,
+        props: {
+          date: (x.AuthKey?.last_used && new Date(+x.AuthKey?.last_used * 1000)) || null
+        }
+      })
       // class: 'whitespace-nowrap'
     }),
     col({
@@ -83,9 +96,11 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'last_seen_ip',
       label: 'Last seen Ip',
       value: (x) => ({
-        text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
-      }),
-      display: Info
+        display: Info,
+        props: {
+          text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
+        }
+      })
       // class: 'whitespace-nowrap'
     }),
     col({
@@ -93,18 +108,20 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'ip_count',
       label: 'Attr.',
       value: (x) => ({
-        pills: [
-          {
-            label: 'Seen',
-            text: x.AuthKey?.unique_ips?.length
-          },
-          {
-            label: 'Allowed',
-            text: x.AuthKey?.allowed_ips?.length ?? 'All'
-          }
-        ]
-      }),
-      display: PillCollection
+        display: PillCollection,
+        props: {
+          pills: [
+            {
+              label: 'Seen',
+              text: x.AuthKey?.unique_ips?.length
+            },
+            {
+              label: 'Allowed',
+              text: x.AuthKey?.allowed_ips?.length ?? 'All'
+            }
+          ]
+        }
+      })
     })
   ];
 

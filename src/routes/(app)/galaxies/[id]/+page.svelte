@@ -7,6 +7,8 @@
   export let data: PageData;
 
   const { left, right, galaxy, header } = data;
+
+  const galaxyData = galaxy.Galaxy!;
 </script>
 
 <!--
@@ -15,8 +17,8 @@
   Information about a single galaxy, including a list of its clusters.
 -->
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
-  <DynCard header={left} data={galaxy.Galaxy} />
-  <DynCard header={right} data={galaxy.Galaxy} />
+  <DynCard header={left} data={galaxyData} />
+  <DynCard header={right} data={galaxyData} />
 </div>
 
 <DynTable

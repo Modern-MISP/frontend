@@ -8,10 +8,9 @@
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-  import type { PageData } from './$types';
 
   /** Data that is provided +page.ts on page load. */
-  export let data: PageData;
+  export let data;
 
   const { header, tableData, galaxyCluster } = data;
 
@@ -48,7 +47,7 @@
       <HrefPill
         icon="streamline:galaxy-2-solid"
         label={info?.galaxy_id ?? 'unknown'}
-        text={info?.Galaxy.name}
+        text={info?.Galaxy?.name}
         href="/galaxies/{info?.galaxy_id}"
       />
     </CardRow>
@@ -61,7 +60,8 @@
     <CardRow>
       <span class="font-bold">Authors</span>
       <PillCollection
-        pills={info?.authors.map((a) => ({ icon: 'streamline:user-circle-single', text: a }))}
+        pills={info?.authors?.map((a) => ({ icon: 'streamline:user-circle-single', text: a })) ??
+          []}
         class="pl-4"
       />
     </CardRow>
@@ -105,22 +105,22 @@
 
     <CardRow>
       <span class="font-bold">Owner Organization</span>
-      <span>{info?.Org.name ?? 'unknown'}</span>
+      <span>{info?.Org?.name ?? 'unknown'}</span>
     </CardRow>
 
     <CardRow>
       <span class="font-bold">Creator Organization</span>
-      <span>{info?.Orgc.name ?? 'unknown'}</span>
+      <span>{info?.Orgc?.name ?? 'unknown'}</span>
     </CardRow>
 
     <CardRow>
       <span class="font-bold">Distribution</span>
-      <LookupPill value={+info.distribution} options={DISTRIBUTION_LOOKUP} />
+      <LookupPill value={+(info?.distribution ?? 0)} options={DISTRIBUTION_LOOKUP} />
     </CardRow>
 
     <CardRow>
       <span class="font-bold">Default</span>
-      <Boolean isTrue={info.default} />
+      <Boolean isTrue={info?.default} />
     </CardRow>
   </Card>
 </div>
