@@ -1,5 +1,5 @@
 import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from '../../[id]/$types';
 
 import Info from '$lib/components/info/Info.svelte';
@@ -17,32 +17,40 @@ export const load: PageLoad = async ({ params, fetch }) => {
     fetch
   });
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  
+  const galaxyElements = data.GalaxyCluster?.GalaxyElement ?? [];
   const col = createTableHeadGenerator<
-    (typeof data.GalaxyCluster.GalaxyElement)[number], // FIXME: make typesafe
+    (typeof galaxyElements)[number],
     DynTableHeadExtent
   >();
   const header = [
-    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
+    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col({
       icon: 'mdi:key',
       key: 'key',
       label: 'key',
-      display: Info,
-      value: (x) => ({ text: x.key })
+      value: (x) => ({
+        display: Info,
+        props: {
+          text: x.key
+        }
+      })
     }),
     col({
       icon: 'mdi:circle',
       key: 'value',
       label: 'Value',
-      display: Info,
-      value: (x) => ({ text: x.value })
+      value: (x) => ({
+        display: Info,
+        props: { text: x.value }
+      })
     })
   ];
 
   return {
     galaxyCluster: data,
-    tableData: data?.GalaxyCluster?.GalaxyElement ?? [],
+    tableData: galaxyElements,
     header
   };
 };
