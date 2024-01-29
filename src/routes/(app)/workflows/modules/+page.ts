@@ -17,11 +17,11 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     // col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:id-card',
       key: 'name',
       label: 'Name',
-      display: Info,
-      value: (x) => ({ text: x.name })
+      value: (x) => ({ text: x.name ?? 'unknown' }),
+      display: Info
     }),
     col({
       icon: 'mdi:information-outline',
