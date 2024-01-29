@@ -86,7 +86,9 @@ eslint:
 
 svelte-check:
   stage: test
-  script: npm run check
+  script: 
+    - cp $ENV_FILE .env
+    - npm run check
 
 
 # === deploy stage ===
