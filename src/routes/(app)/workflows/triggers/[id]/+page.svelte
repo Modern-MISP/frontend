@@ -13,35 +13,64 @@
 
   console.log(trigger);
 
-  const nodes: Writable<Node[]> = writable([
-    {
-      id: '1',
-      type: 'trigger',
-      data: { label: wfData[1].data.name },
-      position: { x: wfData[1].pos_x, y: wfData[1].pos_y }
-    }
-  ]);
-
+  const nodes: Writable<Node[]> = writable([]);
   const edges: Writable<Edge[]> = writable([]);
 
-  for (let i = 2; ; i++) {
-    const module = wfData[i];
-    if (!module) {
-      break;
-    }
+  for (const [, module] of Object.entries(wfData).filter(([key]) => key !== '_frames')) {
     $nodes.push({
-      id: `${i}`,
-      type: 'module',
+      id: `${module.id}`,
+      type: module.data.module_type,  // 'trigger' or 'action'
       data: { label: module.name },
       position: { x: module.pos_x, y: module.pos_y }
     });
-    $edges.push({
-      id: `1-${i}`,
+    // create input edges for this module
+    for (const edge of module.inputs.input_1?.connections ?? []) {
+      $edges.push({
+      id: `${edge.node}-${module.id}`,
       type: 'default',
-      source: '1',
-      target: `${i}`,
-      label: 'triggers'
+      source: edge.node,
+      target: `${module.id}`,
+      animated: true
     });
+    }
+  }
+
+  for (const frame of Object.values(wfData._frames)) {
+    const node = {
+      id: frame.id,
+      type: 'frame',
+      data: { nodes: frame.nodes, width: 0, height: 0, label: frame.text },
+      position: { x: 0, y: 0},
+      zIndex: -100,
+      draggable: false,
+      selectable: false
+    }
+    $nodes.push(node);
+    updateFrame(node);
+  }
+
+  console.log($nodes);
+
+  function updateFrame(frame: Node) {
+    const padding = 20;
+    const additionalLabelPadding = 30;
+
+    const children = $nodes.filter((n) => frame.data.nodes.includes(n.id));
+    frame.position.x = Math.min(...children.map((n) => n.position.x)) - padding;
+    frame.position.y = Math.min(...children.map((n) => n.position.y)) - padding - additionalLabelPadding;
+    const width = Math.max(...children.map((n) => n.position.x + (n.computed?.width ?? 0))) - frame.position.x;
+    const height = Math.max(...children.map((n) => n.position.y + (n.computed?.height ?? 0))) - frame.position.y;
+    frame.width = width + padding;
+    frame.height = height + padding;
+  }
+
+  function onNodeDrag({ detail: { node } }: { detail: { node: Node }}) {
+    $nodes.forEach((frameNode) => {
+      if (frameNode.type === 'frame' && frameNode.data.nodes.includes(node.id)) {
+        updateFrame(frameNode);
+      }
+    });
+    $nodes = $nodes;
   }
 </script>
 
@@ -56,6 +85,6 @@
     <DynCard header={infoHeader} data={trigger} />
   </div>
   <div class="flex-col w-full basis-2/3">
-    <Flow {nodes} {edges} />
+    <Flow {nodes} {edges} on:nodedrag={onNodeDrag} />
   </div>
 </div>
