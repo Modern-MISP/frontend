@@ -3,15 +3,17 @@ import Info from '$lib/components/info/Info.svelte';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import { DATE_FORMAT } from '$lib/components/config';
+import Input from '$lib/components/input/Input.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
-import { format } from 'date-fns';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
+import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { format } from 'date-fns';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -132,8 +134,55 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const fil = createTableHeadGenerator<undefined>();
+  const filter = [
+    fil({
+      label: 'Value',
+      display: Input,
+      value: () => ({
+        name: 'value',
+        placeholder: 'Value'
+      })
+    }),
+    // In the current api published does not need to be an boolean. That's why we could use the string return from an input checkbox
+    fil({
+      label: 'Published',
+      display: Checkbox,
+      value: () => ({
+        checked: false,
+        name: 'published'
+      })
+    }),
+    fil({
+      label: 'Type',
+      display: Input,
+      value: () => ({
+        name: 'type',
+        placeholder: 'Type'
+      })
+    }),
+    fil({
+      label: 'Search all',
+      display: Input,
+      value: () => ({
+        name: 'searchall',
+        placeholder: 'Search all'
+      })
+    }),
+    // You can override the page limit with this.
+    fil({
+      label: 'Page Limit',
+      display: Input,
+      value: () => ({
+        name: 'limit',
+        placeholder: 'Page Limit'
+      })
+    })
+  ];
+
   return {
     header,
-    tableData: data
+    tableData: data,
+    filter
   };
 };
