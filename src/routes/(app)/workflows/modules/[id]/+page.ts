@@ -1,14 +1,10 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { filter } from 'lodash-es';
 import Info from '$lib/components/info/Info.svelte';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
-import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await GET('/workflows/moduleIndex', { fetch }); // TODO: check for alternative endpoint/solution

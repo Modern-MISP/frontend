@@ -1,7 +1,6 @@
 import { GET } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
