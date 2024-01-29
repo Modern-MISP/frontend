@@ -7,4 +7,10 @@
   const { tableData, header } = data;
 </script>
 
-<DynTable href={(x) => x.Server?.id} {header} data={tableData} />
+<!--
+  @component
+  Displays a list of all users of the instance.
+  
+-->
+
+<DynTable href={(x) => `/admin/users/${x.User?.id}`} {header} data={tableData} />

@@ -3,8 +3,8 @@ hide footbox
 
 actor User as user
 box "Frontend"
-participant "Event Graph" as eventgraph
-participant "Options Menu" as optmenu <<Component>>
+participant "Event Graph" as eventgraph <<Component>>
+participant "Action Bar" as optmenu <<Component>>
 participant "'Add Reference' Menu" as addreferencemenu <<Component>>
 participant "Top Menu" as topmenu <<Component>>
 participant Layout as layout <<Component>>

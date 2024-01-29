@@ -13,14 +13,14 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } } });
+  } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } }, fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<
     Required<(typeof data)['GalaxyCluster']>[number],

@@ -15,6 +15,12 @@
   $: page = 1;
 </script>
 
+<!--
+  @component
+  Displays a combined list of the tags of all events.
+  
+-->
+
 <DynTable href={({ id }) => `tags/${id}`} {header} data={sliced} />
 
 <Pagination bind:page />

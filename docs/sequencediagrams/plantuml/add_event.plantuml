@@ -4,7 +4,7 @@ hide footbox
 actor User as user
 box "Frontend"
 participant "Event List" as eventlist
-participant "Create Event Dialogue" as createdialogue
+participant "/events/new" as createdialogue
 participant TopMenu as topmenu <<Component>>
 participant Layout as layout <<Component>>
 end box
@@ -16,6 +16,7 @@ activate eventlist
 user -> topmenu : toggle edit mode
 topmenu --> layout : state changes
 layout -> eventlist : enter edit mode
+activate eventlist
 user -> topmenu : click "add event"
 topmenu --> layout : state changes
 layout -> createdialogue : open "create event" dialogue
@@ -24,9 +25,10 @@ note left : editable values form inputs
 user -> createdialogue : change input value
 createdialogue --> createdialogue : update internal value
 
-user -> createdialogue : click save
+user -> createdialogue : click "save"
 createdialogue -> api : PATCH event
 api --> createdialogue : success
+deactivate eventlist
 deactivate eventlist
 createdialogue --> user : redirect to /event/[id]
 createdialogue -> layout : exit edit mode

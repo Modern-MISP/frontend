@@ -8,7 +8,7 @@
 
   /**
    * The header of the table. Also includes the icon and the href.
-   * When setting this, it's recommended to use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util}.
+   * When setting this, it's recommended to use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function.
    */
   export let header: (TableHead<T[number]> & DynTableHeadExtent)[];
   /**

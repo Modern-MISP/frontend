@@ -8,10 +8,10 @@ import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/tags');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/tags', { fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<
     NonNullable<(typeof data)['Tag']>[number],

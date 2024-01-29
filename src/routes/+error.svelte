@@ -11,6 +11,15 @@
   ];
 </script>
 
+<!-- 
+  @component
+
+  If any error occurs inside of a +page.ts [load function](https://kit.svelte.dev/docs/load), this page will be rendered. Handles 403 errors, by showing a link to the login page.
+
+  See: https://kit.svelte.dev/docs/errors
+  
+ -->
+
 <div class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-red">
   <h2 class="text-9xl">
     {$page.status}

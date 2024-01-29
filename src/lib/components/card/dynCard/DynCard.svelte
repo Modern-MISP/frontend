@@ -21,7 +21,7 @@
   @component
   A card that displays the data of the given header.
 
-  This works dynamically similar to the {@link DynTable} component. So you should probably use the {@link createTableHeadGenerator} util function inside of {@link tableBuilder.util} to create the header.
+  This works dynamically similar to the {@link DynTable} component. So you should probably use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function to create the header.
  -->
 
 <Card class="gap-4">

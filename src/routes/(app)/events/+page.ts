@@ -13,14 +13,14 @@ import { format } from 'date-fns';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async ({ fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await POST('/events/index', { body: { page: 1, limit: 50 } });
+  } = await POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   console.log(data);

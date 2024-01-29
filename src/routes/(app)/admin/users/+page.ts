@@ -7,10 +7,10 @@ import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/admin/users');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/admin/users', { fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 

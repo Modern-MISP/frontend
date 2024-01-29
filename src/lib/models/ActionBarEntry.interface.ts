@@ -1,5 +1,5 @@
 export interface ActionBarEntry {
-    icon: string
-    label: string
-    action: string | (() => void)
+  icon: string;
+  label: string;
+  action: string | (() => void);
 }

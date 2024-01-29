@@ -120,9 +120,7 @@
                           "uuid": "94af82d1-d62b-45a7-8c99-83c421cc0f3b",
                           "version": "1"
                         },
-                        "authors": [
-                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
-                        ],
+                        "authors": ["Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"],
                         "collection_uuid": "94af82d1-d62b-45a7-8c99-83c421cc0f3b",
                         "default": true,
                         "deleted": false,
@@ -135,30 +133,14 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "BRAND": [
-                            "Glock"
-                          ],
-                          "Classification": [
-                            "Firearm"
-                          ],
-                          "Rounds": [
-                            "10"
-                          ],
-                          "SKU": [
-                            "764503037894"
-                          ],
-                          "Unit of Measure": [
-                            "Each"
-                          ],
-                          "caliber": [
-                            "9mm"
-                          ],
-                          "manufacturer": [
-                            "PX4350201"
-                          ],
-                          "name": [
-                            "Glock G43X"
-                          ]
+                          "BRAND": ["Glock"],
+                          "Classification": ["Firearm"],
+                          "Rounds": ["10"],
+                          "SKU": ["764503037894"],
+                          "Unit of Measure": ["Each"],
+                          "caliber": ["9mm"],
+                          "manufacturer": ["PX4350201"],
+                          "name": ["Glock G43X"]
                         },
                         "org_id": "0",
                         "orgc_id": "0",
@@ -196,9 +178,7 @@
                           "uuid": "c1dc03b2-89b3-42a5-9d41-782ef726435a",
                           "version": "1"
                         },
-                        "authors": [
-                          "NIS Cooperation Group"
-                        ],
+                        "authors": ["NIS Cooperation Group"],
                         "collection_uuid": "c1dc03b2-89b3-42a5-9d41-782ef726435a",
                         "default": true,
                         "deleted": false,
@@ -211,12 +191,8 @@
                         "local": true,
                         "locked": false,
                         "meta": {
-                          "date": [
-                            "March 2018."
-                          ],
-                          "kill_chain": [
-                            "example-of-threats:all-phases | governement-IT"
-                          ],
+                          "date": ["March 2018."],
+                          "kill_chain": ["example-of-threats:all-phases | governement-IT"],
                           "refs": [
                             "https://www.ria.ee/sites/default/files/content-editors/kuberturve/cyber_security_of_election_technology.pdf"
                           ]
@@ -439,9 +415,7 @@
                           "uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
                           "version": "1"
                         },
-                        "authors": [
-                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
-                        ],
+                        "authors": ["Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"],
                         "collection_uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
                         "default": true,
                         "deleted": false,
@@ -454,18 +428,10 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "caliber": [
-                            "12 Gauge Ammo"
-                          ],
-                          "description": [
-                            "250 Rounds of 1 oz. #8 Shot (Lead) Ammunition"
-                          ],
-                          "manufacturer": [
-                            "Fiocchi"
-                          ],
-                          "name": [
-                            "Fiocchi 12 Gauge Ammo"
-                          ]
+                          "caliber": ["12 Gauge Ammo"],
+                          "description": ["250 Rounds of 1 oz. #8 Shot (Lead) Ammunition"],
+                          "manufacturer": ["Fiocchi"],
+                          "name": ["Fiocchi 12 Gauge Ammo"]
                         },
                         "org_id": "0",
                         "orgc_id": "0",
@@ -544,9 +510,7 @@
                           "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
                           "version": "9"
                         },
-                        "authors": [
-                          "MITRE"
-                        ],
+                        "authors": ["MITRE"],
                         "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
                         "default": true,
                         "deleted": false,
@@ -559,15 +523,9 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "external_id": [
-                            "T1059.009"
-                          ],
-                          "kill_chain": [
-                            "mitre-attack:execution"
-                          ],
-                          "mitre_data_sources": [
-                            "Command: Command Execution"
-                          ],
+                          "external_id": ["T1059.009"],
+                          "kill_chain": ["mitre-attack:execution"],
+                          "mitre_data_sources": ["Command: Command Execution"],
                           "mitre_platforms": [
                             "IaaS",
                             "Azure AD",
@@ -606,9 +564,7 @@
                           "uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
                           "version": "1"
                         },
-                        "authors": [
-                          "Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"
-                        ],
+                        "authors": ["Bryan BAUMGARTNER, Theotime CHAPIER-MALDAGUE"],
                         "collection_uuid": "e7394838-65a9-4b8a-b484-b8c4c7cf49c3",
                         "default": true,
                         "deleted": false,
@@ -621,18 +577,10 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "caliber": [
-                            "12 Gauge Ammo"
-                          ],
-                          "description": [
-                            "250 Rounds of 2"
-                          ],
-                          "manufacturer": [
-                            "Fiocchi"
-                          ],
-                          "name": [
-                            "Fiocchi 12 Gauge Ammo"
-                          ]
+                          "caliber": ["12 Gauge Ammo"],
+                          "description": ["250 Rounds of 2"],
+                          "manufacturer": ["Fiocchi"],
+                          "name": ["Fiocchi 12 Gauge Ammo"]
                         },
                         "org_id": "0",
                         "orgc_id": "0",
@@ -697,9 +645,7 @@
                         "local": true,
                         "locked": false,
                         "meta": {
-                          "kill_chain": [
-                            "ATRM-tactics:Credential Access"
-                          ],
+                          "kill_chain": ["ATRM-tactics:Credential Access"],
                           "refs": [
                             "https://microsoft.github.io/Azure-Threat-Research-Matrix/CredentialAccess/AZT602/AZT602-1"
                           ]
@@ -767,9 +713,7 @@
                         "local": true,
                         "locked": false,
                         "meta": {
-                          "kill_chain": [
-                            "ATRM-tactics:Credential Access"
-                          ],
+                          "kill_chain": ["ATRM-tactics:Credential Access"],
                           "refs": [
                             "https://microsoft.github.io/Azure-Threat-Research-Matrix/CredentialAccess/AZT604/AZT604"
                           ]
@@ -851,9 +795,7 @@
                           "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
                           "version": "9"
                         },
-                        "authors": [
-                          "MITRE"
-                        ],
+                        "authors": ["MITRE"],
                         "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
                         "default": true,
                         "deleted": false,
@@ -866,15 +808,9 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "external_id": [
-                            "T1021.007"
-                          ],
-                          "kill_chain": [
-                            "mitre-attack:lateral-movement"
-                          ],
-                          "mitre_data_sources": [
-                            "Logon Session: Logon Session Creation"
-                          ],
+                          "external_id": ["T1021.007"],
+                          "kill_chain": ["mitre-attack:lateral-movement"],
+                          "mitre_data_sources": ["Logon Session: Logon Session Creation"],
                           "mitre_platforms": [
                             "Office 365",
                             "Azure AD",
@@ -882,9 +818,7 @@
                             "IaaS",
                             "Google Workspace"
                           ],
-                          "refs": [
-                            "https://attack.mitre.org/techniques/T1021/007"
-                          ]
+                          "refs": ["https://attack.mitre.org/techniques/T1021/007"]
                         },
                         "org_id": "0",
                         "orgc_id": "0",
@@ -963,9 +897,7 @@
                           "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
                           "version": "9"
                         },
-                        "authors": [
-                          "MITRE"
-                        ],
+                        "authors": ["MITRE"],
                         "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
                         "default": true,
                         "deleted": false,
@@ -978,12 +910,8 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "external_id": [
-                            "T1069.003"
-                          ],
-                          "kill_chain": [
-                            "mitre-attack:discovery"
-                          ],
+                          "external_id": ["T1069.003"],
+                          "kill_chain": ["mitre-attack:discovery"],
                           "mitre_data_sources": [
                             "Application Log: Application Log Content",
                             "Command: Command Execution",
@@ -1086,9 +1014,7 @@
                           "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
                           "version": "9"
                         },
-                        "authors": [
-                          "MITRE"
-                        ],
+                        "authors": ["MITRE"],
                         "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
                         "default": true,
                         "deleted": false,
@@ -1101,15 +1027,9 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "external_id": [
-                            "T1285"
-                          ],
-                          "kill_chain": [
-                            "mitre-pre-attack:organizational-information-gathering"
-                          ],
-                          "refs": [
-                            "https://attack.mitre.org/techniques/T1285"
-                          ]
+                          "external_id": ["T1285"],
+                          "kill_chain": ["mitre-pre-attack:organizational-information-gathering"],
+                          "refs": ["https://attack.mitre.org/techniques/T1285"]
                         },
                         "org_id": "0",
                         "orgc_id": "0",
@@ -1188,9 +1108,7 @@
                           "uuid": "c4e851fa-775f-11e7-8163-b774922098cd",
                           "version": "9"
                         },
-                        "authors": [
-                          "MITRE"
-                        ],
+                        "authors": ["MITRE"],
                         "collection_uuid": "dcb864dc-775f-11e7-9fbb-1f41b4996683",
                         "default": true,
                         "deleted": false,
@@ -1203,16 +1121,9 @@
                         "local": false,
                         "locked": false,
                         "meta": {
-                          "external_id": [
-                            "T1139"
-                          ],
-                          "kill_chain": [
-                            "mitre-attack:credential-access"
-                          ],
-                          "mitre_platforms": [
-                            "Linux",
-                            "macOS"
-                          ],
+                          "external_id": ["T1139"],
+                          "kill_chain": ["mitre-attack:credential-access"],
+                          "mitre_platforms": ["Linux", "macOS"],
                           "refs": [
                             "http://www.slideshare.net/StephanBorosh/external-to-da-the-os-x-way",
                             "https://attack.mitre.org/techniques/T1139"
@@ -1437,10 +1348,7 @@
                               "type": "boolean"
                             },
                             "relationship_type": {
-                              "enum": [
-                                "",
-                                "custom"
-                              ],
+                              "enum": ["", "custom"],
                               "title": "RelationshipType",
                               "type": "string"
                             },
@@ -1469,11 +1377,7 @@
                                   "type": "boolean"
                                 },
                                 "icon": {
-                                  "enum": [
-                                    "fire",
-                                    "map",
-                                    "battery-full"
-                                  ],
+                                  "enum": ["fire", "map", "battery-full"],
                                   "title": "Icon",
                                   "type": "string"
                                 },
@@ -1592,14 +1496,8 @@
                               "additionalProperties": {
                                 "items": {
                                   "type": "string",
-                                  "x-qt-uri-extensions": [
-                                    ".html",
-                                    ".pdf"
-                                  ],
-                                  "x-qt-uri-protocols": [
-                                    "http",
-                                    "https"
-                                  ]
+                                  "x-qt-uri-extensions": [".html", ".pdf"],
+                                  "x-qt-uri-protocols": ["http", "https"]
                                 },
                                 "type": "array"
                               },
@@ -1624,9 +1522,7 @@
                             },
                             "source": {
                               "type": "string",
-                              "x-qt-uri-protocols": [
-                                "https"
-                              ]
+                              "x-qt-uri-protocols": ["https"]
                             },
                             "tag_id": {
                               "format": "integer",

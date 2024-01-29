@@ -33,8 +33,7 @@
       id: `${i}`,
       type: 'module',
       data: { label: module.name },
-      position: { x: module.pos_x, y: module.pos_y },
-      class: '!bg-surface1',
+      position: { x: module.pos_x, y: module.pos_y }
     });
     $edges.push({
       id: `1-${i}`,
@@ -42,7 +41,7 @@
       source: '1',
       target: `${i}`,
       label: 'triggers'
-    })
+    });
   }
 </script>
 
@@ -57,6 +56,6 @@
     <DynCard header={infoHeader} data={trigger} />
   </div>
   <div class="flex-col w-full basis-2/3">
-    <Flow {nodes} {edges}></Flow>
+    <Flow {nodes} {edges} />
   </div>
 </div>

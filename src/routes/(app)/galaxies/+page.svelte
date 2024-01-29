@@ -33,5 +33,6 @@
   
   A list of all galaxies.
 -->
+
 <svelte:window use:actionBar={actions} />
 <DynTable href={(x) => `/galaxies/${x.Galaxy?.id}`} {header} data={tableData} />

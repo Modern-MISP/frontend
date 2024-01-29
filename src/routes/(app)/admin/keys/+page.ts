@@ -9,10 +9,10 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-  const { data, error: mispError, response } = await GET('/auth_keys');
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await GET('/auth_keys', { fetch });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
@@ -42,7 +42,7 @@ export const load: PageLoad = async () => {
       label: 'Key',
       display: Info,
       value: (x) => ({
-        text: x.AuthKey?.authkey_end + '••••••••••••••' + x.AuthKey?.authkey_end
+        text: x.AuthKey?.authkey_start + '••••••••••••••' + x.AuthKey?.authkey_end
       })
     }),
     col({

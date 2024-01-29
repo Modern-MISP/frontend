@@ -26,13 +26,17 @@
     if (response.ok && _data) {
       tableData = _data;
     }
-
-    throw new Error('Error fetching more data');
   };
 
   $: page = 1;
   $: loadMore(page);
 </script>
+
+<!--
+  @component
+  Displays a list of all events.
+  
+-->
 
 <DynTable href={({ id }) => `/events/${id}`} {header} data={tableData} />
 

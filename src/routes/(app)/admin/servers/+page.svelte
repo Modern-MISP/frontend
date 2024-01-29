@@ -7,4 +7,10 @@
   const { tableData, header } = data;
 </script>
 
-<DynTable href={(x) => `/galaxies/${x.Galaxy?.id}`} {header} data={tableData} />
+<!--
+  @component
+  Displays a list of all remote servers of the instance.
+  
+-->
+
+<DynTable href={(x) => `/admin/servers/${x.Server?.id}`} {header} data={tableData} />

@@ -1,3 +1,6 @@
+# include:
+#   - template: Code-Quality.gitlab-ci.yml
+
 stages:
   - pre-build
   - build
@@ -6,7 +9,8 @@ stages:
 
 default:
   tags:
-    - docker # Tag is required to make the CI runner accept the jobs
+    - kit-intranet # Tag is required to make the CI runner accept the jobs
+  image: node:latest
 
 workflow:
   rules:
@@ -16,7 +20,6 @@ workflow:
 # === pre-build stage ===
 
 install_dependencies:
-  image: node:latest
   stage: pre-build
   script:
     - npm ci --cache .npm --prefer-offline
@@ -33,7 +36,6 @@ install_dependencies:
 # === build stage ===
 
 build_production:
-  image: node:latest
   stage: build
   script:
     - cp $ENV_FILE .env
@@ -66,10 +68,21 @@ docs:
 
 unit_tests:
   stage: test
-  image: node:latest
   script:
-      - npm run test:unit
+    - npx vitest run --reporter junit --outputFile report.xml
+  artifacts:
+    reports:
+      junit: report.xml
 
+eslint:
+  stage: test
+  script:
+    - npx eslint --format gitlab .
+  dependencies:
+    - install_dependencies
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
 
 # === deploy stage ===
 

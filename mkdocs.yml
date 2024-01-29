@@ -4,10 +4,12 @@ repo_url: https://gitlab.kit.edu/kit/kit-cert/mmisp/frontend
 site_author: MMISP Frontend Team
 
 theme:
-  name: "material"
+  name: 'material'
 
 nav:
   - intro.md
+  - overview.md
+  - dynRendering.md
   - sequence_diagrams.md
   - generated/components.md
   - generated/pages.md
@@ -17,9 +19,8 @@ nav:
 plugins:
   - search
   - with-pdf:
-      # See https://github.com/orzih/mkdocs-with-pdf 
+      # See https://github.com/orzih/mkdocs-with-pdf
       cover_subtitle: Design Phase
       # NOTE: There's a zero width space in these parentheses because I couldn't make the copyright not show up otherwise.
       #       It's also possible to use custom templates with mkdocs-with-pdf, might be worth it, see github linked above.
-      copyright: "​" 
-
+      copyright: '​'

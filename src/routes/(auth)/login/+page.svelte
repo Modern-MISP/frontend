@@ -11,7 +11,7 @@
     if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
 
     const data = new FormData(currentTarget);
-    const entries: any = Object.fromEntries(data.entries());
+    const entries = Object.fromEntries(data.entries());
     try {
       const res = await login(entries);
       if (res) {
@@ -24,6 +24,14 @@
     }
   }
 </script>
+
+<!--
+  @component
+  Provides a login flow via username and password.
+  Stores the generated authentication token in [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage),
+  allowing the user to stay logged in after closing the page.
+  
+-->
 
 <form class="flex flex-col gap-4 m-auto w-80" method="post" on:submit|preventDefault={submit}>
   <h1 class="text-4xl font-bold text-white">

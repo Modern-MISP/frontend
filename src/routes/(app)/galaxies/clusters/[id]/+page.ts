@@ -4,20 +4,20 @@ import type { PageLoad } from '../../[id]/$types';
 
 import Info from '$lib/components/info/Info.svelte';
 
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
   } = await GET('/galaxy_clusters/view/{galaxyClusterId}', {
-    params: { path: { galaxyClusterId: params.id } }
+    params: { path: { galaxyClusterId: params.id } },
+    fetch
   });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status, mispError.message);
   const col = createTableHeadGenerator<
     (typeof data.GalaxyCluster.GalaxyElement)[number], // FIXME: make typesafe
     DynTableHeadExtent

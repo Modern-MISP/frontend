@@ -26,6 +26,7 @@ api --> attributelist : event attributes
 user -> topmenu : toggle edit mode
 topmenu --> layout : state changes
 layout -> attributelist : enter edit mode
+activate attributelist
 user -> attributelist : click on "freetext import dialogue"
 
 
@@ -43,7 +44,7 @@ createattributesview --> user : display dialogue
 user -> createattributesview : change internal value
 createattributesview --> createattributesview : update internal value
 createattributesview --> user : display inputs 
-user -> createattributesview : click save
+user -> createattributesview : click "save"
 
 createattributesview -> api : PATCH event
 api --> createattributesview : success
@@ -51,6 +52,7 @@ createattributesview --> attributelist : update values
 deactivate createattributesview
 
 attributelist -> layout : exit edit mode
+deactivate attributelist
 deactivate attributelist
 layout -> topmenu : view mode
 @enduml
