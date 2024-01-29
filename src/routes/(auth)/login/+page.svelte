@@ -5,12 +5,11 @@
   import { login } from './authMock';
   import { goto } from '$app/navigation';
   import { getFormValues } from '$lib/util/form.util';
-  import { HttpError_1 } from '@sveltejs/kit';
 
   let error: string | null = null;
 
   async function submit(event: SubmitEvent) {
-    const entries = getFormValues(event) as {
+    const entries = getFormValues(event)[0] as {
       email: string;
       password: string;
     };
@@ -21,10 +20,8 @@
         goto('/events');
       }
     } catch (e) {
-      if (e instanceof HttpError_1) {
-        console.warn(e.body.message);
-        error = e.body.message;
-      }
+      console.warn(e.body.message);
+      error = e.body.message;
     }
   }
 </script>
