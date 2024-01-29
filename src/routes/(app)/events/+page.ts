@@ -14,6 +14,7 @@ import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { format } from 'date-fns';
+import InputCollection from '$lib/components/filter/InputCollection.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -176,6 +177,15 @@ export const load: PageLoad = async ({ fetch }) => {
       value: () => ({
         name: 'limit',
         placeholder: 'Page Limit'
+      })
+    }),
+    fil({
+      label: 'Tags',
+      display: InputCollection,
+      value: () => ({
+        length: 5,
+        name: 'tags',
+        placeholder: 'New Tag'
       })
     })
   ];

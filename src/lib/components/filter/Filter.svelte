@@ -13,14 +13,14 @@
   /**
    * The current filter values. You should probably bind this.
    */
-  export let currentFilter: Record<string, FormDataEntryValue>[] = [{ id: '12' }];
+  export let currentFilter: Record<string, FormDataEntryValue[] | FormDataEntryValue>[] = [];
 
   let currentOption: string = header[0].label;
   $: option = header.find(({ label }) => label === currentOption);
 </script>
 
 <div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-1 lg:w-1/2">
-  <form on:submit|preventDefault={(e) => (currentFilter = [...currentFilter, getFormValues(e)])}>
+  <form on:submit|preventDefault={(e) => (currentFilter = [...currentFilter, ...getFormValues(e)])}>
     <FilterCard>
       <span slot="heading"> Add Filter </span>
 
