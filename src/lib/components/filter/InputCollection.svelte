@@ -20,6 +20,7 @@
   export { clazz as class };
 </script>
 
+<!--  eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 {#each { length } as _}
   <Input {name} {placeholder} class={clazz} />
 {/each}
