@@ -84,6 +84,11 @@ eslint:
     reports:
       codequality: gl-code-quality-report.json
 
+svelte-check:
+  stage: test
+  script: npm run check
+
+
 # === deploy stage ===
 
 ftp_deploy:

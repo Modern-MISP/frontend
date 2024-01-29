@@ -28,7 +28,7 @@ module.exports = {
     },
     {
       files: ['*.svelte'],
-      excludedFiles: '*.story.svelte',
+      excludedFiles: ['*.story.svelte', '+page.svelte', '+layout.svelte', '+error.svelte'],
       extends: ['plugin:jsdoc/recommended-typescript'],
       rules: {
         // Require jsDoc comments on exports, so they show up in UML and possibly the markdown document.
