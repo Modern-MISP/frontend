@@ -10,13 +10,13 @@ today is colored in lightblue
 [Layout / Menus] requires 4 days
 [Action Bar] requires 3 days
 [Setup CI] requires 3 days and is 95% complete
-[Table Filter] requires 7 days and is 0% complete
-[Edit Mode setup] requires 6 days and is 80% complete and is colored in red
-[Edit Actions] requires 4 days and is 0% complete
+[Table Filter] requires 7 days and is 5% complete
+[Edit Mode setup] requires 8 days and is 90% complete and is colored in red
+[Edit Actions] requires 5 days and is 0% complete and is colored in red
 [SvelteFlow setup] requires 5 days and is 100% complete
 [Write Phase Report] requires 5 days and is 0% complete
 -- Pages --
-[List Pages] requires 9 days and is 90% complete and is colored in red
+[List Pages] requires 11 days and is 90% complete and is colored in red
 note bottom
     Pages that consist of a
     single table listing data.
@@ -29,7 +29,7 @@ end note
 note bottom
     The respective edit mode implementations of <color:gray>List Pages</color>.
 end note
-[View Pages] requires 10 days and is 50% complete
+[View Pages] requires 11 days and is 50% complete and is colored in red
 note bottom
     Pages that display detailed data of a
     single item (event/attribute/etc).
