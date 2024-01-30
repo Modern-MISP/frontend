@@ -13,73 +13,170 @@ import { format } from 'date-fns';
 
 const col = createTableHeadGenerator<PageData['event']>();
 
-export const viewHeader = [
-  col({ key: 'info', label: 'Info', value: (x) => x?.info ?? 'unknown' }),
-  col({
-    label: 'Threat Level',
-    display: LookupPill,
-    value: (x) => ({
-      value: +(x?.threat_level_id ?? 1) - 1,
-      options: THREAT_LEVEL_LOOKUP
-    })
-  }),
-  col({
-    label: 'Analysis',
-    display: LookupPill,
-    value: (x) => ({
-      value: +(x?.analysis ?? 1),
-      options: ANALYSIS_LOOKUP
-    })
-  }),
-  col({
-    label: 'Published',
-    display: Boolean,
-    value: (x) => ({
-      isTrue: x?.published ?? false
-    })
-  }),
-  col({
-    label: 'Date',
-    display: DatePill,
-    value: (x) => ({
-      date: x?.date ? new Date(x.date) : null
-    })
-  }),
-  col({
-    label: 'Creator user',
-    display: HrefPill,
-    value: (x) => ({
-      href: 'mailto:' + x?.event_creator_email,
-      text: x?.event_creator_email,
-      icon: 'mdi:account-outline'
-    })
-  }),
+export const header = [
+  col(
+    { label: 'Info', value: (x) => x?.info ?? 'unknown' },
+    { value: (x) => ({ display: Input, props: { value: x?.info ?? '', name: 'info' } }) }
+  ),
+  col(
+    {
+      label: 'Threat Level',
+      value: (x) => ({
+        display: LookupPill,
+        props: {
+          value: +(x?.threat_level_id ?? 1) - 1,
+          options: THREAT_LEVEL_LOOKUP
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Select,
+        props: {
+          value: '' + (+(x?.threat_level_id ?? 1) - 1),
+          options: THREAT_LEVEL_LOOKUP.map((x, i) => ({
+            label: x.text ?? 'unknown',
+            value: '' + i
+          })),
+          name: 'threat_level_id'
+        }
+      })
+    }
+  ),
+  col(
+    {
+      label: 'Analysis',
+      value: (x) => ({
+        display: LookupPill,
+        props: {
+          value: +(x?.analysis ?? 1),
+          options: ANALYSIS_LOOKUP
+        }
+      })
+    },
+    {
+      label: 'Analysis',
+      value: (x) => ({
+        display: Select,
+        props: {
+          value: '' + (x?.analysis ?? 1),
+          options: ANALYSIS_LOOKUP.map((x, i) => ({ label: x.text ?? 'unknown', value: '' + i })),
+          name: 'analysis'
+        }
+      })
+    }
+  ),
+  col(
+    {
+      label: 'Published',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.published ?? false
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Checkbox,
+        props: {
+          checked: x?.published ?? false,
+          name: 'published'
+        }
+      })
+    }
+  ),
+  col(
+    {
+      label: 'Date',
+      value: (x) => ({
+        display: DatePill,
+        props: {
+          date: x?.date ? new Date(x.date) : null
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Input,
+        props: {
+          value: x?.date ? format(new Date(x.date), 'yyyy-MM-dd') : undefined,
+          name: 'date',
+          type: 'date'
+        }
+      })
+    }
+  ),
+  col(
+    {
+      label: 'Creator user',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          href: 'mailto:' + x?.event_creator_email,
+          text: x?.event_creator_email,
+          icon: 'mdi:account-outline'
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          href: 'mailto:' + x?.event_creator_email,
+          text: x?.event_creator_email,
+          icon: 'mdi:account-outline'
+        }
+      })
+    }
+  ),
   col({
     label: 'Creator Org',
-    display: Pill,
     value: (x) => ({
-      text: x?.Orgc?.name,
-      icon: 'material-symbols:work-outline'
+      display: Pill,
+      props: {
+        text: x?.Orgc?.name,
+        icon: 'material-symbols:work-outline'
+      }
     })
   }),
   col({
     label: 'Owner Org',
-    display: Pill,
     value: (x) => ({
-      text: x?.Org?.name,
-      icon: 'material-symbols:work-outline'
+      display: Pill,
+      props: {
+        text: x?.Org?.name,
+        icon: 'material-symbols:work-outline'
+      }
     })
   }),
   col({ label: 'ID', value: (x) => x?.id ?? 'unknown' }),
   col({ label: 'UUID', value: (x) => x?.uuid ?? 'unknown' }),
-  col({
-    label: 'Distribution',
-    display: LookupPill,
-    value: (x) => ({
-      value: +(x?.distribution ?? 1),
-      options: DISTRIBUTION_LOOKUP
-    })
-  }),
+  col(
+    {
+      label: 'Distribution',
+      value: (x) => ({
+        display: LookupPill,
+        props: {
+          value: +(x?.distribution ?? 1),
+          options: DISTRIBUTION_LOOKUP
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Select,
+        props: {
+          value: '' + (x?.distribution ?? 1),
+          options: DISTRIBUTION_LOOKUP.map((x, i) => ({
+            label: x.text ?? 'unknown',
+            value: '' + i
+          })),
+          name: 'distribution'
+        }
+      })
+    }
+  ),
   col({
     label: 'Attribute Count',
     value: (x) =>
@@ -87,105 +184,16 @@ export const viewHeader = [
         x?.Object?.length ?? 0
       } Objects)`
   }),
-
-  col({ label: 'Extends UUID', value: (x) => x?.extends_uuid || 'none' })
-];
-
-export const editHeader = [
-  col({
-    key: 'info',
-    label: 'Info',
-    display: Input,
-    value: (x) => ({
-      value: x?.info ?? '',
-      name: 'info'
-    })
-  }),
-  col({
-    label: 'Threat Level',
-    display: Select,
-    value: (x) => ({
-      value: '' + (+(x?.threat_level_id ?? 1) - 1),
-      options: THREAT_LEVEL_LOOKUP.map((x, i) => ({ label: x.text ?? 'unknown', value: '' + i })),
-      name: 'threat_level_id'
-    })
-  }),
-  col({
-    label: 'Analysis',
-    display: Select,
-    value: (x) => ({
-      value: '' + (x?.analysis ?? 1),
-      options: ANALYSIS_LOOKUP.map((x, i) => ({ label: x.text ?? 'unknown', value: '' + i })),
-      name: 'analysis'
-    })
-  }),
-  col({
-    label: 'Published',
-    display: Checkbox,
-    value: (x) => ({
-      checked: x?.published ?? false,
-      name: 'published'
-    })
-  }),
-  col({
-    label: 'Date',
-    display: Input,
-    value: (x) => ({
-      value: x?.date ? format(new Date(x.date), 'yyyy-MM-dd') : undefined,
-      name: 'date',
-      type: 'date'
-    })
-  }),
-  col({
-    label: 'Creator user',
-    display: HrefPill,
-    value: (x) => ({
-      href: 'mailto:' + x?.event_creator_email,
-      text: x?.event_creator_email,
-      icon: 'mdi:account-outline'
-    })
-  }),
-  col({
-    label: 'Creator Org',
-    display: Pill,
-    value: (x) => ({
-      text: x?.Orgc?.name,
-      icon: 'material-symbols:work-outline'
-    })
-  }),
-  col({
-    label: 'Owner Org',
-    display: Pill,
-    value: (x) => ({
-      text: x?.Org?.name,
-      icon: 'material-symbols:work-outline'
-    })
-  }),
-  col({ label: 'ID', value: (x) => x?.id ?? 'unknown' }),
-  col({ label: 'UUID', value: (x) => x?.uuid ?? 'unknown' }),
-  col({
-    label: 'Distribution',
-    display: Select,
-    value: (x) => ({
-      value: '' + (x?.distribution ?? 1),
-      options: DISTRIBUTION_LOOKUP.map((x, i) => ({ label: x.text ?? 'unknown', value: '' + i })),
-      name: 'distribution'
-    })
-  }),
-  col({
-    label: 'Attribute Count',
-    value: (x) =>
-      `${(x?.Attribute?.length ?? 0) + (x?.Object?.length ?? 0)} (${
-        x?.Object?.length ?? 0
-      } Objects)`
-  }),
-
-  col({
-    label: 'Extends UUID',
-    display: Input,
-    value: (x) => ({
-      value: x?.extends_uuid || undefined,
-      name: 'extends_uuid'
-    })
-  })
+  col(
+    { label: 'Extends UUID', value: (x) => x?.extends_uuid || 'none' },
+    {
+      value: (x) => ({
+        display: Input,
+        props: {
+          value: x?.extends_uuid ?? undefined,
+          name: 'extends_uuid'
+        }
+      })
+    }
+  )
 ];

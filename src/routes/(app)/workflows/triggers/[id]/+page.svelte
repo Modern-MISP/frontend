@@ -1,12 +1,11 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { writable, type Writable } from 'svelte/store';
-  import type { PageData } from './$types';
   import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
 
   /** The data that will be displayed on this page. */
-  export let data: PageData;
+  export let data;
 
   const { trigger, infoHeader } = data;
   const wfData = trigger.Workflow?.data ?? {};

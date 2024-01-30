@@ -24,4 +24,7 @@
   
  -->
 
-<Pill {text} class="text-white font-bold px-2 {isTrue ? '!bg-green' : '!bg-red'} {clazz}" />
+<Pill
+  {text}
+  class="text-white font-bold !w-16  items-center px-2 {isTrue ? '!bg-green' : '!bg-red'} {clazz}"
+/>
