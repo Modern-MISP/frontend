@@ -4,6 +4,7 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
@@ -13,6 +14,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     error: mispError,
     response
   } = await GET('/admin/users/view/{userId}', { params: { path: { userId: params.id } }, fetch });
+  console.log(data)
 
   if (mispError) error(response.status, mispError.message);
 
@@ -20,9 +22,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
   const left = [
     col({
-        key: 'email',
-        label: 'Name',
-        value: (x) => x.User?.email ?? 'unknown'
+      key: 'email',
+      label: 'Name',
+      value: (x) => x.User?.email ?? 'unknown'
     }),
     col({
       key: 'id',
@@ -30,20 +32,22 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => x.User?.id ?? 'unknown'
     }),
     col({
-        key: 'name',
-        label: 'Role',
-        value: (x) => x.Role?.name ?? 'unknown'
+      key: 'name',
+      label: 'Role',
+      value: (x) => x.Role?.name ?? 'unknown'
     }),
     col({
-        key: 'nids_sid',
-        label: 'NIDS SID',
-        value: (x) => x.User?.nids_sid ?? 'unknown'
+      key: 'nids_sid',
+      label: 'NIDS SID',
+      value: (x) => x.User?.nids_sid ?? 'unknown'
     }),
     col({
-        key: 'change_pw',
-        label: 'Last password change',
-        //TODO: where is this data?
-        value: (x) => x.User?.change_pw ?? 'unknown'
+      icon: 'mdi:clock-outline',  
+      key: 'last_pw_change',
+      label: 'Last password change',
+      display: DatePill,
+      // class: 'whitespace-nowrap',
+      value: (x) => ({ date: new Date(+(x.User?.last_pw_change || 0) * 1000) })
       }),
     col({
         key: 'created',
@@ -94,31 +98,24 @@ export const load: PageLoad = async ({ params, fetch }) => {
     }),
 
     //TODO: formatting
-    //TODO: more specific email notification stuff
 
     col({
-        key: 'autoalert',
-        label: 'event',
-        display: Boolean,
-        value: (x) => ({ isTrue: x.User?.autoalert ?? false })
-      }),
-    col({
-        key: 'autoalert',
+        key: 'notification_daily',
         label: 'daily',
         display: Boolean,
-        value: (x) => ({ isTrue: x.User?.autoalert ?? false })
+        value: (x) => ({ isTrue: x.User?.notification_daily ?? false })
     }),
     col({
-        key: 'autoalert',
+        key: 'notification_weekly',
         label: 'weekly',
         display: Boolean,
-        value: (x) => ({ isTrue: x.User?.autoalert ?? false })
+        value: (x) => ({ isTrue: x.User?.notification_weekly ?? false })
     }),
     col({
-        key: 'autoalert',
+        key: 'notification_monthly',
         label: 'monthly',
         display: Boolean,
-        value: (x) => ({ isTrue: x.User?.autoalert ?? false })
+        value: (x) => ({ isTrue: x.User?.notification_monthly ?? false })
     })
   ];
 
