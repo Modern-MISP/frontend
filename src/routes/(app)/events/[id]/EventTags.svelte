@@ -33,9 +33,9 @@
   <hr />
   <PillCollection
     pills={(data.event?.Tag ?? []).map((y) => ({
-      /// @ts-expect-error fuck this fucking API spec
+      /// @ts-expect-error Wrong API spec
       icon: y.local == 0 ? 'mdi:cloud-off-outline' : 'mdi:earth',
-      /// @ts-expect-error see above
+      /// @ts-expect-error Wrong API spec
       label: y.relationship_type ? y.relationship_type : undefined,
       text: y.name,
       style: `background-color: ${y.colour}; color: ${

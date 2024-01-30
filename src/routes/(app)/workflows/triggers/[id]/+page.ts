@@ -13,7 +13,6 @@ import type { Trigger } from '../trigger';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   /// @ts-expect-error '/workflows/triggers' is not specified within the OpenAPI spec
-  // TODO: Get a better fucking OpenAPI spec
   const { data, error: mispError, response } = await GET('/workflows/triggers', { fetch }); // TODO: check for alternative endpoint/solution
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
