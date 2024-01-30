@@ -43,7 +43,7 @@
     }
   }
 
-  for (const frame of Object.values(wfData._frames)) {
+  for (const frame of Object.values(wfData._frames ?? {})) {
     const node = {
       id: frame.id,
       type: 'frame',

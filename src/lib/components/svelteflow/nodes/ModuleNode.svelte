@@ -29,6 +29,10 @@
   export let targetPosition: $$Props['targetPosition'] = undefined;
   /** Node source position */
   export let sourcePosition: $$Props['sourcePosition'] = undefined;
+  /** Node absolute x position */
+  export let positionAbsoluteX: $$Props['positionAbsoluteX'];
+  /** Node absolute y position */
+  export let positionAbsoluteY: $$Props['positionAbsoluteY'];
 
   // TODO: better handle positioning
   const dist = 10;
@@ -39,7 +43,7 @@
   
   A node representing a generic workflow module.
 -->
-<BaseNode {id} {data} {dragHandle} {type} {selected} {isConnectable} {zIndex} {width} {height} {dragging} {targetPosition} {sourcePosition}>
+<BaseNode {id} {data} {dragHandle} {type} {selected} {isConnectable} {zIndex} {width} {height} {dragging} {targetPosition} {sourcePosition} {positionAbsoluteX} {positionAbsoluteY}>
   <div class="flex flex-col">
     <span class="italic">{data.moduleData.module_type}</span>
     <span class="font-bold">{data.label}</span>

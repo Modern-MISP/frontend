@@ -27,6 +27,10 @@
   export let targetPosition: $$Props['targetPosition'] = undefined; targetPosition;
   /** Node source position */
   export let sourcePosition: $$Props['sourcePosition'] = undefined; sourcePosition;
+  /** Node absolute x position */
+  export let positionAbsoluteX: $$Props['positionAbsoluteX']; positionAbsoluteX;
+  /** Node absolute y position */
+  export let positionAbsoluteY: $$Props['positionAbsoluteY']; positionAbsoluteY;
 </script>
 
 <!--
