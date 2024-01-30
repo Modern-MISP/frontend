@@ -2,7 +2,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { writable, type Writable } from 'svelte/store';
   import type { PageData } from './$types';
-  import { type Node, type Edge } from '@xyflow/svelte';
+  import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
 
   /** The data that will be displayed on this page. */
@@ -64,12 +64,12 @@
     const additionalLabelPadding = 30;
 
     const children = $nodes.filter((n) => frame.data.nodes.includes(n.id));
-    frame.position.x = Math.min(...children.map((n) => n.position.x)) - padding;
-    frame.position.y = Math.min(...children.map((n) => n.position.y)) - padding - additionalLabelPadding;
-    const width = Math.max(...children.map((n) => n.position.x + (n.computed?.width ?? 0))) - frame.position.x;
-    const height = Math.max(...children.map((n) => n.position.y + (n.computed?.height ?? 0))) - frame.position.y;
-    frame.width = width + padding;
-    frame.height = height + padding;
+    const bounds = getNodesBounds(children);
+
+    frame.position.x = bounds.x - padding;
+    frame.position.y = bounds.y - padding - additionalLabelPadding;
+    frame.width = bounds.width + 2*padding;
+    frame.height = bounds.height + 2*padding + additionalLabelPadding;
   }
 
   function onNodeDrag({ detail: { node } }: { detail: { node: Node }}) {
