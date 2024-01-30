@@ -1,15 +1,19 @@
 import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { filter } from 'lodash-es';
 import Info from '$lib/components/info/Info.svelte';
+import type { Module } from '../module';
 
 export const load: PageLoad = async ({ params, fetch }) => {
-  const { data, error: mispError, response } = await GET('/workflows/moduleIndex', { fetch }); // TODO: check for alternative endpoint/solution
+  /// @ts-expect-error Not in OpenAPI spec
+  const getResult = await GET('/workflows/moduleIndex', { fetch }); // TODO: check for alternative endpoint/solution
+  const { response, error: mispError } = getResult;
+  const data = getResult.data as Module[];
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const module = filter(data, (x) => x.id === params.id).at(0) ?? {};
 
@@ -20,43 +24,37 @@ export const load: PageLoad = async ({ params, fetch }) => {
       icon: 'mdi:id-card',
       key: 'name',
       label: 'Name',
-      value: (x) => ({ text: x.name ?? 'unknown' }),
-      display: Info
+      value: (x) => ({ display: Info, props: { text: x.name ?? 'unknown' } })
     }),
     col({
-        icon: 'mdi:id-card',
-        key: 'id',
-        label: 'ID',
-        value: (x) => ({ text: x.id ?? 'unknown' }),
-        display: Info
+      icon: 'mdi:id-card',
+      key: 'id',
+      label: 'ID',
+      value: (x) => ({ display: Info, props: { text: x.id ?? 'unknown' } })
     }),
     col({
-        icon: 'mdi:circle',
-        key: 'type',
-        label: 'Type',
-        value: (x) => ({ text: x.module_type ?? 'unknown'}),
-        display: Info
+      icon: 'mdi:circle',
+      key: 'type',
+      label: 'Type',
+      value: (x) => ({ display: Info, props: { text: x.module_type ?? 'unknown' } })
     }),
     col({
-        icon: 'mdi:checkbox-outline',
-        key: 'enabled',
-        label: 'Enabled',
-        value: (x) => ({ isTrue: !x.disabled }),
-        display: Boolean
+      icon: 'mdi:checkbox-outline',
+      key: 'enabled',
+      label: 'Enabled',
+      value: (x) => ({ display: Boolean, props: { isTrue: !x.disabled } })
     }),
     col({
-        icon: 'mdi:circle',
-        key: 'misp_module',
-        label: 'Is Misp Module',
-        value: (x) => ({ isTrue: x.misp_module ?? 'unknown'}),
-        display: Boolean
+      icon: 'mdi:circle',
+      key: 'misp_module',
+      label: 'Is Misp Module',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.misp_module ?? 'unknown' } })
     }),
     col({
-        icon: 'mdi:information-outline',
-        key: 'description',
-        label: 'Description',
-        value: (x) => ({ text: x.description ?? ''}),
-        display: Info
+      icon: 'mdi:information-outline',
+      key: 'description',
+      label: 'Description',
+      value: (x) => ({ display: Info, props: { text: x.description ?? '' } })
     })
   ];
 

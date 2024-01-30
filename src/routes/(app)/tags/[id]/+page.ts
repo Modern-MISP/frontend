@@ -1,5 +1,5 @@
 import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
@@ -17,73 +17,74 @@ export const load: PageLoad = async ({ params, fetch }) => {
     response
   } = await GET('/tags/view/{tagId}', { params: { path: { tagId: params.id } }, fetch });
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<typeof data>();
+  const col = createTableHeadGenerator<
+    typeof data & {
+      local_only?: boolean;
+      count?: string;
+      hidden?: string;
+      local?: string;
+    }
+  >();
 
   const header = [
-
-    col({ 
-        key: 'id', 
-        label: 'ID', 
-        value: (x) => x.id ?? 'unknown' 
+    col({
+      key: 'id',
+      label: 'ID',
+      value: (x) => x.id ?? 'unknown'
     }),
     col({
-        key: 'name',
-        label: 'Name',
+      key: 'name',
+      label: 'Name',
+      value: (x) => ({
         display: Pill,
-        value: (x) => ({
+        props: {
           icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
           text: x.name,
           style: `background-color: ${x.colour}; color: ${
             shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
           }`
-        })
-      }),
+        }
+      })
+    }),
     col({
       key: 'tagged_events',
       label: 'Tagged Events',
-      display: Info,
-      value: (x) => ({ text: x.count })
+      value: (x) => ({ display: Info, props: { text: x.count } })
     }),
     col({
       key: 'exportable',
       label: 'Exportable',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.exportable === 'true' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.exportable } })
     }),
     col({
       key: 'hidden',
       label: 'Hidden',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.hidden === 'true' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.hidden === 'true' } })
     }),
     col({
       icon: 'mdi:cloud-off-outline',
       key: 'local_only',
       label: 'Local only',
       // class: 'whitespace-nowrap',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.local === 'true' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.local === 'true' } })
     }),
     col({
       key: 'restrict_org',
       label: 'Restricted to Org',
       // class: 'whitespace-nowrap',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.org_id !== '0' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.org_id !== '0' } })
     }),
     col({
       icon: 'mdi:account-cancel-outline',
       key: 'restrict_user',
       label: 'Restricted to User',
       // class: 'whitespace-nowrap',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.user_id !== '0' })
-    }),
+      value: (x) => ({ display: Boolean, props: { isTrue: x.user_id !== '0' } })
+    })
 
     //TODO: more categories necessary?
-
   ];
 
   return {

@@ -1,5 +1,5 @@
 import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
@@ -15,86 +15,100 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/auth_keys/view/{authKeyId}', { params: { path: { authKeyId: params.id } }, fetch });
+  } = await GET('/auth_keys/view/{authKeyId}', {
+    params: { path: { authKeyId: params.id } },
+    fetch
+  });
 
-  if (mispError) error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<(typeof data)[number]>();
+  const col = createTableHeadGenerator<typeof data & { AuthKey?: { unique_ips?: string[] } }>();
 
   const left = [
     col({
-        key: 'id',
-        label: 'ID',
-        value: (x) => x.AuthKey?.id ?? ''
+      key: 'id',
+      label: 'ID',
+      value: (x) => x.AuthKey?.id ?? ''
     }),
     col({
-        key: 'uuid',
-        label: 'UUID',
-        value: (x) => x.AuthKey?.uuid ?? ''
+      key: 'uuid',
+      label: 'UUID',
+      value: (x) => x.AuthKey?.uuid ?? ''
     }),
     col({
-        key: 'key',
-        label: 'Key',
+      key: 'key',
+      label: 'Key',
+      value: (x) => ({
         display: Info,
-        value: (x) => ({
+        props: {
           text: x.AuthKey?.authkey_start + '••••••••••••••' + x.AuthKey?.authkey_end
-        })
+        }
+      })
     }),
     col({
-        key: 'user',
-        label: 'User',
-        value: (x) => ({
+      key: 'user',
+      label: 'User',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
           icon: 'mdi:account-outline',
-          text: x.User?.email,
+          text: x.User?.email ?? undefined,
           href: `/admin/users/${x.User?.id}`
-        }),
-        display: HrefPill
-      }),
+        }
+      })
+    }),
     col({
-        icon: 'mdi:information-outline',
-        key: 'expiration',
-        label: 'Expires',
-        value: (x) => ({
+      icon: 'mdi:information-outline',
+      key: 'expiration',
+      label: 'Expires',
+      value: (x) => ({
+        display: RelativeDatePill,
+        props: {
           date:
             (x.AuthKey?.expiration &&
               +x.AuthKey.expiration !== 0 &&
               new Date(+x.AuthKey.expiration * 1000)) ||
             null
-        }),
-        display: RelativeDatePill
+        }
+      })
     }),
     col({
-        key: 'read_only',
-        label: 'Read only',
-        display: Boolean,
-        value: (x) => ({ isTrue: x.AuthKey?.read_only ?? false })
+      key: 'read_only',
+      label: 'Read only',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
     }),
     col({
-        key: 'comment',
-        label: 'Comment',
-        value: (x) => ({
+      key: 'comment',
+      label: 'Comment',
+      value: (x) => ({
+        display: Info,
+        props: {
           text: x.AuthKey?.comment || 'No Comment',
           class: 'line-clamp-3'
-        }),
-        display: Info
-    }),
+        }
+      })
+    })
   ];
 
   const right = [
     col({
-        key: 'seen_ip',
-        label: 'Seen Ip',
-        value: (x) => ({
-            text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
-        }),
-        display: Info
-        // class: 'whitespace-nowrap'
-      }),
-      col({
-        icon: 'ph:hash-bold',
-        key: 'ip_count',
-        label: 'Attr.',
-        value: (x) => ({
+      key: 'seen_ip',
+      label: 'Seen Ip',
+      value: (x) => ({
+        display: Info,
+        props: {
+          text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
+        }
+      })
+      // class: 'whitespace-nowrap'
+    }),
+    col({
+      icon: 'ph:hash-bold',
+      key: 'ip_count',
+      label: 'Attr.',
+      value: (x) => ({
+        display: PillCollection,
+        props: {
           pills: [
             {
               label: 'Seen',
@@ -105,9 +119,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
               text: x.AuthKey?.allowed_ips?.length ?? 'All'
             }
           ]
-        }),
-        display: PillCollection
+        }
       })
+    })
   ];
 
   return {
