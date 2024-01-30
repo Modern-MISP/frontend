@@ -9,7 +9,7 @@ import {
 import { error } from '@sveltejs/kit';
 
 async function defaultDisabled(): Promise<FetchResponse<object>> {
-  throw error(503, 'The REST method you try to use is disabled');
+  error(503, 'The REST method you try to use is disabled');
 }
 const api = {
   ...createClient<paths>({

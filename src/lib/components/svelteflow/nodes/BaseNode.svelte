@@ -4,8 +4,8 @@
   type $$Props = NodeProps;
 
   /** Node properties */
-  // eslint-disable-next-line svelte/valid-compile
   export let data: $$Props['data'];
+  data;
 </script>
 
 <!--

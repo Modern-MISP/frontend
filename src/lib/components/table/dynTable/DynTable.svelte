@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord[]">
+  import { derived, type Readable } from 'svelte/store';
+
   import { constant, groupBy } from 'lodash-es';
 
   import type { DynTableHeadExtent } from './DynTable.model';
@@ -12,7 +14,7 @@
    * The header of the table. Also includes the icon and the href.
    * When setting this, it's recommended to use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function.
    */
-  export let header: (TableHead<T[number]> & DynTableHeadExtent)[];
+  export let header: Readable<TableHead<T[number]> & DynTableHeadExtent>[];
   /**
    * The data that will be displayed in the table.
    */
@@ -25,6 +27,8 @@
    * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
    */
   export let groupInfo: (x: T[number]) => unknown | undefined = constant(undefined);
+
+  const store = derived(header, (arr) => arr);
 </script>
 
 <!--
@@ -40,7 +44,7 @@
 <Table>
   <thead>
     <tr>
-      {#each header as head}
+      {#each $store as head}
         <Th
           {...head}
           on:click={() => {
