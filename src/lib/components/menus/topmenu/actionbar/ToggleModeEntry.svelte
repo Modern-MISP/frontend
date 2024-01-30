@@ -4,6 +4,7 @@
   import { capitalize } from 'lodash-es';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type ActionBar from './ActionBar.svelte';
+  import ActionBarEntryTemplate from './ActionBarEntryTemplate.svelte';
 
   /**
    * The current mode of this Entry.
@@ -16,11 +17,10 @@
   The {@link ActionBar} entry responsible for toggling modes.
 -->
 
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<label class="flex flex-col items-center gap-1">
+<ActionBarEntryTemplate>
   <Checkbox
     checked={mode === 'edit'}
     on:change={() => (mode = mode === 'view' ? 'edit' : 'view')}
   />
-  <span class="text-xs">{capitalize(mode)} mode</span>
-</label>
+  <span slot="label">{capitalize(mode)} mode</span>
+</ActionBarEntryTemplate>

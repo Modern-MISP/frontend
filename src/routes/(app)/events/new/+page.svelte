@@ -5,7 +5,8 @@
     {
       icon: 'mdi:close-circle-outline',
       label: 'Abbrechen',
-      action: '/events'
+      action: '/events',
+      class: 'text-red'
     },
     {
       icon: 'material-symbols:save-outline',

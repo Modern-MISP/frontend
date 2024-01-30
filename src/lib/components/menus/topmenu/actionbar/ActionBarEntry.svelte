@@ -2,6 +2,7 @@
   import Icon from '@iconify/svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type ActionBar from './ActionBar.svelte';
+  import ActionBarEntryTemplate from './ActionBarEntryTemplate.svelte';
 
   /**
    * The label of this ActionBar entry.
@@ -27,7 +28,7 @@
   
 -->
 
-<div class="flex flex-col items-center gap-1 {clazz}">
+<ActionBarEntryTemplate class={clazz}>
   <Icon {icon} class="w-6 h-6" />
-  <span class="text-xs">{label}</span>
-</div>
+  <span slot="label">{label}</span>
+</ActionBarEntryTemplate>
