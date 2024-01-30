@@ -18,7 +18,7 @@
   for (const [, module] of Object.entries(wfData).filter(([key]) => key !== '_frames')) {
     $nodes.push({
       id: `${module.id}`,
-      type: module.data.module_type,  // 'trigger' or 'action'
+      type: module.data.module_type, // 'trigger' or 'action'
       data: {
         label: module.name,
         inputs: Object.keys(module.inputs),
@@ -48,11 +48,11 @@
       id: frame.id,
       type: 'frame',
       data: { nodes: frame.nodes, width: 0, height: 0, label: frame.text },
-      position: { x: 0, y: 0},
+      position: { x: 0, y: 0 },
       zIndex: -100,
       draggable: false,
       selectable: false
-    }
+    };
     $nodes.push(node);
     updateFrame(node);
   }
@@ -66,11 +66,11 @@
 
     frame.position.x = bounds.x - padding;
     frame.position.y = bounds.y - padding - additionalLabelPadding;
-    frame.width = bounds.width + 2*padding;
-    frame.height = bounds.height + 2*padding + additionalLabelPadding;
+    frame.width = bounds.width + 2 * padding;
+    frame.height = bounds.height + 2 * padding + additionalLabelPadding;
   }
 
-  function onNodeDrag({ detail: { node } }: { detail: { node: Node }}) {
+  function onNodeDrag({ detail: { node } }: { detail: { node: Node } }) {
     $nodes.forEach((frameNode) => {
       if (frameNode.type === 'frame' && frameNode.data.nodes.includes(node.id)) {
         updateFrame(frameNode);

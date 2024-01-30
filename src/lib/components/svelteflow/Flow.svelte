@@ -11,8 +11,8 @@
   import type { Writable } from 'svelte/store';
   import ActionModuleNode from './nodes/ActionModuleNode.svelte';
   import { mode } from '$lib/stores';
-    import FrameNode from './nodes/FrameNode.svelte';
-    import ModuleNode from './nodes/ModuleNode.svelte';
+  import FrameNode from './nodes/FrameNode.svelte';
+  import ModuleNode from './nodes/ModuleNode.svelte';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;

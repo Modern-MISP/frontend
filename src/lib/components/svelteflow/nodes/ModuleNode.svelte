@@ -12,7 +12,7 @@
   /** Node drag handle */
   export let dragHandle: $$Props['dragHandle'] = undefined;
   /** Node type */
-  export let type: $$Props['type']  = undefined;
+  export let type: $$Props['type'] = undefined;
   /** Node selected */
   export let selected: $$Props['selected'] = undefined;
   /** Node is connectable */
@@ -37,19 +37,37 @@
   // TODO: better handle positioning
   const dist = 10;
 </script>
-  
+
 <!--
   @component
   
   A node representing a generic workflow module.
 -->
-<BaseNode {id} {data} {dragHandle} {type} {selected} {isConnectable} {zIndex} {width} {height} {dragging} {targetPosition} {sourcePosition} {positionAbsoluteX} {positionAbsoluteY}>
+<BaseNode
+  {id}
+  {data}
+  {dragHandle}
+  {type}
+  {selected}
+  {isConnectable}
+  {zIndex}
+  {width}
+  {height}
+  {dragging}
+  {targetPosition}
+  {sourcePosition}
+  {positionAbsoluteX}
+  {positionAbsoluteY}
+>
   <div class="flex flex-col">
     <span class="italic">{data.moduleData.module_type}</span>
     <span class="font-bold">{data.label}</span>
 
     {#if !Array.isArray(data.moduleData.indexed_params)}
-      <Info text={JSON.stringify(data.moduleData.indexed_params)} class="!bg-base max-w-96 overflow-scroll"/>
+      <Info
+        text={JSON.stringify(data.moduleData.indexed_params)}
+        class="!bg-base max-w-96 overflow-scroll"
+      />
     {/if}
   </div>
   {#each data.inputs as inputId, i}
