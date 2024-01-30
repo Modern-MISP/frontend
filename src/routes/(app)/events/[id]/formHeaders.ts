@@ -15,7 +15,7 @@ const col = createTableHeadGenerator<PageData['event']>();
 
 export const header = [
   col(
-    { key: 'info', label: 'Info', value: (x) => x?.info ?? 'unknown' },
+    { label: 'Info', value: (x) => x?.info ?? 'unknown' },
     { value: (x) => ({ display: Input, props: { value: x?.info ?? '', name: 'info' } }) }
   ),
   col(
