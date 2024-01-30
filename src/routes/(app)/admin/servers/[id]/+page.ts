@@ -50,7 +50,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'URL',
       value: (x) => x.Server?.url ?? 'unknown'
     }),
-    gi
     //TODO: not functional yet
     col({
       key: 'explore_event_graph',
