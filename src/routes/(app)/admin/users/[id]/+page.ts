@@ -47,14 +47,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       display: DatePill,
       // class: 'whitespace-nowrap',
       value: (x) => ({ date: new Date(+(x.User?.last_pw_change || 0) * 1000) })
-      }),
-    col({
-        key: 'created',
-        label: 'Org Admins',
-        //TODO: where is this data?
-        display: Info,
-        value: (x) => x.Organisation?.admin ?? 'unknown'
-    })
+      })
   ];
 
   const right = [
@@ -83,7 +76,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({ isTrue: x.User?.termsaccepted ?? false })
     }),
     col({
-        //TODO: gpg or pgp?
         key: 'gpgkey',
         label: 'PGP key',
         display: Boolean,
