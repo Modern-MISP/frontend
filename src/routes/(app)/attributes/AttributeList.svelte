@@ -22,7 +22,9 @@
     col(attributeCols.comment),
     col(attributeCols.value),
     col(attributeCols.object_id),
-    col(attributeCols.object_relation)
+    col(attributeCols.object_relation),
+    col(attributeCols.type),
+    col(attributeCols.deleted)
   ];
 </script>
 

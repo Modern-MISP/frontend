@@ -2,7 +2,6 @@ import { GET } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import Boolean from '$lib/components/boolean/Boolean.svelte';
 import attributeCols from '../attributeCols';
 
 export const load: PageLoad = async ({ params, fetch }) => {

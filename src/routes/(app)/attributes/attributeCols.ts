@@ -3,7 +3,10 @@ import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import Info from '$lib/components/info/Info.svelte';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
 import type { components } from '$lib/api/misp';
+import type { TableHead } from '$lib/models/TableHead.interface';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 export default {
   id: {
@@ -71,8 +74,22 @@ export default {
     label: 'Object Relation',
     icon: 'mdi:circle',
     value: (x) => x.object_relation ?? ''
+  },
+  type: {
+    icon: '',
+    key: 'type',
+    label: 'Type',
+    value: (x) => x.type ?? ''
+  },
+  deleted: {
+    label: 'Deleted',
+    key: 'deleted',
+    icon: 'mdi:delete',
+    value: (x) => ({
+      display: Boolean,
+      props: {
+        isTrue: x.deleted
+      }
+    })
   }
-} satisfies Record<
-  string,
-  { value: (x: components['schemas']['Attribute']) => unknown } & Record<string, unknown>
->;
+} satisfies Record<string, TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>;
