@@ -37,13 +37,33 @@
     <Card>
       <Icon icon="mdi:magnify" />
     </Card>
-    <Card />
-    <Card />
-    <Card />
+    <Card>
+      <Icon icon="mdi:show" />
+    </Card>
+    <Card>
+      <Icon icon="mdi:hide" />
+    </Card>
+    <Card>
+      <Icon icon="bx:expand" />
+    </Card>
+    <Card>
+      <Icon icon="bx:collapse" />
+    </Card>
+    <Card>
+      <Icon icon="mdi:edit" />
+    </Card>
+    <Card>
+      <Icon icon="bx:duplicate" />
+    </Card>
+    <Card>
+      <Icon icon="mdi:delete" />
+    </Card>
+    
+
   </div>
   <div class="flex gap-4 shrink-0">
-    <Card>Objects</Card>
-    <Card>Attributes</Card>
+    <Card>Unreferenced Objects</Card>
+    <Card>Unreferenced Attributes</Card>
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
