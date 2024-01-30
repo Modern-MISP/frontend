@@ -13,6 +13,12 @@
 
   /** URL for hyperlink */
   export let action: string | undefined = undefined;
+
+  let clazz = '';
+  /**
+   * The class of this ActionBar entry.
+   */
+  export { clazz as class };
 </script>
 
 <!--
@@ -21,5 +27,5 @@
 -->
 
 <a href={action}>
-  <ActionBarEntry {label} {icon} />
+  <ActionBarEntry {label} {icon} class={clazz} />
 </a>

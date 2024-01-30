@@ -12,6 +12,13 @@
    * The icon of this ActionBar entry.
    */
   export let icon: string;
+
+  let clazz = '';
+
+  /**
+   * The class of this ActionBar entry.
+   */
+  export { clazz as class };
 </script>
 
 <!--
@@ -20,7 +27,7 @@
   
 -->
 
-<div class="flex flex-col items-center gap-1">
+<div class="flex flex-col items-center gap-1 {clazz}">
   <Icon {icon} class="w-6 h-6" />
   <span class="text-xs">{label}</span>
 </div>

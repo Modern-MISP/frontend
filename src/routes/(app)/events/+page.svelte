@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { actionBar } from '$lib/actions';
   import { POST } from '$lib/api';
   import Pagination from '$lib/components/pagination/Pagination.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PageData } from './$types';
   /**
    * Page data
@@ -30,6 +32,14 @@
 
   $: page = 1;
   $: loadMore(page);
+
+  const actions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:event-add',
+      label: 'Add Event',
+      action: '/events/new'
+    }
+  ];
 </script>
 
 <!--
@@ -37,6 +47,8 @@
   Displays a list of all events.
   
 -->
+
+<svelte:window use:actionBar={actions} />
 
 <DynTable href={({ id }) => `/events/${id}`} {header} data={tableData} />
 
