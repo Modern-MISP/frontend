@@ -2,7 +2,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { writable, type Writable } from 'svelte/store';
   import type { PageData } from './$types';
-  import type { Node, Edge } from '@xyflow/svelte';
+  import { type Node, type Edge } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
 
   /** The data that will be displayed on this page. */
@@ -20,18 +20,26 @@
     $nodes.push({
       id: `${module.id}`,
       type: module.data.module_type,  // 'trigger' or 'action'
-      data: { label: module.name },
+      data: {
+        label: module.name,
+        inputs: Object.keys(module.inputs),
+        outputs: Object.keys(module.outputs)
+      },
       position: { x: module.pos_x, y: module.pos_y }
     });
     // create input edges for this module
-    for (const edge of module.inputs.input_1?.connections ?? []) {
-      $edges.push({
-      id: `${edge.node}-${module.id}`,
-      type: 'default',
-      source: edge.node,
-      target: `${module.id}`,
-      animated: true
-    });
+    for (const [inputName, input] of Object.entries(module.inputs)) {
+      for (const connection of input.connections ?? []) {
+        $edges.push({
+          id: `${connection.node}-${module.id}`,
+          type: 'default',
+          source: connection.node,
+          sourceHandle: connection.input,
+          target: `${module.id}`,
+          targetHandle: inputName,
+          animated: true
+        });
+      }
     }
   }
 

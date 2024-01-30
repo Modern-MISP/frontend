@@ -12,6 +12,7 @@
   import ActionModuleNode from './nodes/ActionModuleNode.svelte';
   import { mode } from '$lib/stores';
     import FrameNode from './nodes/FrameNode.svelte';
+    import ModuleNode from './nodes/ModuleNode.svelte';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;
@@ -20,9 +21,9 @@
   export let edges: Writable<Edge[]>;
 
   const nodeTypes = {
-    trigger: TriggerModuleNode,
-    action: ActionModuleNode,
-    logic: ActionModuleNode,
+    trigger: ModuleNode,
+    action: ModuleNode,
+    logic: ModuleNode,
     frame: FrameNode
   };
 
