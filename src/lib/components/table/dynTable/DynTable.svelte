@@ -1,6 +1,8 @@
 <script lang="ts" generics="T extends IRecord[]">
   import { derived, type Readable } from 'svelte/store';
 
+  import { constant, groupBy } from 'lodash-es';
+
   import type { DynTableHeadExtent } from './DynTable.model';
 
   import type { TableHead } from '$lib/models/TableHead.interface';
@@ -21,6 +23,10 @@
    * The callback that will be called when the user clicks on the row.
    */
   export let href: ((row: T[number]) => string | undefined) | undefined = undefined;
+  /**
+   * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
+   */
+  export let groupInfo: (x: T[number]) => unknown | undefined = constant(undefined);
 
   const store = derived(header, (arr) => arr);
 </script>
@@ -48,22 +54,37 @@
       {/each}
     </tr>
   </thead>
-  <tbody>
-    {#each data as row}
-      <tr class="hover:bg-sky">
-        {#each $store as { value }}
-          {@const v = value(row)}
-          <Td href={href && href(row)}>
-            <span class="text-lg">
-              {#if typeof v !== 'string'}
-                <svelte:component this={v.display} {...v.props} />
-              {:else}
-                {v}
-              {/if}
-            </span>
-          </Td>
-        {/each}
-      </tr>
-    {/each}
-  </tbody>
+  {@const grouped = groupBy(data, groupInfo)}
+  {#each Object.entries(grouped) as [info, group], i}
+    <tbody class:border-sky={info !== 'undefined'} class:border-8={info !== 'undefined'}>
+      {#if info !== 'undefined'}
+        <tr class="bg-sky">
+          <td colspan={$store.length} class="px-2 text-black">
+            {info}
+          </td>
+        </tr>
+      {/if}
+      {#each group as row}
+        <tr class="hover:bg-sky w-full">
+          {#each $store as { value }}
+            {@const v = value(row)}
+            <Td href={href && href(row)}>
+              <span class="text-lg">
+                {#if typeof v != 'string'}
+                  <svelte:component this={v.display} {...v.props} />
+                {:else}
+                  {v}
+                {/if}
+              </span>
+            </Td>
+          {/each}
+        </tr>
+      {/each}
+    </tbody>
+    <!-- Hack to display a "gap" between `tbody`s, is displayed after all but the last group -->
+    {#if i < Object.keys(grouped).length - 1}
+      <tbody class="bg-black"><tr><td colspan={$store.length} /></tr></tbody>
+    {/if}
+  {/each}
+  <!-- </tbody> -->
 </Table>
