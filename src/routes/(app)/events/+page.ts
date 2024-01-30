@@ -7,7 +7,6 @@ import type { components } from '$lib/api/misp';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import { DATE_FORMAT } from '$lib/components/config';
 import InputCollection from '$lib/components/filter/InputCollection.svelte';
-import Input from '$lib/components/input/Input.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -161,13 +160,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const filter = [
     fil({
       label: 'Value',
-      value: () => ({
-        display: Input,
-        props: {
-          name: 'value',
-          placeholder: 'Value'
-        }
-      })
+      value: () => 'value'
     }),
     // In the current api published does not need to be an boolean. That's why we could use the string return from an input checkbox
     fil({
@@ -182,35 +175,19 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     fil({
       label: 'Type',
-      value: () => ({
-        display: Input,
-        props: {
-          name: 'type',
-          placeholder: 'Type'
-        }
-      })
+      value: () => 'type'
     }),
     fil({
       label: 'Search all',
-      value: () => ({
-        display: Input,
-        props: {
-          name: 'searchall',
-          placeholder: 'Search all'
-        }
-      })
+      value: () => 'seachall'
     }),
     // You can override the page limit with this.
+
     fil({
       label: 'Page Limit',
-      value: () => ({
-        display: Input,
-        props: {
-          name: 'limit',
-          placeholder: 'Page Limit'
-        }
-      })
+      value: () => 'limit'
     }),
+
     fil({
       label: 'Tags',
       value: () => ({

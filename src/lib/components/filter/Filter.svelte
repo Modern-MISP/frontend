@@ -5,18 +5,23 @@
   import type { TableHead } from '$lib/models/TableHead.interface';
   import { getFormValues } from '$lib/util/form.util';
   import Icon from '@iconify/svelte';
+  import { derived, type Readable } from 'svelte/store';
+  import Input from '../input/Input.svelte';
   /**
    * All possible filter
    */
-  export let header: TableHead<undefined>[];
+  export let header: Readable<TableHead<undefined>>[];
+
+  const store = derived(header, (arr) => arr);
 
   /**
    * The current filter values. You should probably bind this.
    */
   export let currentFilter: Record<string, FormDataEntryValue[] | FormDataEntryValue>[] = [];
 
-  let currentOption: string = header[0].label;
-  $: option = header.find(({ label }) => label === currentOption);
+  let currentOption: string = $store[0].label;
+  $: option = $store.find(({ label }) => label === currentOption);
+  $: optionValue = option?.value(undefined);
 </script>
 
 <div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-1 lg:w-1/2">
@@ -25,13 +30,15 @@
       <span slot="heading"> Add Filter </span>
 
       <Select
-        options={header.map(({ label }) => ({ label, value: label }))}
+        options={$store.map(({ label }) => ({ label, value: label }))}
         bind:value={currentOption}
         class="!bg-overlay0"
       />
 
-      {#if option}
-        <svelte:component this={option.display} {...option.value(undefined)} class="!bg-overlay0" />
+      {#if optionValue && typeof optionValue != 'string'}
+        <svelte:component this={optionValue.display} {...optionValue.props} class="!bg-overlay0" />
+      {:else}
+        <Input name={optionValue} placeholder={option?.label} class="!bg-overlay0" />
       {/if}
 
       <!-- Add element to list. Triggers form submit, cuz type of submit per default. If you change the default ty of the button, you also have to change this. -->
