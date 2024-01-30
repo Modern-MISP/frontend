@@ -14,7 +14,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
     error: mispError,
     response
   } = await GET('/admin/users/view/{userId}', { params: { path: { userId: params.id } }, fetch });
-  console.log(data)
 
   if (mispError) error(response.status, mispError.message);
 
