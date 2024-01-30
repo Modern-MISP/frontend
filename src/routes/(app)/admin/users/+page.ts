@@ -30,7 +30,7 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
 
     col({
-      icon: 'mdi:email-outline',
+      icon: 'mdi:email-outline<',
       key: 'email',
       label: 'Email',
       value: (x) => ({ display: Info, props: { text: x.User?.email ?? 'unknown' } })
