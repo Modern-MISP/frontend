@@ -8,5 +8,9 @@
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: MesloLGS, Source Code Pro, Roboto, sans-serif;
+  font-family:
+    MesloLGS,
+    Source Code Pro,
+    Roboto,
+    sans-serif;
 }

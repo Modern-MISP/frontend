@@ -12,7 +12,11 @@
   const col = createTableHeadGenerator<(typeof TABLE_DATA)[0]>();
 
   const header = [
-    col({ key: 'id', label: 'ID', display: Info, value: (x) => ({ text: x.description }) }),
+    col({
+      key: 'id',
+      label: 'ID',
+      value: (x) => ({ display: Info, props: { text: x.description } })
+    }),
     col({ key: 'name', label: 'Name', value: (x) => x.name }),
     col({
       key: 'description',

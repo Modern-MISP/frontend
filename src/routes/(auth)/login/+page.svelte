@@ -14,12 +14,13 @@
       password: string;
     };
     try {
-      const res = await login(entries);
+      const res = await login(entries as { email: string; password: string });
       if (res) {
         localStorage.setItem('authToken', 'Bearer: security');
         goto('/events');
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
       console.warn(e.body.message);
       error = e.body.message;
     }
