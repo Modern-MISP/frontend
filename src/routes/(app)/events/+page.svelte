@@ -38,7 +38,7 @@
   $: loadMore({ ...merge({}, ...currentFilter), page });
 
   let filterOpen = false;
-  let currentFilter: Record<string, FormDataEntryValue>[] = [];
+  let currentFilter: Record<string, string>[] = [];
 </script>
 
 <!--
