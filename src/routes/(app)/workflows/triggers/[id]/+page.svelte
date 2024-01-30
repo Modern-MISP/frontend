@@ -23,7 +23,8 @@
       data: {
         label: module.name,
         inputs: Object.keys(module.inputs),
-        outputs: Object.keys(module.outputs)
+        outputs: Object.keys(module.outputs),
+        moduleData: module.data
       },
       position: { x: module.pos_x, y: module.pos_y }
     });
@@ -56,8 +57,6 @@
     $nodes.push(node);
     updateFrame(node);
   }
-
-  console.log($nodes);
 
   function updateFrame(frame: Node) {
     const padding = 20;

@@ -1,11 +1,34 @@
 <script lang="ts">
+  import Info from '$lib/components/info/Info.svelte';
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
 
   type $$Props = NodeProps;
 
-  /** Node properties */
+  /** Node id */
+  export let id: $$Props['id'];
+  /** Node data */
   export let data: $$Props['data'];
+  /** Node drag handle */
+  export let dragHandle: $$Props['dragHandle'] = undefined;
+  /** Node type */
+  export let type: $$Props['type']  = undefined;
+  /** Node selected */
+  export let selected: $$Props['selected'] = undefined;
+  /** Node is connectable */
+  export let isConnectable: $$Props['isConnectable'] = undefined;
+  /** Node z index */
+  export let zIndex: $$Props['zIndex'] = undefined;
+  /** Node width */
+  export let width: $$Props['width'] = undefined;
+  /** Node height */
+  export let height: $$Props['height'] = undefined;
+  /** Node dragging */
+  export let dragging: $$Props['dragging'];
+  /** Node target position */
+  export let targetPosition: $$Props['targetPosition'] = undefined;
+  /** Node source position */
+  export let sourcePosition: $$Props['sourcePosition'] = undefined;
 
   // TODO: better handle positioning
   const dist = 10;
@@ -16,9 +39,14 @@
   
   A node representing a generic workflow module.
 -->
-<BaseNode {...data}>
-  <div class="flex">
-    {data.label}
+<BaseNode {id} {data} {dragHandle} {type} {selected} {isConnectable} {zIndex} {width} {height} {dragging} {targetPosition} {sourcePosition}>
+  <div class="flex flex-col">
+    <span class="italic">{data.moduleData.module_type}</span>
+    <span class="font-bold">{data.label}</span>
+
+    {#if !Array.isArray(data.moduleData.indexed_params)}
+      <Info text={JSON.stringify(data.moduleData.indexed_params)} class="!bg-base max-w-96 overflow-scroll"/>
+    {/if}
   </div>
   {#each data.inputs as inputId, i}
     <Handle

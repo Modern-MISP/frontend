@@ -3,9 +3,30 @@
 
   type $$Props = NodeProps;
 
-  /** Node properties */
-  // eslint-disable-next-line svelte/valid-compile
-  export let data: $$Props['data'];
+  /** Node id */
+  export let id: $$Props['id']; id;
+  /** Node data */
+  export let data: $$Props['data']; data;
+  /** Node drag handle */
+  export let dragHandle: $$Props['dragHandle'] = undefined; dragHandle;
+  /** Node type */
+  export let type: $$Props['type']  = undefined; type;
+  /** Node selected */
+  export let selected: $$Props['selected'] = undefined; selected;
+  /** Node is connectable */
+  export let isConnectable: $$Props['isConnectable'] = undefined; isConnectable;
+  /** Node z index */
+  export let zIndex: $$Props['zIndex'] = undefined; zIndex;
+  /** Node width */
+  export let width: $$Props['width'] = undefined; width;
+  /** Node height */
+  export let height: $$Props['height'] = undefined; height;
+  /** Node dragging */
+  export let dragging: $$Props['dragging']; dragging;
+  /** Node target position */
+  export let targetPosition: $$Props['targetPosition'] = undefined; targetPosition;
+  /** Node source position */
+  export let sourcePosition: $$Props['sourcePosition'] = undefined; sourcePosition;
 </script>
 
 <!--
