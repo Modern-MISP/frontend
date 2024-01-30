@@ -1,12 +1,11 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { mode } from '$lib/stores';
   import type { PageData } from './$types';
   import EditMode from './EditMode.svelte';
 
   import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
   import EventTags from './EventTags.svelte';
-  import { editHeader, viewHeader } from './formHeaders';
+  import { header } from './formHeaders';
   import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
@@ -39,7 +38,7 @@
         <AddTagForm />
       {:else}
         <section class="h-full">
-          <DynCard data={data.event} header={$mode === 'view' ? viewHeader : editHeader} />
+          <DynCard data={data.event} {header} />
         </section>
       {/if}
       <section class="h-full">
