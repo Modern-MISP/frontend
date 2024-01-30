@@ -59,19 +59,19 @@
     <tbody class:border-sky={info !== 'undefined'} class:border-8={info !== 'undefined'}>
       {#if info !== 'undefined'}
         <tr class="bg-sky">
-          <td colspan={header.length} class="px-2 text-black">
+          <td colspan={$store.length} class="px-2 text-black">
             {info}
           </td>
         </tr>
       {/if}
       {#each group as row}
         <tr class="hover:bg-sky w-full">
-          {#each header as { value, display }}
+          {#each $store as { value }}
             {@const v = value(row)}
             <Td href={href && href(row)}>
               <span class="text-lg">
-                {#if display && typeof v != 'string'}
-                  <svelte:component this={display} {...v} />
+                {#if typeof v != 'string'}
+                  <svelte:component this={v.display} {...v.props} />
                 {:else}
                   {v}
                 {/if}
@@ -83,7 +83,7 @@
     </tbody>
     <!-- Hack to display a "gap" between `tbody`s, is displayed after all but the last group -->
     {#if i < Object.keys(grouped).length - 1}
-      <tbody class="bg-black"><tr><td colspan={header.length} /></tr></tbody>
+      <tbody class="bg-black"><tr><td colspan={$store.length} /></tr></tbody>
     {/if}
   {/each}
   <!-- </tbody> -->

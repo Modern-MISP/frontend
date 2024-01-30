@@ -17,37 +17,42 @@ export default {
     key: 'event',
     label: 'Event',
     value: (x) => ({
-      icon: 'mdi-calendar',
-      text: x.event_id!,
-      href: `/events/${x.event_id}`
-    }),
-    display: HrefPill
+      display: HrefPill,
+      props: {
+        icon: 'mdi-calendar',
+        text: x.event_id!,
+        href: `/events/${x.event_id}`
+      }
+    })
   },
   distribution: {
     icon: 'mdi:share',
     key: 'distribution',
     label: 'Distribution',
-    display: LookupPill,
     value: (x) => ({
-      value: +(x.distribution ?? 0),
-      options: DISTRIBUTION_LOOKUP
+      display: LookupPill,
+      props: {
+        value: +(x.distribution ?? 0),
+        options: DISTRIBUTION_LOOKUP
+      }
     })
   },
   category: {
     icon: 'mdi:circle',
     key: 'category',
     label: 'Category',
-    display: Pill,
     value: (x) => ({
-      text: x.category
+      display: Pill,
+      props: {
+        text: x.category
+      }
     })
   },
   value: {
     icon: 'mdi:circle',
     key: 'value',
     label: 'Value',
-    display: Info,
-    value: (x) => ({ text: x.value })
+    value: (x) => ({ display: Info, props: { text: x.value } })
   },
   comment: {
     icon: 'mdi:comment',
@@ -59,13 +64,13 @@ export default {
     key: 'object_id',
     label: 'Object ID',
     icon: 'mdi:format-list-group',
-    value: (x) => x.object_id!
+    value: (x) => x.object_id ?? ''
   },
   object_relation: {
     key: 'object_relation',
     label: 'Object Relation',
     icon: 'mdi:circle',
-    value: (x) => x.object_relation!
+    value: (x) => x.object_relation ?? ''
   }
 } satisfies Record<
   string,

@@ -1,5 +1,5 @@
 import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     fetch
   });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
 
   const col = createTableHeadGenerator<NonNullable<(typeof data)['Attribute']>>();
 
