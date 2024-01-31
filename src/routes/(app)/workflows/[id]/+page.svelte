@@ -3,19 +3,22 @@
   import { writable, type Writable } from 'svelte/store';
   import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
+  import type { Trigger } from '../triggers/trigger.js';
+  import { objectEntries } from 'ts-extras';
 
   /** The data that will be displayed on this page. */
   export let data;
 
-  const { workflow, infoHeader } = data;
-  const wfData = workflow.data ?? {};
+  const { infoHeader } = data;
+  const workflow = (data.workflow as Trigger['Workflow'])!;
+  const wfData = workflow.data!;
 
   console.log(workflow);
 
   const nodes: Writable<Node[]> = writable([]);
   const edges: Writable<Edge[]> = writable([]);
 
-  for (const [, module] of Object.entries(wfData).filter(([key]) => key !== '_frames')) {
+  for (const [, module] of objectEntries(wfData).filter(([key]) => key !== '_frames')) {
     $nodes.push({
       id: `${module.id}`,
       type: module.data.module_type, // 'trigger' or 'action'
