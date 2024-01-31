@@ -4,6 +4,7 @@ import type { PageLoad } from './$types';
 import { filter } from 'lodash-es';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
@@ -38,7 +39,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => x.Server?.priority ?? 'unknown'
     }),
 
-    //TODO: maybe reference to orf or something like that
+    //TODO: maybe reference to org or something like that
     
     col({
       key: 'remote_org_id',
@@ -50,11 +51,18 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'URL',
       value: (x) => x.Server?.url ?? 'unknown'
     }),
-    //TODO: not functional yet
+    
+    //TODO: not implemented desired function yet
     col({
       key: 'explore_event_graph',
       label: 'Explore Event Graph',
-      value: (x) => x.Server?.id ?? 'unknown'
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          text: 'click to see events',
+          href: `/events/`
+        }
+      })
     })
   ]
   const right = [

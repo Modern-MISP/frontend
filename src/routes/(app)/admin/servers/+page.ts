@@ -5,6 +5,7 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
@@ -108,12 +109,18 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
     }),
 
-    //TODO: not functional yet
+    //TODO: not implemented desired function yet
     col({
-      icon: 'mdi:id-card',
+      icon: 'mdi:link',
       key: 'explore_event_graph',
       label: 'Explore Event Graph',
-      value: (x) => x.Server?.id ?? 'unknown'
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          text: 'click to see events',
+          href: `/events/`
+        }
+      })
     })
   ];
 
