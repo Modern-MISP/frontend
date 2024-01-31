@@ -5,6 +5,8 @@
   import Icon from '@iconify/svelte';
   import type { Edge, Node } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
+  import CardRow from '../card/CardRow.svelte';
+  import IconCard from './IconCard.svelte';
   const nodes: Writable<Node[]> = writable([]);
 
   const edges: Writable<Edge[]> = writable([]);
@@ -34,36 +36,34 @@
 -->
 <header class="flex justify-between w-full gap-2">
   <div class="flex gap-2">
-    <Card>
-      <Icon icon="mdi:magnify" />
-    </Card>
-    <Card>
-      <Icon icon="mdi:show" />
-    </Card>
-    <Card>
-      <Icon icon="mdi:hide" />
-    </Card>
-    <Card>
-      <Icon icon="bx:expand" />
-    </Card>
-    <Card>
-      <Icon icon="bx:collapse" />
-    </Card>
-    <Card>
-      <Icon icon="mdi:edit" />
-    </Card>
-    <Card>
-      <Icon icon="bx:duplicate" />
-    </Card>
-    <Card>
-      <Icon icon="mdi:delete" />
-    </Card>
+
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:magnify" text="Details" />
+    </CardRow>
+
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:show" text="Show" />
+      <IconCard icon="mdi:hide" text="Hide" class="!text-red" />
+    </CardRow>
+
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="bx:expand" text="Expand" />
+      <IconCard icon="bx:collapse" text="Collapse" class="!text-red" />
+    </CardRow>
+
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:edit" text="Edit" />
+      <IconCard icon="bx:duplicate" text="Duplicate" />
+      <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
+    </CardRow>
     
 
   </div>
   <div class="flex gap-4 shrink-0">
-    <Card>Unreferenced Objects</Card>
-    <Card>Unreferenced Attributes</Card>
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:edit" text="Unreferenced Objects" />
+      <IconCard icon="mdi:edit" text="Unreferenced Objects" />
+    </CardRow>
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
@@ -72,7 +72,7 @@
   </div>
 
   <Card>
-    {#each [{ text: 'test', icon: 'mdi:file' }] as obj}
+    {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
   </Card>

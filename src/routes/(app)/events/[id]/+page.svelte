@@ -7,17 +7,15 @@
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
   import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
   import Card from '$lib/components/card/Card.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-  import AttributeList from '../../attributes/AttributeList.svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
    */
   export let data: PageData;
-
-  const attributeData = data.event.Attribute!;
 
   let addTag = false;
 </script>
@@ -69,10 +67,9 @@
       </section>
     </div>
   </EditMode>
-
   <section>
     <h1>Attributes</h1>
-    <AttributeList data={attributeData} />
+    <DynTable data={[]} header={[]} />
   </section>
 
   <EventGraph event={data.event} />
