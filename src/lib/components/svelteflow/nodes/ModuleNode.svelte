@@ -61,14 +61,12 @@
 >
   <div class="flex flex-col">
     <span class="italic">{data.moduleData.module_type}</span>
-    <span class="font-bold">{data.label}</span>
+    <span class="font-bold">{data.moduleData.name}</span>
 
-    {#if !Array.isArray(data.moduleData.indexed_params)}
-      <Info
-        text={JSON.stringify(data.moduleData.indexed_params)}
-        class="!bg-base max-w-96 overflow-scroll"
-      />
-    {/if}
+    <Info
+      text={JSON.stringify(data.moduleData.indexed_params)}
+      class="!bg-base max-w-96 overflow-scroll"
+    />
   </div>
   {#each data.inputs as inputId, i}
     <Handle

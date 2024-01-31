@@ -20,7 +20,6 @@
       id: `${module.id}`,
       type: module.data.module_type, // 'trigger' or 'action'
       data: {
-        label: module.name,
         inputs: Object.keys(module.inputs),
         outputs: Object.keys(module.outputs),
         moduleData: module.data
