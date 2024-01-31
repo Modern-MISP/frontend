@@ -1,6 +1,5 @@
 import { GET } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 import { filter } from 'lodash-es';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
@@ -8,13 +7,8 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-export const load: PageLoad = async ({ params, fetch }) => {
-  const {
-    data,
-    error: mispError,
-    response
-  } = await GET('/servers', { fetch });
-  console.log(data)
+export const load = async ({ params, fetch }) => {
+  const { data, error: mispError, response } = await GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -40,7 +34,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     }),
 
     //TODO: maybe reference to org or something like that
-    
+
     col({
       key: 'remote_org_id',
       label: 'Organization',
@@ -51,12 +45,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'URL',
       value: (x) => x.Server?.url ?? 'unknown'
     }),
-    
+
     //TODO: not implemented desired function yet
     col({
       key: 'explore_event_graph',
       label: 'Explore Event Graph',
-      value: (x) => ({
+      value: () => ({
         display: HrefPill,
         props: {
           text: 'click to see events',
@@ -64,7 +58,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     })
-  ]
+  ];
   const right = [
     col({
       key: 'internal',
@@ -89,7 +83,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       key: 'push_galaxy_cluster',
       label: 'Push Cluster',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_galaxy_clusters ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.push_galaxy_clusters ?? false }
+      })
     }),
     col({
       key: 'caching_enabled',
@@ -104,7 +101,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       key: 'publish_without_email',
       label: 'Publish without E-Mail',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.publish_without_email ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.publish_without_email ?? false }
+      })
     }),
     col({
       key: 'self_signed',

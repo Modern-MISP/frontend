@@ -11,7 +11,6 @@ export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
-  console.log(data)
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   const header = [
@@ -35,7 +34,7 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
 
     //TODO: maybe reference to orf or something like that
-    
+
     col({
       icon: 'material-symbols:work-outline',
       key: 'remote_org_id',
@@ -76,7 +75,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'streamline:galaxy-2-solid',
       key: 'push_galaxy_cluster',
       label: 'Push Cluster',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_galaxy_clusters ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.push_galaxy_clusters ?? false }
+      })
     }),
     col({
       icon: 'mdi:cached',
@@ -94,7 +96,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:email-outline',
       key: 'publish_without_email',
       label: 'Publish without E-Mail',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.publish_without_email ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.publish_without_email ?? false }
+      })
     }),
     col({
       icon: 'mdi:id-card',
@@ -114,7 +119,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:link',
       key: 'explore_event_graph',
       label: 'Explore Event Graph',
-      value: (x) => ({
+      value: () => ({
         display: HrefPill,
         props: {
           text: 'click to see events',
