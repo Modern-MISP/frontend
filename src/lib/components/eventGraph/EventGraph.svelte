@@ -2,7 +2,6 @@
   import Card from '$lib/components/card/Card.svelte';
   import IconCardRow from '$lib/components/eventGraph/IconCardRow.svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
-  import Icon from '@iconify/svelte';
   import type { Edge, Node } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import CardRow from '../card/CardRow.svelte';
@@ -76,9 +75,9 @@
     <Flow {nodes} {edges} />
   </div>
 
-  <!-- <Card>
+  <Card>
     {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
-  </Card> -->
+  </Card>
 </div>
