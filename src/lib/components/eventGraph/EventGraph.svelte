@@ -61,19 +61,24 @@
   </div>
   <div class="flex gap-4 shrink-0">
     <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:edit" text="Unreferenced Objects" />
-      <IconCard icon="mdi:edit" text="Unreferenced Objects" />
+      <IconCard icon="mdi:web" text="Unreferenced Objects" />
+      <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
     </CardRow>
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
-  <div class="flex-col w-full basis-2/3">
+  <div class="flex-col w-full">
+    <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:web-plus" text="Add Object" />
+      <IconCard icon="mdi:flag-add" text="Add Attribute" />
+      <IconCard icon="icon-park-outline:connection" text="Add Reference" />
+    </CardRow>
     <Flow {nodes} {edges} />
   </div>
 
-  <Card>
+  <!-- <Card>
     {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
-  </Card>
+  </Card> -->
 </div>
