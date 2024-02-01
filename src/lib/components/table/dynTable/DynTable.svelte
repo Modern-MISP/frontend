@@ -56,16 +56,16 @@
   </thead>
   {@const grouped = groupBy(data, groupInfo)}
   {#each Object.entries(grouped) as [info, group], i}
-    <tbody class:border-sky={info !== 'undefined'} class:border-8={info !== 'undefined'}>
+    <tbody class:border-blue={info !== 'undefined'} class:border-8={info !== 'undefined'}>
       {#if info !== 'undefined'}
-        <tr class="bg-sky">
+        <tr class="bg-blue">
           <td colspan={$store.length} class="px-2 text-black">
             {info}
           </td>
         </tr>
       {/if}
       {#each group as row}
-        <tr class="hover:bg-sky w-full">
+        <tr class="hover:bg-surface2 w-full">
           {#each $store as { value }}
             {@const v = value(row)}
             <Td href={href && href(row)}>
