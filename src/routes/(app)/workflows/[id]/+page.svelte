@@ -70,16 +70,18 @@
     frame.position.y = bounds.y - padding - additionalLabelPadding;
     frame.width = bounds.width + 2 * padding;
     frame.height = bounds.height + 2 * padding + additionalLabelPadding;
+    $nodes = $nodes;
   }
 
-  function onNodeDrag({ detail: { node } }: { detail: { node: Node } }) {
+  function onNodeDrag({ detail: { node } }: Flow['$$events_def']['nodedrag']) {
     $nodes.forEach((frameNode) => {
       if (frameNode.type === 'frame' && frameNode.data.nodes.includes(node.id)) {
         updateFrame(frameNode);
       }
     });
-    $nodes = $nodes;
   }
+
+  setTimeout(() => $nodes.filter((n) => n.type === 'frame').forEach(updateFrame));
 </script>
 
 <!--
