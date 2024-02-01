@@ -44,7 +44,9 @@
 >
   <slot name="logo">
     <div class="flex h-10 gap-12 px-5 overflow-hidden text-2xl" class:text-4xl={isOpen}>
-      <Icon icon="mdi:home" class="text-inherit shrink-0" />
+      <a href="/events">
+        <Icon icon="mdi:home" class="text-inherit shrink-0" />
+      </a>
       {#if isOpen}
         <h1 class="font-bold line-clamp-1" transition:fade={FADE_OPTIONS}>MISP</h1>
       {/if}
