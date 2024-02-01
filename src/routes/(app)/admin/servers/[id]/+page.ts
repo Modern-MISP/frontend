@@ -4,6 +4,7 @@ import { filter } from 'lodash-es';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
@@ -30,20 +31,48 @@ export const load = async ({ params, fetch }) => {
     col({
       key: 'priority',
       label: 'Priority',
-      value: (x) => x.Server?.priority ?? 'unknown'
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'mdi:chevron-triple-up',
+          text: x.Server?.priority ?? 'unknown'
+        }
+      })
     }),
-
-    //TODO: maybe reference to org or something like that
-
     col({
-      key: 'remote_org_id',
       label: 'Organization',
-      value: (x) => x.Server?.remote_org_id ?? 'unknown'
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'material-symbols:work-outline',
+          label: x.Server?.org_id ?? 'unknown',
+          text: x.Organisation?.name ?? 'unknown'
+        }
+      })
+    }),
+    col({
+      label: 'Remote Organization',
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'material-symbols:work-outline',
+          label: x.Server?.remote_org_id ?? 'unknown',
+          text: x.RemoteOrg?.name ?? 'unknown'
+        }
+      })
     }),
     col({
       key: 'url',
       label: 'URL',
-      value: (x) => x.Server?.url ?? 'unknown'
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'ri:share-box-line',
+          href: x.Server?.url ?? '#',
+          target: '_blank' as const,
+          text: x.Server?.url ?? 'unknown'
+        }
+      })
     }),
 
     //TODO: not implemented desired function yet

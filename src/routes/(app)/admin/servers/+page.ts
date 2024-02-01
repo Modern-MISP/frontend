@@ -6,6 +6,7 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
@@ -32,14 +33,31 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Priority',
       value: (x) => x.Server?.priority ?? 'unknown'
     }),
-
-    //TODO: maybe reference to orf or something like that
-
+    col({
+      icon: 'material-symbols:work-outline',
+      key: 'org_id',
+      label: 'Organization',
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'material-symbols:work-outline',
+          label: x.Server?.org_id ?? 'unknown',
+          text: x.Organisation?.name ?? 'unknown'
+        }
+      })
+    }),
     col({
       icon: 'material-symbols:work-outline',
       key: 'remote_org_id',
-      label: 'Organization',
-      value: (x) => x.Server?.remote_org_id ?? 'unknown'
+      label: 'Remote Org',
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'material-symbols:work-outline',
+          label: x.Server?.remote_org_id ?? 'unknown',
+          text: x.RemoteOrg?.name ?? 'unknown'
+        }
+      })
     }),
     col({
       icon: 'mdi:wifi',
