@@ -89,11 +89,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       key: 'force_logout',
       label: 'Must change password',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.User?.change_pw === '1' ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.User?.change_pw === '1' } })
     }),
-
-    //TODO: formatting
-
     col({
       key: 'notification_daily',
       label: 'daily',

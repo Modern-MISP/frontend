@@ -17,6 +17,10 @@
    * The target URL of the pill, which will be navigated to when the pill is clicked.
    */
   export let href: string;
+  /**
+   * The target browsing context i.e. where to open the URL.
+   */
+  export let target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 </script>
 
 <!-- 
@@ -25,6 +29,6 @@
 
  -->
 
-<a {href}>
+<a {href} {target}>
   <Pill {label} {text} {icon} class="!text-blue-400" />
 </a>

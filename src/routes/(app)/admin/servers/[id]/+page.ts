@@ -1,41 +1,45 @@
 import { GET } from '$lib/api';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error, type NumericRange } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import { filter } from 'lodash-es';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
-export const load: PageLoad = async ({ fetch }) => {
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+
+export const load = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
-  const header = [
+  const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
+
+  const col = createTableHeadGenerator<typeof server>();
+
+  const left = [
     col({
-      icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
       value: (x) => x.Server?.id ?? 'unknown'
     }),
     col({
-      icon: 'mdi:circle',
       key: 'name',
       label: 'Name',
       value: (x) => x.Server?.name ?? 'unknown'
     }),
     col({
-      icon: 'mdi:chevron-triple-up',
       key: 'priority',
       label: 'Priority',
-      value: (x) => x.Server?.priority ?? 'unknown'
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'mdi:chevron-triple-up',
+          text: x.Server?.priority ?? 'unknown'
+        }
+      })
     }),
     col({
-      icon: 'material-symbols:work-outline',
-      key: 'org_id',
       label: 'Organization',
       value: (x) => ({
         display: Pill,
@@ -47,9 +51,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'material-symbols:work-outline',
-      key: 'remote_org_id',
-      label: 'Remote Org',
+      label: 'Remote Organization',
       value: (x) => ({
         display: Pill,
         props: {
@@ -60,81 +62,21 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:wifi',
       key: 'url',
       label: 'URL',
-      value: (x) => x.Server?.url ?? 'unknown'
-    }),
-    col({
-      icon: 'mdi:home-search-outline',
-      key: 'internal',
-      label: 'Internal',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
-    }),
-    col({
-      icon: 'mdi:share',
-      key: 'push',
-      label: 'Push',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
-    }),
-    col({
-      icon: 'mdi:share',
-      key: 'pull',
-      label: 'Pull',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
-    }),
-    col({
-      icon: 'mdi:eye',
-      key: 'push_sightings',
-      label: 'Push Sightings',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_sightings ?? false } })
-    }),
-    col({
-      icon: 'streamline:galaxy-2-solid',
-      key: 'push_galaxy_cluster',
-      label: 'Push Cluster',
       value: (x) => ({
-        display: Boolean,
-        props: { isTrue: x.Server?.push_galaxy_clusters ?? false }
+        display: HrefPill,
+        props: {
+          icon: 'ri:share-box-line',
+          href: x.Server?.url ?? '#',
+          target: '_blank' as const,
+          text: x.Server?.url ?? 'unknown'
+        }
       })
-    }),
-    col({
-      icon: 'mdi:cached',
-      key: 'caching_enabled',
-      label: 'Cache',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
-    }),
-    col({
-      icon: 'mdi:share-all',
-      key: 'unpublish_event',
-      label: 'Unpublish Event',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.unpublish_event ?? false } })
-    }),
-    col({
-      icon: 'mdi:email-outline',
-      key: 'publish_without_email',
-      label: 'Publish without E-Mail',
-      value: (x) => ({
-        display: Boolean,
-        props: { isTrue: x.Server?.publish_without_email ?? false }
-      })
-    }),
-    col({
-      icon: 'mdi:id-card',
-      key: 'self_signed',
-      label: 'Self Signed',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })
-    }),
-    col({
-      icon: 'mdi:link',
-      key: 'skip_proxy',
-      label: 'Skip Proxy',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
     }),
 
     //TODO: not implemented desired function yet
     col({
-      icon: 'mdi:link',
       key: 'explore_event_graph',
       label: 'Explore Event Graph',
       value: () => ({
@@ -146,10 +88,68 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     })
   ];
+  const right = [
+    col({
+      key: 'internal',
+      label: 'Internal',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
+    }),
+    col({
+      key: 'push',
+      label: 'Push',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
+    }),
+    col({
+      key: 'pull',
+      label: 'Pull',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
+    }),
+    col({
+      key: 'push_sightings',
+      label: 'Push Sightings',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_sightings ?? false } })
+    }),
+    col({
+      key: 'push_galaxy_cluster',
+      label: 'Push Cluster',
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.push_galaxy_clusters ?? false }
+      })
+    }),
+    col({
+      key: 'caching_enabled',
+      label: 'Cache',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
+    }),
+    col({
+      key: 'unpublish_event',
+      label: 'Unpublish Event',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.unpublish_event ?? false } })
+    }),
+    col({
+      key: 'publish_without_email',
+      label: 'Publish without E-Mail',
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.publish_without_email ?? false }
+      })
+    }),
+    col({
+      key: 'self_signed',
+      label: 'Self Signed',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })
+    }),
+    col({
+      key: 'skip_proxy',
+      label: 'Skip Proxy',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
+    })
+  ];
 
   return {
-    data,
-    tableData: data,
-    header
+    server,
+    left,
+    right
   };
 };
