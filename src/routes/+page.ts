@@ -4,5 +4,5 @@ export const load = async () => {
   const token = localStorage.getItem('authToken');
   if (!token) redirect(307, '/login');
 
-  throw redirect(307, '/events');
+  redirect(307, '/events');
 };
