@@ -9,14 +9,14 @@ today is colored in lightblue
 
 [Layout / Menus] requires 4 days
 [Action Bar] requires 3 days
-[Setup CI] requires 3 days and is 95% complete
+[Setup CI] requires 3 days and is 100% complete
 [Table Filter] requires 9 days and is 100% complete and is colored in red
 [Edit Mode setup] requires 9 days and is 100% complete and is colored in red
-[Edit Actions] requires 7 days and is 10% complete and is colored in red
+[Edit Actions] requires 9 days and is 10% complete and is colored in red
 [SvelteFlow setup] requires 5 days and is 100% complete
 [Write Phase Report] requires 7 days and is 0% complete
 -- Pages --
-[List Pages] requires 13 days and is 95% complete and is colored in red
+[List Pages] requires 14 days and is 100% complete and is colored in red
 note bottom
     Pages that consist of a
     single table listing data.
@@ -29,7 +29,7 @@ end note
 note bottom
     The respective edit mode implementations of <color:gray>List Pages</color>.
 end note
-[View Pages] requires 13 days and is 90% complete and is colored in red
+[View Pages] requires 13 days and is 100% complete and is colored in red
 note bottom
     Pages that display detailed data of a
     single item (event/attribute/etc).
@@ -46,8 +46,8 @@ end note
 [Import Galaxy] requires 2 days and is 0% complete
 [Auth] requires 4 days
 [Settings] requires 3 days
-[Workflows] requires 10 days and is 20% complete
-[Event Graph] requires 14 days and is 0% complete
+[Workflows] requires 10 days and is 30% complete
+[Event Graph] requires 14 days and is 5% complete
 
 Project starts 2024-01-15
 [Layout / Menus] starts at D+0
@@ -67,7 +67,7 @@ Project starts 2024-01-15
 [List Pages] -> [List Pages > Filter]
 [List Pages] -> [List Pages > Edit Mode]
 [Edit Mode setup] -> [List Pages > Edit Mode]
-[Edit Actions] -> [List Pages > Edit Mode]
+[List Pages > Edit Mode] starts 2024-02-02
 [Edit Mode setup] -> [View Pages > Edit Mode]
 [View Pages] -> [View Pages > Edit Mode]
 [SvelteFlow setup] -> [Workflows]
