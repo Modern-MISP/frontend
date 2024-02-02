@@ -3,6 +3,7 @@
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
   import ModuleParam from './ModuleParam.svelte';
+  import Icon from '@iconify/svelte';
 
   type $$Props = NodeProps;
 
@@ -74,12 +75,18 @@
   class={fullData.disabled ? 'border-4 border-red' : ''}
 >
   <div class="flex flex-col">
-    <span class="italic">{data.moduleData.module_type}</span>
-    <span class="font-bold">{data.moduleData.name}</span>
+    <span class="italic mb-2">{data.moduleData.module_type}</span>
+    <div class="flex flex-row gap-3 w-full items-center">
+      <Icon icon={`fa6-solid:${fullData.icon}`} />
+      <span class="font-bold basis-full">{data.moduleData.name}</span>
+    </div>
+    {#if (fullData.params ?? []).length > 0}
+      <hr class="border-text h-1 my-3">
 
-    {#each fullData.params ?? [] as param}
-      <ModuleParam {param} value={data.moduleData.indexed_params[param.id]} />
-    {/each}
+      {#each fullData.params as param}
+        <ModuleParam {param} value={data.moduleData.indexed_params[param.id]} />
+      {/each}
+    {/if}
   </div>
   {#each data.inputs as inputId, i}
     <Handle
