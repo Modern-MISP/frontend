@@ -4,6 +4,7 @@
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
   import ModuleParam from './ModuleParam.svelte';
   import Icon from '@iconify/svelte';
+    import Button from '$lib/components/button/Button.svelte';
 
   type $$Props = NodeProps;
 
@@ -75,7 +76,16 @@
   class={fullData.disabled ? 'border-4 border-red' : ''}
 >
   <div class="flex flex-col">
-    <span class="italic mb-2">{data.moduleData.module_type}</span>
+    <div class="flex flex-row gap-1">
+      <span class="italic mb-2 mr-5 basis-full">{data.moduleData.module_type}</span>
+      {#if fullData.disabled}
+        <Button class="bg-red basis-1"><Icon icon="fa6-solid:circle-exclamation"/></Button>
+      {/if}
+      {#if fullData.blocking}
+        <Button class="bg-peach basis-1"><Icon icon="fa6-solid:triangle-exclamation"/></Button>
+      {/if}
+      <Button class="basis-1"><Icon icon="mdi:menu"/></Button>
+    </div>
     <div class="flex flex-row gap-3 w-full items-center">
       <Icon icon={`fa6-solid:${fullData.icon}`} />
       <span class="font-bold basis-full">{data.moduleData.name}</span>
