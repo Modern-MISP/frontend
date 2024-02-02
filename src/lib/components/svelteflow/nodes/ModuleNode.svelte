@@ -50,7 +50,7 @@
   $: console.log(data.moduleData.name, fullData);
 
   // TODO: better handle positioning
-  const dist = 10;
+  const dist = 20;
 </script>
 
 <!--
@@ -103,7 +103,7 @@
       id={inputId}
       type="target"
       position={Position.Left}
-      class="!bg-teal-500 rounded-none border-none"
+      class="!bg-sky rounded-none border-none !w-4 !h-4"
       style="top: {i * dist + dist}px"
     />
   {/each}
@@ -112,7 +112,7 @@
       id={outputId}
       type="source"
       position={Position.Right}
-      class="!bg-teal-500 rounded-none border-none"
+      class="!bg-sky rounded-none border-none !w-4 !h-4"
       style="top: {i * dist + dist}px"
     />
   {/each}

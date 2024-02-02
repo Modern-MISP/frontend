@@ -39,7 +39,8 @@
           sourceHandle: connection.input,
           target: `${module.id}`,
           targetHandle: inputName,
-          animated: true
+          animated: true,
+          style: 'stroke-width: 4px'
         });
       }
     }
