@@ -14,6 +14,10 @@
    * Name of this `select` element. Used for forms.
    */
   export let name: string | undefined = undefined;
+  /**
+   * When true, selection is disabled.
+   */
+  export let disabled: boolean = false;
 </script>
 
 <!-- 
@@ -24,10 +28,15 @@
   The options prop should be an`as const` array of objects with a value and a label property to allow full type safety.
   
  -->
-<div class="relative flex items-center rounded-md bg-crust text-text">
+<div
+  class="relative flex items-center rounded-md text-text"
+  class:bg-crust={!disabled}
+  class:bg-base={disabled}
+>
   <select
-    class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-crust pe-3"
+    class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-inherit pe-3"
     {name}
+    {disabled}
     bind:value
   >
     {#each options as { value, label }}

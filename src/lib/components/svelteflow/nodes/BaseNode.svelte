@@ -1,50 +1,53 @@
 <script lang="ts">
   import type { NodeProps } from '@xyflow/svelte';
 
-  type $$Props = NodeProps;
-
   /** Node id */
-  export let id: $$Props['id'];
+  export let id: NodeProps['id'];
   id;
   /** Node data */
-  export let data: $$Props['data'];
+  export let data: NodeProps['data'];
   data;
   /** Node drag handle */
-  export let dragHandle: $$Props['dragHandle'] = undefined;
+  export let dragHandle: NodeProps['dragHandle'] = undefined;
   dragHandle;
   /** Node type */
-  export let type: $$Props['type'] = undefined;
+  export let type: NodeProps['type'] = undefined;
   type;
   /** Node selected */
-  export let selected: $$Props['selected'] = undefined;
+  export let selected: NodeProps['selected'] = undefined;
   selected;
   /** Node is connectable */
-  export let isConnectable: $$Props['isConnectable'] = undefined;
+  export let isConnectable: NodeProps['isConnectable'] = undefined;
   isConnectable;
   /** Node z index */
-  export let zIndex: $$Props['zIndex'] = undefined;
+  export let zIndex: NodeProps['zIndex'] = undefined;
   zIndex;
   /** Node width */
-  export let width: $$Props['width'] = undefined;
+  export let width: NodeProps['width'] = undefined;
   width;
   /** Node height */
-  export let height: $$Props['height'] = undefined;
+  export let height: NodeProps['height'] = undefined;
   height;
   /** Node dragging */
-  export let dragging: $$Props['dragging'];
+  export let dragging: NodeProps['dragging'];
   dragging;
   /** Node target position */
-  export let targetPosition: $$Props['targetPosition'] = undefined;
+  export let targetPosition: NodeProps['targetPosition'] = undefined;
   targetPosition;
   /** Node source position */
-  export let sourcePosition: $$Props['sourcePosition'] = undefined;
+  export let sourcePosition: NodeProps['sourcePosition'] = undefined;
   sourcePosition;
   /** Node absolute x position */
-  export let positionAbsoluteX: $$Props['positionAbsoluteX'];
+  export let positionAbsoluteX: NodeProps['positionAbsoluteX'];
   positionAbsoluteX;
   /** Node absolute y position */
-  export let positionAbsoluteY: $$Props['positionAbsoluteY'];
+  export let positionAbsoluteY: NodeProps['positionAbsoluteY'];
   positionAbsoluteY;
+
+  let clazz: string = '';
+
+  /** Additional classes applied to outer div. */
+  export { clazz as class };
 </script>
 
 <!--
@@ -53,6 +56,6 @@
   The base component for all custom diagram nodes.
   Other custom node types should use this as their container.
 -->
-<div class="px-4 py-2 rounded-md shadow-md bg-surface1">
+<div class="px-4 py-2 rounded-md shadow-md bg-surface1 {clazz}">
   <slot />
 </div>

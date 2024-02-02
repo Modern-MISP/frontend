@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { GET } from '$lib/api';
   import Info from '$lib/components/info/Info.svelte';
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+  import ModuleParam from './ModuleParam.svelte';
+  import { tick } from 'svelte';
 
   type $$Props = NodeProps;
 
@@ -34,6 +37,18 @@
   /** Node absolute y position */
   export let positionAbsoluteY: $$Props['positionAbsoluteY'];
 
+  // TODO: define 'module' type to use here
+  /** Similar to `data.moduleData`, but with more and differently named properties. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let fullData: any = {};
+  // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
+  GET('/workflows/moduleView/{moduleId}', {
+    params: { path: { moduleId: data.moduleData.id } }
+  }).then((res) => {
+    fullData = res.data;
+  });
+  $: console.log(data.moduleData.name, fullData);
+
   // TODO: better handle positioning
   const dist = 10;
 </script>
@@ -58,15 +73,15 @@
   {sourcePosition}
   {positionAbsoluteX}
   {positionAbsoluteY}
+  class={fullData.disabled ? 'border-4 border-red' : ''}
 >
   <div class="flex flex-col">
     <span class="italic">{data.moduleData.module_type}</span>
     <span class="font-bold">{data.moduleData.name}</span>
 
-    <Info
-      text={JSON.stringify(data.moduleData.indexed_params)}
-      class="!bg-base max-w-96 overflow-scroll"
-    />
+    {#each fullData.params ?? [] as param}
+      <ModuleParam {param} value={data.moduleData.indexed_params[param.id]} />
+    {/each}
   </div>
   {#each data.inputs as inputId, i}
     <Handle
