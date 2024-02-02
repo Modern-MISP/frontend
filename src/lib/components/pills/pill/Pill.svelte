@@ -34,7 +34,7 @@
 
 <div class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}" {style}>
   {#if icon || label}
-    <div class="flex items-center gap-2 px-2 py-1 text-white bg-crust">
+    <div class="flex items-center gap-2 px-2 py-1 text-white bg-crust my-auto">
       {#if icon}
         <Icon {icon} />
       {/if}
@@ -44,7 +44,7 @@
       {/if}
     </div>
   {/if}
-  <span class="w-full px-2 py-1 text-center line-clamp-1" class:pl-0={icon || label}>
+  <span class="w-full px-2 py-1 text-center line-clamp-1 my-auto" class:pl-0={icon || label}>
     <slot>
       {text}
     </slot>

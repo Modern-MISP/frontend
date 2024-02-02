@@ -15,8 +15,8 @@
 -->
 
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
-  <DynCard header={leftCardHeader} data={cardData} ></DynCard>
-  <DynCard header={rightCardHeader} data={cardData} ></DynCard>
+  <DynCard header={leftCardHeader} data={cardData}></DynCard>
+  <DynCard header={rightCardHeader} data={cardData}></DynCard>
 </div>
 
 <DynTable header={tableHeader} data={tableData} />

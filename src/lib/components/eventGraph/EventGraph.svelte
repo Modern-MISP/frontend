@@ -2,28 +2,131 @@
   import Card from '$lib/components/card/Card.svelte';
   import IconCardRow from '$lib/components/eventGraph/IconCardRow.svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
-  import type { Edge, Node } from '@xyflow/svelte';
+  import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import CardRow from '../card/CardRow.svelte';
   import IconCard from './IconCard.svelte';
-  const nodes: Writable<Node[]> = writable([]);
+  import type { components } from '$lib/api/misp';
+  import dagre from '@dagrejs/dagre';
+  import { spring } from 'svelte/motion';
+  import AttributeNode from './AttributeNode.svelte';
 
   const edges: Writable<Edge[]> = writable([]);
 
-  // TODO: fix lint error properly
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let tableView: 'objects' | 'attributes' = 'objects';
-
-  type Event = Record<string, unknown>;
+  tableView;
 
   /**
    * The Event to be displayed on this page.
    */
-  // TODO: fix lint error properly
-  // eslint-disable-next-line svelte/valid-compile
-  export let event: Event;
-
+  export let event: components['schemas']['ExtendedEvent'];
   event;
+
+  const { updateNode } = useSvelteFlow();
+
+  const objects = event.Object ?? [];
+  const attributes = event.Attribute ?? [];
+  const tags = event.Tag ?? [];
+
+  const position = { x: 0, y: 0 };
+
+  const nodes: Writable<Node[]> = writable([]);
+  $nodes.push({ id: 'event', position, data: { label: 'Event' }, type: 'input' });
+
+  for (const object of objects) {
+    $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id}` } });
+    $edges.push({
+      id: `event-to-object-${object.id}`,
+      source: 'event',
+      target: `object-${object.id}`
+    });
+
+    for (const attribute of object.Attribute ?? []) {
+      $nodes.push({
+        id: `attribute-${attribute.id}`,
+        position,
+        data: {
+          id: attribute.id,
+          type: attribute.type,
+          comment: attribute.comment,
+          category: attribute.category,
+          value: attribute.value
+        },
+        type: 'attribute'
+      });
+      $edges.push({
+        id: `object-${object.id}-to-attribute-${attribute.id}`,
+        source: `object-${object.id}`,
+        target: `attribute-${attribute.id}`,
+        label: attribute.object_relation ?? undefined
+      });
+    }
+  }
+
+  for (const attribute of attributes) {
+    $nodes.push({
+      id: `attribute-${attribute.id}`,
+      position,
+      data: {
+        id: attribute.id,
+        type: attribute.type,
+        comment: attribute.comment,
+        category: attribute.category,
+        value: attribute.value
+      },
+      type: 'attribute'
+    });
+    $edges.push({
+      id: `event-to-attribute-${attribute.id}`,
+      source: `event`,
+      target: `attribute-${attribute.id}`
+    });
+  }
+
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+  function getLayoutedElements(nodes: Node[], edges: Edge[]) {
+    dagreGraph.setGraph({ rankdir: 'LR' });
+
+    nodes.forEach((node) => {
+      const { width, height } = getNodesBounds([node]);
+      dagreGraph.setNode(node.id, {
+        width: 200,
+        height
+      });
+    });
+
+    edges.forEach((edge) => {
+      dagreGraph.setEdge(edge.source, edge.target);
+    });
+
+    dagre.layout(dagreGraph);
+
+    nodes.forEach((node) => {
+      const nodeWithPosition = dagreGraph.node(node.id);
+      node.targetPosition = Position.Left;
+      node.sourcePosition = Position.Right;
+
+      // We are shifting the dagre node position (anchor=center center) to the top left
+      // so it matches the React Flow node anchor point (top left).
+      node.position = {
+        x: nodeWithPosition.x - nodeWithPosition.width / 2,
+        y: nodeWithPosition.y - nodeWithPosition.height / 2
+      };
+    });
+
+    return { nodes, edges };
+  }
+
+  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements($nodes, $edges);
+
+  $nodes = layoutedNodes;
+  $edges = layoutedEdges;
+
+  const nodeTypes = {
+    attribute: AttributeNode
+  };
 </script>
 
 <!--
@@ -35,7 +138,6 @@
 -->
 <header class="flex justify-between w-full gap-2">
   <div class="flex gap-2">
-
     <CardRow class="rounded-lg bg-surface0">
       <IconCard icon="mdi:magnify" text="Details" />
     </CardRow>
@@ -55,8 +157,6 @@
       <IconCard icon="bx:duplicate" text="Duplicate" />
       <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
     </CardRow>
-    
-
   </div>
   <div class="flex gap-4 shrink-0">
     <CardRow class="rounded-lg bg-surface0">
@@ -72,7 +172,18 @@
       <IconCard icon="mdi:flag-add" text="Add Attribute" />
       <IconCard icon="icon-park-outline:connection" text="Add Reference" />
     </CardRow>
-    <Flow {nodes} {edges} />
+    <Flow
+      {nodes}
+      {edges}
+      {nodeTypes}
+      on:nodedragstop={({ detail: { node } }) => {
+        if (!node) return;
+        const position = spring(node.position);
+        const computedPosition = layoutedNodes.find((n) => n.id === node.id)?.position;
+        if (computedPosition) position.set(computedPosition);
+        position.subscribe((position) => updateNode(node.id, { position }));
+      }}
+    />
   </div>
 
   <Card>

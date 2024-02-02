@@ -23,10 +23,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
   });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
-  
-  const col = createTableHeadGenerator<
-    (typeof data)['GalaxyCluster']
-  >();
+
+  const col = createTableHeadGenerator<(typeof data)['GalaxyCluster']>();
   const leftCardHeader = [
     col({
       label: 'Value',
@@ -48,7 +46,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           icon: 'streamline:galaxy-2-solid',
           label: x?.galaxy_id ?? 'unknown',
           text: x?.Galaxy?.name,
-          href: `/galaxies/${x?.galaxy_id}`,
+          href: `/galaxies/${x?.galaxy_id}`
         }
       })
     }),
@@ -78,7 +76,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           icon: 'mdi:tag',
           label: x?.tag_id ?? 'unknown',
           text: x?.tag_name ?? 'unknown',
-          href: x?.tag_id ? '/tags/' + x.tag_id : '#',
+          href: x?.tag_id ? '/tags/' + x.tag_id : '#'
         }
       })
     })
@@ -142,10 +140,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   ];
 
   const galaxyElements = data.GalaxyCluster?.GalaxyElement ?? [];
-  const col2 = createTableHeadGenerator<
-    (typeof galaxyElements)[number],
-    DynTableHeadExtent
-  >();
+  const col2 = createTableHeadGenerator<(typeof galaxyElements)[number], DynTableHeadExtent>();
   const elementsHeader = [
     col2({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col2({

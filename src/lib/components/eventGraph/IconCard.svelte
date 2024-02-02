@@ -1,22 +1,22 @@
 <script lang="ts">
-    import Card from '$lib/components/card/Card.svelte';
-    import Icon from '@iconify/svelte';
+  import Card from '$lib/components/card/Card.svelte';
+  import Icon from '@iconify/svelte';
 
-    let clazz = '';
-    /**
-     * Additional classes to be applied to this component.
-     */
-    export { clazz as class };
+  let clazz = '';
+  /**
+   * Additional classes to be applied to this component.
+   */
+  export { clazz as class };
 
-    /**
-     * The icon to be displayed in this card.
-     */
-    export let icon: string;
+  /**
+   * The icon to be displayed in this card.
+   */
+  export let icon: string;
 
-    /**
-     * The text to be displayed in this card.
-     */
-    export let text: string;
+  /**
+   * The text to be displayed in this card.
+   */
+  export let text: string;
 </script>
 
 <!-- 
@@ -25,7 +25,10 @@
   Sets the default padding and border radius. You can override this by passing your own classes.
   
  -->
-<Card class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}" title = {text}>
-    <Icon {icon} />
-    {text}
+<Card
+  class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
+  title={text}
+>
+  <Icon {icon} />
+  {text}
 </Card>

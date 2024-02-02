@@ -5,7 +5,8 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge
+    type Edge,
+    type NodeTypes
   } from '@xyflow/svelte';
   import TriggerNode from './nodes/TriggerNode.svelte';
   import type { Writable } from 'svelte/store';
@@ -18,9 +19,16 @@
   /** Edges that are rendered on the flow */
   export let edges: Writable<Edge[]>;
 
+  let additionalNodeTypes: NodeTypes | undefined = undefined;
+  /**
+   * Additional nodeTypes to pass to SvelteFlow.
+   */
+  export { additionalNodeTypes as nodeTypes };
+
   const nodeTypes = {
     trigger: TriggerNode,
-    module: ModuleNode
+    module: ModuleNode,
+    ...(additionalNodeTypes ?? {})
   };
 
   /** Dimensions of the grid that nodes will snap onto */
@@ -43,6 +51,7 @@
   {nodeTypes}
   fitView
   on:nodeclick
+  on:nodedragstop
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}

@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
+    "@dagrejs/dagre": "^1.0.4",
     "@histoire/plugin-svelte": "^0.17.9",
     "@iconify/svelte": "^3.1.6",
     "@sveltejs/adapter-static": "^3.0.1",
