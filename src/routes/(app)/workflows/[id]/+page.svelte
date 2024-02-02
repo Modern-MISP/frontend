@@ -1,7 +1,7 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { writable, type Writable } from 'svelte/store';
-  import { type Node, type Edge, getNodesBounds, useUpdateNodeInternals } from '@xyflow/svelte';
+  import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { Trigger } from '../triggers/trigger.js';
   import { objectEntries } from 'ts-extras';

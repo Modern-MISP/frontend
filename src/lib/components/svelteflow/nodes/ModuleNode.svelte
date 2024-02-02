@@ -1,10 +1,8 @@
 <script lang="ts">
   import { GET } from '$lib/api';
-  import Info from '$lib/components/info/Info.svelte';
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
   import ModuleParam from './ModuleParam.svelte';
-  import { tick } from 'svelte';
 
   type $$Props = NodeProps;
 
