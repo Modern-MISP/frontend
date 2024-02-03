@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends IRecord[]">
   import { derived, type Readable } from 'svelte/store';
 
-  import { constant, groupBy } from 'lodash-es';
+  import { constant, groupBy, xor } from 'lodash-es';
 
   import type { DynTableHeadExtent } from './DynTable.model';
 
@@ -29,6 +29,13 @@
   export let groupInfo: (x: T[number]) => unknown | undefined = constant(undefined);
 
   const store = derived(header, (arr) => arr);
+
+  /**
+   * currentlyActive rows.
+   */
+  export let activeRows: T = [] as unknown as T;
+
+  const toggleRow = (row: T[number]) => (activeRows = xor(activeRows, [row]) as T); // This cast is safe, because xor should have IRecord as generic parameter. But ts parses it wrong.
 </script>
 
 <!--
@@ -65,7 +72,11 @@
         </tr>
       {/if}
       {#each group as row}
-        <tr class="hover:bg-surface2 w-full">
+        <tr
+          class="w-full hover:bg-surface2"
+          class:bg-surface2={activeRows.includes(row)}
+          on:click={() => (href ? undefined : toggleRow(row))}
+        >
           {#each $store as { value }}
             {@const v = value(row)}
             <Td href={href && href(row)}>

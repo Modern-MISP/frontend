@@ -16,6 +16,8 @@
       action: '/admin/users/new'
     }
   ];
+
+  let activeRows: typeof tableData = [];
 </script>
 
 <!--
@@ -27,6 +29,11 @@
 <svelte:window use:actionBar={actions} />
 
 {#if $mode === 'edit'}
-  <DynActionCard header={editActions} data={tableData}></DynActionCard>
+  <DynActionCard header={editActions} data={activeRows}></DynActionCard>
 {/if}
-<DynTable href={(x) => `/admin/users/${x.User?.id}`} {header} data={tableData} />
+<DynTable
+  href={$mode === 'view' ? (x) => `/admin/users/${x.User?.id}` : undefined}
+  {header}
+  data={tableData}
+  bind:activeRows
+/>
