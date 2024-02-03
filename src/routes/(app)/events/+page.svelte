@@ -1,7 +1,9 @@
 <script lang="ts">
+  import { actionBar } from '$lib/actions';
   import { POST } from '$lib/api';
   import Pagination from '$lib/components/pagination/Pagination.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   import Filter from '$lib/components/filter/Filter.svelte';
   import Pill from '$lib/components/pills/pill/Pill.svelte';
@@ -44,6 +46,14 @@
     capture: () => currentFilter,
     restore: (value) => (currentFilter = value)
   };
+
+  const actions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:event-add',
+      label: 'Add Event',
+      action: '/events/new'
+    }
+  ];
 </script>
 
 <!--
@@ -51,6 +61,8 @@
   Displays a list of all events.
   
 -->
+
+<svelte:window use:actionBar={actions} />
 
 <div class="flex gap-4">
   <ActionCard>

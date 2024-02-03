@@ -1,7 +1,7 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { ActionBarEntry } from '$lib/models/ActionBarEntry.interface';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   import type { PageData } from './$types';
 
@@ -12,7 +12,7 @@
 
   const { tableData, header } = data;
 
-  const actions: ActionBarEntry[] = [
+  const actions: ActionBarEntryProps[] = [
     {
       icon: 'mdi:plus',
       label: 'add',
