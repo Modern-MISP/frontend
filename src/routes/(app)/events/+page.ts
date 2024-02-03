@@ -179,7 +179,7 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     fil({
       label: 'Search all',
-      value: () => 'seachall'
+      value: () => 'searchall'
     }),
     // You can override the page limit with this.
 
