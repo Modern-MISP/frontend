@@ -2,11 +2,11 @@ import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import CallbackEntry from '$lib/components/menus/topmenu/actionbar/CallbackEntry.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/admin/users', { fetch });
@@ -96,34 +96,43 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
-  const editAction = createTableHeadGenerator<typeof data>();
-
-  const defaultEditAction = (
-    label: string,
-    icon: string,
-    clazz: string,
-    action: (x: typeof data) => void
-  ) =>
-    editAction({
-      label: '',
-      value: (x) => ({
-        display: CallbackEntry,
-        props: {
-          action: () => action(x),
-          label,
-          icon,
-          class: clazz
-        }
-      })
-    });
-
-  const editActions = [
-    defaultEditAction('Delete', 'mdi:delete-outline', 'text-red', (x) =>
-      alert('DELETE!' + x?.[0]?.User?.id)
-    ),
-    defaultEditAction('Delete', 'mdi:delete-outline', '', (x) =>
-      alert('DELETE!' + x?.[0]?.User?.id)
-    )
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Enable User',
+      icon: 'mdi:account-lock-open-outline',
+      action: (x) => {
+        alert('Enable' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Disable User',
+      icon: 'mdi:account-lock-outline',
+      action: (x) => {
+        alert('Disable' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Delete User',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        alert('Delete' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Send Email Publish',
+      icon: 'icon-park-outline:send-email',
+      action: (x) => {
+        alert('Send email publish' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Disable Email Publish',
+      icon: 'mdi:email-lock-outline',
+      action: (x) => {
+        alert('Disable email publish' + x.map((y) => y.User?.id).join());
+      }
+    }
   ];
   return {
     data,
