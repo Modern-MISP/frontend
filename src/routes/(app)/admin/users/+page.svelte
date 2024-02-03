@@ -18,6 +18,9 @@
   ];
 
   let activeRows: typeof tableData = [];
+
+  // On mode change reset selected rows.
+  $: if ($mode) activeRows = [];
 </script>
 
 <!--
@@ -32,8 +35,9 @@
   <DynActionCard header={editActions} data={activeRows}></DynActionCard>
 {/if}
 <DynTable
-  href={$mode === 'view' ? (x) => `/admin/users/${x.User?.id}` : undefined}
   {header}
+  selectMode={$mode === 'edit'}
+  href={(x) => `/admin/users/${x.User?.id}`}
   data={tableData}
   bind:activeRows
 />

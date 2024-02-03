@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord[]">
+  import { goto } from '$app/navigation';
+
   import { derived, type Readable } from 'svelte/store';
 
   import { constant, groupBy, xor } from 'lodash-es';
@@ -31,9 +33,14 @@
   const store = derived(header, (arr) => arr);
 
   /**
-   * currentlyActive rows.
+   * Is the table in select mode. Aka. Select rows by single click. Navigate to href on double click
    */
-  export let activeRows: T = [] as unknown as T;
+  export let selectMode = false;
+
+  /**
+   * currentlyActive rows. Should probably bind to this.
+   */
+  export let activeRows: T = [] as unknown as T; // Ts can not initialize Record<string, unknown>[] as []. I think this is a svelte error. Couldn't find a  better workaround
 
   const toggleRow = (row: T[number]) => (activeRows = xor(activeRows, [row]) as T); // This cast is safe, because xor should have IRecord as generic parameter. But ts parses it wrong.
 </script>
@@ -46,14 +53,17 @@
   while the `data` prop provides rows of data that conform to the structure of the header.
 
   Type safety of this is enforced at compile time using Typescript.
+
+  Can enable selectMode. Where you can navigate to href by double click, and it adds the row to activeRows on click. Removes it, if it is present.
   
 -->
 <Table>
   <thead>
     <tr>
-      {#each $store as head}
+      {#each $store as { icon, label }}
         <Th
-          {...head}
+          {icon}
+          {label}
           on:click={() => {
             // data = sortBy(data, (x) => x[head.name].text);
           }}
@@ -72,14 +82,16 @@
         </tr>
       {/if}
       {#each group as row}
+        {@const _href = href && href(row)}
         <tr
           class="w-full hover:bg-surface2"
           class:bg-surface2={activeRows.includes(row)}
-          on:click={() => (href ? undefined : toggleRow(row))}
+          on:click={() => (selectMode ? toggleRow(row) : undefined)}
+          on:dblclick={() => _href && goto(_href)}
         >
           {#each $store as { value }}
             {@const v = value(row)}
-            <Td href={href && href(row)}>
+            <Td href={selectMode ? undefined : _href}>
               <span class="text-lg">
                 {#if typeof v != 'string'}
                   <svelte:component this={v.display} {...v.props} />
