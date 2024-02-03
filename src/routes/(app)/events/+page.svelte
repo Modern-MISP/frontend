@@ -6,9 +6,9 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   import Filter from '$lib/components/filter/Filter.svelte';
+  import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
   import Pill from '$lib/components/pills/pill/Pill.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
-  import ActionEntry from '$lib/components/table/actions/entry/ActionEntry.svelte';
   import { merge } from 'lodash-es';
   /**
    * Page data
@@ -66,7 +66,7 @@
 
 <div class="flex gap-4">
   <ActionCard>
-    <ActionEntry icon="mdi:filter-outline" text="filter" bind:active={filterOpen} />
+    <ActiveEntry label="test" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
   </ActionCard>
 
   {#if currentFilter.length > 0}
