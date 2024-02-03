@@ -6,6 +6,7 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import CallbackEntry from '$lib/components/menus/topmenu/actionbar/CallbackEntry.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/admin/users', { fetch });
@@ -94,9 +95,40 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted } })
     })
   ];
+
+  const editAction = createTableHeadGenerator<typeof data>();
+
+  const defaultEditAction = (
+    label: string,
+    icon: string,
+    clazz: string,
+    action: (x: typeof data) => void
+  ) =>
+    editAction({
+      label: '',
+      value: (x) => ({
+        display: CallbackEntry,
+        props: {
+          action: () => action(x),
+          label,
+          icon,
+          class: clazz
+        }
+      })
+    });
+
+  const editActions = [
+    defaultEditAction('Delete', 'mdi:delete-outline', 'text-red', (x) =>
+      alert('DELETE!' + x?.[0]?.User?.id)
+    ),
+    defaultEditAction('Delete', 'mdi:delete-outline', '', (x) =>
+      alert('DELETE!' + x?.[0]?.User?.id)
+    )
+  ];
   return {
     data,
     tableData: data,
-    header
+    header,
+    editActions
   };
 };

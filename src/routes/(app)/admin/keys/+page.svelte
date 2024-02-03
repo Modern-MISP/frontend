@@ -31,7 +31,7 @@
   <div class="flex gap-4">
     <ActionCard>
       <CallbackEntry
-        action={() => alert('DELTEE!')}
+        action={() => alert('DELETE!')}
         label="Delete"
         icon="mdi:delete-outline"
         class="text-red"
