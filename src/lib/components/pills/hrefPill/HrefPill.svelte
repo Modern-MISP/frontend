@@ -21,7 +21,7 @@
 
 <!-- 
   @component
-  A pill component that acts as a link. This pills text will be blue:
+  A pill component that acts as a link. This pill's text will be blue:
 
  -->
 

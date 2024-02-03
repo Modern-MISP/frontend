@@ -31,10 +31,14 @@
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: 'Event' }, type: 'input' });
+  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'input' });
+  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'input' });
+  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'input' });
 
   for (const object of objects) {
-    $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id}` } });
+    // Node: objects (refed/unrefed)
+    $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id} ${object.name}` } });
+    // Edge: event to objects (refed/unrefed)
     $edges.push({
       id: `event-to-object-${object.id}`,
       source: 'event',
@@ -42,40 +46,48 @@
     });
 
     for (const attribute of object.Attribute ?? []) {
-      $nodes.push({
+      // Node: refed attributes
+       $nodes.push({
         id: `attribute-${attribute.id}`,
         position,
         data: {
           id: attribute.id,
-          type: attribute.type,
-          comment: attribute.comment,
+          type: "mdi:flag", // temporary
+/*           type: attribute.type,
+          comment: attribute.comment, */
           category: attribute.category,
           value: attribute.value
         },
         type: 'attribute'
       });
+      // Edge: refed objects to refed attributes
       $edges.push({
         id: `object-${object.id}-to-attribute-${attribute.id}`,
         source: `object-${object.id}`,
         target: `attribute-${attribute.id}`,
-        label: attribute.object_relation ?? undefined
+        label: attribute.object_relation ?? undefined,
+        type: 'bezier',
+        animated: true
       });
     }
   }
 
   for (const attribute of attributes) {
+    // Node: unrefed attributes
     $nodes.push({
       id: `attribute-${attribute.id}`,
       position,
       data: {
         id: attribute.id,
-        type: attribute.type,
-        comment: attribute.comment,
-        category: attribute.category,
-        value: attribute.value
+        type: "mdi:flag", // temporary
+/*         type: attribute.type,
+        comment: attribute.comment, */
+        category: attribute.category, 
+        value: attribute.value,
       },
       type: 'attribute'
     });
+    // Edge: event to unrefed attributes
     $edges.push({
       id: `event-to-attribute-${attribute.id}`,
       source: `event`,
@@ -93,7 +105,7 @@
       const { width, height } = getNodesBounds([node]);
       dagreGraph.setNode(node.id, {
         width: 200,
-        height
+        height: 50
       });
     });
 
@@ -186,9 +198,9 @@
     />
   </div>
 
-  <Card>
+<!--   <Card>
     {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
-  </Card>
+  </Card> -->
 </div>
