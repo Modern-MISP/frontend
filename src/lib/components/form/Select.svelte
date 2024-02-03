@@ -14,6 +14,12 @@
    * Name of this `select` element. Used for forms.
    */
   export let name: string | undefined = undefined;
+
+  let clazz = '';
+  /**
+   * The class of the select element.
+   */
+  export { clazz as class };
 </script>
 
 <!-- 
@@ -24,9 +30,9 @@
   The options prop should be an`as const` array of objects with a value and a label property to allow full type safety.
   
  -->
-<div class="relative flex items-center rounded-md bg-crust text-text">
+<div class="relative flex items-center rounded-md bg-crust text-text {clazz}">
   <select
-    class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-crust pe-3"
+    class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-inherit pe-3"
     {name}
     bind:value
   >

@@ -5,23 +5,13 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import type { Module } from './module';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
   const getResult = await GET('/workflows/moduleIndex', { fetch });
   const { error: mispError, response } = getResult;
-  const data = getResult.data as {
-    id?: string;
-    name?: string;
-    description?: string;
-    module_type?: string;
-    version?: string;
-    blocking?: boolean;
-    expect_misp_core_format?: boolean;
-    misp_module?: boolean;
-    is_custom?: boolean;
-    disabled?: boolean;
-  }[];
+  const data = getResult.data as Module[];
 
   console.log(data);
 
@@ -32,7 +22,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     // col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:id-card',
       key: 'name',
       label: 'Name',
       value: (x) => ({ display: Info, props: { text: x.name } })
