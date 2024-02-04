@@ -1,6 +1,8 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
+  import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import DynActionCard from '$lib/components/table/actions/dynCard/DynActionCard.svelte';
+  import SelectionCard from '$lib/components/table/actions/selectionCard/SelectionCard.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { mode } from '$lib/stores';
@@ -32,7 +34,14 @@
 <svelte:window use:actionBar={actions} />
 
 {#if $mode === 'edit'}
-  <DynActionCard header={editActions} data={activeRows}></DynActionCard>
+  <div class="flex flex-row gap-1">
+    <DynActionCard header={editActions} data={activeRows}></DynActionCard>
+    <SelectionCard
+      numSelected={activeRows.length}
+      selectAll={() => (activeRows = tableData)}
+      unselectAll={() => (activeRows = [])}
+    />
+  </div>
 {/if}
 <DynTable
   {header}
