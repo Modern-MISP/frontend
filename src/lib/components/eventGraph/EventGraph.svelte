@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Card from '$lib/components/card/Card.svelte';
-  import IconCardRow from '$lib/components/eventGraph/IconCardRow.svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
@@ -9,7 +7,8 @@
   import type { components } from '$lib/api/misp';
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
-  import AttributeNode from './AttributeNode.svelte';
+  import AttributeNode from './nodes/AttributeNode.svelte';
+    import ObjectNode from './nodes/ObjectNode.svelte';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -26,7 +25,7 @@
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
-  const tags = event.Tag ?? [];
+   const tags = event.Tag ?? [];
 
   const position = { x: 0, y: 0 };
 
@@ -77,7 +76,16 @@
   
   for (const object of objects) {
     // Node: objects (refed/unrefed)
-    $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id} ${object.name}` } });
+/*     $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id} ${object.name}` } });
+ */    $nodes.push({ 
+          id: `object-${object.id}`,
+          position,
+          data: { 
+            id: object.id,
+            name: object.name
+           },
+          type:"object"
+       });
     // Edge: event to objects (refed/unrefed)
     $edges.push({
       id: `event-to-object-${object.id}`,
@@ -100,7 +108,7 @@
         },
         type: 'attribute'
       });
-      // Edge: refed objects to refed attributes
+      // Edge: refed objects to refed attributes (= reference)
       $edges.push({
         id: `object-${object.id}-to-attribute-${attribute.id}`,
         source: `object-${object.id}`,
@@ -143,9 +151,10 @@
 
     nodes.forEach((node) => {
       const { width, height } = getNodesBounds([node]);
+      const [offsetX, offsetY] = [300, 50];
       dagreGraph.setNode(node.id, {
-        width: width + 200,
-        height: height + 50
+        width: width + offsetX,
+        height: height + offsetY
       });
     });
 
@@ -177,7 +186,8 @@
   $edges = layoutedEdges;
 
   const nodeTypes = {
-    attribute: AttributeNode
+    attribute: AttributeNode,
+    object: ObjectNode
   };
 </script>
 
