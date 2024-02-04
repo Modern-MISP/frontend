@@ -11,6 +11,11 @@
   export let routes: SideMenuRoute[];
 
   /**
+   * Context dependant routes to be displayed in a separate side menu section.
+   */
+  export let contextRoutes: SideMenuRoute[] = [];
+
+  /**
    * The current route to be displayed in the {@link Breadcrumbs}.
    */
   export let currentRoute: Route[] = [];
@@ -30,7 +35,7 @@
 
 <div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
   <slot name="sideMenu">
-    <SideMenu {routes} bind:isOpen />
+    <SideMenu {routes} {contextRoutes} bind:isOpen />
   </slot>
 
   <div class="flex flex-col h-full min-w-0 grow">

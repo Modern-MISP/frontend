@@ -1,14 +1,11 @@
 <script lang="ts">
-  import type { PageData } from './$types';
   import Card from '$lib/components/card/Card.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 
   /**
    *
    */
-  export let data: PageData;
-
-  console.log(data.event?.Galaxy);
+  export let data;
 </script>
 
 <Card class="h-full ">
