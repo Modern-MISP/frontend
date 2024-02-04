@@ -1,6 +1,5 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
-  import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import DynActionCard from '$lib/components/table/actions/dynCard/DynActionCard.svelte';
   import SelectionCard from '$lib/components/table/actions/selectionCard/SelectionCard.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
