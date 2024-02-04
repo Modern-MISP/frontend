@@ -22,8 +22,8 @@
       <Icon icon="mdi:web" />
     </div>
     <div class="ml-2">
-      <div class="text-lg font-bold">{data.name}</div>
-      <div class="text-gray-500">{data.id}</div>
+      <div class="text-lg font-bold">{name}</div>
+      <div class="text-gray-500">{id}</div>
     </div>
   </div>
   <Handle

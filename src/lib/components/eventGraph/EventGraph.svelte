@@ -25,15 +25,12 @@
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
-   const tags = event.Tag ?? [];
-
+/*   const tags = event.Tag ?? []; */
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
   $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'input' });
   $nodes.push({ id: 'referenced', position, data: { label: `Referenced` } });
-  $nodes.push({ id: 'referenced-objects', position, data: { label: `Referenced Objects` } });
-  $nodes.push({ id: 'referenced-attributes', position, data: { label: `Referenced Attributes` } });
   $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` } });
   $nodes.push({ id: 'unreferenced-objects', position, data: { label: `Unreferenced Objects` } });
   $nodes.push({ id: 'unreferenced-attributes', position, data: { label: `Unreferenced Attributes` } });
@@ -43,31 +40,16 @@
     source: 'event',
     target: `referenced`
   });
-
   $edges.push({
     id: `event-to-unreferenced`,
     source: 'event',
     target: `unreferenced`
   });
-
-  $edges.push({
-    id: `referenced-to-referenced-objects`,
-    source: 'referenced',
-    target: `referenced-objects`
-  });
-
-  $edges.push({
-    id: `referenced-to-referenced-attributes`,
-    source: 'referenced',
-    target: `referenced-attributes`
-  });
-
   $edges.push({
     id: `unreferenced-to-unreferenced-objects`,
     source: 'unreferenced',
     target: `unreferenced-objects`
   });
-
   $edges.push({
     id: `unreferenced-to-unreferenced-attributes`,
     source: 'unreferenced',
@@ -76,20 +58,19 @@
   
   for (const object of objects) {
     // Node: objects (refed/unrefed)
-/*     $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id} ${object.name}` } });
- */    $nodes.push({ 
-          id: `object-${object.id}`,
-          position,
-          data: { 
-            id: object.id,
-            name: object.name
-           },
-          type:"object"
-       });
+    $nodes.push({ 
+      id: `object-${object.id}`,
+      position,
+      data: { 
+        id: object.id,
+        name: object.name
+        },
+      type:"object"
+    });
     // Edge: event to objects (refed/unrefed)
     $edges.push({
       id: `event-to-object-${object.id}`,
-      source: 'referenced-objects',
+      source: 'referenced',
       target: `object-${object.id}`
     });
 
