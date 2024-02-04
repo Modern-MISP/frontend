@@ -84,8 +84,10 @@
       {#each group as row}
         {@const _href = href && href(row)}
         <tr
-          class="w-full hover:bg-surface2"
+          class="w-full hover:bg-surface2 border-l-surface0"
           class:bg-surface2={activeRows.includes(row)}
+          class:!border-l-sky={activeRows.includes(row)}
+          class:border-l-4={selectMode}
           on:click={() => (selectMode ? toggleRow(row) : undefined)}
           on:dblclick={() => _href && goto(_href)}
         >
