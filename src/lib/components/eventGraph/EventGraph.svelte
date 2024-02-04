@@ -32,16 +32,56 @@
 
   const nodes: Writable<Node[]> = writable([]);
   $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'input' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'input' });
-  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'input' });
+  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` } });
+  $nodes.push({ id: 'referenced-objects', position, data: { label: `Referenced Objects` } });
+  $nodes.push({ id: 'referenced-attributes', position, data: { label: `Referenced Attributes` } });
+  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` } });
+  $nodes.push({ id: 'unreferenced-objects', position, data: { label: `Unreferenced Objects` } });
+  $nodes.push({ id: 'unreferenced-attributes', position, data: { label: `Unreferenced Attributes` } });
 
+  $edges.push({
+    id: `event-to-referenced`,
+    source: 'event',
+    target: `referenced`
+  });
+
+  $edges.push({
+    id: `event-to-unreferenced`,
+    source: 'event',
+    target: `unreferenced`
+  });
+
+  $edges.push({
+    id: `referenced-to-referenced-objects`,
+    source: 'referenced',
+    target: `referenced-objects`
+  });
+
+  $edges.push({
+    id: `referenced-to-referenced-attributes`,
+    source: 'referenced',
+    target: `referenced-attributes`
+  });
+
+  $edges.push({
+    id: `unreferenced-to-unreferenced-objects`,
+    source: 'unreferenced',
+    target: `unreferenced-objects`
+  });
+
+  $edges.push({
+    id: `unreferenced-to-unreferenced-attributes`,
+    source: 'unreferenced',
+    target: `unreferenced-attributes`
+  });
+  
   for (const object of objects) {
     // Node: objects (refed/unrefed)
     $nodes.push({ id: `object-${object.id}`, position, data: { label: `Object ${object.id} ${object.name}` } });
     // Edge: event to objects (refed/unrefed)
     $edges.push({
       id: `event-to-object-${object.id}`,
-      source: 'event',
+      source: 'referenced-objects',
       target: `object-${object.id}`
     });
 
@@ -90,7 +130,7 @@
     // Edge: event to unrefed attributes
     $edges.push({
       id: `event-to-attribute-${attribute.id}`,
-      source: `event`,
+      source: `unreferenced-attributes`,
       target: `attribute-${attribute.id}`
     });
   }
@@ -104,8 +144,8 @@
     nodes.forEach((node) => {
       const { width, height } = getNodesBounds([node]);
       dagreGraph.setNode(node.id, {
-        width: 200,
-        height: 50
+        width: width + 200,
+        height: height + 50
       });
     });
 
