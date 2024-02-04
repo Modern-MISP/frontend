@@ -26,8 +26,8 @@
  -->
 
 <th class="sticky top-0 bg-surface1 {clazz}" on:click>
-  <div class="flex items-center gap-2 p-6 text-xl">
-    <Icon {icon} />
+  <div class="flex items-center gap-2 px-4 py-2 text-xl">
+    <Icon {icon} class="shrink-0" />
     <span>
       {label}
     </span>

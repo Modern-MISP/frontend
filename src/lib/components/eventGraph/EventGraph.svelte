@@ -21,6 +21,8 @@
   // TODO: fix lint error properly
   // eslint-disable-next-line svelte/valid-compile
   export let event: Event;
+
+  event;
 </script>
 
 <!--

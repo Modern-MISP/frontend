@@ -4,21 +4,23 @@
   import Icon from '@iconify/svelte';
   import { login } from './authMock';
   import { goto } from '$app/navigation';
+  import { getFormValues } from '$lib/util/form.util';
 
   let error: string | null = null;
 
-  async function submit({ currentTarget }: SubmitEvent) {
-    if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
-
-    const data = new FormData(currentTarget);
-    const entries = Object.fromEntries(data.entries());
+  async function submit(event: SubmitEvent) {
+    const entries = getFormValues(event)[0] as {
+      email: string;
+      password: string;
+    };
     try {
-      const res = await login(entries);
+      const res = await login(entries as { email: string; password: string });
       if (res) {
-        localStorage.setItem('authToken', 'Bearer: secür.it.be');
+        localStorage.setItem('authToken', 'Bearer: security');
         goto('/events');
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
       console.warn(e.body.message);
       error = e.body.message;
     }
