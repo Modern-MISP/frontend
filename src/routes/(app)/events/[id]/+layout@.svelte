@@ -1,32 +1,32 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import Layout from "$lib/components/layout/Layout.svelte";
-  import type { SideMenuRoute } from "$lib/components/menus/sidemenu/SideMenu.model";
-  import { currentRoute } from "$lib/stores";
-  import { routes as mainRoutes } from "../../routes";
+  import { page } from '$app/stores';
+  import Layout from '$lib/components/layout/Layout.svelte';
+  import type { SideMenuRoute } from '$lib/components/menus/sidemenu/SideMenu.model';
+  import { currentRoute } from '$lib/stores';
+  import { routes as mainRoutes } from '../../routes';
 
   const contextRoutes: SideMenuRoute[] = [
-      {
-        name: 'Event Info',
-        icon: 'mdi:information-outline',
-        href: `/events/${$page.params.id}/#`
-      },
-      {
-        name: 'Event Galaxies',
-        icon: 'streamline:galaxy-2-solid',
-        href: `/events/${$page.params.id}/galaxies`
-      },
-      {
-        name: 'Event Attributes',
-        icon: 'mdi:format-list-bulleted',
-        href: `/events/${$page.params.id}/attributes`
-      },
-      {
-        name: 'Event Graph',
-        icon: 'material-symbols:network-node',
-        href: `/events/${$page.params.id}/graph`
-      },
-    ];
+    {
+      name: 'Event Info',
+      icon: 'mdi:information-outline',
+      href: `/events/${$page.params.id}/#`
+    },
+    {
+      name: 'Event Galaxies',
+      icon: 'streamline:galaxy-2-solid',
+      href: `/events/${$page.params.id}/galaxies`
+    },
+    {
+      name: 'Event Attributes',
+      icon: 'mdi:format-list-bulleted',
+      href: `/events/${$page.params.id}/attributes`
+    },
+    {
+      name: 'Event Graph',
+      icon: 'material-symbols:network-node',
+      href: `/events/${$page.params.id}/graph`
+    }
+  ];
 
   /**
    * Add all routes that are included in the current url.
@@ -49,5 +49,5 @@
 </script>
 
 <Layout {contextRoutes} routes={mainRoutes} currentRoute={$currentRoute}>
-    <slot />
+  <slot />
 </Layout>
