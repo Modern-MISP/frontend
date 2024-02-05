@@ -1,9 +1,12 @@
 <script lang="ts">
   import { GET } from '$lib/api';
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
-  import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+  import { Handle, Position, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
   import ModuleParam from './ModuleParam.svelte';
   import Icon from '@iconify/svelte';
+  import { tick } from 'svelte';
+
+  const svelteFlow = useSvelteFlow();
 
   type $$Props = NodeProps;
 
@@ -43,8 +46,11 @@
   // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
   GET('/workflows/moduleView/{moduleId}', {
     params: { path: { moduleId: data.moduleData.id } }
-  }).then((res) => {
+  }).then(async (res) => {
     fullData = res.data;
+    await tick();
+    svelteFlow.fitView();
+    data.onUpdate(id);
   });
   $: console.log(data.moduleData.name, fullData);
 

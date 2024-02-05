@@ -1,13 +1,15 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { writable, type Writable } from 'svelte/store';
-  import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
+  import { type Node, type Edge, getNodesBounds, useSvelteFlow } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { Trigger } from '../triggers/trigger.js';
   import { objectEntries } from 'ts-extras';
 
   /** The data that will be displayed on this page. */
   export let data;
+
+  const svelteFlow = useSvelteFlow();
 
   const { infoHeader } = data;
   const workflow = (data.workflow as Trigger['Workflow'])!;
@@ -25,7 +27,8 @@
       data: {
         inputs: Object.keys(module.inputs),
         outputs: Object.keys(module.outputs),
-        moduleData: module.data
+        moduleData: module.data,
+        onUpdate: onNodeUpdate
       },
       position: { x: module.pos_x, y: module.pos_y }
     });
@@ -70,15 +73,19 @@
     frame.position.y = bounds.y - padding - additionalLabelPadding;
     frame.width = bounds.width + 2 * padding;
     frame.height = bounds.height + 2 * padding + additionalLabelPadding;
-    $nodes = $nodes;
+    svelteFlow.updateNode(frame.id, frame);
   }
 
-  function onNodeDrag({ detail: { node } }: Flow['$$events_def']['nodedrag']) {
+  async function onNodeUpdate(nodeId: string) {
     $nodes.forEach((frameNode) => {
-      if (frameNode.type === 'frame' && frameNode.data.nodes.includes(node.id)) {
+      if (frameNode.type === 'frame' && frameNode.data.nodes.includes(nodeId)) {
         updateFrame(frameNode);
       }
     });
+  }
+
+  function onNodeDrag({ detail: { node } }: Flow['$$events_def']['nodedrag']) {
+    onNodeUpdate(node.id);
   }
 
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
