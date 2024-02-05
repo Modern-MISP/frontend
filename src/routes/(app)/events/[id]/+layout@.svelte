@@ -18,12 +18,12 @@
     },
     {
       name: 'Event Attributes',
-      icon: 'mdi:format-list-bulleted',
+      icon: 'mdi:flag',
       href: `/events/${$page.params.id}/attributes`
     },
     {
       name: 'Event Graph',
-      icon: 'material-symbols:network-node',
+      icon: 'ph:graph',
       href: `/events/${$page.params.id}/graph`
     }
   ];
