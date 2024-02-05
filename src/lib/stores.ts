@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
 import { writable } from 'svelte/store';
-import type { ActionBarEntry } from './models/ActionBarEntry.interface';
 import type { Mode } from './models/Mode';
 import type { ComponentProps } from 'svelte';
 import { INITIAL_SETTINGS } from './settings';
+import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
@@ -20,7 +20,7 @@ const createSettingsStore = <T>(init: T) => {
   };
 };
 
-export const actionBarEntries = writable<ActionBarEntry[]>([]);
+export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
 let init = INITIAL_SETTINGS;
 
 if (browser) {

@@ -40,6 +40,8 @@
   let clazz = '';
 
   const dispatch = createEventDispatcher<{ value: string }>();
+
+  const id = crypto.randomUUID();
 </script>
 
 <!-- 
@@ -66,7 +68,7 @@
     on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
     on:blur
     on:focus
-    id={name}
+    {id}
     {placeholder}
     {name}
     {type}
@@ -76,7 +78,7 @@
   />
   {#if placeholder && (!disabled || !value)}
     <label
-      for={name}
+      for={id}
       class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
 			peer-placeholder-shown:text-text peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
 			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0"

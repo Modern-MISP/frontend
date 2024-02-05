@@ -39,23 +39,25 @@ build_production:
   stage: build
   script:
     - cp $ENV_FILE .env
-    - npm run build
+    - npm run build -- --mode production
     - mv build dist_production
   artifacts:
     expire_in: 1 week
     paths:
       - dist_production
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
-# build staging:
-#   image: node:latest
-#   stage: build
-#   script:
-#     - npm run build -- --mode staging
-#     - mv build dist_staging
-#   artifacts:
-#     expire_in: 1 week
-#     paths:
-#       - dist_staging
+build_staging:
+  stage: build
+  script:
+    - cp $ENV_FILE .env
+    - npm run build -- --mode staging
+    - mv build dist_staging
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist_staging
 
 docs:
   stage: build
@@ -96,13 +98,11 @@ ftp_deploy:
   stage: deploy
   image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
   rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-      when: manual
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "dev"
   environment:
-    name: Production
+    name: Staging
   script:
     - apt-get update -qq && apt-get install -y -qq lftp
-    - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_production/ ./ --parallel=10 -X .htaccess"
+    - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_staging/ ./ --parallel=10 -X .htaccess"
   dependencies:
-    - build_production
+    - build_staging

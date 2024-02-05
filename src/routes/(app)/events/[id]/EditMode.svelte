@@ -1,6 +1,6 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
-  import type { ActionBarEntry } from '$lib/models/ActionBarEntry.interface';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   let form: HTMLFormElement;
   $: if (form) console.log(new FormData(form));
@@ -12,7 +12,7 @@
     console.log(data);
   };
 
-  const actions: ActionBarEntry[] = [
+  const actions: ActionBarEntryProps[] = [
     {
       icon: 'material-symbols:save-outline',
       label: 'Save',

@@ -46,11 +46,11 @@
       <ToggleModeEntry bind:mode />
     </div>
 
-    <div class="flex flex-col items-center gap-1">
+    <!-- <div class="flex flex-col items-center gap-1">
       <div class="text-2xl rounded-full">
         <Icon icon="mdi:account-circle" />
       </div>
       <span class="text-xs">admin@admin.test</span>
-    </div>
+    </div> -->
   </div>
 </div>

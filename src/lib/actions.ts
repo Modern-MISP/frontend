@@ -1,8 +1,8 @@
 import type { Action } from 'svelte/action';
-import type { ActionBarEntry } from './models/ActionBarEntry.interface';
 import { actionBarEntries } from './stores';
+import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 
-export const actionBar: Action<HTMLElement, Array<ActionBarEntry>> = function (node, actions) {
+export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (node, actions) {
   actionBarEntries.set(actions);
 
   return {

@@ -13,6 +13,11 @@
 
   /** Callback function that is executed on click. */
   export let action: () => void;
+  let clazz = '';
+  /**
+   * The class of this ActionBar entry.
+   */
+  export { clazz as class };
 </script>
 
 <!--
@@ -21,5 +26,5 @@
 -->
 
 <button on:click={action}>
-  <ActionBarEntry {icon} {label} />
+  <ActionBarEntry {icon} {label} class={clazz} />
 </button>

@@ -2,10 +2,11 @@ import { GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/admin/users', { fetch });
@@ -94,9 +95,49 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted } })
     })
   ];
+
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Enable User',
+      icon: 'mdi:account-lock-open-outline',
+      action: (x) => {
+        alert('Enable' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Disable User',
+      icon: 'mdi:account-lock-outline',
+      action: (x) => {
+        alert('Disable' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Delete User',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        alert('Delete' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Send Email Publish',
+      icon: 'icon-park-outline:send-email',
+      action: (x) => {
+        alert('Send email publish' + x.map((y) => y.User?.id).join());
+      }
+    },
+    {
+      label: 'Disable Email Publish',
+      icon: 'mdi:email-lock-outline',
+      action: (x) => {
+        alert('Disable email publish' + x.map((y) => y.User?.id).join());
+      }
+    }
+  ];
   return {
     data,
     tableData: data,
-    header
+    header,
+    editActions
   };
 };

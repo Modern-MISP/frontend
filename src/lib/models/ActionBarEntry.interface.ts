@@ -1,5 +1,5 @@
-export interface ActionBarEntry {
-  icon: string;
-  label: string;
-  action: string | (() => void);
-}
+import type { ComponentProps } from 'svelte';
+import type HrefEntry from '$lib/components/menus/topmenu/actionbar/HrefEntry.svelte';
+import type CallbackEntry from '$lib/components/menus/topmenu/actionbar/CallbackEntry.svelte';
+
+export type ActionBarEntryProps = ComponentProps<HrefEntry | CallbackEntry>;

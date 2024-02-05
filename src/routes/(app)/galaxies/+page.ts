@@ -7,6 +7,7 @@ import Info from '$lib/components/info/Info.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import Icon from '@iconify/svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/galaxies', { fetch });
@@ -24,7 +25,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:circle',
       key: 'icon',
       label: 'Icon',
-      value: (x) => ({ display: Info, props: { text: x.Galaxy?.icon ?? 'unknown' } })
+      value: (x) => ({
+        display: Icon,
+        props: { icon: `fa6-solid:${x.Galaxy?.icon}` }
+      })
     }),
     col({
       icon: 'mdi:circle',

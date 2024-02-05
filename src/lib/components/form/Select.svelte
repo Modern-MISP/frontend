@@ -18,6 +18,12 @@
    * When true, selection is disabled.
    */
   export let disabled: boolean = false;
+
+  let clazz = '';
+  /**
+   * The class of the select element.
+   */
+  export { clazz as class };
 </script>
 
 <!-- 
@@ -29,7 +35,7 @@
   
  -->
 <div
-  class="relative flex items-center rounded-md text-text"
+  class="relative flex items-center rounded-md text-text {clazz}"
   class:bg-crust={!disabled}
   class:bg-base={disabled}
 >
