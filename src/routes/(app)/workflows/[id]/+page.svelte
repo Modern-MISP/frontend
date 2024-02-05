@@ -91,7 +91,7 @@
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
   // or when adding the frames in the first place, but apparently it works.
   // TODO: (Optional) Find out why this happens?
-  setTimeout(() => $nodes.filter((n) => n.type === 'frame').forEach(updateFrame));
+  setTimeout(() => $nodes.filter((n) => n.type === 'frame').forEach(updateFrame), 1000);
 </script>
 
 <!--
