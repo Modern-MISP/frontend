@@ -9,9 +9,9 @@
 
   export let data: $$Props['data'];
 
-  const { id, value, category, type } = data;
+  const { id, category, type, value, comment } = data;
 
 </script>
 
 <Handle type="target" position={Position.Left} />
-<HrefPill label={category} text={value} icon={type} href={`/attributes/${id}`}></HrefPill>
+<HrefPill label={type} text={value} icon="mdi:flag" href={`/attributes/${id}`}></HrefPill>

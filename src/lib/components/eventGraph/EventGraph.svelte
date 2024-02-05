@@ -8,7 +8,7 @@
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
   import AttributeNode from './nodes/AttributeNode.svelte';
-    import ObjectNode from './nodes/ObjectNode.svelte';
+  import ObjectNode from './nodes/ObjectNode.svelte';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -26,6 +26,7 @@
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
 /*   const tags = event.Tag ?? []; */
+
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
@@ -63,14 +64,15 @@
       position,
       data: { 
         id: object.id,
-        name: object.name
+        name: object.name,
+        comment: object.comment
         },
       type:"object"
     });
     // Edge: event to objects (refed/unrefed)
     $edges.push({
       id: `event-to-object-${object.id}`,
-      source: 'referenced',
+      source: 'unreferenced-objects',
       target: `object-${object.id}`
     });
 
@@ -81,11 +83,10 @@
         position,
         data: {
           id: attribute.id,
-          type: "mdi:flag", // temporary
-/*           type: attribute.type,
-          comment: attribute.comment, */
+          type: attribute.type,
           category: attribute.category,
-          value: attribute.value
+          value: attribute.value,
+          comment: attribute.comment
         },
         type: 'attribute'
       });
@@ -108,11 +109,10 @@
       position,
       data: {
         id: attribute.id,
-        type: "mdi:flag", // temporary
-/*         type: attribute.type,
-        comment: attribute.comment, */
-        category: attribute.category, 
+        type: attribute.type,
+        category: attribute.category,
         value: attribute.value,
+        comment: attribute.comment
       },
       type: 'attribute'
     });
