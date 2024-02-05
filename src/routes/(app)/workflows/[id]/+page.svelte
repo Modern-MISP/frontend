@@ -3,8 +3,9 @@
   import { writable, type Writable } from 'svelte/store';
   import { type Node, type Edge, getNodesBounds, useSvelteFlow } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
-  import type { Trigger } from '../triggers/trigger.js';
+  import type { Trigger, ModuleNodeData } from '../triggers/trigger.js';
   import { objectEntries } from 'ts-extras';
+  import ModuleInfo from './ModuleInfo.svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -88,6 +89,19 @@
     onNodeUpdate(node.id);
   }
 
+  let nodeContext: ModuleNodeData | null = null;
+  function onNodeClick({ detail: { node } }: Flow['$$events_def']['nodeclick']) {
+    if (node.type !== 'frame') {
+      nodeContext = node.data.moduleData;
+    } else {
+      nodeContext = null;
+    }
+  }
+
+  function onPaneClick() {
+    nodeContext = null;
+  }
+
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
   // or when adding the frames in the first place, but apparently it works.
   // TODO: (Optional) Find out why this happens?
@@ -101,10 +115,23 @@
   including an interactive node-based diagram for visualization.
 -->
 <div class="flex flex-row h-full">
-  <div class="flex-col">
-    <DynCard header={infoHeader} data={workflow} />
+  <div class="flex flex-col gap-1">
+    <div class="flex-row">
+      <DynCard header={infoHeader} data={workflow} />
+    </div>
+    {#if nodeContext}
+      <div class="flex-row">
+        <ModuleInfo data={nodeContext} />
+      </div>
+    {/if}
   </div>
   <div class="flex-col w-full h-full basis-full">
-    <Flow {nodes} {edges} on:nodedrag={onNodeDrag} />
+    <Flow
+      {nodes}
+      {edges}
+      on:nodedrag={onNodeDrag}
+      on:nodeclick={onNodeClick}
+      on:paneclick={onPaneClick}
+    />
   </div>
 </div>

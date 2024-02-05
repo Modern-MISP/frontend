@@ -14,30 +14,7 @@ export type Trigger = {
     timestamp?: string;
     enabled?: boolean;
     debug_enabled?: boolean;
-    data?: Record<
-      string | number,
-      {
-        id: number;
-        class: string;
-        data: {
-          id: string;
-          indexed_params: [];
-          module_type: string;
-          module_version: string;
-          multiple_output_connection: boolean;
-          name: string;
-          node_uid: string;
-          previous_module_version: string;
-          saved_filters: object;
-        };
-        pos_x: number;
-        pos_y: number;
-        name: string;
-        typenode: boolean;
-        inputs: Inputs;
-        outputs: Outputs;
-      }
-    > & {
+    data?: Record<string | number, ModuleNode> & {
       _frames:
         | []
         | Record<
@@ -79,3 +56,27 @@ type Outputs =
       };
     }
   | [];
+
+export type ModuleNodeData = {
+  id: string;
+  indexed_params: [];
+  module_type: string;
+  module_version: string;
+  multiple_output_connection: boolean;
+  name: string;
+  node_uid: string;
+  previous_module_version: string;
+  saved_filters: object;
+};
+
+export type ModuleNode = {
+  id: number;
+  class: string;
+  data: ModuleNodeData;
+  pos_x: number;
+  pos_y: number;
+  name: string;
+  typenode: boolean;
+  inputs: Inputs;
+  outputs: Outputs;
+};
