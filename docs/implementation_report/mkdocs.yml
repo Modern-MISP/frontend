@@ -8,7 +8,11 @@ theme:
   name: 'material'
 
 nav:
-  - index.md
+  - intro.md
+  - design_changes.md
+  - features.md
+  - delays.md
+  - unit_tests.md
 
 plugins:
   - search
