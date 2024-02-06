@@ -19,6 +19,11 @@
   export let routes: SideMenuRoute[] = [];
 
   /**
+   * Context dependant routes to be displayed in a separate section.
+   */
+  export let contextRoutes: SideMenuRoute[] = [];
+
+  /**
    * The current route that is active.
    *
    * Should usually be the current URL provided by SvelteKit (`$page.url.href`).
@@ -56,6 +61,20 @@
   <SideMenuDivider />
   <nav class="flex flex-col justify-start w-full gap-2 overflow-auto">
     <slot>
+      {#if contextRoutes.length > 0}
+        <div class="flex flex-col bg-crust justify-center w-full gap-2 py-2 px-1 rounded-2xl">
+          {#each contextRoutes as route}
+            <div class="flex-row px-4 rounded-2xl" class:bg-crust={isOpen}>
+              <SideMenuEntry
+                {...route}
+                isMenuOpen={isOpen}
+                active={activeRoute?.includes(route.href)}
+              />
+            </div>
+          {/each}
+        </div>
+        <SideMenuDivider />
+      {/if}
       {#each routes as route}
         <div class="flex flex-col px-5 rounded-2xl" class:bg-crust={isOpen}>
           <SideMenuEntry
