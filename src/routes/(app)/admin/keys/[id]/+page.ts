@@ -4,11 +4,14 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { format } from 'date-fns';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -71,23 +74,42 @@ export const load: PageLoad = async ({ params, fetch }) => {
             null
         }
       })
-    }),
-    col({
-      key: 'read_only',
-      label: 'Read only',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
-    }),
-    col({
-      key: 'comment',
-      label: 'Comment',
+    }, 
+    {
       value: (x) => ({
-        display: Info,
+        display: Input,
         props: {
-          text: x.AuthKey?.comment || 'No Comment',
-          class: 'line-clamp-3'
+          value: x.AuthKey?.expiration ? format(new Date(x.AuthKey?.expiration), 'yyyy-MM-dd') : undefined,
+          name: 'date',
+          type: 'Date'
         }
       })
-    })
+    }
+    ),
+    col({
+        key: 'read_only',
+        label: 'Read only',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
+      },
+      {
+        value: (x) => ({ display: Checkbox, props: { name: 'read_only', checked: x.AuthKey?.read_only ?? false } })
+      }
+    ),
+    col(
+      {
+        key: 'comment',
+        label: 'Comment',
+        value: (x) => ({
+          display: Info,
+          props: {
+            text: x.AuthKey?.comment || 'No Comment',
+            class: 'line-clamp-3'
+          }
+        })
+      },
+      {
+        value: (x) => ({ display: Input, props: { value: x.AuthKey?.comment ?? 'unknown' } })
+      })
   ];
 
   const right = [
