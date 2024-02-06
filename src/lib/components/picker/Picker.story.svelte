@@ -26,6 +26,38 @@
           label: 'asdf'
         },
         { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
+        { text: 'asdf' },
 
         { text: 'asdf', icon: 'mdi:test-tube' }
       ]}
@@ -35,7 +67,7 @@
     <form on:submit|preventDefault={(e) => console.log(getFormValues(e))}>
       <Picker
         placeholder="pick an item"
-        popUpClass="flex-col"
+        popUpClass="flex-col flex-nowrap"
         name="pills"
         pickableItems={[
           {
@@ -45,7 +77,40 @@
             text: 'hiii',
             label: 'asdf'
           },
-          { text: 'asdf', icon: 'mdi:abugida-thai' }
+          { text: 'asdf', icon: 'mdi:abugida-thai' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' },
+          { text: 'asdf' }
         ]}
       />
       <button type="submit">Senden</button>

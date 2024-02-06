@@ -21,6 +21,11 @@
    */
   export let name = 'default';
 
+  /**
+   * Max Elements to show for Autocomplete
+   */
+  export let maxAutoComplete = 50;
+
   let value: string = '';
 
   /**
@@ -63,7 +68,7 @@
     return [source, target];
   }
 
-  $: autocomplete = pickableItems.filter((x) => matchFunction(x, value));
+  $: autocomplete = pickableItems.filter((x) => matchFunction(x, value)).slice(0, maxAutoComplete);
 
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
 
@@ -107,7 +112,7 @@
     />
     {#if value !== ''}
       <div
-        class="absolute left-0 right-0 z-10 flex p-4 overflow-visible rounded-md top-full bg-surface0 {popUpClass}"
+        class="absolute left-0 max-h-80 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface0 {popUpClass}"
       >
         {#each autocomplete as props}
           <button
