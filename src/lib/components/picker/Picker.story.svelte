@@ -2,6 +2,7 @@
   import type { Hst } from '@histoire/plugin-svelte';
   import Picker from './Picker.svelte';
   import { themes } from '$lib/stores';
+  import { getFormValues } from '$lib/util/form.util';
 
   let theme = 'macchiato';
 
@@ -30,19 +31,24 @@
       ]}
     />
     <h1>Force list display</h1>
-    <Picker
-      placeholder="pick an item"
-      popUpClass="flex-col"
-      pickableItems={[
-        {
-          text: 'hi'
-        },
-        {
-          text: 'hiii',
-          label: 'asdf'
-        },
-        { text: 'asdf', icon: 'mdi:abugida-thai' }
-      ]}
-    />
+
+    <form on:submit|preventDefault={(e) => console.log(getFormValues(e))}>
+      <Picker
+        placeholder="pick an item"
+        popUpClass="flex-col"
+        name="pills"
+        pickableItems={[
+          {
+            text: 'hi'
+          },
+          {
+            text: 'hiii',
+            label: 'asdf'
+          },
+          { text: 'asdf', icon: 'mdi:abugida-thai' }
+        ]}
+      />
+      <button type="submit">Senden</button>
+    </form>
   </div>
 </Hst.Story>

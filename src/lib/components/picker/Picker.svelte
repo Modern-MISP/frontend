@@ -66,6 +66,8 @@
   $: autocomplete = pickableItems.filter((x) => matchFunction(x, value));
 
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
+
+  let input: HTMLInputElement;
 </script>
 
 <!--
@@ -96,9 +98,9 @@
       {/each}
     </ul>
     <input
+      bind:this={input}
       class="w-full h-full m-2 outline-none bg-inherit text-text"
       type="text"
-      {name}
       {placeholder}
       bind:value
       on:keydown={onKeyDown}
@@ -109,12 +111,15 @@
       >
         {#each autocomplete as props}
           <button
-            on:click={() =>
-              ([pickableItems, pickedItems] = removeFromAddToIndex(
+            on:click={() => {
+              [pickableItems, pickedItems] = removeFromAddToIndex(
                 pickableItems,
                 pickedItems,
                 pickableItems.findIndex((x) => x === props)
-              ))}
+              );
+              value = '';
+              input.focus();
+            }}
           >
             <Pill {...props} class="border-2 border-surface0 {props.class}"></Pill>
           </button>
@@ -123,3 +128,5 @@
     {/if}
   </div>
 </div>
+
+<input type="hidden" {name} value={JSON.stringify(pickedItems)} />
