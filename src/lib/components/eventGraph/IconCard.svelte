@@ -17,6 +17,10 @@
    * The text to be displayed in this card.
    */
   export let text: string;
+  /**
+   * The target URL of the Card, which will be navigated to when the Card is clicked.
+   */
+   export let href='';
 </script>
 
 <!-- 
@@ -25,10 +29,12 @@
   Sets the default padding and border radius. You can override this by passing your own classes.
   
  -->
-<Card
-  class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
-  title={text}
->
-  <Icon {icon} />
-  {text}
-</Card>
+<a {href}>
+  <Card
+    class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
+    title={text}
+  >
+    <Icon {icon} />
+    {text}
+  </Card>
+</a>

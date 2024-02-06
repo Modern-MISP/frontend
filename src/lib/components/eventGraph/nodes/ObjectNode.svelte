@@ -13,10 +13,7 @@
 
 </script>
 
-<!-- <Handle type="target" position={Position.Left} />
-<Pill label={id} text={name} icon="mdi:web"></Pill> -->
-
-<div class="px-4 py-2 shadow-md rounded-md bg-surface0 border-2 border-stone-400" title={name}>
+<div class="px-4 py-2 shadow-md rounded-md bg-surface0 border-2 border-stone-400" title={name + " : " + comment}>
   <div class="flex">
     <div class="rounded-full w-12 h-12 flex justify-center items-center bg-surface1">
       <Icon icon="mdi:web" />
