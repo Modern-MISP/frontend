@@ -2,7 +2,7 @@
   import Icon from '@iconify/svelte';
   import Pill from '../pills/pill/Pill.svelte';
   import type { ComponentProps } from 'svelte';
-  import { remove } from 'lodash-es';
+  import { remove, sortBy } from 'lodash-es';
 
   /** The items that have been picked. */
   export let pickedItems: ComponentProps<Pill>[] = [];
@@ -42,23 +42,30 @@
       if (!match) return;
       pickedItems = [...pickedItems, match];
       pickableItems = pickableItems.filter((x) => x !== match);
-    } else if (event.key === 'Backspace' && value === '') {
+      value = '';
+      return;
+    }
+    if (event.key === 'Backspace' && value === '') {
       event.preventDefault();
       if (pickedItems.length === 0) return;
-      [pickedItems, pickableItems] = switchByIndex(
+      value = pickedItems.slice(-1)[0].text ?? '';
+      [pickedItems, pickableItems] = removeFromAddToIndex(
         pickedItems,
         pickableItems,
         pickedItems.length - 1
       );
+      return;
     }
   }
 
-  function switchByIndex<T>(source: T[], target: T[], index: number) {
+  function removeFromAddToIndex<T>(source: T[], target: T[], index: number) {
     target.push(remove(source, (_, i) => i === index)[0]);
     return [source, target];
   }
 
   $: autocomplete = pickableItems.filter((x) => matchFunction(x, value));
+
+  $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
 </script>
 
 <!--
@@ -75,7 +82,11 @@
             {props.text}
             <button
               on:click={() =>
-                ([pickedItems, pickableItems] = switchByIndex(pickedItems, pickableItems, i))}
+                ([pickedItems, pickableItems] = removeFromAddToIndex(
+                  pickedItems,
+                  pickableItems,
+                  i
+                ))}
               class="align-middle hover:text-red"
             >
               <Icon icon="mdi:close-circle-outline" />
@@ -96,10 +107,14 @@
       <div
         class="absolute left-0 right-0 z-10 flex p-4 overflow-visible rounded-md top-full bg-surface0 {popUpClass}"
       >
-        {#each autocomplete as props, i}
+        {#each autocomplete as props}
           <button
             on:click={() =>
-              ([pickableItems, pickedItems] = switchByIndex(pickableItems, pickedItems, i))}
+              ([pickableItems, pickedItems] = removeFromAddToIndex(
+                pickableItems,
+                pickedItems,
+                pickableItems.findIndex((x) => x === props)
+              ))}
           >
             <Pill {...props} class="border-2 border-surface0 {props.class}"></Pill>
           </button>

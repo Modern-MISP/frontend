@@ -18,14 +18,15 @@
       placeholder="pick an item"
       pickableItems={[
         {
-          text: 'hi'
+          text: 'ha'
         },
-
         {
-          text: 'hiii',
+          text: 'hb',
           label: 'asdf'
         },
-        { text: 'asdf' }
+        { text: 'asdf' },
+
+        { text: 'asdf', icon: 'mdi:test-tube' }
       ]}
     />
     <h1>Force list display</h1>
