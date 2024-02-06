@@ -10,7 +10,8 @@
 
   const { left, key } = data;
 
-  const seenIps = key.AuthKey?.unique_ips ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const seenIps = (key.AuthKey as any)?.unique_ips ?? [];
   const allowedIps = key.AuthKey?.allowed_ips;
   console.log(key);
 </script>
