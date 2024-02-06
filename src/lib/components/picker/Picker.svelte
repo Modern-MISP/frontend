@@ -2,14 +2,12 @@
   import Icon from '@iconify/svelte';
   import Pill from '../pills/pill/Pill.svelte';
   import type { ComponentProps } from 'svelte';
+  import { remove } from 'lodash-es';
 
   /** The items that have been picked. */
   export let pickedItems: ComponentProps<Pill>[] = [];
   /** The items that can be picked. */
   export let pickableItems: ComponentProps<Pill>[] = [];
-  /** The items that are completions for the current input. */
-  // let autocompleteItems = pickableItems;
-
   /**
    * Placeholder of the input.
    */
@@ -21,17 +19,38 @@
 
   let value: string = '';
 
+  /**
+   * Override the match function while typing in the input
+   * @param pill The pill
+   * @param value the input value
+   * @returns true if the pill should match the value
+   */
+  export let matchFunction: (pill: ComponentProps<Pill>, value: string) => boolean | undefined = (
+    pill: ComponentProps<Pill>,
+    value: string
+  ) => pill.text?.includes(value);
+
   function onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       event.preventDefault();
       if (!value) return;
-      const match = pickableItems.find((x) => x.text?.includes(value));
+      const match = pickableItems.find((x) => matchFunction(x, value));
       if (!match) return;
       pickedItems = [...pickedItems, match];
+      pickableItems = pickableItems.filter((x) => x !== match);
     } else if (event.key === 'Backspace' && value === '') {
       event.preventDefault();
-      pickedItems = pickedItems.slice(0, -1);
+      [pickedItems, pickableItems] = switchByIndex(
+        pickedItems,
+        pickableItems,
+        pickedItems.length - 1
+      );
     }
+  }
+
+  function switchByIndex<T>(source: T[], target: T[], index: number) {
+    target.push(remove(source, (_, i) => i === index)[0]);
+    return [source, target];
   }
 </script>
 
@@ -48,7 +67,8 @@
           <Pill {...props} class="border-2 border-surface0 {props.class}">
             {props.text}
             <button
-              on:click={() => (pickedItems = pickedItems.filter((_, index) => index !== i))}
+              on:click={() =>
+                ([pickedItems, pickableItems] = switchByIndex(pickedItems, pickableItems, i))}
               class="align-middle hover:text-red"
             >
               <Icon icon="mdi:close-circle-outline" />
