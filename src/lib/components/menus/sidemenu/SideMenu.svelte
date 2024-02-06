@@ -54,7 +54,7 @@
   </slot>
 
   <SideMenuDivider />
-  <nav class="flex flex-col justify-center w-full gap-2 overflow-auto">
+  <nav class="flex flex-col justify-start w-full gap-2 overflow-auto">
     <slot>
       {#each routes as route}
         <div class="flex flex-col px-5 rounded-2xl" class:bg-crust={isOpen}>
