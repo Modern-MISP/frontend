@@ -13,6 +13,10 @@
    */
   export let placeholder: string | undefined = undefined;
   /**
+   * Popup Class Override
+   */
+  export let popUpClass: string = '';
+  /**
    * The name of the input. Used for form submission.
    */
   export let name = 'default';
@@ -40,6 +44,7 @@
       pickableItems = pickableItems.filter((x) => x !== match);
     } else if (event.key === 'Backspace' && value === '') {
       event.preventDefault();
+      if (pickedItems.length === 0) return;
       [pickedItems, pickableItems] = switchByIndex(
         pickedItems,
         pickableItems,
@@ -52,6 +57,8 @@
     target.push(remove(source, (_, i) => i === index)[0]);
     return [source, target];
   }
+
+  $: autocomplete = pickableItems.filter((x) => matchFunction(x, value));
 </script>
 
 <!--
@@ -60,11 +67,11 @@
   An input for picking from a list of pre-defined items.
 -->
 <div class="box-border relative overflow-visible">
-  <div class="flex flex-row flex-wrap items-center gap-2 p-2 rounded-lg bg-crust w-fit">
-    <ul class="flex flex-wrap gap-1 bg-inherit">
+  <div class="flex flex-row items-center w-full gap-2 p-2 rounded-lg bg-crust">
+    <ul class="flex gap-1 bg-inherit">
       {#each pickedItems as props, i}
         <li>
-          <Pill {...props} class="border-2 border-surface0 {props.class}">
+          <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
             {props.text}
             <button
               on:click={() =>
@@ -78,17 +85,26 @@
       {/each}
     </ul>
     <input
-      class="m-2 outline-none bg-inherit text-text"
+      class="w-full h-full m-2 outline-none bg-inherit text-text"
       type="text"
       {name}
       {placeholder}
       bind:value
       on:keydown={onKeyDown}
     />
-    <!-- <div class="absolute top-full left-0 right-0 bg-white z-[99] overflow-visible">
-      {#each autocompleteItems as item}
-        <div>{item}</div>
-      {/each}
-    </div> -->
+    {#if value !== ''}
+      <div
+        class="absolute left-0 right-0 z-10 flex p-4 overflow-visible rounded-md top-full bg-surface0 {popUpClass}"
+      >
+        {#each autocomplete as props, i}
+          <button
+            on:click={() =>
+              ([pickableItems, pickedItems] = switchByIndex(pickableItems, pickedItems, i))}
+          >
+            <Pill {...props} class="border-2 border-surface0 {props.class}"></Pill>
+          </button>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>

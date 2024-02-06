@@ -13,13 +13,34 @@
     <Hst.Select title="Theme" bind:value={theme} options={themes} />
   </svelte:fragment>
   <div class={theme}>
+    <h1>Display flex wrap</h1>
     <Picker
       placeholder="pick an item"
       pickableItems={[
         {
           text: 'hi'
         },
+
+        {
+          text: 'hiii',
+          label: 'asdf'
+        },
         { text: 'asdf' }
+      ]}
+    />
+    <h1>Force list display</h1>
+    <Picker
+      placeholder="pick an item"
+      popUpClass="flex-col"
+      pickableItems={[
+        {
+          text: 'hi'
+        },
+        {
+          text: 'hiii',
+          label: 'asdf'
+        },
+        { text: 'asdf', icon: 'mdi:abugida-thai' }
       ]}
     />
   </div>
