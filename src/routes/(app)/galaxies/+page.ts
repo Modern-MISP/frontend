@@ -8,6 +8,7 @@ import Info from '$lib/components/info/Info.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Icon from '@iconify/svelte';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/galaxies', { fetch });
@@ -74,9 +75,38 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Enable',
+      icon: 'mdi:checkbox-outline',
+      action: (x) => {
+        // TODO: Implement api endpoint
+        alert('Enable' + x.map((y) => y.Galaxy?.id).join());
+      }
+    },
+    {
+      label: 'Disable',
+      icon: 'mdi:close-box-outline',
+      action: (x) => {
+        // TODO: Implement api endpoint
+        alert('Disable' + x.map((y) => y.Galaxy?.id).join());
+      }
+    },
+    {
+      label: 'Delete',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        // TODO: Implement api endpoint
+        alert('Delete' + x.map((y) => y.Galaxy?.id).join());
+      }
+    }
+  ];
+
   return {
     galaxies: data,
     tableData: data,
-    header
+    header,
+    editActions
   };
 };
