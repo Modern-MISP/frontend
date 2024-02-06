@@ -46,9 +46,11 @@ generate_mkdocs:
   image: hub.cert.kit.edu:5000/mkdocs
   script:
     - source /root/.venv/bin/activate; mkdocs build
+    - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
       - site
+      - docs/implementation_report/site
 
 push_docs:
   stage: push_docs
@@ -67,7 +69,7 @@ push_docs:
     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
     - cp site/pdf/document.pdf docs/
     - cp docs/generated/uml.svg docs/
-    - rm -r docs/generated/
+    - cp docs/implementation_report/site/pdf/document.pdf docs/implementation_report
     - git add docs/
     - git config user.name uml-pipeline
     - git config user.email uml-pipeline@example.com
