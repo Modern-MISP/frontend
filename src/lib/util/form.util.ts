@@ -16,10 +16,22 @@ export function getFormValues({ currentTarget }: SubmitEvent) {
   const entries = keys.map((key) => {
     // Get all values from that name inputs.
     const values = data.getAll(key);
-    // Handles arrays. If there are multiple inputs with the same name they most be an array. Elsewise there is only one input. So no need too but it into an array.
-    return { [key]: values.length > 1 ? values : values[0] };
+    // Handles arrays. If there are multiple inputs with the same name they most be an array. Elsewise there is only one input. So no need too but it into an array. Also is able to parse stringifies json. Need to verify the types elsewhere
+    return {
+      [key]: values.length > 1 ? values.map(parseFormDataEntry) : parseFormDataEntry(values[0])
+    };
   });
   // Throw if no name is set
   if (!entries) throw new Error("Forgot to set 'name' attribute");
   return entries;
+}
+
+function parseFormDataEntry(formDataEntry: FormDataEntryValue): unknown | FormDataEntryValue {
+  if (typeof formDataEntry !== 'string') return formDataEntry;
+
+  try {
+    return JSON.parse(formDataEntry);
+  } catch {
+    return formDataEntry;
+  }
 }
