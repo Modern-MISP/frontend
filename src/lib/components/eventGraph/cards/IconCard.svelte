@@ -29,12 +29,14 @@
   Sets the default padding and border radius. You can override this by passing your own classes.
   
  -->
-<a {href}>
-  <Card
-    class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
-    title={text}
-  >
-    <Icon {icon} />
-    {text}
-  </Card>
-</a>
+<button on:click>
+  <a {href}>
+    <Card
+      class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
+      title={text}
+    >
+      <Icon {icon} />
+      {text}
+    </Card>
+  </a>
+</button>

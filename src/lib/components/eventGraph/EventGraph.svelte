@@ -3,12 +3,13 @@
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import CardRow from '../card/CardRow.svelte';
-  import IconCard from './IconCard.svelte';
+  import IconCard from './cards/IconCard.svelte';
   import type { components } from '$lib/api/misp';
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
   import AttributeNode from './nodes/AttributeNode.svelte';
   import ObjectNode from './nodes/ObjectNode.svelte';
+  import ContextMenu from './menu/ContextMenu.svelte';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -25,7 +26,6 @@
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
-/*   const tags = event.Tag ?? []; */
 
   const position = { x: 0, y: 0 };
 
@@ -77,7 +77,7 @@
     });
 
     for (const attribute of object.Attribute ?? []) {
-      // Node: refed attributes
+      // Node: attributes
        $nodes.push({
         id: `attribute-${attribute.id}`,
         position,
@@ -90,7 +90,7 @@
         },
         type: 'attribute'
       });
-      // Edge: refed objects to refed attributes (= reference)
+      // Edge: objects to attributes (= relations)
       $edges.push({
         id: `object-${object.id}-to-attribute-${attribute.id}`,
         source: `object-${object.id}`,
@@ -170,6 +170,30 @@
     attribute: AttributeNode,
     object: ObjectNode
   };
+
+  let menu: { id: string; top?: number; left?: number; right?: number; bottom?: number } | null;
+  let width: number;
+  let height: number;
+
+  function handleContextMenu({ detail: { event, node } }) {
+    // Prevent native context menu from showing
+    event.preventDefault();
+
+    // Calculate position of the context menu. We want to make sure it
+    // doesn't get positioned off-screen.
+    menu = {
+      id: node.id,
+      top: 0,
+      left: 0,
+      right: 500,
+      bottom: 500
+    };
+  }
+
+  // Close the context menu if it's open whenever the window is clicked.
+  function handlePaneClick() {
+    menu = null;
+  }
 </script>
 
 <!--
@@ -180,27 +204,6 @@
 
 -->
 <header class="flex justify-between w-full gap-2">
-  <div class="flex gap-2">
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:magnify" text="Details" />
-    </CardRow>
-
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:show" text="Show" />
-      <IconCard icon="mdi:hide" text="Hide" class="!text-red" />
-    </CardRow>
-
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="bx:expand" text="Expand" />
-      <IconCard icon="bx:collapse" text="Collapse" class="!text-red" />
-    </CardRow>
-
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:edit" text="Edit" />
-      <IconCard icon="bx:duplicate" text="Duplicate" />
-      <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
-    </CardRow>
-  </div>
   <div class="flex gap-4 shrink-0">
     <CardRow class="rounded-lg bg-surface0">
       <IconCard icon="mdi:web" text="Unreferenced Objects" />
@@ -210,15 +213,22 @@
 </header>
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:web-plus" text="Add Object" />
-      <IconCard icon="mdi:flag-add" text="Add Attribute" />
-      <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-    </CardRow>
+    {#if menu}
+      <ContextMenu
+        onClick={handlePaneClick}
+        id={menu.id}
+        top={menu.top}
+        left={menu.left}
+        right={menu.right}
+        bottom={menu.bottom}
+      />
+    {/if}
     <Flow
       {nodes}
       {edges}
       {nodeTypes}
+      on:nodecontextmenu={handleContextMenu}
+      on:paneclick={handlePaneClick}
       on:nodedragstop={({ detail: { node } }) => {
         if (!node) return;
         const position = spring(node.position);
@@ -233,5 +243,5 @@
     {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
-  </Card> -->
+</Card> -->
 </div>

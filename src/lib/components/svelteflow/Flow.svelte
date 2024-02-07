@@ -52,6 +52,8 @@
   fitView
   on:nodeclick
   on:nodedragstop
+  on:nodecontextmenu
+  on:paneclick
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
