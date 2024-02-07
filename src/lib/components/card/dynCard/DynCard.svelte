@@ -33,10 +33,14 @@
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>
       {@const v = value(data)}
-      {#if typeof v !== 'string'}
-        <svelte:component this={v.display} {...v.props} />
+      {#if v}
+        {#if typeof v !== 'string'}
+          <svelte:component this={v.display} {...v.props} />
+        {:else}
+          <span>{v}</span>
+        {/if}
       {:else}
-        <span>{v}</span>
+        <span class="text-red">undefined</span>
       {/if}
     </CardRow>
   {/each}
