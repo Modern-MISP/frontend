@@ -61,7 +61,7 @@ export type ModuleNodeData = {
   id: string;
   indexed_params: [];
   module_type: string;
-  module_version: string;
+  module_version?: string;
   multiple_output_connection: boolean;
   name: string;
   node_uid: string;

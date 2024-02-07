@@ -27,7 +27,7 @@
     }),
     col({
       label: 'Version',
-      value: (x) => x.module_version
+      value: (x) => x.module_version ?? 'unknown'
     })
   ];
 </script>
