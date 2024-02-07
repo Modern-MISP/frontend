@@ -7,10 +7,10 @@
     type Node,
     type Edge
   } from '@xyflow/svelte';
-  import TriggerNode from './nodes/TriggerNode.svelte';
   import type { Writable } from 'svelte/store';
-  import ModuleNode from './nodes/ModuleNode.svelte';
   import { mode } from '$lib/stores';
+  import FrameNode from './nodes/FrameNode.svelte';
+  import ModuleNode from './nodes/ModuleNode.svelte';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;
@@ -19,8 +19,10 @@
   export let edges: Writable<Edge[]>;
 
   const nodeTypes = {
-    trigger: TriggerNode,
-    module: ModuleNode
+    trigger: ModuleNode,
+    action: ModuleNode,
+    logic: ModuleNode,
+    frame: FrameNode
   };
 
   /** Dimensions of the grid that nodes will snap onto */
@@ -42,7 +44,10 @@
   {snapGrid}
   {nodeTypes}
   fitView
+  on:init
   on:nodeclick
+  on:nodedrag
+  on:paneclick
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}

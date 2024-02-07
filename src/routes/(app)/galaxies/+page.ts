@@ -27,7 +27,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Icon',
       value: (x) => ({
         display: Icon,
-        props: { icon: `fa6-solid:${x.Galaxy?.icon}`}
+        props: { icon: `fa6-solid:${x.Galaxy?.icon}` }
       })
     }),
     col({

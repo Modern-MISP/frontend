@@ -28,6 +28,11 @@
   export let type: HTMLInputTypeAttribute = 'text';
 
   /**
+   * When true, the input is disabled an cannot be changed.
+   */
+  export let disabled: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
@@ -49,7 +54,11 @@
   You can also set the placeholder prop, if you want to set an placeholder. 
  -->
 
-<label class="relative flex items-center gap-2 px-2 py-2 bg-crust text-text rounded-lg {clazz}">
+<label
+  class="relative flex items-center gap-2 px-2 py-2 text-text rounded-lg {clazz}"
+  class:bg-crust={!disabled}
+  class:bg-base={disabled}
+>
   <slot name="icon">
     {#if icon}
       <Icon {icon} />
@@ -64,9 +73,10 @@
     {name}
     {type}
     {value}
+    {disabled}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer"
   />
-  {#if placeholder}
+  {#if placeholder && (!disabled || !value)}
     <label
       for={id}
       class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
