@@ -1,14 +1,15 @@
-import { GET } from '$lib/api';
+import { GET, POST } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { invalidateAll } from '$app/navigation';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import Icon from '@iconify/svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import Icon from '@iconify/svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/galaxies', { fetch });
@@ -79,17 +80,29 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Enable',
       icon: 'mdi:checkbox-outline',
-      action: (x) => {
-        // TODO: Implement api endpoint
-        alert('Enable' + x.map((y) => y.Galaxy?.id).join());
+      action: (selected) => {
+        Promise.all(
+          selected
+            .map((y) => y.Galaxy?.id)
+            .map((galaxyId) =>
+              // @ts-expect-error Not in the OpenAPI spec.. great.
+              POST('/galaxies/enable/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+            )
+        ).then(invalidateAll);
       }
     },
     {
       label: 'Disable',
       icon: 'mdi:close-box-outline',
-      action: (x) => {
-        // TODO: Implement api endpoint
-        alert('Disable' + x.map((y) => y.Galaxy?.id).join());
+      action: (selected) => {
+        Promise.all(
+          selected
+            .map((y) => y.Galaxy?.id)
+            .map((galaxyId) =>
+              // @ts-expect-error Not in the OpenAPI spec.. great.
+              POST('/galaxies/disable/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+            )
+        ).then(invalidateAll);
       }
     },
     {
@@ -97,8 +110,20 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        // TODO: Implement api endpoint
-        alert('Delete' + x.map((y) => y.Galaxy?.id).join());
+        if (
+          confirm(
+            `Are you sure you want to delete the galaxies with ids: ${x.map((x) => x.Galaxy?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.Galaxy?.id)
+              .map((galaxyId) =>
+                // @ts-expect-error Not in the OpenAPI spec.. great.
+                POST('/galaxies/delete/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+              )
+          ).then(invalidateAll);
+        }
       }
     }
   ];

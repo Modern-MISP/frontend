@@ -17,7 +17,7 @@
   export let data: PageData;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { tableData, header, editActions } = data as any;
+  $: ({ tableData, header, editActions } = data as any);
 
   const actions: ActionBarEntryProps[] = [
     {
