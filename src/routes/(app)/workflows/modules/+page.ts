@@ -9,7 +9,7 @@ import type { Module } from './module';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await GET('/workflows/moduleIndex', { fetch });
+  const getResult = await GET('/workflows/moduleIndex/type:all', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Module[];
 
@@ -20,7 +20,6 @@ export const load: PageLoad = async ({ fetch }) => {
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
   const header = [
-    // col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
     col({
       icon: 'mdi:id-card',
       key: 'name',
