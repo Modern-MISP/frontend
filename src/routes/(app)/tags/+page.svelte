@@ -4,7 +4,6 @@
   import Pagination from '$lib/components/pagination/Pagination.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface.js';
   import { mode } from '$lib/stores.js';
   import CreateTag from './CreateTag.svelte';
 
