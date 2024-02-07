@@ -20,7 +20,7 @@
   /**
    * The target browsing context i.e. where to open the URL.
    */
-  export let target: '_self' | '_blank' | '_parent' | '_top' = '_self';
+  export let target: '_self' | '_blank' | '_parent' | '_top' | undefined = undefined;
 </script>
 
 <!-- 
