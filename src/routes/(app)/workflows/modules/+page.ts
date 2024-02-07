@@ -60,7 +60,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:circle',
       key: 'misp_module',
       label: 'Misp Module',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.misp_module } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.is_misp_module } })
     }),
     col({
       icon: 'mdi:circle',

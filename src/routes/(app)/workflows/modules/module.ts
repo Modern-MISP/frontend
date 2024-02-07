@@ -6,7 +6,7 @@ export type Module = {
   version?: string;
   blocking?: boolean;
   expect_misp_core_format?: boolean;
-  misp_module?: boolean;
+  is_misp_module?: boolean;
   is_custom?: boolean;
   disabled?: boolean;
 };
