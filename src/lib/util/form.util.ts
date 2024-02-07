@@ -26,7 +26,7 @@ export function getFormValues({ currentTarget }: SubmitEvent) {
   return entries;
 }
 
-function parseFormDataEntry(formDataEntry: FormDataEntryValue): unknown | File {
+function parseFormDataEntry(formDataEntry: FormDataEntryValue): unknown | FormDataEntryValue {
   if (typeof formDataEntry !== 'string') return formDataEntry;
 
   try {
