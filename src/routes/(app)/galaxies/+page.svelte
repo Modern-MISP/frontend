@@ -10,6 +10,8 @@
   import { findKey, values } from 'lodash-es';
   import type { PageData } from './$types';
   import { mode } from '$lib/stores';
+  import { POST } from '$lib/api';
+  import { invalidateAll } from '$app/navigation';
 
   /**
    * The data that will be displayed on this page
@@ -24,17 +26,14 @@
       icon: 'mdi:refresh',
       label: 'Refresh Galaxies',
       action: () => {
-        // TODO: Implement api endpoint
-        alert('Will refresh Galaxies');
+        if (confirm('Do you want to update all Galaxies?'))
+          POST('/galaxies/update').then(invalidateAll);
       }
     },
     {
       icon: 'mdi:import',
       label: 'Import Galaxies',
-      action: () => {
-        // TODO: Implement api endpoint
-        alert('Will open a dialog or redirect to a page with free text import');
-      }
+      action: '/galaxies/import'
     }
   ];
 
