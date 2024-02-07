@@ -36,10 +36,10 @@
   <Card>
     <h1 class="text-xl">Import Galaxies</h1>
     {#if error}
-      <span class="text-red">Error: {error}</span>
+      <span class="text-red"><b>Error:</b> {error}</span>
     {/if}
     {#if success}
-      <span class="text-green">Success: {success}</span>
+      <span class="text-green"><b>Success:</b> {success}</span>
     {/if}
 
     <textarea
