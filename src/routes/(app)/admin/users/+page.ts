@@ -7,6 +7,9 @@ import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interf
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/admin/users', { fetch });
@@ -134,10 +137,130 @@ export const load: PageLoad = async ({ fetch }) => {
       }
     }
   ];
+
+  const topMenuActions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:user-add-outline',
+      label: 'Add User',
+      action: '/admin/users/new'
+    }
+  ];
+
+  // @ts-expect-error Not in the OpenAPI spec.. great.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: roleData }: { data: any[] } = await GET('/roles');
+  const { data: orgData } = await GET('/organisations');
+
+  const fil = createTableHeadGenerator<undefined>();
+  const filter = [
+    fil({
+      label: 'ID',
+      value: () => 'id'
+    }),
+
+    fil({
+      label: 'Org',
+      value: () => ({
+        display: Select,
+        props: {
+          options:
+            orgData?.map((x) => ({
+              label: x.Organisation?.name ?? 'unknown',
+              value: x.Organisation?.id ?? 'unknown'
+            })) ?? [],
+          value: orgData && orgData.length > 0 ? orgData[0].Organisation?.id ?? '0' : '0',
+          name: 'org'
+        }
+      })
+    }),
+    fil({
+      label: 'Role',
+      value: () => ({
+        display: Select,
+        props: {
+          options:
+            roleData?.map((x) => ({
+              label: x.Role?.name ?? 'unknown',
+              value: x.Role?.id ?? 'unknown'
+            })) ?? [],
+          value: roleData && roleData.length > 0 ? roleData[0].Role?.id ?? '0' : '0',
+          name: 'role'
+        }
+      })
+    }),
+    fil({
+      label: 'E-Mail',
+      value: () => 'email'
+    }),
+    fil({
+      label: 'NIDS SID',
+      value: () => 'nids_sid'
+    }),
+    fil({
+      label: 'Last Login',
+      value: () => 'last_login'
+    }),
+    fil({
+      label: 'Created',
+      value: () => 'created'
+    }),
+    fil({
+      label: 'TOTP',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'totp'
+        }
+      })
+    }),
+    fil({
+      label: 'Contact',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'contact'
+        }
+      })
+    }),
+    fil({
+      label: 'Notification',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'notification'
+        }
+      })
+    }),
+    fil({
+      label: 'PGP-Key',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'pgp_key'
+        }
+      })
+    }),
+    fil({
+      label: 'Terms',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'terms'
+        }
+      })
+    })
+  ];
   return {
     data,
     tableData: data,
     header,
-    editActions
+    editActions,
+    topMenuActions,
+    filter
   };
 };
