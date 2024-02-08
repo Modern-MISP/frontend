@@ -6,13 +6,18 @@
   import type { Trigger, ModuleNodeData } from '../triggers/trigger.js';
   import { objectEntries } from 'ts-extras';
   import ModuleInfo from './ModuleInfo.svelte';
+  import { mode } from '$lib/stores.js';
+  import Card from '$lib/components/card/Card.svelte';
+  import ModuleCard from './ModuleCard.svelte';
+  import { fly } from 'svelte/transition';
+  import type { Module } from '../modules/module.js';
 
   /** The data that will be displayed on this page. */
   export let data;
 
   const svelteFlow = useSvelteFlow();
 
-  const { infoHeader } = data;
+  const { infoHeader, moduleData } = data;
   const workflow = (data.workflow as Trigger['Workflow'])!;
   const wfData = workflow.data!;
 
@@ -106,6 +111,50 @@
   // or when adding the frames in the first place, but apparently it works.
   // TODO: (Optional) Find out why this happens?
   setTimeout(() => $nodes.filter((n) => n.type === 'frame').forEach(updateFrame), 1000);
+
+  function onDragOver(event: DragEvent) {
+    event.preventDefault();
+
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  }
+
+  function onDrop(event: DragEvent) {
+    event.preventDefault();
+
+    if (!event.dataTransfer) {
+      return null;
+    }
+
+    const newModule: Module = JSON.parse(event.dataTransfer.getData('application/svelteflow'));
+
+    const position = svelteFlow.screenToFlowPosition({
+      x: event.clientX,
+      y: event.clientY
+    });
+
+    const newNode = {
+      id: `${newModule.id}`,
+      type: newModule.module_type,
+      position,
+      data: {
+        inputs: [],
+        outputs: [],
+        moduleData: {
+          id: newModule.id,
+          name: newModule.name,
+          module_type: newModule.module_type,
+          indexed_params: []
+        } as ModuleNodeData,
+        onUpdate: onNodeUpdate
+      },
+      origin: [0.5, 0.0]
+    } satisfies Node;
+
+    $nodes.push(newNode);
+    $nodes = $nodes;
+  }
 </script>
 
 <!--
@@ -115,13 +164,29 @@
   including an interactive node-based diagram for visualization.
 -->
 <div class="flex flex-row h-full">
-  <div class="flex flex-col gap-1">
-    <div class="flex-row">
-      <DynCard header={infoHeader} data={workflow} />
-    </div>
-    {#if nodeContext}
-      <div class="flex-row">
-        <ModuleInfo data={nodeContext} />
+  <div class="flex flex-col gap-1 max-w-md">
+    {#if $mode === 'view'}
+      <div class="flex-row basis-full">
+        <DynCard header={infoHeader} data={workflow} />
+      </div>
+      {#if nodeContext}
+        <div class="flex-row">
+          <ModuleInfo data={nodeContext} />
+        </div>
+      {/if}
+    {:else}
+      <div in:fly={{ x: -200 }} class="overflow-auto">
+        <Card class="flex flex-col">
+          {#await moduleData}
+            Loading
+          {:then modules}
+            {#each modules as module}
+              <div class="flex-row">
+                <ModuleCard {module} />
+              </div>
+            {/each}
+          {/await}
+        </Card>
       </div>
     {/if}
   </div>
@@ -132,6 +197,8 @@
       on:nodedrag={onNodeDrag}
       on:nodeclick={onNodeClick}
       on:paneclick={onPaneClick}
+      on:dragover={onDragOver}
+      on:drop={onDrop}
     />
   </div>
 </div>

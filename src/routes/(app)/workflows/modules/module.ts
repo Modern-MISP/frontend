@@ -1,6 +1,7 @@
 export type Module = {
   id?: string;
   name?: string;
+  icon?: string;
   description?: string;
   module_type?: string;
   version?: string;

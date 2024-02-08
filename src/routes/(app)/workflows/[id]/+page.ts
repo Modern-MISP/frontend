@@ -6,6 +6,7 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import Info from '$lib/components/info/Info.svelte';
 import type { Trigger } from '../triggers/trigger';
+import type { Module } from '../modules/module';
 
 export const load = async ({ params, fetch }) => {
   const {
@@ -81,8 +82,15 @@ export const load = async ({ params, fetch }) => {
     })
   ];
 
+  // @ts-expect-error Not in the OpenAPI spec
+  const moduleData = GET('/workflows/moduleIndex/type:all', { fetch }).then((result) => {
+    if (result.error) error(result.response.status as NumericRange<400, 599>, result.error.message);
+    return result.data as Module[];
+  });
+
   return {
     workflow,
-    infoHeader
+    infoHeader,
+    moduleData
   };
 };

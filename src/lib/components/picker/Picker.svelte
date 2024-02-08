@@ -20,6 +20,10 @@
    * The name of the input. Used for form submission.
    */
   export let name = 'default';
+  /**
+   * When true, the picker cannot be used.
+   */
+  export let disabled: boolean = false;
 
   /**
    * Max Elements to show for Autocomplete
@@ -81,23 +85,29 @@
   An input for picking from a list of pre-defined items.
 -->
 <div class="box-border relative overflow-visible">
-  <div class="flex flex-row items-center w-full gap-2 p-2 rounded-lg bg-crust">
+  <div
+    class="flex flex-row items-center w-full gap-2 p-2 rounded-lg"
+    class:bg-crust={!disabled}
+    class:bg-base={disabled}
+  >
     <ul class="flex gap-1 bg-inherit">
       {#each pickedItems as props, i}
         <li>
           <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
             {props.text}
-            <button
-              on:click={() =>
-                ([pickedItems, pickableItems] = removeFromAddToIndex(
-                  pickedItems,
-                  pickableItems,
-                  i
-                ))}
-              class="align-middle hover:text-red"
-            >
-              <Icon icon="mdi:close-circle-outline" />
-            </button>
+            {#if !disabled}
+              <button
+                on:click={() =>
+                  ([pickedItems, pickableItems] = removeFromAddToIndex(
+                    pickedItems,
+                    pickableItems,
+                    i
+                  ))}
+                class="align-middle hover:text-red"
+              >
+                <Icon icon="mdi:close-circle-outline" />
+              </button>
+            {/if}
           </Pill>
         </li>
       {/each}
@@ -107,6 +117,7 @@
       class="w-full h-full m-2 outline-none bg-inherit text-text"
       type="text"
       {placeholder}
+      {disabled}
       bind:value
       on:keydown={onKeyDown}
     />

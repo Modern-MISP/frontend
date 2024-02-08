@@ -113,6 +113,7 @@
         </button>
       {/if}
       {#if fullData.module_type !== 'trigger'}
+        <!-- settings are only available for non-trigger modules -->
         <button class="text-sky text-2xl hover:mix-blend-hard-light" title="node settings">
           <Icon icon="mdi:dots-horizontal" />
         </button>

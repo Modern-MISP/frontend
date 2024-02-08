@@ -48,6 +48,8 @@
   on:nodeclick
   on:nodedrag
   on:paneclick
+  on:dragover
+  on:drop
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
