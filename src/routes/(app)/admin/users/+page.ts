@@ -4,6 +4,8 @@ import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { notifications } from '$lib/stores';
+import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
@@ -101,7 +103,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Enable User',
       icon: 'mdi:account-lock-open-outline',
       action: (x) => {
-        alert('Enable' + x.map((y) => y.User?.id).join());
+        notifications.add(successPill('Enable: ' + x.map((y) => y.User?.id).join()));
       }
     },
     {
