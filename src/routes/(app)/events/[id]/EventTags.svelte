@@ -5,6 +5,7 @@
   import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
   import { mode } from '$lib/stores';
   import Icon from '@iconify/svelte';
+  import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
   /**
    * The Page data.
@@ -32,6 +33,7 @@
   </div>
   <hr />
   <PillCollection
+    base={HrefPill}
     pills={(data.event?.Tag ?? []).map((y) => ({
       /// @ts-expect-error Wrong API spec
       icon: y.local == 0 ? 'mdi:cloud-off-outline' : 'mdi:earth',
@@ -40,7 +42,9 @@
       text: y.name,
       style: `background-color: ${y.colour}; color: ${
         shouldTextBeBlack(y.colour || '') ? 'black' : 'white'
-      }`
+      }`,
+      href: `/tags/${y.id}`,
+      enforceTextColor: false
     }))}
   />
 </Card>
