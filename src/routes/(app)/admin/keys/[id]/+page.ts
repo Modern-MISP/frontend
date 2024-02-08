@@ -6,9 +6,8 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
-import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { format } from 'date-fns';
@@ -60,39 +59,46 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     }),
-    col({
-      icon: 'mdi:information-outline',
-      key: 'expiration',
-      label: 'Expires',
-      value: (x) => ({
-        display: RelativeDatePill,
-        props: {
-          date:
-            (x.AuthKey?.expiration &&
-              +x.AuthKey.expiration !== 0 &&
-              new Date(+x.AuthKey.expiration * 1000)) ||
-            null
-        }
-      })
-    }, 
-    {
-      value: (x) => ({
-        display: Input,
-        props: {
-          value: x.AuthKey?.expiration ? format(new Date(x.AuthKey?.expiration), 'yyyy-MM-dd') : undefined,
-          name: 'date',
-          type: 'Date'
-        }
-      })
-    }
+    col(
+      {
+        icon: 'mdi:information-outline',
+        key: 'expiration',
+        label: 'Expires',
+        value: (x) => ({
+          display: RelativeDatePill,
+          props: {
+            date:
+              (x.AuthKey?.expiration &&
+                +x.AuthKey.expiration !== 0 &&
+                new Date(+x.AuthKey.expiration * 1000)) ||
+              null
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x.AuthKey?.expiration
+              ? format(new Date(x.AuthKey?.expiration), 'yyyy-MM-dd')
+              : undefined,
+            name: 'date',
+            type: 'Date'
+          }
+        })
+      }
     ),
-    col({
+    col(
+      {
         key: 'read_only',
         label: 'Read only',
         value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'read_only', checked: x.AuthKey?.read_only ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'read_only', checked: x.AuthKey?.read_only ?? false }
+        })
       }
     ),
     col(
@@ -109,46 +115,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
       },
       {
         value: (x) => ({ display: Input, props: { value: x.AuthKey?.comment ?? 'unknown' } })
-      })
-  ];
-
-  const right = [
-    col({
-      key: 'seen_ip',
-      label: 'Seen Ip',
-      value: (x) => ({
-        display: Info,
-        props: {
-          text: x.AuthKey?.unique_ips?.[0] ?? 'Never seen'
-        }
-      })
-      // class: 'whitespace-nowrap'
-    }),
-    col({
-      icon: 'ph:hash-bold',
-      key: 'ip_count',
-      label: 'Attr.',
-      value: (x) => ({
-        display: PillCollection,
-        props: {
-          pills: [
-            {
-              label: 'Seen',
-              text: x.AuthKey?.unique_ips?.length
-            },
-            {
-              label: 'Allowed',
-              text: x.AuthKey?.allowed_ips?.length ?? 'All'
-            }
-          ]
-        }
-      })
-    })
+      }
+    )
   ];
 
   return {
     key: data,
-    left,
-    right
+    left
   };
 };
