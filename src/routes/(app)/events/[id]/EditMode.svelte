@@ -24,6 +24,6 @@
 </script>
 
 <svelte:window use:actionBar={actions} />
-<form bind:this={form} on:submit|preventDefault={submit}>
+<form bind:this={form} on:submit|preventDefault={submit} class="h-full">
   <slot />
 </form>

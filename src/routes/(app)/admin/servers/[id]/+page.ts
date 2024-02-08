@@ -16,7 +16,7 @@ export const load = async ({ params, fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
-  console.log(server)
+  console.log(server);
   const col = createTableHeadGenerator<typeof server>();
 
   const left = [
@@ -30,25 +30,24 @@ export const load = async ({ params, fetch }) => {
         key: 'name',
         label: 'Name',
         value: (x) => x.Server?.name ?? 'unknown'
-      }, 
+      },
       {
         value: (x) => ({ display: Input, props: { value: x.Server?.name ?? 'unknown' } })
       }
     ),
+    col({
+      key: 'priority',
+      label: 'Priority',
+      value: (x) => ({
+        display: Pill,
+        props: {
+          icon: 'mdi:chevron-triple-up',
+          text: x.Server?.priority ?? 'unknown'
+        }
+      })
+    }),
     col(
       {
-        key: 'priority',
-        label: 'Priority',
-        value: (x) => ({
-          display: Pill,
-          props: {
-            icon: 'mdi:chevron-triple-up',
-            text: x.Server?.priority ?? 'unknown'
-          }
-        })
-      }
-    ),
-    col({
         label: 'Organization',
         value: (x) => ({
           display: Pill,
@@ -64,7 +63,8 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
       }
     ),
-    col({
+    col(
+      {
         label: 'Remote Organization',
         value: (x) => ({
           display: Pill,
@@ -80,7 +80,8 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
       }
     ),
-    col({
+    col(
+      {
         key: 'url',
         label: 'URL',
         value: (x) => ({
@@ -99,15 +100,16 @@ export const load = async ({ params, fetch }) => {
     ),
 
     //TODO: authkey should only be changed if approved
-    col({
-      key: 'authkey',
-      label: 'Auth Key',
-      value: () => 'not shown'
-    },
-    {
-      value: () => ({ display: Input, props: { value: '', placeholder:'set new auth key' } })
-    }
-  ),
+    col(
+      {
+        key: 'authkey',
+        label: 'Auth Key',
+        value: () => 'not shown'
+      },
+      {
+        value: () => ({ display: Input, props: { value: '', placeholder: 'set new auth key' } })
+      }
+    ),
 
     //TODO: not implemented desired function yet
     col({
@@ -128,34 +130,47 @@ export const load = async ({ params, fetch }) => {
       label: 'Internal',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
-    col({
+    col(
+      {
         key: 'push',
         label: 'Push',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'push', checked: x.Server?.push ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'push', checked: x.Server?.push ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'pull',
         label: 'Pull',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'pull', checked: x.Server?.pull ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'pull', checked: x.Server?.pull ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'push_sightings',
         label: 'Push Sightings',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_sightings ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'push_sightings', checked: x.Server?.push_sightings ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'push_sightings', checked: x.Server?.push_sightings ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'push_galaxy_clusters',
         label: 'Push Cluster',
         value: (x) => ({
@@ -164,40 +179,56 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'push_galaxy_clusters', checked: x.Server?.push_galaxy_clusters ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'push_galaxy_clusters', checked: x.Server?.push_galaxy_clusters ?? false }
+        })
       }
     ),
-    col({
-      key: 'pull_galaxy_clusters',
-      label: 'Pull Cluster',
-      value: (x) => ({
-        display: Boolean,
-        props: { isTrue: x.Server?.pull_galaxy_clusters ?? false }
-      })
-    },
-    {
-      value: (x) => ({ display: Checkbox, props: { name: 'pull_galaxy_clusters', checked: x.Server?.pull_galaxy_clusters ?? false } })
-    }
-  ),
-    col({
+    col(
+      {
+        key: 'pull_galaxy_clusters',
+        label: 'Pull Cluster',
+        value: (x) => ({
+          display: Boolean,
+          props: { isTrue: x.Server?.pull_galaxy_clusters ?? false }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'pull_galaxy_clusters', checked: x.Server?.pull_galaxy_clusters ?? false }
+        })
+      }
+    ),
+    col(
+      {
         key: 'caching_enabled',
         label: 'Cache',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'unpublish_event',
         label: 'Unpublish Event',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.unpublish_event ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'unpublish_event', checked: x.Server?.unpublish_event ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'unpublish_event', checked: x.Server?.unpublish_event ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'publish_without_email',
         label: 'Publish without E-Mail',
         value: (x) => ({
@@ -206,37 +237,61 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'publish_without_email', checked: x.Server?.publish_without_email ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: {
+            name: 'publish_without_email',
+            checked: x.Server?.publish_without_email ?? false
+          }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'self_signed',
         label: 'Allow self signed certificates',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'self_signed', checked: x.Server?.self_signed ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'self_signed', checked: x.Server?.self_signed ?? false }
+        })
       }
     ),
-    col({
+    col(
+      {
         key: 'skip_proxy',
         label: 'Skip Proxy',
         value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
       },
       {
-        value: (x) => ({ display: Checkbox, props: { name: 'skip_proxy', checked: x.Server?.skip_proxy ?? false } })
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'skip_proxy', checked: x.Server?.skip_proxy ?? false }
+        })
       }
     ),
     //TODO: doesn't know remove_missing_tags property
-    col({
-      key: 'remove_missing_tags',
-      label: 'Remove missing attribute tags',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.remove_missing_tags ?? false } })
-    },
-    {
-      value: (x) => ({ display: Checkbox, props: { name: 'skip_proxy', checked: x.Server?.remove_missing_tags ?? false } })
-    }
-  )
+    col(
+      {
+        key: 'remove_missing_tags',
+        label: 'Remove missing attribute tags',
+        value: (x) => ({
+          display: Boolean,
+          // @ts-expect-error Not in the OpenAPI spec.. great.
+          props: { isTrue: x.Server?.remove_missing_tags ?? false }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+
+          // @ts-expect-error Not in the OpenAPI spec.. great.
+          props: { name: 'skip_proxy', checked: x.Server?.remove_missing_tags ?? false }
+        })
+      }
+    )
   ];
 
   return {

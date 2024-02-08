@@ -28,7 +28,7 @@
 
 <div class="h-full overflow-auto">
   <EditMode>
-    <div class="grid gap-2 g lg:flex-nowrap">
+    <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
       {#if addTag}
         <AddTagForm />
       {:else}
@@ -42,9 +42,3 @@
     </div>
   </EditMode>
 </div>
-
-<style>
-  .g {
-    grid: 50rem 50rem / 1fr 1fr;
-  }
-</style>
