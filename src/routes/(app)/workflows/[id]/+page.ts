@@ -1,13 +1,12 @@
 import { GET, POST } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
-import Info from '$lib/components/info/Info.svelte';
 import type { Module } from '../modules/module';
 import type { Workflow } from '../workflow';
-import { requestData } from './checkGraph.mock';
 
 export const load = async ({ params, fetch }) => {
   const {
@@ -90,12 +89,15 @@ export const load = async ({ params, fetch }) => {
   });
 
   async function checkGraph(constructWorkflowData: () => Workflow['data']) {
-    // @ts-expect-error Not in the OpenAPI spec
+    const json = JSON.stringify(constructWorkflowData());
+    // @ts-expect-error Api does not support this
     const checkGraphResult = await POST('/workflows/checkGraph', {
-      fetch,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-      body: new URLSearchParams({ graph: JSON.stringify(constructWorkflowData()) })
-      //body: new URLSearchParams({'graph': requestData})
+      headers: {
+        Accept: '*/*',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: { graph: json },
+      bodySerializer: (x) => new URLSearchParams(x)
     });
 
     console.log(checkGraphResult);

@@ -133,7 +133,7 @@
         ])
       ),
       _frames: wfData._frames // changing frames is not yet supported
-    };
+    } as Workflow['data'];
   }
 
   // check graph every 10 seconds (like in the original MISP)
@@ -147,7 +147,7 @@
   including an interactive node-based diagram for visualization.
 -->
 <div class="flex flex-row h-full">
-  <div class="flex flex-col gap-1 max-w-md">
+  <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}
       <div class="flex-row basis-full">
         <DynCard header={infoHeader} data={workflow} />
