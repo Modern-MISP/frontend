@@ -7,6 +7,7 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 export const load = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
@@ -71,6 +72,17 @@ export const load = async ({ params, fetch }) => {
           href: x.Server?.url ?? '#',
           target: '_blank' as const,
           text: x.Server?.url ?? 'unknown'
+        }
+      })
+    }),
+    col({
+      key: 'cache_timestamp',
+      label: 'Cache date',
+      value: (x) => ({
+        display: DatePill,
+        props: {
+          date: x.Server?.cache_timestamp ? new Date(+x.Server.cache_timestamp * 1000) : null,
+          onNullText: 'unknown'
         }
       })
     }),

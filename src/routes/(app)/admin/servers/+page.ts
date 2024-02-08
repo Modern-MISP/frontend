@@ -180,56 +180,66 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Sync with local events',
       icon: 'mdi:sync',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. Sync all: ' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Pull all',
       icon: 'mdi:download',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. Pull all: ' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Push all',
       icon: 'mdi:upload',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. Push all: ' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Cache instance',
       icon: 'octicon:cache-16',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        Promise.all(
+          x
+            .map((y) => y.Server?.id)
+            .map((serverId) =>
+              // @ts-expect-error Not in the OpenAPI spec.. great. Don't even know if the endpoint works...
+              POST('/servers/cache/{serverId}', {
+                fetch,
+                params: { path: { serverId: serverId as string } }
+              })
+            )
+        ).then(invalidateAll);
       }
     },
     {
       label: 'Increase priority',
       icon: 'iconoir:priority-up',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. increase prio:' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Decrease priority',
       icon: 'iconoir:priority-down',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. decrease prio: ' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Test connection',
       icon: 'mdi:connection',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. test connection: ' + x.map((y) => y.Server?.id).join());
       }
     },
     {
       label: 'Reset api key',
       icon: 'fluent:key-reset-20-regular',
       action: (x) => {
-        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+        alert('Do not know the endpoint. reset api key: ' + x.map((y) => y.Server?.id).join());
       }
     }
   ];
