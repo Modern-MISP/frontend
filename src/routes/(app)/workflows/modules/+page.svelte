@@ -9,6 +9,4 @@
   
   A list of all workflow modules except triggers.
 -->
-<ComplexTableLayout {...data} topMenuActions={[]} filter={[]}>
-  <div slot="pagination"></div>
-</ComplexTableLayout>
+<ComplexTableLayout {...data} topMenuActions={[]} filter={[]} pagination={false} />

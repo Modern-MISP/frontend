@@ -10,6 +10,4 @@
   
   A list of all workflow triggers.
 -->
-<ComplexTableLayout {...data} topMenuActions={[]} filter={[]}>
-  <div slot="pagination"></div>
-</ComplexTableLayout>
+<ComplexTableLayout {...data} topMenuActions={[]} filter={[]} pagination={false} />
