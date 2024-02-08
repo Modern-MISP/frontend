@@ -2,15 +2,16 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { type Node, useSvelteFlow } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
-  import { objectFromEntries } from 'ts-extras';
   import ModuleInfo from './ModuleInfo.svelte';
   import { mode } from '$lib/stores';
   import Card from '$lib/components/card/Card.svelte';
   import ModuleCard from './ModuleCard.svelte';
   import { fly } from 'svelte/transition';
   import type { Module } from '../modules/module';
-  import type { ModuleNode, ModuleNodeData, Workflow } from '../workflow';
-  import { generateFlowContent, updateFrame } from './utils';
+  import type { ModuleNodeData, Workflow } from '../workflow';
+  import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
+  import { mapValues } from 'lodash-es';
+  import { writable } from 'svelte/store';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -23,7 +24,9 @@
 
   console.log(workflow);
 
-  const { nodes, edges } = generateFlowContent(wfData, onNodeUpdate);
+  const _generatedFlowContent = generateFlowContent(wfData, onNodeUpdate);
+  const nodes = writable(_generatedFlowContent.nodes);
+  const edges = writable(_generatedFlowContent.edges);
 
   for (const frame of Object.values(wfData._frames ?? {})) {
     const node = {
@@ -118,26 +121,8 @@
     $nodes = $nodes;
   }
 
-  /** Turn the current flow back into API-accepted JSON. */
-  function constructWorkflowData(): Workflow['data'] {
-    return {
-      ...objectFromEntries(
-        $nodes.map((node) => [
-          node.id,
-          {
-            ...wfData[node.id],
-            data: node.data.moduleData,
-            pos_x: node.position.x,
-            pos_y: node.position.y
-          } as ModuleNode
-        ])
-      ),
-      _frames: wfData._frames // changing frames is not yet supported
-    } as Workflow['data'];
-  }
-
   // check graph every 10 seconds (like in the original MISP)
-  setTimeout(checkGraph, 10000, constructWorkflowData);
+  setTimeout(checkGraph, 10000, () => constructWorkflowData(wfData, $nodes, $edges));
 </script>
 
 <!--

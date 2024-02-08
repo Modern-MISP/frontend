@@ -9,10 +9,12 @@ export type Workflow = {
   timestamp?: string;
   enabled?: boolean;
   debug_enabled?: boolean;
-  data?: Record<string | number, ModuleNode> & Frames;
+  data?: WorkflowData;
   listening_triggers?: Array<Trigger>;
   trigger_id?: string;
 };
+
+export type WorkflowData = Record<string | number, ModuleNode> & Frames;
 
 type Frames = {
   _frames:

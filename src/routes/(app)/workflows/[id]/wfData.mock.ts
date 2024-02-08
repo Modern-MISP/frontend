@@ -1,4 +1,148 @@
-export const wfData = {
+import type { WorkflowData } from '../workflow';
+
+export const wfData: WorkflowData = {
+  '1': {
+    id: 1,
+    name: 'Attribute After Save',
+    data: {
+      id: 'attribute-after-save',
+      scope: 'attribute',
+      name: 'Attribute After Save',
+      description: 'This trigger is called after an Attribute has been saved in the database',
+      icon: 'cube',
+      inputs: 0,
+      outputs: 1,
+      blocking: false,
+      misp_core_format: true,
+      trigger_overhead: 3,
+      trigger_overhead_message:
+        'This trigger is called each time an Attribute has been saved. This means that when a large quantity of Attributes are being saved (e.g. Feed pulling or synchronisation), the workflow will be run for as many time as there are Attributes.',
+      is_misp_module: false,
+      is_custom: false,
+      expect_misp_core_format: false,
+      version: '0.1',
+      icon_class: '',
+      multiple_output_connection: false,
+      support_filters: false,
+      saved_filters: { selector: '', value: '', operator: '', path: '' },
+      module_type: 'trigger',
+      html_template: 'trigger',
+      disabled: true,
+      node_uid: '1i30429ggue7kmy',
+      indexed_params: [],
+      previous_module_version: '0.1',
+      module_version: '0.1'
+    },
+    class: 'block-type-trigger disabled',
+    typenode: false,
+    inputs: [],
+    outputs: { output_1: { connections: [{ node: '2', output: 'input_1' }] } },
+    pos_x: -639,
+    pos_y: 173.379263516833
+  },
+  '2': {
+    id: 2,
+    name: 'Attribute comment operation',
+    data: {
+      node_uid: '1ib0fwu0zk3mvx',
+      indexed_params: [],
+      saved_filters: { selector: '', value: 'tlp:white', operator: 'in', path: '' },
+      module_type: 'action',
+      id: 'Module_attribute_comment_operation',
+      name: 'Attribute comment operation',
+      multiple_output_connection: false,
+      previous_module_version: '0.1',
+      module_version: '0.1'
+    },
+    class: 'block-type-default expect-misp-core-format',
+    typenode: false,
+    inputs: { input_1: { connections: [{ node: '1', input: 'output_1' }] } },
+    outputs: { output_1: { connections: [{ node: '6', output: 'input_1' }] } },
+    pos_x: -158,
+    pos_y: 85.37926351683298
+  },
+  '4': {
+    id: 4,
+    name: 'Enrich Event',
+    data: {
+      node_uid: '1ie0l5c58gjkzi',
+      indexed_params: { modules: 'circl_passivessl' },
+      saved_filters: { selector: '', value: '', operator: 'not_in', path: 'Tag.{n}.Name' },
+      module_type: 'action',
+      id: 'enrich-event',
+      name: 'Enrich Event',
+      multiple_output_connection: false,
+      previous_module_version: '0.2',
+      module_version: '0.2'
+    },
+    class: 'block-type-default expect-misp-core-format',
+    typenode: false,
+    inputs: { input_1: { connections: [{ node: '6', input: 'output_2' }] } },
+    outputs: { output_1: { connections: [] } },
+    pos_x: 771,
+    pos_y: 501
+  },
+  '6': {
+    id: 6,
+    name: 'IF :: Tag',
+    data: {
+      indexed_params: {
+        scope: 'event_attribute',
+        condition: 'in_or',
+        tags: ['cossi:TLP="white"'],
+        clusters: ['tea-matrix="Milk in tea"']
+      },
+      saved_filters: { selector: '', value: '', operator: '', path: '' },
+      node_uid: '1in0f6urd6ro4pe',
+      module_type: 'logic',
+      id: 'tag-if',
+      name: 'IF :: Tag',
+      multiple_output_connection: false,
+      previous_module_version: '0.4',
+      module_version: '0.4'
+    },
+    class: 'block-type-if block-type-logic expect-misp-core-format disabled',
+    typenode: false,
+    inputs: { input_1: { connections: [{ node: '2', input: 'output_1' }] } },
+    outputs: {
+      output_1: { connections: [{ node: '7', output: 'input_1' }] },
+      output_2: { connections: [{ node: '4', output: 'input_1' }] }
+    },
+    pos_x: 275,
+    pos_y: 25
+  },
+  '7': {
+    id: 7,
+    name: 'Stop execution',
+    data: {
+      indexed_params: [],
+      saved_filters: { selector: '', value: '', operator: '', path: '' },
+      node_uid: '1o505mytzgdetsh',
+      module_type: 'action',
+      id: 'stop-execution',
+      name: 'Stop execution',
+      multiple_output_connection: false,
+      previous_module_version: '0.1',
+      module_version: '0.1'
+    },
+    class: 'block-type-default disabled',
+    typenode: false,
+    inputs: { input_1: { connections: [{ node: '6', input: 'output_1' }] } },
+    outputs: [],
+    pos_x: 796.379263516833,
+    pos_y: 11.379263516832985
+  },
+  _frames: {
+    'a0b1859d-1a7a-41b9-a848-3d00501a031e': {
+      id: 'a0b1859d-1a7a-41b9-a848-3d00501a031e',
+      text: 'PAP:RED and tlp:red Blocking',
+      nodes: ['6', '7'],
+      class: ''
+    }
+  }
+};
+
+export const resultWfData = {
   '1': {
     id: 1,
     name: 'Attribute+After+Save',

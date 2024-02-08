@@ -1,12 +1,8 @@
 import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
-import { objectEntries } from 'ts-extras';
-import type { Workflow } from '../workflow';
-import { writable } from 'svelte/store';
+import { objectEntries, objectFromEntries } from 'ts-extras';
+import type { ModuleNode, WorkflowData } from '../workflow';
 
-export function generateFlowContent(
-  wfData: NonNullable<Workflow['data']>,
-  onNodeUpdate: (id: string) => void
-) {
+export function generateFlowContent(wfData: WorkflowData, onNodeUpdate: (id: string) => void) {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
@@ -38,7 +34,7 @@ export function generateFlowContent(
       }
     }
   }
-  return { nodes: writable(nodes), edges: writable(edges) };
+  return { nodes, edges };
 }
 
 /**
@@ -59,4 +55,26 @@ export function updateFrame(nodes: Node[], frame: Node): [string, Node] {
   frame.width = bounds.width + 2 * padding;
   frame.height = bounds.height + 2 * padding + additionalLabelPadding;
   return [frame.id, frame];
+}
+
+/** Turn the current flow back into API-accepted JSON. */
+export function constructWorkflowData(
+  wfData: WorkflowData,
+  nodes: Node[],
+  edges: Edge[]
+): WorkflowData {
+  return {
+    ...objectFromEntries(
+      nodes.map((node) => [
+        node.id,
+        {
+          ...wfData[node.id],
+          data: node.data.moduleData,
+          pos_x: node.position.x,
+          pos_y: node.position.y
+        } as ModuleNode
+      ])
+    ),
+    _frames: wfData._frames // changing frames is not yet supported
+  };
 }
