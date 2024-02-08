@@ -1,4 +1,4 @@
-import { GET } from '$lib/api';
+import { GET, POST } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -6,14 +6,14 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import type { Module } from './module';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { invalidateAll } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
   const getResult = await GET('/workflows/moduleIndex/type:all', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Module[];
-
-  console.log(data);
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -79,9 +79,57 @@ export const load: PageLoad = async ({ fetch }) => {
 
   if (!data) error(500, 'No data returned');
 
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Enable',
+      icon: 'mdi:check',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to enable the following modules?\n${x.map((x) => x.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x.map((module) =>
+              // @ts-expect-error Not in the OpenAPI spec
+              POST('/workflows/toggleModule/{moduleId}/1', {
+                fetch,
+                params: { path: { moduleId: module.id } }
+              })
+            )
+          ).then(invalidateAll);
+        }
+      }
+    },
+    {
+      label: 'Disable',
+      icon: 'mdi:close',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to disable the following modules?\n${x.map((x) => x.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x.map((module) =>
+              // @ts-expect-error Not in the OpenAPI spec
+              POST('/workflows/toggleModule/{moduleId}/0', {
+                fetch,
+                params: { path: { moduleId: module.id } }
+              })
+            )
+          ).then(invalidateAll);
+        }
+      }
+    }
+  ];
+
   return {
     data,
     tableData: data,
-    header
+    header,
+    editActions
   };
 };

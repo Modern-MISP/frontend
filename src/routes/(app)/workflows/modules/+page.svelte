@@ -1,9 +1,12 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   export let data;
-
-  const { tableData, header } = data;
 </script>
 
-<DynTable href={({ id }) => `/workflows/modules/${id}`} {header} data={tableData} />
+<!--
+  @component
+  
+  A list of all workflow modules except triggers.
+-->
+<ComplexTableLayout {...data} topMenuActions={[]} filter={[]} pagination={false} />
