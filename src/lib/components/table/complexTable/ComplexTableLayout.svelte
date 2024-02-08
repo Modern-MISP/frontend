@@ -135,6 +135,7 @@
     {#if filter.length > 0 && filterOpen}
       <Filter header={filter} bind:currentFilter />
     {/if}
+    <slot name="added" />
   </slot>
 </div>
 
