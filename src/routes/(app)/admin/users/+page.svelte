@@ -14,7 +14,7 @@
 <ComplexTableLayout
   endpoint={(x) => {
     // @ts-expect-error Not in the OpenAPI spec.. great. AND not even implemented wtf...
-    return POST('/admin/users', { body: x });
+    return POST('/admin/users/index', { body: x });
   }}
   {...data}
   pagination={false}

@@ -31,4 +31,4 @@ const api = {
 };
 
 if (PUBLIC_REST_DISABLED) api.disableRESTMethods(JSON.parse(PUBLIC_REST_DISABLED));
-export const { GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE } = api;
+export const { GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE, DELETE } = api;

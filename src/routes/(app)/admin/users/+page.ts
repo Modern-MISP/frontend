@@ -1,15 +1,16 @@
-import { GET } from '$lib/api';
+import { invalidateAll } from '$app/navigation';
+import { DELETE, GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/admin/users', { fetch });
@@ -104,14 +105,22 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Enable User',
       icon: 'mdi:account-lock-open-outline',
       action: (x) => {
-        alert('Enable' + x.map((y) => y.User?.id).join());
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.User?.id).join());
       }
     },
     {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
-        alert('Disable' + x.map((y) => y.User?.id).join());
+        alert('Do not know the endpoint. Disable' + x.map((y) => y.User?.id).join());
+        // Promise.all(
+        //   x
+        //     .map((y) => y.User?.id)
+        //     .map((userId) =>
+        //       // @ts-expect-error Does this endpoint even exist?
+        //       PUT('/admin/users/disable/{userId}', { fetch, params: { path: { userId } } })
+        //     )
+        // ).then(invalidateAll);
       }
     },
     {
@@ -119,21 +128,30 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        alert('Delete' + x.map((y) => y.User?.id).join());
+        Promise.all(
+          x
+            .map((y) => y.User?.id)
+            .map((userId) =>
+              DELETE('/admin/users/delete/{userId}', {
+                fetch,
+                params: { path: { userId: userId as string } }
+              })
+            )
+        ).then(invalidateAll);
       }
     },
     {
       label: 'Send Email Publish',
       icon: 'icon-park-outline:send-email',
       action: (x) => {
-        alert('Send email publish' + x.map((y) => y.User?.id).join());
+        alert('Do not know the endpoint. Send email publish' + x.map((y) => y.User?.id).join());
       }
     },
     {
       label: 'Disable Email Publish',
       icon: 'mdi:email-lock-outline',
       action: (x) => {
-        alert('Disable email publish' + x.map((y) => y.User?.id).join());
+        alert('Do not know the endpoint. Disable email publish' + x.map((y) => y.User?.id).join());
       }
     }
   ];
