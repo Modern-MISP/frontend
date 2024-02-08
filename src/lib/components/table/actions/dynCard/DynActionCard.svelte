@@ -19,10 +19,12 @@
   export { clazz as class };
 </script>
 
-<ActionCard class="{clazz} gap-4 ">
-  <slot />
-  {#each header as props}
-    <CallbackEntry {...props} action={() => props.action(data)} class="w-max {props.class}"
-    ></CallbackEntry>
-  {/each}
-</ActionCard>
+{#if header.length > 0}
+  <ActionCard class="{clazz} gap-4 ">
+    <slot />
+    {#each header as props}
+      <CallbackEntry {...props} action={() => props.action(data)} class="w-max {props.class}"
+      ></CallbackEntry>
+    {/each}
+  </ActionCard>
+{/if}

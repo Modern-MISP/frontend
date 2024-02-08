@@ -6,10 +6,28 @@
   import CallbackEntry from '$lib/components/menus/topmenu/actionbar/CallbackEntry.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import { mode } from '$lib/stores';
+  import { POST } from '$lib/api/index.js';
 
   export let data;
+  $: ({ tableData, header } = data);
 
-  const { tableData, header } = data;
+  const loadMore = async (bodyOptions: Record<string, unknown>) => {
+    const {
+      data: _data,
+      error: mispError,
+      response
+    } = await POST('/auth_keys', { body: { limit: 50, ...bodyOptions } });
+
+    if (mispError) {
+      console.error(mispError);
+      alert('Error fetching more data');
+    }
+
+    if (response.ok && _data) {
+      tableData = _data;
+    }
+  };
+
   const actions: ActionBarEntryProps[] = [
     {
       icon: 'mdi:key-add',

@@ -5,16 +5,17 @@ import type { PageLoad } from './$types';
 
 import type { components } from '$lib/api/misp';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import { DATE_FORMAT } from '$lib/components/config';
 import InputCollection from '$lib/components/filter/InputCollection.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import { format } from 'date-fns';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -125,7 +126,6 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.attribute_count } })
     }),
 
-    // TODO: probably use DatePills
     col({
       icon: 'mdi:clock-outline',
       key: 'dates',
@@ -133,22 +133,20 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({
         display: PillCollection,
         props: {
+          base: DatePill,
           pills: [
             {
               label: 'created',
-              text: format(x.date ? new Date(x.date) : new Date(), DATE_FORMAT)
+              date: x.date ? new Date(x.date) : new Date()
             },
 
             {
               label: 'modified',
-              text: format(x.timestamp ? new Date(+x.timestamp * 1000) : new Date(), DATE_FORMAT)
+              date: x.timestamp ? new Date(+x.timestamp * 1000) : new Date()
             },
             {
               label: 'published',
-              text: format(
-                x.publish_timestamp ? new Date(+x.publish_timestamp * 1000) : new Date(),
-                DATE_FORMAT
-              )
+              date: x.publish_timestamp ? new Date(+x.publish_timestamp * 1000) : new Date()
             }
           ]
         }
@@ -200,10 +198,30 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     })
   ];
+  const topMenuActions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:event-add',
+      label: 'Add Event',
+      action: '/events/new'
+    }
+  ];
+
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Delete event',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        alert('Delete' + x.map((y) => y.id));
+      }
+    }
+  ];
 
   return {
     header,
     tableData: data,
-    filter
+    filter,
+    topMenuActions,
+    editActions
   };
 };

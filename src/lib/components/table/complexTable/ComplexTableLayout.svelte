@@ -1,0 +1,135 @@
+<script lang="ts" generics="T extends IRecord">
+  import { page } from '$app/stores';
+
+  import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+
+  import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+
+  import type { TableHead } from '$lib/models/TableHead.interface';
+
+  import type { Readable } from 'svelte/store';
+
+  import FilterCard from '$lib/components/table/actions/filterCard/FilterCard.svelte';
+
+  import { actionBar } from '$lib/actions';
+  import { GET, POST } from '$lib/api';
+  import Pagination from '$lib/components/pagination/Pagination.svelte';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+
+  import DynActionCard from '$lib/components/table/actions/dynCard/DynActionCard.svelte';
+  import SelectionCard from '$lib/components/table/actions/selectionCard/SelectionCard.svelte';
+
+  import Filter from '$lib/components/filter/Filter.svelte';
+  import { mode } from '$lib/stores';
+  import { merge } from 'lodash-es';
+
+  /**
+   * Your initial data
+   */
+  export let tableData: T[];
+  /**
+   * Your table header. {@link DynTable.header}
+   */
+  export let header: Readable<TableHead<T> & DynTableHeadExtent>[];
+  /**
+   * Your filter header. {@link Filter.header }
+   */
+  export let filter: Readable<TableHead<undefined>>[];
+
+  /**
+   * Your edit actions. {@link DynActionCard.header}
+   */
+  export let editActions: DynCardActionHeader<T[]>[];
+
+  /**
+   * Your top menu actions. {@link actionBar}
+   */
+  export let topMenuActions: ActionBarEntryProps[];
+
+  /**
+   * Do you want to include pagination in the request and in the page. Default: true
+   */
+  export let pagination = true;
+
+  /**
+   * The href where the use will be navigated, if clicked on an row {@see DynTable.href}
+   * @param row The row the user clicked. Defaults to the id. You should define this, if your data does not include an id.
+   * @param row.id Defaults to the id of the row
+   * @returns The href th user will be navigate to
+   */
+  export let tableHref: ((row: T) => string | undefined) | undefined = ({ id }) =>
+    `${$page.url}/${id}`;
+
+  /**
+   * The endpoint where the requests will be sent to.
+   */
+  export let endpoint: (body: Record<string, unknown>) => ReturnType<typeof POST | typeof GET>;
+
+  const loadMore = async (bodyOptions: Record<string, unknown>) => {
+    const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
+
+    if (mispError) {
+      console.error(mispError);
+      alert('Error fetching more data');
+    }
+
+    if (response.ok && _data) {
+      tableData = _data as T[];
+    }
+  };
+
+  $: pagPage = 1;
+
+  $: loadMore({ ...merge({}, ...currentFilter, pagination ? { page: pagPage } : {}) });
+
+  let filterOpen = false;
+  let currentFilter: Record<string, string>[] = [];
+
+  let activeRows: typeof tableData = [];
+</script>
+
+<svelte:window use:actionBar={topMenuActions} />
+
+<div class="flex gap-4">
+  <slot name="filter">
+    {#if filter.length > 0}
+      <FilterCard bind:currentFilter bind:filterOpen></FilterCard>
+    {/if}
+  </slot>
+  <slot name="actionList">
+    {#if $mode === 'edit'}
+      <SelectionCard
+        numSelected={activeRows.length}
+        selectAll={() => (activeRows = tableData)}
+        unselectAll={() => (activeRows = [])}
+      />
+      <slot name="editActions">
+        <DynActionCard header={editActions} data={activeRows}></DynActionCard>
+      </slot>
+    {/if}
+  </slot>
+  <slot name="moreActions" />
+</div>
+<div class="relative flex h-full overflow-hidden">
+  <slot>
+    <DynTable
+      href={tableHref}
+      {header}
+      data={tableData}
+      selectMode={$mode === 'edit'}
+      bind:activeRows
+    />
+
+    {#if filter.length > 0 && filterOpen}
+      <Filter header={filter} bind:currentFilter />
+    {/if}
+  </slot>
+</div>
+
+{#if pagination}
+  <slot name="pagination">
+    <Pagination bind:page={pagPage} />
+  </slot>
+{/if}
