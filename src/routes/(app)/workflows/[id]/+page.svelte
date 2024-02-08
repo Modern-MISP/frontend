@@ -1,59 +1,29 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { writable, type Writable } from 'svelte/store';
-  import { type Node, type Edge, getNodesBounds, useSvelteFlow } from '@xyflow/svelte';
+  import { type Node, useSvelteFlow } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
-  import type { Trigger, ModuleNodeData } from '../triggers/trigger.js';
-  import { objectEntries } from 'ts-extras';
+  import { objectFromEntries } from 'ts-extras';
   import ModuleInfo from './ModuleInfo.svelte';
-  import { mode } from '$lib/stores.js';
+  import { mode } from '$lib/stores';
   import Card from '$lib/components/card/Card.svelte';
   import ModuleCard from './ModuleCard.svelte';
   import { fly } from 'svelte/transition';
-  import type { Module } from '../modules/module.js';
+  import type { Module } from '../modules/module';
+  import type { ModuleNode, ModuleNodeData, Workflow } from '../workflow';
+  import { generateFlowContent, updateFrame } from './utils';
 
   /** The data that will be displayed on this page. */
   export let data;
 
   const svelteFlow = useSvelteFlow();
 
-  const { infoHeader, moduleData } = data;
-  const workflow = (data.workflow as Trigger['Workflow'])!;
+  const { infoHeader, moduleData, checkGraph } = data;
+  const workflow = (data.workflow as Workflow)!;
   const wfData = workflow.data!;
 
   console.log(workflow);
 
-  const nodes: Writable<Node[]> = writable([]);
-  const edges: Writable<Edge[]> = writable([]);
-
-  for (const [, module] of objectEntries(wfData).filter(([key]) => key !== '_frames')) {
-    $nodes.push({
-      id: `${module.id}`,
-      type: module.data.module_type, // 'trigger' or 'action'
-      data: {
-        inputs: Object.keys(module.inputs),
-        outputs: Object.keys(module.outputs),
-        moduleData: module.data,
-        onUpdate: onNodeUpdate
-      },
-      position: { x: module.pos_x, y: module.pos_y }
-    });
-    // create input edges for this module
-    for (const [inputName, input] of Object.entries(module.inputs)) {
-      for (const connection of input.connections ?? []) {
-        $edges.push({
-          id: `${connection.node}-${module.id}`,
-          type: 'default',
-          source: connection.node,
-          sourceHandle: connection.input,
-          target: `${module.id}`,
-          targetHandle: inputName,
-          animated: true,
-          style: 'stroke-width: 4px'
-        });
-      }
-    }
-  }
+  const { nodes, edges } = generateFlowContent(wfData, onNodeUpdate);
 
   for (const frame of Object.values(wfData._frames ?? {})) {
     const node = {
@@ -68,24 +38,10 @@
     $nodes.push(node);
   }
 
-  function updateFrame(frame: Node) {
-    const padding = 20;
-    const additionalLabelPadding = 30;
-
-    const children = $nodes.filter((n) => frame.data.nodes.includes(n.id));
-    const bounds = getNodesBounds(children);
-
-    frame.position.x = bounds.x - padding;
-    frame.position.y = bounds.y - padding - additionalLabelPadding;
-    frame.width = bounds.width + 2 * padding;
-    frame.height = bounds.height + 2 * padding + additionalLabelPadding;
-    svelteFlow.updateNode(frame.id, frame);
-  }
-
   async function onNodeUpdate(nodeId: string) {
     $nodes.forEach((frameNode) => {
       if (frameNode.type === 'frame' && frameNode.data.nodes.includes(nodeId)) {
-        updateFrame(frameNode);
+        svelteFlow.updateNode(...updateFrame($nodes, frameNode));
       }
     });
   }
@@ -110,7 +66,13 @@
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
   // or when adding the frames in the first place, but apparently it works.
   // TODO: (Optional) Find out why this happens?
-  setTimeout(() => $nodes.filter((n) => n.type === 'frame').forEach(updateFrame), 1000);
+  setTimeout(
+    () =>
+      $nodes
+        .filter((n) => n.type === 'frame')
+        .forEach((n) => svelteFlow.updateNode(...updateFrame($nodes, n))),
+    1000
+  );
 
   function onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -155,6 +117,27 @@
     $nodes.push(newNode);
     $nodes = $nodes;
   }
+
+  /** Turn the current flow back into API-accepted JSON. */
+  function constructWorkflowData(): Workflow['data'] {
+    return {
+      ...objectFromEntries(
+        $nodes.map((node) => [
+          node.id,
+          {
+            ...wfData[node.id],
+            data: node.data.moduleData,
+            pos_x: node.position.x,
+            pos_y: node.position.y
+          } as ModuleNode
+        ])
+      ),
+      _frames: wfData._frames // changing frames is not yet supported
+    };
+  }
+
+  // check graph every 10 seconds (like in the original MISP)
+  setTimeout(checkGraph, 10000, constructWorkflowData);
 </script>
 
 <!--
