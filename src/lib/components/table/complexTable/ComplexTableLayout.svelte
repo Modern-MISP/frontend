@@ -65,9 +65,12 @@
   /**
    * The endpoint where the requests will be sent to.
    */
-  export let endpoint: (body: Record<string, unknown>) => ReturnType<typeof POST | typeof GET>;
+  export let endpoint:
+    | ((body: Record<string, unknown>) => ReturnType<typeof POST | typeof GET>)
+    | undefined = undefined;
 
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
+    if (!endpoint) return;
     const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
 
     if (mispError) {
@@ -88,6 +91,13 @@
   let currentFilter: Record<string, string>[] = [];
 
   let activeRows: typeof tableData = [];
+
+  // Reset selected rows, if tableData changed
+  let lastTableData: typeof tableData = [];
+  $: if (tableData !== lastTableData) {
+    lastTableData = tableData;
+    activeRows = [];
+  }
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
