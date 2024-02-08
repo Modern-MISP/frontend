@@ -1,12 +1,15 @@
-import { GET } from '$lib/api';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { GET, POST } from '$lib/api';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
+import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
@@ -147,9 +150,94 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const topMenuActions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:server-add',
+      label: 'Add Server',
+      action: '/admin/servers/new'
+    }
+  ];
+
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Delete Server',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        Promise.all(
+          x
+            .map((y) => y.Server?.id)
+            .map((serverId) =>
+              POST('/servers/delete/{serverId}', {
+                fetch,
+                params: { path: { serverId: serverId as string } }
+              })
+            )
+        ).then(invalidateAll);
+      }
+    },
+    {
+      label: 'Sync with local events',
+      icon: 'mdi:sync',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Pull all',
+      icon: 'mdi:download',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Push all',
+      icon: 'mdi:upload',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Cache instance',
+      icon: 'octicon:cache-16',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Increase priority',
+      icon: 'iconoir:priority-up',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Decrease priority',
+      icon: 'iconoir:priority-down',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Test connection',
+      icon: 'mdi:connection',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    },
+    {
+      label: 'Reset api key',
+      icon: 'fluent:key-reset-20-regular',
+      action: (x) => {
+        alert('Do not know the endpoint. Enable' + x.map((y) => y.Server?.id).join());
+      }
+    }
+  ];
   return {
     data,
     tableData: data,
-    header
+    header,
+    topMenuActions,
+    editActions
   };
 };
