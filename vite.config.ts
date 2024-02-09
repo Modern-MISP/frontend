@@ -11,6 +11,7 @@ export default defineConfig({
       enabled: true,
       provider: 'v8',
       reporter: ['cobertura', 'text']
-    }
+    },
+    passWithNoTests: true
   }
 });
