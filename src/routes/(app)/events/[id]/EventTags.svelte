@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { PageData } from './$types';
   import Card from '$lib/components/card/Card.svelte';
-  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-  import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
-  import { mode } from '$lib/stores';
-  import Icon from '@iconify/svelte';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import { mode } from '$lib/stores';
+  import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+  import Icon from '@iconify/svelte';
+  import type { PageData } from './$types';
 
   /**
    * The Page data.
@@ -16,6 +17,11 @@
    * The current mode of the page.
    */
   export let addTag = false;
+
+  /**
+   * The currently selected pills
+   */
+  export let selection: PickerPill[] = [];
 </script>
 
 <Card class="w-full ">
@@ -47,4 +53,10 @@
       enforceTextColor: false
     }))}
   />
+  {#if addTag}
+    <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
+      <h3>Those tags will be added:</h3>
+      <PillCollection pills={selection}></PillCollection>
+    </div>
+  {/if}
 </Card>
