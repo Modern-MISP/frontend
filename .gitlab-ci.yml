@@ -71,10 +71,14 @@ docs:
 unit_tests:
   stage: test
   script:
-    - npx vitest run --reporter junit --outputFile report.xml
+    - npx vitest run
+  coverage: /All files[^|]*\|[^|]*\|\s+([\d\.]+)/
   artifacts:
     reports:
       junit: report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
 
 eslint:
   stage: test
