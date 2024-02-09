@@ -10,7 +10,9 @@ stages:
 default:
   tags:
     - kit-intranet # Tag is required to make the CI runner accept the jobs
-  image: node:latest
+  image:
+    name: node:latest
+    pull_policy: if-not-present
 
 workflow:
   rules:
