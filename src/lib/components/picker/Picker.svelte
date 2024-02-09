@@ -101,7 +101,11 @@
           {#if !disabled}
             <button
               on:click={() =>
-                ([pickedItems, pickableItems] = removeFromAddToIndex(pickedItems, pickableItems, i))}
+                ([pickedItems, pickableItems] = removeFromAddToIndex(
+                  pickedItems,
+                  pickableItems,
+                  i
+                ))}
               class="justify-center align-middle hover:text-red shrink-0"
             >
               <Icon icon="mdi:close-circle-outline" />

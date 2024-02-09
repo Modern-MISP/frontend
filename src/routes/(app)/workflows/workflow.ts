@@ -1,3 +1,4 @@
+import type { Module } from './modules/module';
 import type { Trigger } from './triggers/trigger';
 
 export type Workflow = {
@@ -14,7 +15,10 @@ export type Workflow = {
   trigger_id?: string;
 };
 
-export type WorkflowData = Record<string | number, ModuleNode> & Frames;
+export type WorkflowData = {
+  [key: string | number]: ModuleNode;
+  _frames: Frames['_frames'];
+};
 
 type Frames = {
   _frames:
@@ -54,15 +58,17 @@ type Outputs =
 
 export type ModuleNodeData = {
   id: string;
-  indexed_params: [];
+  indexed_params: [] | Record<string, string | string[]>;
   module_type: string;
   module_version?: string;
   multiple_output_connection: boolean;
+  is_misp_module?: boolean;
   name: string;
   node_uid: string;
   previous_module_version: string;
   saved_filters: object;
-};
+} & Module &
+  Trigger;
 
 export type ModuleNode = {
   id: number;
