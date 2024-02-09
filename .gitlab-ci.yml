@@ -10,7 +10,9 @@ stages:
 default:
   tags:
     - kit-intranet # Tag is required to make the CI runner accept the jobs
-  image: node:latest
+  image:
+    name: node:latest
+    pull_policy: if-not-present
 
 workflow:
   rules:
@@ -79,6 +81,13 @@ unit_tests:
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+
+prettier:
+  stage: test
+  script:
+    - npx prettier --check .
+  dependencies:
+    - install_dependencies
 
 eslint:
   stage: test
