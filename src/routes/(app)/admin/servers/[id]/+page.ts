@@ -1,3 +1,4 @@
+import { genSelectProps } from '$lib/util/select.util';
 import { GET } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { filter } from 'lodash-es';
@@ -9,6 +10,7 @@ import Input from '$lib/components/input/Input.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
 
 export const load = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await GET('/servers', { fetch });
@@ -18,6 +20,9 @@ export const load = async ({ params, fetch }) => {
   const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
   console.log(server);
   const col = createTableHeadGenerator<typeof server>();
+
+  const { data: orgs } = await GET('/organisations', { fetch });
+  const orgOptions = orgs?.map((x) => x.Organisation);
 
   const left = [
     col({
@@ -59,8 +64,13 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        //TODO: search if valid org?
-        value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
+        value: () => ({
+          display: Select,
+          props: {
+            ...genSelectProps(orgOptions),
+            name: 'org_id'
+          }
+        })
       }
     ),
     col(
@@ -76,7 +86,7 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        //TODO: search if valid org?
+        //TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
         value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
       }
     ),
