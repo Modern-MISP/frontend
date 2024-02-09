@@ -1,8 +1,8 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
-  import Pill from '../pills/pill/Pill.svelte';
-  import type { ComponentProps } from 'svelte';
   import { remove, sortBy } from 'lodash-es';
+  import type { ComponentProps } from 'svelte';
+  import Pill from '../pills/pill/Pill.svelte';
 
   type PickerPill = ComponentProps<Pill> & { value?: string };
 
@@ -10,6 +10,7 @@
   export let pickedItems: PickerPill[] = [];
   /** The items that can be picked. */
   export let pickableItems: PickerPill[] = [];
+
   /**
    * Placeholder of the input.
    */
@@ -91,6 +92,7 @@
             {props.text?.trim()}
           </span>
           <button
+            type="button"
             on:click={() =>
               ([pickedItems, pickableItems] = removeFromAddToIndex(pickedItems, pickableItems, i))}
             class="justify-center align-middle hover:text-red shrink-0"
