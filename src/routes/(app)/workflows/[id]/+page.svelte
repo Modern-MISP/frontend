@@ -144,8 +144,11 @@
     }
   }
 
-  // check graph every 10 seconds (like in the original MISP)
-  setInterval(applyGraphCheck, 15000);
+  // reactively check graph when edges change
+  $: {
+    $edges;
+    applyGraphCheck();
+  }
 </script>
 
 <!--
