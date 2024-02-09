@@ -11,6 +11,7 @@
   import type { ModuleNodeData, Workflow } from '../workflow';
   import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
   import { writable } from 'svelte/store';
+  import { objectEntries } from 'ts-extras';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -120,8 +121,31 @@
     $nodes = $nodes;
   }
 
+  async function applyGraphCheck() {
+    const checkResult = await checkGraph(() => constructWorkflowData(wfData, $nodes, $edges));
+    if (checkResult.multiple_output_connection.has_multiple_output_connection) {
+      const nodesWithBadEdges = checkResult.multiple_output_connection.edges;
+      if (Array.isArray(nodesWithBadEdges)) return;
+      for (const [sourceNode, targetNodes] of objectEntries(nodesWithBadEdges)) {
+        // need to use the svelteflow getter for edges to actually update
+        const badEdges = svelteFlow.getEdges(
+          $edges
+            .filter(
+              (e) =>
+                e.source === sourceNode && targetNodes.map((n) => n.toString()).includes(e.target)
+            )
+            .map((e) => e.id)
+        );
+        badEdges.forEach((e) => {
+          e.style = 'stroke: red; stroke-width: 4px;';
+          e.animated = false;
+        });
+      }
+    }
+  }
+
   // check graph every 10 seconds (like in the original MISP)
-  setTimeout(checkGraph, 10000, () => constructWorkflowData(wfData, $nodes, $edges));
+  setInterval(applyGraphCheck, 15000);
 </script>
 
 <!--

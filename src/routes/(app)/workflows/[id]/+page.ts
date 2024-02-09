@@ -99,9 +99,7 @@ export const load = async ({ params, fetch }) => {
       bodySerializer: (x) => new URLSearchParams(x)
     });
 
-    const checkGraphResult = checkGraphResponse.data as CheckGraphResult;
-
-    console.log(checkGraphResult);
+    return checkGraphResponse.data as CheckGraphResult;
   }
 
   return {

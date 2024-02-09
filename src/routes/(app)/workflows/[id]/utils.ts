@@ -70,17 +70,19 @@ export function constructWorkflowData(
 
   const constructedData = {
     ...objectFromEntries(
-      nodes.map((node) => [
-        node.id,
-        {
-          ...wfData[node.id],
-          data: node.data.moduleData,
-          pos_x: node.position.x,
-          pos_y: node.position.y,
-          inputs: removeConnections(wfData[node.id].inputs),
-          outputs: removeConnections(wfData[node.id].outputs)
-        } as ModuleNode
-      ])
+      nodes
+        .filter((node) => node.type !== 'frame')
+        .map((node) => [
+          node.id,
+          {
+            ...wfData[node.id],
+            data: node.data.moduleData,
+            pos_x: node.position.x,
+            pos_y: node.position.y,
+            inputs: removeConnections(wfData[node.id].inputs),
+            outputs: removeConnections(wfData[node.id].outputs)
+          } as ModuleNode
+        ])
     ),
     _frames: wfData._frames // changing frames is not yet supported
   } as WorkflowData;

@@ -86,7 +86,7 @@ export type CheckGraphResult = {
   is_acyclic: { is_acyclic: boolean; cycles: unknown[] };
   multiple_output_connection: {
     has_multiple_output_connection: boolean;
-    edges: unknown[];
+    edges: [] | Record<number, number[]>;
   };
   path_warnings: {
     has_path_warnings: boolean;
