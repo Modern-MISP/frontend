@@ -55,6 +55,9 @@
   on:nodeclick
   on:nodedrag
   on:paneclick
+  on:nodedragstop
+  on:nodecontextmenu
+  on:paneclick
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
