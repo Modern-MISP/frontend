@@ -150,7 +150,7 @@ export const load: PageLoad = async ({ fetch }) => {
       }
     },
     {
-      label: 'Send Email Publish',
+      label: 'Enable Email Publish',
       icon: 'icon-park-outline:send-email',
       action: (x) => {
         notifications.add(

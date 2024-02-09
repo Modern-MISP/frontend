@@ -113,7 +113,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'ph:hash-bold',
       key: 'ip_count',
-      label: 'Attr.',
+      label: 'Ip count',
       value: (x) => ({
         display: PillCollection,
         props: {
