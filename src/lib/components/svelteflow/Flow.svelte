@@ -6,7 +6,8 @@
     Controls,
     type Node,
     type Edge,
-    type DefaultEdgeOptions
+    type DefaultEdgeOptions,
+    type NodeTypes
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
   import { mode } from '$lib/stores';
@@ -19,11 +20,18 @@
   /** Edges that are rendered on the flow */
   export let edges: Writable<Edge[]>;
 
+  let additionalNodeTypes: NodeTypes | undefined = undefined;
+  /**
+   * Additional nodeTypes to pass to SvelteFlow.
+   */
+  export { additionalNodeTypes as nodeTypes };
+
   const nodeTypes = {
     trigger: ModuleNode,
     action: ModuleNode,
     logic: ModuleNode,
-    frame: FrameNode
+    frame: FrameNode,
+    ...additionalNodeTypes
   };
 
   /** Dimensions of the grid that nodes will snap onto */
@@ -53,6 +61,8 @@
   on:init
   on:nodeclick
   on:nodedrag
+  on:nodedragstop
+  on:nodecontextmenu
   on:paneclick
   on:dragover
   on:drop
