@@ -30,7 +30,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
   >();
 
   const left = [
-    col({
+    col(
+      {
         key: 'email',
         label: 'Name',
         value: (x) => x.User?.email ?? 'unknown'
@@ -72,7 +73,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
   ];
 
   const right = [
-    col({
+    col(
+      {
         key: 'disabled',
         label: 'Is enabled',
         value: (x) => ({ display: Boolean, props: { isTrue: !x.User?.disabled } })
@@ -84,7 +86,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col({
+    col(
+      {
         key: 'authkey',
         label: 'TOTP set',
         value: (x) => ({ display: Boolean, props: { isTrue: x.User?.authkey ?? false } })
@@ -92,11 +95,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
       {
         value: (x) => ({
           display: Checkbox,
-          props: { name: 'authkey', checked: x.User?.authkey ?? false }
+          props: { name: 'authkey', checked: x.User?.authkey !== '' ?? false }
         })
       }
     ),
-    col({
+    col(
+      {
         key: 'contactalert',
         label: 'Contact enables',
         value: (x) => ({ display: Boolean, props: { isTrue: x.User?.contactalert ?? false } })
@@ -108,7 +112,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col({
+    col(
+      {
         key: 'termsaccepted',
         label: 'Terms accepted',
         value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted ?? false } })
@@ -130,7 +135,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'Must change password',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.change_pw === '1' } })
     }),
-    col({
+    col(
+      {
         key: 'notification_daily',
         label: 'daily',
         value: (x) => ({ display: Boolean, props: { isTrue: x.User?.notification_daily ?? false } })
@@ -142,10 +148,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col({
+    col(
+      {
         key: 'notification_weekly',
         label: 'weekly',
-        value: (x) => ({ display: Boolean, props: { isTrue: x.User?.notification_weekly ?? false } })
+        value: (x) => ({
+          display: Boolean,
+          props: { isTrue: x.User?.notification_weekly ?? false }
+        })
       },
       {
         value: (x) => ({
@@ -154,10 +164,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col({
+    col(
+      {
         key: 'notification_monthly',
         label: 'monthly',
-        value: (x) => ({ display: Boolean, props: { isTrue: x.User?.notification_monthly ?? false } })
+        value: (x) => ({
+          display: Boolean,
+          props: { isTrue: x.User?.notification_monthly ?? false }
+        })
       },
       {
         value: (x) => ({
