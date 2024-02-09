@@ -75,12 +75,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
           }
         })
       },
+      // FIXME: This should also alow for never expiring keys
       {
         value: (x) => ({
           display: Input,
           props: {
             value: x.AuthKey?.expiration
-              ? format(new Date(x.AuthKey?.expiration), 'yyyy-MM-dd')
+              ? format(new Date(x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
               : undefined,
             name: 'date',
             type: 'Date'
