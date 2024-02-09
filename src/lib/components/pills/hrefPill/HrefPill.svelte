@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { HTMLAttributeAnchorTarget } from 'svelte/elements';
   import Pill from '../pill/Pill.svelte';
 
   /**
@@ -20,7 +21,17 @@
   /**
    * The target browsing context i.e. where to open the URL.
    */
-  export let target: '_self' | '_blank' | '_parent' | '_top' = '_self';
+  export let target: HTMLAttributeAnchorTarget | undefined = undefined;
+
+  /**
+   * Some style overrides.
+   */
+  export let style = '';
+
+  /**
+   * Whether to force the text to be blue.
+   */
+  export let enforceTextColor = true;
 </script>
 
 <!-- 
@@ -30,5 +41,5 @@
  -->
 
 <a {href} {target}>
-  <Pill {label} {text} {icon} class="!text-blue-400" />
+  <Pill {label} {text} {icon} {style} class={enforceTextColor ? '!text-blue-400' : ''} />
 </a>

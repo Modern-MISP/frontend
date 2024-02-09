@@ -4,10 +4,12 @@
   import type { ComponentProps } from 'svelte';
   import { remove, sortBy } from 'lodash-es';
 
+  type PickerPill = ComponentProps<Pill> & { value?: string };
+
   /** The items that have been picked. */
-  export let pickedItems: ComponentProps<Pill>[] = [];
+  export let pickedItems: PickerPill[] = [];
   /** The items that can be picked. */
-  export let pickableItems: ComponentProps<Pill>[] = [];
+  export let pickableItems: PickerPill[] = [];
   /**
    * Placeholder of the input.
    */
@@ -38,8 +40,8 @@
    * @param value the input value
    * @returns true if the pill should match the value
    */
-  export let matchFunction: (pill: ComponentProps<Pill>, value: string) => boolean | undefined = (
-    pill: ComponentProps<Pill>,
+  export let matchFunction: (pill: PickerPill, value: string) => boolean | undefined = (
+    pill: PickerPill,
     value: string
   ) => pill.text?.includes(value);
 
@@ -90,28 +92,24 @@
     class:bg-crust={!disabled}
     class:bg-base={disabled}
   >
-    <ul class="flex gap-1 bg-inherit">
+    <div class="flex flex-wrap gap-1 overflow-hidden rounded-md bg-inherit w-max">
       {#each pickedItems as props, i}
-        <li>
-          <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
-            {props.text}
-            {#if !disabled}
-              <button
-                on:click={() =>
-                  ([pickedItems, pickableItems] = removeFromAddToIndex(
-                    pickedItems,
-                    pickableItems,
-                    i
-                  ))}
-                class="align-middle hover:text-red"
-              >
-                <Icon icon="mdi:close-circle-outline" />
-              </button>
-            {/if}
-          </Pill>
-        </li>
+        <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
+          <span class="flex overflow-hidden shrink line-clamp-1">
+            {props.text?.trim()}
+          </span>
+          {#if !disabled}
+            <button
+              on:click={() =>
+                ([pickedItems, pickableItems] = removeFromAddToIndex(pickedItems, pickableItems, i))}
+              class="justify-center align-middle hover:text-red shrink-0"
+            >
+              <Icon icon="mdi:close-circle-outline" />
+            </button>
+          {/if}
+        </Pill>
       {/each}
-    </ul>
+    </div>
     <input
       bind:this={input}
       class="w-full h-full m-2 outline-none bg-inherit text-text"
@@ -123,7 +121,7 @@
     />
     {#if value !== ''}
       <div
-        class="absolute left-0 max-h-80 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface0 {popUpClass}"
+        class="absolute left-0 max-h-80 gap-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface0 {popUpClass}"
       >
         {#each autocomplete as props}
           <button
@@ -145,4 +143,6 @@
   </div>
 </div>
 
-<input type="hidden" {name} value={JSON.stringify(pickedItems)} />
+{#each pickedItems as { value }}
+  <input type="hidden" {name} {value} />
+{/each}

@@ -3,6 +3,8 @@
   import Picker from './Picker.svelte';
   import { themes } from '$lib/stores';
   import { getFormValues } from '$lib/util/form.util';
+  import { TAGS_MOCK } from './tags.mock';
+  import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 
   let theme = 'macchiato';
 
@@ -13,54 +15,18 @@
   <svelte:fragment slot="controls">
     <Hst.Select title="Theme" bind:value={theme} options={themes} />
   </svelte:fragment>
-  <div class={theme}>
+  <div class="h-screen {theme}">
     <h1>Display flex wrap</h1>
     <Picker
       placeholder="pick an item"
-      pickableItems={[
-        {
-          text: 'ha'
-        },
-        {
-          text: 'hb',
-          label: 'asdf'
-        },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-        { text: 'asdf' },
-
-        { text: 'asdf', icon: 'mdi:test-tube' }
-      ]}
+      pickableItems={TAGS_MOCK.map((x) => ({
+        icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
+        text: x.name,
+        style: `background-color: ${x.colour}; color: ${
+          shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
+        }`,
+        value: x.id
+      }))}
     />
     <h1>Force list display</h1>
 
@@ -69,49 +35,14 @@
         placeholder="pick an item"
         popUpClass="flex-col flex-nowrap"
         name="pills"
-        pickableItems={[
-          {
-            text: 'hi'
-          },
-          {
-            text: 'hiii',
-            label: 'asdf'
-          },
-          { text: 'asdf', icon: 'mdi:abugida-thai' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' },
-          { text: 'asdf' }
-        ]}
+        pickableItems={TAGS_MOCK.map((x) => ({
+          icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
+          text: x.name,
+          style: `background-color: ${x.colour}; color: ${
+            shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
+          }`,
+          value: x.id
+        }))}
       />
       <button type="submit">Senden</button>
     </form>

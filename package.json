@@ -28,6 +28,7 @@
     "@types/lodash-es": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
+    "@vitest/coverage-v8": "^1.2.2",
     "@xyflow/svelte": "^0.0.35",
     "autoprefixer": "^10.4.17",
     "cypress": "^13.6.3",

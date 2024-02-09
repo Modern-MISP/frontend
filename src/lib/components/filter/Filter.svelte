@@ -17,8 +17,7 @@
   /**
    * The current filter values. You should probably bind this.
    */
-  export let currentFilter: Record<string, FormDataEntryValue[] | FormDataEntryValue | unknown>[] =
-    [];
+  export let currentFilter: Record<string, FormDataEntryValue[] | FormDataEntryValue>[] = [];
 
   let currentOption: string = $store[0].label;
   $: option = $store.find(({ label }) => label === currentOption);

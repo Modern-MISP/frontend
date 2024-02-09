@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Notifications from './Notifications.svelte';
+
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
@@ -44,6 +46,7 @@
     </div>
 
     <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
+      <Notifications></Notifications>
       <Breadcrumbs routes={currentRoute} />
       <main class="relative flex flex-col max-h-full gap-4 overflow-hidden grow">
         <slot />
