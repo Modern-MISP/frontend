@@ -1,10 +1,8 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
   import { remove, sortBy } from 'lodash-es';
-  import type { ComponentProps } from 'svelte';
   import Pill from '../pills/pill/Pill.svelte';
-
-  type PickerPill = ComponentProps<Pill> & { value?: string };
+  import type { PickerPill } from '$lib/models/Picker.interface';
 
   /** The items that have been picked. */
   export let pickedItems: PickerPill[] = [];
