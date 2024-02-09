@@ -80,6 +80,11 @@ unit_tests:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
 
+prettier:
+  stage: test
+  script:
+    - npx prettier --check .
+
 eslint:
   stage: test
   script:
