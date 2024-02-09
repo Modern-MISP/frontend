@@ -14,3 +14,7 @@
     Roboto,
     sans-serif;
 }
+/* Can not extend tailwind overflow for some reason. => Set as global class */
+.overflow-initial {
+  overflow: initial;
+}

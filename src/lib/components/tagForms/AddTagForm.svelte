@@ -79,8 +79,8 @@
       />
     </CardRow>
   </Card>
-  <Card class="h-min">
-    <div class="flex flex-row justify-center gap-4">
+  <Card class="!h-min overflow-initial">
+    <div class="flex justify-center gap-4">
       <Button class="w-min whitespace-nowrap bg-surface1" suffixIcon="mdi:plus-circle-outline"
         >Create new Tag</Button
       >
