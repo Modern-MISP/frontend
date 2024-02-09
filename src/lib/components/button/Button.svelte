@@ -26,7 +26,7 @@
 
 <button
   on:click
-  class="flex gap-4 justify-between p-4 rounded-md bg-crust w-full items-center text-lg font-bold {clazz}"
+  class="flex gap-4 justify-between p-4 rounded-md bg-surface1 w-full items-center text-lg font-bold {clazz}"
 >
   {#if prefixIcon}
     <Icon icon={prefixIcon} />
