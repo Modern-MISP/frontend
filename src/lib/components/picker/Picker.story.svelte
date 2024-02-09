@@ -3,7 +3,7 @@
   import Picker from './Picker.svelte';
   import { themes } from '$lib/stores';
   import { getFormValues } from '$lib/util/form.util';
-  import { TAGS_MOCK } from './tags';
+  import { TAGS_MOCK } from './tags.mock';
   import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 
   let theme = 'macchiato';
