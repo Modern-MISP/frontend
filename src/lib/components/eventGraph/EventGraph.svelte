@@ -171,22 +171,16 @@
     object: ObjectNode
   };
 
-  let menu: { id: string; top?: number; left?: number; right?: number; bottom?: number } | null;
-  let width: number;
-  let height: number;
+  let menu: { id: string } | null;
 
-  function handleContextMenu({ detail: { event, node } }) {
+  function handleContextMenu({ detail: { event, node } }: { detail: { event: MouseEvent, node: HTMLElement } }) {
     // Prevent native context menu from showing
     event.preventDefault();
 
     // Calculate position of the context menu. We want to make sure it
     // doesn't get positioned off-screen.
     menu = {
-      id: node.id,
-      top: 0,
-      left: 0,
-      right: 500,
-      bottom: 500
+      id: node.id
     };
   }
 
@@ -194,6 +188,7 @@
   function handlePaneClick() {
     menu = null;
   }
+
 </script>
 
 <!--
@@ -206,6 +201,12 @@
 <header class="flex justify-between w-full gap-2">
   <div class="flex gap-4 shrink-0">
     <CardRow class="rounded-lg bg-surface0">
+      <IconCard icon="mdi:web-plus" text="Add Object" />
+      <IconCard icon="mdi:flag-add" text="Add Attribute" />
+      <IconCard icon="icon-park-outline:connection" text="Add Reference" />
+    </CardRow>
+
+    <CardRow class="rounded-lg bg-surface0">
       <IconCard icon="mdi:web" text="Unreferenced Objects" />
       <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
     </CardRow>
@@ -217,10 +218,6 @@
       <ContextMenu
         onClick={handlePaneClick}
         id={menu.id}
-        top={menu.top}
-        left={menu.left}
-        right={menu.right}
-        bottom={menu.bottom}
       />
     {/if}
     <Flow

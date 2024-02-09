@@ -5,10 +5,6 @@
 
   export let onClick: () => void;
   export let id: string;
-  export let top: number | undefined;
-  export let left: number | undefined;
-  export let right: number | undefined;
-  export let bottom: number | undefined;
 
   const nodes = useNodes();
   const edges = useEdges();
@@ -29,7 +25,7 @@
     $nodes = $nodes;
   }
 
-  function deleteNode() {
+  function hideNode() {
     $nodes = $nodes.filter((node) => node.id !== id);
     $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
   }
@@ -41,7 +37,7 @@
 
  -->
 
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-2 ">
   <small>node: {id}</small>
   <CardRow class="rounded-lg bg-surface0">
     <IconCard icon="mdi:magnify" text="Details" />
@@ -49,7 +45,7 @@
 
   <CardRow class="rounded-lg bg-surface0">
     <IconCard icon="mdi:show" text="Show" />
-    <IconCard icon="mdi:hide" text="Hide" class="!text-red" />
+    <IconCard icon="mdi:hide" text="Hide" class="!text-red" on:click={hideNode} />
   </CardRow>
 
   <CardRow class="rounded-lg bg-surface0">
@@ -59,8 +55,8 @@
 
   <CardRow class="rounded-lg bg-surface0">
     <IconCard icon="mdi:edit" text="Edit" />
-    <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode}/>
-    <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode}/>
+    <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
+    <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
   </CardRow>
 
 </div>

@@ -8,7 +8,7 @@
   /**
    * Title of this component.
    */
-  export let title: string;
+   export let title = '';
 </script>
 
 <!-- 
