@@ -55,7 +55,6 @@
   on:init
   on:nodeclick
   on:nodedrag
-  on:paneclick
   on:nodedragstop
   on:nodecontextmenu
   on:paneclick
