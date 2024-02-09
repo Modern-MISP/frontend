@@ -10,7 +10,6 @@
   export let data: $$Props['data'];
 
   const { id, type, value } = data;
-
 </script>
 
 <Handle type="target" position={Position.Left} />

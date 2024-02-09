@@ -58,5 +58,4 @@
     <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
     <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
   </CardRow>
-
 </div>

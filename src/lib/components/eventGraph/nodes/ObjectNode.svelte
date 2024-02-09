@@ -3,17 +3,17 @@
   import { Position, Handle, type NodeProps } from '@xyflow/svelte';
   import Icon from '@iconify/svelte';
 
-  type $$Props = NodeProps<
-    Pick<components['schemas']['Object'], 'id' | 'name' | 'comment'>
-  >;
+  type $$Props = NodeProps<Pick<components['schemas']['Object'], 'id' | 'name' | 'comment'>>;
 
   export let data: $$Props['data'];
 
   const { name, comment } = data;
-
 </script>
 
-<div class="px-4 py-2 shadow-md rounded-md bg-surface0 border-2 border-stone-400" title={name + " : " + comment}>
+<div
+  class="px-4 py-2 shadow-md rounded-md bg-surface0 border-2 border-stone-400"
+  title={name + ' : ' + comment}
+>
   <div class="flex">
     <div class="rounded-full w-12 h-12 flex justify-center items-center bg-surface1">
       <Icon icon="mdi:web" />

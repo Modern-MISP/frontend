@@ -20,7 +20,7 @@
   /**
    * The target URL of the Card, which will be navigated to when the Card is clicked.
    */
-   export let href='';
+  export let href = '';
 </script>
 
 <!-- 

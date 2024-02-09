@@ -34,7 +34,11 @@
   $nodes.push({ id: 'referenced', position, data: { label: `Referenced` } });
   $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` } });
   $nodes.push({ id: 'unreferenced-objects', position, data: { label: `Unreferenced Objects` } });
-  $nodes.push({ id: 'unreferenced-attributes', position, data: { label: `Unreferenced Attributes` } });
+  $nodes.push({
+    id: 'unreferenced-attributes',
+    position,
+    data: { label: `Unreferenced Attributes` }
+  });
 
   $edges.push({
     id: `event-to-referenced`,
@@ -56,18 +60,18 @@
     source: 'unreferenced',
     target: `unreferenced-attributes`
   });
-  
+
   for (const object of objects) {
     // Node: objects (refed/unrefed)
-    $nodes.push({ 
+    $nodes.push({
       id: `object-${object.id}`,
       position,
-      data: { 
+      data: {
         id: object.id,
         name: object.name,
         comment: object.comment
-        },
-      type:"object"
+      },
+      type: 'object'
     });
     // Edge: event to objects (refed/unrefed)
     $edges.push({
@@ -78,7 +82,7 @@
 
     for (const attribute of object.Attribute ?? []) {
       // Node: attributes
-       $nodes.push({
+      $nodes.push({
         id: `attribute-${attribute.id}`,
         position,
         data: {
@@ -173,7 +177,7 @@
 
   let menu: { id: string } | null;
 
-  function handleContextMenu({ detail: { event, node } }: { detail: { event: any, node: any } }) {
+  function handleContextMenu({ detail: { event, node } }: { detail: { event: any; node: any } }) {
     // Prevent native context menu from showing
     event.preventDefault();
 
@@ -188,7 +192,6 @@
   function handlePaneClick() {
     menu = null;
   }
-
 </script>
 
 <!--
@@ -215,10 +218,7 @@
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu
-        onClick={handlePaneClick}
-        id={menu.id}
-      />
+      <ContextMenu onClick={handlePaneClick} id={menu.id} />
     {/if}
     <Flow
       {nodes}
@@ -236,7 +236,7 @@
     />
   </div>
 
-<!--   <Card>
+  <!--   <Card>
     {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
       <IconCardRow {...obj} />
     {/each}
