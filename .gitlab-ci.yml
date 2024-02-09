@@ -84,6 +84,8 @@ prettier:
   stage: test
   script:
     - npx prettier --check .
+  dependencies:
+    - install_dependencies
 
 eslint:
   stage: test
