@@ -63,7 +63,7 @@ export function constructWorkflowData(
   nodes: Node[],
   edges: Edge[]
 ): WorkflowData {
-  return {
+  const constructedData = {
     ...objectFromEntries(
       nodes.map((node) => [
         node.id,
@@ -71,10 +71,19 @@ export function constructWorkflowData(
           ...wfData[node.id],
           data: node.data.moduleData,
           pos_x: node.position.x,
-          pos_y: node.position.y
+          pos_y: node.position.y,
+          inputs: [],
+          outputs: []
         } as ModuleNode
       ])
     ),
     _frames: wfData._frames // changing frames is not yet supported
-  };
+  } as WorkflowData;
+
+  for (const edge of edges) {
+    // TODO
+    edge;
+  }
+
+  return constructedData;
 }

@@ -6,7 +6,7 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { Module } from '../modules/module';
-import type { Workflow } from '../workflow';
+import type { CheckGraphResult, Workflow } from '../workflow';
 
 export const load = async ({ params, fetch }) => {
   const {
@@ -89,16 +89,17 @@ export const load = async ({ params, fetch }) => {
   });
 
   async function checkGraph(constructWorkflowData: () => Workflow['data']) {
-    const json = JSON.stringify(constructWorkflowData());
     // @ts-expect-error Api does not support this
-    const checkGraphResult = await POST('/workflows/checkGraph', {
+    const checkGraphResponse = await POST('/workflows/checkGraph', {
       headers: {
-        Accept: '*/*',
+        Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-      body: { graph: json },
+      body: { graph: JSON.stringify(constructWorkflowData()) },
       bodySerializer: (x) => new URLSearchParams(x)
     });
+
+    const checkGraphResult = checkGraphResponse.data as CheckGraphResult;
 
     console.log(checkGraphResult);
   }

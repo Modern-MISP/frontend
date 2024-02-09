@@ -10,7 +10,6 @@
   import type { Module } from '../modules/module';
   import type { ModuleNodeData, Workflow } from '../workflow';
   import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
-  import { mapValues } from 'lodash-es';
   import { writable } from 'svelte/store';
 
   /** The data that will be displayed on this page. */
