@@ -51,10 +51,6 @@
     <h1>Attributes</h1>
     <DynTable data={[]} header={[]} />
   </section>
-
-  <SvelteFlowProvider>
-    <EventGraph event={data.event} />
-  </SvelteFlowProvider>
 </div>
 
 <style>
