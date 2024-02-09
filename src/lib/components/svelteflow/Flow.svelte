@@ -29,7 +29,8 @@
     trigger: ModuleNode,
     action: ModuleNode,
     logic: ModuleNode,
-    frame: FrameNode
+    frame: FrameNode,
+    ...additionalNodeTypes
   };
 
   /** Dimensions of the grid that nodes will snap onto */
