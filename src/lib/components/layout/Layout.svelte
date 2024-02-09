@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Notifications from './Notifications.svelte';
+
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
@@ -9,6 +11,11 @@
    * The routes to be displayed in the side menu.
    */
   export let routes: SideMenuRoute[];
+
+  /**
+   * Context dependant routes to be displayed in a separate side menu section.
+   */
+  export let contextRoutes: SideMenuRoute[] = [];
 
   /**
    * The current route to be displayed in the {@link Breadcrumbs}.
@@ -30,7 +37,7 @@
 
 <div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
   <slot name="sideMenu">
-    <SideMenu {routes} bind:isOpen />
+    <SideMenu {routes} {contextRoutes} bind:isOpen />
   </slot>
 
   <div class="flex flex-col h-full min-w-0 grow">
@@ -39,6 +46,7 @@
     </div>
 
     <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
+      <Notifications></Notifications>
       <Breadcrumbs routes={currentRoute} />
       <main class="relative flex flex-col max-h-full gap-4 overflow-hidden grow">
         <slot />

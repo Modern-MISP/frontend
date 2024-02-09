@@ -3,16 +3,18 @@ import Info from '$lib/components/info/Info.svelte';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
+import type { components } from '$lib/api/misp';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import { DATE_FORMAT } from '$lib/components/config';
+import InputCollection from '$lib/components/filter/InputCollection.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
-import { format } from 'date-fns';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-import type { components } from '$lib/api/misp';
+import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { format } from 'date-fns';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -154,8 +156,54 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const fil = createTableHeadGenerator<undefined>();
+  const filter = [
+    fil({
+      label: 'Value',
+      value: () => 'value'
+    }),
+    // In the current api published does not need to be an boolean. That's why we could use the string return from an input checkbox
+    fil({
+      label: 'Published',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'published'
+        }
+      })
+    }),
+    fil({
+      label: 'Type',
+      value: () => 'type'
+    }),
+    fil({
+      label: 'Search all',
+      value: () => 'searchall'
+    }),
+    // You can override the page limit with this.
+
+    fil({
+      label: 'Page Limit',
+      value: () => 'limit'
+    }),
+
+    fil({
+      label: 'Tags',
+      value: () => ({
+        display: InputCollection,
+        props: {
+          length: 5,
+          name: 'tags',
+          placeholder: 'New Tag'
+        }
+      })
+    })
+  ];
+
   return {
     header,
-    tableData: data
+    tableData: data,
+    filter
   };
 };

@@ -45,27 +45,6 @@
       <section class="h-full">
         <EventTags bind:addTag {data} />
       </section>
-
-      <section class="h-full">
-        <Card class="h-full ">
-          {#each data.event?.Galaxy ?? [] as galaxy}
-            <div>
-              <h1 class="text-xl text-center text-sky text-bold">{galaxy.name}</h1>
-              <hr />
-              <br />
-              <PillCollection
-                pills={galaxy.GalaxyCluster
-                  ? galaxy.GalaxyCluster.map((y) => ({
-                      icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-                      label: y.relationship_type ? y.relationship_type : undefined,
-                      text: y.value
-                    }))
-                  : []}
-              />
-            </div>
-          {/each}
-        </Card>
-      </section>
     </div>
   </EditMode>
   <section>

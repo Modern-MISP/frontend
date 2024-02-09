@@ -28,6 +28,11 @@
   export let type: HTMLInputTypeAttribute = 'text';
 
   /**
+   * When true, the input is disabled an cannot be changed.
+   */
+  export let disabled: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
@@ -35,6 +40,8 @@
   let clazz = '';
 
   const dispatch = createEventDispatcher<{ value: string }>();
+
+  const id = crypto.randomUUID();
 </script>
 
 <!-- 
@@ -47,7 +54,11 @@
   You can also set the placeholder prop, if you want to set an placeholder. 
  -->
 
-<label class="relative flex items-center gap-2 px-2 py-2 bg-crust text-text rounded-lg {clazz}">
+<label
+  class="relative flex items-center gap-2 px-2 py-2 text-text rounded-lg {clazz}"
+  class:bg-crust={!disabled}
+  class:bg-base={disabled}
+>
   <slot name="icon">
     {#if icon}
       <Icon {icon} />
@@ -57,16 +68,17 @@
     on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
     on:blur
     on:focus
-    id={name}
+    {id}
     {placeholder}
     {name}
     {type}
     {value}
+    {disabled}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer"
   />
-  {#if placeholder}
+  {#if placeholder && (!disabled || !value)}
     <label
-      for={name}
+      for={id}
       class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
 			peer-placeholder-shown:text-text peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
 			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0"

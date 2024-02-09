@@ -1,9 +1,10 @@
 import { browser } from '$app/environment';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
-import { writable } from 'svelte/store';
-import type { ActionBarEntry } from './models/ActionBarEntry.interface';
-import type { Mode } from './models/Mode';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 import type { ComponentProps } from 'svelte';
+import { writable } from 'svelte/store';
+import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
+import type { Mode } from './models/Mode';
 import { INITIAL_SETTINGS } from './settings';
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
@@ -20,7 +21,7 @@ const createSettingsStore = <T>(init: T) => {
   };
 };
 
-export const actionBarEntries = writable<ActionBarEntry[]>([]);
+export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
 let init = INITIAL_SETTINGS;
 
 if (browser) {
@@ -47,3 +48,26 @@ export const themes = [
 
 export const mode = writable<Mode>('view');
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
+
+const createNotificationStore = (timeout: number) => {
+  const { subscribe, update } = writable<ComponentProps<Pill>[]>([]);
+
+  function add(value: ComponentProps<Pill>) {
+    update((x) => [...x, value]);
+
+    setTimeout(() => {
+      removeOne(value);
+    }, timeout);
+  }
+
+  function removeOne(value: ComponentProps<Pill>) {
+    update((update) => update.filter((x) => x !== value));
+  }
+
+  return {
+    subscribe,
+    remove: removeOne,
+    add
+  };
+};
+export const notifications = createNotificationStore(3000);

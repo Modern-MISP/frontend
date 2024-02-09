@@ -2,12 +2,13 @@
   import type { Hst } from '@histoire/plugin-svelte';
   import ActionBar from './ActionBar.svelte';
   import { themes } from '$lib/stores';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   export let Hst: Hst;
 
   let theme = 'macchiato';
 
-  let entries = [
+  let entries: ActionBarEntryProps[] = [
     {
       icon: 'mdi:link',
       label: 'play Go!',

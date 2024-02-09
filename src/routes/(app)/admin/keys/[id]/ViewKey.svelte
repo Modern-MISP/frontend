@@ -1,1 +1,0 @@
-I am View mode

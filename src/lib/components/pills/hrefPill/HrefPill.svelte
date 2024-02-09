@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { HTMLAttributeAnchorTarget } from 'svelte/elements';
   import Pill from '../pill/Pill.svelte';
 
   /**
@@ -17,6 +18,20 @@
    * The target URL of the pill, which will be navigated to when the pill is clicked.
    */
   export let href: string;
+  /**
+   * The target browsing context i.e. where to open the URL.
+   */
+  export let target: HTMLAttributeAnchorTarget | undefined = undefined;
+
+  /**
+   * Some style overrides.
+   */
+  export let style = '';
+
+  /**
+   * Whether to force the text to be blue.
+   */
+  export let enforceTextColor = true;
 </script>
 
 <!-- 
@@ -25,6 +40,6 @@
 
  -->
 
-<a {href}>
-  <Pill {label} {text} {icon} class="!text-blue-400" />
+<a {href} {target}>
+  <Pill {label} {text} {icon} {style} class={enforceTextColor ? '!text-blue-400' : ''} />
 </a>

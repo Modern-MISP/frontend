@@ -1,9 +1,8 @@
 import { GET } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 import type { components } from '$lib/api/misp';
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
