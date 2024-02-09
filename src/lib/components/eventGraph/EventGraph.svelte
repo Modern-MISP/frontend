@@ -177,7 +177,7 @@
 
   let menu: { id: string } | null;
 
-  function handleContextMenu({ detail: { event, node } }: { detail: { event: any; node: any } }) {
+  function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
     event.preventDefault();
 
@@ -201,6 +201,7 @@
   Uses the {@link Card} component to render the action Bar and a table, where the unreferenced objects and attributes are displayed.
 
 -->
+
 <header class="flex justify-between w-full gap-2">
   <div class="flex gap-4 shrink-0">
     <CardRow class="rounded-lg bg-surface0">
