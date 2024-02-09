@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord">
+  import { errorPill } from '$lib/util/pill.util';
+
   import { page } from '$app/stores';
 
   import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
@@ -22,7 +24,7 @@
   import SelectionCard from '$lib/components/table/actions/selectionCard/SelectionCard.svelte';
 
   import Filter from '$lib/components/filter/Filter.svelte';
-  import { mode } from '$lib/stores';
+  import { mode, notifications } from '$lib/stores';
   import { merge } from 'lodash-es';
 
   /**
@@ -75,7 +77,7 @@
 
     if (mispError) {
       console.error(mispError);
-      alert('Error fetching more data');
+      notifications.add(errorPill('Error fetching more data'));
     }
 
     if (response.ok && _data) {

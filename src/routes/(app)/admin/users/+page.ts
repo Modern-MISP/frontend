@@ -9,7 +9,7 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { notifications } from '$lib/stores';
-import { successPill } from '$lib/util/pill.util';
+import { errorPill, successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
@@ -107,14 +107,18 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Enable User',
       icon: 'mdi:account-lock-open-outline',
       action: (x) => {
-        notifications.add(successPill('Enable: ' + x.map((y) => y.User?.id).join()));
+        notifications.add(
+          errorPill('Do not know the endpoint. Enable' + x.map((y) => y.User?.id).join())
+        );
       }
     },
     {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
-        alert('Do not know the endpoint. Disable' + x.map((y) => y.User?.id).join());
+        notifications.add(
+          errorPill('Do not know the endpoint. Disable' + x.map((y) => y.User?.id).join())
+        );
         // Promise.all(
         //   x
         //     .map((y) => y.User?.id)
@@ -139,21 +143,32 @@ export const load: PageLoad = async ({ fetch }) => {
                 params: { path: { userId: userId as string } }
               })
             )
-        ).then(invalidateAll);
+        ).then(() => {
+          notifications.add(successPill('Deleted' + x.map((y) => y.User?.id).join()));
+          invalidateAll();
+        });
       }
     },
     {
       label: 'Send Email Publish',
       icon: 'icon-park-outline:send-email',
       action: (x) => {
-        alert('Do not know the endpoint. Send email publish' + x.map((y) => y.User?.id).join());
+        notifications.add(
+          errorPill(
+            'Do not know the endpoint. Send email publish' + x.map((y) => y.User?.id).join()
+          )
+        );
       }
     },
     {
       label: 'Disable Email Publish',
       icon: 'mdi:email-lock-outline',
       action: (x) => {
-        alert('Do not know the endpoint. Disable email publish' + x.map((y) => y.User?.id).join());
+        notifications.add(
+          errorPill(
+            'Do not know the endpoint. Disable email publish' + x.map((y) => y.User?.id).join()
+          )
+        );
       }
     }
   ];

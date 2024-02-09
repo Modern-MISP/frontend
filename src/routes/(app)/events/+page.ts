@@ -16,6 +16,8 @@ import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { notifications } from '$lib/stores';
+import { errorPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -212,7 +214,9 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        alert('Delete' + x.map((y) => y.id));
+        notifications.add(
+          errorPill('Do not know the endpoint. Delete: ' + x.map((y) => y.id).join())
+        );
       }
     }
   ];
