@@ -5,7 +5,8 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge
+    type Edge,
+    type DefaultEdgeOptions
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
   import { mode } from '$lib/stores';
@@ -27,6 +28,11 @@
 
   /** Dimensions of the grid that nodes will snap onto */
   export let snapGrid: [number, number] = [25, 25];
+
+  /**
+   * Default options to set for edges.
+   */
+  export let defaultEdgeOptions: DefaultEdgeOptions | undefined = undefined;
 </script>
 
 <!--
@@ -50,6 +56,7 @@
   on:paneclick
   on:dragover
   on:drop
+  {defaultEdgeOptions}
   class="text-text"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}

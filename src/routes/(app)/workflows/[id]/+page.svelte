@@ -161,6 +161,10 @@
     <Flow
       {nodes}
       {edges}
+      defaultEdgeOptions={{
+        animated: true,
+        style: 'stroke-width: 4px'
+      }}
       on:nodedrag={onNodeDrag}
       on:nodeclick={onNodeClick}
       on:paneclick={onPaneClick}
