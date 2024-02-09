@@ -173,7 +173,7 @@
 
   let menu: { id: string } | null;
 
-  function handleContextMenu({ detail: { event, node } }: { detail: { event: MouseEvent, node: HTMLElement } }) {
+  function handleContextMenu({ detail: { event, node } }: { detail: { event: any, node: any } }) {
     // Prevent native context menu from showing
     event.preventDefault();
 

@@ -9,7 +9,7 @@
 
   export let data: $$Props['data'];
 
-  const { id, category, type, value, comment } = data;
+  const { id, type, value } = data;
 
 </script>
 

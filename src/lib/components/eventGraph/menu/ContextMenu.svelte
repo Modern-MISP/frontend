@@ -1,9 +1,9 @@
 <script lang="ts">
   import { useEdges, useNodes } from '@xyflow/svelte';
-    import IconCard from '../cards/IconCard.svelte';
-    import CardRow from '../../card/CardRow.svelte';
+  import IconCard from '../cards/IconCard.svelte';
+  import CardRow from '../../card/CardRow.svelte';
 
-  export let onClick: () => void;
+  export const onClick = () => {};
   export let id: string;
 
   const nodes = useNodes();
@@ -37,7 +37,7 @@
 
  -->
 
-<div class="flex items-center gap-2 ">
+<div class="flex items-center gap-2">
   <small>node: {id}</small>
   <CardRow class="rounded-lg bg-surface0">
     <IconCard icon="mdi:magnify" text="Details" />
