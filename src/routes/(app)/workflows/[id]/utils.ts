@@ -63,6 +63,11 @@ export function constructWorkflowData(
   nodes: Node[],
   edges: Edge[]
 ): WorkflowData {
+  const removeConnections = (anyputs: ModuleNode['inputs'] | ModuleNode['outputs']) => {
+    if (Array.isArray(anyputs)) return anyputs;
+    return objectFromEntries(Object.keys(anyputs).map((key) => [key, { connections: [] }]));
+  };
+
   const constructedData = {
     ...objectFromEntries(
       nodes.map((node) => [
@@ -72,8 +77,8 @@ export function constructWorkflowData(
           data: node.data.moduleData,
           pos_x: node.position.x,
           pos_y: node.position.y,
-          inputs: [],
-          outputs: []
+          inputs: removeConnections(wfData[node.id].inputs),
+          outputs: removeConnections(wfData[node.id].outputs)
         } as ModuleNode
       ])
     ),
@@ -81,8 +86,27 @@ export function constructWorkflowData(
   } as WorkflowData;
 
   for (const edge of edges) {
-    // TODO
-    edge;
+    // update constructed source node with connection data
+    const sourceNode = constructedData[edge.source];
+    const sourceHandle = edge.sourceHandle!;
+    if (Array.isArray(sourceNode.outputs) || !sourceNode.outputs[sourceHandle]) {
+      throw Error('no output for node connection');
+    }
+    sourceNode.outputs[sourceHandle].connections.push({
+      node: edge.target,
+      output: edge.targetHandle!
+    });
+
+    // do the same for target node
+    const targetNode = constructedData[edge.target];
+    const targetHandle = edge.targetHandle!;
+    if (Array.isArray(targetNode.inputs) || !targetNode.inputs[targetHandle]) {
+      throw Error('no input for node connection');
+    }
+    targetNode.inputs[targetHandle].connections.push({
+      node: edge.source,
+      input: edge.sourceHandle!
+    });
   }
 
   return constructedData;

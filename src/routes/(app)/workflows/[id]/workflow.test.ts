@@ -7,6 +7,6 @@ describe('workflow', () => {
     const { nodes, edges } = generateFlowContent(wfData, () => {});
 
     const resultWfData = constructWorkflowData(wfData, nodes, edges);
-    expect(JSON.stringify(resultWfData)).toBe(JSON.stringify(wfData));
+    expect(resultWfData).toStrictEqual(wfData);
   });
 });
