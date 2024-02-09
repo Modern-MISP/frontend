@@ -7,6 +7,7 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -47,4 +48,8 @@
       </section>
     </div>
   </EditMode>
+  <section>
+    <h1>Attributes</h1>
+    <DynTable data={[]} header={[]} />
+  </section>
 </div>
