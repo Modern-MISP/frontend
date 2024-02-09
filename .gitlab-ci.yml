@@ -72,6 +72,7 @@ unit_tests:
   stage: test
   script:
     - npx vitest run
+  coverage: /All files[^|]*\|[^|]*\|\s+([\d\.]+)/
   artifacts:
     reports:
       junit: report.xml
