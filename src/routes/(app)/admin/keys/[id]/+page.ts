@@ -81,7 +81,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             value: x.AuthKey?.expiration
-              ? format(new Date(x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
+              ? format(new Date(+x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
               : undefined,
             name: 'date',
             type: 'Date'
