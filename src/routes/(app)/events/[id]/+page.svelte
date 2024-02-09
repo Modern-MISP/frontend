@@ -6,12 +6,7 @@
   import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
-  import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-
-  import Card from '$lib/components/card/Card.svelte';
-  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-  import { SvelteFlowProvider } from '@xyflow/svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
