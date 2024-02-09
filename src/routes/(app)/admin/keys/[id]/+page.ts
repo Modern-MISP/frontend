@@ -4,10 +4,13 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { format } from 'date-fns';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -56,37 +59,65 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     }),
-    col({
-      icon: 'mdi:information-outline',
-      key: 'expiration',
-      label: 'Expires',
-      value: (x) => ({
-        display: RelativeDatePill,
-        props: {
-          date:
-            (x.AuthKey?.expiration &&
-              +x.AuthKey.expiration !== 0 &&
-              new Date(+x.AuthKey.expiration * 1000)) ||
-            null
-        }
-      })
-    }),
-    col({
-      key: 'read_only',
-      label: 'Read only',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
-    }),
-    col({
-      key: 'comment',
-      label: 'Comment',
-      value: (x) => ({
-        display: Info,
-        props: {
-          text: x.AuthKey?.comment || 'No Comment',
-          class: 'line-clamp-3'
-        }
-      })
-    })
+    col(
+      {
+        icon: 'mdi:information-outline',
+        key: 'expiration',
+        label: 'Expires',
+        value: (x) => ({
+          display: RelativeDatePill,
+          props: {
+            date:
+              (x.AuthKey?.expiration &&
+                +x.AuthKey.expiration !== 0 &&
+                new Date(+x.AuthKey.expiration * 1000)) ||
+              null
+          }
+        })
+      },
+      // FIXME: This should also alow for never expiring keys
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x.AuthKey?.expiration
+              ? format(new Date(+x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
+              : undefined,
+            name: 'date',
+            type: 'Date'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        key: 'read_only',
+        label: 'Read only',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.AuthKey?.read_only ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'read_only', checked: x.AuthKey?.read_only ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        key: 'comment',
+        label: 'Comment',
+        value: (x) => ({
+          display: Info,
+          props: {
+            text: x.AuthKey?.comment || 'No Comment',
+            class: 'line-clamp-3'
+          }
+        })
+      },
+      {
+        value: (x) => ({ display: Input, props: { value: x.AuthKey?.comment ?? 'unknown' } })
+      }
+    )
   ];
 
   return {
