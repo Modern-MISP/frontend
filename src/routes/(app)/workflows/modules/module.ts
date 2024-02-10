@@ -17,4 +17,13 @@ export type Module = {
   disabled?: boolean;
   support_filters?: boolean;
   html_template?: string;
+  params?: ModuleParam[];
+};
+
+export type ModuleParam = {
+  id: string;
+  label: string;
+  placeholder: string;
+  type: string;
+  options?: { [key: string]: string };
 };

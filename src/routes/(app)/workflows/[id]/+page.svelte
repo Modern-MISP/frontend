@@ -12,7 +12,7 @@
   import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
   import { writable } from 'svelte/store';
   import { objectEntries } from 'ts-extras';
-  import { range } from 'lodash-es';
+  import { cloneDeep, debounce, range } from 'lodash-es';
   import { actionBar } from '$lib/actions';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
@@ -24,6 +24,13 @@
   const { infoHeader, moduleData, checkGraph, saveWorkflow, toggleDebug } = data;
   const workflow = (data.workflow as Workflow)!;
   const wfData = workflow.data!;
+  const originalWfData = cloneDeep(wfData);
+
+  let modifiedWfData = wfData;
+  const getModified = debounce((mNodes, mEdges) => {
+    return constructWorkflowData(wfData, mNodes, mEdges);
+  }, 200);
+  $: modifiedWfData = getModified($nodes, $edges) ?? modifiedWfData;
 
   console.log(workflow);
 
@@ -130,7 +137,7 @@
     $nodes = $nodes;
   }
 
-  async function applyGraphCheck() {
+  const applyGraphCheck = debounce(async () => {
     const checkResult = await checkGraph(() => constructWorkflowData(wfData, $nodes, $edges));
     if (checkResult.multiple_output_connection.has_multiple_output_connection) {
       const nodesWithBadEdges = checkResult.multiple_output_connection.edges;
@@ -151,7 +158,7 @@
         });
       }
     }
-  }
+  }, 500);
 
   function getWorkflowActions(saveData: WorkflowData): ActionBarEntryProps[] {
     return [
@@ -160,7 +167,7 @@
         label: 'Save',
         class: 'text-green',
         action: () => saveWorkflow(workflow.name ?? '', workflow.description ?? '', saveData),
-        disabled: JSON.stringify(wfData) === JSON.stringify(saveData)
+        disabled: JSON.stringify(originalWfData) === JSON.stringify(saveData)
       },
       {
         icon: workflow.debug_enabled ? 'mdi:bug-check' : 'mdi:bug',
@@ -184,7 +191,7 @@
   All the information about a specific workflow,
   including an interactive node-based diagram for visualization.
 -->
-<svelte:window use:actionBar={getWorkflowActions(constructWorkflowData(wfData, $nodes, $edges))} />
+<svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} />
 <div class="flex flex-row h-full">
   <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}

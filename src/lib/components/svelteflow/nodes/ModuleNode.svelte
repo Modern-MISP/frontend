@@ -6,6 +6,7 @@
   import { tick } from 'svelte';
   import { get } from 'svelte/store';
   import ModuleParam from './ModuleParam.svelte';
+  import type { Module } from '../../../../routes/(app)/workflows/modules/module';
 
   const svelteFlow = useSvelteFlow();
 
@@ -42,15 +43,14 @@
 
   // TODO: define 'module' type to use here
   /** Similar to `data.moduleData`, but with more and differently named properties. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let fullData: any = {};
+  let fullData: Module = {};
   get(api)
     // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
     .GET('/workflows/moduleView/{moduleId}', {
       params: { path: { moduleId: data.moduleData.id } }
     })
     .then(async (res) => {
-      fullData = res.data;
+      fullData = res.data as Module;
       await tick();
       svelteFlow.fitView();
       data.onUpdate(id);
@@ -133,8 +133,8 @@
         <span class="max-w-xs mb-2">{fullData.description}</span>
       {/if}
 
-      {#each fullData.params as param}
-        <ModuleParam {param} value={data.moduleData.indexed_params[param.id]} />
+      {#each fullData.params ?? [] as param}
+        <ModuleParam {param} bind:value={data.moduleData.indexed_params[param.id]} />
       {/each}
     {/if}
   </div>
