@@ -106,17 +106,13 @@
         </button>
       {/if}
       {#if fullData.support_filters}
+        <!-- Module filters are not yet supported -->
         <button
           class="text-2xl text-sky hover:mix-blend-hard-light"
-          title="module filtering conditions"
+          title="module filtering conditions (not yet supported)"
+          disabled
         >
           <Icon icon="mdi:filter" />
-        </button>
-      {/if}
-      {#if fullData.module_type !== 'trigger'}
-        <!-- settings are only available for non-trigger modules -->
-        <button class="text-sky text-2xl hover:mix-blend-hard-light" title="node settings">
-          <Icon icon="mdi:dots-horizontal" />
         </button>
       {/if}
     </div>
