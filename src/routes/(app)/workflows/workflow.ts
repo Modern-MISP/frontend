@@ -15,10 +15,7 @@ export type Workflow = {
   trigger_id?: string;
 };
 
-export type WorkflowData = {
-  [key: string | number]: ModuleNode;
-  _frames: Frames['_frames'];
-};
+export type WorkflowData = Record<string | number, ModuleNode> & Frames;
 
 type Frames = {
   _frames:

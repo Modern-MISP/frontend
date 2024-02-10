@@ -8,7 +8,7 @@
   export let data: NodeProps['data'];
   data;
   /** Node drag handle */
-  export let dragHandle: NodeProps['dragHandle'] = undefined;
+  export let dragHandle: NodeProps['dragHandle'];
   dragHandle;
   /** Node type */
   export let type: NodeProps['type'] = undefined;

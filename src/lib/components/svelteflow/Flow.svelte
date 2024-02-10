@@ -26,7 +26,7 @@
    */
   export { additionalNodeTypes as nodeTypes };
 
-  const nodeTypes = {
+  const nodeTypes: NodeTypes = {
     trigger: ModuleNode,
     action: ModuleNode,
     logic: ModuleNode,

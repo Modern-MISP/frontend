@@ -139,7 +139,7 @@ export const wfData: WorkflowData = {
       nodes: ['6', '7'],
       class: ''
     }
-  }
+  } as never
 };
 
 export const resultWfData = {

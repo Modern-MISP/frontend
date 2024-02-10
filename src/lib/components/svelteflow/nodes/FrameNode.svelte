@@ -7,19 +7,19 @@
   /** Node properties */
   export let data: NodeProps['data'];
   /** Node drag handle */
-  export let dragHandle: NodeProps['dragHandle'] = undefined;
+  export let dragHandle: NodeProps['dragHandle'];
   dragHandle;
   /** Node type */
-  export let type: NodeProps['type'] = undefined;
+  export let type: NodeProps['type'];
   type;
   /** Node selected */
-  export let selected: NodeProps['selected'] = undefined;
+  export let selected: NodeProps['selected'];
   selected;
   /** Node is connectable */
-  export let isConnectable: NodeProps['isConnectable'] = undefined;
+  export let isConnectable: NodeProps['isConnectable'];
   isConnectable;
   /** Node z index */
-  export let zIndex: NodeProps['zIndex'] = undefined;
+  export let zIndex: NodeProps['zIndex'];
   zIndex;
   /** Node width */
   export let width: NodeProps['width'] = undefined;

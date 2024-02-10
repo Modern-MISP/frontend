@@ -17,7 +17,7 @@
   /** Node data */
   export let data: $$Props['data'];
   /** Node drag handle */
-  export let dragHandle: $$Props['dragHandle'] = undefined;
+  export let dragHandle: $$Props['dragHandle'];
   /** Node type */
   export let type: $$Props['type'] = undefined;
   /** Node selected */
