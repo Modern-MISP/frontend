@@ -1,16 +1,18 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Icon from '@iconify/svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/galaxies', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/galaxies', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
@@ -13,7 +14,7 @@ import type { Trigger } from './trigger';
 
 export const load: PageLoad = async ({ fetch }) => {
   /// @ts-expect-error Not in the OpenAPI spec.. great.
-  const getResult = await GET('/workflows/triggers', { fetch });
+  const getResult = await get(api).GET('/workflows/triggers', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as unknown as Trigger[];
 

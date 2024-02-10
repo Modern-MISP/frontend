@@ -1,7 +1,8 @@
-import { GET } from '$lib/api';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { api } from '$lib/api';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
@@ -9,7 +10,7 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/servers', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

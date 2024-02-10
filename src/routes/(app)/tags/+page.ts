@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
@@ -9,7 +10,7 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/tags', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/tags', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
