@@ -175,7 +175,8 @@
     object: ObjectNode
   };
 
-  let menu: { id: string, data: any } | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let menu: { id: string; data: any } | null;
 
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
@@ -220,7 +221,7 @@
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu onClick={handlePaneClick} id={menu.id} data={menu.data}/>
+      <ContextMenu onClick={handlePaneClick} id={menu.id} data={menu.data} />
     {/if}
     <Flow
       {nodes}

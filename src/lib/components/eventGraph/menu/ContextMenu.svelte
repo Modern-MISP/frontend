@@ -5,6 +5,7 @@
 
   export const onClick = () => {};
   export let id: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export let data: any;
 
   const nodes = useNodes();
@@ -27,13 +28,12 @@
   }
 
   function hideNode() {
-    console.log(data)
     $nodes = $nodes.filter((node) => node.id !== id);
     $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
   }
 
   function showNodeDetails() {
-    console.log(data)
+    console.log(data);
   }
 </script>
 
