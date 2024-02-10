@@ -1,7 +1,8 @@
 import { PUBLIC_MISP_API_ENDPOINT, PUBLIC_REST_DISABLED } from '$env/static/public';
+import { createLocalStorageStore } from '$lib/util/store.util';
 import { error } from '@sveltejs/kit';
 import createClient, { type FetchResponse } from 'openapi-fetch';
-import { derived, writable } from 'svelte/store';
+import { derived } from 'svelte/store';
 import { objectEntries } from 'ts-extras';
 import type { paths } from './misp'; // generated from openapi-typescript
 
@@ -9,7 +10,7 @@ async function defaultDisabled(): Promise<FetchResponse<object>> {
   error(503, 'The REST method you try to use is disabled');
 }
 
-export const token = writable<string | null>(null);
+export const token = createLocalStorageStore('no token', 'token');
 
 export const api = derived(token, ($token) => {
   const client = {
