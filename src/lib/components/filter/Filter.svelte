@@ -24,8 +24,12 @@
   $: optionValue = option?.value(undefined);
 </script>
 
-<div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-1 lg:w-1/2">
-  <form on:submit|preventDefault={(e) => (currentFilter = [...currentFilter, ...getFormValues(e)])}>
+<div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-1/2">
+  <form
+    on:submit|preventDefault={(e) => {
+      currentFilter = [...currentFilter, ...getFormValues(e)];
+    }}
+  >
     <FilterCard>
       <span slot="heading"> Add Filter </span>
 
@@ -41,11 +45,8 @@
         <Input name={optionValue} placeholder={option?.label} class="!bg-overlay0" />
       {/if}
 
-      <!-- Add element to list. Triggers form submit, cuz type of submit per default. If you change the default ty of the button, you also have to change this. -->
-      <Button class="!bg-overlay0 text-sky self-end w-min gap-4 py-2 mt-auto">
-        <span> Add </span>
-        <Icon icon="mdi:arrow-right" />
-      </Button>
+      <!-- Add element to list. Triggers form submit, cuz type of submit per default. If you change the default type of the button, you also have to change this. -->
+      <Button class="self-end py-2 mt-auto w-min text-sky" suffixIcon="mdi:arrow-right">Add</Button>
     </FilterCard>
   </form>
 
@@ -54,7 +55,7 @@
 
     <body class="flex flex-col gap-2">
       {#each currentFilter as filter}
-        <div class="flex items-center gap-3 p-2 rounded-md bg-overlay0">
+        <div class="flex items-center gap-3 p-2 rounded-md bg-surface1">
           <!-- Api request key => Should probably add a label to not show internal attributes. -->
           <span class="grow">
             {Object.keys(filter)[0]}
