@@ -1,6 +1,6 @@
 <script lang="ts">
   import { api } from '$lib/api';
-  import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
+  import BaseNode from '$lib/components/svelteflow/BaseNode.svelte';
   import Icon from '@iconify/svelte';
   import { Handle, Position, useSvelteFlow, type NodeProps } from '@xyflow/svelte';
   import { tick } from 'svelte';

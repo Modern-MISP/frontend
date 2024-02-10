@@ -1,6 +1,6 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { type Node, useSvelteFlow } from '@xyflow/svelte';
+  import { type Node, useSvelteFlow, type NodeTypes } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import ModuleInfo from './ModuleInfo.svelte';
   import { mode } from '$lib/stores';
@@ -15,6 +15,8 @@
   import { cloneDeep, debounce, range } from 'lodash-es';
   import { actionBar } from '$lib/actions';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+  import ModuleNode from './ModuleNode.svelte';
+  import FrameNode from './FrameNode.svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -181,6 +183,12 @@
     $edges;
     applyGraphCheck();
   }
+  const nodeTypes: NodeTypes = {
+    trigger: ModuleNode,
+    action: ModuleNode,
+    logic: ModuleNode,
+    frame: FrameNode
+  };
 </script>
 
 <!--
@@ -219,6 +227,7 @@
   </div>
   <div class="flex-col w-full h-full basis-full">
     <Flow
+      {nodeTypes}
       {nodes}
       {edges}
       defaultEdgeOptions={{

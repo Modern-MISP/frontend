@@ -11,8 +11,6 @@
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
   import { mode } from '$lib/stores';
-  import FrameNode from './nodes/FrameNode.svelte';
-  import ModuleNode from './nodes/ModuleNode.svelte';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;
@@ -20,19 +18,10 @@
   /** Edges that are rendered on the flow */
   export let edges: Writable<Edge[]>;
 
-  let additionalNodeTypes: NodeTypes | undefined = undefined;
   /**
-   * Additional nodeTypes to pass to SvelteFlow.
+   * Custom node types to pass to SvelteFlow.
    */
-  export { additionalNodeTypes as nodeTypes };
-
-  const nodeTypes: NodeTypes = {
-    trigger: ModuleNode,
-    action: ModuleNode,
-    logic: ModuleNode,
-    frame: FrameNode,
-    ...additionalNodeTypes
-  };
+  export let nodeTypes: NodeTypes | undefined = undefined;
 
   /** Dimensions of the grid that nodes will snap onto */
   export let snapGrid: [number, number] = [25, 25];
