@@ -16,13 +16,13 @@
     if (node) {
       $nodes.push({
         ...node,
-        // needs better id
+        // need better id
         id: `${id}-copy${Math.random()}`,
         position: {
           x: node.position.x,
           y: node.position.y + 50
         },
-        // needs to copy all data except ids
+        // need to copy all data except ids
         data: node.data
       });
     }
@@ -36,6 +36,59 @@
 
   function showNodeDetails() {
     console.log(data);
+  }
+
+  function manipulateNode(expand: boolean) {
+    const node = $nodes.find((node) => node.id === id);
+    // Only objects are collapsible
+    if (node && node.type === 'object') {
+      // Get all edges associated with the selected node
+      const nodeEdges = $edges.filter((edge) => edge.source === node.id);
+
+      // Iterate to find associated attribute nodes
+      nodeEdges.forEach((edge) => {
+        const associatedNode = $nodes.find((n) => n.id === edge.target);
+        if (associatedNode && associatedNode.type === 'attribute') {
+          // Update visibility based on expand parameter
+          const hiddenValue = expand ? false : true;
+
+          // Hide or show the attribute node
+          $nodes = $nodes.map((n) => {
+            if (n.id === associatedNode.id) {
+              return {
+                ...n,
+                hidden: hiddenValue
+              };
+            }
+            return n;
+          });
+
+          // Hide or show the edge connecting object node and attribute node
+          $edges = $edges.map((e) => {
+            if (e.source === node.id && e.target === associatedNode.id) {
+              return {
+                ...e,
+                hidden: hiddenValue
+              };
+            }
+            return e;
+          });
+        }
+      });
+    }
+  }
+
+  function expandNode() {
+    manipulateNode(true);
+  }
+
+  function collapseNode() {
+    manipulateNode(false);
+  }
+
+  function deleteNode() {
+    hideNode();
+    // need to delete (api)
   }
 </script>
 
@@ -57,13 +110,13 @@
   </IconCardRow>
 
   <IconCardRow class="border-2 border-sky">
-    <IconCard icon="bx:expand" text="Expand" />
-    <IconCard icon="bx:collapse" text="Collapse" class="!text-red" />
+    <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
+    <IconCard icon="bx:collapse" text="Collapse" class="!text-red" on:click={collapseNode} />
   </IconCardRow>
 
   <IconCardRow class="border-2 border-sky">
     <IconCard icon="mdi:edit" text="Edit" />
     <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
-    <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
+    <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
   </IconCardRow>
 </div>
