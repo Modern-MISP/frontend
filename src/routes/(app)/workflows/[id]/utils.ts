@@ -63,9 +63,9 @@ export function constructWorkflowData(
   nodes: Node[],
   edges: Edge[]
 ): WorkflowData {
-  const removeConnections = (anyputs: ModuleNode['inputs'] | ModuleNode['outputs']) => {
-    if (Array.isArray(anyputs)) return anyputs;
-    return objectFromEntries(Object.keys(anyputs).map((key) => [key, { connections: [] }]));
+  const getAnyputs = (anyputs: string[]) => {
+    if (anyputs.length === 0) return [];
+    return objectFromEntries(anyputs.map((a) => [a, { connections: [] }]));
   };
 
   const constructedData = {
@@ -76,11 +76,12 @@ export function constructWorkflowData(
           node.id,
           {
             ...wfData[node.id],
+            id: Number.parseInt(node.id),
             data: node.data.moduleData,
             pos_x: node.position.x,
             pos_y: node.position.y,
-            inputs: removeConnections(wfData[node.id].inputs),
-            outputs: removeConnections(wfData[node.id].outputs)
+            inputs: getAnyputs(node.data.inputs),
+            outputs: getAnyputs(node.data.outputs)
           } as ModuleNode
         ])
     ),
@@ -110,6 +111,6 @@ export function constructWorkflowData(
       input: edge.sourceHandle!
     });
   }
-
+  console.log(constructedData);
   return constructedData;
 }

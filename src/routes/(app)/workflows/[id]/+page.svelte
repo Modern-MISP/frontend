@@ -12,6 +12,9 @@
   import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
   import { writable } from 'svelte/store';
   import { objectEntries } from 'ts-extras';
+  import { range } from 'lodash-es';
+  import { actionBar } from '$lib/actions';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -99,13 +102,19 @@
       y: event.clientY
     });
 
+    const emptyAnyputs = (count: number, id: (i: number) => string) => {
+      return range(1, count + 1).map(id);
+    };
+
+    const newId =
+      Math.max(...$nodes.filter((n) => n.type !== 'frame').map((n) => Number.parseInt(n.id))) + 1;
     const newNode = {
-      id: `${newModule.id}`,
+      id: `${newId}`,
       type: newModule.module_type,
       position,
       data: {
-        inputs: [],
-        outputs: [],
+        inputs: emptyAnyputs(newModule.inputs ?? 0, (i) => `input_${i}`),
+        outputs: emptyAnyputs(newModule.inputs ?? 0, (i) => `output_${i}`),
         moduleData: {
           id: newModule.id,
           name: newModule.name,
@@ -144,6 +153,21 @@
     }
   }
 
+  const workflowActions: ActionBarEntryProps[] = [
+    {
+      icon: 'material-symbols:save-outline-rounded',
+      label: 'Save',
+      class: 'text-green',
+      action: () => {}
+    },
+    {
+      icon: workflow.debug_enabled ? 'mdi:bug-check' : 'mdi:bug',
+      label: 'Debug',
+      class: workflow.debug_enabled ? 'text-green' : 'text-text',
+      action: () => {}
+    }
+  ];
+
   // reactively check graph when edges change
   $: {
     $edges;
@@ -157,6 +181,7 @@
   All the information about a specific workflow,
   including an interactive node-based diagram for visualization.
 -->
+<svelte:window use:actionBar={workflowActions} />
 <div class="flex flex-row h-full">
   <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}
