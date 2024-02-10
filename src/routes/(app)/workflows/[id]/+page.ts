@@ -85,11 +85,14 @@ export const load = async ({ params, fetch }) => {
     })
   ];
 
-  // @ts-expect-error Not in the OpenAPI spec
-  const moduleData = GET('/workflows/moduleIndex/type:all', { fetch }).then((result) => {
-    if (result.error) error(result.response.status as NumericRange<400, 599>, result.error.message);
-    return result.data as Module[];
-  });
+  const moduleData = get(api)
+    // @ts-expect-error Not in the OpenAPI spec
+    .GET('/workflows/moduleIndex/type:all', { fetch })
+    .then((result) => {
+      if (result.error)
+        error(result.response.status as NumericRange<400, 599>, result.error.message);
+      return result.data as Module[];
+    });
 
   async function checkGraph(constructWorkflowData: () => WorkflowData) {
     // @ts-expect-error Api does not support this
@@ -111,8 +114,8 @@ export const load = async ({ params, fetch }) => {
     formData.append('data[Workflow][description]', description);
     formData.append('data[Workflow][data]', JSON.stringify(wfData));
 
-    // @ts-expect-error Not in the OpenAPI spec
     await get(api)
+      // @ts-expect-error Not in the OpenAPI spec
       .POST('/workflows/edit/{workflowId}', {
         params: { path: { workflowId: params.id } },
         headers: {
@@ -148,8 +151,8 @@ export const load = async ({ params, fetch }) => {
     formData.append('_method', 'POST');
     formData.append('data[Token][unlocked]', '');
 
-    // @ts-expect-error Not in the OpenAPI spec
     get(api)
+      // @ts-expect-error Not in the OpenAPI spec
       .POST('/workflows/debugToggleField/{workflowId}/{enabled}', {
         params: {
           path: {
