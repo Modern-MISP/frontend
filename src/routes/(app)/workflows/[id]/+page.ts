@@ -1,4 +1,5 @@
-import { GET, POST } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
@@ -16,7 +17,7 @@ export const load = async ({ params, fetch }) => {
     error: mispError,
     response
     // @ts-expect-error '/workflows/view' is not specified within the OpenAPI spec
-  } = await GET('/workflows/view/{workflowId}', {
+  } = await get(api).GET('/workflows/view/{workflowId}', {
     params: { path: { workflowId: params.id } },
     fetch
   });
@@ -111,14 +112,15 @@ export const load = async ({ params, fetch }) => {
     formData.append('data[Workflow][data]', JSON.stringify(wfData));
 
     // @ts-expect-error Not in the OpenAPI spec
-    await POST('/workflows/edit/{workflowId}', {
-      params: { path: { workflowId: params.id } },
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      body: formData,
-      bodySerializer: (x) => new URLSearchParams(x)
-    })
+    await get(api)
+      .POST('/workflows/edit/{workflowId}', {
+        params: { path: { workflowId: params.id } },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: formData,
+        bodySerializer: (x) => new URLSearchParams(x)
+      })
       .then((resp) => {
         if (resp.error)
           throw Error(
@@ -147,19 +149,20 @@ export const load = async ({ params, fetch }) => {
     formData.append('data[Token][unlocked]', '');
 
     // @ts-expect-error Not in the OpenAPI spec
-    POST('/workflows/debugToggleField/{workflowId}/{enabled}', {
-      params: {
-        path: {
-          workflowId: params.id,
-          enabled: enable ? '1' : '0'
-        }
-      },
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      body: formData,
-      bodySerializer: (x) => new URLSearchParams(x)
-    })
+    get(api)
+      .POST('/workflows/debugToggleField/{workflowId}/{enabled}', {
+        params: {
+          path: {
+            workflowId: params.id,
+            enabled: enable ? '1' : '0'
+          }
+        },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: formData,
+        bodySerializer: (x) => new URLSearchParams(x)
+      })
       .then((resp) => {
         if (resp.error) throw Error(resp.error.message);
       })

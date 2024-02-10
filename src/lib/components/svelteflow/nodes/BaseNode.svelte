@@ -56,6 +56,6 @@
   The base component for all custom diagram nodes.
   Other custom node types should use this as their container.
 -->
-<div class="px-4 py-2 rounded-md shadow-md bg-surface1 {clazz}">
+<div class="px-4 py-2 rounded-md shadow-md bg-surface0 {clazz}">
   <slot />
 </div>

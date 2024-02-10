@@ -1,11 +1,12 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import Input from '$lib/components/input/Input.svelte';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
@@ -17,7 +18,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/auth_keys/view/{authKeyId}', {
+  } = await get(api).GET('/auth_keys/view/{authKeyId}', {
     params: { path: { authKeyId: params.id } },
     fetch
   });

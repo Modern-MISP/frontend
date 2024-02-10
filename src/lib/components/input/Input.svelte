@@ -55,9 +55,9 @@
  -->
 
 <label
-  class="relative flex items-center gap-2 px-2 py-2 text-text rounded-lg {clazz}"
-  class:bg-crust={!disabled}
-  class:bg-base={disabled}
+  class="relative flex items-center gap-2 px-4 py-2 text-text rounded-lg bg-surface1 cursor-text {clazz}"
+  class:!bg-overlay0={disabled}
+  class:!cursor-not-allowed={disabled}
 >
   <slot name="icon">
     {#if icon}
@@ -74,14 +74,14 @@
     {type}
     {value}
     {disabled}
-    class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer"
+    class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
   />
   {#if placeholder && (!disabled || !value)}
     <label
       for={id}
-      class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
-			peer-placeholder-shown:text-text peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
-			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0"
+      class="rounded-md absolute bg-inherit -top-3 left-2 px-2 text-sm transition-all
+			peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
+			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0 cursor-inherit"
       class:peer-placeholder-shown:left-9={$$slots.icon || icon}
     >
       {placeholder}</label
