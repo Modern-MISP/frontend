@@ -25,7 +25,7 @@
 
   import Filter from '$lib/components/filter/Filter.svelte';
   import { mode, notifications } from '$lib/stores';
-  import { merge } from 'lodash-es';
+  import { constant, merge } from 'lodash-es';
 
   /**
    * Your initial data
@@ -56,6 +56,11 @@
   export let pagination = true;
 
   /**
+   * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
+   */
+  export let groupInfo: (x: T) => unknown | undefined = constant(undefined);
+
+  /**
    * The href where the use will be navigated, if clicked on an row {@see DynTable.href}
    * @param row The row the user clicked. Defaults to the id. You should define this, if your data does not include an id.
    * @param row.id Defaults to the id of the row
@@ -71,6 +76,14 @@
     | ((body: Record<string, unknown>) => ReturnType<typeof POST | typeof GET>)
     | undefined = undefined;
 
+  /**
+   * A transform function for the response data, after more data gets loaded (by pagination, filter). Default: (x) => x as T[] (no transformation)
+   * @param x response data (untransformed)
+   * @returns The transformed data
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Can not know the type of the response here. Depends on endpoint. Fixing this with a generic would be too much work.
+  export let dataAccess: (body: any) => T[] = (x) => x as T[];
+
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
     if (!endpoint) return;
     const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
@@ -81,13 +94,13 @@
     }
 
     if (response.ok && _data) {
-      tableData = _data as T[];
+      tableData = dataAccess(_data);
     }
   };
 
   $: pagPage = 1;
 
-  $: loadMore({ ...merge({}, ...currentFilter, pagination ? { page: pagPage } : {}) });
+  $: loadMore({ ...merge({}, ...currentFilter, pagination ? { page: pagPage, limit: 50 } : {}) });
 
   let filterOpen = false;
   let currentFilter: Record<string, string>[] = [];
@@ -126,14 +139,16 @@
 </div>
 <div class="relative flex h-full overflow-hidden">
   <slot>
-    <DynTable
-      href={tableHref}
-      {header}
-      data={tableData}
-      selectMode={$mode === 'edit'}
-      bind:activeRows
-    />
-
+    <slot name="table">
+      <DynTable
+        href={tableHref}
+        {header}
+        data={tableData}
+        selectMode={$mode === 'edit'}
+        bind:activeRows
+        {groupInfo}
+      />
+    </slot>
     {#if filter.length > 0 && filterOpen}
       <Filter header={filter} bind:currentFilter />
     {/if}
