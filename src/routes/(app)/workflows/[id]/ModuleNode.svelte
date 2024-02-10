@@ -41,7 +41,6 @@
   /** Node absolute y position */
   export let positionAbsoluteY: $$Props['positionAbsoluteY'];
 
-  // TODO: define 'module' type to use here
   /** Similar to `data.moduleData`, but with more and differently named properties. */
   let fullData: Module = {};
   get(api)
