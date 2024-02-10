@@ -6,7 +6,9 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { Module } from '../modules/module';
-import type { CheckGraphResult, Workflow } from '../workflow';
+import type { CheckGraphResult, Workflow, WorkflowData } from '../workflow';
+import { invalidateAll } from '$app/navigation';
+import { notifications } from '$lib/stores';
 
 export const load = async ({ params, fetch }) => {
   const {
@@ -88,7 +90,7 @@ export const load = async ({ params, fetch }) => {
     return result.data as Module[];
   });
 
-  async function checkGraph(constructWorkflowData: () => Workflow['data']) {
+  async function checkGraph(constructWorkflowData: () => WorkflowData) {
     // @ts-expect-error Api does not support this
     const checkGraphResponse = await POST('/workflows/checkGraph', {
       headers: {
@@ -102,10 +104,82 @@ export const load = async ({ params, fetch }) => {
     return checkGraphResponse.data as CheckGraphResult;
   }
 
+  async function saveWorkflow(name: string, description: string, wfData: WorkflowData) {
+    const formData = new FormData();
+    formData.append('data[Workflow][name]', name);
+    formData.append('data[Workflow][description]', description);
+    formData.append('data[Workflow][data]', JSON.stringify(wfData));
+
+    // @ts-expect-error Not in the OpenAPI spec
+    await POST('/workflows/edit/{workflowId}', {
+      params: { path: { workflowId: params.id } },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: formData,
+      bodySerializer: (x) => new URLSearchParams(x)
+    })
+      .then((resp) => {
+        if (resp.error)
+          throw Error(
+            // @ts-expect-error MISP returns 'errors' property
+            resp.error.errors ?? resp.error.message
+          );
+        notifications.add({
+          icon: 'mdi:check',
+          text: 'saved'
+        });
+      })
+      .then(invalidateAll)
+      .catch((error) => {
+        notifications.add({
+          icon: 'mdi:exclamation-thick',
+          label: 'error',
+          text: error.message,
+          class: 'text-red'
+        });
+      });
+  }
+
+  async function toggleDebug(enable: boolean) {
+    const formData = new FormData();
+    formData.append('_method', 'POST');
+    formData.append('data[Token][unlocked]', '');
+
+    // @ts-expect-error Not in the OpenAPI spec
+    POST('/workflows/debugToggleField/{workflowId}/{enabled}', {
+      params: {
+        path: {
+          workflowId: params.id,
+          enabled: enable ? '1' : '0'
+        }
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: formData,
+      bodySerializer: (x) => new URLSearchParams(x)
+    })
+      .then((resp) => {
+        if (resp.error) throw Error(resp.error.message);
+      })
+      .then(invalidateAll)
+      .catch((error) => {
+        notifications.add({
+          icon: 'mdi:exclamation-thick',
+          label: 'error',
+          text: error,
+          class: 'text-red'
+        });
+      });
+  }
+
   return {
     workflow,
     infoHeader,
     moduleData,
-    checkGraph
+    checkGraph,
+    saveWorkflow,
+    toggleDebug
   };
 };
