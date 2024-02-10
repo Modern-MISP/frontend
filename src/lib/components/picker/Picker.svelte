@@ -88,8 +88,9 @@
 <div class="box-border relative overflow-visible">
   <div
     class="flex flex-row items-center w-full gap-2 p-2 rounded-lg"
-    class:bg-crust={!disabled}
-    class:bg-base={disabled}
+    class:bg-surface1={!disabled}
+    class:bg-overlay0={disabled}
+    class:cursor-not-allowed={disabled}
   >
     <div class="flex flex-wrap gap-1 overflow-hidden rounded-md bg-inherit w-max">
       {#each pickedItems as props, i}

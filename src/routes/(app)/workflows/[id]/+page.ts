@@ -96,7 +96,7 @@ export const load = async ({ params, fetch }) => {
 
   async function checkGraph(constructWorkflowData: () => WorkflowData) {
     // @ts-expect-error Api does not support this
-    const checkGraphResponse = await POST('/workflows/checkGraph', {
+    const checkGraphResponse = await get(api).POST('/workflows/checkGraph', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
