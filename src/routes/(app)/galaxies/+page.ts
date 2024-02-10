@@ -1,4 +1,6 @@
-import { GET, POST } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -13,7 +15,7 @@ import Icon from '@iconify/svelte';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/galaxies', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/galaxies', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
   const tableData = data.map(
@@ -92,7 +94,10 @@ export const load: PageLoad = async ({ fetch }) => {
             .map((y) => y.id)
             .map((galaxyId) =>
               // @ts-expect-error Not in the OpenAPI spec.. great.
-              POST('/galaxies/enable/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+              get(api).POST('/galaxies/enable/{galaxyId}', {
+                fetch,
+                params: { path: { galaxyId } }
+              })
             )
         ).then(invalidateAll);
       }
@@ -106,7 +111,10 @@ export const load: PageLoad = async ({ fetch }) => {
             .map((y) => y.id)
             .map((galaxyId) =>
               // @ts-expect-error Not in the OpenAPI spec.. great.
-              POST('/galaxies/disable/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+              get(api).POST('/galaxies/disable/{galaxyId}', {
+                fetch,
+                params: { path: { galaxyId } }
+              })
             )
         ).then(invalidateAll);
       }
@@ -126,7 +134,10 @@ export const load: PageLoad = async ({ fetch }) => {
               .map((y) => y.id)
               .map((galaxyId) =>
                 //  @ts-expect-error Not in the OpenAPI spec.. great.
-                POST('/galaxies/delete/{galaxyId}', { fetch, params: { path: { galaxyId } } })
+                get(api).POST('/galaxies/delete/{galaxyId}', {
+                  fetch,
+                  params: { path: { galaxyId } }
+                })
               )
           ).then(invalidateAll);
         }
@@ -139,7 +150,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Refresh Galaxies',
       action: () => {
         if (confirm('Do you want to update all Galaxies?'))
-          POST('/galaxies/update').then(invalidateAll);
+          get(api).POST('/galaxies/update').then(invalidateAll);
       }
     },
     {

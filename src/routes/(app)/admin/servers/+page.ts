@@ -1,7 +1,8 @@
-import { GET, POST } from '$lib/api';
+import { api } from '$lib/api';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import { invalidateAll } from '$app/navigation';
@@ -14,7 +15,7 @@ import { notifications } from '$lib/stores';
 import { errorPill, successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/servers', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -170,7 +171,7 @@ export const load: PageLoad = async ({ fetch }) => {
           x
             .map((y) => y.Server?.id)
             .map((serverId) =>
-              POST('/servers/delete/{serverId}', {
+              get(api).POST('/servers/delete/{serverId}', {
                 fetch,
                 params: { path: { serverId: serverId as string } }
               })
@@ -214,7 +215,7 @@ export const load: PageLoad = async ({ fetch }) => {
             .map((y) => y.Server?.id)
             .map((serverId) =>
               // @ts-expect-error Not in the OpenAPI spec.. great. Don't even know if the endpoint works...
-              POST('/servers/cache/{serverId}', {
+              get(api).POST('/servers/cache/{serverId}', {
                 fetch,
                 params: { path: { serverId: serverId as string } }
               })

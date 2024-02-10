@@ -35,9 +35,9 @@
   
  -->
 <div
-  class="relative flex items-center rounded-md text-text {clazz}"
-  class:bg-crust={!disabled}
-  class:bg-base={disabled}
+  class="relative flex items-center rounded-md text-text bg-surface1 {clazz}"
+  class:!bg-overlay0={disabled}
+  class:cursor-not-allowed={disabled}
 >
   <select
     class="w-full px-4 py-3 pr-8 transition-all rounded-md appearance-none bg-inherit pe-3"

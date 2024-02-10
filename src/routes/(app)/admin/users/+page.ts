@@ -1,5 +1,5 @@
+import { api } from '$lib/api';
 import { invalidateAll } from '$app/navigation';
-import { DELETE, GET } from '$lib/api';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
@@ -12,10 +12,11 @@ import { notifications } from '$lib/stores';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/admin/users', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -138,7 +139,7 @@ export const load: PageLoad = async ({ fetch }) => {
           x
             .map((y) => y.User?.id)
             .map((userId) =>
-              DELETE('/admin/users/delete/{userId}', {
+              get(api).DELETE('/admin/users/delete/{userId}', {
                 fetch,
                 params: { path: { userId: userId as string } }
               })
@@ -184,7 +185,7 @@ export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec.. great.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: roleData }: { data: any[] } = await GET('/roles');
-  const { data: orgData } = await GET('/organisations');
+  const { data: orgData } = await get(api).GET('/organisations');
 
   const fil = createTableHeadGenerator<undefined>();
   const filter = [

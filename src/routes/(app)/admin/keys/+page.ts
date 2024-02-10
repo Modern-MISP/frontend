@@ -1,5 +1,5 @@
+import { api } from '$lib/api';
 import { invalidateAll } from '$app/navigation';
-import { POST } from '$lib/api';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
@@ -10,6 +10,7 @@ import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
@@ -17,7 +18,7 @@ export const load: PageLoad = async ({ fetch }) => {
     data,
     error: mispError,
     response
-  } = await POST('/auth_keys', { fetch, body: { limit: 50, page: 1 } }); // I think limit does not work here. I guess there is no api support. great...
+  } = await get(api).POST('/auth_keys', { fetch, body: { limit: 50, page: 1 } }); // I think limit does not work here. I guess there is no api support. great...
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -156,7 +157,7 @@ export const load: PageLoad = async ({ fetch }) => {
               .filter((x) => x)
               .map((keyId) =>
                 // @ts-expect-error Not in the OpenAPI spec.. great.
-                POST('/auth_keys/delete/{keyId}', {
+                get(api).POST('/auth_keys/delete/{keyId}', {
                   fetch,
                   params: { path: { keyId: keyId as string } }
                 })
