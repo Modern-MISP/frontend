@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
@@ -17,7 +18,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     error: mispError,
     response
     // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
-  } = await GET('/workflows/moduleView/{triggerId}', {
+  } = await get(api).GET('/workflows/moduleView/{triggerId}', {
     params: { path: { triggerId: params.id } },
     fetch
   });

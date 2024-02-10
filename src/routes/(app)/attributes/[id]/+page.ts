@@ -1,15 +1,16 @@
-import { GET } from '$lib/api';
-import { error, type NumericRange } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import { api } from '$lib/api';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import attributeCols from '../attributeCols';
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
     response,
     data,
     error: mispError
-  } = await GET('/attributes/view/{attributeId}', {
+  } = await get(api).GET('/attributes/view/{attributeId}', {
     params: { path: { attributeId: params.id } },
     fetch
   });

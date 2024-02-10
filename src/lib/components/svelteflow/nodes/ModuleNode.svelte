@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { GET } from '$lib/api';
+  import { api } from '$lib/api';
   import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
-  import { Handle, Position, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-  import ModuleParam from './ModuleParam.svelte';
   import Icon from '@iconify/svelte';
+  import { Handle, Position, useSvelteFlow, type NodeProps } from '@xyflow/svelte';
   import { tick } from 'svelte';
+  import { get } from 'svelte/store';
+  import ModuleParam from './ModuleParam.svelte';
 
   const svelteFlow = useSvelteFlow();
 
@@ -43,15 +44,17 @@
   /** Similar to `data.moduleData`, but with more and differently named properties. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let fullData: any = {};
-  // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
-  GET('/workflows/moduleView/{moduleId}', {
-    params: { path: { moduleId: data.moduleData.id } }
-  }).then(async (res) => {
-    fullData = res.data;
-    await tick();
-    svelteFlow.fitView();
-    data.onUpdate(id);
-  });
+  get(api)
+    // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
+    .GET('/workflows/moduleView/{moduleId}', {
+      params: { path: { moduleId: data.moduleData.id } }
+    })
+    .then(async (res) => {
+      fullData = res.data;
+      await tick();
+      svelteFlow.fitView();
+      data.onUpdate(id);
+    });
   $: console.log(data.moduleData.name, fullData);
 
   // TODO: better handle positioning
@@ -81,24 +84,24 @@
   class={fullData.disabled ? 'border-4 border-red' : ''}
 >
   <div class="flex flex-col">
-    <div class="flex flex-row gap-1 items-center">
-      <span class="italic mb-2 mr-5 basis-full">{data.moduleData.module_type}</span>
+    <div class="flex flex-row items-center gap-1">
+      <span class="mb-2 mr-5 italic basis-full">{data.moduleData.module_type}</span>
       {#if data.moduleData.misp_core_format}
         <span
-          class="text-sky text-2xl"
+          class="text-2xl text-sky"
           title="The data passed by this trigger is compliant with the MISP core format"
         >
           <Icon icon="material-symbols:chat" />
         </span>
       {/if}
       {#if fullData.disabled}
-        <button class="text-red text-2xl hover:mix-blend-hard-light" title="Module disabled">
+        <button class="text-2xl text-red hover:mix-blend-hard-light" title="Module disabled">
           <Icon icon="fa6-solid:circle-exclamation" />
         </button>
       {/if}
       {#if fullData.blocking}
         <button
-          class="text-peach text-2xl hover:mix-blend-hard-light"
+          class="text-2xl text-peach hover:mix-blend-hard-light"
           title="Blocking module might not work as intended"
         >
           <Icon icon="fa6-solid:triangle-exclamation" />
@@ -106,25 +109,25 @@
       {/if}
       {#if fullData.support_filters}
         <button
-          class="text-sky text-2xl hover:mix-blend-hard-light"
+          class="text-2xl text-sky hover:mix-blend-hard-light"
           title="module filtering conditions"
         >
           <Icon icon="mdi:filter" />
         </button>
       {/if}
       {#if fullData.module_type !== 'trigger'}
-        <button class="text-sky text-2xl hover:mix-blend-hard-light" title="node settings">
+        <button class="text-2xl text-sky hover:mix-blend-hard-light" title="node settings">
           <Icon icon="mdi:dots-horizontal" />
         </button>
       {/if}
     </div>
-    <div class="flex flex-row gap-3 w-full items-center text-lg">
+    <div class="flex flex-row items-center w-full gap-3 text-lg">
       <Icon icon={`fa6-solid:${fullData.icon}`} />
       <span class="font-bold basis-full">{data.moduleData.name}</span>
     </div>
 
     {#if (fullData.params ?? []).length > 0}
-      <hr class="border-text h-1 my-3" />
+      <hr class="h-1 my-3 border-text" />
       {#if fullData.module_type === 'action'}
         <span class="max-w-xs mb-2">{fullData.description}</span>
       {/if}

@@ -1,19 +1,20 @@
+import { api } from '$lib/api';
 import { genSelectProps } from '$lib/util/select.util';
-import { GET } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { filter } from 'lodash-es';
+import { get } from 'svelte/store';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Input from '$lib/components/input/Input.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-import Input from '$lib/components/input/Input.svelte';
 
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 export const load = async ({ params, fetch }) => {
-  const { data, error: mispError, response } = await GET('/servers', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -21,7 +22,7 @@ export const load = async ({ params, fetch }) => {
   console.log(server);
   const col = createTableHeadGenerator<typeof server>();
 
-  const { data: orgs } = await GET('/organisations', { fetch });
+  const { data: orgs } = await get(api).GET('/organisations', { fetch });
   const orgOptions = orgs?.map((x) => x.Organisation);
 
   const left = [

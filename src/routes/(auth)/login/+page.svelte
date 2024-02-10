@@ -5,17 +5,24 @@
   import { getFormValues } from '$lib/util/form.util';
   import { merge } from 'lodash-es';
   import { login } from './authMock';
+  import { PUBLIC_MISP_KEY } from '$env/static/public';
+  import { token } from '$lib/api';
 
-  let error: string | null = null;
+  let error: string = '';
 
   async function submit(event: SubmitEvent) {
     const entries = merge({}, ...getFormValues(event));
-    console.log(entries);
+    if ('token' in entries && entries.token) {
+      $token = entries.token;
+      localStorage.setItem('authToken', entries.token);
+      goto('/events');
+      return;
+    }
 
     try {
       const res = await login(entries as { email: string; password: string });
       if (res) {
-        localStorage.setItem('authToken', 'Bearer: security');
+        localStorage.setItem('authToken', PUBLIC_MISP_KEY);
         goto('/events');
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,17 +41,27 @@
   
 -->
 
-<form class="flex flex-col gap-4 m-auto w-80" method="post" on:submit|preventDefault={submit}>
-  <h1 class="text-4xl font-bold text-white">
+<form
+  class="flex flex-col gap-4 m-auto w-80 text-text"
+  method="post"
+  on:submit|preventDefault={submit}
+>
+  <h1 class="text-4xl font-bold leading-normal">
     Login
     <hr />
   </h1>
-  <Input name="email" placeholder="Email" icon="mdi:email-outline" />
-  <Input name="password" placeholder="Password" icon="mdi:lock-outline" />
-  <Button class="py-2 !w-fit text-text self-end" suffixIcon="mdi:chevron-right">Login</Button>
-  {#if error}
-    <div class="text-red">
-      {error}
-    </div>
-  {/if}
+  <Input name="email" placeholder="Email" />
+  <Input name="password" placeholder="Password" type="password" icon="mdi:lock-outline" />
+
+  <div class="relative flex items-center justify-center">
+    <hr class="absolute w-full" />
+
+    <div class="z-10 px-2 bg-base">or</div>
+  </div>
+
+  <Input name="token" placeholder="Token" icon="mdi:key-outline" />
+  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right">Login</Button>
+  <span class="h-12 text-red">
+    {error}
+  </span>
 </form>
