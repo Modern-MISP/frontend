@@ -13,7 +13,7 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import { shouldTextBeBlack } from '$lib/util/color.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { format } from 'date-fns';
 

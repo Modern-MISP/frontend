@@ -14,6 +14,7 @@
   const dispatch = createEventDispatcher<{
     close: void;
     add: { id: string; relation: string; local: boolean }[];
+    createTag: void;
   }>();
 
   /**
@@ -54,8 +55,10 @@
   </Card>
   <Card class="!h-min overflow-initial">
     <div class="flex justify-center gap-4">
-      <Button class="w-min whitespace-nowrap bg-surface1" suffixIcon="mdi:plus-circle-outline"
-        >Create new Tag</Button
+      <Button
+        class="w-min whitespace-nowrap bg-surface1"
+        suffixIcon="mdi:plus-circle-outline"
+        on:click={() => dispatch('createTag')}>Create new Tag</Button
       >
       <Button
         class="w-min text-red bg-surface1"

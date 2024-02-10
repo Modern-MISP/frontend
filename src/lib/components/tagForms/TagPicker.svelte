@@ -3,7 +3,7 @@
   import type { components } from '$lib/api/misp';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { notifications } from '$lib/stores';
-  import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+  import { shouldTextBeBlack } from '$lib/util/color.util';
   import { errorPill } from '$lib/util/pill.util';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';

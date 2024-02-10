@@ -4,7 +4,7 @@
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { mode } from '$lib/stores';
-  import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+  import { shouldTextBeBlack } from '$lib/util/color.util';
   import Icon from '@iconify/svelte';
   import type { PageData } from './$types';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
@@ -17,7 +17,7 @@
   /**
    * The current mode of the page.
    */
-  export let addTag = false;
+  export let state: 'addTag' | 'info' | 'createTag';
 
   /**
    * The currently selected pills
@@ -29,8 +29,8 @@
   <div class="flex justify-between">
     <CardHeading>Tags</CardHeading>
     {#if $mode === 'edit'}
-      <button on:click={() => (addTag = !addTag)}>
-        {#if addTag}
+      <button on:click={() => (state = state === 'addTag' ? 'info' : 'addTag')}>
+        {#if state === 'addTag'}
           <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
         {:else}
           <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
@@ -53,7 +53,7 @@
       enforceTextColor: false
     }))}
   />
-  {#if addTag}
+  {#if state === 'addTag'}
     <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
       <h3>Those tags will be added:</h3>
       <PillCollection pills={selection}></PillCollection>
