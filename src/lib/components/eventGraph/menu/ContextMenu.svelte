@@ -16,12 +16,14 @@
     if (node) {
       $nodes.push({
         ...node,
-        // You should use a better id than this in production
+        // needs better id
         id: `${id}-copy${Math.random()}`,
         position: {
           x: node.position.x,
           y: node.position.y + 50
-        }
+        },
+        // needs to copy all data except ids
+        data: node.data
       });
     }
     $nodes = $nodes;

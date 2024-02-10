@@ -4,7 +4,19 @@
   import HrefPill from '../../pills/hrefPill/HrefPill.svelte';
 
   type $$Props = NodeProps<
-    Pick<components['schemas']['Attribute'], 'type' | 'value' | 'category' | 'id' | 'comment'>
+    Pick<
+      components['schemas']['Attribute'],
+      | 'id'
+      | 'uuid'
+      | 'event_id'
+      | 'object_id'
+      | 'object_relation'
+      | 'category'
+      | 'type'
+      | 'distribution'
+      | 'value'
+      | 'comment'
+    >
   >;
 
   export let data: $$Props['data'];

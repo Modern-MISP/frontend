@@ -3,7 +3,12 @@
   import { Position, Handle, type NodeProps } from '@xyflow/svelte';
   import Icon from '@iconify/svelte';
 
-  type $$Props = NodeProps<Pick<components['schemas']['Object'], 'id' | 'name' | 'comment'>>;
+  type $$Props = NodeProps<
+    Pick<
+      components['schemas']['Object'],
+      'id' | 'uuid' | 'event_id' | 'distribution' | 'name' | 'description' | 'comment'
+    >
+  >;
 
   export let data: $$Props['data'];
 

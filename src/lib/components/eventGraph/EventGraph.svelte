@@ -68,8 +68,16 @@
       position,
       data: {
         id: object.id,
+        uuid: object.uuid,
+        event_id: object.event_id,
+        distribution: object.distribution,
         name: object.name,
-        comment: object.comment
+        description: object.description,
+        attributes: object.Attribute,
+        comment: object.comment,
+        first_seen: object.first_seen,
+        last_seen: object.last_seen,
+        deleted: object.deleted
       },
       type: 'object'
     });
@@ -87,10 +95,19 @@
         position,
         data: {
           id: attribute.id,
-          type: attribute.type,
+          uuid: attribute.uuid,
+          event_id: attribute.event_id,
+          object_id: attribute.object_id,
+          object_relation: attribute.object_relation,
           category: attribute.category,
+          type: attribute.type,
+          distribution: attribute.distribution,
           value: attribute.value,
-          comment: attribute.comment
+          comment: attribute.comment,
+          first_seen: attribute.first_seen,
+          last_seen: attribute.last_seen,
+          deleted: attribute.deleted,
+          disable_correlation: attribute.disable_correlation
         },
         type: 'attribute'
       });
@@ -113,10 +130,19 @@
       position,
       data: {
         id: attribute.id,
-        type: attribute.type,
+        uuid: attribute.uuid,
+        event_id: attribute.event_id,
+        object_id: attribute.object_id,
+        object_relation: attribute.object_relation,
         category: attribute.category,
+        type: attribute.type,
+        distribution: attribute.distribution,
         value: attribute.value,
-        comment: attribute.comment
+        comment: attribute.comment,
+        first_seen: attribute.first_seen,
+        last_seen: attribute.last_seen,
+        deleted: attribute.deleted,
+        disable_correlation: attribute.disable_correlation
       },
       type: 'attribute'
     });
@@ -182,12 +208,13 @@
     // Prevent native context menu from showing
     event.preventDefault();
 
-    // Calculate position of the context menu. We want to make sure it
-    // doesn't get positioned off-screen.
-    menu = {
-      id: node.id,
-      data: node.data
-    };
+    // context menu only for object and attribute nodes
+    if (node.type === 'object' || node.type === 'attribute') {
+      menu = {
+        id: node.id,
+        data: node.data
+      };
+    }
   }
 
   // Close the context menu if it's open whenever the window is clicked.
