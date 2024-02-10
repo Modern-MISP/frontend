@@ -7,6 +7,7 @@
   import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
   import Icon from '@iconify/svelte';
   import type { PageData } from './$types';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
 
   /**
    * The Page data.
@@ -26,18 +27,17 @@
 
 <Card class="w-full ">
   <div class="flex justify-between">
-    <h1 class="text-4xl">Tags</h1>
+    <CardHeading>Tags</CardHeading>
     {#if $mode === 'edit'}
       <button on:click={() => (addTag = !addTag)}>
         {#if addTag}
-          <Icon icon="mdi:close-circle-outline" class="text-4xl text-red" />
+          <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
         {:else}
-          <Icon icon="mdi:plus-circle-outline" class="text-4xl text-sky" />
+          <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
         {/if}
       </button>
     {/if}
   </div>
-  <hr />
   <PillCollection
     base={HrefPill}
     pills={(data.event?.Tag ?? []).map((y) => ({

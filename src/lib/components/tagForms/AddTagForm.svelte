@@ -9,6 +9,7 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { createEventDispatcher } from 'svelte';
   import { TAG_RELATION_TYPES } from '../../consts/relationTypes';
+  import CardHeading from '../card/CardHeading.svelte';
 
   const dispatch = createEventDispatcher<{
     close: void;
@@ -35,6 +36,7 @@
 
 <div class="flex flex-col gap-1">
   <Card>
+    <CardHeading>Add Tags</CardHeading>
     <TagPicker bind:pickedItems></TagPicker>
 
     <CardRow>
