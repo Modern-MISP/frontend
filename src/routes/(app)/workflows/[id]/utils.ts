@@ -111,6 +111,5 @@ export function constructWorkflowData(
       input: edge.sourceHandle!
     });
   }
-  console.log(constructedData);
   return constructedData;
 }

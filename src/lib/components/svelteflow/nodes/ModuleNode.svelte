@@ -55,7 +55,6 @@
       svelteFlow.fitView();
       data.onUpdate(id);
     });
-  $: console.log(data.moduleData.name, fullData);
 
   // TODO: better handle positioning
   const dist = 20;

@@ -51,7 +51,6 @@
       disabled={$mode === 'view'}
     />
   {:else if param.type === 'picker'}
-    {console.log(value)}
     <Picker
       name={param.id}
       placeholder={param.placeholder}

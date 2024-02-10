@@ -32,8 +32,6 @@
   }, 200);
   $: modifiedWfData = getModified($nodes, $edges) ?? modifiedWfData;
 
-  console.log(workflow);
-
   const _generatedFlowContent = generateFlowContent(wfData, onNodeUpdate);
   const nodes = writable(_generatedFlowContent.nodes);
   const edges = writable(_generatedFlowContent.edges);
