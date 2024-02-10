@@ -2,8 +2,8 @@
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
-  import CardRow from '../card/CardRow.svelte';
   import IconCard from './cards/IconCard.svelte';
+  import IconCardRow from './cards/IconCardRow.svelte';
   import type { components } from '$lib/api/misp';
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
@@ -175,7 +175,7 @@
     object: ObjectNode
   };
 
-  let menu: { id: string } | null;
+  let menu: { id: string, data: any } | null;
 
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
@@ -184,7 +184,8 @@
     // Calculate position of the context menu. We want to make sure it
     // doesn't get positioned off-screen.
     menu = {
-      id: node.id
+      id: node.id,
+      data: node.data
     };
   }
 
@@ -204,22 +205,22 @@
 
 <header class="flex justify-between w-full gap-2">
   <div class="flex gap-4 shrink-0">
-    <CardRow class="rounded-lg bg-surface0">
+    <IconCardRow>
       <IconCard icon="mdi:web-plus" text="Add Object" />
       <IconCard icon="mdi:flag-add" text="Add Attribute" />
       <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-    </CardRow>
+    </IconCardRow>
 
-    <CardRow class="rounded-lg bg-surface0">
+    <IconCardRow>
       <IconCard icon="mdi:web" text="Unreferenced Objects" />
       <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
-    </CardRow>
+    </IconCardRow>
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu onClick={handlePaneClick} id={menu.id} />
+      <ContextMenu onClick={handlePaneClick} id={menu.id} data={menu.data}/>
     {/if}
     <Flow
       {nodes}
@@ -236,10 +237,4 @@
       }}
     />
   </div>
-
-  <!--   <Card>
-    {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
-      <IconCardRow {...obj} />
-    {/each}
-</Card> -->
 </div>

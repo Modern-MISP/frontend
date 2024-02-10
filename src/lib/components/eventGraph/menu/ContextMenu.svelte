@@ -1,10 +1,11 @@
 <script lang="ts">
   import { useEdges, useNodes } from '@xyflow/svelte';
   import IconCard from '../cards/IconCard.svelte';
-  import CardRow from '../../card/CardRow.svelte';
+  import IconCardRow from '../cards/IconCardRow.svelte';
 
   export const onClick = () => {};
   export let id: string;
+  export let data: any;
 
   const nodes = useNodes();
   const edges = useEdges();
@@ -26,8 +27,13 @@
   }
 
   function hideNode() {
+    console.log(data)
     $nodes = $nodes.filter((node) => node.id !== id);
     $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
+  }
+
+  function showNodeDetails() {
+    console.log(data)
   }
 </script>
 
@@ -37,25 +43,25 @@
 
  -->
 
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-2 absolute z-50">
   <small>node: {id}</small>
-  <CardRow class="rounded-lg bg-surface0">
-    <IconCard icon="mdi:magnify" text="Details" />
-  </CardRow>
+  <IconCardRow class="border-2 border-sky">
+    <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
+  </IconCardRow>
 
-  <CardRow class="rounded-lg bg-surface0">
+  <IconCardRow class="border-2 border-sky">
     <IconCard icon="mdi:show" text="Show" />
     <IconCard icon="mdi:hide" text="Hide" class="!text-red" on:click={hideNode} />
-  </CardRow>
+  </IconCardRow>
 
-  <CardRow class="rounded-lg bg-surface0">
+  <IconCardRow class="border-2 border-sky">
     <IconCard icon="bx:expand" text="Expand" />
     <IconCard icon="bx:collapse" text="Collapse" class="!text-red" />
-  </CardRow>
+  </IconCardRow>
 
-  <CardRow class="rounded-lg bg-surface0">
+  <IconCardRow class="border-2 border-sky">
     <IconCard icon="mdi:edit" text="Edit" />
     <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
     <IconCard icon="mdi:delete" text="Delete" class="!text-red" />
-  </CardRow>
+  </IconCardRow>
 </div>
