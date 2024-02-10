@@ -12,7 +12,6 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 export const load = async ({ params, fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
