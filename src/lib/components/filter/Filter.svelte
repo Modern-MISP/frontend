@@ -45,8 +45,11 @@
         <Input name={optionValue} placeholder={option?.label} class="!bg-overlay0" />
       {/if}
 
-      <!-- Add element to list. Triggers form submit, cuz type of submit per default. If you change the default type of the button, you also have to change this. -->
-      <Button class="self-end py-2 mt-auto w-min text-sky" suffixIcon="mdi:arrow-right">Add</Button>
+      <Button
+        class="self-end py-2 mt-auto w-min text-sky"
+        suffixIcon="mdi:arrow-right"
+        type="submit">Add</Button
+      >
     </FilterCard>
   </form>
 
