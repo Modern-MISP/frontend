@@ -12,17 +12,16 @@
 
   async function submit(event: SubmitEvent) {
     const entries = merge({}, ...getFormValues(event));
-    if ('token' in entries && entries.token) {
+    if (entries.token) {
       $token = entries.token;
-      localStorage.setItem('authToken', entries.token);
       goto('/events');
       return;
     }
 
     try {
-      const res = await login(entries as { email: string; password: string });
+      const res = await login(entries as { email: string; password: string }); // Can not get the form builder type safe
       if (res) {
-        localStorage.setItem('authToken', PUBLIC_MISP_KEY);
+        $token = PUBLIC_MISP_KEY;
         goto('/events');
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
