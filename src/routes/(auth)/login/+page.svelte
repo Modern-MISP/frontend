@@ -1,18 +1,17 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
-  import Icon from '@iconify/svelte';
-  import { login } from './authMock';
-  import { goto } from '$app/navigation';
   import { getFormValues } from '$lib/util/form.util';
+  import { merge } from 'lodash-es';
+  import { login } from './authMock';
 
   let error: string | null = null;
 
   async function submit(event: SubmitEvent) {
-    const entries = getFormValues(event)[0] as {
-      email: string;
-      password: string;
-    };
+    const entries = merge({}, ...getFormValues(event));
+    console.log(entries);
+
     try {
       const res = await login(entries as { email: string; password: string });
       if (res) {
@@ -42,10 +41,7 @@
   </h1>
   <Input name="email" placeholder="Email" icon="mdi:email-outline" />
   <Input name="password" placeholder="Password" icon="mdi:lock-outline" />
-  <Button class="py-2 !w-fit self-end gap-2">
-    Login
-    <Icon icon="mdi:chevron-right" />
-  </Button>
+  <Button class="py-2 !w-fit text-text self-end" suffixIcon="mdi:chevron-right">Login</Button>
   {#if error}
     <div class="text-red">
       {error}

@@ -75,4 +75,9 @@
   :global(:root) {
     --minimap-background-color-props: theme('colors.current');
   }
+  :global(.svelte-flow__controls-button) {
+    background-color: theme('colors.surface1.DEFAULT') !important;
+    color: theme('colors.text.DEFAULT') !important;
+    border: none !important;
+  }
 </style>
