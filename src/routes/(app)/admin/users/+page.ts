@@ -184,7 +184,7 @@ export const load: PageLoad = async ({ fetch }) => {
 
   // @ts-expect-error Not in the OpenAPI spec.. great.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: roleData }: { data: any[] } = await GET('/roles');
+  const { data: roleData }: { data: any[] } = await get(api).GET('/roles');
   const { data: orgData } = await get(api).GET('/organisations');
 
   const fil = createTableHeadGenerator<undefined>();
