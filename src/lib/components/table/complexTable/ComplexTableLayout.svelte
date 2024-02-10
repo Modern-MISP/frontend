@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord">
+  import type { api } from '$lib/api';
+
   import { errorPill } from '$lib/util/pill.util';
 
   import { page } from '$app/stores';
@@ -16,7 +18,6 @@
   import FilterCard from '$lib/components/table/actions/filterCard/FilterCard.svelte';
 
   import { actionBar } from '$lib/actions';
-  import { GET, POST } from '$lib/api';
   import Pagination from '$lib/components/pagination/Pagination.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
@@ -73,7 +74,7 @@
    * The endpoint where the requests will be sent to.
    */
   export let endpoint:
-    | ((body: Record<string, unknown>) => ReturnType<typeof POST | typeof GET>)
+    | ((body: Record<string, unknown>) => ReturnType<(typeof $api)['POST'] | (typeof $api)['GET']>)
     | undefined = undefined;
 
   /**
