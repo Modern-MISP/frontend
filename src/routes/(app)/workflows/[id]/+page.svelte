@@ -1,6 +1,12 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { type Node, useSvelteFlow, type NodeTypes, useStore } from '@xyflow/svelte';
+  import {
+    type Node,
+    useSvelteFlow,
+    type NodeTypes,
+    useStore,
+    ControlButton
+  } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import ModuleInfo from './ModuleInfo.svelte';
   import { mode } from '$lib/stores';
@@ -18,6 +24,8 @@
   import ModuleNode from './ModuleNode.svelte';
   import FrameNode from './FrameNode.svelte';
   import ContextMenu from './ContextMenu.svelte';
+  import Icon from '@iconify/svelte';
+  import { createPopover, createTooltip, melt } from '@melt-ui/svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -226,6 +234,15 @@
     logic: ModuleNode,
     frame: FrameNode
   };
+
+  // TODO: Maybe make this better and prettier
+  const {
+    elements: { content, trigger }
+  } = createTooltip({
+    positioning: { placement: 'left' },
+    portal: '#layout',
+    openDelay: 0
+  });
 </script>
 
 <!--
@@ -235,6 +252,7 @@
   including an interactive node-based diagram for visualization.
 -->
 <svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} />
+
 <div class="flex flex-row h-full">
   <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}
@@ -279,6 +297,9 @@
       on:nodecontextmenu={onNodeContextMenu}
       on:drag={onDrag}
     >
+      <div slot="controls" use:melt={$trigger}>
+        <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
+      </div>
       {#if menu}
         <ContextMenu
           id={menu.id}
@@ -291,4 +312,13 @@
       {/if}
     </Flow>
   </div>
+</div>
+
+<div use:melt={$content} class="z-10 shaodw shadow-black">
+  <Card>
+    <p>Left-Click and Drag on Background: Drag View</p>
+    <p>Left-Click and Drag on Node: Drag Node (Edit Mode only)</p>
+    <p>Left-Click and Drag on Handle: Create Connection (Edit Mode only)</p>
+    <p>Right-Click on Node: Context Menu (Edit Mode only)</p>
+  </Card>
 </div>
