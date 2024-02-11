@@ -183,6 +183,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Sync with local events',
       icon: 'mdi:sync',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Sync all: ' + x.map((y) => y.Server?.id).join())
         );
@@ -192,6 +193,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Pull all',
       icon: 'mdi:download',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Pull all: ' + x.map((y) => y.Server?.id).join())
         );
@@ -200,6 +202,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Push all',
       icon: 'mdi:upload',
+      // TODO: add a endpoint if found.
       action: (x) => {
         notifications.add(
           errorPill('Do not know the endpoint. Push all: ' + x.map((y) => y.Server?.id).join())
@@ -230,6 +233,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Increase priority',
       icon: 'iconoir:priority-up',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. increase prio:' + x.map((y) => y.Server?.id).join())
         );
@@ -248,6 +252,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Test connection',
       icon: 'mdi:connection',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
             'Do not know the endpoint. test connection: ' + x.map((y) => y.Server?.id).join()
@@ -259,6 +264,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Reset api key',
       icon: 'fluent:key-reset-20-regular',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. reset api key: ' + x.map((y) => y.Server?.id).join())
         );

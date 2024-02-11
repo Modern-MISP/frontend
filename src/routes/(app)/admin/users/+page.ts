@@ -117,6 +117,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Disable' + x.map((y) => y.User?.id).join())
         );
@@ -154,6 +155,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Enable Email Publish',
       icon: 'icon-park-outline:send-email',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
             'Do not know the endpoint. Send email publish' + x.map((y) => y.User?.id).join()
@@ -165,6 +167,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Disable Email Publish',
       icon: 'mdi:email-lock-outline',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
             'Do not know the endpoint. Disable email publish' + x.map((y) => y.User?.id).join()

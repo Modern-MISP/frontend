@@ -215,6 +215,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Delete: ' + x.map((y) => y.id).join())
         );
