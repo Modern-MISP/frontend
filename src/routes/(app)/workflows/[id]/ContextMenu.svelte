@@ -4,10 +4,15 @@
   import { useEdges, useNodes } from '@xyflow/svelte';
   import { createEventDispatcher } from 'svelte';
 
+  /** Node id */
   export let id: string;
+  /** absolute top distance in pixels */
   export let top: number | undefined;
+  /** absolute bottom distance in pixels */
   export let bottom: number | undefined;
+  /** absolute right distance in pixels */
   export let right: number | undefined;
+  /** absolute left distance in pixels */
   export let left: number | undefined;
 
   const dispatch = createEventDispatcher<{ close: void }>();
@@ -23,10 +28,10 @@
 </script>
 
 <div
-  class="absolute z-10 shadow shadow-black"
+  class="absolute z-10"
   style={`top: ${top}px; left: ${left}px; right: ${right}px; bottom: ${bottom}px;`}
 >
-  <Card>
+  <Card class="!resize-none shadow-lg shadow-black">
     <span>Node: {id}</span>
     <hr class="w-full border-text" />
     <Button on:click={deleteNode} prefixIcon="mdi:delete" class="text-red">Delete</Button>

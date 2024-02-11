@@ -25,7 +25,7 @@
   import FrameNode from './FrameNode.svelte';
   import ContextMenu from './ContextMenu.svelte';
   import Icon from '@iconify/svelte';
-  import { createPopover, createTooltip, melt } from '@melt-ui/svelte';
+  import { createTooltip, melt } from '@melt-ui/svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -237,7 +237,7 @@
 
   // TODO: Maybe make this better and prettier
   const {
-    elements: { content, trigger }
+    elements: { content: helpContent, trigger: helpTrigger }
   } = createTooltip({
     positioning: { placement: 'left' },
     portal: '#layout',
@@ -297,7 +297,7 @@
       on:nodecontextmenu={onNodeContextMenu}
       on:drag={onDrag}
     >
-      <div slot="controls" use:melt={$trigger}>
+      <div slot="controls" use:melt={$helpTrigger}>
         <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
       </div>
       {#if menu}
@@ -314,8 +314,8 @@
   </div>
 </div>
 
-<div use:melt={$content} class="z-10 shaodw shadow-black">
-  <Card>
+<div use:melt={$helpContent} class="z-10 shaodw shadow-black">
+  <Card class="!resize-none">
     <p>Left-Click and Drag on Background: Drag View</p>
     <p>Left-Click and Drag on Node: Drag Node (Edit Mode only)</p>
     <p>Left-Click and Drag on Handle: Create Connection (Edit Mode only)</p>
