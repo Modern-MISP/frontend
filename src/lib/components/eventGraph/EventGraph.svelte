@@ -9,6 +9,7 @@
   import IconCardRow from './cards/IconCardRow.svelte';
   import ObjectNode from './nodes/ObjectNode.svelte';
   import AttributeNode from './nodes/AttributeNode.svelte';
+  import BaseNode from '../svelteflow/nodes/BaseNode.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
 
@@ -31,14 +32,20 @@
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'input' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` } });
-  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` } });
-  $nodes.push({ id: 'unreferenced-objects', position, data: { label: `Unreferenced Objects` } });
+  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'base' });
+  $nodes.push({ id: 'referenced', position, data: { label: `Referenced`}, type: 'base' });
+  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'base' });
+  $nodes.push({
+    id: 'unreferenced-objects',
+    position,
+    data: { label: `Unreferenced Objects` },
+    type: 'base'
+  });
   $nodes.push({
     id: 'unreferenced-attributes',
     position,
-    data: { label: `Unreferenced Attributes` }
+    data: { label: `Unreferenced Attributes`},
+    type: 'base'
   });
 
   $edges.push({
@@ -198,12 +205,13 @@
   $edges = layoutedEdges;
 
   const nodeTypes = {
+    object: ObjectNode,
     attribute: AttributeNode,
-    object: ObjectNode
+    base: BaseNode
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let menu: { id: string; data: any } | null;
+  let menu: { id: string; data: any; type: string } | null;
 
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
@@ -213,7 +221,8 @@
     if (node.type === 'object' || node.type === 'attribute') {
       menu = {
         id: node.id,
-        data: node.data
+        data: node.data,
+        type: node.type
       };
 
       removePreviousHighlightBorder();
@@ -254,7 +263,7 @@
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu id={menu.id} data={menu.data} />
+      <ContextMenu id={menu.id} data={menu.data} type={menu.type} />
     {/if}
     <Flow
       {nodes}

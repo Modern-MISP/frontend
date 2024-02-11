@@ -6,6 +6,7 @@
   export let id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export let data: any;
+  export let type: string;
 
   const nodes = useNodes();
   const edges = useEdges();
@@ -107,10 +108,12 @@
     <IconCard icon="mdi:hide" text="Hide" class="!text-red" on:click={hideNode} />
   </IconCardRow>
 
+  {#if type === 'object'}
   <IconCardRow class="border-2 border-sky">
     <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
     <IconCard icon="bx:collapse" text="Collapse" class="!text-red" on:click={collapseNode} />
   </IconCardRow>
+  {/if}
 
   <IconCardRow class="border-2 border-sky">
     <IconCard icon="mdi:edit" text="Edit" />
