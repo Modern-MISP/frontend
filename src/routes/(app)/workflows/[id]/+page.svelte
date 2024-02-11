@@ -13,11 +13,12 @@
   import { writable } from 'svelte/store';
   import { objectEntries } from 'ts-extras';
   import { cloneDeep, debounce, range } from 'lodash-es';
-  import { actionBar } from '$lib/actions';
+  import { actionBar, lockEditMode } from '$lib/actions';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import ModuleNode from './ModuleNode.svelte';
   import FrameNode from './FrameNode.svelte';
   import ContextMenu from './ContextMenu.svelte';
+  import { invalidateAll } from '$app/navigation';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -30,10 +31,12 @@
   const originalWfData = cloneDeep(wfData);
 
   let modifiedWfData = wfData;
+  let isModified = false;
   const getModified = debounce((mNodes, mEdges) => {
     return constructWorkflowData(wfData, mNodes, mEdges);
-  }, 200);
+  }, 100);
   $: modifiedWfData = getModified($nodes, $edges) ?? modifiedWfData;
+  $: isModified = JSON.stringify(originalWfData) !== JSON.stringify(modifiedWfData);
 
   const _generatedFlowContent = generateFlowContent(wfData, onNodeUpdate);
   const nodes = writable(_generatedFlowContent.nodes);
@@ -166,14 +169,31 @@
     }
   }, 500);
 
+  function cancelEdit() {
+    if (!isModified) {
+      $mode = 'view';
+      return;
+    }
+    if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
+      $mode = 'view';
+      invalidateAll();
+    }
+  }
+
   function getWorkflowActions(saveData: WorkflowData): ActionBarEntryProps[] {
     return [
+      {
+        icon: 'mdi:cancel',
+        label: 'Cancel',
+        class: 'text-red',
+        action: cancelEdit
+      },
       {
         icon: 'material-symbols:save-outline-rounded',
         label: 'Save',
         class: 'text-green',
         action: () => saveWorkflow(workflow.name ?? '', workflow.description ?? '', saveData),
-        disabled: JSON.stringify(originalWfData) === JSON.stringify(saveData)
+        disabled: !isModified
       },
       {
         icon: workflow.debug_enabled ? 'mdi:bug-check' : 'mdi:bug',
@@ -233,7 +253,7 @@
   All the information about a specific workflow,
   including an interactive node-based diagram for visualization.
 -->
-<svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} />
+<svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} use:lockEditMode={isModified} />
 <div class="flex flex-row h-full">
   <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}
