@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+  import { Position, Handle, type NodeProps } from '@xyflow/svelte';
   import BaseNode from '$lib/components/svelteflow/BaseNode.svelte';
 
   type $$Props = NodeProps;
@@ -11,7 +11,7 @@
   /** Node drag handle */
   export let dragHandle: $$Props['dragHandle'];
   /** Node type */
-  export let type: $$Props['type'] = undefined;
+  export let type: $$Props['type'] = 'category';
   /** Node selected */
   export let selected: $$Props['selected'] = undefined;
   /** Node is connectable */
@@ -37,24 +37,27 @@
 <!--
   @component
   
-  A node representing a generic workflow module.
+  A node representing a generic event graph category node.
 -->
 
-<BaseNode 
-{id}
-{data}
-{dragHandle}
-{type}
-{selected}
-{isConnectable}
-{zIndex}
-{width}
-{height}
-{dragging}
-{targetPosition}
-{sourcePosition}
-{positionAbsoluteX}
-{positionAbsoluteY}
+<BaseNode
+  {id}
+  {data}
+  {dragHandle}
+  {type}
+  {selected}
+  {isConnectable}
+  {zIndex}
+  {width}
+  {height}
+  {dragging}
+  {targetPosition}
+  {sourcePosition}
+  {positionAbsoluteX}
+  {positionAbsoluteY}
+  class=""
 >
   {data.label}
+  <Handle type="target" position={Position.Left} />
+  <Handle type="source" position={Position.Right} />
 </BaseNode>

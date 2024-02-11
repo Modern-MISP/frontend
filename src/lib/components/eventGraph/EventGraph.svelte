@@ -33,7 +33,7 @@
 
   const nodes: Writable<Node[]> = writable([]);
   $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced`}, type: 'category' });
+  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'category' });
   $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'category' });
   $nodes.push({
     id: 'unreferenced-objects',
@@ -44,7 +44,7 @@
   $nodes.push({
     id: 'unreferenced-attributes',
     position,
-    data: { label: `Unreferenced Attributes`},
+    data: { label: `Unreferenced Attributes` },
     type: 'category'
   });
 

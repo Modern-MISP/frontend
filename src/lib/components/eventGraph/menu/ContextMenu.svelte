@@ -109,10 +109,10 @@
   </IconCardRow>
 
   {#if type === 'object'}
-  <IconCardRow class="border-2 border-sky">
-    <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
-    <IconCard icon="bx:collapse" text="Collapse" class="!text-red" on:click={collapseNode} />
-  </IconCardRow>
+    <IconCardRow class="border-2 border-sky">
+      <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
+      <IconCard icon="bx:collapse" text="Collapse" class="!text-red" on:click={collapseNode} />
+    </IconCardRow>
   {/if}
 
   <IconCardRow class="border-2 border-sky">

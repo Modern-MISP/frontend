@@ -15,6 +15,12 @@
   const { id, name, comment } = data;
 </script>
 
+<!--
+  @component
+  
+  A node representing a generic event graph object node.
+-->
+
 <div
   id={'object-' + id}
   class="px-4 py-2 shadow-md rounded-md bg-surface0"
@@ -25,8 +31,8 @@
       <Icon icon="mdi:web" />
     </div>
     <div class="ml-2">
-      <div class="text-lg font-bold truncate max-w-28">{name}</div>
-      <div class="text-gray-500 truncate max-w-28">{comment}</div>
+      <div class="font-bold truncate max-w-28">{name}</div>
+      <div class="text-surface2 font-bold truncate max-w-28">{comment}</div>
     </div>
   </div>
   <Handle
