@@ -6,19 +6,21 @@ import type { PageLoad } from './$types';
 
 import type { components } from '$lib/api/misp';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import InputCollection from '$lib/components/filter/InputCollection.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
+import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
+import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { notifications } from '$lib/stores';
+import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { errorPill } from '$lib/util/pill.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+
+import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -179,24 +181,72 @@ export const load: PageLoad = async ({ fetch }) => {
       value: () => 'type'
     }),
     fil({
-      label: 'Search all',
-      value: () => 'searchall'
+      label: 'Attribute',
+      value: () => 'attribute'
     }),
-    // You can override the page limit with this.
+    fil({
+      label: 'Event ID',
+      value: () => 'eventid'
+    }),
+    fil({
+      label: 'Event Info',
+      value: () => 'eventinfo'
+    }),
+    fil({
+      label: 'Sharing Group',
+      value: () => 'sharinggroup'
+    }),
 
     fil({
-      label: 'Page Limit',
-      value: () => 'limit'
+      label: 'Analysis',
+      value: () => ({
+        display: Select,
+        props: {
+          value: '',
+          options: ANALYSIS_LOOKUP.map((x, i) => ({
+            label: x.text ?? 'unknown',
+            value: '' + i
+          })),
+          name: 'analysis'
+        }
+      })
+    }),
+    fil({
+      label: 'Threat Level',
+      value: () => ({
+        display: Select,
+        props: {
+          value: '',
+          options: THREAT_LEVEL_LOOKUP.map((x, i) => ({
+            label: x.text ?? 'unknown',
+            value: '' + i
+          })),
+          name: 'threatlevel'
+        }
+      })
+    }),
+
+    fil({
+      label: 'Email',
+      value: () => 'email'
+    }),
+    fil({
+      label: 'Has Proposal',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'hasproposal'
+        }
+      })
     }),
 
     fil({
       label: 'Tags',
       value: () => ({
-        display: InputCollection,
+        display: TagPicker,
         props: {
-          length: 5,
-          name: 'tags',
-          placeholder: 'New Tag'
+          name: 'tags'
         }
       })
     })
