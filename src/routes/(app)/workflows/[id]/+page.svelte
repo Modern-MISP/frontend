@@ -1,6 +1,6 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { type Node, useSvelteFlow, type NodeTypes } from '@xyflow/svelte';
+  import { type Node, useSvelteFlow, type NodeTypes, useStore } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import ModuleInfo from './ModuleInfo.svelte';
   import { mode } from '$lib/stores';
@@ -187,26 +187,27 @@
   let menu:
     | { id: string; left?: number; right?: number; top?: number; bottom?: number }
     | undefined;
-  let width: number;
-  let height: number;
-  let flowWrapper: HTMLDivElement;
 
+  const { domNode, width, height } = useStore();
+
+  // TODO: Figure out how to either move or invalidate menu when panning flow.
   function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     event.preventDefault();
 
-    if ($mode !== 'edit' || node.type === 'frame') return;
+    if ($mode !== 'edit' || node.type === 'frame' || !$domNode) return;
 
-    const mouseEvent = event as MouseEvent;
-    const rect = flowWrapper.getBoundingClientRect();
-    const x = mouseEvent.clientX - rect.x;
-    const y = mouseEvent.clientY - rect.y;
+    const { clientX, clientY } = 'touches' in event ? event.touches[0] : event;
+
+    const rect = $domNode.getBoundingClientRect();
+    const x = clientX - rect.x;
+    const y = clientY - rect.y;
 
     menu = {
       id: node.id,
-      top: y < height - 200 ? y : undefined,
-      left: x < width - 200 ? x : undefined,
-      right: x >= width - 200 ? width - x : undefined,
-      bottom: y >= height - 200 ? height - y : undefined
+      top: y < $height - 200 ? y : undefined,
+      left: x < $width - 200 ? x : undefined,
+      right: x >= $width - 200 ? $width - x : undefined,
+      bottom: y >= $height - 200 ? $height - y : undefined
     };
   }
 
@@ -261,12 +262,7 @@
       </div>
     {/if}
   </div>
-  <div
-    class="flex-col w-full h-full basis-full"
-    bind:clientHeight={height}
-    bind:clientWidth={width}
-    bind:this={flowWrapper}
-  >
+  <div class="flex-col w-full h-full basis-full">
     <Flow
       {nodeTypes}
       {nodes}
