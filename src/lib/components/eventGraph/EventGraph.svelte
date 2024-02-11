@@ -204,30 +204,51 @@
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let menu: { id: string; data: any } | null;
 
+  function removeHighlightBorder() {
+    // Remove highlight border from previously selected node
+    const previouslySelectedNode = document.querySelector('.border-sky-200');
+    if (previouslySelectedNode) {
+      previouslySelectedNode.classList.remove('border-2', 'border-sky-200');
+    }
+  }
+
+  function addHighlightBorder(nodeId: string) {
+    // Add highlight border to the currently selected node
+    const selectedNode = document.getElementById(nodeId);
+    if (selectedNode) {
+      selectedNode.classList.add('border-2', 'border-sky-200');
+    }
+  }
+
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
     event.preventDefault();
 
-    // context menu only for object and attribute nodes
+    // Context menu only for object and attribute nodes
     if (node.type === 'object' || node.type === 'attribute') {
       menu = {
         id: node.id,
         data: node.data
       };
+
+      removeHighlightBorder();
+
+      addHighlightBorder(node.data.id);
     }
   }
 
   // Close the context menu if it's open whenever the window is clicked.
   function handlePaneClick() {
     menu = null;
+    removeHighlightBorder();
   }
 </script>
 
 <!--
   @component
   
-  The event Graph component. Uses the {@link Flow} component to render the graph.
-  Uses the {@link Card} component to render the action Bar and a table, where the unreferenced objects and attributes are displayed.
+  The Event Graph component. Uses the {@link Flow} component to render the graph.
+  Uses the {@link IconCard} component to render action bar buttons.
 
 -->
 
@@ -248,7 +269,7 @@
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu onClick={handlePaneClick} id={menu.id} data={menu.data} />
+      <ContextMenu id={menu.id} data={menu.data} />
     {/if}
     <Flow
       {nodes}

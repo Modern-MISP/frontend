@@ -3,7 +3,6 @@
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
 
-  export const onClick = () => {};
   export let id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export let data: any;

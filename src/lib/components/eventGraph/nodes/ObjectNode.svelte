@@ -12,11 +12,12 @@
 
   export let data: $$Props['data'];
 
-  const { name, comment } = data;
+  const { id, name, comment } = data;
 </script>
 
 <div
-  class="px-4 py-2 shadow-md rounded-md bg-surface0 border-2 border-stone-400"
+  {id}
+  class="px-4 py-2 shadow-md rounded-md bg-surface0"
   title={name + ' : ' + comment}
 >
   <div class="flex">
