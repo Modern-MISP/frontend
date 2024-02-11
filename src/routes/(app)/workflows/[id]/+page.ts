@@ -1,3 +1,4 @@
+import { successPill, errorPill } from '$lib/util/pill.util';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
@@ -130,20 +131,10 @@ export const load = async ({ params, fetch }) => {
             // @ts-expect-error MISP returns 'errors' property
             resp.error.errors ?? resp.error.message
           );
-        notifications.add({
-          icon: 'mdi:check',
-          text: 'saved'
-        });
+        notifications.add(successPill('saved'));
       })
       .then(invalidateAll)
-      .catch((error) => {
-        notifications.add({
-          icon: 'mdi:exclamation-thick',
-          label: 'error',
-          text: error.message,
-          class: 'text-red'
-        });
-      });
+      .catch((error) => errorPill(error.message));
   }
 
   async function toggleDebug(enable: boolean) {
@@ -170,14 +161,7 @@ export const load = async ({ params, fetch }) => {
         if (resp.error) throw Error(resp.error.message);
       })
       .then(invalidateAll)
-      .catch((error) => {
-        notifications.add({
-          icon: 'mdi:exclamation-thick',
-          label: 'error',
-          text: error,
-          class: 'text-red'
-        });
-      });
+      .catch((error) => notifications.add(errorPill(error)));
   }
 
   return {
