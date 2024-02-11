@@ -1,11 +1,12 @@
 <script lang="ts">
   import { api } from '$lib/api';
-  import BaseNode from '$lib/components/svelteflow/nodes/BaseNode.svelte';
+  import BaseNode from '$lib/components/svelteflow/BaseNode.svelte';
   import Icon from '@iconify/svelte';
   import { Handle, Position, useSvelteFlow, type NodeProps } from '@xyflow/svelte';
   import { tick } from 'svelte';
   import { get } from 'svelte/store';
   import ModuleParam from './ModuleParam.svelte';
+  import type { Module } from '../../../../routes/(app)/workflows/modules/module';
 
   const svelteFlow = useSvelteFlow();
 
@@ -16,7 +17,7 @@
   /** Node data */
   export let data: $$Props['data'];
   /** Node drag handle */
-  export let dragHandle: $$Props['dragHandle'] = undefined;
+  export let dragHandle: $$Props['dragHandle'];
   /** Node type */
   export let type: $$Props['type'] = undefined;
   /** Node selected */
@@ -40,22 +41,19 @@
   /** Node absolute y position */
   export let positionAbsoluteY: $$Props['positionAbsoluteY'];
 
-  // TODO: define 'module' type to use here
   /** Similar to `data.moduleData`, but with more and differently named properties. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let fullData: any = {};
+  let fullData: Module = {};
   get(api)
     // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
     .GET('/workflows/moduleView/{moduleId}', {
       params: { path: { moduleId: data.moduleData.id } }
     })
     .then(async (res) => {
-      fullData = res.data;
+      fullData = res.data as Module;
       await tick();
       svelteFlow.fitView();
       data.onUpdate(id);
     });
-  $: console.log(data.moduleData.name, fullData);
 
   // TODO: better handle positioning
   const dist = 20;
@@ -108,16 +106,13 @@
         </button>
       {/if}
       {#if fullData.support_filters}
+        <!-- Module filters are not yet supported -->
         <button
           class="text-2xl text-sky hover:mix-blend-hard-light"
-          title="module filtering conditions"
+          title="module filtering conditions (not yet supported)"
+          disabled
         >
           <Icon icon="mdi:filter" />
-        </button>
-      {/if}
-      {#if fullData.module_type !== 'trigger'}
-        <button class="text-2xl text-sky hover:mix-blend-hard-light" title="node settings">
-          <Icon icon="mdi:dots-horizontal" />
         </button>
       {/if}
     </div>
@@ -132,8 +127,8 @@
         <span class="max-w-xs mb-2">{fullData.description}</span>
       {/if}
 
-      {#each fullData.params as param}
-        <ModuleParam {param} value={data.moduleData.indexed_params[param.id]} />
+      {#each fullData.params ?? [] as param}
+        <ModuleParam {param} bind:value={data.moduleData.indexed_params[param.id]} />
       {/each}
     {/if}
   </div>
