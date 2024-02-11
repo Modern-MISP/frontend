@@ -21,6 +21,4 @@
 </script>
 
 <svelte:window use:actionBar={actions} />
-<form>
-  <slot />
-</form>
+<slot />

@@ -14,9 +14,6 @@
   endpoint={(x) => {
     return POST('/attributes/restSearch', { body: x });
   }}
-  editActions={[]}
-  topMenuActions={[]}
-  filter={[]}
   {...data}
   pagination={true}
   dataAccess={(x) => x.response?.Attribute}
