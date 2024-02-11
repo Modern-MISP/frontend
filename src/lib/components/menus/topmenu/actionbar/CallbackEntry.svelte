@@ -13,6 +13,10 @@
 
   /** Callback function that is executed on click. */
   export let action: () => void;
+
+  /** When true, the action cannot be clicked. */
+  export let disabled: boolean = false;
+
   let clazz = '';
   /**
    * The class of this ActionBar entry.
@@ -25,6 +29,6 @@
   An {@link ActionBarEntry} with an `on:click` callback action associated with it.
 -->
 
-<button on:click={action}>
-  <ActionBarEntry {icon} {label} class={clazz} />
+<button on:click={action} {disabled}>
+  <ActionBarEntry {icon} {label} {disabled} class={clazz} />
 </button>
