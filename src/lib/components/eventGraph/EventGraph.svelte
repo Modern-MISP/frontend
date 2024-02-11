@@ -204,7 +204,7 @@
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let menu: { id: string; data: any } | null;
 
-  function removeHighlightBorder() {
+  function removePreviousHighlightBorder() {
     // Remove highlight border from previously selected node
     const previouslySelectedNode = document.querySelector('.border-sky-200');
     if (previouslySelectedNode) {
@@ -231,16 +231,16 @@
         data: node.data
       };
 
-      removeHighlightBorder();
+      removePreviousHighlightBorder();
 
       addHighlightBorder(node.data.id);
     }
   }
 
-  // Close the context menu if it's open whenever the window is clicked.
   function handlePaneClick() {
+    // Close the context menu if it's open whenever the window is clicked.
     menu = null;
-    removeHighlightBorder();
+    removePreviousHighlightBorder();
   }
 </script>
 
