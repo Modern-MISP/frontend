@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from '../../[id]/$types';
 
@@ -17,7 +18,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/galaxy_clusters/view/{galaxyClusterId}', {
+  } = await get(api).GET('/galaxy_clusters/view/{galaxyClusterId}', {
     params: { path: { galaxyClusterId: params.id } },
     fetch
   });

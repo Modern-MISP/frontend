@@ -1,16 +1,17 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/auth_keys', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/auth_keys', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

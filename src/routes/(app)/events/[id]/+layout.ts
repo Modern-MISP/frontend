@@ -1,13 +1,17 @@
-import { GET } from '$lib/api';
-import { error, type NumericRange } from '@sveltejs/kit';
+import { api } from '$lib/api';
 import type { components } from '$lib/api/misp';
+import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 
 export const load = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await GET('/events/view/{eventId}', { params: { path: { eventId: params.id } }, fetch });
+  } = await get(api).GET('/events/view/{eventId}', {
+    params: { path: { eventId: params.id } },
+    fetch
+  });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

@@ -1,6 +1,7 @@
-import { POST } from '$lib/api';
+import { api } from '$lib/api';
 import Info from '$lib/components/info/Info.svelte';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import type { components } from '$lib/api/misp';
@@ -21,7 +22,7 @@ export const load: PageLoad = async ({ fetch }) => {
     data,
     error: mispError,
     response
-  } = await POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
+  } = await get(api).POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

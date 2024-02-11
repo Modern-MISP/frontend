@@ -67,6 +67,8 @@ docs:
     include: .gitlab/docs.yml
   variables:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+  rules:
+    - if: $CI_COMMIT_BRANCH == "docs"
 
 # === test stage ===
 

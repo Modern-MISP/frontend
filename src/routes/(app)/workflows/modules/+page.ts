@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -9,7 +10,7 @@ import type { Module } from './module';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await GET('/workflows/moduleIndex/type:all', { fetch });
+  const getResult = await get(api).GET('/workflows/moduleIndex/type:all', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Module[];
 
