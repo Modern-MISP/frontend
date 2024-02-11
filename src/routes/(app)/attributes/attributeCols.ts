@@ -7,6 +7,7 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import type { components } from '$lib/api/misp';
 import type { TableHead } from '$lib/models/TableHead.interface';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 export default {
   id: {
@@ -28,18 +29,6 @@ export default {
       }
     })
   },
-  distribution: {
-    icon: 'mdi:share',
-    key: 'distribution',
-    label: 'Distribution',
-    value: (x) => ({
-      display: LookupPill,
-      props: {
-        value: +(x.distribution ?? 0),
-        options: DISTRIBUTION_LOOKUP
-      }
-    })
-  },
   category: {
     icon: 'mdi:circle',
     key: 'category',
@@ -50,6 +39,12 @@ export default {
         text: x.category
       }
     })
+  },
+  type: {
+    icon: '',
+    key: 'type',
+    label: 'Type',
+    value: (x) => x.type ?? ''
   },
   value: {
     icon: 'mdi:circle',
@@ -63,33 +58,65 @@ export default {
     label: 'Comment',
     value: (x) => x.comment ?? ''
   },
-  object_id: {
-    key: 'object_id',
-    label: 'Object ID',
-    icon: 'mdi:format-list-group',
-    value: (x) => x.object_id ?? ''
-  },
-  object_relation: {
-    key: 'object_relation',
-    label: 'Object Relation',
-    icon: 'mdi:circle',
-    value: (x) => x.object_relation ?? ''
-  },
-  type: {
-    icon: '',
-    key: 'type',
-    label: 'Type',
-    value: (x) => x.type ?? ''
-  },
-  deleted: {
-    label: 'Deleted',
-    key: 'deleted',
-    icon: 'mdi:delete',
+  distribution: {
+    icon: 'mdi:share',
+    key: 'distribution',
+    label: 'Distribution',
     value: (x) => ({
-      display: Boolean,
+      display: LookupPill,
       props: {
-        isTrue: x.deleted
+        value: +(x.distribution ?? 0),
+        options: DISTRIBUTION_LOOKUP
+      }
+    })
+  },
+  correlation_flag: {
+    icon: 'mdi:circle',
+    key: 'disable_correlation',
+    label: 'Correlate',
+    value: (x) => ({ display: Boolean, props: { isTrue: !x.disable_correlation } })
+  },
+  ids_flag: {
+    icon: 'mdi:flag',
+    key: 'to_ids',
+    label: 'IDS flag',
+    value: (x) => ({ display: Boolean, props: { isTrue: x.to_ids } })
+  },
+  date: {
+    icon: 'mdi:clock-outline',
+    key: 'date',
+    label: 'Date',
+    value: (x) => ({
+      display: DatePill,
+      props: {
+        date: x.timestamp ? new Date(+x.timestamp * 1000) : new Date()
+      }
+    })
+  },
+  first_sighting: {
+    icon: 'mdi:clock-outline',
+    key: 'first_seen',
+    label: 'First Sighting',
+    value: (x) => ({
+      display: DatePill,
+      props: {
+        date: x.first_seen ? new Date(+x.first_seen || 0) : new Date() //TODO: never seen
+      }
+    })
+  },
+  last_sighting: {
+    icon: 'mdi:clock-outline',
+    key: 'last_seen',
+    label: 'Last Sighting',
+    value: (x) => ({
+      display: DatePill,
+      props: {
+        date: x.last_seen ? new Date(+x.last_seen || 0) : new Date() //TODO: never seen
       }
     })
   }
+  //TODO: add tags (tags with is_galaxy==false) and galaxies (tags with is_galaxy==true)
+  //TODO: add sightings
+  //TODO: add org
+  //TODO: add batch import flag
 } satisfies Record<string, TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>;

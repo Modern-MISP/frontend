@@ -1,9 +1,8 @@
 <script lang="ts">
-  import AttributeList from '../../../attributes/AttributeList.svelte';
+  import AttributeList from '../../../attributes/+page.svelte';
 
   export let data;
 
   const attributeData = data.event.Attribute!;
+  //TODO: List of Attributes
 </script>
-
-<AttributeList data={attributeData}></AttributeList>

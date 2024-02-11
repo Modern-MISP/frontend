@@ -15,20 +15,25 @@ export const load: PageLoad = async ({ fetch }) => {
   if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
 
   const tableData = data.response?.Attribute ?? [];
+  console.log(tableData);
 
   const col = createTableHeadGenerator<(typeof tableData)[number], DynTableHeadExtent>();
 
   const header = [
     col(attributeCols.id),
     col(attributeCols.event),
-    col(attributeCols.distribution),
+    //org
     col(attributeCols.category),
-    col(attributeCols.comment),
-    col(attributeCols.value),
-    col(attributeCols.object_id),
-    col(attributeCols.object_relation),
     col(attributeCols.type),
-    col(attributeCols.deleted)
+    col(attributeCols.value),
+    col(attributeCols.comment),
+    col(attributeCols.distribution),
+    col(attributeCols.correlation_flag),
+    col(attributeCols.ids_flag),
+    col(attributeCols.date)
+    //tags
+    //related events
+    //sightings
   ];
   return {
     tableData,
