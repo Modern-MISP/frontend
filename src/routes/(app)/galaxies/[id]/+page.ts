@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -18,7 +19,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } }, fetch });
+  } = await get(api).GET('/galaxies/view/{galaxyId}', {
+    params: { path: { galaxyId: params.id } },
+    fetch
+  });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

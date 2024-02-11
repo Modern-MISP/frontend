@@ -1,9 +1,10 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
-  import { POST } from '$lib/api';
+  import { api } from '$lib/api';
   import Pagination from '$lib/components/pagination/Pagination.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+  import { get } from 'svelte/store';
 
   import Filter from '$lib/components/filter/Filter.svelte';
   import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
@@ -23,7 +24,7 @@
       data: _data,
       error: mispError,
       response
-    } = await POST('/events/index', { body: { limit: 50, ...bodyOptions } });
+    } = await get(api).POST('/events/index', { body: { limit: 50, ...bodyOptions } });
 
     if (mispError) {
       console.error(mispError);

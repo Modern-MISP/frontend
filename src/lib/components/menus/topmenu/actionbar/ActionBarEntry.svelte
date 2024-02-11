@@ -14,6 +14,9 @@
    */
   export let icon: string;
 
+  /** When true, the action cannot be clicked. */
+  export let disabled: boolean = false;
+
   let clazz = '';
 
   /**
@@ -28,7 +31,7 @@
   
 -->
 
-<ActionBarEntryTemplate class={clazz}>
+<ActionBarEntryTemplate {disabled} class={clazz}>
   <Icon {icon} class="w-6 h-6" />
   <span slot="label">{label}</span>
 </ActionBarEntryTemplate>

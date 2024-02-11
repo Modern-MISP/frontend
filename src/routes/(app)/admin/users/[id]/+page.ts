@@ -1,11 +1,12 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import Input from '$lib/components/input/Input.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
@@ -14,7 +15,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/admin/users/view/{userId}', { params: { path: { userId: params.id } }, fetch });
+  } = await get(api).GET('/admin/users/view/{userId}', {
+    params: { path: { userId: params.id } },
+    fetch
+  });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
