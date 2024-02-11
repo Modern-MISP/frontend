@@ -26,6 +26,7 @@
   import ContextMenu from './ContextMenu.svelte';
   import Icon from '@iconify/svelte';
   import { createTooltip, melt } from '@melt-ui/svelte';
+  import type { ComponentProps } from 'svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -192,11 +193,24 @@
     ];
   }
 
-  let menu:
-    | { id: string; left?: number; right?: number; top?: number; bottom?: number }
-    | undefined;
+  let menu: ComponentProps<ContextMenu> | undefined;
 
   const { domNode, width, height } = useStore();
+
+  function calcContextMenuPosition(event: MouseEvent | TouchEvent, element: HTMLDivElement) {
+    const { clientX, clientY } = 'touches' in event ? event.touches[0] : event;
+
+    const rect = element.getBoundingClientRect();
+    const x = clientX - rect.x;
+    const y = clientY - rect.y;
+
+    return {
+      top: y < $height - 200 ? y : undefined,
+      left: x < $width - 200 ? x : undefined,
+      right: x >= $width - 200 ? $width - x : undefined,
+      bottom: y >= $height - 200 ? $height - y : undefined
+    };
+  }
 
   // TODO: Figure out how to either move or invalidate menu when panning flow.
   function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
@@ -204,18 +218,22 @@
 
     if ($mode !== 'edit' || node.type === 'frame' || !$domNode) return;
 
-    const { clientX, clientY } = 'touches' in event ? event.touches[0] : event;
-
-    const rect = $domNode.getBoundingClientRect();
-    const x = clientX - rect.x;
-    const y = clientY - rect.y;
-
     menu = {
       id: node.id,
-      top: y < $height - 200 ? y : undefined,
-      left: x < $width - 200 ? x : undefined,
-      right: x >= $width - 200 ? $width - x : undefined,
-      bottom: y >= $height - 200 ? $height - y : undefined
+      type: 'node',
+      ...calcContextMenuPosition(event, $domNode)
+    };
+  }
+
+  function onEdgeContextMenu({ detail: { event, edge } }: Flow['$$events_def']['edgecontextmenu']) {
+    event.preventDefault();
+
+    if ($mode !== 'edit' || !$domNode) return;
+
+    menu = {
+      id: edge.id,
+      type: 'edge',
+      ...calcContextMenuPosition(event, $domNode)
     };
   }
 
@@ -295,20 +313,14 @@
       on:dragover={onDragOver}
       on:drop={onDrop}
       on:nodecontextmenu={onNodeContextMenu}
+      on:edgecontextmenu={onEdgeContextMenu}
       on:drag={onDrag}
     >
       <div slot="controls" use:melt={$helpTrigger}>
         <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
       </div>
       {#if menu}
-        <ContextMenu
-          id={menu.id}
-          top={menu.top}
-          left={menu.left}
-          right={menu.right}
-          bottom={menu.bottom}
-          on:close={() => (menu = undefined)}
-        ></ContextMenu>
+        <ContextMenu {...menu} on:close={() => (menu = undefined)}></ContextMenu>
       {/if}
     </Flow>
   </div>

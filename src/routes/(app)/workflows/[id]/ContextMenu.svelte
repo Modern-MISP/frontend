@@ -1,11 +1,14 @@
 <script lang="ts">
   import Button from '$lib/components/button/Button.svelte';
   import Card from '$lib/components/card/Card.svelte';
-  import { useEdges, useNodes } from '@xyflow/svelte';
+  import { useSvelteFlow } from '@xyflow/svelte';
+  import { capitalize } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
 
-  /** Node id */
+  /** Node or edge id */
   export let id: string;
+  /** target type */
+  export let type: 'node' | 'edge';
   /** absolute top distance in pixels */
   export let top: number | undefined;
   /** absolute bottom distance in pixels */
@@ -17,12 +20,14 @@
 
   const dispatch = createEventDispatcher<{ close: void }>();
 
-  const nodes = useNodes();
-  const edges = useEdges();
+  const svelteFlow = useSvelteFlow();
 
-  function deleteNode() {
-    $nodes = $nodes.filter((node) => node.id !== id);
-    $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
+  function deleteTarget() {
+    if (type === 'node') {
+      svelteFlow.deleteElements({ nodes: [{ id }] });
+    } else {
+      svelteFlow.deleteElements({ edges: [{ id }] });
+    }
     dispatch('close');
   }
 </script>
@@ -32,8 +37,8 @@
   style={`top: ${top}px; left: ${left}px; right: ${right}px; bottom: ${bottom}px;`}
 >
   <Card class="!resize-none shadow-lg shadow-black">
-    <span>Node: {id}</span>
+    <span>{capitalize(type)}: {id}</span>
     <hr class="w-full border-text" />
-    <Button on:click={deleteNode} prefixIcon="mdi:delete" class="text-red">Delete</Button>
+    <Button on:click={deleteTarget} prefixIcon="mdi:delete" class="text-red">Delete</Button>
   </Card>
 </div>

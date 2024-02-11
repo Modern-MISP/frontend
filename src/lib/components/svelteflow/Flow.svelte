@@ -52,6 +52,7 @@
   on:nodedrag
   on:nodedragstop
   on:nodecontextmenu
+  on:edgecontextmenu
   on:paneclick
   on:dragover
   on:drop
