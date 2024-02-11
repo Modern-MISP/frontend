@@ -17,6 +17,7 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import ModuleNode from './ModuleNode.svelte';
   import FrameNode from './FrameNode.svelte';
+  import ContextMenu from './ContextMenu.svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
@@ -70,10 +71,13 @@
     } else {
       nodeContext = null;
     }
+
+    menu = undefined;
   }
 
   function onPaneClick() {
     nodeContext = null;
+    menu = undefined;
   }
 
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
@@ -93,6 +97,8 @@
     if (event.dataTransfer) {
       event.dataTransfer.dropEffect = 'move';
     }
+
+    menu = undefined;
   }
 
   function onDrop(event: DragEvent) {
@@ -178,6 +184,36 @@
     ];
   }
 
+  let menu:
+    | { id: string; left?: number; right?: number; top?: number; bottom?: number }
+    | undefined;
+  let width: number;
+  let height: number;
+  let flowWrapper: HTMLDivElement;
+
+  function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
+    event.preventDefault();
+
+    if ($mode !== 'edit' || node.type === 'frame') return;
+
+    const mouseEvent = event as MouseEvent;
+    const rect = flowWrapper.getBoundingClientRect();
+    const x = mouseEvent.clientX - rect.x;
+    const y = mouseEvent.clientY - rect.y;
+
+    menu = {
+      id: node.id,
+      top: y < height - 200 ? y : undefined,
+      left: x < width - 200 ? x : undefined,
+      right: x >= width - 200 ? width - x : undefined,
+      bottom: y >= height - 200 ? height - y : undefined
+    };
+  }
+
+  function onDrag() {
+    menu = undefined;
+  }
+
   // reactively check graph when edges change
   $: {
     $edges;
@@ -225,7 +261,12 @@
       </div>
     {/if}
   </div>
-  <div class="flex-col w-full h-full basis-full">
+  <div
+    class="flex-col w-full h-full basis-full"
+    bind:clientHeight={height}
+    bind:clientWidth={width}
+    bind:this={flowWrapper}
+  >
     <Flow
       {nodeTypes}
       {nodes}
@@ -239,6 +280,19 @@
       on:paneclick={onPaneClick}
       on:dragover={onDragOver}
       on:drop={onDrop}
-    />
+      on:nodecontextmenu={onNodeContextMenu}
+      on:drag={onDrag}
+    >
+      {#if menu}
+        <ContextMenu
+          id={menu.id}
+          top={menu.top}
+          left={menu.left}
+          right={menu.right}
+          bottom={menu.bottom}
+          on:close={() => (menu = undefined)}
+        ></ContextMenu>
+      {/if}
+    </Flow>
   </div>
 </div>

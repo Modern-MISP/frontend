@@ -56,7 +56,7 @@
   on:dragover
   on:drop
   {defaultEdgeOptions}
-  class="text-text"
+  class="text-text relative"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
   elementsSelectable={$mode === 'edit'}

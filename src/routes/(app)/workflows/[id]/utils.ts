@@ -27,9 +27,7 @@ export function generateFlowContent(wfData: WorkflowData, onNodeUpdate: (id: str
           source: connection.node,
           sourceHandle: connection.input,
           target: `${module.id}`,
-          targetHandle: inputName,
-          animated: true,
-          style: 'stroke-width: 4px'
+          targetHandle: inputName
         });
       }
     }
