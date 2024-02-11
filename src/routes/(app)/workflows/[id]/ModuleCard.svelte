@@ -21,7 +21,19 @@
   
   A module card that can be dragged inside the flow.
 -->
-<div on:dragstart={onDragStart} draggable="true" role="listitem">
+<div
+  on:dragstart={onDragStart}
+  draggable={!module.disabled}
+  role="listitem"
+  class:shadow-none={module.disabled}
+  class:shadow-sm={!module.disabled}
+  class:hover:shadow-lg={!module.disabled}
+  class:cursor-not-allowed={module.disabled}
+  class:blur-[1px]={module.disabled}
+  class:border-2={module.disabled}
+  class:border-red={module.disabled}
+  class:rounded-lg={module.disabled}
+>
   <Card class="!resize-none !bg-surface1">
     <div class="flex flex-row gap-2 items-center">
       <Icon icon={`fa6-solid:${module.icon}`} />
