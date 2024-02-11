@@ -98,7 +98,6 @@
  -->
 
 <div class="flex items-center gap-2 absolute z-50">
-  <small>node: {id}</small>
   <IconCardRow class="border-2 border-sky">
     <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
   </IconCardRow>

@@ -1,15 +1,16 @@
 <script lang="ts">
   import Flow from '$lib/components/svelteflow/Flow.svelte';
+  import type { components } from '$lib/api/misp';
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
-  import IconCard from './cards/IconCard.svelte';
-  import IconCardRow from './cards/IconCardRow.svelte';
-  import type { components } from '$lib/api/misp';
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
-  import AttributeNode from './nodes/AttributeNode.svelte';
+  import IconCard from './cards/IconCard.svelte';
+  import IconCardRow from './cards/IconCardRow.svelte';
   import ObjectNode from './nodes/ObjectNode.svelte';
+  import AttributeNode from './nodes/AttributeNode.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
+  import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -204,22 +205,6 @@
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let menu: { id: string; data: any } | null;
 
-  function removePreviousHighlightBorder() {
-    // Remove highlight border from previously selected node
-    const previouslySelectedNode = document.querySelector('.border-sky-200');
-    if (previouslySelectedNode) {
-      previouslySelectedNode.classList.remove('border-2', 'border-sky-200');
-    }
-  }
-
-  function addHighlightBorder(nodeId: string) {
-    // Add highlight border to the currently selected node
-    const selectedNode = document.getElementById(nodeId);
-    if (selectedNode) {
-      selectedNode.classList.add('border-2', 'border-sky-200');
-    }
-  }
-
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
     event.preventDefault();
@@ -233,7 +218,7 @@
 
       removePreviousHighlightBorder();
 
-      addHighlightBorder(node.data.id);
+      addHighlightBorder(node.id);
     }
   }
 

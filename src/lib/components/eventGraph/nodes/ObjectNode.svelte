@@ -15,7 +15,11 @@
   const { id, name, comment } = data;
 </script>
 
-<div {id} class="px-4 py-2 shadow-md rounded-md bg-surface0" title={name + ' : ' + comment}>
+<div
+  id={'object-' + id}
+  class="px-4 py-2 shadow-md rounded-md bg-surface0"
+  title={name + ' : ' + comment}
+>
   <div class="flex">
     <div class="rounded-full w-12 h-12 flex justify-center items-center bg-surface1">
       <Icon icon="mdi:web" />
