@@ -195,7 +195,11 @@
 
   let menu: ComponentProps<ContextMenu> | undefined;
 
-  const { domNode, width, height } = useStore();
+  const { domNode, width, height, viewport } = useStore();
+
+  viewport.subscribe(() => {
+    menu = undefined;
+  });
 
   function calcContextMenuPosition(event: MouseEvent | TouchEvent, element: HTMLDivElement) {
     const { clientX, clientY } = 'touches' in event ? event.touches[0] : event;
@@ -212,7 +216,6 @@
     };
   }
 
-  // TODO: Figure out how to either move or invalidate menu when panning flow.
   function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     event.preventDefault();
 
