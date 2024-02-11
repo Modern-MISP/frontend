@@ -9,7 +9,7 @@
   import IconCardRow from './cards/IconCardRow.svelte';
   import ObjectNode from './nodes/ObjectNode.svelte';
   import AttributeNode from './nodes/AttributeNode.svelte';
-  import BaseNode from '../svelteflow/nodes/BaseNode.svelte';
+  import CategoryNode from './nodes/CategoryNode.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
 
@@ -32,20 +32,20 @@
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'base' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced`}, type: 'base' });
-  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'base' });
+  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
+  $nodes.push({ id: 'referenced', position, data: { label: `Referenced`}, type: 'category' });
+  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'category' });
   $nodes.push({
     id: 'unreferenced-objects',
     position,
     data: { label: `Unreferenced Objects` },
-    type: 'base'
+    type: 'category'
   });
   $nodes.push({
     id: 'unreferenced-attributes',
     position,
     data: { label: `Unreferenced Attributes`},
-    type: 'base'
+    type: 'category'
   });
 
   $edges.push({
@@ -207,7 +207,7 @@
   const nodeTypes = {
     object: ObjectNode,
     attribute: AttributeNode,
-    base: BaseNode
+    category: CategoryNode
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
