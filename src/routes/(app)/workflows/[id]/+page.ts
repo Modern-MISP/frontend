@@ -134,7 +134,7 @@ export const load = async ({ params, fetch }) => {
         notifications.add(successPill('saved'));
       })
       .then(invalidateAll)
-      .catch((error) => errorPill(error.message));
+      .catch((error) => notifications.add(errorPill(error.message)));
   }
 
   async function toggleDebug(enable: boolean) {
