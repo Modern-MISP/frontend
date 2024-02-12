@@ -31,5 +31,11 @@
   ];
 </script>
 
-<ComplexTableLayout {tableData} {header} editActions={[]} filter={[]} {topMenuActions}
+<ComplexTableLayout
+  {tableData}
+  {header}
+  tableHref={(row) => `/attributes/${row.id}`}
+  editActions={[]}
+  filter={[]}
+  {topMenuActions}
 ></ComplexTableLayout>
