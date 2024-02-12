@@ -21,6 +21,10 @@
    * The name of the input. Used for form submission.
    */
   export let name = 'default';
+  /**
+   * When true, the picker cannot be used.
+   */
+  export let disabled: boolean = false;
 
   /**
    * Max Elements to show for Autocomplete
@@ -82,21 +86,32 @@
   An input for picking from a list of pre-defined items.
 -->
 <div class="box-border relative overflow-visible">
-  <div class="flex flex-row items-center w-full gap-2 p-2 rounded-lg bg-surface1">
+  <div
+    class="flex flex-row items-center w-full gap-2 p-2 rounded-lg"
+    class:bg-surface1={!disabled}
+    class:bg-overlay0={disabled}
+    class:cursor-not-allowed={disabled}
+  >
     <div class="flex flex-wrap gap-1 overflow-hidden rounded-md bg-inherit w-max">
       {#each pickedItems as props, i}
         <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
           <span class="flex overflow-hidden shrink line-clamp-1">
             {props.text?.trim()}
           </span>
-          <button
-            type="button"
-            on:click={() =>
-              ([pickedItems, pickableItems] = removeFromAddToIndex(pickedItems, pickableItems, i))}
-            class="justify-center pl-1 align-middle hover:text-red shrink-0"
-          >
-            <Icon icon="mdi:close-circle-outline" />
-          </button>
+          {#if !disabled}
+            <button
+              type="button"
+              on:click={() =>
+                ([pickedItems, pickableItems] = removeFromAddToIndex(
+                  pickedItems,
+                  pickableItems,
+                  i
+                ))}
+              class="justify-center align-middle hover:text-red shrink-0"
+            >
+              <Icon icon="mdi:close-circle-outline" />
+            </button>
+          {/if}
         </Pill>
       {/each}
     </div>
@@ -105,6 +120,7 @@
       class="w-full h-full m-2 outline-none bg-inherit text-text"
       type="text"
       {placeholder}
+      {disabled}
       bind:value
       on:keydown={onKeyDown}
     />
