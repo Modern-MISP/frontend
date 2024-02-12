@@ -10,7 +10,8 @@
   $mode = 'edit';
 
   async function submit(event: SubmitEvent) {
-    const { galaxies } = getFormValues(event)[0];
+    const { galaxies } = getFormValues(event);
+
     if (typeof galaxies !== 'string') return;
     try {
       const parsed = JSON.parse(galaxies);
@@ -51,7 +52,7 @@
       name="galaxies"
     ></textarea>
 
-    <Button class="self-end gap-2 w-min text-sky">
+    <Button class="self-end gap-2 w-min text-sky" type="submit">
       <Icon icon="mdi:import"></Icon>
       Import
     </Button>
