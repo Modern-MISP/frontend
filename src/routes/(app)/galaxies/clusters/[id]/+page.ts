@@ -71,7 +71,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col(
       {
         label: 'Description',
-        value: (x) => x?.description ?? 'unknown'
+        value: (x) => x?.description ?? ''
       },
       {
         value: (x) => ({
