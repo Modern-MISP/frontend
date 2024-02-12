@@ -25,6 +25,9 @@
  -->
 
 <Pill
-  {text}
   class="text-white font-bold !w-16  items-center px-2 {isTrue ? '!bg-green' : '!bg-red'} {clazz}"
-/>
+>
+  <span class="w-full text-center">
+    {text}
+  </span></Pill
+>
