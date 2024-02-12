@@ -20,6 +20,8 @@ export const themes = [
 ] as const;
 
 export const mode = writable<Mode>('view');
+export const lockModeToggle = writable<boolean>(false);
+
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 
 export const notifications = createTimeoutStore<ComponentProps<Pill>>(3000);
