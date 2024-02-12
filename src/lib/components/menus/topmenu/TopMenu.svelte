@@ -1,10 +1,9 @@
 <script lang="ts">
-  import Input from '$lib/components/input/Input.svelte';
+  import type { Mode } from '$lib/models/Mode';
   import { actionBarEntries } from '$lib/stores';
   import Icon from '@iconify/svelte';
   import ActionBar from './actionbar/ActionBar.svelte';
   import ToggleModeEntry from './actionbar/ToggleModeEntry.svelte';
-  import type { Mode } from '$lib/models/Mode';
 
   /**
    * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
@@ -34,9 +33,10 @@
         <Icon icon="mdi:menu" class="text-4xl shrink-0" />
       {/if}
     </button>
-    <Input placeholder="search">
+    <slot />
+    <!-- <Input placeholder="search">
       <Icon icon="mdi:magnify" slot="icon" class="w-10 h-10" />
-    </Input>
+    </Input> -->
   </div>
   <div class="flex items-center gap-6">
     <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl bg-crust">
