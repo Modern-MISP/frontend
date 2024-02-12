@@ -43,17 +43,17 @@
   /**
    * Your filter header. {@link Filter.header }
    */
-  export let filter: Readable<TableHead<undefined>>[];
+  export let filter: Readable<TableHead<undefined>>[] = [];
 
   /**
    * Your edit actions. {@link DynActionCard.header}
    */
-  export let editActions: DynCardActionHeader<T[]>[];
+  export let editActions: DynCardActionHeader<T[]>[] = [];
 
   /**
    * Your top menu actions. {@link actionBar}
    */
-  export let topMenuActions: ActionBarEntryProps[];
+  export let topMenuActions: ActionBarEntryProps[] = [];
 
   /**
    * Do you want to include pagination in the request and in the page. Default: true

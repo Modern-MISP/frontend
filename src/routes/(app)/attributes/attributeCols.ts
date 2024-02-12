@@ -55,7 +55,10 @@ export default {
     icon: 'mdi:circle',
     key: 'value',
     label: 'Value',
-    value: (x) => ({ display: Info, props: { text: x.value } })
+    value: (x) => ({
+      display: Info,
+      props: { text: x.value, class: 'max-w-xs overflow-hidden text-ellipsis' }
+    })
   },
   comment: {
     icon: 'mdi:comment',
