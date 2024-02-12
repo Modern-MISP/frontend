@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends IRecord">
-  import type { ComponentProps } from 'svelte';
+  import type { FastFilter } from '$lib/models/FastFilter.interface';
 
   import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
 
@@ -129,9 +129,7 @@
   /**
    * Defined some fast filter attributes
    */
-  export let fastFilter: (Omit<ComponentProps<ActiveEntry>, 'active'> & {
-    ifActive: Record<string, string>;
-  })[] = [];
+  export let fastFilter: FastFilter[] = [];
   let activeFastFilter: boolean[] = [];
 </script>
 

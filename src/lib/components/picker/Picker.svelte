@@ -3,6 +3,7 @@
   import { remove, sortBy } from 'lodash-es';
   import Pill from '../pills/pill/Pill.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { createEventDispatcher } from 'svelte';
 
   /** The items that have been picked. */
   export let pickedItems: PickerPill[] = [];
@@ -76,6 +77,9 @@
   $: autocomplete = pickableItems.filter((x) => matchFunction(x, value)).slice(0, maxAutoComplete);
 
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
+
+  const dispatch = createEventDispatcher<{ formValue: Record<string, PickerPill[]> }>();
+  $: if (pickedItems) dispatch('formValue', { [name]: pickedItems });
 
   let input: HTMLInputElement;
 </script>

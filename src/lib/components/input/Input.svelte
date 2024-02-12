@@ -39,7 +39,7 @@
 
   let clazz = '';
 
-  const dispatch = createEventDispatcher<{ value: string }>();
+  const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
 
   const id = crypto.randomUUID();
 </script>
@@ -65,7 +65,10 @@
     {/if}
   </slot>
   <input
-    on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
+    on:input={({ currentTarget }) => {
+      dispatch('formValue', { [name]: currentTarget.value });
+      dispatch('value', currentTarget.value);
+    }}
     on:blur
     on:focus
     {id}
