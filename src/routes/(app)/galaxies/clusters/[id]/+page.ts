@@ -2,9 +2,7 @@ import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from '../../[id]/$types';
-
 import Info from '$lib/components/info/Info.svelte';
-
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
@@ -12,7 +10,6 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import type { paths } from '$lib/api/misp';
 import Input from '$lib/components/input/Input.svelte';
 import Picker from '$lib/components/picker/Picker.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
