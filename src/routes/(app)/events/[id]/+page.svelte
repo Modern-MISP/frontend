@@ -1,13 +1,14 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
-  import EditMode from './EditMode.svelte';
-
+  import Form from '$lib/components/form/Form.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
+  import { api } from '$lib/api';
+  import type { components } from '$lib/api/misp';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -20,6 +21,16 @@
    * The currently selected pills
    */
   let selection: PickerPill[] = [];
+
+  async function formCallback(
+    // eslint-disable-next-line no-undef
+    formData: Record<string, FormDataEntryValue | FormDataEntryValue[]>[]
+  ) {
+    $api.PUT('/events/edit/{eventId}', {
+      params: { path: { eventId: data?.event.id ?? '1' } },
+      body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
+    });
+  }
 </script>
 
 <!-- 
@@ -34,7 +45,7 @@
  -->
 
 <div class="h-full overflow-auto">
-  <EditMode>
+  <Form callback={formCallback}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
       {#if state === 'addTag'}
         <AddTagForm
@@ -53,5 +64,5 @@
         <EventTags bind:state {data} bind:selection />
       </section>
     </div>
-  </EditMode>
+  </Form>
 </div>
