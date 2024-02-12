@@ -13,7 +13,6 @@
   import CategoryNode from './nodes/CategoryNode.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
-  import Card from '../card/Card.svelte';
   import { fly } from 'svelte/transition';
 
   const edges: Writable<Edge[]> = writable([]);
@@ -265,7 +264,7 @@
 <header class="flex justify-between w-full gap-2">
   <div class="flex justify-start gap-4">
     {#if $mode === 'edit'}
-      <div in:fly={{ x: -200 }}>
+      <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
         <IconCardRow>
           <IconCard icon="mdi:web-plus" text="Add Object" />
           <IconCard icon="mdi:flag-add" text="Add Attribute" />
@@ -286,25 +285,39 @@
     </IconCardRow>
     <div class="flex flex-row">
       {#if showUnreferencedObjects}
-        <Card class="flex flex-col !resize-none">
-          {#each objects as object}
-            <div class="flex flex-row truncate">
-              <div>{object.id}</div>
-              <div>{object.name}</div>
-            </div>
-          {/each}
-        </Card>
+        <div
+          in:fly={{ x: 200 }}
+          out:fly={{ x: 200 }}
+          class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
+        >
+          <div class="flex flex-col !resize-none rounded-lg bg-surface0 truncate">
+            {#each objects as object}
+              <IconCard
+                icon="mdi:web"
+                text={object.name + ': ' + object.comment}
+                class="flex !flex-row"
+              ></IconCard>
+            {/each}
+          </div>
+        </div>
       {/if}
 
       {#if showUnreferencedAttributes}
-        <Card class="flex flex-col !resize-none">
-          {#each attributes as attribute}
-            <div class="flex flex-row truncate">
-              <div>{attribute.id}</div>
-              <div>{attribute.value}</div>
-            </div>
-          {/each}
-        </Card>
+        <div
+          in:fly={{ x: 200 }}
+          out:fly={{ x: 200 }}
+          class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
+        >
+          <div class="flex flex-col !resize-none rounded-lg bg-surface0 truncate">
+            {#each attributes as attribute}
+              <IconCard
+                icon="mdi:flag"
+                text={attribute.type + ': ' + attribute.value}
+                class="flex !flex-row"
+              ></IconCard>
+            {/each}
+          </div>
+        </div>
       {/if}
     </div>
   </div>

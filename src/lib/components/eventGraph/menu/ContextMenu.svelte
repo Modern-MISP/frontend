@@ -100,7 +100,7 @@
 
  -->
 
-<div in:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
+<div in:fly={{ x: -200 }} out:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
   <IconCardRow class="border-2 border-sky flex-col">
     <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
   </IconCardRow>
