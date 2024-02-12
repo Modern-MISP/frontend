@@ -1,27 +1,6 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import Card from '$lib/components/card/Card.svelte';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute } from '$lib/stores';
-
-  if ($page.status !== 404)
-    goto('/error', {
-      replaceState: true,
-      state: {
-        status: $page.status,
-        message: $page.error?.message ?? ''
-      }
-    });
-
-  $currentRoute = [
-    ...($currentRoute?.slice(0, -1) ?? []),
-    {
-      name: 'Error',
-      icon: 'mdi:alert-circle-outline',
-      href: '/error'
-    }
-  ];
 </script>
 
 <!--

@@ -6,6 +6,8 @@ import { writable } from 'svelte/store';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 import type { Mode } from './models/Mode';
 import { INITIAL_SETTINGS } from './settings';
+import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
+
 const createSettingsStore = <T>(init: T) => {
   const { subscribe, set, update } = writable<T>(init);
 
@@ -48,6 +50,7 @@ export const themes = [
 
 export const mode = writable<Mode>('view');
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
+export const contextRouteEntries = writable<SideMenuRoute[]>();
 
 const createNotificationStore = (timeout: number) => {
   const { subscribe, update } = writable<ComponentProps<Pill>[]>([]);
