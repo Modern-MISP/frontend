@@ -257,7 +257,9 @@
       return null;
     }
 
-    const type = event.dataTransfer.getData('application/svelteflow');
+    const type = event.dataTransfer.getData('type');
+    const data = JSON.parse(event.dataTransfer.getData('node')).data;
+    console.log(data);
 
     const position = screenToFlowPosition({
       x: event.clientX,
@@ -265,10 +267,10 @@
     });
 
     const newNode = {
-      id: `${Math.random()}`,
+      id: `unref-${data.type}-${data.id}`,
       type,
       position,
-      data: { label: `${type} node` },
+      data: data,
       origin: [0.5, 0.0]
     } satisfies Node;
 

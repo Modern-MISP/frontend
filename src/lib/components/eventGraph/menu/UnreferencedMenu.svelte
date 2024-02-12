@@ -8,12 +8,15 @@
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export let attributes: any;
 
-  const onDragStart = (event: DragEvent, nodeType: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onDragStart = (event: DragEvent, node: any, type: string) => {
     if (!event.dataTransfer) {
       return null;
     }
 
-    event.dataTransfer.setData('application/svelteflow', nodeType);
+    event.dataTransfer.setData('type', type);
+    const nodeString = JSON.stringify(node);
+    event.dataTransfer.setData('node', nodeString);
     event.dataTransfer.effectAllowed = 'move';
   };
 
@@ -59,7 +62,7 @@
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div
               class="object-node node"
-              on:dragstart={(event) => onDragStart(event, 'object')}
+              on:dragstart={(event) => onDragStart(event, { data: object }, 'object')}
               draggable={true}
             >
               <IconCard
@@ -84,7 +87,7 @@
           {#each attributes as attribute}
             <div
               class="attribute-node node"
-              on:dragstart={(event) => onDragStart(event, 'attribute')}
+              on:dragstart={(event) => onDragStart(event, { data: attribute }, 'attribute')}
               draggable={true}
             >
               <IconCard
