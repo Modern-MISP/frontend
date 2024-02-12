@@ -1,6 +1,12 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { type Node, useSvelteFlow, type NodeTypes } from '@xyflow/svelte';
+  import {
+    type Node,
+    useSvelteFlow,
+    type NodeTypes,
+    useStore,
+    ControlButton
+  } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import ModuleInfo from './ModuleInfo.svelte';
   import { mode } from '$lib/stores';
@@ -18,6 +24,9 @@
   import ModuleNode from './ModuleNode.svelte';
   import FrameNode from './FrameNode.svelte';
   import ContextMenu from './ContextMenu.svelte';
+  import Icon from '@iconify/svelte';
+  import { createTooltip, melt } from '@melt-ui/svelte';
+  import type { ComponentProps } from 'svelte';
   import { invalidateAll } from '$app/navigation';
 
   /** The data that will be displayed on this page. */
@@ -204,29 +213,50 @@
     ];
   }
 
-  let menu:
-    | { id: string; left?: number; right?: number; top?: number; bottom?: number }
-    | undefined;
-  let width: number;
-  let height: number;
-  let flowWrapper: HTMLDivElement;
+  let menu: ComponentProps<ContextMenu> | undefined;
+
+  const { domNode, width, height, viewport } = useStore();
+
+  viewport.subscribe(() => {
+    menu = undefined;
+  });
+
+  function calcContextMenuPosition(event: MouseEvent | TouchEvent, element: HTMLDivElement) {
+    const { clientX, clientY } = 'touches' in event ? event.touches[0] : event;
+
+    const rect = element.getBoundingClientRect();
+    const x = clientX - rect.x;
+    const y = clientY - rect.y;
+
+    return {
+      top: y < $height - 200 ? y : undefined,
+      left: x < $width - 200 ? x : undefined,
+      right: x >= $width - 200 ? $width - x : undefined,
+      bottom: y >= $height - 200 ? $height - y : undefined
+    };
+  }
 
   function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     event.preventDefault();
 
-    if ($mode !== 'edit' || node.type === 'frame') return;
-
-    const mouseEvent = event as MouseEvent;
-    const rect = flowWrapper.getBoundingClientRect();
-    const x = mouseEvent.clientX - rect.x;
-    const y = mouseEvent.clientY - rect.y;
+    if ($mode !== 'edit' || node.type === 'frame' || !$domNode) return;
 
     menu = {
       id: node.id,
-      top: y < height - 200 ? y : undefined,
-      left: x < width - 200 ? x : undefined,
-      right: x >= width - 200 ? width - x : undefined,
-      bottom: y >= height - 200 ? height - y : undefined
+      type: 'node',
+      ...calcContextMenuPosition(event, $domNode)
+    };
+  }
+
+  function onEdgeContextMenu({ detail: { event, edge } }: Flow['$$events_def']['edgecontextmenu']) {
+    event.preventDefault();
+
+    if ($mode !== 'edit' || !$domNode) return;
+
+    menu = {
+      id: edge.id,
+      type: 'edge',
+      ...calcContextMenuPosition(event, $domNode)
     };
   }
 
@@ -245,6 +275,15 @@
     logic: ModuleNode,
     frame: FrameNode
   };
+
+  // TODO: Maybe make this better and prettier
+  const {
+    elements: { content: helpContent, trigger: helpTrigger }
+  } = createTooltip({
+    positioning: { placement: 'left' },
+    portal: '#layout',
+    openDelay: 0
+  });
 </script>
 
 <!--
@@ -281,12 +320,7 @@
       </div>
     {/if}
   </div>
-  <div
-    class="flex-col w-full h-full basis-full"
-    bind:clientHeight={height}
-    bind:clientWidth={width}
-    bind:this={flowWrapper}
-  >
+  <div class="flex-col w-full h-full basis-full">
     <Flow
       {nodeTypes}
       {nodes}
@@ -301,18 +335,24 @@
       on:dragover={onDragOver}
       on:drop={onDrop}
       on:nodecontextmenu={onNodeContextMenu}
+      on:edgecontextmenu={onEdgeContextMenu}
       on:drag={onDrag}
     >
+      <div slot="controls" use:melt={$helpTrigger}>
+        <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
+      </div>
       {#if menu}
-        <ContextMenu
-          id={menu.id}
-          top={menu.top}
-          left={menu.left}
-          right={menu.right}
-          bottom={menu.bottom}
-          on:close={() => (menu = undefined)}
-        ></ContextMenu>
+        <ContextMenu {...menu} on:close={() => (menu = undefined)}></ContextMenu>
       {/if}
     </Flow>
   </div>
+</div>
+
+<div use:melt={$helpContent} class="z-10 shaodw shadow-black">
+  <Card class="!resize-none">
+    <p>Left-Click and Drag on Background: Drag View</p>
+    <p>Left-Click and Drag on Node: Drag Node (Edit Mode only)</p>
+    <p>Left-Click and Drag on Handle: Create Connection (Edit Mode only)</p>
+    <p>Right-Click on Node: Context Menu (Edit Mode only)</p>
+  </Card>
 </div>

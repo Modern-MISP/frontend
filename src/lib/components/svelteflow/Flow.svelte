@@ -52,6 +52,7 @@
   on:nodedrag
   on:nodedragstop
   on:nodecontextmenu
+  on:edgecontextmenu
   on:paneclick
   on:dragover
   on:drop
@@ -64,7 +65,9 @@
 >
   <div class="!text-base">
     <Background class="!bg-base" variant={BackgroundVariant.Dots} size={2} />
-    <Controls position="top-right" showLock={false} />
+    <Controls position="top-right" showLock={false}>
+      <slot name="controls" />
+    </Controls>
     <slot />
   </div>
 </SvelteFlow>
