@@ -52,3 +52,27 @@ export const lockEditMode: Action<HTMLElement, boolean> = function (node, enable
     }
   };
 };
+
+/**
+ * Action for preventing the user from leaving view mode.
+ * @param node html node that this action belongs to
+ * @param enabled if true, edit mode will be locked
+ */
+export const lockViewMode: Action<HTMLElement, boolean> = function (node, enabled) {
+  let unsubscribe = mode.subscribe((m) => {
+    lockModeToggle.set(enabled && m === 'view');
+  });
+
+  return {
+    update(enabled) {
+      unsubscribe();
+      unsubscribe = mode.subscribe((m) => {
+        lockModeToggle.set(enabled && m === 'view');
+      });
+    },
+    destroy() {
+      unsubscribe();
+      lockModeToggle.set(false);
+    }
+  };
+};
