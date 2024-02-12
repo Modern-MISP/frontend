@@ -14,6 +14,7 @@
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { fly } from 'svelte/transition';
+  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -239,18 +240,41 @@
     removePreviousHighlightBorder();
   }
 
-  let showUnreferencedObjects = false;
-  let showUnreferencedAttributes = false;
+  const onDragOver = (event: DragEvent) => {
+    event.preventDefault();
 
-  function toggleUnreferencedObjects() {
-    showUnreferencedObjects = !showUnreferencedObjects;
-    showUnreferencedAttributes = false;
-  }
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  };
 
-  function toggleUnreferencedAttributes() {
-    showUnreferencedAttributes = !showUnreferencedAttributes;
-    showUnreferencedObjects = false;
-  }
+  const { screenToFlowPosition } = useSvelteFlow();
+
+  const onDrop = (event: DragEvent) => {
+    event.preventDefault();
+
+    if (!event.dataTransfer) {
+      return null;
+    }
+
+    const type = event.dataTransfer.getData('application/svelteflow');
+
+    const position = screenToFlowPosition({
+      x: event.clientX,
+      y: event.clientY
+    });
+
+    const newNode = {
+      id: `${Math.random()}`,
+      type,
+      position,
+      data: { label: `${type} node` },
+      origin: [0.5, 0.0]
+    } satisfies Node;
+
+    $nodes.push(newNode);
+    $nodes = $nodes;
+  };
 </script>
 
 <!--
@@ -275,51 +299,7 @@
   </div>
 
   <div class="flex flex-col justify-end gap-1 max-w-xs">
-    <IconCardRow>
-      <IconCard icon="mdi:web" text="Unreferenced Objects" on:click={toggleUnreferencedObjects} />
-      <IconCard
-        icon="mdi:flag"
-        text="Unreferenced Attributes"
-        on:click={toggleUnreferencedAttributes}
-      />
-    </IconCardRow>
-    <div class="flex flex-row">
-      {#if showUnreferencedObjects}
-        <div
-          in:fly={{ x: 200 }}
-          out:fly={{ x: 200 }}
-          class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
-        >
-          <div class="flex flex-col !resize-none rounded-lg bg-surface0 truncate">
-            {#each objects as object}
-              <IconCard
-                icon="mdi:web"
-                text={object.name + ': ' + object.comment}
-                class="flex !flex-row"
-              ></IconCard>
-            {/each}
-          </div>
-        </div>
-      {/if}
-
-      {#if showUnreferencedAttributes}
-        <div
-          in:fly={{ x: 200 }}
-          out:fly={{ x: 200 }}
-          class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
-        >
-          <div class="flex flex-col !resize-none rounded-lg bg-surface0 truncate">
-            {#each attributes as attribute}
-              <IconCard
-                icon="mdi:flag"
-                text={attribute.type + ': ' + attribute.value}
-                class="flex !flex-row"
-              ></IconCard>
-            {/each}
-          </div>
-        </div>
-      {/if}
-    </div>
+    <UnreferencedMenu {objects} {attributes} />
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
@@ -340,6 +320,8 @@
         if (computedPosition) position.set(computedPosition);
         position.subscribe((position) => updateNode(node.id, { position }));
       }}
+      on:dragover={onDragOver}
+      on:drop={onDrop}
     />
   </div>
 </div>
