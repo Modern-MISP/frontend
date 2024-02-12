@@ -14,6 +14,9 @@
   /** URL for hyperlink */
   export let action: string | undefined = undefined;
 
+  /** When true, the action cannot be clicked. */
+  export let disabled: boolean = false;
+
   let clazz = '';
   /**
    * The class of this ActionBar entry.
@@ -26,6 +29,6 @@
   An {@link ActionBarEntry} that acts as a link to the specified URL.
 -->
 
-<a href={action}>
-  <ActionBarEntry {label} {icon} class={clazz} />
+<a href={action} class:pointer-events-none={disabled}>
+  <ActionBarEntry {label} {icon} {disabled} class={clazz} />
 </a>

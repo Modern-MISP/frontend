@@ -1,7 +1,7 @@
 <script lang="ts" generics="T">
   import Info from '$lib/components/info/Info.svelte';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-  import { TABLE_DATA } from '$lib/components/table/dynTable/exampleTableData';
+  import { TABLE_DATA } from '$lib/components/table/dynTable/exampleTableData.mock';
   import DynCard from './DynCard.svelte';
   import type { Hst } from '@histoire/plugin-svelte';
   import { themes } from '$lib/stores';

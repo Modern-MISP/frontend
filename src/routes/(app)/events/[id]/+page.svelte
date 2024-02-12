@@ -3,9 +3,11 @@
   import type { PageData } from './$types';
   import EditMode from './EditMode.svelte';
 
-  import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
+  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -13,6 +15,11 @@
   export let data: PageData;
 
   let addTag = false;
+
+  /**
+   * The currently selected pills
+   */
+  let selection: PickerPill[] = [];
 </script>
 
 <!-- 
@@ -28,23 +35,21 @@
 
 <div class="h-full overflow-auto">
   <EditMode>
-    <div class="grid gap-2 g lg:flex-nowrap">
+    <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
       {#if addTag}
-        <AddTagForm />
+        <AddTagForm bind:selection />
       {:else}
         <section class="h-full">
           <DynCard data={data.event} {header} />
         </section>
       {/if}
       <section class="h-full">
-        <EventTags bind:addTag {data} />
+        <EventTags bind:addTag {data} bind:selection />
       </section>
     </div>
   </EditMode>
+  <section>
+    <h1>Attributes</h1>
+    <DynTable data={[]} header={[]} />
+  </section>
 </div>
-
-<style>
-  .g {
-    grid: 50rem 50rem / 1fr 1fr;
-  }
-</style>

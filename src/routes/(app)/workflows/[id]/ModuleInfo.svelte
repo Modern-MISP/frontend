@@ -2,7 +2,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-  import type { ModuleNodeData } from '../triggers/trigger';
+  import type { ModuleNodeData } from '../workflow';
 
   /** Data about a module that is part of a workflow. */
   export let data: ModuleNodeData;

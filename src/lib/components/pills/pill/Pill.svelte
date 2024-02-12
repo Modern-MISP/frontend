@@ -44,7 +44,10 @@
       {/if}
     </div>
   {/if}
-  <span class="flex w-full px-2 py-1 line-clamp-1 flex-nowrap" class:pl-0={icon || label}>
+  <span
+    class="flex self-center w-full px-2 py-1 text-left line-clamp-1 flex-nowrap"
+    class:pl-0={icon || label}
+  >
     <slot>
       {text}
     </slot>
