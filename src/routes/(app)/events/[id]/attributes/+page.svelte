@@ -22,4 +22,10 @@
   ];
 </script>
 
-<ComplexTableLayout {tableData} {header} editActions={[]} filter={[]}></ComplexTableLayout>
+<ComplexTableLayout
+  {tableData}
+  {header}
+  tableHref={(row) => `/attributes/${row.id}`}
+  editActions={[]}
+  filter={[]}
+></ComplexTableLayout>
