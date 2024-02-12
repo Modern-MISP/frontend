@@ -13,6 +13,8 @@
   import CategoryNode from './nodes/CategoryNode.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
+  import Card from '../card/Card.svelte';
+  import { fly } from 'svelte/transition';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -237,6 +239,19 @@
     menu = null;
     removePreviousHighlightBorder();
   }
+
+  let showUnreferencedObjects = false;
+  let showUnreferencedAttributes = false;
+
+  function toggleUnreferencedObjects() {
+    showUnreferencedObjects = !showUnreferencedObjects;
+    showUnreferencedAttributes = false;
+  }
+
+  function toggleUnreferencedAttributes() {
+    showUnreferencedAttributes = !showUnreferencedAttributes;
+    showUnreferencedObjects = false;
+  }
 </script>
 
 <!--
@@ -248,21 +263,50 @@
 -->
 
 <header class="flex justify-between w-full gap-2">
-  <div class="flex gap-4 justify-start">
+  <div class="flex justify-start gap-4">
     {#if $mode === 'edit'}
-      <IconCardRow>
-        <IconCard icon="mdi:web-plus" text="Add Object" />
-        <IconCard icon="mdi:flag-add" text="Add Attribute" />
-        <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-      </IconCardRow>
+      <div in:fly={{ x: -200 }}>
+        <IconCardRow>
+          <IconCard icon="mdi:web-plus" text="Add Object" />
+          <IconCard icon="mdi:flag-add" text="Add Attribute" />
+          <IconCard icon="icon-park-outline:connection" text="Add Reference" />
+        </IconCardRow>
+      </div>
     {/if}
   </div>
 
-  <div class="flex gap-4 justify-end">
+  <div class="flex flex-col justify-end gap-1 max-w-xs">
     <IconCardRow>
-      <IconCard icon="mdi:web" text="Unreferenced Objects" />
-      <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
+      <IconCard icon="mdi:web" text="Unreferenced Objects" on:click={toggleUnreferencedObjects} />
+      <IconCard
+        icon="mdi:flag"
+        text="Unreferenced Attributes"
+        on:click={toggleUnreferencedAttributes}
+      />
     </IconCardRow>
+    <div class="flex flex-row">
+      {#if showUnreferencedObjects}
+        <Card class="flex flex-col !resize-none">
+          {#each objects as object}
+            <div class="flex flex-row truncate">
+              <div>{object.id}</div>
+              <div>{object.name}</div>
+            </div>
+          {/each}
+        </Card>
+      {/if}
+
+      {#if showUnreferencedAttributes}
+        <Card class="flex flex-col !resize-none">
+          {#each attributes as attribute}
+            <div class="flex flex-row truncate">
+              <div>{attribute.id}</div>
+              <div>{attribute.value}</div>
+            </div>
+          {/each}
+        </Card>
+      {/if}
+    </div>
   </div>
 </header>
 <div class="flex flex-row w-full h-full">

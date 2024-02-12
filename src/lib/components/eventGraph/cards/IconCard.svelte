@@ -32,7 +32,7 @@
 <button on:click>
   <a {href}>
     <Card
-      class="!resize-none overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
+      class="!resize-none p-3 overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"
       title={text}
     >
       <Icon {icon} />

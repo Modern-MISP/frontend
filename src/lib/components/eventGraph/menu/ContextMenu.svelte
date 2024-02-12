@@ -3,6 +3,7 @@
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
   import { mode } from '$lib/stores';
+  import { fly } from 'svelte/transition';
 
   export let id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -99,8 +100,8 @@
 
  -->
 
-<div class="flex items-center gap-2 absolute z-50">
-  <IconCardRow class="border-2 border-sky">
+<div in:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
+  <IconCardRow class="border-2 border-sky flex-col">
     <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
   </IconCardRow>
 
