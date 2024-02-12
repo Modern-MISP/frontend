@@ -1,15 +1,18 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { shouldTextBeBlack } from '$lib/util/color.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await GET('/tags', { fetch });
+  const { data, error: mispError, response } = await get(api).GET('/tags', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -84,9 +87,38 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const editActions: DynCardActionHeader<(typeof data)['Tag']>[] = [
+    {
+      label: 'Delete',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to delete the tags with ids: ${x.map((x) => x.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.id)
+              .filter((x) => x)
+              .map((tagId) =>
+                get(api).POST('/tags/delete/{tagId}', {
+                  fetch,
+                  params: { path: { tagId: tagId as string } }
+                })
+              )
+          ).then(invalidateAll);
+        }
+      }
+    }
+  ];
+
   return {
     data,
     tableData: data.Tag ?? [],
-    header
+    header,
+    editActions
   };
 };

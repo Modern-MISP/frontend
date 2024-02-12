@@ -3,18 +3,25 @@
   import type { PageData } from './$types';
   import EditMode from './EditMode.svelte';
 
-  import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
   import { contextRoutes } from '$lib/actions';
   import { page } from '$app/stores';
+  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
    */
   export let data: PageData;
 
-  let addTag = false;
+  let state: 'addTag' | 'info' | 'createTag' = 'info';
+
+  /**
+   * The currently selected pills
+   */
+  let selection: PickerPill[] = [];
 </script>
 
 <!-- 
@@ -55,23 +62,23 @@
 
 <div class="h-full overflow-auto">
   <EditMode>
-    <div class="grid gap-2 g lg:flex-nowrap">
-      {#if addTag}
-        <AddTagForm />
+    <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
+      {#if state === 'addTag'}
+        <AddTagForm
+          bind:selection
+          on:createTag={() => (state = 'createTag')}
+          on:close={() => (state = 'info')}
+        />
+      {:else if state === 'createTag'}
+        <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
       {:else}
         <section class="h-full">
           <DynCard data={data.event} {header} />
         </section>
       {/if}
       <section class="h-full">
-        <EventTags bind:addTag {data} />
+        <EventTags bind:state {data} bind:selection />
       </section>
     </div>
   </EditMode>
 </div>
-
-<style>
-  .g {
-    grid: 50rem 50rem / 1fr 1fr;
-  }
-</style>
