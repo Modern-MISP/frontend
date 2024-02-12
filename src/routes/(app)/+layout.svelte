@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Layout from '$lib/components/layout/Layout.svelte';
-  import { currentRoute } from '$lib/stores';
+  import { currentRoute, contextRouteEntries } from '$lib/stores';
   import { routes } from './routes';
 
   const idEntry = (name: string) => ({
@@ -28,6 +28,6 @@
   
 -->
 
-<Layout {routes} currentRoute={$currentRoute}>
+<Layout {routes} currentRoute={$currentRoute} contextRoutes={$contextRouteEntries}>
   <slot /></Layout
 >
