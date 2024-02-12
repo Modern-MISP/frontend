@@ -10,7 +10,7 @@
   /**
    * The name of the input. Used for the label and for form submission.
    */
-  export let name = 'default';
+  export let name: string | undefined = undefined;
 
   /**
    * The current value of the input.
@@ -66,7 +66,7 @@
   </slot>
   <input
     on:input={({ currentTarget }) => {
-      dispatch('formValue', { [name]: currentTarget.value });
+      if (name) dispatch('formValue', { [name]: currentTarget.value });
       dispatch('value', currentTarget.value);
     }}
     on:blur

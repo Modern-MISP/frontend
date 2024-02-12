@@ -21,7 +21,7 @@
   /**
    * The name of the input. Used for form submission.
    */
-  export let name = 'default';
+  export let name: string | undefined = undefined;
   /**
    * When true, the picker cannot be used.
    */
@@ -79,7 +79,7 @@
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
 
   const dispatch = createEventDispatcher<{ formValue: Record<string, PickerPill[]> }>();
-  $: if (pickedItems) dispatch('formValue', { [name]: pickedItems });
+  $: if (name) dispatch('formValue', { [name]: pickedItems });
 
   let input: HTMLInputElement;
 </script>

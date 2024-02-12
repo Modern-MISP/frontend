@@ -8,10 +8,10 @@
   /**
    * The form name of this checkbox.
    */
-  export let name: string = 'defaultCheckbox';
+  export let name: string | undefined = undefined;
 
   const dispatch = createEventDispatcher<{ formValue: Record<string, boolean> }>();
-  $: if (checked) dispatch('formValue', { [name]: checked });
+  $: if (name) dispatch('formValue', { [name]: checked });
 </script>
 
 <!-- 

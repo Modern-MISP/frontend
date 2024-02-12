@@ -15,7 +15,7 @@
   /**
    * Name of this `select` element. Used for forms.
    */
-  export let name: string = 'defaultSelect';
+  export let name: string | undefined = undefined;
   /**
    * When true, selection is disabled.
    */
@@ -28,7 +28,7 @@
   export { clazz as class };
 
   const dispatch = createEventDispatcher<{ formValue: Record<string, string> }>();
-  $: if (value) dispatch('formValue', { [name]: value });
+  $: if (name) dispatch('formValue', { [name]: value });
 </script>
 
 <!-- 

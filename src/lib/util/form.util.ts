@@ -19,7 +19,6 @@ export function getFormValues({ currentTarget }: SubmitEvent): Record<string, st
     // Handles arrays. If there are multiple inputs with the same name they most be an array. Elsewise there is only one input. So no need too but it into an array.
     return { [key]: values.length > 1 ? values : values[0] };
   });
-  console.log(entries);
 
   // Throw if no name is set. E.g using an input without name inside of the form.
   if (!entries) throw new Error("Forgot to set 'name' attribute");

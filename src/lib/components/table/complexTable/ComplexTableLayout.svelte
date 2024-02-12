@@ -30,7 +30,7 @@
 
   import Filter from '$lib/components/filter/Filter.svelte';
   import { mode, notifications } from '$lib/stores';
-  import { constant, merge } from 'lodash-es';
+  import { constant, isMatch, merge, omitBy } from 'lodash-es';
 
   /**
    * Your initial data
@@ -105,10 +105,10 @@
 
   $: pagPage = 1;
 
-  $: loadMore({ ...merge({}, ...currentFilter, pagination ? { page: pagPage, limit: 50 } : {}) });
+  $: loadMore({ ...merge({}, currentFilter, pagination ? { page: pagPage, limit: 50 } : {}) });
 
   let filterOpen = false;
-  let currentFilter: Record<string, string>[] = [];
+  let currentFilter: Record<string, string> = {};
 
   let activeRows: typeof tableData = [];
 
@@ -119,18 +119,12 @@
     activeRows = [];
   }
 
-  // On any activeFast filter change update the currentFilter with the value provided in fastFilter.isActive
-  $: activeFastFilter.forEach((active, i) => {
-    currentFilter = active
-      ? [...currentFilter, fastFilter[i].ifActive]
-      : currentFilter.filter((v) => v !== fastFilter[i].ifActive);
-  });
-
   /**
    * Defined some fast filter attributes
    */
   export let fastFilter: FastFilter[] = [];
-  let activeFastFilter: boolean[] = [];
+  // The fastFilter should be active if ifActive is a subset of currentFilter
+  $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
@@ -140,11 +134,21 @@
     {#if filter.length > 0}
       <FilterCard bind:currentFilter bind:filterOpen>
         {#each fastFilter as fastFilterEntry, i}
-          <ActiveEntry {...fastFilterEntry} bind:active={activeFastFilter[i]}></ActiveEntry>
+          <ActiveEntry
+            {...fastFilterEntry}
+            active={activeFastFilter[i]}
+            on:click={() =>
+              // If the activeFastFilter is set, omit all values provided in ifActive. Else add them the the current filter
+              (currentFilter = !activeFastFilter[i]
+                ? { ...currentFilter, ...fastFilterEntry.ifActive }
+                : omitBy(
+                    currentFilter,
+                    (value, key) =>
+                      Object.keys(fastFilter[i].ifActive).includes(key) &&
+                      fastFilter[i].ifActive[key] === value
+                  ))}
+          ></ActiveEntry>
         {/each}
-        <!-- {#if fastFilter.length > 0}
-        
-        {/if} -->
       </FilterCard>
     {/if}
   </slot>
