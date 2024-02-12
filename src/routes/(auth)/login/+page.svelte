@@ -1,17 +1,17 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { PUBLIC_MISP_KEY } from '$env/static/public';
+  import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
-  import { merge } from 'lodash-es';
   import { login } from './authMock';
-  import { PUBLIC_MISP_KEY } from '$env/static/public';
-  import { token } from '$lib/api';
 
   let error: string = '';
 
   async function submit(event: SubmitEvent) {
-    const entries = merge({}, ...getFormValues(event));
+    const entries = getFormValues(event);
+
     if (entries.token) {
       $token = entries.token;
       goto('/events');
