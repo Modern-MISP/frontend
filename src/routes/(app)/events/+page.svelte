@@ -19,4 +19,20 @@
   {...data}
   endpoint={(bodyOptions) =>
     get(api).POST('/events/index', { body: { limit: 50, ...bodyOptions } })}
+  fastFilter={[
+    {
+      label: 'My Organisation',
+      icon: 'material-symbols:work-outline',
+      ifActive: {
+        org: '1'
+      }
+    },
+    {
+      label: 'My Events',
+      icon: 'mdi:account-circle',
+      ifActive: {
+        email: 'admin@admin.test'
+      }
+    }
+  ]}
 ></ComplexTableLayout>

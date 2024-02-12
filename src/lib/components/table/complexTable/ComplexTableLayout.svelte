@@ -1,4 +1,8 @@
 <script lang="ts" generics="T extends IRecord">
+  import type { ComponentProps } from 'svelte';
+
+  import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
+
   import type { api } from '$lib/api';
 
   import { errorPill } from '$lib/util/pill.util';
@@ -114,6 +118,21 @@
     lastTableData = tableData;
     activeRows = [];
   }
+
+  // On any activeFast filter change update the currentFilter with the value provided in fastFilter.isActive
+  $: activeFastFilter.forEach((active, i) => {
+    currentFilter = active
+      ? [...currentFilter, fastFilter[i].ifActive]
+      : currentFilter.filter((v) => v !== fastFilter[i].ifActive);
+  });
+
+  /**
+   * Defined some fast filter attributes
+   */
+  export let fastFilter: (Omit<ComponentProps<ActiveEntry>, 'active'> & {
+    ifActive: Record<string, string>;
+  })[] = [];
+  let activeFastFilter: boolean[] = [];
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
@@ -121,7 +140,14 @@
 <div class="flex gap-4">
   <slot name="filter">
     {#if filter.length > 0}
-      <FilterCard bind:currentFilter bind:filterOpen></FilterCard>
+      <FilterCard bind:currentFilter bind:filterOpen>
+        {#each fastFilter as fastFilterEntry, i}
+          <ActiveEntry {...fastFilterEntry} bind:active={activeFastFilter[i]}></ActiveEntry>
+        {/each}
+        <!-- {#if fastFilter.length > 0}
+        
+        {/if} -->
+      </FilterCard>
     {/if}
   </slot>
   <slot name="actionList">

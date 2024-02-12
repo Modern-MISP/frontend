@@ -21,6 +21,8 @@ import { errorPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 import Select from '$lib/components/form/Select.svelte';
+import { genSelectProps } from '$lib/util/select.util';
+import Input from '$lib/components/input/Input.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -159,13 +161,15 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const { data: orgs } = await get(api).GET('/organisations', { fetch });
+  const orgOptions = orgs?.map((x) => x.Organisation);
   const fil = createTableHeadGenerator<undefined>();
   const filter = [
     fil({
       label: 'Value',
       value: () => 'value'
     }),
-    // In the current api published does not need to be an boolean. That's why we could use the string return from an input checkbox
+    // Not specified in the api spec. But does work anyways.
     fil({
       label: 'Published',
       value: () => ({
@@ -184,6 +188,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Attribute',
       value: () => 'attribute'
     }),
+
     fil({
       label: 'Event ID',
       value: () => 'eventid'
@@ -195,6 +200,20 @@ export const load: PageLoad = async ({ fetch }) => {
     fil({
       label: 'Sharing Group',
       value: () => 'sharinggroup'
+    }),
+    fil({
+      label: 'Event Information',
+      value: () => 'eventinfo'
+    }),
+    fil({
+      label: 'Organisation',
+      value: () => ({
+        display: Select,
+        props: {
+          ...genSelectProps(orgOptions),
+          name: 'org'
+        }
+      })
     }),
 
     fil({
@@ -237,6 +256,27 @@ export const load: PageLoad = async ({ fetch }) => {
         props: {
           checked: false,
           name: 'hasproposal'
+        }
+      })
+    }),
+
+    fil({
+      label: 'Date From',
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'datefrom',
+          type: 'date'
+        }
+      })
+    }),
+    fil({
+      label: 'Date Until',
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'dateuntil',
+          type: 'date'
         }
       })
     }),
