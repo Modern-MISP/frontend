@@ -6,7 +6,7 @@ import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import { shouldTextBeBlack } from '$lib/util/color.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';

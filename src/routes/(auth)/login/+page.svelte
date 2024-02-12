@@ -59,7 +59,9 @@
   </div>
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
-  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right">Login</Button>
+  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    >Login</Button
+  >
   <span class="h-12 text-red">
     {error}
   </span>
