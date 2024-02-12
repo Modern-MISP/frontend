@@ -16,8 +16,8 @@ import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { notifications } from '$lib/stores';
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
 import { errorPill } from '$lib/util/pill.util';
+import { shouldTextBeBlack } from '$lib/util/color.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 import Select from '$lib/components/form/Select.svelte';

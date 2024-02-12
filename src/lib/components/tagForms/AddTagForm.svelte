@@ -9,10 +9,12 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { createEventDispatcher } from 'svelte';
   import { TAG_RELATION_TYPES } from '../../consts/relationTypes';
+  import CardHeading from '../card/CardHeading.svelte';
 
   const dispatch = createEventDispatcher<{
     close: void;
     add: { id: string; relation: string; local: boolean }[];
+    createTag: void;
   }>();
 
   /**
@@ -35,6 +37,7 @@
 
 <div class="flex flex-col gap-1">
   <Card>
+    <CardHeading>Add Tags</CardHeading>
     <TagPicker bind:pickedItems></TagPicker>
 
     <CardRow>
@@ -52,8 +55,10 @@
   </Card>
   <Card class="!h-min overflow-initial">
     <div class="flex justify-center gap-4">
-      <Button class="w-min whitespace-nowrap bg-surface1" suffixIcon="mdi:plus-circle-outline"
-        >Create new Tag</Button
+      <Button
+        class="w-min whitespace-nowrap bg-surface1"
+        suffixIcon="mdi:plus-circle-outline"
+        on:click={() => dispatch('createTag')}>Create new Tag</Button
       >
       <Button
         class="w-min text-red bg-surface1"
