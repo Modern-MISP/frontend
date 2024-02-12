@@ -63,8 +63,7 @@
     },
     openDelay: 0,
     closeDelay: 0,
-    portal: '#layout',
-    group: 'sidemenu'
+    portal: '#layout'
   });
 </script>
 
