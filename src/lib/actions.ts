@@ -16,7 +16,7 @@ export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (n
   };
 };
 
-export const contextRoutes: Action<Window, SideMenuRoute[]> = function (node, routes) {
+export const contextRoutes: Action<HTMLElement, SideMenuRoute[]> = function (node, routes) {
   contextRouteEntries.set(routes);
 
   return {
