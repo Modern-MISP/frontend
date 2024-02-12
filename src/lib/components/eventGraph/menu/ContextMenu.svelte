@@ -2,6 +2,7 @@
   import { useEdges, useNodes } from '@xyflow/svelte';
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
+  import { mode } from '$lib/stores';
 
   export let id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -115,9 +116,11 @@
     </IconCardRow>
   {/if}
 
-  <IconCardRow class="border-2 border-sky">
-    <IconCard icon="mdi:edit" text="Edit" />
-    <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
-    <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
-  </IconCardRow>
+  {#if $mode === 'edit'}
+    <IconCardRow class="border-2 border-sky">
+      <IconCard icon="mdi:edit" text="Edit" />
+      <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
+      <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
+    </IconCardRow>
+  {/if}
 </div>

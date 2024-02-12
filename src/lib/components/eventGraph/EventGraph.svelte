@@ -1,6 +1,7 @@
 <script lang="ts">
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { components } from '$lib/api/misp';
+  import { mode } from '$lib/stores';
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import dagre from '@dagrejs/dagre';
@@ -247,13 +248,17 @@
 -->
 
 <header class="flex justify-between w-full gap-2">
-  <div class="flex gap-4 shrink-0">
-    <IconCardRow>
-      <IconCard icon="mdi:web-plus" text="Add Object" />
-      <IconCard icon="mdi:flag-add" text="Add Attribute" />
-      <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-    </IconCardRow>
+  <div class="flex gap-4 justify-start">
+    {#if $mode === 'edit'}
+      <IconCardRow>
+        <IconCard icon="mdi:web-plus" text="Add Object" />
+        <IconCard icon="mdi:flag-add" text="Add Attribute" />
+        <IconCard icon="icon-park-outline:connection" text="Add Reference" />
+      </IconCardRow>
+    {/if}
+  </div>
 
+  <div class="flex gap-4 justify-end">
     <IconCardRow>
       <IconCard icon="mdi:web" text="Unreferenced Objects" />
       <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
