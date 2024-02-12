@@ -25,7 +25,7 @@
   $: optionValue = option?.value(undefined);
 
   let value: unknown;
-  $: console.log(currentFilter);
+  $: console.log(value);
 </script>
 
 <div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-1/2">
