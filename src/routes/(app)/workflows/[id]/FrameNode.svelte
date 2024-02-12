@@ -1,26 +1,25 @@
 <script lang="ts">
-  import type { NodeProps } from '@xyflow/svelte';
+  import { type NodeProps } from '@xyflow/svelte';
 
   /** Node id */
   export let id: NodeProps['id'];
   id;
-  /** Node data */
+  /** Node properties */
   export let data: NodeProps['data'];
-  data;
   /** Node drag handle */
-  export let dragHandle: NodeProps['dragHandle'] = undefined;
+  export let dragHandle: NodeProps['dragHandle'];
   dragHandle;
   /** Node type */
-  export let type: NodeProps['type'] = undefined;
+  export let type: NodeProps['type'];
   type;
   /** Node selected */
-  export let selected: NodeProps['selected'] = undefined;
+  export let selected: NodeProps['selected'];
   selected;
   /** Node is connectable */
-  export let isConnectable: NodeProps['isConnectable'] = undefined;
+  export let isConnectable: NodeProps['isConnectable'];
   isConnectable;
   /** Node z index */
-  export let zIndex: NodeProps['zIndex'] = undefined;
+  export let zIndex: NodeProps['zIndex'];
   zIndex;
   /** Node width */
   export let width: NodeProps['width'] = undefined;
@@ -43,19 +42,13 @@
   /** Node absolute y position */
   export let positionAbsoluteY: NodeProps['positionAbsoluteY'];
   positionAbsoluteY;
-
-  let clazz: string = '';
-
-  /** Additional classes applied to outer div. */
-  export { clazz as class };
 </script>
 
 <!--
   @component
   
-  The base component for all custom diagram nodes.
-  Other custom node types should use this as their container.
+  A node representing a workflow frame.
 -->
-<div class="px-4 py-2 rounded-md shadow-md bg-surface0 {clazz}">
-  <slot />
+<div class="bg-surface0 w-full h-full opacity-50 border-2">
+  <span class="bg-surface2 text-white">{data.label}</span>
 </div>
