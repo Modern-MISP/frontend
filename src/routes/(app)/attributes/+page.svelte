@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { POST } from '$lib/api';
+  import { api } from '$lib/api';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import { get } from 'svelte/store';
 
   export let data;
 </script>
@@ -12,7 +13,7 @@
 
 <ComplexTableLayout
   endpoint={(x) => {
-    return POST('/attributes/restSearch', { body: x });
+    return get(api).POST('/attributes/restSearch', { body: x });
   }}
   {...data}
   pagination={true}

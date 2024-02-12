@@ -16,6 +16,7 @@
 
 <ActionCard class="!w-auto gap-4 flex">
   <ActiveEntry label="Filter" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
+  <slot />
   {#if currentFilter.length > 0}
     <div class="flex flex-wrap w-full h-full gap-2">
       {#each currentFilter as filter}

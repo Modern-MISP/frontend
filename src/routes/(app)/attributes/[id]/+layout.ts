@@ -1,12 +1,13 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 
 export const load = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await GET('/attributes/view/{attributeId}', {
+  } = await get(api).GET('/attributes/view/{attributeId}', {
     params: { path: { attributeId: params.id } },
     fetch
   });

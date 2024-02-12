@@ -1,5 +1,6 @@
-import { POST } from '$lib/api';
+import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import attributeCols from './attributeCols';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -13,7 +14,7 @@ export const load: PageLoad = async ({ fetch }) => {
     response,
     data,
     error: mispError
-  } = await POST('/attributes/restSearch', { fetch, body: { limit: 50, page: 1 } });
+  } = await get(api).POST('/attributes/restSearch', { fetch, body: { limit: 50, page: 1 } });
 
   if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
 

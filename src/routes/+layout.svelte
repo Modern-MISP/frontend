@@ -10,6 +10,6 @@
   Elements using the proper tailwind classes will be themed automatically according to the current theme when placed in this layout.
   
 -->
-<body class="{$settings.theme} bg-base w-full h-[100vh] flex">
+<body id="layout" class="{$settings.theme} bg-base w-full h-[100vh] flex">
   <slot />
 </body>

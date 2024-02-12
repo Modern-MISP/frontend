@@ -5,12 +5,12 @@
     BackgroundVariant,
     Controls,
     type Node,
-    type Edge
+    type Edge,
+    type DefaultEdgeOptions,
+    type NodeTypes
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
   import { mode } from '$lib/stores';
-  import FrameNode from './nodes/FrameNode.svelte';
-  import ModuleNode from './nodes/ModuleNode.svelte';
 
   /** Nodes that are rendered on the flow */
   export let nodes: Writable<Node[]>;
@@ -18,15 +18,18 @@
   /** Edges that are rendered on the flow */
   export let edges: Writable<Edge[]>;
 
-  const nodeTypes = {
-    trigger: ModuleNode,
-    action: ModuleNode,
-    logic: ModuleNode,
-    frame: FrameNode
-  };
+  /**
+   * Custom node types to pass to SvelteFlow.
+   */
+  export let nodeTypes: NodeTypes | undefined = undefined;
 
   /** Dimensions of the grid that nodes will snap onto */
   export let snapGrid: [number, number] = [25, 25];
+
+  /**
+   * Default options to set for edges.
+   */
+  export let defaultEdgeOptions: DefaultEdgeOptions | undefined = undefined;
 </script>
 
 <!--
@@ -47,8 +50,14 @@
   on:init
   on:nodeclick
   on:nodedrag
+  on:nodedragstop
+  on:nodecontextmenu
+  on:edgecontextmenu
   on:paneclick
-  class="text-text"
+  on:dragover
+  on:drop
+  {defaultEdgeOptions}
+  class="text-text relative"
   nodesDraggable={$mode === 'edit'}
   nodesConnectable={$mode === 'edit'}
   elementsSelectable={$mode === 'edit'}
@@ -56,7 +65,9 @@
 >
   <div class="!text-base">
     <Background class="!bg-base" variant={BackgroundVariant.Dots} size={2} />
-    <Controls position="top-right" showLock={false} />
+    <Controls position="top-right" showLock={false}>
+      <slot name="controls" />
+    </Controls>
     <slot />
   </div>
 </SvelteFlow>
@@ -64,5 +75,10 @@
 <style lang="postcss">
   :global(:root) {
     --minimap-background-color-props: theme('colors.current');
+  }
+  :global(.svelte-flow__controls-button) {
+    background-color: theme('colors.surface1.DEFAULT') !important;
+    color: theme('colors.text.DEFAULT') !important;
+    border: none !important;
   }
 </style>

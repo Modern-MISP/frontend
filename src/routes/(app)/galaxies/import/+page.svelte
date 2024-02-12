@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { POST } from '$lib/api';
+  import { api } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Card from '$lib/components/card/Card.svelte';
   import { mode } from '$lib/stores';
   import { getFormValues } from '$lib/util/form.util';
   import Icon from '@iconify/svelte';
+  import { get } from 'svelte/store';
 
   $mode = 'edit';
 
@@ -14,7 +15,10 @@
     try {
       const parsed = JSON.parse(galaxies);
 
-      const { error: _error, data } = await POST('/galaxies/import', { fetch, body: parsed });
+      const { error: _error, data } = await get(api).POST('/galaxies/import', {
+        fetch,
+        body: parsed
+      });
       if (_error) {
         error = `Server responded with error: ${JSON.stringify(_error, null, 2)}`;
         success = '';

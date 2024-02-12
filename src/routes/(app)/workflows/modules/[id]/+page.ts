@@ -1,4 +1,5 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
@@ -8,7 +9,7 @@ import type { Module } from '../module';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   /// @ts-expect-error Not in OpenAPI spec
-  const getResult = await GET('/workflows/moduleView/{moduleId}', {
+  const getResult = await get(api).GET('/workflows/moduleView/{moduleId}', {
     fetch,
     params: { path: { moduleId: params.id } }
   });

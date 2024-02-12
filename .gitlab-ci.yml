@@ -10,7 +10,9 @@ stages:
 default:
   tags:
     - kit-intranet # Tag is required to make the CI runner accept the jobs
-  image: node:latest
+  image:
+    name: node:latest
+    pull_policy: if-not-present
 
 workflow:
   rules:
@@ -65,16 +67,29 @@ docs:
     include: .gitlab/docs.yml
   variables:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+  rules:
+    - if: $CI_COMMIT_BRANCH == "docs"
 
 # === test stage ===
 
 unit_tests:
   stage: test
   script:
-    - npx vitest run --reporter junit --outputFile report.xml
+    - npx vitest run
+  coverage: /All files[^|]*\|[^|]*\|\s+([\d\.]+)/
   artifacts:
     reports:
       junit: report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+
+prettier:
+  stage: test
+  script:
+    - npx prettier --check .
+  dependencies:
+    - install_dependencies
 
 eslint:
   stage: test
