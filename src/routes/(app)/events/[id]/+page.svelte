@@ -1,14 +1,14 @@
 <script lang="ts">
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import type { PageData } from './$types';
-  import Form from '$lib/components/form/Form.svelte';
-  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
-  import type { PickerPill } from '$lib/models/Picker.interface';
-  import EventTags from './EventTags.svelte';
-  import { header } from './formHeaders';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import { api } from '$lib/api';
   import type { components } from '$lib/api/misp';
+  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
+  import Form from '$lib/components/form/Form.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import type { PageData } from './$types';
+  import EventTags from './EventTags.svelte';
+  import { header } from './formHeaders';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -24,7 +24,7 @@
 
   async function formCallback(
     // eslint-disable-next-line no-undef
-    formData: Record<string, FormDataEntryValue | FormDataEntryValue[]>[]
+    formData: Record<string, string>
   ) {
     $api.PUT('/events/edit/{eventId}', {
       params: { path: { eventId: data?.event.id ?? '1' } },
