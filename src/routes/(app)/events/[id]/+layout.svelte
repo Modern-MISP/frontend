@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import { contextRoutes } from '$lib/actions';
-</script>
+  import { currentRoute } from '$lib/stores';
 
-<svelte:window
-  use:contextRoutes={[
+  const eventContextRoutes = [
     {
       name: 'Event Info',
       icon: 'mdi:information-outline',
@@ -25,7 +24,23 @@
       icon: 'ph:graph',
       href: `/events/${$page.params.id}/graph`
     }
-  ]}
-/>
+  ];
+
+  $: $currentRoute = [
+    {
+      name: 'Events',
+      icon: 'mdi-calendar',
+      href: '/events'
+    },
+    {
+      name: $page.params.id,
+      icon: 'mdi:id-card',
+      href: `/events/${$page.params.id}`
+    },
+    ...eventContextRoutes.filter(({ href }) => $page.url.href.includes(href))
+  ];
+</script>
+
+<svelte:window use:contextRoutes={eventContextRoutes} />
 
 <slot />
