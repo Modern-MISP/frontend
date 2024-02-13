@@ -107,7 +107,7 @@
                   pickableItems,
                   i
                 ))}
-              class="justify-center align-middle hover:text-red shrink-0"
+              class="justify-center pl-1 align-middle hover:text-red shrink-0"
             >
               <Icon icon="mdi:close-circle-outline" />
             </button>
@@ -126,7 +126,7 @@
     />
     {#if value !== ''}
       <div
-        class="absolute left-0 max-h-80 gap-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface0 {popUpClass}"
+        class="absolute left-0 max-h-80 gap-1 mt-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface0 {popUpClass}"
       >
         {#each autocomplete as props}
           <button

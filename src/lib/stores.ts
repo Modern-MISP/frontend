@@ -6,8 +6,10 @@ import type { Mode } from './models/Mode';
 import { createLocalStorageStore, createTimeoutStore } from './util/store.util';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { INITIAL_SETTINGS } from './settings';
+import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 
 export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
+export const contextRouteEntries = writable<SideMenuRoute[]>([]);
 
 export const settings = createLocalStorageStore(INITIAL_SETTINGS, 'settings');
 

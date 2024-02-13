@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-import { shouldTextBeBlack } from '$lib/util/contrastColor.util';
+import { shouldTextBeBlack } from '$lib/util/color.util';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';

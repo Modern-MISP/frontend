@@ -26,6 +26,12 @@ export const routes: SideMenuRoute[] = [
         icon: 'carbon:assembly-cluster',
         href: '/galaxies/clusters',
         hidden: true
+      },
+      {
+        name: 'Import',
+        icon: 'mdi:import',
+        href: '/galaxies/import',
+        hidden: true
       }
     ]
   },

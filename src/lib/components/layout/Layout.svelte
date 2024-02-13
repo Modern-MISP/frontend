@@ -42,12 +42,15 @@
 
   <div class="flex flex-col h-full min-w-0 grow">
     <div class="ml-0 lg:ml-4">
-      <TopMenu bind:mode={$mode} bind:isOpen />
+      <TopMenu bind:mode={$mode} bind:isOpen>
+        <div class="pl-4">
+          <Breadcrumbs routes={currentRoute} />
+        </div>
+      </TopMenu>
     </div>
 
     <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
-      <Notifications></Notifications>
-      <Breadcrumbs routes={currentRoute} />
+      <Notifications />
       <main class="relative flex flex-col max-h-full gap-4 overflow-hidden grow">
         <slot />
       </main>
