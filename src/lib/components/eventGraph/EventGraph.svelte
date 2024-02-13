@@ -31,6 +31,8 @@
    * The event graph references for the event to be displayed.
    */
   export let eventGraphReferences: EventGraphReferences;
+  const items = eventGraphReferences.items ?? [];
+  const references = eventGraphReferences.relations ?? [];
 
   const { updateNode } = useSvelteFlow();
 

@@ -19,9 +19,11 @@ export const load = async ({ params, fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   // @ts-expect-error Not in the OpenAPI spec
-  const { data: eventGraphReferences } = GET('/events/getEventGraphReferences/{eventId}', {
+  const eventGraphReferencesResult = GET('/events/getEventGraphReferences/{eventId}', {
     params: { path: { eventId: params.id } }
   });
+
+  const eventGraphReferences = (await eventGraphReferencesResult).data as EventGraphReferences
 
   return {
     event: data.Event! as NonNullable<typeof data.Event> & {
@@ -36,6 +38,6 @@ export const load = async ({ params, fetch }) => {
         relationship_type?: string;
       }[];
     },
-    eventGraphReferences: eventGraphReferences as EventGraphReferences
+    eventGraphReferences
   };
 };
