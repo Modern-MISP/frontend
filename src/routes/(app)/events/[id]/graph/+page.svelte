@@ -6,5 +6,5 @@
 </script>
 
 <SvelteFlowProvider>
-  <EventGraph event={data.event} />
+  <EventGraph event={data.event} eventGraphReferences={data.eventGraphReferences} />
 </SvelteFlowProvider>

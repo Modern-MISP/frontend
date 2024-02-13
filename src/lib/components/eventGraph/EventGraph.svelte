@@ -15,6 +15,7 @@
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { fly } from 'svelte/transition';
   import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
+  import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
 
   const edges: Writable<Edge[]> = writable([]);
 
@@ -25,7 +26,11 @@
    * The Event to be displayed on this page.
    */
   export let event: components['schemas']['ExtendedEvent'];
-  event;
+
+  /**
+   * The event graph references for the event to be displayed.
+   */
+  export let eventGraphReferences: EventGraphReferences;
 
   const { updateNode } = useSvelteFlow();
 
