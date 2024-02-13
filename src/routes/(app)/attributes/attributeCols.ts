@@ -7,6 +7,8 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import type { components } from '$lib/api/misp';
 import type { TableHead } from '$lib/models/TableHead.interface';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import Select from '$lib/components/form/Select.svelte';
+import Input from '$lib/components/input/Input.svelte';
 
 export default {
   id: {
@@ -96,3 +98,47 @@ export default {
     })
   }
 } satisfies Record<string, TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>;
+
+export const editAttributeCols = (
+  options: components['schemas']['DescribeAttributeTypesResponse']
+) =>
+  ({
+    distribution: {
+      value: () => ({
+        display: Select,
+        props: {
+          options: DISTRIBUTION_LOOKUP.map((d, i) => ({
+            value: i.toString(),
+            label: d.text!
+          }))
+        }
+      })
+    },
+    category: {
+      value: () => ({
+        display: Select,
+        props: {
+          options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
+        }
+      })
+    },
+    comment: {
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'comment'
+        }
+      })
+    },
+    value: {
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'value'
+        }
+      })
+    }
+  }) satisfies Record<
+    string,
+    Partial<TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>
+  >;
