@@ -11,7 +11,6 @@
   import { header } from './formHeaders';
   import { contextRoutes } from '$lib/actions';
   import { page } from '$app/stores';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
 
   /**
    * Page data containing the data of the event with the id in the url
