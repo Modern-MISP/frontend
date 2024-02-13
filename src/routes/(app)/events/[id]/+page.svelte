@@ -11,6 +11,8 @@
   import { header } from './formHeaders';
   import { contextRoutes } from '$lib/actions';
   import { page } from '$app/stores';
+  import { notifications } from '$lib/stores';
+  import { successPill } from '$lib/util/pill.util';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -25,10 +27,12 @@
   let selection: PickerPill[] = [];
 
   async function formCallback(formData: Record<string, string>) {
-    $api.PUT('/events/edit/{eventId}', {
-      params: { path: { eventId: data?.event.id ?? '1' } },
-      body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
-    });
+    $api
+      .PUT('/events/edit/{eventId}', {
+        params: { path: { eventId: data?.event.id ?? '1' } },
+        body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
+      })
+      .then(() => notifications.add(successPill('Event updated successfully!')));
   }
 </script>
 
