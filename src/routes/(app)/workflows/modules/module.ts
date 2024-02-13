@@ -12,7 +12,7 @@ export type Module = {
   blocking?: boolean;
   misp_core_format?: boolean;
   expect_misp_core_format?: boolean;
-  misp_module?: boolean;
+  is_misp_module?: boolean;
   is_custom?: boolean;
   disabled?: boolean;
   support_filters?: boolean;
