@@ -62,7 +62,7 @@
   <nav class="flex flex-col justify-start w-full gap-2 overflow-auto">
     <slot>
       {#if contextRoutes.length > 0}
-        <div class="flex flex-col bg-crust justify-center w-full gap-2 py-2 px-1 rounded-2xl">
+        <div class="flex flex-col justify-center w-full gap-2 px-1 py-2 bg-crust rounded-2xl">
           {#each contextRoutes as route}
             <div class="flex-row px-4 rounded-2xl" class:bg-crust={isOpen}>
               <SideMenuEntry

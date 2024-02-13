@@ -1,16 +1,14 @@
 <script lang="ts">
   import { actionBar } from '$lib/actions';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+  import { getFormValues } from '$lib/util/form.util';
+
+  /**
+   * The callback to call on submit.
+   */
+  export let callback: (formData: Record<string, string>) => void;
 
   let form: HTMLFormElement;
-  $: if (form) console.log(new FormData(form));
-
-  const submit = ({ currentTarget }: SubmitEvent) => {
-    if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
-
-    const data = new FormData(currentTarget);
-    console.log(data);
-  };
 
   const actions: ActionBarEntryProps[] = [
     {
@@ -24,6 +22,6 @@
 </script>
 
 <svelte:window use:actionBar={actions} />
-<form bind:this={form} on:submit|preventDefault={submit} class="h-full">
+<form bind:this={form} on:submit|preventDefault={(e) => callback(getFormValues(e))}>
   <slot />
 </form>

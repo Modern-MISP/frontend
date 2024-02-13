@@ -99,7 +99,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       {
         value: (x) => ({
           display: Checkbox,
-          props: { name: 'authkey', checked: x.User?.authkey !== '' ?? false }
+          props: { name: 'authkey', checked: x.User?.authkey !== '' } ?? false
         })
       }
     ),

@@ -1,60 +1,12 @@
 <script lang="ts">
-  import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
-  import Pagination from '$lib/components/pagination/Pagination.svelte';
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import { get } from 'svelte/store';
 
-  import Filter from '$lib/components/filter/Filter.svelte';
-  import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
-  import Pill from '$lib/components/pills/pill/Pill.svelte';
-  import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
-  import { merge } from 'lodash-es';
   /**
    * Page data
    */
   export let data;
-
-  let { tableData, header, filter } = data;
-
-  // TODO: move to generic util function. Smth. link (url, page)
-  const loadMore = async (bodyOptions: Record<string, unknown>) => {
-    const {
-      data: _data,
-      error: mispError,
-      response
-    } = await get(api).POST('/events/index', { body: { limit: 50, ...bodyOptions } });
-
-    if (mispError) {
-      console.error(mispError);
-      alert('Error fetching more data');
-    }
-
-    if (response.ok && _data) {
-      tableData = _data;
-    }
-  };
-
-  $: page = 1;
-
-  $: loadMore({ ...merge({}, ...currentFilter), page });
-
-  let filterOpen = false;
-  let currentFilter: Record<string, string>[] = [];
-
-  export const snapshot = {
-    capture: () => currentFilter,
-    restore: (value) => (currentFilter = value)
-  };
-
-  const actions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:event-add',
-      label: 'Add Event',
-      action: '/events/new'
-    }
-  ];
 </script>
 
 <!--
@@ -63,30 +15,8 @@
   
 -->
 
-<svelte:window use:actionBar={actions} />
-
-<div class="flex gap-4">
-  <ActionCard>
-    <ActiveEntry label="test" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
-  </ActionCard>
-
-  {#if currentFilter.length > 0}
-    <ActionCard class="p-4">
-      <div class="flex gap-2">
-        {#each currentFilter as filter}
-          {@const label = Object.keys(filter)[0]}
-          {@const text = filter[label]}
-          <Pill {label} {text}></Pill>
-        {/each}
-      </div>
-    </ActionCard>
-  {/if}
-</div>
-<div class="relative flex h-full overflow-hidden">
-  <DynTable href={({ id }) => `/events/${id}`} {header} data={tableData} />
-
-  {#if filterOpen}
-    <Filter header={filter} bind:currentFilter />
-  {/if}
-</div>
-<Pagination bind:page />
+<ComplexTableLayout
+  {...data}
+  endpoint={(bodyOptions) =>
+    get(api).POST('/events/index', { body: { limit: 50, ...bodyOptions } })}
+></ComplexTableLayout>

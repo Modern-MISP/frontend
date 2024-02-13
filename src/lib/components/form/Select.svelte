@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends string">
+  import { createEventDispatcher } from 'svelte';
+
   import Icon from '@iconify/svelte';
 
   /**
@@ -24,6 +26,9 @@
    * The class of the select element.
    */
   export { clazz as class };
+
+  const dispatch = createEventDispatcher<{ formValue: Record<string, string> }>();
+  $: if (name) dispatch('formValue', { [name]: value });
 </script>
 
 <!-- 

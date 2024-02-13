@@ -1,17 +1,24 @@
 import { api } from '$lib/api';
+import { invalidateAll } from '$app/navigation';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await get(api).GET('/auth_keys', { fetch });
+  const {
+    data,
+    error: mispError,
+    response
+  } = await get(api).POST('/auth_keys', { fetch, body: { limit: 50, page: 1 } }); // I think limit does not work here. I guess there is no api support. great...
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -107,7 +114,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'ph:hash-bold',
       key: 'ip_count',
-      label: 'Attr.',
+      label: 'Ip count',
       value: (x) => ({
         display: PillCollection,
         props: {
@@ -125,9 +132,46 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     })
   ];
+  const topMenuActions: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:key-add',
+      label: 'Add Key',
+      action: '/admin/keys/new'
+    }
+  ];
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Delete',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to delete the keys with ids: ${x.map((x) => x.AuthKey?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.AuthKey?.id)
+              .filter((x) => x)
+              .map((keyId) =>
+                // @ts-expect-error Not in the OpenAPI spec.. great.
+                get(api).POST('/auth_keys/delete/{keyId}', {
+                  fetch,
+                  params: { path: { keyId: keyId as string } }
+                })
+              )
+          ).then(invalidateAll);
+        }
+      }
+    }
+  ];
 
   return {
     header,
-    tableData: data
+    tableData: data,
+    topMenuActions,
+    editActions
   };
 };
