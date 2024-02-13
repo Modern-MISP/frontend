@@ -12,7 +12,6 @@
   const { left, right, server } = data;
 
   function editCallback(formData: Record<string, string>) {
-    // FIXME: error 500 without further info
     notifySave(
       $api
         .PUT('/servers/edit/{serverId}', {

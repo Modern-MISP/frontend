@@ -90,10 +90,10 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        //TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
+        // TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
         value: (x) => ({
           display: Input,
-          props: { value: x.Organisation?.name ?? 'unknown', name: 'remote_org_id' }
+          props: { value: x.Server?.remote_org_id, name: 'remote_org_id' }
         })
       }
     ),
