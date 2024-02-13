@@ -33,10 +33,10 @@ export const header = [
       value: (x) => ({
         display: Select,
         props: {
-          value: '' + (+(x?.threat_level_id ?? 1) - 1),
+          value: '' + +(x?.threat_level_id ?? 1),
           options: THREAT_LEVEL_LOOKUP.map((x, i) => ({
             label: x.text ?? 'unknown',
-            value: '' + i
+            value: '' + (i + 1)
           })),
           name: 'threat_level_id'
         }
