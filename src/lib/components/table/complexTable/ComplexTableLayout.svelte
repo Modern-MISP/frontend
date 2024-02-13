@@ -135,6 +135,7 @@
       <FilterCard bind:currentFilter bind:filterOpen>
         {#each fastFilter as fastFilterEntry, i}
           <ActiveEntry
+            class="w-max"
             {...fastFilterEntry}
             active={activeFastFilter[i]}
             on:click={() =>
