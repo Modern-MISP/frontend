@@ -8,6 +8,8 @@ import type { components } from '$lib/api/misp';
 import type { TableHead } from '$lib/models/TableHead.interface';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import Select from '$lib/components/form/Select.svelte';
+import Input from '$lib/components/input/Input.svelte';
 
 export default {
   id: {
@@ -135,3 +137,51 @@ export default {
   //TODO: add org
   //TODO: add batch import flag
 } satisfies Record<string, TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>;
+
+export const editAttributeCols = (
+  options: components['schemas']['DescribeAttributeTypesResponse']
+) =>
+  ({
+    distribution: {
+      value: (x) => ({
+        display: Select,
+        props: {
+          value: (x?.distribution ?? 1).toString(),
+          options: DISTRIBUTION_LOOKUP.map((d, i) => ({
+            value: i.toString(),
+            label: d.text!
+          }))
+        },
+        name: 'distribution'
+      })
+    },
+    category: {
+      value: () => ({
+        display: Select,
+        props: {
+          options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
+        }
+      })
+    },
+    comment: {
+      value: (x) => ({
+        display: Input,
+        props: {
+          name: 'comment',
+          value: x?.comment ?? ''
+        }
+      })
+    },
+    value: {
+      value: (x) => ({
+        display: Input,
+        props: {
+          name: 'value',
+          value: x?.value ?? ''
+        }
+      })
+    }
+  }) satisfies Record<
+    string,
+    Partial<TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>
+  >;

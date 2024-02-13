@@ -5,39 +5,23 @@ import Input from '$lib/components/input/Input.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import type { PageData } from './$types';
 import { format } from 'date-fns';
-import attributeCols from '../attributeCols';
+import attributeCols, { editAttributeCols } from '../attributeCols';
 
 const col = createTableHeadGenerator<PageData['attribute']>();
+
+const editCols = editAttributeCols();
 
 export const header = [
   col(attributeCols.id),
   col(attributeCols.event),
   //org
-  col(attributeCols.category, {
-    //TODO: Select
-  }),
+  col(attributeCols.category, editCols.category),
   col(attributeCols.type, {
     //TODO: Select
   }),
-  col(attributeCols.value, {
-    value: (x) => ({ display: Input, props: { value: x?.value ?? '', name: 'value' } })
-  }),
-  col(attributeCols.comment, {
-    value: (x) => ({ display: Input, props: { value: x?.comment ?? '', name: 'comment' } })
-  }),
-  col(attributeCols.distribution, {
-    value: (x) => ({
-      display: Select,
-      props: {
-        value: '' + (x?.distribution ?? 1),
-        options: DISTRIBUTION_LOOKUP.map((x, i) => ({
-          label: x.text ?? 'unknown',
-          value: '' + i
-        })),
-        name: 'distribution'
-      }
-    })
-  }),
+  col(attributeCols.value, editCols.value),
+  col(attributeCols.comment, editCols.comment),
+  col(attributeCols.distribution, editCols.distribution),
   //Batch Import Flag
   col(attributeCols.correlation_flag, {
     value: (x) => ({
