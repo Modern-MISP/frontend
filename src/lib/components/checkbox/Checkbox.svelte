@@ -9,6 +9,10 @@
    * The form name of this checkbox.
    */
   export let name: string | undefined = undefined;
+  /**
+   * If true, the checkbox can't be toggled.
+   */
+  export let disabled: boolean = false;
 
   const dispatch = createEventDispatcher<{ formValue: Record<string, boolean> }>();
   $: if (name) dispatch('formValue', { [name]: checked });
@@ -28,7 +32,7 @@
  -->
 
 <label class="relative flex cursor-pointer">
-  <input type="checkbox" bind:checked on:change class="sr-only peer" />
+  <input type="checkbox" {disabled} bind:checked on:change class="sr-only peer" />
   <!-- To support boolean as form response => Checkbox would evaluate to "on" if set and nothing if not set -->
   <input type="hidden" bind:value={checked} {name} />
   <div

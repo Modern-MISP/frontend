@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Mode } from '$lib/models/Mode';
-  import { actionBarEntries } from '$lib/stores';
+  import { actionBarEntries, lockModeToggle } from '$lib/stores';
   import Icon from '@iconify/svelte';
   import ActionBar from './actionbar/ActionBar.svelte';
   import ToggleModeEntry from './actionbar/ToggleModeEntry.svelte';
@@ -43,7 +43,7 @@
       {#if mode === 'edit'}
         <ActionBar entries={$actionBarEntries} />
       {/if}
-      <ToggleModeEntry bind:mode />
+      <ToggleModeEntry bind:mode disabled={$lockModeToggle} />
     </div>
 
     <!-- <div class="flex flex-col items-center gap-1">
