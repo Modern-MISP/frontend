@@ -1,6 +1,7 @@
 import type { Action } from 'svelte/action';
-import { actionBarEntries, lockModeToggle, mode } from './stores';
+import { actionBarEntries, contextRouteEntries, lockModeToggle, mode } from './stores';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
+import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 
 export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (node, actions) {
   actionBarEntries.set(actions);
@@ -11,6 +12,19 @@ export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (n
     },
     destroy() {
       actionBarEntries.set([]);
+    }
+  };
+};
+
+export const contextRoutes: Action<HTMLElement, SideMenuRoute[]> = function (node, routes) {
+  contextRouteEntries.set(routes);
+
+  return {
+    update(routes) {
+      contextRouteEntries.set(routes);
+    },
+    destroy() {
+      contextRouteEntries.set([]);
     }
   };
 };
@@ -42,7 +56,7 @@ export const lockEditMode: Action<HTMLElement, boolean> = function (node, enable
 /**
  * Action for preventing the user from leaving view mode.
  * @param node html node that this action belongs to
- * @param enabled if true, edit mode will be locked
+ * @param enabled if true, view mode will be locked
  */
 export const lockViewMode: Action<HTMLElement, boolean> = function (node, enabled) {
   let unsubscribe = mode.subscribe((m) => {

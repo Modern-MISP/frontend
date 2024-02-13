@@ -1,17 +1,17 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { PUBLIC_MISP_KEY } from '$env/static/public';
+  import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
-  import { merge } from 'lodash-es';
   import { login } from './authMock';
-  import { PUBLIC_MISP_KEY } from '$env/static/public';
-  import { token } from '$lib/api';
 
   let error: string = '';
 
   async function submit(event: SubmitEvent) {
-    const entries = merge({}, ...getFormValues(event));
+    const entries = getFormValues(event);
+
     if (entries.token) {
       $token = entries.token;
       goto('/events');
@@ -59,7 +59,9 @@
   </div>
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
-  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right">Login</Button>
+  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    >Login</Button
+  >
   <span class="h-12 text-red">
     {error}
   </span>

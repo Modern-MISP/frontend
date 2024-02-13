@@ -7,7 +7,7 @@
   <div class="absolute top-0 right-0 z-50 flex flex-col gap-2">
     {#each $notifications as notification}
       <button on:click={() => notifications.remove(notification)} class="h-12">
-        <Pill {...notification} class="h-full {notification.class}"></Pill>
+        <Pill {...notification} class="h-full shadow-xl {notification.class}"></Pill>
       </button>
     {/each}
   </div>
