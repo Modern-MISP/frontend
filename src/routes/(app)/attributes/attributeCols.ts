@@ -159,6 +159,7 @@ export const editAttributeCols = (
       value: () => ({
         display: Select,
         props: {
+          name: 'category',
           options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
         }
       })

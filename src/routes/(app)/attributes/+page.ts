@@ -2,7 +2,7 @@ import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
-import attributeCols from './attributeCols';
+import attributeCols, { editAttributeCols } from './attributeCols';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
@@ -40,16 +40,28 @@ export const load: PageLoad = async ({ fetch }) => {
     //sightings
   ];
 
+  const describeTypes = await get(api).GET('/attributes/describeTypes');
+  if (describeTypes.error)
+    throw error(
+      describeTypes.response.status as NumericRange<400, 599>,
+      describeTypes.error.message
+    );
+
+  const filterCols = editAttributeCols(
+    // cast type to fix wrong MISP API spec
+    (describeTypes.data as unknown as { result: typeof describeTypes.data }).result
+  );
+
   const fil = createTableHeadGenerator<undefined>();
   const filter = [
     //TODO filter: org
     fil({
       label: 'Category',
-      value: () => 'category' //TODO: select
+      ...filterCols.category
     }),
     fil({
       label: 'Type',
-      value: () => 'type' //TODO: select
+      value: () => 'type' //TODO: filterCols.type
     }),
     fil({
       label: 'Value',
