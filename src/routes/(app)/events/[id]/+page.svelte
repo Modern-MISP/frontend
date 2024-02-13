@@ -7,6 +7,8 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
+  import { contextRoutes } from '$lib/actions';
+  import { page } from '$app/stores';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
 
   /**
@@ -32,6 +34,31 @@
 
   The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
  -->
+
+<svelte:window
+  use:contextRoutes={[
+    {
+      name: 'Event Info',
+      icon: 'mdi:information-outline',
+      href: `/events/${$page.params.id}/#`
+    },
+    {
+      name: 'Event Galaxies',
+      icon: 'streamline:galaxy-2-solid',
+      href: `/events/${$page.params.id}/galaxies`
+    },
+    {
+      name: 'Event Attributes',
+      icon: 'mdi:flag',
+      href: `/events/${$page.params.id}/attributes`
+    },
+    {
+      name: 'Event Graph',
+      icon: 'ph:graph',
+      href: `/events/${$page.params.id}/graph`
+    }
+  ]}
+/>
 
 <div class="h-full overflow-auto">
   <EditMode>

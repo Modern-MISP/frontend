@@ -1,14 +1,5 @@
 <script>
   import { page } from '$app/stores';
-  import { currentRoute } from '$lib/stores';
-
-  $currentRoute = [
-    {
-      name: 'Error',
-      icon: 'mdi:alert-circle-outline',
-      href: '/error'
-    }
-  ];
 </script>
 
 <!-- 
@@ -26,7 +17,7 @@
   </h2>
   <h1 class="text-4xl font-bold">An error occurred!</h1>
   <p class="text-xl">
-    {$page.error?.message}
+    {$page.error?.message ?? ''}
   </p>
 
   {#if $page.status === 403}

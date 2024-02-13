@@ -50,13 +50,22 @@ export default {
     icon: 'mdi:circle',
     key: 'value',
     label: 'Value',
-    value: (x) => ({ display: Info, props: { text: x.value } })
+    value: (x) => ({
+      display: Info,
+      props: { text: x.value, class: 'max-w-xs overflow-hidden text-ellipsis' }
+    })
   },
   comment: {
     icon: 'mdi:comment',
     key: 'comment',
     label: 'Comment',
     value: (x) => x.comment ?? ''
+  },
+  object_id: {
+    key: 'object_id',
+    label: 'Object ID',
+    icon: 'mdi:format-list-group',
+    value: (x) => x.object_id ?? ''
   },
   distribution: {
     icon: 'mdi:share',
@@ -69,6 +78,12 @@ export default {
         options: DISTRIBUTION_LOOKUP
       }
     })
+  },
+  object_relation: {
+    icon: 'mdi:circle',
+    key: 'object_relation',
+    label: 'Object Relation',
+    value: (x) => x.object_relation ?? ''
   },
   correlation_flag: {
     icon: 'mdi:circle',
