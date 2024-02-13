@@ -13,6 +13,7 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import Picker from '$lib/components/picker/Picker.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -243,16 +244,31 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     }),
-    col({
-      label: 'Distribution',
-      value: (x) => ({
-        display: LookupPill,
-        props: {
-          value: +(x?.distribution ?? 0),
-          options: DISTRIBUTION_LOOKUP
-        }
-      })
-    }),
+    col(
+      {
+        label: 'Distribution',
+        value: (x) => ({
+          display: LookupPill,
+          props: {
+            value: +(x?.distribution ?? 0),
+            options: DISTRIBUTION_LOOKUP
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Select,
+          props: {
+            value: '' + (x?.distribution ?? 1),
+            options: DISTRIBUTION_LOOKUP.map((x, i) => ({
+              label: x.text ?? 'unknown',
+              value: '' + i
+            })),
+            name: 'distribution'
+          }
+        })
+      }
+    ),
     col(
       {
         label: 'Default',
