@@ -38,6 +38,7 @@
   placeholder="Tags"
   popUpClass="bg-surface1"
   bind:pickedItems
+  on:formValue
   pickableItems={tags.map((tag) => ({
     text: tag.name,
     value: tag.id,

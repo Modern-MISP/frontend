@@ -11,17 +11,18 @@
   /**
    * Currently Filter
    */
-  export let currentFilter: Record<string, string>[] = [];
+  export let currentFilter: Record<string, string> = {};
+  $: filterKeys = Object.keys(currentFilter);
 </script>
 
 <ActionCard class="!w-auto gap-4 flex">
   <ActiveEntry label="Filter" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
   <slot />
-  {#if currentFilter.length > 0}
+  {#if filterKeys.length > 0}
     <div class="flex flex-wrap w-full h-full gap-2">
-      {#each currentFilter as filter}
-        {@const label = Object.keys(filter)[0]}
-        {@const text = filter[label]}
+      {#each filterKeys as filterKey}
+        {@const label = filterKey}
+        {@const text = currentFilter[label]}
         <Pill {label} {text} class="h-min"></Pill>
       {/each}
     </div>

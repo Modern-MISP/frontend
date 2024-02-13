@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
   /**
    * Whether the checkbox is checked or not.
    */
@@ -11,6 +13,9 @@
    * If true, the checkbox can't be toggled.
    */
   export let disabled: boolean = false;
+
+  const dispatch = createEventDispatcher<{ formValue: Record<string, boolean> }>();
+  $: if (name) dispatch('formValue', { [name]: checked });
 </script>
 
 <!-- 
@@ -27,7 +32,9 @@
  -->
 
 <label class="relative flex cursor-pointer">
-  <input type="checkbox" {name} {disabled} bind:checked on:change class="sr-only peer" />
+  <input type="checkbox" {disabled} bind:checked on:change class="sr-only peer" />
+  <!-- To support boolean as form response => Checkbox would evaluate to "on" if set and nothing if not set -->
+  <input type="hidden" bind:value={checked} {name} />
   <div
     class="w-11 h-6 bg-crust rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-text after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main peer-checked:dark:bg-sky transition-colors"
   />
