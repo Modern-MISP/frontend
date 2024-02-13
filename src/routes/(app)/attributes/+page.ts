@@ -61,7 +61,7 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     fil({
       label: 'Type',
-      value: () => 'type' //TODO: filterCols.type
+      ...filterCols.type
     }),
     fil({
       label: 'Value',

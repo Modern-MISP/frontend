@@ -139,7 +139,8 @@ export default {
 } satisfies Record<string, TableHead<components['schemas']['Attribute']> & DynTableHeadExtent>;
 
 export const editAttributeCols = (
-  options: components['schemas']['DescribeAttributeTypesResponse']
+  options: components['schemas']['DescribeAttributeTypesResponse'],
+  selectedCategory: string | undefined = undefined // TODO: idk where/how to get this
 ) =>
   ({
     distribution: {
@@ -161,6 +162,21 @@ export const editAttributeCols = (
         props: {
           name: 'category',
           options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
+        }
+      })
+    },
+    type: {
+      value: () => ({
+        display: Select,
+        props: {
+          name: 'type',
+          // use types that are associated with selected category, if possible
+          options:
+            (
+              (selectedCategory
+                ? (options.category_type_mappings ?? {})[selectedCategory]
+                : undefined) ?? options.types
+            )?.map((t) => ({ value: t, label: t })) ?? []
         }
       })
     },
