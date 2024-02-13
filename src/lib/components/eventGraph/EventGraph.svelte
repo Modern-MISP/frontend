@@ -263,24 +263,25 @@
     }
 
     const type = event.dataTransfer.getData('type');
-    const data = JSON.parse(event.dataTransfer.getData('node')).data;
-    console.log(data);
+    if (type === 'object' || type === 'attribute') {
+      const data = JSON.parse(event.dataTransfer.getData('node')).data;
 
-    const position = screenToFlowPosition({
-      x: event.clientX,
-      y: event.clientY
-    });
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY
+      });
 
-    const newNode = {
-      id: `unref-${data.type}-${data.id}`,
-      type,
-      position,
-      data: data,
-      origin: [0.5, 0.0]
-    } satisfies Node;
+      const newNode = {
+        id: `unref-${data.type}-${data.id}`,
+        type,
+        position,
+        data: data,
+        origin: [0.5, 0.0]
+      } satisfies Node;
 
-    $nodes.push(newNode);
-    $nodes = $nodes;
+      $nodes.push(newNode);
+      $nodes = $nodes;
+    }
   };
 </script>
 
@@ -305,7 +306,7 @@
     {/if}
   </div>
 
-  <div class="flex flex-col justify-end gap-1 max-w-xs">
+  <div class="flex flex-col justify-end gap-1">
     <UnreferencedMenu {objects} {attributes} />
   </div>
 </header>
