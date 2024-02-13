@@ -4,6 +4,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import { notifySave } from '$lib/util/notifications.util.js';
   import { get } from 'svelte/store';
 
   /** Data that is provided +page.ts on page load. */
@@ -12,11 +13,16 @@
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
 
   function formCallback(formData: Record<string, string>) {
-    // TODO: Use notifySave utility
-    get(api).PUT('/galaxy_clusters/edit/{galaxyClusterId}', {
-      params: { path: { galaxyClusterId: data.cardData!.id! } },
-      body: formData
-    });
+    notifySave(
+      get(api)
+        .PUT('/galaxy_clusters/edit/{galaxyClusterId}', {
+          params: { path: { galaxyClusterId: data.cardData!.id! } },
+          body: formData
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        })
+    );
   }
 </script>
 
