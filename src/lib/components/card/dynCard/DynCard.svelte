@@ -33,7 +33,7 @@
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>
       {@const v = value(data)}
-      {#if v}
+      {#if v !== null && v !== undefined}
         {#if typeof v !== 'string'}
           <svelte:component this={v.display} {...v.props} />
         {:else}

@@ -32,6 +32,11 @@
    */
   export let maxAutoComplete = 50;
 
+  /**
+   * Allow inputting arbitrary
+   */
+  export let arbitraryInput: ((x: string) => PickerPill) | undefined = undefined;
+
   let value: string = '';
 
   /**
@@ -49,7 +54,9 @@
     if (event.key === 'Enter') {
       event.preventDefault();
       if (!value) return;
-      const match = pickableItems.find((x) => matchFunction(x, value));
+      const match =
+        pickableItems.find((x) => matchFunction(x, value)) ??
+        (arbitraryInput ? arbitraryInput(value) : undefined);
       if (!match) return;
       pickedItems = [...pickedItems, match];
       pickableItems = pickableItems.filter((x) => x !== match);
