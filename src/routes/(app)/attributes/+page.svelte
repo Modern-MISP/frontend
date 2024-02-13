@@ -19,4 +19,5 @@
   pagination={true}
   dataAccess={(x) => x.response?.Attribute}
   groupInfo={(x) => (x.object_id === '0' ? undefined : `Object: ${x.object_id}`)}
+  editActions={[]}
 />

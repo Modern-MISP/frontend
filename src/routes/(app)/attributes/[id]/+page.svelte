@@ -2,7 +2,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
   import EditMode from './EditMode.svelte';
-  import { header } from './formHeaders';
+  import { header as headerPromise } from './formHeaders';
 
   /**
    * Page data containing the data of the attribute with the id in the url
@@ -11,12 +11,16 @@
 </script>
 
 <!--
-    @component
-    Displays information about a specific attribute, specified by `id`.
-    
-  -->
+  @component
+  Displays information about a specific attribute, specified by `id`.
+  
+-->
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
   <EditMode>
-    <DynCard {header} data={data.attribute} />
+    {#await headerPromise()}
+      loading
+    {:then header}
+      <DynCard {header} data={data.attribute} />
+    {/await}
   </EditMode>
 </div>
