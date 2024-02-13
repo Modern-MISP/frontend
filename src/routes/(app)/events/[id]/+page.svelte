@@ -24,7 +24,7 @@
 
   async function formCallback(formData: Record<string, string>) {
     $api.PUT('/events/edit/{eventId}', {
-      params: { path: { eventId: data?.event.id ?? '1' } },
+      params: { path: { eventId: data!.event.id! } },
       body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
     });
   }

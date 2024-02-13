@@ -36,37 +36,38 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const left = [
     col(
       {
-        key: 'email',
-        label: 'Name',
+        label: 'Email',
         value: (x) => x.User?.email ?? 'unknown'
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.User?.email ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.User?.email ?? 'unknown', name: 'email' }
+        })
       }
     ),
     col({
-      key: 'id',
       label: 'ID',
       value: (x) => x.User?.id ?? 'unknown'
     }),
     col({
-      key: 'name',
       label: 'Role',
       value: (x) => x.Role?.name ?? 'unknown'
     }),
     col(
       {
-        key: 'nids_sid',
         label: 'NIDS SID',
         value: (x) => x.User?.nids_sid ?? 'unknown'
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.User?.nids_sid ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.User?.nids_sid ?? 'unknown', name: 'nids_sid' }
+        })
       }
     ),
     col({
       icon: 'mdi:clock-outline',
-      key: 'last_pw_change',
       label: 'Last password change',
       // class: 'whitespace-nowrap',
       value: (x) => ({
@@ -79,27 +80,25 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const right = [
     col(
       {
-        key: 'disabled',
-        label: 'Is enabled',
-        value: (x) => ({ display: Boolean, props: { isTrue: !x.User?.disabled } })
+        label: 'Is disabled',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.User?.disabled } })
       },
       {
         value: (x) => ({
           display: Checkbox,
-          props: { name: 'disabled', checked: !x.User?.disabled ?? false }
+          props: { name: 'disabled', checked: x.User?.disabled ?? false }
         })
       }
     ),
     col(
       {
-        key: 'authkey',
         label: 'TOTP set',
         value: (x) => ({ display: Boolean, props: { isTrue: x.User?.authkey ?? false } })
       },
       {
-        value: (x) => ({
-          display: Checkbox,
-          props: { name: 'authkey', checked: x.User?.authkey !== '' } ?? false
+        value: () => ({
+          display: Input,
+          props: { name: 'authkey', placeholder: 'set new auth key' }
         })
       }
     ),

@@ -116,7 +116,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.AuthKey?.comment ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.AuthKey?.comment ?? 'unknown', name: 'comment' }
+        })
       }
     )
   ];
