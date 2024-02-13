@@ -24,10 +24,7 @@
    */
   let selection: PickerPill[] = [];
 
-  async function formCallback(
-    // eslint-disable-next-line no-undef
-    formData: Record<string, string>
-  ) {
+  async function formCallback(formData: Record<string, string>) {
     $api.PUT('/events/edit/{eventId}', {
       params: { path: { eventId: data?.event.id ?? '1' } },
       body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
