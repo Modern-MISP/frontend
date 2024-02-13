@@ -23,7 +23,7 @@ export const load = async ({ params, fetch }) => {
     params: { path: { eventId: params.id } }
   });
 
-  const eventGraphReferences = (await eventGraphReferencesResult).data as EventGraphReferences
+  const eventGraphReferences = (await eventGraphReferencesResult).data as EventGraphReferences;
 
   return {
     event: data.Event! as NonNullable<typeof data.Event> & {

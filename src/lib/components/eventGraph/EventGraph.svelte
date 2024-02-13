@@ -172,6 +172,40 @@
     });
   }
 
+  for (const item of items) {
+    if (item.node_type === 'object') {
+      $nodes.push({
+        id: `${item.id}`,
+        position,
+        data: {
+          id: item.id,
+          name: item.type,
+          comment: item.comment
+        },
+        type: 'object'
+      });
+    } else if (item.node_type === 'attribute') {
+      $nodes.push({
+        id: `${item.id}`,
+        position,
+        data: {
+          id: item.id,
+          type: item.type,
+          value: item.comment
+        },
+        type: 'attribute'
+      });
+    }
+  }
+
+  for (const reference of references) {
+    $edges.push({
+      id: `reference-${reference.id}`,
+      source: `${reference.from}`,
+      target: `${reference.to}`
+    });
+  }
+
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
