@@ -269,23 +269,24 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        label: 'Default',
-        value: (x) => ({
-          display: Boolean,
-          props: {
-            isTrue: x?.default
-          }
-        })
-      },
-      {
-        value: (x) => ({
-          display: Checkbox,
-          props: { checked: x?.default ?? false, name: 'default' }
-        })
-      }
-    )
+    col({
+      label: 'Default',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.default
+        }
+      })
+    }),
+    col({
+      label: 'Locked',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.locked
+        }
+      })
+    })
   ];
 
   const galaxyElements = data.GalaxyCluster?.GalaxyElement ?? [];
@@ -295,7 +296,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col2({
       icon: 'mdi:key',
       key: 'key',
-      label: 'key',
+      label: 'Key',
       value: (x) => ({
         display: Info,
         props: {
