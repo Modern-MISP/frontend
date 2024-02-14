@@ -3,14 +3,19 @@
   import Td from '../table/modularTable/Td.svelte';
   import Th from '../table/modularTable/Th.svelte';
   import Input from '../input/Input.svelte';
+  import { onMount } from 'svelte';
 
   /**
    * The map of key value pairs.
    */
   export let entries: [string, string][];
 
-  function onBlur() {
-    entries = [...new Map(entries.filter(([k, v]) => k || v)).entries()];
+  onMount(() => {
+    updateEntries();
+  });
+
+  function updateEntries() {
+    entries = [...new Map(entries.filter(([k, v]) => k || v)).entries(), ['', '']];
   }
 </script>
 
@@ -22,12 +27,12 @@
     </tr>
   </thead>
   <tbody>
-    {#each [...entries, ['', '']] as [key, value], i}
+    {#each entries as [key, value], i}
       <tr>
         <Td
           ><Input
             value={key}
-            on:blur={onBlur}
+            on:blur={updateEntries}
             on:value={({ detail }) => {
               entries[i] = [detail, value];
             }}
@@ -36,7 +41,7 @@
         <Td
           ><Input
             {value}
-            on:blur={onBlur}
+            on:blur={updateEntries}
             on:value={({ detail }) => {
               entries[i] = [key, detail];
             }}
