@@ -33,6 +33,11 @@
   export let disabled: boolean = false;
 
   /**
+   * Whether the input is required.
+   */
+  export let required: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
@@ -87,6 +92,7 @@
     {type}
     {value}
     {disabled}
+    {required}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
     bind:this={inputElement}
   />

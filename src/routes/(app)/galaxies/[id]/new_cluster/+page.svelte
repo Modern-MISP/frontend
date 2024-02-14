@@ -15,6 +15,10 @@
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
   import Select from '$lib/components/form/Select.svelte';
   import { goto } from '$app/navigation';
+  import { mode } from '$lib/stores';
+  import { lockEditMode } from '$lib/actions';
+
+  $mode = 'edit';
 
   let map: Map<string, string> = new Map();
 
@@ -53,7 +57,8 @@
           display: Input,
           props: {
             value: x?.value,
-            name: 'value'
+            name: 'value',
+            required: true
           }
         })
       }
@@ -146,6 +151,8 @@
     )
   ];
 </script>
+
+<svelte:window use:lockEditMode={true} />
 
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
