@@ -20,5 +20,12 @@
   }}
   {...data}
   pagination={false}
+  topMenuActions={[
+    {
+      icon: 'mdi:plus',
+      label: 'Add User',
+      action: '/admin/users/new'
+    }
+  ]}
   tableHref={(x) => `/admin/users/${x.User?.id}`}
 ></ComplexTableLayout>
