@@ -3,13 +3,6 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
-import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import Input from '$lib/components/input/Input.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-
 import idCardHeaders from '../idCardHeaders';
 
 export const load: PageLoad = async ({ params, fetch }) => {

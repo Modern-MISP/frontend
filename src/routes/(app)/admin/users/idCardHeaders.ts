@@ -5,7 +5,7 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
-export type CustomUserType =
+const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
     User?: {
       notification_daily?: boolean;
@@ -13,9 +13,8 @@ export type CustomUserType =
       notification_monthly?: boolean;
       last_pw_change?: number;
     };
-  };
-
-const col = createTableHeadGenerator<CustomUserType>();
+  }
+>();
 
 export default {
   email: col(
