@@ -15,8 +15,14 @@
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
   import Select from '$lib/components/form/Select.svelte';
   import { goto } from '$app/navigation';
-  import { mode } from '$lib/stores';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
+
+  $currentRoute = [
+    ...($currentRoute ?? []),
+    { name: 'New Galaxy Cluster', href: 'new_cluster', icon: 'carbon:assembly-cluster' }
+  ];
 
   $mode = 'edit';
 
