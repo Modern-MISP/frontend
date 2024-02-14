@@ -1,7 +1,34 @@
-# Verzögerungen im Zeitplan
+# Ablauf und Verzögerungen im Zeitplan
 
 An einigen Stellen konnte unser Zeitplan leider nicht wie vorgesehen eingehalten werden.
 
-![original plan](https://gitlab.kit.edu/kit/kit-cert/mmisp/frontend/-/raw/920e6a6ea76db93a30d0d47b2ebf6b470d4350c9/docs/ganttChart.svg)
+Ursprünglicher Plan:
+![original plan](originalGanttChart.svg)
 
-![latest plan](https://gitlab.kit.edu/api/v4/projects/159800/jobs/artifacts/docs/raw/docs/ganttChart.svg?job=generate_uml_svg)
+Tatsächlicher Verlauf:
+![latest plan](../../ganttChart.svg)
+
+Rote Balken symbolisieren, dass die entsprechende Aufgabe nicht zum geplanten Zeitpunkt vollständig abgeschlossen war.
+
+## Erste Phasenhälfte
+
+Gerade in den ersten 1-2 Wochen ist die Implementierungsarbeit nur langsam in gang gekommen.
+
+### Planung
+
+Die erste Woche war noch geprägt von der Vorbereitung der Entwurfspräsentation, sowie Planung der Implementierungsphase.
+In dieser Zeit ist das ursprüngliche Gantt-Diagramm entstanden.
+
+Da wir die grundlegende Projektstruktur und einzelne Teile der Funktionalität bereits in der Entwurfsphase umgesetzt hatten, lagen wir zu diesem Zeitpunkt noch recht gut im Zeitplan.
+
+### Start der Implementierung
+
+TODO: view mode und edit mode setup
+
+## Zweite Phasenhälfte
+
+TODO: edit mode, filter, API Probleme
+
+### Endspurt
+
+TODO
