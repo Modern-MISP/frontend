@@ -14,18 +14,18 @@ today is colored in lightblue
 [Edit Mode setup] requires 9 days and is 100% complete and is colored in red
 [Edit Actions] requires 9 days and is 100% complete and is colored in red
 [SvelteFlow setup] requires 5 days and is 100% complete
-[Write Phase Report] requires 7 days and is 5% complete
+[Write Phase Report] requires 9 days and is 20% complete
 -- Pages --
 [List Pages] requires 14 days and is 100% complete and is colored in red
 note bottom
     Pages that consist of a
     single table listing data.
 end note
-[List Pages > Filter] requires 6 days and is 50% complete
+[List Pages > Filter] requires 6 days and is 90% complete
 note bottom
     Dynamic filters for the tables on <color:gray>List Pages</color>.
 end note
-[List Pages > Edit Mode] requires 7 days and is 60% complete
+[List Pages > Edit Mode] requires 7 days and is 90% complete
 note bottom
     The respective edit mode implementations of <color:gray>List Pages</color>.
 end note
@@ -34,12 +34,12 @@ note bottom
     Pages that display detailed data of a
     single item (event/attribute/etc).
 end note
-[View Pages > Edit Mode] requires 8 days and is 40% complete
+[View Pages > Edit Mode] requires 8 days and is 70% complete
 note bottom
     The respective edit mode implementations of <color:gray>View Pages</color>,
     usually consisting of an HTML form.
 end note
-[Add Pages] requires 5 days and is 10% complete
+[Add Pages] requires 10 days and is 40% complete
 note bottom
     Pages for adding an item (event/tag/etc.)
 end note
@@ -47,7 +47,7 @@ end note
 [Auth] requires 4 days
 [Settings] requires 3 days
 [Workflows] requires 11 days and is 100% complete and is colored in red
-[Event Graph] requires 14 days and is 30% complete
+[Event Graph] requires 16 days and is 50% complete
 
 Project starts 2024-01-15
 [Layout / Menus] starts at D+0
@@ -74,10 +74,11 @@ Project starts 2024-01-15
 [SvelteFlow setup] -> [Event Graph]
 2024-02-03 to 2024-02-09 is closed and are named [Pause Klausurenphase]
 [Import Galaxy] ends 2024-02-13
-[Write Phase Report] ends at 2024-02-16
-[Abgabe] happens at 2024-02-16
+[Write Phase Report] ends at 2024-02-18
+[Abgabe Ursprünglich] happens at 2024-02-16
+[Abgabe] happens at 2024-02-18
 
 
 ' [List Pages > Filter] displays on same row as [List Pages]
-[Präsentation Entwurf] displays on same row as [Abgabe]
+[Präsentation Entwurf] displays on same row as [Abgabe Ursprünglich]
 @endgantt
