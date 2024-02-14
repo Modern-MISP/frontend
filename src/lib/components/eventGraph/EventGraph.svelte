@@ -8,9 +8,10 @@
   import { spring } from 'svelte/motion';
   import IconCard from './cards/IconCard.svelte';
   import IconCardRow from './cards/IconCardRow.svelte';
-  import ObjectNode from './nodes/ObjectNode.svelte';
-  import AttributeNode from './nodes/AttributeNode.svelte';
-  import CategoryNode from './nodes/CategoryNode.svelte';
+  import ObjectNode from './graph/nodes/ObjectNode.svelte';
+  import AttributeNode from './graph/nodes/AttributeNode.svelte';
+  import CategoryNode from './graph/nodes/CategoryNode.svelte';
+  import BiDirectionalEdge from './graph/edges/BiDirectionalEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { fly } from 'svelte/transition';
@@ -34,6 +35,9 @@
   const items = eventGraphReferences.items ?? [];
   const references = eventGraphReferences.relations ?? [];
 
+  console.log(items);
+  console.log(references);
+
   const { updateNode } = useSvelteFlow();
 
   const objects = event.Object ?? [];
@@ -43,7 +47,7 @@
 
   const nodes: Writable<Node[]> = writable([]);
   $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'category' });
+  /* $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'category' });
   $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'category' });
   $nodes.push({
     id: 'unreferenced-objects',
@@ -77,9 +81,9 @@
     id: `unreferenced-to-unreferenced-attributes`,
     source: 'unreferenced',
     target: `unreferenced-attributes`
-  });
+  }); */
 
-  for (const object of objects) {
+  /* for (const object of objects) {
     // Node: objects (refed/unrefed)
     $nodes.push({
       id: `object-${object.id}`,
@@ -170,12 +174,12 @@
       source: `unreferenced-attributes`,
       target: `attribute-${attribute.id}`
     });
-  }
+  } */
 
-  for (const item of items) {
+  /*   for (const item of items) {
     if (item.node_type === 'object') {
       $nodes.push({
-        id: `${item.id}`,
+        id: `object-${item.id}`,
         position,
         data: {
           id: item.id,
@@ -184,25 +188,68 @@
         },
         type: 'object'
       });
+      $edges.push({
+        id: `reference-to-object-${item.id}`,
+        source: 'referenced',
+        target: `object-${item.id}`,
+        label: item.label ?? undefined
+      });
     } else if (item.node_type === 'attribute') {
       $nodes.push({
-        id: `${item.id}`,
+        id: `attribute-${item.id}`,
         position,
         data: {
           id: item.id,
           type: item.type,
-          value: item.comment
+          value: item.label
         },
         type: 'attribute'
       });
     }
+  } */
+
+  const referencedItemsIds: string[] = Array.from(
+    new Set(references.flatMap((reference) => [reference.from, reference.to]))
+  );
+
+  const referencedObjectsIds: string[] = referencedItemsIds.filter((id) => id.startsWith('o-'));
+  const referencedAttributesIds: string[] = referencedItemsIds.filter((id) => !id.startsWith('o-'));
+
+  for (const referencedObjectId of referencedObjectsIds) {
+    let referencedObject = items.find((item) => item.id === referencedObjectId);
+    $nodes.push({
+      id: `${referencedObject?.id}`,
+      position,
+      data: {
+        id: `${referencedObject?.id}`,
+        name: `${referencedObject?.type}`,
+        comment: `${referencedObject?.comment}`
+      },
+      type: 'object'
+    });
+  }
+
+  for (const referencedAttributeId of referencedAttributesIds) {
+    let referencedAttribute = items.find((item) => item.id === referencedAttributeId);
+    $nodes.push({
+      id: `${referencedAttribute?.id}`,
+      position,
+      data: {
+        id: `${referencedAttribute?.id}`,
+        type: `${referencedAttribute?.type}`,
+        value: `${referencedAttribute?.label}`
+      },
+      type: 'attribute'
+    });
   }
 
   for (const reference of references) {
     $edges.push({
       id: `reference-${reference.id}`,
       source: `${reference.from}`,
-      target: `${reference.to}`
+      target: `${reference.to}`,
+      label: reference.type,
+      type: 'bidirectional'
     });
   }
 
@@ -252,6 +299,10 @@
     object: ObjectNode,
     attribute: AttributeNode,
     category: CategoryNode
+  };
+
+  const edgeTypes = {
+    bidirectional: BiDirectionalEdge
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
