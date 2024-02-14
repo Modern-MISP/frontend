@@ -14,7 +14,7 @@
 
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
 
-  let entries = tableData.map(({ key, value }) => [key ?? '', value ?? '']);
+  let entries: [string, string][] = tableData.map(({ key, value }) => [key ?? '', value ?? '']);
 
   function formCallback(formData: Record<string, string>) {
     notifySave(
