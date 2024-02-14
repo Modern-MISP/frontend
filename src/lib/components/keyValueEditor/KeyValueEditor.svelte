@@ -15,7 +15,7 @@
   });
 
   function updateEntries() {
-    entries = [...new Map(entries.filter(([k, v]) => k || v)).entries(), ['', '']];
+    entries = [...new Map(entries.filter(([k, v]) => k || v)).entries()];
   }
 </script>
 
@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each entries as [key, value], i}
+    {#each [...entries, ['', '']] as [key, value], i}
       <tr>
         <Td
           ><Input

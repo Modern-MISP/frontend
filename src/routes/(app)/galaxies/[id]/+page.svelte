@@ -28,7 +28,7 @@
   use:actionBar={[
     {
       icon: 'mdi:plus',
-      label: 'New Galaxy Cluster',
+      label: 'Add Cluster',
       action: `/galaxies/${$page.params.id}/new_cluster`
     }
   ]}
