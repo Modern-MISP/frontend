@@ -1,5 +1,5 @@
 stages:
-  - generate_docs
+  # - generate_docs # Don't run generate_docs job because it always hangs on install for some reason
   - generate_uml_svg
   - generate_mkdocs
   - push_docs
