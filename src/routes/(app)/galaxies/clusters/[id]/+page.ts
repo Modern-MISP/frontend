@@ -12,7 +12,6 @@ import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import Picker from '$lib/components/picker/Picker.svelte';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -143,11 +142,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Picker,
           props: {
             name: 'authors',
-            pickedItems: x?.authors?.map((a) => ({
-              value: a,
-              text: a,
-              icon: 'streamline:user-circle-single'
-            })),
+            pickedItems:
+              x?.authors?.map((a) => ({
+                value: a,
+                text: a,
+                icon: 'streamline:user-circle-single'
+              })) ?? [], // NOTE: The `?? []` is required for some reason, otherwise the component throws an error. I don't understand it either.
             arbitraryInput: (a: string) => ({
               icon: 'streamline:user-circle-single',
               text: a,
@@ -269,23 +269,24 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        label: 'Default',
-        value: (x) => ({
-          display: Boolean,
-          props: {
-            isTrue: x?.default
-          }
-        })
-      },
-      {
-        value: (x) => ({
-          display: Checkbox,
-          props: { checked: x?.default ?? false, name: 'default' }
-        })
-      }
-    )
+    col({
+      label: 'Default',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.default
+        }
+      })
+    }),
+    col({
+      label: 'Locked',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.locked
+        }
+      })
+    })
   ];
 
   const galaxyElements = data.GalaxyCluster?.GalaxyElement ?? [];
@@ -295,7 +296,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col2({
       icon: 'mdi:key',
       key: 'key',
-      label: 'key',
+      label: 'Key',
       value: (x) => ({
         display: Info,
         props: {

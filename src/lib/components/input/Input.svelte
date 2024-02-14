@@ -33,6 +33,11 @@
   export let disabled: boolean = false;
 
   /**
+   * Whether the input is required.
+   */
+  export let required: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
@@ -42,6 +47,16 @@
   const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
 
   const id = crypto.randomUUID();
+
+  let inputElement: HTMLInputElement;
+
+  /**
+   * Sets the inner input's value.
+   * @param value The value to use.
+   */
+  export function setValue(value: string) {
+    inputElement.value = value;
+  }
 </script>
 
 <!-- 
@@ -77,7 +92,9 @@
     {type}
     {value}
     {disabled}
+    {required}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
+    bind:this={inputElement}
   />
   {#if placeholder && (!disabled || !value)}
     <label
