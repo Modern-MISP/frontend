@@ -8,6 +8,10 @@
    * The map of key value pairs.
    */
   export let map: Map<string, string>;
+
+  // FIXME: Currently, this behaves really weirdly when typing the same key twice.
+  // While the same key obviously shouldn't be allowed twice anyways,
+  // this also happens while typing the name of a key that begins with the name of a key that is already in the list.
 </script>
 
 <Table>
@@ -24,9 +28,19 @@
           ><Input
             value={key}
             on:value={({ detail }) => {
+              const entries = [...map.entries()];
+              const index = entries.findIndex(([k]) => k === key);
               map.delete(key);
               if (detail || value) {
-                map.set(detail, value);
+                if (index >= 0) {
+                  map = new Map([
+                    ...entries.slice(0, index),
+                    [detail, value],
+                    ...entries.slice(index + 1)
+                  ]);
+                } else {
+                  map.set(detail, value);
+                }
               }
               map = map;
             }}
