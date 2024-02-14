@@ -2,11 +2,13 @@
 
 An einigen Stellen konnte unser Zeitplan leider nicht wie vorgesehen eingehalten werden.
 
-Ursprünglicher Plan:
-![original plan](originalGanttChart.svg)
+| ![original plan](originalGanttChart.svg) |
+| :--: |
+| Ursprünglicher Plan |
 
-Tatsächlicher Verlauf:
-![latest plan](../../ganttChart.svg)
+| ![latest plan](ganttChart.svg) |
+| :--: |
+| Tatsächlicher Verlauf |
 
 Rote Balken symbolisieren, dass die entsprechende Aufgabe nicht zum geplanten Zeitpunkt vollständig abgeschlossen war.
 
