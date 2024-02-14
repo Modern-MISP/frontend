@@ -1,7 +1,8 @@
 import type { Action } from 'svelte/action';
-import { actionBarEntries, contextRouteEntries, lockModeToggle, mode } from './stores';
+import { actionBarEntries, contextInfo, contextRouteEntries, lockModeToggle, mode } from './stores';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
+import { get } from 'svelte/store';
 
 export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (node, actions) {
   actionBarEntries.set(actions);
@@ -28,6 +29,44 @@ export const contextRoutes: Action<HTMLElement, SideMenuRoute[]> = function (nod
     }
   };
 };
+
+export const addContextInfo: Action<HTMLElement, { message: string; condition?: boolean }> =
+  function (node, { message, condition = true }) {
+    let currentInfo = get(contextInfo);
+    let index: number | undefined = undefined;
+
+    const add = (newMessage: string) => {
+      index = currentInfo.length;
+      contextInfo.set([...currentInfo, newMessage]);
+    };
+
+    if (condition) {
+      add(message);
+    }
+
+    return {
+      update({ message: newMessage, condition: newCondition }) {
+        currentInfo = get(contextInfo);
+        if (index === undefined && newCondition) {
+          add(newMessage);
+        } else if (index !== undefined && !newCondition) {
+          currentInfo.splice(index, 1);
+          contextInfo.set(currentInfo);
+          index = undefined;
+        } else if (index !== undefined) {
+          currentInfo[index] = newMessage;
+          contextInfo.set(currentInfo);
+        }
+      },
+      destroy() {
+        if (index !== undefined) {
+          currentInfo = get(contextInfo);
+          currentInfo.splice(index, 1);
+          contextInfo.set(currentInfo);
+        }
+      }
+    };
+  };
 
 /**
  * Action for preventing the user from leaving edit mode.
