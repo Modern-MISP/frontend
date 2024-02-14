@@ -14,10 +14,7 @@
 
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
 
-  // Doesn't work when tableData is reactive for some reason.
-  // Probably because the two way binding doesn't really work that way.
-  // TODO: Should think of a better solution.
-  let map = new Map(tableData.map(({ key, value }) => [key ?? '', value ?? '']));
+  let entries = tableData.map(({ key, value }) => [key ?? '', value ?? '']);
 
   function formCallback(formData: Record<string, string>) {
     notifySave(
@@ -26,7 +23,7 @@
           params: { path: { galaxyClusterId: data.cardData!.id! } },
           body: {
             ...formData,
-            GalaxyElement: [...map.entries()].map(([key, value]) => ({
+            GalaxyElement: entries.map(([key, value]) => ({
               key,
               value,
               id: tableData.find((d) => d.key === key)?.id
@@ -58,5 +55,5 @@
 {#if $mode === 'view'}
   <DynTable header={tableHeader} data={tableData} />
 {:else}
-  <KeyValueEditor bind:map></KeyValueEditor>
+  <KeyValueEditor bind:entries></KeyValueEditor>
 {/if}

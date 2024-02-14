@@ -7,11 +7,11 @@
   /**
    * The map of key value pairs.
    */
-  export let map: Map<string, string>;
+  export let entries: [string, string][];
 
-  // FIXME: Currently, this behaves really weirdly when typing the same key twice.
-  // While the same key obviously shouldn't be allowed twice anyways,
-  // this also happens while typing the name of a key that begins with the name of a key that is already in the list.
+  function onBlur() {
+    entries = [...new Map(entries.filter(([k, v]) => k || v)).entries()];
+  }
 </script>
 
 <Table>
@@ -22,40 +22,23 @@
     </tr>
   </thead>
   <tbody>
-    {#each [...map.entries(), ['', '']] as [key, value]}
+    {#each [...entries, ['', '']] as [key, value], i}
       <tr>
         <Td
           ><Input
             value={key}
+            on:blur={onBlur}
             on:value={({ detail }) => {
-              const entries = [...map.entries()];
-              const index = entries.findIndex(([k]) => k === key);
-              map.delete(key);
-              if (detail || value) {
-                if (index >= 0) {
-                  map = new Map([
-                    ...entries.slice(0, index),
-                    [detail, value],
-                    ...entries.slice(index + 1)
-                  ]);
-                } else {
-                  map.set(detail, value);
-                }
-              }
-              map = map;
+              entries[i] = [detail, value];
             }}
           ></Input></Td
         >
         <Td
           ><Input
             {value}
+            on:blur={onBlur}
             on:value={({ detail }) => {
-              if (key || detail) {
-                map.set(key, detail);
-              } else {
-                map.delete(key);
-              }
-              map = map;
+              entries[i] = [key, detail];
             }}
           ></Input></Td
         >

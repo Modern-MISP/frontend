@@ -20,7 +20,7 @@
 
   $mode = 'edit';
 
-  let map: Map<string, string> = new Map();
+  let entries: [string, string][] = [];
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -29,7 +29,7 @@
           params: { path: { galaxyId: $page.params.id } },
           body: {
             ...formData,
-            GalaxyElement: [...map.entries()].map(([key, value]) => ({
+            GalaxyElement: entries.map(([key, value]) => ({
               key,
               value
             }))
@@ -158,4 +158,4 @@
   <DynCard {header} data={{}}></DynCard>
 </Form>
 
-<KeyValueEditor bind:map></KeyValueEditor>
+<KeyValueEditor bind:entries></KeyValueEditor>
