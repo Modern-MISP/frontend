@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
+  import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
@@ -27,6 +29,22 @@
         })
     );
   }
+
+  function deleteUser() {
+    notifySave(
+      $api
+        .DELETE('/admin/users/delete/{userId}', { params: { path: { userId: $page.params.id } } })
+        .then((resp) => {
+          if (resp.error) {
+            // @ts-expect-error MISP API return custom errors object
+            const mispErrors: string[] = Object.values(resp.error.errors ?? {});
+            throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
+          } else {
+            goto('/admin/users');
+          }
+        })
+    );
+  }
 </script>
 
 <!--
@@ -34,6 +52,9 @@
   Displays information about a specific user, specified by `id`.
   
 -->
+
+<svelte:window use:actionBar={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]} />
+
 <Form callback={editCallback}>
   <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
     <DynCard header={left} data={user} />
