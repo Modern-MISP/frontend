@@ -2,7 +2,7 @@
 
 ### Current implementation timeline
 
-![gantt chart](https://gitlab.kit.edu/api/v4/projects/159800/jobs/artifacts/docs/raw/docs/ganttChart.svg?job=generate_uml_svg)
+![gantt chart](https://gitlab.kit.edu/api/v4/projects/159800/jobs/artifacts/docs/raw/docs/implementation_report/docs/ganttChart.svg?job=generate_uml_svg)
 
 ## Setup
 
