@@ -30,12 +30,18 @@ export const contextRoutes: Action<HTMLElement, SideMenuRoute[]> = function (nod
   };
 };
 
+/**
+ * Action for adding a message to the context info.
+ * @param node html node that this action belongs to
+ * @param param1 info message and condition for when to add it to the context
+ */
 export const addContextInfo: Action<HTMLElement, { message: string; condition?: boolean }> =
   function (node, { message, condition = true }) {
     let currentInfo = get(contextInfo);
     let index: number | undefined = undefined;
 
     const add = (newMessage: string) => {
+      // add new info message and remember index
       index = currentInfo.length;
       contextInfo.set([...currentInfo, newMessage]);
     };
@@ -48,15 +54,20 @@ export const addContextInfo: Action<HTMLElement, { message: string; condition?: 
       update({ message: newMessage, condition: newCondition }) {
         currentInfo = get(contextInfo);
         if (index === undefined && newCondition) {
+          // no index means message is currently not added;
+          // condition being true indicates it should be
           add(newMessage);
         } else if (index !== undefined && !newCondition) {
+          // message is added, but shouldn't be => remove
           currentInfo.splice(index, 1);
           contextInfo.set(currentInfo);
           index = undefined;
         } else if (index !== undefined) {
+          // message is added and should be => just update message
           currentInfo[index] = newMessage;
           contextInfo.set(currentInfo);
         }
+        // else: message is not added and should't be => do nothing
       },
       destroy() {
         if (index !== undefined) {
