@@ -29,3 +29,7 @@ sich als ungeplanter Zusatzaufwand nicht mehr im Rahmen der Implementierungsphas
 
 In diesem Abschnitt werden Wunschkriterien besprochen, die
 zusätzlich zu den Musskriterien umgesetzt werden konnten.
+
+### /F004/ MISP Token Auth
+
+Es ist möglich, sich mit einem Auth Key anzumelden.
