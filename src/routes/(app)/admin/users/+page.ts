@@ -97,8 +97,8 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     col({
       icon: 'mdi:scale-balance',
-      label: 'terms',
-      key: 'Terms',
+      label: 'Terms',
+      key: 'terms',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted } })
     })
   ];
