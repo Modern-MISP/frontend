@@ -1,14 +1,16 @@
 # Ablauf und Verzögerungen im Zeitplan
 
+In diesem Abschnitt wird der Verlauf der Phase analysiert.
+
+### Ursprünglicher Plan
+
+![original plan](originalGanttChart.svg)
+
+### Tatsächlicher Verlauf
+
+![latest plan](ganttChart.svg)
+
 An einigen Stellen konnte unser Zeitplan leider nicht wie vorgesehen eingehalten werden.
-
-| ![original plan](originalGanttChart.svg) |
-| :--: |
-| Ursprünglicher Plan |
-
-| ![latest plan](ganttChart.svg) |
-| :--: |
-| Tatsächlicher Verlauf |
 
 Rote Balken symbolisieren, dass die entsprechende Aufgabe nicht zum geplanten Zeitpunkt vollständig abgeschlossen war.
 
