@@ -161,7 +161,10 @@
         unselectAll={() => (activeRows = [])}
       />
       <slot name="editActions">
-        <DynActionCard header={editActions} data={activeRows}></DynActionCard>
+        <DynActionCard
+          header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
+          data={activeRows}
+        ></DynActionCard>
       </slot>
     {/if}
   </slot>
