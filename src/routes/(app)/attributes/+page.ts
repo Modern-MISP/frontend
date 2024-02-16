@@ -20,6 +20,8 @@ import Select from '$lib/components/form/Select.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
 import { THREAT_LEVEL_LOOKUP, EXPORT_FORMAT_LOOKUP } from '$lib/consts/PillLookups';
+import { notifySave } from '$lib/util/notifications.util.js';
+import { invalidateAll } from '$app/navigation';
 
 export const load = async ({ fetch }) => {
   const {
@@ -32,7 +34,7 @@ export const load = async ({ fetch }) => {
 
   const tableData = data.response?.Attribute ?? [];
 
-  const describeTypesResponse = await get(api).GET('/attributes/describeTypes');
+  const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(
       describeTypesResponse.response.status as NumericRange<400, 599>,
@@ -488,14 +490,31 @@ export const load = async ({ fetch }) => {
     }
   ];
 
-  const editActions: DynCardActionHeader<typeof data>[] = [
+  const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: () => '' //TODO: delete attribute
+      action: (attributes) => {
+        notifySave(
+          Promise.all(
+            attributes.map((attribute) =>
+              get(api)
+                .DELETE('/attributes/delete/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                  invalidateAll();
+                })
+            )
+          ),
+          'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        );
+      }
     }
   ];
+
   return {
     header,
     tableData,
