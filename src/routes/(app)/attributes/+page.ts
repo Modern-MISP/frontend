@@ -2,7 +2,6 @@ import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
-import { editAttributeCols } from './attributeCols';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
