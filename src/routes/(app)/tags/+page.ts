@@ -44,7 +44,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'ph:hash-bold',
       key: 'tagged_events',
       label: 'Tagged Events',
       value: (x) => ({ display: Info, props: { text: x.count, class: 'm-auto' } })

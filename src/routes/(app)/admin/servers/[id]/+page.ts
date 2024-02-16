@@ -44,6 +44,27 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
+    col(
+      {
+        key: 'url',
+        label: 'URL',
+        value: (x) => ({
+          display: HrefPill,
+          props: {
+            icon: 'ri:share-box-line',
+            href: x.Server?.url ?? '#',
+            target: '_blank' as const,
+            text: x.Server?.url ?? 'unknown'
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.url ?? 'unknown', name: 'url' }
+        })
+      }
+    ),
     col({
       key: 'priority',
       label: 'Priority',
@@ -97,27 +118,6 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        key: 'url',
-        label: 'URL',
-        value: (x) => ({
-          display: HrefPill,
-          props: {
-            icon: 'ri:share-box-line',
-            href: x.Server?.url ?? '#',
-            target: '_blank' as const,
-            text: x.Server?.url ?? 'unknown'
-          }
-        })
-      },
-      {
-        value: (x) => ({
-          display: Input,
-          props: { value: x.Server?.url ?? 'unknown', name: 'url' }
-        })
-      }
-    ),
 
     //TODO: authkey should only be changed if approved
     col(
@@ -153,6 +153,7 @@ export const load = async ({ params, fetch }) => {
       label: 'Internal',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
+    //TODO: text: Sync methods
     col(
       {
         key: 'push',
@@ -194,6 +195,19 @@ export const load = async ({ params, fetch }) => {
     ),
     col(
       {
+        key: 'caching_enabled',
+        label: 'Cache',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false }
+        })
+      }
+    ),
+    col(
+      {
         key: 'push_galaxy_clusters',
         label: 'Push Cluster',
         value: (x) => ({
@@ -224,19 +238,7 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        key: 'caching_enabled',
-        label: 'Cache',
-        value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
-      },
-      {
-        value: (x) => ({
-          display: Checkbox,
-          props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false }
-        })
-      }
-    ),
+    //TODO: text: misc settings
     col(
       {
         key: 'unpublish_event',
@@ -295,14 +297,13 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    //TODO: doesn't know remove_missing_tags property
     col(
       {
         key: 'remove_missing_tags',
         label: 'Remove missing attribute tags',
         value: (x) => ({
           display: Boolean,
-          // @ts-expect-error Not in the OpenAPI spec.. great.
+          // @ts-expect-error Not in the OpenAPI spec.
           props: { isTrue: x.Server?.remove_missing_tags ?? false }
         })
       },
@@ -310,7 +311,7 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({
           display: Checkbox,
 
-          // @ts-expect-error Not in the OpenAPI spec.. great.
+          // @ts-expect-error Not in the OpenAPI spec.
           props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }

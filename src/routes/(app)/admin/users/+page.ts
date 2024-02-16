@@ -14,6 +14,7 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
@@ -41,7 +42,14 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:email-outline',
       key: 'email',
       label: 'Email',
-      value: (x) => ({ display: Info, props: { text: x.User?.email ?? 'unknown' } })
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:email-outline',
+          text: x.User?.email,
+          href: `/admin/users/${x.User?.id}`
+        }
+      })
     }),
 
     col({
