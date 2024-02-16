@@ -7,7 +7,7 @@
 </script>
 
 <!--
-    @component
+    @component Displays a list of all attributes. 
     
 -->
 
@@ -15,9 +15,6 @@
   endpoint={(x) => {
     return get(api).POST('/attributes/restSearch', { body: x });
   }}
-  editActions={[]}
-  topMenuActions={[]}
-  filter={[]}
   {...data}
   pagination={true}
   dataAccess={(x) => x.response?.Attribute}

@@ -62,7 +62,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organisations',
+      label: 'Organizations',
       value: (x) => ({
         display: PillCollection,
         props: {
@@ -210,7 +210,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: () => 'eventinfo'
     }),
     fil({
-      label: 'Organisation',
+      label: 'Organization',
       value: () => ({
         display: Select,
         props: {
@@ -323,7 +323,7 @@ export const load: PageLoad = async ({ fetch }) => {
 
   const fastFilter: FastFilter[] = [
     {
-      label: 'My Organisation',
+      label: 'My Organization',
       icon: 'material-symbols:work-outline',
       ifActive: {
         org: myData.Organisation.id

@@ -10,6 +10,7 @@ import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 
 export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
 export const contextRouteEntries = writable<SideMenuRoute[]>([]);
+export const contextInfo = writable<string[]>([]);
 
 export const settings = createLocalStorageStore(INITIAL_SETTINGS, 'settings');
 
@@ -26,4 +27,4 @@ export const lockModeToggle = writable<boolean>(false);
 
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 
-export const notifications = createTimeoutStore<ComponentProps<Pill>>(3000);
+export const notifications = createTimeoutStore<ComponentProps<Pill>>(8000);

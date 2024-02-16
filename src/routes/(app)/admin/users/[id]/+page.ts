@@ -21,6 +21,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     idCardHeaders.email,
     idCardHeaders.id,
     idCardHeaders.role,
+    idCardHeaders.organisation,
     idCardHeaders.nids_sid,
     idCardHeaders.last_pw_change
   ];

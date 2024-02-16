@@ -48,7 +48,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       icon: 'mdi:circle',
       key: 'misp_module',
-      label: 'Is Misp Module',
+      label: 'Is MISP Module',
       value: (x) => ({ display: Boolean, props: { isTrue: x.is_misp_module ?? 'unknown' } })
     }),
     col({
