@@ -8,7 +8,7 @@ import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
-import type { PageData } from './$types';
+import type { PageData } from '../$types';
 import { format } from 'date-fns';
 
 const col = createTableHeadGenerator<PageData['event']>();

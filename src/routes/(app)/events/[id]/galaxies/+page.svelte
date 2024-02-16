@@ -1,28 +1,29 @@
 <script lang="ts">
-  import Card from '$lib/components/card/Card.svelte';
-  import CardHeading from '$lib/components/card/CardHeading.svelte';
-  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import EventInfo from '../_components/EventInfo.svelte';
+  import EventGalaxies from '../_components/EventGalaxies.svelte';
+  import type { EventState } from '../_components/EventState.interface';
 
   /**
    *
    */
   export let data;
+  let state: EventState = 'info';
+
+  let selection: PickerPill[] = [];
+  function addTags(x: any) {}
 </script>
 
-<Card class="h-full ">
-  {#each data.event?.Galaxy ?? [] as galaxy}
-    <div>
-      <CardHeading>{galaxy.name}</CardHeading>
-      <br />
-      <PillCollection
-        pills={galaxy.GalaxyCluster
-          ? galaxy.GalaxyCluster.map((y) => ({
-              icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-              label: y.relationship_type ? y.relationship_type : undefined,
-              text: y.value
-            }))
-          : []}
-      />
-    </div>
-  {/each}
-</Card>
+<EventInfo {data} bind:state>
+  <svelte:fragment slot="add">
+    <AddTagForm
+      bind:selection
+      on:createTag={() => (state = 'create')}
+      on:close={() => (state = 'info')}
+      on:add={({ detail }) => addTags(detail)}
+    />
+  </svelte:fragment>
+
+  <EventGalaxies bind:state {data} bind:selection />
+</EventInfo>

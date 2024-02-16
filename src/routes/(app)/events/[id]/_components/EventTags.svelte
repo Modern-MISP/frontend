@@ -1,25 +1,21 @@
 <script lang="ts">
-  import Card from '$lib/components/card/Card.svelte';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { mode } from '$lib/stores';
   import { shouldTextBeBlack } from '$lib/util/color.util';
-  import Icon from '@iconify/svelte';
-  import type { PageData } from './$types';
-  import CardHeading from '$lib/components/card/CardHeading.svelte';
+  import type { PageData } from '../$types';
+  import EventPillCollectionCard from './EventPillCollectionCard.svelte';
+  import type { EventState } from './EventState.interface';
 
   /**
    * The Page data.
    */
   export let data: PageData;
 
-  $: console.log(data);
-
   /**
    * The current mode of the page.
    */
-  export let state: 'addTag' | 'info' | 'createTag';
+  export let state: EventState;
 
   /**
    * The currently selected pills
@@ -27,19 +23,7 @@
   export let selection: PickerPill[] = [];
 </script>
 
-<Card class="w-full h-full">
-  <div class="flex justify-between">
-    <CardHeading>Tags</CardHeading>
-    {#if $mode === 'edit'}
-      <button type="button" on:click={() => (state = state === 'addTag' ? 'info' : 'addTag')}>
-        {#if state === 'addTag'}
-          <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
-        {:else}
-          <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
-        {/if}
-      </button>
-    {/if}
-  </div>
+<EventPillCollectionCard title="Tags" bind:state bind:selection>
   <PillCollection
     base={HrefPill}
     pills={(data.event?.Tag ?? []).map((y) => ({
@@ -55,10 +39,4 @@
       enforceTextColor: false
     }))}
   />
-  {#if state === 'addTag'}
-    <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
-      <h3>Those tags will be added:</h3>
-      <PillCollection pills={selection}></PillCollection>
-    </div>
-  {/if}
-</Card>
+</EventPillCollectionCard>
