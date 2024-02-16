@@ -141,6 +141,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({
           display: Picker,
           props: {
+            placeholder: 'Authors',
             name: 'authors',
             pickedItems:
               x?.authors?.map((a) => ({
