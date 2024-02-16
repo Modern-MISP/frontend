@@ -32,20 +32,15 @@
    * The event graph references for the event to be displayed.
    */
   export let eventGraphReferences: EventGraphReferences;
-  const items = eventGraphReferences.items ?? [];
-  const references = eventGraphReferences.relations ?? [];
-  let referencedObjects = [];
-  let referencedAttributes = [];
-
-  const { updateNode } = useSvelteFlow();
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
 
-  const position = { x: 0, y: 0 };
+  const items = eventGraphReferences.items ?? [];
+  const references = eventGraphReferences.relations ?? [];
 
-  const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
+  let referencedObjects = [];
+  let referencedAttributes = [];
 
   const referencedItemsIds: string[] = Array.from(
     new Set(references.flatMap((reference) => [reference.from, reference.to]))
@@ -67,6 +62,25 @@
       referencedAttributes.push(referencedAttribute);
     }
   }
+
+  let unreferencedObjects = objects.filter(
+    (object) =>
+      !referencedObjectsIds.some((referencedObjectId) => `o-${object.id}` === referencedObjectId)
+  );
+
+  let unreferencedAttributes = attributes.filter(
+    (attribute) =>
+      !referencedAttributesIds.some(
+        (referencedAttributesId) => `${attribute.id}` === referencedAttributesId
+      )
+  );
+
+  const { updateNode } = useSvelteFlow();
+
+  const position = { x: 0, y: 0 };
+
+  const nodes: Writable<Node[]> = writable([]);
+  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
 
   for (const referencedObject of referencedObjects) {
     $nodes.push({
@@ -111,7 +125,7 @@
         },
         type: 'attribute'
       });
-      // Edge: objects to attributes (= relations)
+      // Edge: object to its attributes (= relations)
       $edges.push({
         id: `object-${referencedObject.id}-to-attribute-${attribute.id}`,
         source: `o-${referencedObject.id}`,
@@ -122,20 +136,31 @@
     }
   }
 
-  for (const referencedAttributeId of referencedAttributesIds) {
-    let referencedAttribute = items.find((item) => item.id === referencedAttributeId);
+  for (const referencedAttribute of referencedAttributes) {
     $nodes.push({
-      id: `${referencedAttribute?.id}`,
+      id: `${referencedAttribute.id}`,
       position,
       data: {
-        id: `${referencedAttribute?.id}`,
-        type: `${referencedAttribute?.type}`,
-        value: `${referencedAttribute?.label}`
+        id: referencedAttribute.id,
+        uuid: referencedAttribute.uuid,
+        event_id: referencedAttribute.event_id,
+        object_id: referencedAttribute.object_id,
+        object_relation: referencedAttribute.object_relation,
+        category: referencedAttribute.category,
+        type: referencedAttribute.type,
+        distribution: referencedAttribute.distribution,
+        value: referencedAttribute.value,
+        comment: referencedAttribute.comment,
+        first_seen: referencedAttribute.first_seen,
+        last_seen: referencedAttribute.last_seen,
+        deleted: referencedAttribute.deleted,
+        disable_correlation: referencedAttribute.disable_correlation
       },
       type: 'attribute'
     });
   }
 
+  // Edge: referenced objects to referenced attributes or objects (= reference)
   for (const reference of references) {
     $edges.push({
       id: `reference-${reference.id}`,
@@ -288,7 +313,7 @@
   </div>
 
   <div class="flex flex-col justify-end gap-1">
-    <UnreferencedMenu {objects} {attributes} />
+    <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
