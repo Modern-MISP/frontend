@@ -33,7 +33,6 @@ export const load = async ({ params, fetch }) => {
 
   const tableData = data.Attribute ?? {};
 
-  console.log(data);
   const col = createTableHeadGenerator<
     typeof tableData & {
       Tag?: (components['schemas']['Tag'] & {
