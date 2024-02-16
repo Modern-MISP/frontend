@@ -65,3 +65,66 @@ export const DISTRIBUTION_LOOKUP: ComponentProps<Pill>[] = [
     icon: 'mdi:circle'
   }
 ];
+
+export const EXPORT_FORMAT_LOOKUP: ComponentProps<Pill>[] = [
+  {
+    text: 'json'
+  },
+  {
+    text: 'xml'
+  },
+  {
+    text: 'csv'
+  },
+  {
+    text: 'text'
+  },
+  {
+    text: 'stix'
+  },
+  {
+    text: 'stix2'
+  },
+  {
+    text: 'stix-json'
+  },
+  {
+    text: 'attack'
+  },
+  {
+    text: 'attack-sightings'
+  },
+  {
+    text: 'cache'
+  },
+  {
+    text: 'count'
+  },
+  {
+    text: 'hashes'
+  },
+  {
+    text: 'netfilter'
+  },
+  {
+    text: 'opendata'
+  },
+  {
+    text: 'openioc'
+  },
+  {
+    text: 'rpz'
+  },
+  {
+    text: 'snort'
+  },
+  {
+    text: 'suricata'
+  },
+  {
+    text: 'yara'
+  },
+  {
+    text: 'yara-json'
+  }
+];
