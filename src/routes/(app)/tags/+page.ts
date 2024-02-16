@@ -55,21 +55,24 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Exportable',
       value: (x) => ({
         display: Boolean,
-        props: { isTrue: (x.exportable as unknown as string) === 'true', class: 'm-auto' }
+        props: { isTrue: x.exportable ?? false, class: 'm-auto' }
       })
     }),
     col({
       icon: 'mdi:eye-off-outline',
       key: 'hidden',
       label: 'Hidden',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.hidden === 'true', class: 'm-auto' } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.hide_tag ?? false, class: 'm-auto' } })
     }),
     col({
       icon: 'mdi:cloud-off-outline',
       key: 'local_only',
       label: 'Local only',
       // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.local === 'true', class: 'm-auto' } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.local_only ?? false, class: 'm-auto' }
+      })
     }),
     col({
       icon: 'mdi:circle',
