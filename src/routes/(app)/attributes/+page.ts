@@ -288,9 +288,29 @@ export const load = async ({ fetch }) => {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: () => '' //TODO: delete attribute
+      action: (attributes) => {
+        Promise.all(
+          attributes.map((attribute) =>
+            get(api)
+              .DELETE('/attributes/delete/{attributeId}', {
+                params: { path: { attributeId: attribute.id! } }
+              })
+              .then((resp) => {
+                if (resp.error) throw new Error(resp.error.message);
+              })
+          )
+        ).then(() => {
+          notifications.add(
+            successPill(
+              'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+            )
+          );
+          invalidateAll();
+        });
+      }
     }
   ];
+
   return {
     header,
     tableData,
