@@ -10,12 +10,21 @@
   import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import { shouldTextBeBlack } from '$lib/util/color.util.js';
+  import type { components } from '$lib/api/misp.js';
 
   export let data;
 
   const tableData = data.event.Attribute!;
 
-  const col = createTableHeadGenerator<(typeof tableData)[number], DynTableHeadExtent>();
+  const col = createTableHeadGenerator<
+    (typeof tableData)[number] & {
+      Tag?: (components['schemas']['Tag'] & {
+        relationship_type?: string;
+        local?: boolean;
+      })[];
+    },
+    DynTableHeadExtent
+  >();
   const header = [
     col({
       icon: 'mdi:id-card',

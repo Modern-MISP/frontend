@@ -16,7 +16,6 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import Select from '$lib/components/form/Select.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { components } from '$lib/api/misp';
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import { format } from 'date-fns';
@@ -33,16 +32,16 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const tableData = data.Attribute ?? [];
+  const tableData = data.Attribute ?? {};
 
   console.log(data);
   const col = createTableHeadGenerator<
-    (typeof tableData)[number] & {
+    typeof tableData & {
       Tag?: (components['schemas']['Tag'] & {
-        relationship_typ?: string;
+        relationship_type?: string;
+        local?: boolean;
       })[];
-    },
-    DynTableHeadExtent
+    }
   >();
   const describeTypesResponse = await get(api).GET('/attributes/describeTypes');
   if (describeTypesResponse.error)
@@ -184,7 +183,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({
           display: Checkbox,
           props: {
-            checked: !x.disable_correlation ?? false,
+            checked: !x.disable_correlation,
             name: 'correlate'
           }
         })
@@ -247,7 +246,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({
           display: Input,
           props: {
-            value: x?.first_seen ? format(new Date(+x.timestamp * 1000), 'yyyy-MM-dd') : undefined,
+            value: x?.first_seen ? format(new Date(+x.first_seen * 1000), 'yyyy-MM-dd') : undefined,
             name: 'first_seen',
             type: 'date'
           }
@@ -271,7 +270,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({
           display: Input,
           props: {
-            value: x?.last_seen ? format(new Date(+x.timestamp * 1000), 'yyyy-MM-dd') : undefined,
+            value: x?.last_seen ? format(new Date(+x.last_seen * 1000), 'yyyy-MM-dd') : undefined,
             name: 'last:seen',
             type: 'date'
           }

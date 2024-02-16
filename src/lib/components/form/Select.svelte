@@ -1,5 +1,5 @@
 <script lang="ts" generics="T extends string">
-    import type { ChangeEventHandler } from 'svelte/elements';
+  import type { ChangeEventHandler } from 'svelte/elements';
 
   import Icon from '@iconify/svelte';
 

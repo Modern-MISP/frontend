@@ -29,7 +29,6 @@ export const load: PageLoad = async ({ fetch }) => {
   if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
 
   const tableData = data.response?.Attribute ?? [];
-  console.log(tableData);
 
   const describeTypesResponse = await get(api).GET('/attributes/describeTypes');
   if (describeTypesResponse.error)
@@ -44,7 +43,8 @@ export const load: PageLoad = async ({ fetch }) => {
   const col = createTableHeadGenerator<
     (typeof tableData)[number] & {
       Tag?: (components['schemas']['Tag'] & {
-        relationship_typ?: string;
+        relationship_type?: string;
+        local?: boolean;
       })[];
     },
     DynTableHeadExtent
