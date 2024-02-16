@@ -11,10 +11,10 @@
   import Button from '../button/Button.svelte';
   import Pill from '../pills/pill/Pill.svelte';
   import { createEventDispatcher } from 'svelte';
-    import { api } from '$lib/api';
-    import { notifications } from '$lib/stores';
-    import { errorPill } from '$lib/util/pill.util';
-    import type { components } from '$lib/api/misp';
+  import { api } from '$lib/api';
+  import { notifications } from '$lib/stores';
+  import { errorPill } from '$lib/util/pill.util';
+  import type { components } from '$lib/api/misp';
 
   const dispatch = createEventDispatcher<{
     close: void;
@@ -45,13 +45,21 @@
 </script>
 
 <div class="flex flex-col gap-1">
-  <Card>
+  <Card class="resize-none">
     <CardHeading>Create a new Tag</CardHeading>
-    <Input placeholder="Name" name="name" icon="mdi:tag-outline" on:value={({ detail }) => (text = detail)} />
+    <Input
+      placeholder="Name"
+      name="name"
+      icon="mdi:tag-outline"
+      on:value={({ detail }) => (text = detail)}
+    />
     <CardRow>
       <span>Restrict to org:</span>
       <Select
-        options={orgs.map((org) => ({ label: org.Organisation?.name ?? 'unknown', value: org.Organisation?.id ?? '' }))}
+        options={orgs.map((org) => ({
+          label: org.Organisation?.name ?? 'unknown',
+          value: org.Organisation?.id ?? ''
+        }))}
         value=""
         name="org_id"
       />
@@ -59,7 +67,10 @@
     <CardRow>
       <span>Restrict to user:</span>
       <Select
-        options={users.map((user) => ({label: user.User?.email ?? 'unknown', value: user.User?.id ?? ''}))}
+        options={users.map((user) => ({
+          label: user.User?.email ?? 'unknown',
+          value: user.User?.id ?? ''
+        }))}
         value=""
         name="user_id"
       />

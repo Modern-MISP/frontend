@@ -54,7 +54,7 @@
 
   <div slot="added">
     {#if addTag}
-      <CreateTag></CreateTag>
+      <CreateTag on:close={() => (addTag = false)}></CreateTag>
     {/if}
   </div>
 
