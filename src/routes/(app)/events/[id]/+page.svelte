@@ -1,17 +1,13 @@
 <script lang="ts">
-  import { invalidateAll } from '$app/navigation';
   import { page } from '$app/stores';
-  import { api } from '$lib/api';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { notifications } from '$lib/stores';
-  import { errorPill, successPill } from '$lib/util/pill.util';
-  import { partition } from 'lodash-es';
   import type { PageData } from './$types';
   import EventInfo from './_components/EventInfo.svelte';
-  import EventTags from './_components/EventTags.svelte';
   import type { EventState } from './_components/EventState.interface';
+  import EventTags from './_components/EventTags.svelte';
+  import { addTags } from './_components/event.util';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -24,72 +20,6 @@
    * The currently selected pills
    */
   let selection: PickerPill[] = [];
-
-  async function addTags(
-    tags: {
-      local: boolean;
-      id: string;
-      relation: string;
-    }[]
-  ) {
-    const promises = tags.map(({ id, local }) =>
-      $api.POST('/events/addTag/{eventId}/{tagId}/local:{local}', {
-        params: {
-          path: {
-            eventId: $page.params.id,
-            tagId: id,
-            local: local ? 1 : 0
-          }
-        },
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      })
-    );
-
-    try {
-      const res = await Promise.all(promises);
-      // partition the answer into success and error, because misp sends errors with the 200 status...
-      const [success, errors] = partition(res, ({ error, data }) => !error && data && !data.errors);
-
-      if (errors.length > 0) {
-        notifications.add(errorPill('Some errors occurred. Please refer to the console.'));
-        console.error(errors);
-      }
-
-      if (success.length > 0) notifications.add(successPill(`Added ${success.length} tags.`));
-    } catch (error) {
-      notifications.add(
-        errorPill(
-          'Some external errors occurred. Could also be a cors error. Please refer to the console.'
-        )
-      );
-      console.error(error);
-    }
-
-    // Always invalidate, because cors errors are not fatal => tags could be added without notification.
-    invalidateAll();
-
-    // TODO: update the relation here, if we have any idea how to get the id. Attention. The required id is another then the id from the tag. It is an event specific idea and I have no clue how to access it.
-    // const res = await Promise.all(tags.map(updateRelation));
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async function updateRelation({ id, relation }: { id: string; relation: string }) {
-    const endpoint = `tags/modifyTagRelationship/event/{id}`;
-
-    // @ts-expect-error not in the api spec. Don't know how to get the id...
-    await $api.POST(endpoint, {
-      params: {
-        path: {
-          id
-        }
-      },
-      body: {
-        'data[Tag][relationship_type]': relation
-      }
-    });
-  }
 </script>
 
 <!-- 
@@ -109,7 +39,7 @@
       bind:selection
       on:createTag={() => (state = 'create')}
       on:close={() => (state = 'info')}
-      on:add={({ detail }) => addTags(detail)}
+      on:add={({ detail }) => addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
     />
   </svelte:fragment>
 

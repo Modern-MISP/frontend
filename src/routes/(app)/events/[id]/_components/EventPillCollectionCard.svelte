@@ -39,12 +39,13 @@
   <div class="overflow-auto">
     <slot />
   </div>
+  <slot name="footer" />
   {#if state === 'add'}
-    <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
-      <slot name="addition">
+    <slot name="addition">
+      <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
         <h3>Those elements will be added:</h3>
         <PillCollection pills={selection}></PillCollection>
-      </slot>
-    </div>
+      </div>
+    </slot>
   {/if}
 </Card>

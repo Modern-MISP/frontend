@@ -25,7 +25,9 @@
 
 <EventPillCollectionCard title="Galaxies" bind:state bind:selection>
   {#each data.event?.Galaxy ?? [] as galaxy}
-    <CardHeading class="py-2 pt-3 text-xl">{galaxy.name}</CardHeading>
+    <a href="/galaxies/{galaxy.id}">
+      <CardHeading class="py-2 pt-3 text-xl">{galaxy.name}</CardHeading>
+    </a>
     <PillCollection
       pills={galaxy.GalaxyCluster
         ? galaxy.GalaxyCluster.map((y) => ({

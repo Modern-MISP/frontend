@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { invalidateAll } from '$app/navigation';
   import { api } from '$lib/api';
   import type { components } from '$lib/api/misp';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { notifications } from '$lib/stores';
-  import { successPill } from '$lib/util/pill.util';
+  import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from '../$types';
   import type { EventState } from './EventState.interface';
   import { header } from './formHeaders';
@@ -20,12 +20,15 @@
   export let state: EventState = 'info';
 
   async function formCallback(formData: Record<string, string>) {
-    $api
-      .PUT('/events/edit/{eventId}', {
-        params: { path: { eventId: data!.event.id! } },
-        body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
-      })
-      .then(() => notifications.add(successPill('Event updated successfully!')));
+    notifySave(
+      $api
+        .PUT('/events/edit/{eventId}', {
+          params: { path: { eventId: data!.event.id! } },
+          body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
+        })
+        .then(invalidateAll),
+      'Event updated successfully!'
+    );
   }
 </script>
 
