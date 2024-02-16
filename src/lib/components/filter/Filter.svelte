@@ -81,6 +81,7 @@
             onClick: () => (currentFilter = omit(currentFilter, filterKey)),
             class: 'hover:text-red'
           }}
+          title={currentFilter[filterKey]}
         ></Pill>
       {/each}
     </div>
