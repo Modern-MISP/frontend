@@ -455,7 +455,7 @@ export const load = async ({ fetch }) => {
           value: '',
           options: EXPORT_FORMAT_LOOKUP.map((x) => ({
             label: x.text ?? 'unknown',
-            value: x.text
+            value: x.text ?? ''
           })),
           name: 'returnFormat'
         }
@@ -518,13 +518,18 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:plus',
       action: (x) => {
         notifySave(
-          get(api)
-            .POST('/sightings/add/{attributeId}', {
-              params: { path: { attributeId: x.id } }
-            })
-            .then((resp) => {
-              if (resp.error) throw new Error(resp.error.message);
-            })
+          Promise.all(
+            x.map((attribute) =>
+              get(api)
+                .POST('/sightings/add/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                })
+            )
+          ),
+          `Added sightings for attributes ${x.map(({ id }) => id).join(', ')}`
         );
       }
     }
