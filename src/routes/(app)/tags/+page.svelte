@@ -4,6 +4,8 @@
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import CreateTag from './CreateTag.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
 
   /**
    * Page data
@@ -52,9 +54,15 @@
     </ActionCard>
   </div>
 
-  <div slot="added">
+  <div
+    slot="added"
+    class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
+  >
     {#if addTag}
-      <CreateTag></CreateTag>
+      <FilterCard>
+        <CardHeading>Create a new Tag</CardHeading>
+        <CreateTag on:close={() => (addTag = false)}></CreateTag>
+      </FilterCard>
     {/if}
   </div>
 
