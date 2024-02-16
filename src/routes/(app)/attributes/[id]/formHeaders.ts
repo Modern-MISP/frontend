@@ -1,9 +1,9 @@
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+/*import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import type { PageData } from './$types';
 import { format } from 'date-fns';
-import attributeCols, { editAttributeCols } from '../attributeCols';
+import { editAttributeCols } from '../attributeCols';
 import { get } from 'svelte/store';
 import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
@@ -22,7 +22,6 @@ export const header = async () => {
   return [
     col(attributeCols.id),
     col(attributeCols.event),
-    //org
     col(attributeCols.category, editCols.category),
     col(attributeCols.type, {
       //TODO: Select
@@ -30,7 +29,6 @@ export const header = async () => {
     col(attributeCols.value, editCols.value),
     col(attributeCols.comment, editCols.comment),
     col(attributeCols.distribution, editCols.distribution),
-    //Batch Import Flag
     col(attributeCols.correlation_flag, {
       value: (x) => ({
         display: Checkbox,
@@ -64,6 +62,6 @@ export const header = async () => {
     col(attributeCols.last_sighting)
     //tags
     //related events
-    //sightings
   ];
 };
+*/
