@@ -19,7 +19,7 @@
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
 
-  $currentRoute = [
+  $: $currentRoute = [
     ...($currentRoute ?? []),
     { name: 'New Galaxy Cluster', href: 'new_cluster', icon: 'carbon:assembly-cluster' }
   ];
