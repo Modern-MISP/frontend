@@ -8,6 +8,7 @@
   import Form from '$lib/components/form/Form.svelte';
   import Select from '$lib/components/form/Select.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode, notifications } from '$lib/stores';
   import { errorPill, successPill } from '$lib/util/pill.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
