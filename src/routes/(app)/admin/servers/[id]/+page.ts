@@ -132,7 +132,7 @@ export const load = async ({ params, fetch }) => {
           props: { value: '', placeholder: 'set new auth key', name: 'authkey' }
         })
       }
-    ),
+    )
   ];
   const right = [
     col({
