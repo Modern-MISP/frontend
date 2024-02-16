@@ -26,4 +26,4 @@ export const lockModeToggle = writable<boolean>(false);
 
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 
-export const notifications = createTimeoutStore<ComponentProps<Pill>>(3000);
+export const notifications = createTimeoutStore<ComponentProps<Pill>>(8000);
