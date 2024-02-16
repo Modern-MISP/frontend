@@ -57,19 +57,19 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       key: 'exportable',
       label: 'Exportable',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.exportable } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.exportable ?? false } })
     }),
     col({
       key: 'hidden',
       label: 'Hidden',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.hidden === 'true' } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.hide_tag ?? false } })
     }),
     col({
       icon: 'mdi:cloud-off-outline',
       key: 'local_only',
       label: 'Local only',
       // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.local === 'true' } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.local_only ?? false } })
     }),
     col({
       key: 'restrict_org',
