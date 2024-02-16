@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { lockEditMode } from '$lib/actions.js';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
@@ -7,11 +8,13 @@
   import Select from '$lib/components/form/Select.svelte';
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, notifications } from '$lib/stores.js';
+  import { currentRoute, mode, notifications } from '$lib/stores.js';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
   export let data;
+
+  $mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -71,6 +74,8 @@
     { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
   ];
 </script>
+
+<svelte:window use:lockEditMode={true} />
 
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
