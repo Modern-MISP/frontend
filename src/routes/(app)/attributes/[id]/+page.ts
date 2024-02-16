@@ -104,7 +104,14 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => x.type ?? ''
       },
       {
-        //TODO: Select
+        //TODO: options dependent on select category
+        value: () => ({
+          display: Select,
+          props: {
+            name: 'type',
+            options: options.types?.map((c) => ({ value: c, label: c })) ?? []
+          }
+        })
       }
     ),
     col(

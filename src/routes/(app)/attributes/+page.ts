@@ -192,7 +192,6 @@ export const load: PageLoad = async ({ fetch }) => {
         }
       })
     })
-    //col(attributeCols.tags) -> TODO: fix it
     //sightings
   ];
 
@@ -202,11 +201,6 @@ export const load: PageLoad = async ({ fetch }) => {
       describeTypes.response.status as NumericRange<400, 599>,
       describeTypes.error.message
     );
-
-  const filterCols = editAttributeCols(
-    // cast type to fix wrong MISP API spec
-    (describeTypes.data as unknown as { result: typeof describeTypes.data }).result
-  );
 
   const fil = createTableHeadGenerator<undefined>();
   const filter = [
@@ -222,7 +216,13 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     fil({
       label: 'Type',
-      ...filterCols.type
+      value: () => ({
+        display: Select,
+        props: {
+          name: 'type',
+          options: options.types?.map((c) => ({ value: c, label: c })) ?? []
+        }
+      })
     }),
     fil({
       label: 'Value',
