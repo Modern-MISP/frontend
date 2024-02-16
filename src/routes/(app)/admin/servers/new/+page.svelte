@@ -44,7 +44,7 @@
 
   $currentRoute = [
     ...($currentRoute ?? []),
-    { name: 'New Remove Server', href: 'new', icon: 'mdi:server-add' }
+    { name: 'New Remove Server', href: 'new', icon: 'mdi:server-plus' }
   ];
 </script>
 
