@@ -54,6 +54,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
   ).result;
 
+  let currentCategory: string | undefined = undefined;
+
   const left = [
     col({
       icon: 'mdi:id-card',
@@ -91,7 +93,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Select,
           props: {
             name: 'category',
-            options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
+            options: options.categories?.map((c) => ({ value: c, label: c })) ?? [],
+            changeCallback: (event) => {
+              currentCategory = event.currentTarget.value;
+            }
           }
         })
       }
