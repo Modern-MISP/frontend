@@ -24,8 +24,6 @@
   }
 </script>
 
-<div class="absolute left-0 z-50 w-1/2 h-full overflow-auto">
-  <form on:submit|preventDefault={(e) => addTag(getFormValues(e))}>
-    <CreateTagForm on:close />
-  </form>
-</div>
+<form on:submit|preventDefault={(e) => addTag(getFormValues(e))} class="h-full">
+  <CreateTagForm on:close />
+</form>
