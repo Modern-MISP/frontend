@@ -145,16 +145,19 @@ export const load: PageLoad = async ({ fetch }) => {
           pills: [
             {
               label: 'created',
-              date: x.date ? new Date(x.date) : new Date()
+              date: x.date ? new Date(x.date) : new Date(),
+              icon: undefined
             },
 
             {
               label: 'modified',
-              date: x.timestamp ? new Date(+x.timestamp * 1000) : new Date()
+              date: x.timestamp ? new Date(+x.timestamp * 1000) : new Date(),
+              icon: undefined
             },
             {
               label: 'published',
-              date: x.publish_timestamp ? new Date(+x.publish_timestamp * 1000) : new Date()
+              date: x.publish_timestamp ? new Date(+x.publish_timestamp * 1000) : new Date(),
+              icon: undefined
             }
           ]
         }
