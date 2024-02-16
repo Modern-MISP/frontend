@@ -7,7 +7,7 @@
 </script>
 
 <!--
-    @component
+    @component Displays a list of all attributes. 
     
 -->
 
