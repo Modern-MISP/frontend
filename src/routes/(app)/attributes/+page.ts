@@ -451,7 +451,7 @@ export const load = async ({ fetch }) => {
         display: Select,
         props: {
           value: '',
-          options: EXPORT_FORMAT_LOOKUP.map((x, i) => ({
+          options: EXPORT_FORMAT_LOOKUP.map((x) => ({
             label: x.text ?? 'unknown',
             value: x.text
           })),
