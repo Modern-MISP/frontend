@@ -125,7 +125,7 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.value ?? 'unknown' } })
+        value: (x) => ({ display: Input, props: { name: 'value', value: x.value ?? 'unknown' } })
       }
     ),
     col(
@@ -136,7 +136,10 @@ export const load = async ({ params, fetch }) => {
         value: (x) => x?.comment ?? 'text'
       },
       {
-        value: (x) => ({ display: Input, props: { value: x?.comment ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { name: 'comment', value: x?.comment ?? 'unknown' }
+        })
       }
     ),
     col(
@@ -171,16 +174,15 @@ export const load = async ({ params, fetch }) => {
     col(
       {
         icon: 'mdi:circle',
-        key: 'disable_correlation',
-        label: 'Correlate',
-        value: (x) => ({ display: Boolean, props: { isTrue: !x.disable_correlation } })
+        label: 'Disable Correlation',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.disable_correlation ?? false } })
       },
       {
         value: (x) => ({
           display: Checkbox,
           props: {
-            checked: !x.disable_correlation,
-            name: 'correlate'
+            checked: x.disable_correlation ?? false,
+            name: 'disable_correlation'
           }
         })
       }
@@ -202,29 +204,18 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        icon: 'mdi:clock-outline',
-        key: 'date',
-        label: 'Date',
-        value: (x) => ({
-          display: DatePill,
-          props: {
-            date: x.timestamp ? new Date(+x.timestamp * 1000) : new Date()
-          }
-        })
-      },
-      {
-        value: (x) => ({
-          display: Input,
-          props: {
-            value: x?.timestamp ? format(new Date(+x.timestamp * 1000), 'yyyy-MM-dd') : undefined,
-            name: 'date',
-            type: 'date'
-          }
-        })
-      }
-    ),
+    col({
+      icon: 'mdi:clock-outline',
+      key: 'date',
+      label: 'Date',
+      value: (x) => ({
+        display: DatePill,
+        props: {
+          date: x.timestamp ? new Date(+x.timestamp * 1000) : null,
+          onNullText: 'no date'
+        }
+      })
+    }),
     col(
       {
         icon: 'mdi:clock-outline',
@@ -267,7 +258,7 @@ export const load = async ({ params, fetch }) => {
           display: Input,
           props: {
             value: x?.last_seen ? format(new Date(+x.last_seen * 1000), 'yyyy-MM-dd') : undefined,
-            name: 'last:seen',
+            name: 'last_seen',
             type: 'date'
           }
         })
