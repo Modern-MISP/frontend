@@ -14,12 +14,14 @@
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
-      $api.PUT('/attributes/edit/{attributeId}', {
-        params: { path: { attributeId: $page.params.id } },
-        body: formData
-      }).then((resp) => {
-        if (resp.error) throw Error(resp.error.message);
-      })
+      $api
+        .PUT('/attributes/edit/{attributeId}', {
+          params: { path: { attributeId: $page.params.id } },
+          body: formData
+        })
+        .then((resp) => {
+          if (resp.error) throw Error(resp.error.message);
+        })
     );
   }
 </script>
