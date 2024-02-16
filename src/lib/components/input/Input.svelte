@@ -10,7 +10,7 @@
   /**
    * The name of the input. Used for the label and for form submission.
    */
-  export let name = 'default';
+  export let name: string | undefined = undefined;
 
   /**
    * The current value of the input.
@@ -33,15 +33,30 @@
   export let disabled: boolean = false;
 
   /**
+   * Whether the input is required.
+   */
+  export let required: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
 
   let clazz = '';
 
-  const dispatch = createEventDispatcher<{ value: string }>();
+  const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
 
   const id = crypto.randomUUID();
+
+  let inputElement: HTMLInputElement;
+
+  /**
+   * Sets the inner input's value.
+   * @param value The value to use.
+   */
+  export function setValue(value: string) {
+    inputElement.value = value;
+  }
 </script>
 
 <!-- 
@@ -65,7 +80,10 @@
     {/if}
   </slot>
   <input
-    on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
+    on:input={({ currentTarget }) => {
+      if (name) dispatch('formValue', { [name]: currentTarget.value });
+      dispatch('value', currentTarget.value);
+    }}
     on:blur
     on:focus
     {id}
@@ -74,7 +92,9 @@
     {type}
     {value}
     {disabled}
+    {required}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
+    bind:this={inputElement}
   />
   {#if placeholder && (!disabled || !value)}
     <label

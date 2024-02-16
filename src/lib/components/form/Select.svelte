@@ -1,4 +1,7 @@
 <script lang="ts" generics="T extends string">
+  import type { ChangeEventHandler } from 'svelte/elements';
+  import { createEventDispatcher } from 'svelte';
+
   import Icon from '@iconify/svelte';
 
   /**
@@ -9,7 +12,7 @@
    * The value that is currently selected.
    * Because of the template variable, full type safety should be enforced if using `const`s as options.
    */
-  export let value: T | undefined = undefined;
+  export let value: T;
   /**
    * Name of this `select` element. Used for forms.
    */
@@ -19,11 +22,20 @@
    */
   export let disabled: boolean = false;
 
+  /**
+   * Function that gets called when the selected value changes.
+   * For most use cases, you should prefer value binding over this.
+   */
+  export let changeCallback: ChangeEventHandler<HTMLSelectElement> = () => {};
+
   let clazz = '';
   /**
    * The class of the select element.
    */
   export { clazz as class };
+
+  const dispatch = createEventDispatcher<{ formValue: Record<string, string> }>();
+  $: if (name) dispatch('formValue', { [name]: value });
 </script>
 
 <!-- 
@@ -44,6 +56,7 @@
     {name}
     {disabled}
     bind:value
+    on:change={changeCallback}
   >
     {#each options as { value, label }}
       <option {value}>{label}</option>

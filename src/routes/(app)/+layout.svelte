@@ -29,5 +29,5 @@
 -->
 
 <Layout {routes} currentRoute={$currentRoute} contextRoutes={$contextRouteEntries}>
-  <slot /></Layout
->
+  <slot />
+</Layout>

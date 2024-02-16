@@ -23,6 +23,7 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Select from '$lib/components/form/Select.svelte';
 import { genSelectProps } from '$lib/util/select.util';
 import Input from '$lib/components/input/Input.svelte';
+import type { FastFilter } from '$lib/models/FastFilter.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -61,7 +62,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organisations',
+      label: 'Organizations',
       value: (x) => ({
         display: PillCollection,
         props: {
@@ -206,7 +207,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: () => 'eventinfo'
     }),
     fil({
-      label: 'Organisation',
+      label: 'Organization',
       value: () => ({
         display: Select,
         props: {
@@ -313,11 +314,32 @@ export const load: PageLoad = async ({ fetch }) => {
     }
   ];
 
+  // @ts-expect-error not in api spec. Great...
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: myData } = (await get(api).GET('/users/view/me')) as any;
+
+  const fastFilter: FastFilter[] = [
+    {
+      label: 'My Organization',
+      icon: 'material-symbols:work-outline',
+      ifActive: {
+        org: myData.Organisation.id
+      }
+    },
+    {
+      label: 'My Events',
+      icon: 'mdi:account-circle',
+      ifActive: {
+        email: myData.User.email
+      }
+    }
+  ];
   return {
     header,
     tableData: data,
     filter,
     topMenuActions,
-    editActions
+    editActions,
+    fastFilter
   };
 };

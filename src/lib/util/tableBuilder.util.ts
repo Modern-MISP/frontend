@@ -1,7 +1,7 @@
 import type { TableHead } from '$lib/models/TableHead.interface';
 import { mode } from '$lib/stores';
 import type { SvelteComponent } from 'svelte';
-import { derived } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 /**
  * Generates dynamic, reactive and type-safe `TableHead`s to use in dynamic components like {@link DynCard} and {@link DynTable}.
@@ -27,6 +27,8 @@ export function createTableHeadGenerator<
     K extends SvelteComponent | undefined = undefined,
     L extends SvelteComponent | undefined = undefined
   >(view: TableHead<T, K> & E, edit: Partial<TableHead<T, L> & E> = {}) {
-    return derived(mode, (m) => (m === 'edit' ? { ...view, ...edit } : view));
+    const store = writable<TableHead<T, K | L> & E>();
+    mode.subscribe((m) => store.set(m === 'edit' ? { ...view, ...edit } : view));
+    return store;
   };
 }

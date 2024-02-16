@@ -2,9 +2,7 @@ import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from '../../[id]/$types';
-
 import Info from '$lib/components/info/Info.svelte';
-
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
@@ -12,6 +10,9 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import Picker from '$lib/components/picker/Picker.svelte';
+import Select from '$lib/components/form/Select.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -25,20 +26,78 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
+  /**
+   * Editable properties according to OpenAPI spec:
+   * - [ ] GalaxyElement
+   * - [x] authors
+   * - [ ] collection_uuid
+   * - [x] default
+   * - [ ] deleted
+   * - [ ] description
+   * - [x] distribution
+   * - [ ] extends_uuid
+   * - [ ] extends_version
+   * - [ ] galaxy_id
+   * - [x] id
+   * - [ ] locked
+   * - [ ] org_id
+   * - [ ] orgc_id
+   * - [ ] published
+   * - [ ] sharing_group_id
+   * - [x] source
+   * - [ ] tag_name
+   * - [x] type
+   * - [x] uuid
+   * - [x] value
+   * - [x] version
+   */
   const col = createTableHeadGenerator<(typeof data)['GalaxyCluster']>();
   const leftCardHeader = [
-    col({
-      label: 'Value',
-      value: (x) => x?.value ?? 'unknown'
-    }),
-    col({
-      label: 'Description',
-      value: (x) => x?.description ?? 'unknown'
-    }),
-    col({
-      label: 'Type',
-      value: (x) => x?.type ?? 'unknown'
-    }),
+    col(
+      {
+        label: 'Value',
+        value: (x) => x?.value ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.value,
+            name: 'value'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Description',
+        value: (x) => x?.description ?? ''
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.description,
+            name: 'description'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Type',
+        value: (x) => x?.type ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.type,
+            name: 'type'
+          }
+        })
+      }
+    ),
     col({
       label: 'Parent Galaxy',
       value: (x) => ({
@@ -51,20 +110,54 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     }),
-    col({
-      label: 'Source',
-      value: (x) => x?.source ?? 'unknown'
-    }),
-    col({
-      label: 'Authors',
-      value: (x) => ({
-        display: PillCollection,
-        props: {
-          pills: x?.authors?.map((a) => ({ icon: 'streamline:user-circle-single', text: a })) ?? [],
-          class: 'pl-4'
-        }
-      })
-    }),
+    col(
+      {
+        label: 'Source',
+        value: (x) => x?.source ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.source,
+            name: 'source'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Authors',
+        value: (x) => ({
+          display: PillCollection,
+          props: {
+            pills:
+              x?.authors?.map((a) => ({ icon: 'streamline:user-circle-single', text: a })) ?? [],
+            class: 'pl-4'
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Picker,
+          props: {
+            placeholder: 'Authors',
+            name: 'authors',
+            pickedItems:
+              x?.authors?.map((a) => ({
+                value: a,
+                text: a,
+                icon: 'streamline:user-circle-single'
+              })) ?? [], // NOTE: The `?? []` is required for some reason, otherwise the component throws an error. I don't understand it either.
+            arbitraryInput: (a: string) => ({
+              icon: 'streamline:user-circle-single',
+              text: a,
+              value: a
+            })
+          }
+        })
+      }
+    ),
     col({
       label: 'Events',
       value: (x) => x?.tag_count?.toString() ?? 'unknown'
@@ -83,18 +176,51 @@ export const load: PageLoad = async ({ params, fetch }) => {
     })
   ];
   const rightCardHeader = [
-    col({
-      label: 'Version',
-      value: (x) => x?.version ?? 'unknown'
-    }),
-    col({
-      label: 'ID',
-      value: (x) => x?.id ?? 'unknown'
-    }),
-    col({
-      label: 'UUID',
-      value: (x) => x?.uuid ?? 'unknown'
-    }),
+    col(
+      {
+        label: 'Version',
+        value: (x) => x?.version ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.version ?? undefined,
+            name: 'version'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'ID',
+        value: (x) => x?.id ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.id,
+            name: 'id'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'UUID',
+        value: (x) => x?.uuid ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.uuid,
+            name: 'uuid'
+          }
+        })
+      }
+    ),
     col({
       label: 'Collection UUID',
       value: (x) => x?.collection_uuid ?? 'unknown'
@@ -119,22 +245,46 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
       })
     }),
-    col({
-      label: 'Distribution',
-      value: (x) => ({
-        display: LookupPill,
-        props: {
-          value: +(x?.distribution ?? 0),
-          options: DISTRIBUTION_LOOKUP
-        }
-      })
-    }),
+    col(
+      {
+        label: 'Distribution',
+        value: (x) => ({
+          display: LookupPill,
+          props: {
+            value: +(x?.distribution ?? 0),
+            options: DISTRIBUTION_LOOKUP
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Select,
+          props: {
+            value: '' + (x?.distribution ?? 1),
+            options: DISTRIBUTION_LOOKUP.map((x, i) => ({
+              label: x.text ?? 'unknown',
+              value: '' + i
+            })),
+            name: 'distribution'
+          }
+        })
+      }
+    ),
     col({
       label: 'Default',
       value: (x) => ({
         display: Boolean,
         props: {
           isTrue: x?.default
+        }
+      })
+    }),
+    col({
+      label: 'Locked',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.locked
         }
       })
     })
@@ -147,7 +297,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col2({
       icon: 'mdi:key',
       key: 'key',
-      label: 'key',
+      label: 'Key',
       value: (x) => ({
         display: Info,
         props: {

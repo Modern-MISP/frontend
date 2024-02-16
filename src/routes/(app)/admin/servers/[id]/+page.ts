@@ -38,7 +38,31 @@ export const load = async ({ params, fetch }) => {
         value: (x) => x.Server?.name ?? 'unknown'
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.Server?.name ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.name ?? 'unknown', name: 'name' }
+        })
+      }
+    ),
+    col(
+      {
+        key: 'url',
+        label: 'URL',
+        value: (x) => ({
+          display: HrefPill,
+          props: {
+            icon: 'ri:share-box-line',
+            href: x.Server?.url ?? '#',
+            target: '_blank' as const,
+            text: x.Server?.url ?? 'unknown'
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.url ?? 'unknown', name: 'url' }
+        })
       }
     ),
     col({
@@ -87,26 +111,11 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        //TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
-        value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
-      }
-    ),
-    col(
-      {
-        key: 'url',
-        label: 'URL',
+        // TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
         value: (x) => ({
-          display: HrefPill,
-          props: {
-            icon: 'ri:share-box-line',
-            href: x.Server?.url ?? '#',
-            target: '_blank' as const,
-            text: x.Server?.url ?? 'unknown'
-          }
+          display: Input,
+          props: { value: x.Server?.remote_org_id, name: 'remote_org_id' }
         })
-      },
-      {
-        value: (x) => ({ display: Input, props: { value: x.Server?.url ?? 'unknown' } })
       }
     ),
 
@@ -118,7 +127,10 @@ export const load = async ({ params, fetch }) => {
         value: () => 'not shown'
       },
       {
-        value: () => ({ display: Input, props: { value: '', placeholder: 'set new auth key' } })
+        value: () => ({
+          display: Input,
+          props: { value: '', placeholder: 'set new auth key', name: 'authkey' }
+        })
       }
     ),
 
@@ -141,6 +153,7 @@ export const load = async ({ params, fetch }) => {
       label: 'Internal',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
+    //TODO: text: Sync methods
     col(
       {
         key: 'push',
@@ -182,6 +195,19 @@ export const load = async ({ params, fetch }) => {
     ),
     col(
       {
+        key: 'caching_enabled',
+        label: 'Cache',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false }
+        })
+      }
+    ),
+    col(
+      {
         key: 'push_galaxy_clusters',
         label: 'Push Cluster',
         value: (x) => ({
@@ -212,19 +238,7 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    col(
-      {
-        key: 'caching_enabled',
-        label: 'Cache',
-        value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
-      },
-      {
-        value: (x) => ({
-          display: Checkbox,
-          props: { name: 'caching_enabled', checked: x.Server?.caching_enabled ?? false }
-        })
-      }
-    ),
+    //TODO: text: misc settings
     col(
       {
         key: 'unpublish_event',
@@ -241,7 +255,7 @@ export const load = async ({ params, fetch }) => {
     col(
       {
         key: 'publish_without_email',
-        label: 'Publish without E-Mail',
+        label: 'Publish without email',
         value: (x) => ({
           display: Boolean,
           props: { isTrue: x.Server?.publish_without_email ?? false }
@@ -283,14 +297,13 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    //TODO: doesn't know remove_missing_tags property
     col(
       {
         key: 'remove_missing_tags',
         label: 'Remove missing attribute tags',
         value: (x) => ({
           display: Boolean,
-          // @ts-expect-error Not in the OpenAPI spec.. great.
+          // @ts-expect-error Not in the OpenAPI spec.
           props: { isTrue: x.Server?.remove_missing_tags ?? false }
         })
       },
@@ -298,8 +311,8 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({
           display: Checkbox,
 
-          // @ts-expect-error Not in the OpenAPI spec.. great.
-          props: { name: 'skip_proxy', checked: x.Server?.remove_missing_tags ?? false }
+          // @ts-expect-error Not in the OpenAPI spec.
+          props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }
     )
