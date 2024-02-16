@@ -40,7 +40,7 @@ export const load = async ({ fetch }) => {
   ).result;
 
   const col = createTableHeadGenerator<
-    (typeof tableData)[number] & {
+    Omit<(typeof tableData)[number], 'Tag'> & {
       Tag?: (components['schemas']['Tag'] & {
         relationship_type?: string;
         local?: boolean;
