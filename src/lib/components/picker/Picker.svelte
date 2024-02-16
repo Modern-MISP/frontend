@@ -32,6 +32,11 @@
    */
   export let maxAutoComplete = 50;
 
+  /**
+   * Allow inputting arbitrary
+   */
+  export let arbitraryInput: ((x: string) => PickerPill) | undefined = undefined;
+
   let value: string = '';
 
   /**
@@ -45,15 +50,24 @@
     value: string
   ) => pill.text?.includes(value);
 
+  /**
+   * Adds the current value to pickedItems if possible.
+   */
+  function addValue() {
+    if (!value) return;
+    const match =
+      pickableItems.find((x) => matchFunction(x, value)) ??
+      (arbitraryInput ? arbitraryInput(value) : undefined);
+    if (!match) return;
+    pickedItems = [...pickedItems, match];
+    pickableItems = pickableItems.filter((x) => x !== match);
+    value = '';
+  }
+
   function onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      if (!value) return;
-      const match = pickableItems.find((x) => matchFunction(x, value));
-      if (!match) return;
-      pickedItems = [...pickedItems, match];
-      pickableItems = pickableItems.filter((x) => x !== match);
-      value = '';
+      addValue();
       return;
     }
     if (event.key === 'Backspace' && value === '') {
@@ -67,6 +81,11 @@
       );
       return;
     }
+  }
+
+  function onBlur(event: FocusEvent) {
+    event.preventDefault();
+    addValue();
   }
 
   function removeFromAddToIndex<T>(source: T[], target: T[], index: number) {
@@ -127,6 +146,7 @@
       {disabled}
       bind:value
       on:keydown={onKeyDown}
+      on:blur={onBlur}
     />
     {#if value !== ''}
       <div

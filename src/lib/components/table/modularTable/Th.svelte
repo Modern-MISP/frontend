@@ -25,7 +25,7 @@
    
  -->
 
-<th class="sticky top-0 bg-surface1 {clazz}" on:click>
+<th class="sticky top-0 bg-surface1 z-20 {clazz}" on:click>
   <div class="flex items-center gap-2 px-4 py-2 text-xl">
     <Icon {icon} class="shrink-0" />
     <span>

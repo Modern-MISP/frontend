@@ -38,7 +38,10 @@ export const load = async ({ params, fetch }) => {
         value: (x) => x.Server?.name ?? 'unknown'
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.Server?.name ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.name ?? 'unknown', name: 'name' }
+        })
       }
     ),
     col({
@@ -87,8 +90,11 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        //TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
-        value: (x) => ({ display: Input, props: { value: x.Organisation?.name ?? 'unknown' } })
+        // TODO: search if valid org? => Should use a select. But don't know the endpoint for remote orgs
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.remote_org_id, name: 'remote_org_id' }
+        })
       }
     ),
     col(
@@ -106,7 +112,10 @@ export const load = async ({ params, fetch }) => {
         })
       },
       {
-        value: (x) => ({ display: Input, props: { value: x.Server?.url ?? 'unknown' } })
+        value: (x) => ({
+          display: Input,
+          props: { value: x.Server?.url ?? 'unknown', name: 'url' }
+        })
       }
     ),
 
@@ -118,7 +127,10 @@ export const load = async ({ params, fetch }) => {
         value: () => 'not shown'
       },
       {
-        value: () => ({ display: Input, props: { value: '', placeholder: 'set new auth key' } })
+        value: () => ({
+          display: Input,
+          props: { value: '', placeholder: 'set new auth key', name: 'authkey' }
+        })
       }
     ),
 
@@ -299,7 +311,7 @@ export const load = async ({ params, fetch }) => {
           display: Checkbox,
 
           // @ts-expect-error Not in the OpenAPI spec.. great.
-          props: { name: 'skip_proxy', checked: x.Server?.remove_missing_tags ?? false }
+          props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }
     )

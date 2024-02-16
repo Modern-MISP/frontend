@@ -97,8 +97,8 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     col({
       icon: 'mdi:scale-balance',
-      label: 'terms',
-      key: 'Terms',
+      label: 'Terms',
+      key: 'terms',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted } })
     })
   ];
@@ -108,27 +108,40 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Enable User',
       icon: 'mdi:account-lock-open-outline',
       action: (x) => {
-        notifications.add(
-          errorPill('Do not know the endpoint. Enable' + x.map((y) => y.User?.id).join())
-        );
+        Promise.all(
+          x
+            .map((y) => y.User?.id)
+            .map((userId) =>
+              get(api).PUT('/admin/users/edit/{userId}', {
+                fetch,
+                params: { path: { userId: userId! } },
+                body: { disabled: false }
+              })
+            )
+        ).then(() => {
+          notifications.add(successPill('Enabled users ' + x.map((y) => y.User?.id).join(', ')));
+          invalidateAll();
+        });
       }
     },
     {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
-        // TODO: add a endpoint if found.
-        notifications.add(
-          errorPill('Do not know the endpoint. Disable' + x.map((y) => y.User?.id).join())
-        );
-        // Promise.all(
-        //   x
-        //     .map((y) => y.User?.id)
-        //     .map((userId) =>
-        //       // @ts-expect-error Does this endpoint even exist?
-        //       PUT('/admin/users/disable/{userId}', { fetch, params: { path: { userId } } })
-        //     )
-        // ).then(invalidateAll);
+        Promise.all(
+          x
+            .map((y) => y.User?.id)
+            .map((userId) =>
+              get(api).PUT('/admin/users/edit/{userId}', {
+                fetch,
+                params: { path: { userId: userId! } },
+                body: { disabled: true }
+              })
+            )
+        ).then(() => {
+          notifications.add(successPill('Disabled users ' + x.map((y) => y.User?.id).join(', ')));
+          invalidateAll();
+        });
       }
     },
     {
@@ -142,11 +155,11 @@ export const load: PageLoad = async ({ fetch }) => {
             .map((userId) =>
               get(api).DELETE('/admin/users/delete/{userId}', {
                 fetch,
-                params: { path: { userId: userId as string } }
+                params: { path: { userId: userId! } }
               })
             )
         ).then(() => {
-          notifications.add(successPill('Deleted' + x.map((y) => y.User?.id).join()));
+          notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
           invalidateAll();
         });
       }
@@ -158,7 +171,7 @@ export const load: PageLoad = async ({ fetch }) => {
         // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
-            'Do not know the endpoint. Send email publish' + x.map((y) => y.User?.id).join()
+            'Do not know the endpoint. Send email publish ' + x.map((y) => y.User?.id).join(', ')
           )
         );
       }
@@ -170,7 +183,7 @@ export const load: PageLoad = async ({ fetch }) => {
         // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
-            'Do not know the endpoint. Disable email publish' + x.map((y) => y.User?.id).join()
+            'Do not know the endpoint. Disable email publish ' + x.map((y) => y.User?.id).join(', ')
           )
         );
       }
@@ -289,7 +302,7 @@ export const load: PageLoad = async ({ fetch }) => {
         display: Checkbox,
         props: {
           checked: false,
-          name: 'terms'
+          name: 'termstrue '
         }
       })
     })

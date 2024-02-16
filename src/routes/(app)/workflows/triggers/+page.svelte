@@ -1,8 +1,13 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import EnableFilter from '../../galaxies/EnableFilter.svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
+
+  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: !d.disabled }));
+
+  let filtered: typeof filterableTableData = [];
 </script>
 
 <!--
@@ -10,4 +15,14 @@
   
   A list of all workflow triggers.
 -->
-<ComplexTableLayout {...data} topMenuActions={[]} filter={[]} pagination={false} />
+<ComplexTableLayout
+  {...data}
+  tableData={filtered}
+  topMenuActions={[]}
+  filter={[]}
+  pagination={false}
+>
+  <div slot="filter">
+    <EnableFilter bind:data={filterableTableData} bind:filtered></EnableFilter>
+  </div>
+</ComplexTableLayout>
