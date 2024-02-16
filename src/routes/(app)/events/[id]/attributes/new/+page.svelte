@@ -11,6 +11,7 @@
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups.js';
   import { notifySave } from '$lib/util/notifications.util.js';
   import { goto } from '$app/navigation';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute } from '$lib/stores';
 
   export let data;
