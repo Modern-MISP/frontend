@@ -74,15 +74,19 @@
 <EventPillCollectionCard title="Tags" bind:state bind:selection>
   <PillCollection base={HrefPill} {pills} />
 
-  <div class="relative flex flex-col gap-4 p-2 border rounded-md border-text" slot="footer">
-    <h3>Those elements will be deleted:</h3>
-    <PillCollection pills={deletion}></PillCollection>
+  <svelte:fragment slot="footer">
+    {#if deletion.length > 0}
+      <div class="relative flex flex-col gap-4 p-2 border rounded-md border-text">
+        <h3>Those elements will be deleted:</h3>
+        <PillCollection pills={deletion}></PillCollection>
 
-    <button
-      on:click={_deleteTags}
-      class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
-    >
-      <Icon icon="mdi:delete-outline"></Icon>
-    </button>
-  </div>
+        <button
+          on:click={_deleteTags}
+          class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
+        >
+          <Icon icon="mdi:delete-outline"></Icon>
+        </button>
+      </div>
+    {/if}
+  </svelte:fragment>
 </EventPillCollectionCard>
