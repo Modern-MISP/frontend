@@ -495,7 +495,7 @@ export const load = async ({ fetch }) => {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: (attributes) => {
+      action: ({ response: { Attribute: attributes } }) => {
         notifySave(
           Promise.all(
             attributes.map((attribute) =>
