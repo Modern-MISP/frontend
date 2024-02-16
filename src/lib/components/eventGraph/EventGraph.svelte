@@ -14,14 +14,12 @@
   import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
+  import { getReferencedItems } from './helpers/split';
   import { fly } from 'svelte/transition';
   import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
 
   const edges: Writable<Edge[]> = writable([]);
-
-  let tableView: 'objects' | 'attributes' = 'objects';
-  tableView;
 
   /**
    * The Event to be displayed on this page.
@@ -36,44 +34,10 @@
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
 
-  const items = eventGraphReferences.items ?? [];
   const references = eventGraphReferences.relations ?? [];
 
-  let referencedObjects = [];
-  let referencedAttributes = [];
-
-  const referencedItemsIds: string[] = Array.from(
-    new Set(references.flatMap((reference) => [reference.from, reference.to]))
-  );
-
-  const referencedObjectsIds: string[] = referencedItemsIds.filter((id) => id.startsWith('o-'));
-  const referencedAttributesIds: string[] = referencedItemsIds.filter((id) => !id.startsWith('o-'));
-
-  for (const referencedObjectId of referencedObjectsIds) {
-    let referencedObject = objects.find((item) => `o-${item.id}` === referencedObjectId);
-    if (referencedObject) {
-      referencedObjects.push(referencedObject);
-    }
-  }
-
-  for (const referencedAttributeId of referencedAttributesIds) {
-    let referencedAttribute = attributes.find((item) => item.id === referencedAttributeId);
-    if (referencedAttribute) {
-      referencedAttributes.push(referencedAttribute);
-    }
-  }
-
-  let unreferencedObjects = objects.filter(
-    (object) =>
-      !referencedObjectsIds.some((referencedObjectId) => `o-${object.id}` === referencedObjectId)
-  );
-
-  let unreferencedAttributes = attributes.filter(
-    (attribute) =>
-      !referencedAttributesIds.some(
-        (referencedAttributesId) => `${attribute.id}` === referencedAttributesId
-      )
-  );
+  const { referencedObjects, referencedAttributes, unreferencedObjects, unreferencedAttributes } =
+    getReferencedItems(objects, attributes, references);
 
   const { updateNode } = useSvelteFlow();
 
