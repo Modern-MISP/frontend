@@ -11,6 +11,10 @@
   import Button from '../button/Button.svelte';
   import Pill from '../pills/pill/Pill.svelte';
   import { createEventDispatcher } from 'svelte';
+    import { api } from '$lib/api';
+    import { notifications } from '$lib/stores';
+    import { errorPill } from '$lib/util/pill.util';
+    import type { components } from '$lib/api/misp';
 
   const dispatch = createEventDispatcher<{
     close: void;
@@ -20,44 +24,44 @@
   let text = '';
 
   let local_only = false;
+
+  let orgs: components['responses']['OrganisationListResponse']['content']['application/json'] = [];
+  $api.GET('/organisations').then((res) => {
+    if (res.error) {
+      notifications.add(errorPill('failed loading organizations'));
+      return;
+    }
+    orgs = res.data;
+  });
+
+  let users: components['responses']['UserListResponse']['content']['application/json'] = [];
+  $api.GET('/admin/users').then((res) => {
+    if (res.error) {
+      notifications.add(errorPill('failed loading users'));
+      return;
+    }
+    users = res.data;
+  });
 </script>
 
 <div class="flex flex-col gap-1">
   <Card>
     <CardHeading>Create a new Tag</CardHeading>
-    <Input placeholder="Name" icon="mdi:tag-outline" on:value={({ detail }) => (text = detail)} />
+    <Input placeholder="Name" name="name" icon="mdi:tag-outline" on:value={({ detail }) => (text = detail)} />
     <CardRow>
       <span>Restrict to org:</span>
       <Select
-        options={[
-          {
-            label: 'ORGNAME',
-            value: '0'
-          },
-          {
-            label: 'ANOTHER ORG',
-            value: '1'
-          }
-        ]}
-        value="0"
-        name="restrict_org"
+        options={orgs.map((org) => ({ label: org.Organisation?.name ?? 'unknown', value: org.Organisation?.id ?? '' }))}
+        value=""
+        name="org_id"
       />
     </CardRow>
     <CardRow>
       <span>Restrict to user:</span>
       <Select
-        options={[
-          {
-            label: 'admin@admin.test',
-            value: '0'
-          },
-          {
-            label: 'foo.bar@test',
-            value: '1'
-          }
-        ]}
-        value="0"
-        name="restrict_user"
+        options={users.map((user) => ({label: user.User?.email ?? 'unknown', value: user.User?.id ?? ''}))}
+        value=""
+        name="user_id"
       />
     </CardRow>
     <CardRow>
@@ -66,11 +70,11 @@
     </CardRow>
     <CardRow>
       <span>Hide Tag</span>
-      <CheckBox name="hidden" checked={false} />
+      <CheckBox name="hide_tag" checked={false} />
     </CardRow>
     <CardRow>
       <span>Local only</span>
-      <CheckBox name="hidden" bind:checked={local_only} />
+      <CheckBox name="local_only" bind:checked={local_only} />
     </CardRow>
 
     <CardRow>
@@ -81,6 +85,7 @@
           type="color"
           class="w-32 !cursor-pointer"
           value={color}
+          name="colour"
           on:value={({ detail }) => (color = detail)}
         />
         <Button
@@ -115,6 +120,7 @@
       <Button
         class="w-min text-green bg-surface1"
         suffixIcon="material-symbols:save-outline"
+        type="submit"
         on:click>Save</Button
       >
     </div>
