@@ -14,8 +14,7 @@
   import { api } from '$lib/api/index.js';
   import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface.js';
   import { invalidateAll } from '$app/navigation';
-  import { notifications } from '$lib/stores';
-  import { successPill } from '$lib/util/pill.util.js';
+  import { notifySave } from '$lib/util/notifications.util.js';
 
   export let data;
 
@@ -138,24 +137,22 @@
       icon: 'mdi:delete',
       class: 'text-red',
       action: (attributes) => {
-        Promise.all(
-          attributes.map((attribute) =>
-            $api
-              .DELETE('/attributes/delete/{attributeId}', {
-                params: { path: { attributeId: attribute.id! } }
-              })
-              .then((resp) => {
-                if (resp.error) throw new Error(resp.error.message);
-              })
-          )
-        ).then(() => {
-          notifications.add(
-            successPill(
-              'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        notifySave(
+          Promise.all(
+            attributes.map((attribute) =>
+              $api
+                .DELETE('/attributes/delete/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                })
             )
-          );
-          invalidateAll();
-        });
+          ).then(() => {
+            invalidateAll();
+          }),
+          'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        );
       }
     }
   ];

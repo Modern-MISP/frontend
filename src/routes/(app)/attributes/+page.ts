@@ -17,6 +17,8 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Select from '$lib/components/form/Select.svelte';
+import { notifySave } from '$lib/util/notifications.util.js';
+import { invalidateAll } from '$app/navigation';
 
 export const load = async ({ fetch }) => {
   const {
@@ -29,7 +31,7 @@ export const load = async ({ fetch }) => {
 
   const tableData = data.response?.Attribute ?? [];
 
-  const describeTypesResponse = await get(api).GET('/attributes/describeTypes');
+  const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(
       describeTypesResponse.response.status as NumericRange<400, 599>,
@@ -289,24 +291,22 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (attributes) => {
-        Promise.all(
-          attributes.map((attribute) =>
-            get(api)
-              .DELETE('/attributes/delete/{attributeId}', {
-                params: { path: { attributeId: attribute.id! } }
-              })
-              .then((resp) => {
-                if (resp.error) throw new Error(resp.error.message);
-              })
-          )
-        ).then(() => {
-          notifications.add(
-            successPill(
-              'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        notifySave(
+          Promise.all(
+            attributes.map((attribute) =>
+              get(api)
+                .DELETE('/attributes/delete/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                })
             )
-          );
-          invalidateAll();
-        });
+          ).then(() => {
+            invalidateAll();
+          }),
+          'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        );
       }
     }
   ];
