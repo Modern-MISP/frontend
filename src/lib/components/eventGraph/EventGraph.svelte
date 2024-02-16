@@ -11,7 +11,7 @@
   import ObjectNode from './graph/nodes/ObjectNode.svelte';
   import AttributeNode from './graph/nodes/AttributeNode.svelte';
   import CategoryNode from './graph/nodes/CategoryNode.svelte';
-  import BiDirectionalEdge from './graph/edges/BiDirectionalEdge.svelte';
+  import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { fly } from 'svelte/transition';
@@ -249,7 +249,7 @@
       source: `${reference.from}`,
       target: `${reference.to}`,
       label: reference.type,
-      type: 'bidirectional'
+      type: 'reference'
     });
   }
 
@@ -302,7 +302,7 @@
   };
 
   const edgeTypes = {
-    bidirectional: BiDirectionalEdge
+    reference: ReferenceEdge
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -406,6 +406,7 @@
       {nodes}
       {edges}
       {nodeTypes}
+      {edgeTypes}
       on:nodecontextmenu={handleContextMenu}
       on:paneclick={handlePaneClick}
       on:nodedragstop={({ detail: { node } }) => {
