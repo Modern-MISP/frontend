@@ -8,7 +8,7 @@
   import Form from '$lib/components/form/Form.svelte';
   import Select from '$lib/components/form/Select.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-  import { mode, notifications } from '$lib/stores';
+  import { currentRoute, mode, notifications } from '$lib/stores';
   import { errorPill, successPill } from '$lib/util/pill.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
@@ -18,10 +18,19 @@
 
   const col = createTableHeadGenerator<null>();
 
+  $: $currentRoute = [
+    ...($currentRoute ?? []),
+    {
+      name: 'Export Galaxy',
+      href: 'export',
+      icon: 'mdi:export'
+    }
+  ];
+
   const header = [
     col(
       {
-        label: 'Exclude default clusters',
+        label: 'Include default clusters',
         value: () => ''
       },
       {
@@ -36,7 +45,7 @@
     ),
     col(
       {
-        label: 'Exclude custom clusters',
+        label: 'Include custom clusters',
         value: () => ''
       },
       {
@@ -59,7 +68,7 @@
           display: Select,
           props: {
             name: 'distribution',
-            value: '0',
+            value: '3', // All communities
             options: DISTRIBUTION_LOOKUP.map((d, i) => ({
               value: i.toString(),
               label: d.text ?? 'unknown'
