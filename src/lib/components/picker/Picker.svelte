@@ -3,6 +3,7 @@
   import { remove, sortBy } from 'lodash-es';
   import Pill from '../pills/pill/Pill.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { createEventDispatcher } from 'svelte';
 
   /** The items that have been picked. */
   export let pickedItems: PickerPill[] = [];
@@ -20,7 +21,7 @@
   /**
    * The name of the input. Used for form submission.
    */
-  export let name = 'default';
+  export let name: string | undefined = undefined;
   /**
    * When true, the picker cannot be used.
    */
@@ -30,6 +31,11 @@
    * Max Elements to show for Autocomplete
    */
   export let maxAutoComplete = 50;
+
+  /**
+   * Allow inputting arbitrary
+   */
+  export let arbitraryInput: ((x: string) => PickerPill) | undefined = undefined;
 
   let value: string = '';
 
@@ -44,15 +50,24 @@
     value: string
   ) => pill.text?.includes(value);
 
+  /**
+   * Adds the current value to pickedItems if possible.
+   */
+  function addValue() {
+    if (!value) return;
+    const match =
+      pickableItems.find((x) => matchFunction(x, value)) ??
+      (arbitraryInput ? arbitraryInput(value) : undefined);
+    if (!match) return;
+    pickedItems = [...pickedItems, match];
+    pickableItems = pickableItems.filter((x) => x !== match);
+    value = '';
+  }
+
   function onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      if (!value) return;
-      const match = pickableItems.find((x) => matchFunction(x, value));
-      if (!match) return;
-      pickedItems = [...pickedItems, match];
-      pickableItems = pickableItems.filter((x) => x !== match);
-      value = '';
+      addValue();
       return;
     }
     if (event.key === 'Backspace' && value === '') {
@@ -68,6 +83,11 @@
     }
   }
 
+  function onBlur(event: FocusEvent) {
+    event.preventDefault();
+    addValue();
+  }
+
   function removeFromAddToIndex<T>(source: T[], target: T[], index: number) {
     target.push(remove(source, (_, i) => i === index)[0]);
     return [source, target];
@@ -76,6 +96,9 @@
   $: autocomplete = pickableItems.filter((x) => matchFunction(x, value)).slice(0, maxAutoComplete);
 
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
+
+  const dispatch = createEventDispatcher<{ formValue: Record<string, PickerPill[]> }>();
+  $: if (name) dispatch('formValue', { [name]: pickedItems });
 
   let input: HTMLInputElement;
 </script>
@@ -123,6 +146,7 @@
       {disabled}
       bind:value
       on:keydown={onKeyDown}
+      on:blur={onBlur}
     />
     {#if value !== ''}
       <div

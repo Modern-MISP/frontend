@@ -1,7 +1,6 @@
 import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
-import type { PageLoad } from './$types';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
@@ -19,7 +18,7 @@ import { shouldTextBeBlack } from '$lib/util/color.util';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Select from '$lib/components/form/Select.svelte';
 
-export const load: PageLoad = async ({ fetch }) => {
+export const load = async ({ fetch }) => {
   const {
     response,
     data,
@@ -209,7 +208,8 @@ export const load: PageLoad = async ({ fetch }) => {
         display: Select,
         props: {
           name: 'category',
-          options: options.categories?.map((c) => ({ value: c, label: c })) ?? []
+          options: options.categories?.map((c) => ({ value: c, label: c })) ?? [],
+          value: ''
         }
       })
     }),
@@ -219,7 +219,8 @@ export const load: PageLoad = async ({ fetch }) => {
         display: Select,
         props: {
           name: 'type',
-          options: options.types?.map((c) => ({ value: c, label: c })) ?? []
+          options: options.types?.map((c) => ({ value: c, label: c })) ?? [],
+          value: ''
         }
       })
     }),

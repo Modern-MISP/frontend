@@ -1,7 +1,6 @@
 import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
-import type { PageLoad } from '../$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
@@ -20,7 +19,7 @@ import type { components } from '$lib/api/misp';
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import { format } from 'date-fns';
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
@@ -88,14 +87,15 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       },
       {
-        value: () => ({
+        value: (x) => ({
           display: Select,
           props: {
             name: 'category',
             options: options.categories?.map((c) => ({ value: c, label: c })) ?? [],
             changeCallback: (event) => {
               currentCategory = event.currentTarget.value;
-            }
+            },
+            value: x.category ?? ''
           }
         })
       }
@@ -109,11 +109,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
       },
       {
         //TODO: options dependent on select category
-        value: () => ({
+        value: (x) => ({
           display: Select,
           props: {
             name: 'type',
-            options: options.types?.map((c) => ({ value: c, label: c })) ?? []
+            options: options.types?.map((c) => ({ value: c, label: c })) ?? [],
+            value: x.type ?? ''
           }
         })
       }
