@@ -490,12 +490,12 @@ export const load = async ({ fetch }) => {
     }
   ];
 
-  const editActions: DynCardActionHeader<typeof data>[] = [
+  const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: ({ response: { Attribute: attributes } }) => {
+      action: (attributes) => {
         notifySave(
           Promise.all(
             attributes.map((attribute) =>
