@@ -178,7 +178,7 @@ export default {
   ),
   organisation: col({
     key: 'org',
-    label: 'Organisations',
+    label: 'Organizations',
     value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
   })
 };

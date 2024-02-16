@@ -127,7 +127,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'mdi:email-outline',
       key: 'publish_without_email',
-      label: 'Publish without E-Mail',
+      label: 'Publish without email',
       value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.publish_without_email ?? false }

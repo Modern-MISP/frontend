@@ -255,7 +255,7 @@ export const load = async ({ params, fetch }) => {
     col(
       {
         key: 'publish_without_email',
-        label: 'Publish without E-Mail',
+        label: 'Publish without email',
         value: (x) => ({
           display: Boolean,
           props: { isTrue: x.Server?.publish_without_email ?? false }

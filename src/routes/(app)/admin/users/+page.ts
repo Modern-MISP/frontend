@@ -28,7 +28,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organisations',
+      label: 'Organizations',
       value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
     }),
     col({
@@ -249,7 +249,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     fil({
-      label: 'E-Mail',
+      label: 'Email',
       value: () => 'email'
     }),
     fil({
