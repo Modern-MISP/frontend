@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
@@ -26,6 +27,25 @@
   }
 </script>
 
+<svelte:window
+  use:actionBar={[
+    {
+      label: 'Add Sighting',
+      icon: 'mdi:plus',
+      action: () => {
+        notifySave(
+          $api
+            .POST('/sightings/add/{attributeId}', {
+              params: { path: { attributeId: $page.params.id } }
+            })
+            .then((resp) => {
+              if (resp.error) throw new Error(resp.error.message);
+            })
+        );
+      }
+    }
+  ]}
+/>
 <!--
   @component
   Displays information about a specific attribute, specified by `id`.
