@@ -31,7 +31,7 @@
     );
   }
 
-  $currentRoute = [
+  $: $currentRoute = [
     ...($currentRoute ?? []),
     { name: 'New User', href: 'new', icon: 'mdi:account-plus-outline' }
   ];

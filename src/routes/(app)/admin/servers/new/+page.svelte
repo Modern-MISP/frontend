@@ -42,7 +42,7 @@
     })
   ];
 
-  $currentRoute = [
+  $: $currentRoute = [
     ...($currentRoute ?? []),
     { name: 'New Remote Server', href: 'new', icon: 'mdi:server-plus' }
   ];

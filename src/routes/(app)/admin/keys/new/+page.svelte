@@ -66,7 +66,10 @@
     })
   ];
 
-  $currentRoute = [...($currentRoute ?? []), { name: 'New Key', icon: 'mdi:key-add', href: 'new' }];
+  $: $currentRoute = [
+    ...($currentRoute ?? []),
+    { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
+  ];
 </script>
 
 <Form callback={editCallback}>
