@@ -58,12 +58,14 @@
       {/if}
     </div>
   {/if}
-  <span
-    class="flex self-center px-2 py-1 text-left shrink w-fit line-clamp-1 flex-nowrap"
+  <div
+    class="flex self-center px-2 py-1 text-left shrink line-clamp-1 flex-nowrap"
     class:pl-0={icon || label}
   >
     <slot>
-      {text}
+      <span class="overflow-hidden w-fit text-ellipsis">
+        {text}
+      </span>
     </slot>
     {#if action}
       <button
@@ -74,5 +76,5 @@
         <Icon icon={action.icon} />
       </button>
     {/if}
-  </span>
+  </div>
 </div>

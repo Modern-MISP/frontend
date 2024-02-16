@@ -75,7 +75,7 @@
         <Pill
           label={filterKey}
           text={currentFilter[filterKey]}
-          class="justify-between h-10"
+          class="!justify-between w-full h-10"
           action={{
             icon: 'mdi:delete-outline',
             onClick: () => (currentFilter = omit(currentFilter, filterKey)),
