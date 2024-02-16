@@ -286,7 +286,7 @@ export const load = async ({ params, fetch }) => {
   ];
 
   return {
-    user: data,
+    attribute: tableData,
     left,
     right
   };
