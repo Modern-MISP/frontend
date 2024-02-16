@@ -3,7 +3,7 @@ import { actionBar, addContextInfo, contextRoutes, lockEditMode } from './action
 import { actionBarEntries, contextInfo, contextRouteEntries, lockModeToggle, mode } from './stores';
 import { get } from 'svelte/store';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
-import { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
+import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 
 describe('svelte actions', () => {
   describe('actionBar', () => {
@@ -41,8 +41,8 @@ describe('svelte actions', () => {
     const entries: SideMenuRoute[] = [
       {
         icon: 'testicon1',
-        label: 'testlabel1',
-        action: '/test/1'
+        name: 'testlabel1',
+        href: '/test/1'
       }
     ];
     const element = document.createElement('div');
@@ -55,8 +55,8 @@ describe('svelte actions', () => {
         ...entries,
         {
           icon: 'testicon2',
-          label: 'testlabel2',
-          action: '/test/2'
+          name: 'testlabel2',
+          href: '/test/2'
         }
       ];
       update!(newEntries);
