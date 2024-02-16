@@ -34,6 +34,20 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => x.Server?.name ?? 'unknown'
     }),
     col({
+      icon: 'mdi:wifi',
+      key: 'url',
+      label: 'URL',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'ri:share-box-line',
+          href: x.Server?.url ?? '#',
+          target: '_blank' as const,
+          text: x.Server?.url ?? 'unknown'
+        }
+      })
+    }),
+    col({
       icon: 'mdi:chevron-triple-up',
       key: 'priority',
       label: 'Priority',
@@ -64,12 +78,6 @@ export const load: PageLoad = async ({ fetch }) => {
           text: x.RemoteOrg?.name ?? 'unknown'
         }
       })
-    }),
-    col({
-      icon: 'mdi:wifi',
-      key: 'url',
-      label: 'URL',
-      value: (x) => x.Server?.url ?? 'unknown'
     }),
     col({
       icon: 'mdi:home-search-outline',
@@ -119,7 +127,7 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'mdi:email-outline',
       key: 'publish_without_email',
-      label: 'Publish without E-Mail',
+      label: 'Publish without email',
       value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.publish_without_email ?? false }

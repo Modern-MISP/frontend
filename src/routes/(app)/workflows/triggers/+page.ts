@@ -5,6 +5,7 @@ import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -60,8 +61,12 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'workflow',
       label: 'Workflow',
       value: (x) => ({
-        display: Pill,
-        props: { icon: 'material-symbols:network-node', text: x.Workflow?.id ?? 'unknown' }
+        display: HrefPill,
+        props: {
+          href: `/workflows/${x.Workflow!.id}`,
+          icon: 'material-symbols:network-node',
+          text: x.Workflow?.id ?? 'unknown'
+        }
       })
     }),
     col({

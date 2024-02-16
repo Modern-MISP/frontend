@@ -1,10 +1,10 @@
-import type { paths } from '$lib/api/misp';
+import type { components, paths } from '$lib/api/misp';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import Info from '$lib/components/info/Info.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
@@ -14,6 +14,7 @@ const col = createTableHeadGenerator<
       notification_monthly?: boolean;
       last_pw_change?: number;
     };
+    Organisation?: components['schemas']['Organisation'];
   }
 >();
 
@@ -178,7 +179,13 @@ export default {
   ),
   organisation: col({
     key: 'org',
-    label: 'Organisations',
-    value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
+    label: 'Organizations',
+    value: (x) => ({
+      display: Pill,
+      props: {
+        text: x?.Organisation?.name,
+        icon: 'material-symbols:work-outline'
+      }
+    })
   })
 };
