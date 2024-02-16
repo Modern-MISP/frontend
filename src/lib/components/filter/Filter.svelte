@@ -28,7 +28,7 @@
   $: console.log(value);
 </script>
 
-<div class="absolute top-0 left-0 z-10 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-1/2">
+<div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2">
   <form
     on:submit|preventDefault={(e) => {
       console.log('values', getFormValues(e));

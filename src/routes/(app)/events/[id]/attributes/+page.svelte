@@ -11,20 +11,23 @@
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import { shouldTextBeBlack } from '$lib/util/color.util.js';
   import type { components } from '$lib/api/misp.js';
+  import { api } from '$lib/api/index.js';
+  import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface.js';
+  import { invalidateAll } from '$app/navigation';
+  import { notifySave } from '$lib/util/notifications.util.js';
 
   export let data;
 
-  const tableData = data.event.Attribute!;
+  $: tableData = data.event.Attribute!;
 
-  const col = createTableHeadGenerator<
-    (typeof tableData)[number] & {
-      Tag?: (components['schemas']['Tag'] & {
-        relationship_type?: string;
-        local?: boolean;
-      })[];
-    },
-    DynTableHeadExtent
-  >();
+  type Data = (typeof tableData)[number] & {
+    Tag?: (components['schemas']['Tag'] & {
+      relationship_type?: string;
+      local?: boolean;
+    })[];
+  };
+
+  const col = createTableHeadGenerator<Data, DynTableHeadExtent>();
   const header = [
     col({
       icon: 'mdi:id-card',
@@ -127,13 +130,38 @@
       action: `/events/${data.event.id}/attributes/new`
     }
   ];
+
+  const editActions: DynCardActionHeader<Data[]>[] = [
+    {
+      label: 'Delete Attribute',
+      icon: 'mdi:delete',
+      class: 'text-red',
+      action: (attributes) => {
+        notifySave(
+          Promise.all(
+            attributes.map((attribute) =>
+              $api
+                .DELETE('/attributes/delete/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                  invalidateAll();
+                })
+            )
+          ),
+          'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        );
+      }
+    }
+  ];
 </script>
 
 <ComplexTableLayout
   {tableData}
   {header}
   tableHref={(row) => `/attributes/${row.id}`}
-  editActions={[]}
+  {editActions}
   filter={[]}
   {topMenuActions}
 ></ComplexTableLayout>

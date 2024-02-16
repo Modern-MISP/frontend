@@ -282,7 +282,6 @@ export const load = async ({ params, fetch }) => {
         }
       })
     })
-    //sightings
   ];
 
   return {
