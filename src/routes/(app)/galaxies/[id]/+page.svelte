@@ -30,6 +30,11 @@
       icon: 'mdi:plus',
       label: 'Add Cluster',
       action: `/galaxies/${$page.params.id}/new_cluster`
+    },
+    {
+      icon: 'mdi:export',
+      label: 'Export Galaxy',
+      action: `/galaxies/${$page.params.id}/export`
     }
   ]}
 />
