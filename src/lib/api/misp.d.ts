@@ -191,15 +191,15 @@ export interface paths {
     delete: operations['deleteUserTotp'];
   };
   '/admin/organisations/add': {
-    /** Add organisation */
+    /** Add organization */
     post: operations['addOrganisation'];
   };
   '/admin/organisations/edit/{organisationId}': {
-    /** Edit organisation */
+    /** Edit organization */
     put: operations['editOrganisation'];
   };
   '/admin/organisations/delete/{organisationId}': {
-    /** Delete organisation */
+    /** Delete organization */
     delete: operations['deleteOrganisation'];
   };
   '/admin/logs': {
@@ -207,11 +207,11 @@ export interface paths {
     post: operations['getLogs'];
   };
   '/organisations': {
-    /** Get organisations */
+    /** Get organizations */
     get: operations['getOrganisations'];
   };
   '/organisations/view/{organisationId}': {
-    /** Get organisation by ID */
+    /** Get organization by ID */
     get: operations['getOrganisationById'];
   };
   '/servers/add': {
@@ -323,11 +323,11 @@ export interface paths {
     get: operations['getSharingGroupById'];
   };
   '/sharing_groups/addOrg/{sharingGroupId}/{organisationId}': {
-    /** Add an organisation to a sharing group */
+    /** Add an organization to a sharing group */
     post: operations['addOrganisationToSharingGroup'];
   };
   '/sharing_groups/removeOrg/{sharingGroupId}/{organisationId}': {
-    /** Remove an organisation from a sharing group */
+    /** Remove an organization from a sharing group */
     post: operations['removeOrganisationFromSharingGroup'];
   };
   '/sharing_groups/addServer/{sharingGroupId}/{serverId}': {
@@ -2942,27 +2942,27 @@ export interface components {
         };
       };
     };
-    /** @description Organisation list response */
+    /** @description Organization list response */
     OrganisationResponse: {
       content: {
         'application/json': components['schemas']['Organisation'];
       };
     };
-    /** @description Organisation list response */
+    /** @description Organization list response */
     OrganisationListResponse: {
       content: {
         'application/json': components['schemas']['OrganisationList'];
       };
     };
-    /** @description Delete organisation response */
+    /** @description Delete organization response */
     DeleteOrganisationResponse: {
       content: {
         'application/json': {
           saved?: boolean;
           success?: boolean;
-          /** @example Organisation deleted */
+          /** @example Organization deleted */
           name?: string;
-          /** @example Organisation deleted */
+          /** @example Organization deleted */
           message?: string;
           /** @example /admin/organisations/delete/1 */
           url?: string;
@@ -3530,30 +3530,30 @@ export interface components {
         };
       };
     };
-    /** @description Add organisation to a sharing group response */
+    /** @description Add organization to a sharing group response */
     AddOrganisationToSharingGroupResponse: {
       content: {
         'application/json': {
           saved?: boolean;
           success?: boolean;
-          /** @example Organisation added to the sharing group. */
+          /** @example Organization added to the sharing group. */
           name?: string;
-          /** @example Organisation added to the sharing group. */
+          /** @example Organization added to the sharing group. */
           message?: string;
           /** @example /sharing_groups/addOrg */
           url?: string;
         };
       };
     };
-    /** @description Remove organisation from a sharing group response */
+    /** @description Remove organization from a sharing group response */
     RemoveOrganisationFromSharingGroupResponse: {
       content: {
         'application/json': {
           saved?: boolean;
           success?: boolean;
-          /** @example Organisation removed from the sharing group. */
+          /** @example Organization removed from the sharing group. */
           name?: string;
-          /** @example Organisation removed from the sharing group. */
+          /** @example Organization removed from the sharing group. */
           message?: string;
           /** @example /sharing_groups/removeOrg */
           url?: string;
@@ -4093,7 +4093,7 @@ export interface components {
     userIdParameter: components['schemas']['UserId'];
     /** @description First time reset is set to `1` only  for new user registrations. */
     firstTimeResetParameter: '0' | '1';
-    /** @description UUID or numeric ID of the organisation */
+    /** @description UUID or numeric ID of the organization */
     organisationIdParameter:
       | components['schemas']['OrganisationId']
       | components['schemas']['UUID'];
@@ -4210,7 +4210,7 @@ export interface components {
            */
           dateuntil?: string | null;
           /**
-           * @description Filter events by matching the creator organisation name
+           * @description Filter events by matching the creator organization name
            * @example CIRCL
            */
           org?: string | null;
@@ -4602,7 +4602,7 @@ export interface components {
           /** Format: email */
           email?: string;
           /**
-           * @description Text search for log organisation name property
+           * @description Text search for log organization name property
            * @example ORG_%
            */
           org?: string;
@@ -5332,7 +5332,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Add organisation */
+  /** Add organization */
   addOrganisation: {
     requestBody: components['requestBodies']['AddOrganisationRequest'];
     responses: {
@@ -5342,7 +5342,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Edit organisation */
+  /** Edit organization */
   editOrganisation: {
     parameters: {
       path: {
@@ -5357,7 +5357,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Delete organisation */
+  /** Delete organization */
   deleteOrganisation: {
     parameters: {
       path: {
@@ -5381,7 +5381,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Get organisations */
+  /** Get organizations */
   getOrganisations: {
     responses: {
       200: components['responses']['OrganisationListResponse'];
@@ -5390,7 +5390,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Get organisation by ID */
+  /** Get organization by ID */
   getOrganisationById: {
     parameters: {
       path: {
@@ -5710,7 +5710,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Add an organisation to a sharing group */
+  /** Add an organization to a sharing group */
   addOrganisationToSharingGroup: {
     parameters: {
       path: {
@@ -5725,7 +5725,7 @@ export interface operations {
       default: components['responses']['ApiErrorResponse'];
     };
   };
-  /** Remove an organisation from a sharing group */
+  /** Remove an organization from a sharing group */
   removeOrganisationFromSharingGroup: {
     parameters: {
       path: {
