@@ -22,6 +22,6 @@
 </script>
 
 <svelte:window use:actionBar={actions} />
-<form bind:this={form} on:submit|preventDefault={(e) => callback(getFormValues(e))}>
+<form bind:this={form} on:submit|preventDefault={(e) => callback(getFormValues(e))} class="h-full">
   <slot />
 </form>

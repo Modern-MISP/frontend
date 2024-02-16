@@ -14,6 +14,8 @@
    */
   export let data: PageData;
 
+  $: console.log(data);
+
   /**
    * The current mode of the page.
    */
@@ -25,11 +27,11 @@
   export let selection: PickerPill[] = [];
 </script>
 
-<Card class="w-full ">
+<Card class="w-full h-full">
   <div class="flex justify-between">
     <CardHeading>Tags</CardHeading>
     {#if $mode === 'edit'}
-      <button on:click={() => (state = state === 'addTag' ? 'info' : 'addTag')}>
+      <button type="button" on:click={() => (state = state === 'addTag' ? 'info' : 'addTag')}>
         {#if state === 'addTag'}
           <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
         {:else}
@@ -42,7 +44,7 @@
     base={HrefPill}
     pills={(data.event?.Tag ?? []).map((y) => ({
       /// @ts-expect-error Wrong API spec
-      icon: y.local == 0 ? 'mdi:cloud-off-outline' : 'mdi:earth',
+      icon: y.local == 1 ? 'mdi:cloud-off-outline' : 'mdi:earth',
       /// @ts-expect-error Wrong API spec
       label: y.relationship_type ? y.relationship_type : undefined,
       text: y.name,
