@@ -23,6 +23,16 @@
    * Some style overrides. When possible, the `class` prop should be used instead.
    */
   export let style = '';
+
+  /**
+   * Define the action icon. Icon is the icon name from iconify. onClick is the on:click event. class is a class overload.
+   */
+  export let action: { icon: string; class?: string; onClick: () => void } | undefined = undefined;
+
+  /**
+   * Pill tooltip
+   */
+  export let title: string | undefined = undefined;
 </script>
 
 <!-- 
@@ -32,7 +42,11 @@
   @slot The content of the pill. If no slot is provided, the text prop will be used.
  -->
 
-<div class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}" {style}>
+<div
+  class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}"
+  {style}
+  {title}
+>
   {#if icon || label}
     <div class="flex items-center gap-2 px-2 py-1 text-white shrink-0 bg-crust">
       {#if icon}
@@ -45,11 +59,20 @@
     </div>
   {/if}
   <span
-    class="flex self-center w-full px-2 py-1 text-left line-clamp-1 flex-nowrap"
+    class="flex self-center px-2 py-1 text-left shrink w-fit line-clamp-1 flex-nowrap"
     class:pl-0={icon || label}
   >
     <slot>
       {text}
     </slot>
+    {#if action}
+      <button
+        type="button"
+        on:click={action.onClick}
+        class="justify-center pl-1 align-middle shrink-0 {action.class ? action.class : ''}"
+      >
+        <Icon icon={action.icon} />
+      </button>
+    {/if}
   </span>
 </div>

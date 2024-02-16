@@ -1,5 +1,6 @@
 <script lang="ts">
   import Card from '$lib/components/card/Card.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 
   /**
@@ -11,8 +12,7 @@
 <Card class="h-full ">
   {#each data.event?.Galaxy ?? [] as galaxy}
     <div>
-      <h1 class="text-xl text-center text-sky text-bold">{galaxy.name}</h1>
-      <hr />
+      <CardHeading>{galaxy.name}</CardHeading>
       <br />
       <PillCollection
         pills={galaxy.GalaxyCluster

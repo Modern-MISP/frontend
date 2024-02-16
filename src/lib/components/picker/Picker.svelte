@@ -1,9 +1,8 @@
 <script lang="ts">
-  import Icon from '@iconify/svelte';
-  import { remove, sortBy } from 'lodash-es';
-  import Pill from '../pills/pill/Pill.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { remove, sortBy } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
+  import Pill from '../pills/pill/Pill.svelte';
 
   /** The items that have been picked. */
   export let pickedItems: PickerPill[] = [];
@@ -117,25 +116,22 @@
   >
     <div class="flex flex-wrap gap-1 overflow-hidden rounded-md bg-inherit w-max">
       {#each pickedItems as props, i}
-        <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
-          <span class="flex overflow-hidden shrink line-clamp-1">
-            {props.text?.trim()}
-          </span>
-          {#if !disabled}
-            <button
-              type="button"
-              on:click={() =>
-                ([pickedItems, pickableItems] = removeFromAddToIndex(
-                  pickedItems,
-                  pickableItems,
-                  i
-                ))}
-              class="justify-center pl-1 align-middle hover:text-red shrink-0"
-            >
-              <Icon icon="mdi:close-circle-outline" />
-            </button>
-          {/if}
-        </Pill>
+        <Pill
+          {...props}
+          class="border-2 border-surface0 w-max {props.class}"
+          action={!disabled
+            ? {
+                class: 'hover:text-red',
+                onClick: () =>
+                  ([pickedItems, pickableItems] = removeFromAddToIndex(
+                    pickedItems,
+                    pickableItems,
+                    i
+                  )),
+                icon: 'mdi:close-circle-outline'
+              }
+            : undefined}
+        ></Pill>
       {/each}
     </div>
     <input
