@@ -52,9 +52,7 @@
         name="restrict_org"
       />
     </CardRow>
-  </Card>
-  <Card class="!h-min overflow-initial">
-    <div class="flex justify-center gap-4">
+    <div class="flex justify-center gap-4 mt-auto">
       <Button
         class="w-min whitespace-nowrap bg-surface1"
         suffixIcon="mdi:plus-circle-outline"

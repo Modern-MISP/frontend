@@ -1,8 +1,10 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import Card from '$lib/components/card/Card.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
   import type { PageData } from './$types';
   import EventInfo from './_components/EventInfo.svelte';
   import type { EventState } from './_components/EventState.interface';
@@ -44,7 +46,10 @@
   </svelte:fragment>
 
   <svelte:fragment slot="create">
-    <CreateTagForm on:close={() => (state = 'add')}></CreateTagForm>
+    <Card>
+      <CardHeading>Create a Tag</CardHeading>
+      <CreateTag on:close={() => (state = 'add')}></CreateTag>
+    </Card>
   </svelte:fragment>
   <EventTags bind:state {data} bind:selection />
 </EventInfo>
