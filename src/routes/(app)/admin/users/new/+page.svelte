@@ -6,7 +6,8 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { get } from 'svelte/store';
   import idCardHeaders from '../idCardHeaders';
-  import { mode } from '$lib/stores';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
 
   $mode = 'edit';
@@ -29,6 +30,11 @@
         })
     );
   }
+
+  $: $currentRoute = [
+    ...($currentRoute ?? []),
+    { name: 'New User', href: 'new', icon: 'mdi:account-plus-outline' }
+  ];
 </script>
 
 <svelte:window use:lockEditMode={true} />

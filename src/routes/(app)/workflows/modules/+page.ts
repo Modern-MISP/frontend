@@ -54,13 +54,13 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'mdi:circle',
       key: 'misp_core',
-      label: 'Misp Core Format',
+      label: 'MISP Core Format',
       value: (x) => ({ display: Boolean, props: { isTrue: x.expect_misp_core_format } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'misp_module',
-      label: 'Misp Module',
+      label: 'MISP Module',
       value: (x) => ({ display: Boolean, props: { isTrue: x.is_misp_module } })
     }),
     col({
