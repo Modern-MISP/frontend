@@ -43,6 +43,8 @@
   export let activeRows: T = [] as unknown as T; // Ts can not initialize Record<string, unknown>[] as []. I think this is a svelte error. Couldn't find a  better workaround
 
   const toggleRow = (row: T[number]) => (activeRows = xor(activeRows, [row]) as T); // This cast is safe, because xor should have IRecord as generic parameter. But ts parses it wrong.
+
+  $: if (!selectMode) activeRows = [] as unknown as T;
 </script>
 
 <!--

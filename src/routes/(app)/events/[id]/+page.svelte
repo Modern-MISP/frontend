@@ -6,13 +6,11 @@
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { notifications } from '$lib/stores';
+  import { successPill } from '$lib/util/pill.util';
   import type { PageData } from './$types';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
-  import { contextRoutes } from '$lib/actions';
-  import { page } from '$app/stores';
-  import { notifications } from '$lib/stores';
-  import { successPill } from '$lib/util/pill.util';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -29,7 +27,7 @@
   async function formCallback(formData: Record<string, string>) {
     $api
       .PUT('/events/edit/{eventId}', {
-        params: { path: { eventId: data?.event.id ?? '1' } },
+        params: { path: { eventId: data!.event.id! } },
         body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
       })
       .then(() => notifications.add(successPill('Event updated successfully!')));
@@ -46,31 +44,6 @@
 
   The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
  -->
-
-<svelte:window
-  use:contextRoutes={[
-    {
-      name: 'Event Info',
-      icon: 'mdi:information-outline',
-      href: `/events/${$page.params.id}/#`
-    },
-    {
-      name: 'Event Galaxies',
-      icon: 'streamline:galaxy-2-solid',
-      href: `/events/${$page.params.id}/galaxies`
-    },
-    {
-      name: 'Event Attributes',
-      icon: 'mdi:flag',
-      href: `/events/${$page.params.id}/attributes`
-    },
-    {
-      name: 'Event Graph',
-      icon: 'ph:graph',
-      href: `/events/${$page.params.id}/graph`
-    }
-  ]}
-/>
 
 <div class="h-full overflow-auto">
   <Form callback={formCallback}>
