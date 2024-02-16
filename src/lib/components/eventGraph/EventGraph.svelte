@@ -34,9 +34,8 @@
   export let eventGraphReferences: EventGraphReferences;
   const items = eventGraphReferences.items ?? [];
   const references = eventGraphReferences.relations ?? [];
-
-  console.log(items);
-  console.log(references);
+  let referencedObjects = [];
+  let referencedAttributes = [];
 
   const { updateNode } = useSvelteFlow();
 
@@ -47,70 +46,49 @@
 
   const nodes: Writable<Node[]> = writable([]);
   $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
-  /* $nodes.push({ id: 'referenced', position, data: { label: `Referenced` }, type: 'category' });
-  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` }, type: 'category' });
-  $nodes.push({
-    id: 'unreferenced-objects',
-    position,
-    data: { label: `Unreferenced Objects` },
-    type: 'category'
-  });
-  $nodes.push({
-    id: 'unreferenced-attributes',
-    position,
-    data: { label: `Unreferenced Attributes` },
-    type: 'category'
-  });
 
-  $edges.push({
-    id: `event-to-referenced`,
-    source: 'event',
-    target: `referenced`
-  });
-  $edges.push({
-    id: `event-to-unreferenced`,
-    source: 'event',
-    target: `unreferenced`
-  });
-  $edges.push({
-    id: `unreferenced-to-unreferenced-objects`,
-    source: 'unreferenced',
-    target: `unreferenced-objects`
-  });
-  $edges.push({
-    id: `unreferenced-to-unreferenced-attributes`,
-    source: 'unreferenced',
-    target: `unreferenced-attributes`
-  }); */
+  const referencedItemsIds: string[] = Array.from(
+    new Set(references.flatMap((reference) => [reference.from, reference.to]))
+  );
 
-  /* for (const object of objects) {
-    // Node: objects (refed/unrefed)
+  const referencedObjectsIds: string[] = referencedItemsIds.filter((id) => id.startsWith('o-'));
+  const referencedAttributesIds: string[] = referencedItemsIds.filter((id) => !id.startsWith('o-'));
+
+  for (const referencedObjectId of referencedObjectsIds) {
+    let referencedObject = objects.find((item) => `o-${item.id}` === referencedObjectId);
+    if (referencedObject) {
+      referencedObjects.push(referencedObject);
+    }
+  }
+
+  for (const referencedAttributeId of referencedAttributesIds) {
+    let referencedAttribute = attributes.find((item) => item.id === referencedAttributeId);
+    if (referencedAttribute) {
+      referencedAttributes.push(referencedAttribute);
+    }
+  }
+
+  for (const referencedObject of referencedObjects) {
     $nodes.push({
-      id: `object-${object.id}`,
+      id: `o-${referencedObject.id}`,
       position,
       data: {
-        id: object.id,
-        uuid: object.uuid,
-        event_id: object.event_id,
-        distribution: object.distribution,
-        name: object.name,
-        description: object.description,
-        attributes: object.Attribute,
-        comment: object.comment,
-        first_seen: object.first_seen,
-        last_seen: object.last_seen,
-        deleted: object.deleted
+        id: referencedObject.id,
+        uuid: referencedObject.uuid,
+        event_id: referencedObject.event_id,
+        distribution: referencedObject.distribution,
+        name: referencedObject.name,
+        description: referencedObject.description,
+        attributes: referencedObject.Attribute,
+        comment: referencedObject.comment,
+        first_seen: referencedObject.first_seen,
+        last_seen: referencedObject.last_seen,
+        deleted: referencedObject.deleted
       },
       type: 'object'
     });
-    // Edge: event to objects (refed/unrefed)
-    $edges.push({
-      id: `event-to-object-${object.id}`,
-      source: 'unreferenced-objects',
-      target: `object-${object.id}`
-    });
 
-    for (const attribute of object.Attribute ?? []) {
+    for (const attribute of referencedObject.Attribute ?? []) {
       // Node: attributes
       $nodes.push({
         id: `attribute-${attribute.id}`,
@@ -135,98 +113,13 @@
       });
       // Edge: objects to attributes (= relations)
       $edges.push({
-        id: `object-${object.id}-to-attribute-${attribute.id}`,
-        source: `object-${object.id}`,
+        id: `object-${referencedObject.id}-to-attribute-${attribute.id}`,
+        source: `o-${referencedObject.id}`,
         target: `attribute-${attribute.id}`,
         label: attribute.object_relation ?? undefined,
-        type: 'bezier',
-        animated: true
+        type: 'bezier'
       });
     }
-  }
-
-  for (const attribute of attributes) {
-    // Node: unrefed attributes
-    $nodes.push({
-      id: `attribute-${attribute.id}`,
-      position,
-      data: {
-        id: attribute.id,
-        uuid: attribute.uuid,
-        event_id: attribute.event_id,
-        object_id: attribute.object_id,
-        object_relation: attribute.object_relation,
-        category: attribute.category,
-        type: attribute.type,
-        distribution: attribute.distribution,
-        value: attribute.value,
-        comment: attribute.comment,
-        first_seen: attribute.first_seen,
-        last_seen: attribute.last_seen,
-        deleted: attribute.deleted,
-        disable_correlation: attribute.disable_correlation
-      },
-      type: 'attribute'
-    });
-    // Edge: event to unrefed attributes
-    $edges.push({
-      id: `event-to-attribute-${attribute.id}`,
-      source: `unreferenced-attributes`,
-      target: `attribute-${attribute.id}`
-    });
-  } */
-
-  /*   for (const item of items) {
-    if (item.node_type === 'object') {
-      $nodes.push({
-        id: `object-${item.id}`,
-        position,
-        data: {
-          id: item.id,
-          name: item.type,
-          comment: item.comment
-        },
-        type: 'object'
-      });
-      $edges.push({
-        id: `reference-to-object-${item.id}`,
-        source: 'referenced',
-        target: `object-${item.id}`,
-        label: item.label ?? undefined
-      });
-    } else if (item.node_type === 'attribute') {
-      $nodes.push({
-        id: `attribute-${item.id}`,
-        position,
-        data: {
-          id: item.id,
-          type: item.type,
-          value: item.label
-        },
-        type: 'attribute'
-      });
-    }
-  } */
-
-  const referencedItemsIds: string[] = Array.from(
-    new Set(references.flatMap((reference) => [reference.from, reference.to]))
-  );
-
-  const referencedObjectsIds: string[] = referencedItemsIds.filter((id) => id.startsWith('o-'));
-  const referencedAttributesIds: string[] = referencedItemsIds.filter((id) => !id.startsWith('o-'));
-
-  for (const referencedObjectId of referencedObjectsIds) {
-    let referencedObject = items.find((item) => item.id === referencedObjectId);
-    $nodes.push({
-      id: `${referencedObject?.id}`,
-      position,
-      data: {
-        id: `${referencedObject?.id}`,
-        name: `${referencedObject?.type}`,
-        comment: `${referencedObject?.comment}`
-      },
-      type: 'object'
-    });
   }
 
   for (const referencedAttributeId of referencedAttributesIds) {
@@ -249,7 +142,8 @@
       source: `${reference.from}`,
       target: `${reference.to}`,
       label: reference.type,
-      type: 'reference'
+      type: 'reference',
+      animated: true
     });
   }
 
