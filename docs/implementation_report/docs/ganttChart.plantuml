@@ -21,11 +21,11 @@ note bottom
     Pages that consist of a
     single table listing data.
 end note
-[List Pages > Filter] requires 7 days and is 95% complete and is colored in red
+[List Pages > Filter] requires 8 days and is 100% complete and is colored in red
 note bottom
     Dynamic filters for the tables on <color:gray>List Pages</color>.
 end note
-[List Pages > Edit Mode] requires 7 days and is 95% complete
+[List Pages > Edit Mode] requires 8 days and is 100% complete and is colored in red
 note bottom
     The respective edit mode implementations of <color:gray>List Pages</color>.
 end note
@@ -34,12 +34,12 @@ note bottom
     Pages that display detailed data of a
     single item (event/attribute/etc).
 end note
-[View Pages > Edit Mode] requires 8 days and is 75% complete
+[View Pages > Edit Mode] requires 9 days and is 90% complete and is colored in red
 note bottom
     The respective edit mode implementations of <color:gray>View Pages</color>,
     usually consisting of an HTML form.
 end note
-[Add Pages] requires 10 days and is 60% complete
+[Add Pages] requires 10 days and is 80% complete
 note bottom
     Pages for adding an item (event/tag/etc.)
 end note
