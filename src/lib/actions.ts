@@ -4,6 +4,11 @@ import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 import { get } from 'svelte/store';
 
+/**
+ * Action for setting action bar entries.
+ * @param node html node that this action belongs to
+ * @param actions action bar entries to set
+ */
 export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (node, actions) {
   actionBarEntries.set(actions);
 
@@ -17,6 +22,11 @@ export const actionBar: Action<HTMLElement, ActionBarEntryProps[]> = function (n
   };
 };
 
+/**
+ * Action for setting current context routes for the side menu.
+ * @param node html node that this action belongs to
+ * @param routes side menu routes to set as current context routes
+ */
 export const contextRoutes: Action<HTMLElement, SideMenuRoute[]> = function (node, routes) {
   contextRouteEntries.set(routes);
 
@@ -51,7 +61,7 @@ export const addContextInfo: Action<HTMLElement, { message: string; condition?: 
     }
 
     return {
-      update({ message: newMessage, condition: newCondition }) {
+      update({ message: newMessage, condition: newCondition = true }) {
         currentInfo = get(contextInfo);
         if (index === undefined && newCondition) {
           // no index means message is currently not added;
