@@ -144,20 +144,6 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'skip_proxy',
       label: 'Skip Proxy',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
-    }),
-
-    //TODO: not implemented desired function yet
-    col({
-      icon: 'mdi:link',
-      key: 'explore_event_graph',
-      label: 'Explore Event Graph',
-      value: () => ({
-        display: HrefPill,
-        props: {
-          text: 'click to see events',
-          href: `/events/`
-        }
-      })
     })
   ];
 

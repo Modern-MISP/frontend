@@ -133,19 +133,6 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-
-    //TODO: not implemented desired function yet
-    col({
-      key: 'explore_event_graph',
-      label: 'Explore Event Graph',
-      value: () => ({
-        display: HrefPill,
-        props: {
-          text: 'click to see events',
-          href: `/events/`
-        }
-      })
-    })
   ];
   const right = [
     col({
