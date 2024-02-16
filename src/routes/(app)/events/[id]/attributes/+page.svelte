@@ -146,11 +146,10 @@
                 })
                 .then((resp) => {
                   if (resp.error) throw new Error(resp.error.message);
+                  invalidateAll();
                 })
             )
-          ).then(() => {
-            invalidateAll();
-          }),
+          ),
           'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
         );
       }
