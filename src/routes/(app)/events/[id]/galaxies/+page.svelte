@@ -1,27 +1,28 @@
 <script lang="ts">
-  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import { page } from '$app/stores';
+  import AddGalaxyClusterForm from '$lib/components/addGalaxyClusterForm/AddGalaxyClusterForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import EventInfo from '../_components/EventInfo.svelte';
   import EventGalaxies from '../_components/EventGalaxies.svelte';
+  import EventInfo from '../_components/EventInfo.svelte';
   import type { EventState } from '../_components/EventState.interface';
+  import { addClusters } from '../_components/event.util';
 
   /**
    *
    */
   export let data;
-  let state: EventState = 'info';
+  let state: EventState = 'add';
 
   let selection: PickerPill[] = [];
-  function addTags(x: any) {}
 </script>
 
 <EventInfo {data} bind:state>
   <svelte:fragment slot="add">
-    <AddTagForm
+    <AddGalaxyClusterForm
       bind:selection
       on:createTag={() => (state = 'create')}
       on:close={() => (state = 'info')}
-      on:add={({ detail }) => addTags(detail)}
+      on:add={({ detail }) => addClusters(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
     />
   </svelte:fragment>
 

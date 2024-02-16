@@ -36,7 +36,6 @@
 
 <Picker
   placeholder="Tags"
-  popUpClass="bg-surface1"
   bind:pickedItems
   on:formValue
   pickableItems={tags.map((tag) => ({

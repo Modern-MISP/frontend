@@ -6,6 +6,37 @@ import { partition } from 'lodash-es';
 import { get } from 'svelte/store';
 
 /**
+ * Adds some galaxy clusters to the event.
+ * @param clusters some clusters
+ */
+export async function addClusters(
+  clusters: {
+    local: boolean;
+    id: string;
+    eventId: string;
+  }[]
+) {
+  const promises = clusters.map(({ id, local, eventId }) =>
+    get(api).POST('/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}', {
+      params: {
+        path: {
+          attachTargetId: eventId,
+          attachTargetType: 'event',
+          local: local ? 1 : 0
+        }
+      },
+      body: {
+        Galaxy: {
+          target_id: +id
+        }
+      }
+    })
+  );
+
+  handleEventPromise(promises);
+}
+
+/**
  * Adds a collection of tags to misp.
  * @param tags A collection of tags
  */
@@ -82,7 +113,7 @@ async function handleEventPromise<
       console.error(errors);
     }
 
-    if (success.length > 0) notifications.add(successPill(`Changed ${success.length} tags.`));
+    if (success.length > 0) notifications.add(successPill(`Changed ${success.length} elements.`));
   } catch (error) {
     notifications.add(
       errorPill(
