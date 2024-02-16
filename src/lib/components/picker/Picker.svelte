@@ -72,7 +72,7 @@
     if (event.key === 'Backspace' && value === '') {
       event.preventDefault();
       if (pickedItems.length === 0) return;
-      value = pickedItems.slice(-1)[0].text ?? '';
+      value = pickedItems.at(-1)!.text ?? '';
       [pickedItems, pickableItems] = removeFromAddToIndex(
         pickedItems,
         pickableItems,
