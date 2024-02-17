@@ -132,6 +132,8 @@
   export let fastFilter: FastFilter[] = [];
   // The fastFilter should be active if ifActive is a subset of currentFilter
   $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
+
+  let sliced: typeof tableData = [];
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
@@ -183,7 +185,7 @@
       <DynTable
         href={tableHref}
         {header}
-        data={tableData}
+        data={sliced.length > 0 ? sliced : tableData}
         selectMode={$mode === 'edit'}
         bind:activeRows
         {groupInfo}
@@ -198,8 +200,12 @@
 
 {#if pagination}
   <slot name="pagination">
-    {#if maxCount > LIMIT}
-      <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
+    {#if endpoint}
+      {#if maxCount > LIMIT}
+        <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
+      {/if}
+    {:else}
+      <Pagination input={tableData} bind:sliced />
     {/if}
   </slot>
 {/if}

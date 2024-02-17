@@ -11,9 +11,5 @@
   
 -->
 
-<ComplexTableLayout
-  {...data}
-  filter={[]}
-  pagination={false}
-  tableHref={(x) => `/admin/servers/${x.Server?.id}`}
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/servers/${x.Server?.id}`}
 ></ComplexTableLayout>

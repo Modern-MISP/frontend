@@ -340,6 +340,6 @@ export const load: PageLoad = async ({ fetch }) => {
     topMenuActions,
     editActions,
     fastFilter,
-    maxCount: response.headers.get('X-result-count')
+    maxCount: +response.headers.get('X-result-count')!
   };
 };

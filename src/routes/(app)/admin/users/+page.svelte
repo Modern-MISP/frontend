@@ -19,6 +19,5 @@
     return get(api).POST('/admin/users/index', { body: x });
   }}
   {...data}
-  pagination={false}
   tableHref={(x) => `/admin/users/${x.User?.id}`}
 ></ComplexTableLayout>

@@ -541,6 +541,6 @@ export const load = async ({ fetch }) => {
     filter,
     topMenuActions,
     editActions,
-    maxCount: response.headers.get('X-result-count')
+    maxCount: +response.headers.get('X-result-count')!
   };
 };
