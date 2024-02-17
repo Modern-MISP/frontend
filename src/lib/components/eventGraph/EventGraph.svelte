@@ -1,7 +1,6 @@
 <script lang="ts">
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { components } from '$lib/api/misp';
-  import { mode } from '$lib/stores';
   import {
     Position,
     type Edge,
@@ -13,8 +12,6 @@
   import { writable, type Writable } from 'svelte/store';
   import dagre from '@dagrejs/dagre';
   import { tweened } from 'svelte/motion';
-  import IconCard from './cards/IconCard.svelte';
-  import IconCardRow from './cards/IconCardRow.svelte';
   import ObjectNode from './graph/nodes/ObjectNode.svelte';
   import AttributeNode from './graph/nodes/AttributeNode.svelte';
   import CategoryNode from './graph/nodes/CategoryNode.svelte';
@@ -22,15 +19,10 @@
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { getReferencedItems } from './helpers/classItems';
-  import { fly } from 'svelte/transition';
   import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
   import { api } from '$lib/api';
   import { notifySave } from '$lib/util/notifications.util';
-  import ActionCard from '../table/actions/card/ActionCard.svelte';
-  import DynActionCard from '../table/actions/dynCard/DynActionCard.svelte';
-  import CallbackEntry from '../menus/topmenu/actionbar/CallbackEntry.svelte';
-  import HrefEntry from '../menus/topmenu/actionbar/HrefEntry.svelte';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
 

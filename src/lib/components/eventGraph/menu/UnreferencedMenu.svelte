@@ -8,7 +8,7 @@
   export let objects: components['schemas']['Object'][];
   export let attributes: components['schemas']['Attribute'][];
 
-  const onDragStart = (event: DragEvent, node: any, type: string) => {
+  const onDragStart = (event: DragEvent, node: unknown, type: string) => {
     if ($mode !== 'edit' || !event.dataTransfer) {
       return;
     }
