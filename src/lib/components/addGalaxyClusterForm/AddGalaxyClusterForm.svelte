@@ -95,11 +95,6 @@
     <Picker placeholder="Cluster" bind:pickedItems on:formValue pickableItems={cluster}></Picker>
     <div class="flex justify-center gap-4 mt-auto">
       <Button
-        class="w-min whitespace-nowrap bg-surface1"
-        suffixIcon="mdi:plus-circle-outline"
-        on:click={() => dispatch('createTag')}>Create new Tag</Button
-      >
-      <Button
         class="w-min text-red bg-surface1"
         suffixIcon="mdi:close-circle-outline"
         on:click={() => dispatch('close')}>Cancel</Button

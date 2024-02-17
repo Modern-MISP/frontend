@@ -1,13 +1,12 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { shouldTextBeBlack } from '$lib/util/color.util';
-  import Icon from '@iconify/svelte';
   import type { PageData } from '../$types';
   import EventPillCollectionCard from './EventPillCollectionCard.svelte';
   import type { EventState } from './EventState.interface';
-  import { page } from '$app/stores';
   import { deleteTags } from './event.util';
 
   /**
@@ -64,29 +63,15 @@
     };
     return pill;
   });
-
-  const _deleteTags = () => {
-    deleteTags(deletion.map((x) => ({ eventId: $page.params.id, id: x.value! })));
-    deletion = [];
-  };
 </script>
 
-<EventPillCollectionCard title="Tags" bind:state bind:selection>
+<EventPillCollectionCard
+  title="Tags"
+  bind:state
+  bind:selection
+  bind:deletion
+  on:delete={({ detail }) =>
+    deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+>
   <PillCollection base={HrefPill} {pills} />
-
-  <svelte:fragment slot="footer">
-    {#if deletion.length > 0}
-      <div class="relative flex flex-col gap-4 p-2 border rounded-md border-text">
-        <h3>Those elements will be deleted:</h3>
-        <PillCollection pills={deletion}></PillCollection>
-
-        <button
-          on:click={_deleteTags}
-          class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
-        >
-          <Icon icon="mdi:delete-outline"></Icon>
-        </button>
-      </div>
-    {/if}
-  </svelte:fragment>
 </EventPillCollectionCard>
