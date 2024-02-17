@@ -7,7 +7,8 @@
     type Node,
     type Edge,
     type DefaultEdgeOptions,
-    type NodeTypes
+    type NodeTypes,
+    type EdgeTypes
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
   import { mode } from '$lib/stores';
@@ -22,6 +23,11 @@
    * Custom node types to pass to SvelteFlow.
    */
   export let nodeTypes: NodeTypes | undefined = undefined;
+
+  /**
+   * Custom edge types to pass to SvelteFlow.
+   */
+  export let edgeTypes: EdgeTypes | undefined = undefined;
 
   /** Dimensions of the grid that nodes will snap onto */
   export let snapGrid: [number, number] = [25, 25];
@@ -46,6 +52,7 @@
   {edges}
   {snapGrid}
   {nodeTypes}
+  {edgeTypes}
   fitView
   on:init
   on:nodeclick
