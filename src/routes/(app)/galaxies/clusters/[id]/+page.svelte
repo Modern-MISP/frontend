@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { lockViewMode } from '$lib/actions';
+  import { addContextInfo, lockViewMode } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
@@ -43,7 +43,13 @@
   Show all information about a single galaxy cluster, including its elements.
 -->
 
-<svelte:window use:lockViewMode={data.cardData?.default ?? false} />
+<svelte:window
+  use:lockViewMode={data.cardData?.default ?? false}
+  use:addContextInfo={{
+    message: 'Default clusters cannot be edited.',
+    condition: data.cardData?.default ?? false
+  }}
+/>
 
 <Form callback={formCallback}>
   <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">

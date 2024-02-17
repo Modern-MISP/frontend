@@ -10,6 +10,7 @@ import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 
 export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
 export const contextRouteEntries = writable<SideMenuRoute[]>([]);
+export const contextInfo = writable<string[]>([]);
 
 export const settings = createLocalStorageStore(INITIAL_SETTINGS, 'settings');
 

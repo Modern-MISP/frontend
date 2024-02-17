@@ -49,7 +49,7 @@
     Login
     <hr />
   </h1>
-  <Input name="email" placeholder="Email" />
+  <Input name="email" placeholder="Email" icon="mdi:email-outline" />
   <Input name="password" placeholder="Password" type="password" icon="mdi:lock-outline" />
 
   <div class="relative flex items-center justify-center">
