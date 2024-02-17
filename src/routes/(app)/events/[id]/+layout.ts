@@ -21,6 +21,7 @@ export const load = async ({ params, fetch }) => {
         GalaxyCluster?: (components['schemas']['GalaxyCluster'] & {
           local?: boolean;
           relationship_type?: string;
+          tag_id: string;
         })[];
       }[];
       Tag?: {

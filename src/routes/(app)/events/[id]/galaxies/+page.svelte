@@ -5,7 +5,7 @@
   import EventGalaxies from '../_components/EventGalaxies.svelte';
   import EventInfo from '../_components/EventInfo.svelte';
   import type { EventState } from '../_components/EventState.interface';
-  import { addClusters } from '../_components/event.util';
+  import { attachCluster } from '../_components/event.util';
 
   /**
    *
@@ -22,7 +22,8 @@
       bind:selection
       on:createTag={() => (state = 'create')}
       on:close={() => (state = 'info')}
-      on:add={({ detail }) => addClusters(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
+      on:add={({ detail }) =>
+        attachCluster(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
     />
   </svelte:fragment>
 

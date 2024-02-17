@@ -9,7 +9,7 @@ import { get } from 'svelte/store';
  * Adds some galaxy clusters to the event.
  * @param clusters some clusters
  */
-export async function addClusters(
+export async function attachCluster(
   clusters: {
     local: boolean;
     id: string;
@@ -29,6 +29,31 @@ export async function addClusters(
         Galaxy: {
           target_id: +id
         }
+      }
+    })
+  );
+
+  handleEventPromise(promises);
+}
+
+export async function detachCluster(
+  clusters: {
+    id: string;
+    eventId: string;
+  }[]
+) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const promises: any = clusters.map(({ id, eventId }) =>
+    // @ts-expect-error not in the api spec
+    get(api).POST('/galaxy_clusters/detach/{eventId}/event/{clusterId}', {
+      params: {
+        path: {
+          eventId,
+          clusterId: id
+        }
+      },
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
       }
     })
   );
