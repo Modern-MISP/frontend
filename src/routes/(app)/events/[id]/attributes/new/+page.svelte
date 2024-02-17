@@ -20,9 +20,6 @@
 
   const col = createTableHeadGenerator();
 
-  const initialCategory = data.attributeTypes.categories![0];
-  const initialTypes = data.attributeTypes.category_type_mappings![initialCategory] as string[];
-
   const typeCol = col({
     icon: '',
     key: 'type',
@@ -31,8 +28,12 @@
       display: Select,
       props: {
         name: 'type',
-        options: initialTypes.map((c) => ({ value: c, label: c })) ?? [],
-        value: initialTypes[0]
+        options:
+          (
+            data.attributeTypes.category_type_mappings![
+              data.attributeTypes.categories![0]
+            ] as string[]
+          ).map((c) => ({ value: c, label: c })) ?? []
       }
     })
   });
@@ -60,8 +61,8 @@
       value: () => ({
         display: Select,
         props: {
-          value: '0',
-          options: DISTRIBUTION_LOOKUP.map((x, i) => ({
+          // Remove "sharing group" option
+          options: DISTRIBUTION_LOOKUP.toSpliced(4, 1).map((x, i) => ({
             label: x.text ?? 'unknown',
             value: '' + i
           })),
@@ -78,14 +79,13 @@
         props: {
           name: 'category',
           options: data.attributeTypes.categories?.map((c) => ({ value: c, label: c })) ?? [],
-          value: initialCategory,
           changeCallback: (e) => {
             const target = e.target as HTMLSelectElement;
-            const value = target.value;
-            // Without this, the value of the category select always resets??
-            // I don't know why this is happening.
-            // Please help me.
-            setTimeout(() => (target.value = value));
+            // const value = target.value;
+            // // Without this, the value of the category select always resets??
+            // // I don't know why this is happening.
+            // // Please help me.
+            // setTimeout(() => (target.value = value));
             const types = data.attributeTypes.category_type_mappings![target.value] as string[];
             typeCol.update((tc) => ({
               ...tc,

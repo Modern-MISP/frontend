@@ -29,7 +29,7 @@
  -->
 
 <Card class="gap-4">
-  {#each $store as { label, value }}
+  {#each $store as { label, value } (label)}
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>
       {@const v = value(data)}
