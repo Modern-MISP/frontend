@@ -18,6 +18,10 @@ module.exports = {
     es2017: true,
     node: true
   },
+  rules: {
+    'no-warning-comments': 'warn',
+    'no-console': 'warn'
+  },
   overrides: [
     {
       files: ['*.svelte'],

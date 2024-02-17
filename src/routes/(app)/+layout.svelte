@@ -1,7 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { PUBLIC_MAINTENANCE_MESSAGE, PUBLIC_MAINTENANCE_MODE } from '$env/static/public';
+  import { addContextInfo, lockViewMode } from '$lib/actions';
   import Layout from '$lib/components/layout/Layout.svelte';
-  import { currentRoute } from '$lib/stores';
+  import { currentRoute, contextRouteEntries } from '$lib/stores';
   import { routes } from './routes';
 
   const idEntry = (name: string) => ({
@@ -27,7 +29,13 @@
   Contains the {@link Layout} component, in which each page's content is inserted into via the component's default slot.
   
 -->
-
-<Layout {routes} currentRoute={$currentRoute}>
-  <slot /></Layout
->
+<svelte:window
+  use:lockViewMode={PUBLIC_MAINTENANCE_MODE === 'true'}
+  use:addContextInfo={{
+    message: PUBLIC_MAINTENANCE_MESSAGE,
+    condition: PUBLIC_MAINTENANCE_MODE === 'true'
+  }}
+/>
+<Layout {routes} currentRoute={$currentRoute} contextRoutes={$contextRouteEntries}>
+  <slot />
+</Layout>

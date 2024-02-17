@@ -1,25 +1,27 @@
 <script lang="ts">
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import type { PageData } from './$types';
-  import EditMode from './EditMode.svelte';
-
-  import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
-  import EventTags from './EventTags.svelte';
-  import { header } from './formHeaders';
-  import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
-
+  import { page } from '$app/stores';
   import Card from '$lib/components/card/Card.svelte';
-  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-  import AttributeList from '../../attributes/AttributeList.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
+  import type { PageData } from './$types';
+  import EventInfo from './_components/EventInfo.svelte';
+  import type { EventState } from './_components/EventState.interface';
+  import EventTags from './_components/EventTags.svelte';
+  import { addTags } from './_components/event.util';
 
   /**
    * Page data containing the data of the event with the id in the url
    */
   export let data: PageData;
 
-  const attributeData = data.event.Attribute!;
+  let state: EventState;
 
-  let addTag = false;
+  /**
+   * The currently selected pills
+   */
+  let selection: PickerPill[] = [];
 </script>
 
 <!-- 
@@ -33,53 +35,24 @@
   The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
  -->
 
-<div class="h-full overflow-auto">
-  <EditMode>
-    <div class="grid gap-2 g lg:flex-nowrap">
-      {#if addTag}
-        <AddTagForm />
-      {:else}
-        <section class="h-full">
-          <DynCard data={data.event} {header} />
-        </section>
-      {/if}
-      <section class="h-full">
-        <EventTags bind:addTag {data} />
-      </section>
+<EventInfo {data} bind:state>
+  <svelte:fragment slot="add">
+    <AddTagForm
+      bind:selection
+      on:createTag={() => (state = 'create')}
+      on:close={() => (state = 'info')}
+      on:add={({ detail }) => {
+        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
+        selection = [];
+      }}
+    />
+  </svelte:fragment>
 
-      <section class="h-full">
-        <Card class="h-full ">
-          {#each data.event?.Galaxy ?? [] as galaxy}
-            <div>
-              <h1 class="text-xl text-center text-sky text-bold">{galaxy.name}</h1>
-              <hr />
-              <br />
-              <PillCollection
-                pills={galaxy.GalaxyCluster
-                  ? galaxy.GalaxyCluster.map((y) => ({
-                      icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-                      label: y.relationship_type ? y.relationship_type : undefined,
-                      text: y.value
-                    }))
-                  : []}
-              />
-            </div>
-          {/each}
-        </Card>
-      </section>
-    </div>
-  </EditMode>
-
-  <section>
-    <h1>Attributes</h1>
-    <AttributeList data={attributeData} />
-  </section>
-
-  <EventGraph event={data.event} />
-</div>
-
-<style>
-  .g {
-    grid: 50rem 50rem / 1fr 1fr;
-  }
-</style>
+  <svelte:fragment slot="create">
+    <Card>
+      <CardHeading>Create a Tag</CardHeading>
+      <CreateTag on:close={() => (state = 'add')}></CreateTag>
+    </Card>
+  </svelte:fragment>
+  <EventTags bind:state {data} bind:selection />
+</EventInfo>

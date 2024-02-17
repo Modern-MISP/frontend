@@ -1,21 +1,22 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { filter } from 'lodash-es';
 import Info from '$lib/components/info/Info.svelte';
 import type { Module } from '../module';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   /// @ts-expect-error Not in OpenAPI spec
-  const getResult = await GET('/workflows/moduleIndex', { fetch }); // TODO: check for alternative endpoint/solution
+  const getResult = await get(api).GET('/workflows/moduleView/{moduleId}', {
+    fetch,
+    params: { path: { moduleId: params.id } }
+  });
   const { response, error: mispError } = getResult;
-  const data = getResult.data as Module[];
+  const module = getResult.data as Module;
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
-
-  const module = filter(data, (x) => x.id === params.id).at(0) ?? {};
 
   const col = createTableHeadGenerator<typeof module>();
 
@@ -47,8 +48,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       icon: 'mdi:circle',
       key: 'misp_module',
-      label: 'Is Misp Module',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.misp_module ?? 'unknown' } })
+      label: 'Is MISP Module',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.is_misp_module ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:information-outline',

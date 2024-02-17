@@ -29,14 +29,18 @@
  -->
 
 <Card class="gap-4">
-  {#each $store as { label, value }}
+  {#each $store as { label, value } (label)}
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>
       {@const v = value(data)}
-      {#if typeof v !== 'string'}
-        <svelte:component this={v.display} {...v.props} />
+      {#if v !== null && v !== undefined}
+        {#if typeof v !== 'string'}
+          <svelte:component this={v.display} {...v.props} />
+        {:else}
+          <span>{v}</span>
+        {/if}
       {:else}
-        <span>{v}</span>
+        <span class="text-red">undefined</span>
       {/if}
     </CardRow>
   {/each}

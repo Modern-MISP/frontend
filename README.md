@@ -35,7 +35,7 @@ https://localhost/servers/serverSettings/Security
 
 ## Develope
 
-### Start misp instance to use as api
+### Start MISP instance to use as api
 
 `npm run start:misp`
 

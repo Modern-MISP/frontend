@@ -1,10 +1,9 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-  import InputCollection from '$lib/components/filter/InputCollection.svelte';
+  import Filter from '$lib/components/filter/Filter.svelte';
   import { themes } from '$lib/stores';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import type { Hst } from '@histoire/plugin-svelte';
-  import Filter from '$lib/components/filter/Filter.svelte';
   export let Hst: Hst;
 
   let theme = 'macchiato';
@@ -39,18 +38,6 @@
     fil({
       label: 'Page Limit',
       value: () => 'limit'
-    }),
-
-    fil({
-      label: 'Tags',
-      value: () => ({
-        display: InputCollection,
-        props: {
-          length: 5,
-          name: 'tags',
-          placeholder: 'New Tag'
-        }
-      })
     })
   ];
 </script>

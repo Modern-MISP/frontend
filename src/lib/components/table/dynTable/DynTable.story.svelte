@@ -5,7 +5,7 @@
   import { createTableHeadGenerator } from '../../../util/tableBuilder.util';
   import type { DynTableHeadExtent } from './DynTable.model';
   import DynTable from './DynTable.svelte';
-  import { TABLE_DATA } from './exampleTableData';
+  import { TABLE_DATA } from './exampleTableData.mock';
   import Boolean from '$lib/components/boolean/Boolean.svelte';
 
   export let Hst: Hst;

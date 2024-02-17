@@ -1,10 +1,10 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
-import Input from '$lib/components/input/Input.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -18,7 +18,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     data,
     error: mispError,
     response
-  } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } }, fetch });
+  } = await get(api).GET('/galaxies/view/{galaxyId}', {
+    params: { path: { galaxyId: params.id } },
+    fetch
+  });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -106,15 +109,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
   >();
 
   const left = [
-    fac2(
-      {
-        label: 'Name',
-        value: (x) => x?.name ?? 'unknown'
-      },
-      {
-        value: (x) => ({ display: Input, props: { value: x?.name ?? 'unknown' } })
-      }
-    ),
+    fac2({
+      label: 'Name',
+      value: (x) => x?.name ?? 'unknown'
+    }),
     fac2({
       label: 'Description',
       value: (x) => ({

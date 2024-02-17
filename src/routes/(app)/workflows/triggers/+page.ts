@@ -1,19 +1,23 @@
-import { GET } from '$lib/api';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import { THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import type { Trigger } from './trigger';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { invalidateAll } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch }) => {
   /// @ts-expect-error Not in the OpenAPI spec.. great.
-  const getResult = await GET('/workflows/triggers', { fetch });
+  const getResult = await get(api).GET('/workflows/triggers', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as unknown as Trigger[];
 
@@ -57,8 +61,12 @@ export const load: PageLoad = async ({ fetch }) => {
       key: 'workflow',
       label: 'Workflow',
       value: (x) => ({
-        display: Pill,
-        props: { icon: 'material-symbols:network-node', text: x.Workflow?.id ?? 'unknown' }
+        display: HrefPill,
+        props: {
+          href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : '#',
+          icon: 'material-symbols:network-node',
+          text: x.Workflow?.id ?? 'unknown'
+        }
       })
     }),
     col({
@@ -107,8 +115,56 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Enable',
+      icon: 'mdi:check',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to enable the following triggers?\n${x.map((x) => x.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x.map((trigger) =>
+              // @ts-expect-error Not in the OpenAPI spec
+              get(api).POST('/workflows/toggleModule/{triggerId}/1/1', {
+                fetch,
+                params: { path: { triggerId: trigger.id } }
+              })
+            )
+          ).then(invalidateAll);
+        }
+      }
+    },
+    {
+      label: 'Disable',
+      icon: 'mdi:close',
+      action: (x) => {
+        if (!x) return;
+        if (
+          confirm(
+            `Are you sure you want to disable the following triggers?\n${x.map((x) => x.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x.map((trigger) =>
+              // @ts-expect-error Not in the OpenAPI spec
+              get(api).POST('/workflows/toggleModule/{triggerId}/0/1', {
+                fetch,
+                params: { path: { triggerId: trigger.id } }
+              })
+            )
+          ).then(invalidateAll);
+        }
+      }
+    }
+  ];
+
   return {
     tableData: data,
-    header
+    header,
+    editActions
   };
 };

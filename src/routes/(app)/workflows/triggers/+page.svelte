@@ -1,10 +1,13 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import EnableFilter from '../../galaxies/EnableFilter.svelte';
 
   /** The data that will be displayed on this page. */
   export let data;
 
-  const { tableData, header } = data;
+  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: !d.disabled }));
+
+  let filtered: typeof filterableTableData = [];
 </script>
 
 <!--
@@ -12,4 +15,8 @@
   
   A list of all workflow triggers.
 -->
-<DynTable href={({ id }) => `/workflows/triggers/${id}`} {header} data={tableData} />
+<ComplexTableLayout {...data} tableData={filtered}>
+  <div slot="filter">
+    <EnableFilter bind:data={filterableTableData} bind:filtered></EnableFilter>
+  </div>
+</ComplexTableLayout>
