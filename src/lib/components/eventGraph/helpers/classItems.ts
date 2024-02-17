@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function getReferencedItems(objects: any[], attributes: any[], references: any[]) {
   const referencedItemsIds = extractReferencedItemsIds(references);
   const referencedObjectsIds = filterReferencedObjectsIds(referencedItemsIds);
