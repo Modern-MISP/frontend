@@ -17,6 +17,11 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Select from '$lib/components/form/Select.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
+import { THREAT_LEVEL_LOOKUP, EXPORT_FORMAT_LOOKUP } from '$lib/consts/PillLookups';
+import { invalidateAll } from '$app/navigation';
+import { notifySave } from '$lib/util/notifications.util';
 
 export const load = async ({ fetch }) => {
   const {
@@ -29,7 +34,7 @@ export const load = async ({ fetch }) => {
 
   const tableData = data.response?.Attribute ?? [];
 
-  const describeTypesResponse = await get(api).GET('/attributes/describeTypes');
+  const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(
       describeTypesResponse.response.status as NumericRange<400, 599>,
@@ -190,7 +195,6 @@ export const load = async ({ fetch }) => {
         }
       })
     })
-    //sightings
   ];
 
   const describeTypes = await get(api).GET('/attributes/describeTypes');
@@ -229,30 +233,233 @@ export const load = async ({ fetch }) => {
       value: () => 'value'
     }),
     fil({
-      label: 'Correlation Flag',
-      value: () => ({
-        display: Checkbox,
-        props: {
-          checked: false,
-          name: 'correlation_flag'
-        }
-      })
-    }),
-    fil({
       label: 'IDS flag',
       value: () => ({
         display: Checkbox,
         props: {
           checked: false,
-          name: 'ids_flag'
+          name: 'to_ids'
         }
       })
     }),
-    //TODO: filter tags
-    //TODO: filter attributes with/without sightings
     fil({
-      label: 'Value',
-      value: () => 'value'
+      label: 'Value1',
+      value: () => 'value1'
+    }),
+    fil({
+      label: 'Value2',
+      value: () => 'value2'
+    }),
+    fil({
+      label: 'Organization',
+      value: () => 'org'
+    }),
+    fil({
+      label: 'Tags',
+      value: () => ({
+        display: TagPicker,
+        props: {
+          name: 'tags'
+        }
+      })
+    }),
+    fil({
+      label: 'Date From',
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'to',
+          type: 'date'
+        }
+      })
+    }),
+    fil({
+      label: 'Date Until',
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'until',
+          type: 'date'
+        }
+      })
+    }),
+    fil({
+      label: 'Time range',
+      value: () => 'last'
+    }),
+    fil({
+      label: 'Event ID',
+      value: () => 'eventid'
+    }),
+    fil({
+      label: 'Has attachment',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'withAttachments'
+        }
+      })
+    }),
+    fil({
+      label: 'Sharing group IDs',
+      value: () => 'sharinggroup'
+    }),
+    fil({
+      label: 'Metadata',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'metadata'
+        }
+      })
+    }),
+    fil({
+      label: 'UUID',
+      value: () => 'uuid'
+    }),
+    fil({
+      label: 'Publish timestamp',
+      value: () => 'publish_timestamp'
+    }),
+    fil({
+      label: 'Timestamp',
+      value: () => 'timestamp'
+    }),
+    fil({
+      label: 'Is published',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'published'
+        }
+      })
+    }),
+    fil({
+      label: 'Enforce Warning List',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'enforceWarningList'
+        }
+      })
+    }),
+    fil({
+      label: 'Sharing group reference only',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'sgReferenceOnly'
+        }
+      })
+    }),
+    fil({
+      label: 'Requested attributes',
+      value: () => 'requested_attributes'
+    }),
+    fil({
+      label: 'Include context',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'includeContext'
+        }
+      })
+    }),
+    fil({
+      label: 'Headerless',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'headerless'
+        }
+      })
+    }),
+    fil({
+      label: 'Include warning list hits',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'includeWarninglistHits'
+        }
+      })
+    }),
+    fil({
+      label: 'Attack galaxy',
+      value: () => 'attackGalaxy'
+    }),
+    fil({
+      label: 'Is deleted',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'deleted'
+        }
+      })
+    }),
+    fil({
+      label: 'Exclude local tags',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'excludeLocalTags'
+        }
+      })
+    }),
+    fil({
+      label: 'Include sighting db',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          checked: false,
+          name: 'includeSightingsb'
+        }
+      })
+    }),
+    fil({
+      label: 'tag',
+      value: () => 'tag'
+    }),
+    fil({
+      label: 'Object relation',
+      value: () => 'object_relation'
+    }),
+    fil({
+      label: 'Threat level',
+      value: () => ({
+        display: Select,
+        props: {
+          value: '',
+          options: THREAT_LEVEL_LOOKUP.map((x, i) => ({
+            label: x.text ?? 'unknown',
+            value: '' + i
+          })),
+          name: 'threat_level_id'
+        }
+      })
+    }),
+    fil({
+      label: 'Response format',
+      value: () => ({
+        display: Select,
+        props: {
+          value: '',
+          options: EXPORT_FORMAT_LOOKUP.map((x) => ({
+            label: x.text ?? 'unknown',
+            value: x.text ?? ''
+          })),
+          name: 'returnFormat'
+        }
+      })
     }),
     fil({
       label: 'Search all',
@@ -283,14 +490,51 @@ export const load = async ({ fetch }) => {
     }
   ];
 
-  const editActions: DynCardActionHeader<typeof data>[] = [
+  const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: () => '' //TODO: delete attribute
+      action: (attributes) => {
+        notifySave(
+          Promise.all(
+            attributes.map((attribute) =>
+              get(api)
+                .DELETE('/attributes/delete/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                  invalidateAll();
+                })
+            )
+          ),
+          'Deleted attributes ' + attributes.map((attribute) => attribute.id).join(', ')
+        );
+      }
+    },
+    {
+      label: 'Add Sightings',
+      icon: 'mdi:plus',
+      action: (x) => {
+        notifySave(
+          Promise.all(
+            x.map((attribute) =>
+              get(api)
+                .POST('/sightings/add/{attributeId}', {
+                  params: { path: { attributeId: attribute.id! } }
+                })
+                .then((resp) => {
+                  if (resp.error) throw new Error(resp.error.message);
+                })
+            )
+          ),
+          `Added sightings for attributes ${x.map(({ id }) => id).join(', ')}`
+        );
+      }
     }
   ];
+
   return {
     header,
     tableData,

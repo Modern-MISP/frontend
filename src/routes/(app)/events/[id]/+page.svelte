@@ -1,11 +1,13 @@
 <script lang="ts">
   import { api } from '$lib/api';
   import type { components } from '$lib/api/misp';
+  import Card from '$lib/components/card/Card.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
   import type { PageData } from './$types';
   import EventTags from './EventTags.svelte';
   import { header } from './formHeaders';
@@ -51,7 +53,10 @@
           on:close={() => (state = 'info')}
         />
       {:else if state === 'createTag'}
-        <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
+        <Card>
+          <CardHeading>Create a Tag</CardHeading>
+          <CreateTag on:close={() => (state = 'addTag')}></CreateTag>
+        </Card>
       {:else}
         <section class="h-full">
           <DynCard data={data.event} {header} />

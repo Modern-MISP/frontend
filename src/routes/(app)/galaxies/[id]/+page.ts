@@ -5,7 +5,6 @@ import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
-import Input from '$lib/components/input/Input.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -110,15 +109,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
   >();
 
   const left = [
-    fac2(
-      {
-        label: 'Name',
-        value: (x) => x?.name ?? 'unknown'
-      },
-      {
-        value: (x) => ({ display: Input, props: { value: x?.name ?? 'unknown' } })
-      }
-    ),
+    fac2({
+      label: 'Name',
+      value: (x) => x?.name ?? 'unknown'
+    }),
     fac2({
       label: 'Description',
       value: (x) => ({

@@ -46,5 +46,20 @@
       />
       <button type="submit">Senden</button>
     </form>
+
+    <Picker
+      placeholder="pick an item"
+      pickableItems={TAGS_MOCK.map((x) => ({
+        icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
+        text: x.name,
+        style: `background-color: ${x.colour}; color: ${
+          shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
+        }`,
+        value: x.id
+      }))}
+      arbitraryInput={(x) => ({
+        text: x
+      })}
+    />
   </div>
 </Hst.Story>
