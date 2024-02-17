@@ -6,12 +6,19 @@
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
-  //import { header as headerPromise } from './formHeaders';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import AttributeTags from './AttributeTags.svelte';
 
   /**
    * Page data containing the data of the attribute with the id in the url
    */
   export let data: PageData;
+
+  let selection: PickerPill[] = [];
+
+  let state: 'addTag' | 'info' | 'createTag' = 'info';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -46,13 +53,30 @@
     }
   ]}
 />
+
 <!--
-  @component
-  Displays information about a specific attribute, specified by `id`.
+@component Displays information about an attribute specified by ID, allows adding of tags.
+
 -->
-<Form callback={editCallback}>
-  <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
-    <DynCard header={data.left} data={data.attribute} />
-    <DynCard header={data.right} data={data.attribute} />
-  </div>
-</Form>
+<div class="h-full overflow-auto">
+  <Form callback={editCallback}>
+    <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
+      {#if state === 'addTag'}
+        <AddTagForm
+          bind:selection
+          on:createTag={() => (state = 'createTag')}
+          on:close={() => (state = 'info')}
+        />
+      {:else if state === 'createTag'}
+        <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
+      {:else}
+        <section class="h-full">
+          <DynCard header={data.header} data={data.attribute} />
+        </section>
+      {/if}
+      <section class="h-full">
+        <AttributeTags bind:state {data} bind:selection />
+      </section>
+    </div>
+  </Form>
+</div>

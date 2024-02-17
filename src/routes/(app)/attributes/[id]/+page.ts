@@ -16,7 +16,6 @@ import Select from '$lib/components/form/Select.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { components } from '$lib/api/misp';
-import { shouldTextBeBlack } from '$lib/util/color.util';
 import { format } from 'date-fns';
 
 export const load = async ({ params, fetch }) => {
@@ -52,7 +51,7 @@ export const load = async ({ params, fetch }) => {
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
   ).result;
 
-  const left = [
+  const header = [
     col({
       icon: 'mdi:id-card',
       key: 'id',
@@ -168,9 +167,7 @@ export const load = async ({ params, fetch }) => {
           }
         })
       }
-    )
-  ];
-  const right = [
+    ),
     col(
       {
         icon: 'mdi:circle',
@@ -263,30 +260,11 @@ export const load = async ({ params, fetch }) => {
           }
         })
       }
-    ),
-    col({
-      icon: 'mdi:tag',
-      key: 'tags',
-      label: 'Tags',
-      value: (x) => ({
-        display: PillCollection,
-        props: {
-          pills: (x.Tag ?? []).map((y) => ({
-            icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-            label: y.relationship_type ? y.relationship_type : undefined,
-            text: y.name,
-            style: `background-color: ${y.colour}; color: ${
-              shouldTextBeBlack(y.colour!) ? 'black' : 'white'
-            }`
-          }))
-        }
-      })
-    })
+    )
   ];
 
   return {
     attribute: tableData,
-    left,
-    right
+    header
   };
 };
