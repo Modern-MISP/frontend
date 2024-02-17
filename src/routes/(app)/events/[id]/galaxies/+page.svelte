@@ -11,7 +11,7 @@
    *
    */
   export let data;
-  let state: EventState = 'add';
+  let state: EventState = 'info';
 
   let selection: PickerPill[] = [];
 </script>
