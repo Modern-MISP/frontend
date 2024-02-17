@@ -29,12 +29,38 @@ Da wir die grundlegende Projektstruktur und einzelne Teile der Funktionalität b
 
 ### Start der Implementierung
 
-TODO: view mode und edit mode setup
+Die Verzögerungen am Anfang haben leider dazu geführt,
+dass sich auch der Beginn von darauffolgenden Aufgaben verzögert hat.
+
+#### View mode
+
+Bei den Seiten für den view mode gab es keine größeren Probleme,
+allerdings hat die Implementierung trotzdem etwas länger gedauert als geplant.
+
+#### Workflows
+
+Bei den Workflows hat es Anfangs Zeit gekostet,
+sich in [SvelteFlow](https://svelteflow.dev/),
+die von uns verwendete Bibliothek zum realisieren das graphischen Editors,
+einzuarbeiten.
 
 ## Zweite Phasenhälfte
 
-TODO: edit mode, filter, API Probleme
+### API Probleme
+
+Besonders als es an die Implementierung des edit mode und der Filter ging,
+haben sich die Probleme mit der MISP API bemerkbar gemacht.
+
+Die teils falsche und unvollständige API Spezifikation,
+sowie inkonsistentes Verhalten und wenig aussagende oder irreführende
+Error-Nachrichten der API haben uns viel nicht eingeplante
+Zeit und Mühen gekostet.
+
+So mussten wir unter anderem API Endpoints "reverse-engineeren",
+um sie richtig ansprechen zu können
+und eigene Typen für deren Rückgabewerte definieren.
 
 ### Endspurt
 
-TODO
+In den letzten paar Tagen haben wir nochmal besonders viel gearbeitet,
+da die Zeit knapp wurde und wir noch alles fertig bekommen wollten.
