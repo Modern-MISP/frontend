@@ -8,6 +8,10 @@
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+  import Pill from '$lib/components/pills/pill/Pill.svelte';
+  import Info from '$lib/components/info/Info.svelte';
+  import Button from '$lib/components/button/Button.svelte';
+  import { notifySave } from '$lib/util/notifications.util';
 
   type ReturnData = {
     value: string;
@@ -33,22 +37,47 @@
         }
       }
     });
+
     freetextData = data as ReturnData[];
+
+    notifySave(
+      $api
+        // @ts-expect-error Not in the OpenAPI spec
+        .POST('/events/saveFreeText/{eventId}', {
+          params: { path: { eventId: $page.params.id } },
+          body: {
+            Attribute: {
+              force: '0',
+              JsonObject: JSON.stringify(freetextData),
+              default_comment: ''
+            }
+          }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        })
+    );
   };
 
-  const finalSubmit = () => {
-    // @ts-expect-error Not in the OpenAPI spec
-    $api.POST('/events/saveFreeText/{eventId}', {
-      params: { path: { eventId: $page.params.id } },
-      body: {
-        Attribute: {
-          force: '0',
-          JsonObject: 'foo',
-          default_comment: ''
-        }
-      }
-    });
-  };
+  // const finalSubmit = () => {
+  //   notifySave(
+  //     $api
+  //       // @ts-expect-error Not in the OpenAPI spec
+  //       .POST('/events/saveFreeText/{eventId}', {
+  //         params: { path: { eventId: $page.params.id } },
+  //         body: {
+  //           Attribute: {
+  //             force: '0',
+  //             JsonObject: '',
+  //             default_comment: ''
+  //           }
+  //         }
+  //       })
+  //       .then((resp) => {
+  //         if (resp.error) throw new Error(resp.error.message);
+  //       })
+  //   );
+  // };
 
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
 </script>
@@ -60,7 +89,7 @@
         class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
         name="freetext"
       ></textarea>
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   {:else}
     <DynTable
@@ -68,22 +97,38 @@
         col({
           label: 'Value',
           value: (x) => ({
-            display: Input,
+            display: Pill,
             props: {
-              value: x.value,
-              name: 'value'
+              text: x.value
             }
           }),
           icon: 'mdi:circle',
           key: 'value'
+        }),
+        col({
+          icon: 'mdi:circle',
+          key: 'category',
+          label: 'Category',
+          value: (x) => ({
+            display: Pill,
+            props: {
+              text: x.category
+            }
+          })
+        }),
+        col({
+          icon: '',
+          key: 'type',
+          label: 'Type',
+          value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
         })
       ]}
       data={freetextData}
     ></DynTable>
-    <CardRow>
+    <!-- <CardRow>
       <span>Default comment</span>
       <Input name="default_comment" />
-    </CardRow>
-    <button on:click={finalSubmit}>Submit</button>
+    </CardRow> -->
+    <!-- <Button on:click={finalSubmit}>Submit</Button> -->
   {/if}
 </div>
