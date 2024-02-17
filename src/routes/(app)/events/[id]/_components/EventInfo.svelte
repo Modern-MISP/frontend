@@ -26,6 +26,20 @@
           params: { path: { eventId: data!.event.id! } },
           body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
         })
+        .then((resp) => {
+          if (resp.error) {
+            let mispError: string | undefined = undefined;
+            // @ts-expect-error MISP API returns custom errors object
+            const mispErrors = resp.error.errors;
+            if (typeof mispErrors === 'object') {
+              const errorValues: string[] = Object.values(mispErrors ?? {});
+              mispError = errorValues.length ? errorValues[0] : undefined;
+            } else if (typeof mispErrors === 'string') {
+              mispError = mispErrors;
+            }
+            throw new Error(mispError ?? resp.error.message);
+          }
+        })
         .then(invalidateAll),
       'Event updated successfully!'
     );
