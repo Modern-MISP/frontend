@@ -115,7 +115,7 @@ export async function deleteTags(
   handleEventPromise(promises);
 }
 
-async function handleEventPromise<
+export async function handleEventPromise<
   T extends {
     data?:
       | {

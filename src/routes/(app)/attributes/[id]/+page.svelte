@@ -10,6 +10,7 @@
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import AttributeTags from './AttributeTags.svelte';
+  import { addTags } from './attribute.util';
 
   /**
    * Page data containing the data of the attribute with the id in the url
@@ -64,6 +65,9 @@
           bind:selection
           on:createTag={() => (state = 'createTag')}
           on:close={() => (state = 'info')}
+          on:add={({ detail }) => {
+            addTags(detail.map((x) => ({ ...x, attributeId: $page.params.id })));
+          }}
         />
       {:else if state === 'createTag'}
         <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
