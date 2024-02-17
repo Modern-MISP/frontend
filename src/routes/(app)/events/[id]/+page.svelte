@@ -1,33 +1,27 @@
 <script lang="ts">
-  import { api } from '$lib/api';
-  import type { components } from '$lib/api/misp';
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import Form from '$lib/components/form/Form.svelte';
+  import { page } from '$app/stores';
+  import Card from '$lib/components/card/Card.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
   import type { PageData } from './$types';
-  import EventTags from './EventTags.svelte';
-  import { header } from './formHeaders';
+  import EventInfo from './_components/EventInfo.svelte';
+  import type { EventState } from './_components/EventState.interface';
+  import EventTags from './_components/EventTags.svelte';
+  import { addTags } from './_components/event.util';
 
   /**
    * Page data containing the data of the event with the id in the url
    */
   export let data: PageData;
 
-  let state: 'addTag' | 'info' | 'createTag' = 'info';
+  let state: EventState;
 
   /**
    * The currently selected pills
    */
   let selection: PickerPill[] = [];
-
-  async function formCallback(formData: Record<string, string>) {
-    $api.PUT('/events/edit/{eventId}', {
-      params: { path: { eventId: data!.event.id! } },
-      body: formData as components['requestBodies']['EditEventRequest']['content']['application/json']
-    });
-  }
 </script>
 
 <!-- 
@@ -41,25 +35,24 @@
   The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
  -->
 
-<div class="h-full overflow-auto">
-  <Form callback={formCallback}>
-    <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'addTag'}
-        <AddTagForm
-          bind:selection
-          on:createTag={() => (state = 'createTag')}
-          on:close={() => (state = 'info')}
-        />
-      {:else if state === 'createTag'}
-        <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
-      {:else}
-        <section class="h-full">
-          <DynCard data={data.event} {header} />
-        </section>
-      {/if}
-      <section class="h-full">
-        <EventTags bind:state {data} bind:selection />
-      </section>
-    </div>
-  </Form>
-</div>
+<EventInfo {data} bind:state>
+  <svelte:fragment slot="add">
+    <AddTagForm
+      bind:selection
+      on:createTag={() => (state = 'create')}
+      on:close={() => (state = 'info')}
+      on:add={({ detail }) => {
+        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
+        selection = [];
+      }}
+    />
+  </svelte:fragment>
+
+  <svelte:fragment slot="create">
+    <Card>
+      <CardHeading>Create a Tag</CardHeading>
+      <CreateTag on:close={() => (state = 'add')}></CreateTag>
+    </Card>
+  </svelte:fragment>
+  <EventTags bind:state {data} bind:selection />
+</EventInfo>

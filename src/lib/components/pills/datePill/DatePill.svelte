@@ -13,6 +13,16 @@
    */
   export let onNullText = 'No date';
 
+  /**
+   * Label of the DatePill
+   */
+  export let label: string | undefined = undefined;
+
+  /**
+   * Icon of the pill, defaults to a clock
+   */
+  export let icon: string | undefined = 'mdi:clock';
+
   let clazz = '';
   /**
    * Class that should be applied to the pill.
@@ -25,7 +35,7 @@
   Displays a date in a pill with the default format. The date format can be configured in the `config.ts` file.
  -->
 
-<Pill icon="mdi:clock" class={clazz}>
+<Pill {icon} class={clazz} {label}>
   {#if date}
     {format(date, DATE_FORMAT)}
   {:else}

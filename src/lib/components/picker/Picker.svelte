@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import Icon from '@iconify/svelte';
   import { remove, sortBy } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
   import Pill from '../pills/pill/Pill.svelte';
@@ -114,26 +113,22 @@
     {#if pickedItems.length > 0}
       <div class="flex flex-wrap w-full gap-1 overflow-hidden rounded-md bg-inherit">
         {#each pickedItems as props, i}
-          <Pill {...props} class="border-2 border-surface0 w-max {props.class}">
-            <span class="flex overflow-hidden shrink line-clamp-1">
-              {props.text?.trim()}
-            </span>
-            {#if !disabled}
-              <button
-                type="button"
-                on:click={() => {
-                  [pickedItems, pickableItems] = removeFromAddToIndex(
-                    pickedItems,
-                    pickableItems,
-                    i
-                  );
-                }}
-                class="justify-center pl-1 align-middle hover:text-red shrink-0"
-              >
-                <Icon icon="mdi:close-circle-outline" />
-              </button>
-            {/if}
-          </Pill>
+          <Pill
+            {...props}
+            class="border-2 border-surface0 w-max {props.class}"
+            action={!disabled
+              ? {
+                  class: 'hover:text-red',
+                  onClick: () =>
+                    ([pickedItems, pickableItems] = removeFromAddToIndex(
+                      pickedItems,
+                      pickableItems,
+                      i
+                    )),
+                  icon: 'mdi:close-circle-outline'
+                }
+              : undefined}
+          />
         {/each}
       </div>
     {/if}

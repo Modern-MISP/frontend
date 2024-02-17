@@ -1,130 +1,138 @@
 <script lang="ts">
   import Flow from '$lib/components/svelteflow/Flow.svelte';
+  import type { components } from '$lib/api/misp';
+  import { mode } from '$lib/stores';
   import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
-  import CardRow from '../card/CardRow.svelte';
-  import IconCard from './cards/IconCard.svelte';
-  import type { components } from '$lib/api/misp';
   import dagre from '@dagrejs/dagre';
   import { spring } from 'svelte/motion';
-  import AttributeNode from './nodes/AttributeNode.svelte';
-  import ObjectNode from './nodes/ObjectNode.svelte';
+  import IconCard from './cards/IconCard.svelte';
+  import IconCardRow from './cards/IconCardRow.svelte';
+  import ObjectNode from './graph/nodes/ObjectNode.svelte';
+  import AttributeNode from './graph/nodes/AttributeNode.svelte';
+  import CategoryNode from './graph/nodes/CategoryNode.svelte';
+  import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
+  import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
+  import { getReferencedItems } from './helpers/classItems';
+  import { fly } from 'svelte/transition';
+  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
+  import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
 
   const edges: Writable<Edge[]> = writable([]);
-
-  let tableView: 'objects' | 'attributes' = 'objects';
-  tableView;
 
   /**
    * The Event to be displayed on this page.
    */
   export let event: components['schemas']['ExtendedEvent'];
-  event;
 
-  const { updateNode } = useSvelteFlow();
+  /**
+   * The event graph references for the event to be displayed.
+   */
+  export let eventGraphReferences: EventGraphReferences;
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
 
+  const references = eventGraphReferences.relations ?? [];
+
+  const { referencedObjects, referencedAttributes, unreferencedObjects, unreferencedAttributes } =
+    getReferencedItems(objects, attributes, references);
+
+  const { updateNode } = useSvelteFlow();
+
   const position = { x: 0, y: 0 };
 
   const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'input' });
-  $nodes.push({ id: 'referenced', position, data: { label: `Referenced` } });
-  $nodes.push({ id: 'unreferenced', position, data: { label: `Unreferenced` } });
-  $nodes.push({ id: 'unreferenced-objects', position, data: { label: `Unreferenced Objects` } });
-  $nodes.push({
-    id: 'unreferenced-attributes',
-    position,
-    data: { label: `Unreferenced Attributes` }
-  });
+  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
 
-  $edges.push({
-    id: `event-to-referenced`,
-    source: 'event',
-    target: `referenced`
-  });
-  $edges.push({
-    id: `event-to-unreferenced`,
-    source: 'event',
-    target: `unreferenced`
-  });
-  $edges.push({
-    id: `unreferenced-to-unreferenced-objects`,
-    source: 'unreferenced',
-    target: `unreferenced-objects`
-  });
-  $edges.push({
-    id: `unreferenced-to-unreferenced-attributes`,
-    source: 'unreferenced',
-    target: `unreferenced-attributes`
-  });
-
-  for (const object of objects) {
-    // Node: objects (refed/unrefed)
+  for (const referencedObject of referencedObjects) {
     $nodes.push({
-      id: `object-${object.id}`,
+      id: `o-${referencedObject.id}`,
       position,
       data: {
-        id: object.id,
-        name: object.name,
-        comment: object.comment
+        id: referencedObject.id,
+        uuid: referencedObject.uuid,
+        event_id: referencedObject.event_id,
+        distribution: referencedObject.distribution,
+        name: referencedObject.name,
+        description: referencedObject.description,
+        attributes: referencedObject.Attribute,
+        comment: referencedObject.comment,
+        first_seen: referencedObject.first_seen,
+        last_seen: referencedObject.last_seen,
+        deleted: referencedObject.deleted
       },
       type: 'object'
     });
-    // Edge: event to objects (refed/unrefed)
-    $edges.push({
-      id: `event-to-object-${object.id}`,
-      source: 'unreferenced-objects',
-      target: `object-${object.id}`
-    });
 
-    for (const attribute of object.Attribute ?? []) {
+    for (const attribute of referencedObject.Attribute ?? []) {
       // Node: attributes
       $nodes.push({
         id: `attribute-${attribute.id}`,
         position,
         data: {
           id: attribute.id,
-          type: attribute.type,
+          uuid: attribute.uuid,
+          event_id: attribute.event_id,
+          object_id: attribute.object_id,
+          object_relation: attribute.object_relation,
           category: attribute.category,
+          type: attribute.type,
+          distribution: attribute.distribution,
           value: attribute.value,
-          comment: attribute.comment
+          comment: attribute.comment,
+          first_seen: attribute.first_seen,
+          last_seen: attribute.last_seen,
+          deleted: attribute.deleted,
+          disable_correlation: attribute.disable_correlation
         },
         type: 'attribute'
       });
-      // Edge: objects to attributes (= relations)
+      // Edge: object to its attributes (= relations)
       $edges.push({
-        id: `object-${object.id}-to-attribute-${attribute.id}`,
-        source: `object-${object.id}`,
+        id: `object-${referencedObject.id}-to-attribute-${attribute.id}`,
+        source: `o-${referencedObject.id}`,
         target: `attribute-${attribute.id}`,
         label: attribute.object_relation ?? undefined,
-        type: 'bezier',
-        animated: true
+        type: 'bezier'
       });
     }
   }
 
-  for (const attribute of attributes) {
-    // Node: unrefed attributes
+  for (const referencedAttribute of referencedAttributes) {
     $nodes.push({
-      id: `attribute-${attribute.id}`,
+      id: `${referencedAttribute.id}`,
       position,
       data: {
-        id: attribute.id,
-        type: attribute.type,
-        category: attribute.category,
-        value: attribute.value,
-        comment: attribute.comment
+        id: referencedAttribute.id,
+        uuid: referencedAttribute.uuid,
+        event_id: referencedAttribute.event_id,
+        object_id: referencedAttribute.object_id,
+        object_relation: referencedAttribute.object_relation,
+        category: referencedAttribute.category,
+        type: referencedAttribute.type,
+        distribution: referencedAttribute.distribution,
+        value: referencedAttribute.value,
+        comment: referencedAttribute.comment,
+        first_seen: referencedAttribute.first_seen,
+        last_seen: referencedAttribute.last_seen,
+        deleted: referencedAttribute.deleted,
+        disable_correlation: referencedAttribute.disable_correlation
       },
       type: 'attribute'
     });
-    // Edge: event to unrefed attributes
+  }
+
+  // Edge: referenced objects to referenced attributes or objects (= reference)
+  for (const reference of references) {
     $edges.push({
-      id: `event-to-attribute-${attribute.id}`,
-      source: `unreferenced-attributes`,
-      target: `attribute-${attribute.id}`
+      id: `reference-${reference.id}`,
+      source: `${reference.from}`,
+      target: `${reference.to}`,
+      label: reference.type,
+      type: 'reference',
+      animated: true
     });
   }
 
@@ -171,60 +179,117 @@
   $edges = layoutedEdges;
 
   const nodeTypes = {
+    object: ObjectNode,
     attribute: AttributeNode,
-    object: ObjectNode
+    category: CategoryNode
   };
 
-  let menu: { id: string } | null;
+  const edgeTypes = {
+    reference: ReferenceEdge
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let menu: { id: string; data: any; type: string } | null;
 
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
     event.preventDefault();
 
-    // Calculate position of the context menu. We want to make sure it
-    // doesn't get positioned off-screen.
-    menu = {
-      id: node.id
-    };
+    // Context menu only for object and attribute nodes
+    if (node.type === 'object' || node.type === 'attribute') {
+      menu = {
+        id: node.id,
+        data: node.data,
+        type: node.type
+      };
+
+      removePreviousHighlightBorder();
+
+      addHighlightBorder(node.id);
+    }
   }
 
-  // Close the context menu if it's open whenever the window is clicked.
   function handlePaneClick() {
+    // Close the context menu if it's open whenever the window is clicked.
     menu = null;
+    removePreviousHighlightBorder();
   }
+
+  const onDragOver = (event: DragEvent) => {
+    event.preventDefault();
+
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  };
+
+  const { screenToFlowPosition } = useSvelteFlow();
+
+  const onDrop = (event: DragEvent) => {
+    event.preventDefault();
+
+    if (!event.dataTransfer) {
+      return null;
+    }
+
+    const type = event.dataTransfer.getData('type');
+    if (type === 'object' || type === 'attribute') {
+      const data = JSON.parse(event.dataTransfer.getData('node')).data;
+
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY
+      });
+
+      const newNode = {
+        id: `unref-${data.type}-${data.id}`,
+        type,
+        position,
+        data: data,
+        origin: [0.5, 0.0]
+      } satisfies Node;
+
+      $nodes.push(newNode);
+      $nodes = $nodes;
+    }
+  };
 </script>
 
 <!--
   @component
   
-  The event Graph component. Uses the {@link Flow} component to render the graph.
-  Uses the {@link Card} component to render the action Bar and a table, where the unreferenced objects and attributes are displayed.
+  The Event Graph component. Uses the {@link Flow} component to render the graph.
+  Uses the {@link IconCard} component to render action bar buttons.
 
 -->
 
 <header class="flex justify-between w-full gap-2">
-  <div class="flex gap-4 shrink-0">
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:web-plus" text="Add Object" />
-      <IconCard icon="mdi:flag-add" text="Add Attribute" />
-      <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-    </CardRow>
+  <div class="flex justify-start gap-4">
+    {#if $mode === 'edit'}
+      <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
+        <IconCardRow>
+          <IconCard icon="mdi:web-plus" text="Add Object" />
+          <IconCard icon="mdi:flag-add" text="Add Attribute" />
+          <IconCard icon="icon-park-outline:connection" text="Add Reference" />
+        </IconCardRow>
+      </div>
+    {/if}
+  </div>
 
-    <CardRow class="rounded-lg bg-surface0">
-      <IconCard icon="mdi:web" text="Unreferenced Objects" />
-      <IconCard icon="mdi:flag" text="Unreferenced Attributes" />
-    </CardRow>
+  <div class="flex flex-col justify-end gap-1">
+    <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
 </header>
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu onClick={handlePaneClick} id={menu.id} />
+      <ContextMenu id={menu.id} data={menu.data} type={menu.type} />
     {/if}
     <Flow
       {nodes}
       {edges}
       {nodeTypes}
+      {edgeTypes}
       on:nodecontextmenu={handleContextMenu}
       on:paneclick={handlePaneClick}
       on:nodedragstop={({ detail: { node } }) => {
@@ -234,12 +299,8 @@
         if (computedPosition) position.set(computedPosition);
         position.subscribe((position) => updateNode(node.id, { position }));
       }}
+      on:dragover={onDragOver}
+      on:drop={onDrop}
     />
   </div>
-
-  <!--   <Card>
-    {#each [{ text: 'test', icon: 'mdi:file' }, { text: 'test 2', icon: 'mdi:server' }] as obj}
-      <IconCardRow {...obj} />
-    {/each}
-</Card> -->
 </div>

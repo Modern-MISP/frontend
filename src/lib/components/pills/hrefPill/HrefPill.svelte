@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { HTMLAttributeAnchorTarget } from 'svelte/elements';
   import Pill from '../pill/Pill.svelte';
+  import type { ComponentProps } from 'svelte';
 
   /**
    * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
@@ -32,6 +33,11 @@
    * Whether to force the text to be blue.
    */
   export let enforceTextColor = true;
+
+  /**
+   * Action of this pill
+   */
+  export let action: ComponentProps<Pill>['action'] = undefined;
 </script>
 
 <!-- 
@@ -40,6 +46,6 @@
 
  -->
 
-<a {href} {target}>
-  <Pill {label} {text} {icon} {style} class={enforceTextColor ? '!text-blue-400' : ''} />
-</a>
+<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? '!text-blue-400' : ''}>
+  <a {href} {target}>{text}</a>
+</Pill>

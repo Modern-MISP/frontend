@@ -1,19 +1,19 @@
 <script lang="ts">
   import CardRow from '$lib/components/card/CardRow.svelte';
-  import Icon from '@iconify/svelte';
 
+  let clazz = '';
   /**
-   * The icon to be displayed in this row.
+   * Additional classes to be applied to this component.
    */
-  export let icon: string;
-
-  /**
-   * The text to be displayed in this row.
-   */
-  export let text: string;
+  export { clazz as class };
 </script>
 
-<CardRow class="!justify-start gap-2 bg-surface1 p-2 rounded-md">
-  <Icon {icon} />
-  {text}
+<!-- 
+  @component
+  A row of icon cards
+  Sets the default padding and border radius. You can override this by passing your own classes.
+  
+ -->
+<CardRow class="rounded-lg bg-surface0 {clazz}">
+  <slot />
 </CardRow>
