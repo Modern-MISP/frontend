@@ -28,7 +28,7 @@
   /**
    * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
    */
-  export let groupInfo: (x: T[number]) => unknown | undefined = constant(undefined);
+  export let groupInfo: (x: T[number]) => unknown = constant(undefined);
 
   const store = derived(header, (arr) => arr);
 
