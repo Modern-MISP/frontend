@@ -41,7 +41,10 @@
       bind:selection
       on:createTag={() => (state = 'create')}
       on:close={() => (state = 'info')}
-      on:add={({ detail }) => addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
+      on:add={({ detail }) => {
+        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
+        selection = [];
+      }}
     />
   </svelte:fragment>
 
