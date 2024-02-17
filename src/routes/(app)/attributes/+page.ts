@@ -472,23 +472,6 @@ export const load = async ({ fetch }) => {
       value: () => 'limit'
     })
   ];
-  const topMenuActions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:event-add',
-      label: 'Add Attributes',
-      action: '' //TODO: /attributes/new
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Freetext Import Tool',
-      action: '' //TODO: freetext import tool
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Attribute Replacement Tool',
-      action: '' //TODO: attribute replacement tool
-    }
-  ];
 
   const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
@@ -539,7 +522,6 @@ export const load = async ({ fetch }) => {
     header,
     tableData,
     filter,
-    topMenuActions,
     editActions
   };
 };
