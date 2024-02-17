@@ -27,6 +27,12 @@
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
   import { api } from '$lib/api';
   import { notifySave } from '$lib/util/notifications.util';
+  import ActionCard from '../table/actions/card/ActionCard.svelte';
+  import DynActionCard from '../table/actions/dynCard/DynActionCard.svelte';
+  import CallbackEntry from '../menus/topmenu/actionbar/CallbackEntry.svelte';
+  import HrefEntry from '../menus/topmenu/actionbar/HrefEntry.svelte';
+  import { page } from '$app/stores';
+  import { actionBar } from '$lib/actions';
 
   /**
    * The Event to be displayed on this page.
@@ -283,12 +289,16 @@
     event.preventDefault();
 
     if (!event.dataTransfer) {
-      return null;
+      return;
     }
 
     const type = event.dataTransfer.getData('type');
     if (type === 'object' || type === 'attribute') {
       const data = JSON.parse(event.dataTransfer.getData('node')).data;
+
+      if ($nodes.find(({ id }) => id === `unref-${data.type}-${data.id}`)) {
+        return;
+      }
 
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -307,6 +317,14 @@
       $nodes = $nodes;
     }
   };
+
+  // Don't think there's an API for deleting references, also didn't find a way to do it in original MISP
+  // function handleEdgeContextMenu({
+  //   detail: { event, edge }
+  // }: Flow['$$events_def']['edgecontextmenu']) {
+  //   event.preventDefault();
+  //   $edges = $edges.filter(({ id }) => id !== edge.id);
+  // }
 </script>
 
 <!--
@@ -317,19 +335,17 @@
 
 -->
 
-<header class="flex justify-between w-full gap-2">
-  <div class="flex justify-start gap-4">
-    {#if $mode === 'edit'}
-      <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
-        <IconCardRow>
-          <IconCard icon="mdi:web-plus" text="Add Object" />
-          <IconCard icon="mdi:flag-add" text="Add Attribute" />
-          <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-        </IconCardRow>
-      </div>
-    {/if}
-  </div>
+<svelte:window
+  use:actionBar={[
+    {
+      action: `/events/${$page.params.id}/attributes/new`,
+      icon: 'mdi:flag-add',
+      label: 'Add attribute'
+    }
+  ]}
+/>
 
+<header class="flex justify-between w-full gap-2">
   <div class="flex flex-col justify-end gap-1">
     <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
@@ -348,6 +364,9 @@
       on:paneclick={handlePaneClick}
       on:dragover={onDragOver}
       on:drop={onDrop}
+      on:edgecontextmenu={() => {
+        /*handleEdgeContextMenu)e */
+      }}
     />
   </div>
 </div>
