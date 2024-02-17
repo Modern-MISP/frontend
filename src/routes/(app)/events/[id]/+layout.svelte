@@ -10,14 +10,14 @@
       href: `/events/${$page.params.id}/#`
     },
     {
-      name: 'Event Attributes',
-      icon: 'mdi:flag',
-      href: `/events/${$page.params.id}/attributes`
-    },
-    {
       name: 'Event Galaxies',
       icon: 'streamline:galaxy-2-solid',
       href: `/events/${$page.params.id}/galaxies`
+    },
+    {
+      name: 'Event Attributes',
+      icon: 'mdi:flag',
+      href: `/events/${$page.params.id}/attributes`
     },
     {
       name: 'Event Graph',
