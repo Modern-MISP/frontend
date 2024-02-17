@@ -54,19 +54,20 @@
     </ActionCard>
   </div>
 
-  <div
-    slot="added"
-    class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
-  >
+  <svelte:fragment slot="added">
     {#if addTag}
-      <FilterCard>
-        <CardHeading>Create a new Tag</CardHeading>
-        <CreateTag on:close={() => (addTag = false)}></CreateTag>
-      </FilterCard>
+      <div
+        class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
+      >
+        <FilterCard>
+          <CardHeading>Create a new Tag</CardHeading>
+          <CreateTag on:close={() => (addTag = false)}></CreateTag>
+        </FilterCard>
+      </div>
     {/if}
-  </div>
+  </svelte:fragment>
 
   <div slot="pagination">
-    <Pagination bind:page />
+    <Pagination bind:page length={tableData.length / 50} />
   </div>
 </ComplexTableLayout>

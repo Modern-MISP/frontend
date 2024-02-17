@@ -48,7 +48,6 @@ export const load: PageLoad = async ({ fetch }) => {
     },
     DynTableHeadExtent
   >();
-  console.log(data);
 
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
@@ -340,6 +339,7 @@ export const load: PageLoad = async ({ fetch }) => {
     filter,
     topMenuActions,
     editActions,
-    fastFilter
+    fastFilter,
+    maxCount: response.headers.get('X-result-count')
   };
 };

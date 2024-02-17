@@ -164,4 +164,5 @@
   {editActions}
   filter={[]}
   {topMenuActions}
+  pagination={false}
 ></ComplexTableLayout>
