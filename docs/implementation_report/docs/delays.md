@@ -14,6 +14,8 @@ An einigen Stellen konnte unser Zeitplan leider nicht wie vorgesehen eingehalten
 
 Rote Balken symbolisieren, dass die entsprechende Aufgabe nicht zum geplanten Zeitpunkt vollständig abgeschlossen war.
 
+![commit frequency](commit_frequency.png)
+
 ## Erste Phasenhälfte
 
 Gerade in den ersten 1-2 Wochen ist die Implementierungsarbeit nur langsam in gang gekommen.
