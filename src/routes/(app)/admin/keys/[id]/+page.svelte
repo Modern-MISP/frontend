@@ -25,7 +25,8 @@
       $api
         .POST('/auth_keys/edit/{authKeyId}', {
           params: { path: { authKeyId: key.AuthKey!.id! } },
-          body: { allowed_ips: [], ...formData } // Allow all ips if no override is given
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- No expiration in api spec...
+          body: { allowed_ips: [], expiration: '', ...formData } as any // Allow all ips if no override is given. Set to never expire by default if not overridden
         })
         .then((resp) => {
           if (
