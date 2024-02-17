@@ -18,7 +18,7 @@
 
   export let data;
 
-  $: tableData = data.event.Attribute!;
+  $: tableData = [...data.event.Attribute!, ...data.event.Object!.flatMap((o) => o.Attribute!)];
 
   type Data = (typeof tableData)[number] & {
     Tag?: (components['schemas']['Tag'] & {
