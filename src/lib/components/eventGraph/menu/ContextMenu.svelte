@@ -92,6 +92,13 @@
     hideNode();
     // need to delete (api)
   }
+
+  function editNode() {
+    const node = $nodes.find((node) => node.id === id);
+    if (node && node.type === 'attribute') {
+      history.pushState(null, '', `/attributes/${node.data.id}`);
+    }
+  }
 </script>
 
 <!-- 
@@ -119,7 +126,7 @@
 
   {#if $mode === 'edit'}
     <IconCardRow class="border-2 border-sky">
-      <IconCard icon="mdi:edit" text="Edit" />
+      <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
       <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
       <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
     </IconCardRow>

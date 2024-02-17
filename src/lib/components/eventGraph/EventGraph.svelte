@@ -14,7 +14,7 @@
   import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
-  import { getReferencedItems } from './helpers/split';
+  import { getReferencedItems } from './helpers/classItems';
   import { fly } from 'svelte/transition';
   import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
