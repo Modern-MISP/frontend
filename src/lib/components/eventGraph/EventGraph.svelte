@@ -2,10 +2,17 @@
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { components } from '$lib/api/misp';
   import { mode } from '$lib/stores';
-  import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
+  import {
+    Position,
+    type Edge,
+    type Node,
+    useSvelteFlow,
+    getNodesBounds,
+    useStore
+  } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import dagre from '@dagrejs/dagre';
-  import { spring } from 'svelte/motion';
+  import { tweened } from 'svelte/motion';
   import IconCard from './cards/IconCard.svelte';
   import IconCardRow from './cards/IconCardRow.svelte';
   import ObjectNode from './graph/nodes/ObjectNode.svelte';
@@ -18,8 +25,8 @@
   import { fly } from 'svelte/transition';
   import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
-
-  const edges: Writable<Edge[]> = writable([]);
+  import { api } from '$lib/api';
+  import { notifySave } from '$lib/util/notifications.util';
 
   /**
    * The Event to be displayed on this page.
@@ -40,11 +47,33 @@
     getReferencedItems(objects, attributes, references);
 
   const { updateNode } = useSvelteFlow();
+  const { nodesDraggable } = useStore();
+
+  $nodesDraggable = false;
 
   const position = { x: 0, y: 0 };
 
-  const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
+  const nodes: Writable<
+    Node<
+      Pick<
+        components['schemas']['Object'],
+        | 'id'
+        | 'uuid'
+        | 'event_id'
+        | 'distribution'
+        | 'name'
+        | 'description'
+        | 'comment'
+        | 'first_seen'
+        | 'last_seen'
+        | 'deleted'
+      > & { attributes?: components['schemas']['Attribute'][] } & Pick<
+          components['schemas']['Attribute'],
+          'object_id' | 'object_relation' | 'category' | 'type' | 'value' | 'disable_correlation'
+        >
+    >[]
+  > = writable([]);
+  const edges: Writable<Edge[]> = writable([]);
 
   for (const referencedObject of referencedObjects) {
     $nodes.push({
@@ -139,44 +168,43 @@
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  function getLayoutedElements(nodes: Node[], edges: Edge[]) {
+  function layoutElements() {
     dagreGraph.setGraph({ rankdir: 'LR' });
 
-    nodes.forEach((node) => {
+    $nodes.forEach((node) => {
       const { width, height } = getNodesBounds([node]);
-      const [offsetX, offsetY] = [300, 50];
+      // const [offsetX, offsetY] = [300, 50];
       dagreGraph.setNode(node.id, {
-        width: width + offsetX,
-        height: height + offsetY
+        width,
+        height
       });
     });
 
-    edges.forEach((edge) => {
+    $edges.forEach((edge) => {
       dagreGraph.setEdge(edge.source, edge.target);
     });
 
     dagre.layout(dagreGraph);
 
-    nodes.forEach((node) => {
+    $nodes.forEach((node) => {
       const nodeWithPosition = dagreGraph.node(node.id);
       node.targetPosition = Position.Left;
       node.sourcePosition = Position.Right;
 
       // We are shifting the dagre node position (anchor=center center) to the top left
       // so it matches the React Flow node anchor point (top left).
-      node.position = {
+      const pos = tweened(node.position);
+      pos.set({
         x: nodeWithPosition.x - nodeWithPosition.width / 2,
         y: nodeWithPosition.y - nodeWithPosition.height / 2
-      };
+      });
+      pos.subscribe((p) => updateNode(node.id, { position: p }));
     });
-
-    return { nodes, edges };
   }
 
-  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements($nodes, $edges);
-
-  $nodes = layoutedNodes;
-  $edges = layoutedEdges;
+  setTimeout(() => {
+    layoutElements();
+  });
 
   const nodeTypes = {
     object: ObjectNode,
@@ -224,6 +252,32 @@
   };
 
   const { screenToFlowPosition } = useSvelteFlow();
+  const { onconnect } = useStore();
+
+  $onconnect = (connection) => {
+    const source = $nodes.find(({ id }) => id === connection.source);
+    const target = $nodes.find(({ id }) => id === connection.target);
+    if (!source || !target) return;
+    notifySave(
+      $api
+        // @ts-expect-error Not in the OpenAPI spec
+        .POST('/objectReferences/add/{objectId}', {
+          params: { path: { objectId: source.data.id } },
+          body: {
+            ObjectReference: {
+              relationship_type_select: 'Acquaintance',
+              relationship_type: '',
+              comment: '',
+              referenced_uuid: target.data.uuid
+            }
+          }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        })
+    );
+    layoutElements();
+  };
 
   const onDrop = (event: DragEvent) => {
     event.preventDefault();
@@ -292,13 +346,6 @@
       {edgeTypes}
       on:nodecontextmenu={handleContextMenu}
       on:paneclick={handlePaneClick}
-      on:nodedragstop={({ detail: { node } }) => {
-        if (!node) return;
-        const position = spring(node.position);
-        const computedPosition = layoutedNodes.find((n) => n.id === node.id)?.position;
-        if (computedPosition) position.set(computedPosition);
-        position.subscribe((position) => updateNode(node.id, { position }));
-      }}
       on:dragover={onDragOver}
       on:drop={onDrop}
     />
