@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import Icon from '@iconify/svelte';
   import { remove, sortBy } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
   import Pill from '../pills/pill/Pill.svelte';
