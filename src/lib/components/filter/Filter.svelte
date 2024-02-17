@@ -4,10 +4,10 @@
   import Select from '$lib/components/form/Select.svelte';
   import type { TableHead } from '$lib/models/TableHead.interface';
   import { getFormValues } from '$lib/util/form.util';
-  import Icon from '@iconify/svelte';
   import { omit } from 'lodash-es';
   import { derived, type Readable } from 'svelte/store';
   import Input from '../input/Input.svelte';
+  import Pill from '../pills/pill/Pill.svelte';
   /**
    * All possible filter
    */
@@ -70,23 +70,20 @@
   <FilterCard>
     <span slot="heading"> Current Filter </span>
 
-    <body class="flex flex-col gap-2">
+    <div class="flex flex-col w-full gap-2">
       {#each Object.keys(currentFilter) as filterKey}
-        <div class="flex items-center gap-3 p-2 rounded-md bg-surface1">
-          <!-- Api request key => Should probably add a label to not show internal attributes. -->
-          <span class="grow">
-            {filterKey}
-          </span>
-
-          <!-- Value of the only other key inside of the filter obj. -->
-          <span>{currentFilter[filterKey]}</span>
-
-          <!-- Delete element -->
-          <button on:click={() => (currentFilter = omit(currentFilter, filterKey))}>
-            <Icon icon="mdi:delete-outline" class="text-red" />
-          </button>
-        </div>
+        <Pill
+          label={filterKey}
+          text={currentFilter[filterKey]}
+          class="!justify-between w-full h-10"
+          action={{
+            icon: 'mdi:delete-outline',
+            onClick: () => (currentFilter = omit(currentFilter, filterKey)),
+            class: 'hover:text-red'
+          }}
+          title={currentFilter[filterKey]}
+        ></Pill>
       {/each}
-    </body>
+    </div>
   </FilterCard>
 </div>

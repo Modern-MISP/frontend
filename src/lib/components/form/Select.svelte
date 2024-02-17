@@ -12,7 +12,7 @@
    * The value that is currently selected.
    * Because of the template variable, full type safety should be enforced if using `const`s as options.
    */
-  export let value: T;
+  export let value: T = options[0].value;
   /**
    * Name of this `select` element. Used for forms.
    */

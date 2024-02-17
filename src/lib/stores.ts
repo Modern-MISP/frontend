@@ -7,6 +7,7 @@ import { createLocalStorageStore, createTimeoutStore } from './util/store.util';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { INITIAL_SETTINGS } from './settings';
 import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
+import { PUBLIC_MAINTENANCE_MODE } from '$env/static/public';
 
 export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
 export const contextRouteEntries = writable<SideMenuRoute[]>([]);
@@ -24,6 +25,11 @@ export const themes = [
 
 export const mode = writable<Mode>('view');
 export const lockModeToggle = writable<boolean>(false);
+
+// enforce view mode when in maintenance mode
+if (PUBLIC_MAINTENANCE_MODE === 'true') {
+  mode.subscribe(() => mode.set('view'));
+}
 
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 

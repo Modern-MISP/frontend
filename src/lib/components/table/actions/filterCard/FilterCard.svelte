@@ -2,7 +2,6 @@
   import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
   import Pill from '$lib/components/pills/pill/Pill.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
-  import Icon from '@iconify/svelte';
   import { omit } from 'lodash-es';
 
   /**
@@ -25,18 +24,16 @@
       {#each filterKeys as filterKey}
         {@const label = filterKey}
         {@const text = currentFilter[label]}
-        <Pill {label} {text} class="h-min">
-          <span class="flex overflow-hidden shrink line-clamp-1">
-            {text}
-          </span>
-          <button
-            type="button"
-            on:click={() => (currentFilter = omit(currentFilter, filterKey))}
-            class="justify-center pl-1 align-middle hover:text-red shrink-0"
-          >
-            <Icon icon="mdi:close-circle-outline" />
-          </button>
-        </Pill>
+        <Pill
+          {label}
+          {text}
+          class="h-min"
+          action={{
+            icon: 'mdi:close-circle-outline',
+            onClick: () => (currentFilter = omit(currentFilter, filterKey)),
+            class: 'hover:text-red'
+          }}
+        ></Pill>
       {/each}
     </div>
   {/if}
