@@ -3,7 +3,6 @@ site_name: MMISP Frontend Implementierungsbericht
 repo_url: https://gitlab.kit.edu/kit/kit-cert/mmisp/frontend
 site_author: MMISP Frontend Team
 
-
 theme:
   name: 'material'
 
