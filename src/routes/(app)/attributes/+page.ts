@@ -56,7 +56,6 @@ export const load = async ({ fetch }) => {
   const options: components['schemas']['DescribeAttributeTypesResponse'] = (
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
   ).result;
-  console.log(tableData, response.headers);
 
   const col = createTableHeadGenerator<
     Omit<(typeof tableData)[number], 'Tag'> & {
