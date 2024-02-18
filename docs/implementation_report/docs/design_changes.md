@@ -13,13 +13,12 @@ Einigen Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
 
 ## Auswahl dargestellter Eigenschaften
 
-Eigenschaften, die sich im Laufe der Programmierung als überflüssig herausgestellt hatten, wurden entfernt, z. B. die Angabe der ersten Sichtung auf der Erstellseite eines Attributs.
+Eigenschaften, die sich im Laufe der Programmierung als überflüssig herausgestellt hatten, wurden entfernt, z. B. die Angabe der Organisation, der ein Attribut gehört, da sie durch das Event definiert ist.
 Parallel dazu wurden andere, sinnvollere Eigenschaften hinzugefügt.
 
 ## Entfernen Dopplung
 
 Einige Kategorien, zum Beispiel Nutzername und Nutzer-E-Mail, sind immer identisch, weshalb nur eine beider Kategorien dargestellt wird.
-Checkboxes, deren einziger Zweck ist, ein Eingabefeld zu aktivieren, wurden entfernt.
 
 ## Warnungen
 
