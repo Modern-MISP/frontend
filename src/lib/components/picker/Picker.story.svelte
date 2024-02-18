@@ -1,10 +1,9 @@
 <script lang="ts">
+  import { themes } from '$lib/stores';
+  import { shouldTextBeBlack } from '$lib/util/color.util';
   import type { Hst } from '@histoire/plugin-svelte';
   import Picker from './Picker.svelte';
-  import { themes } from '$lib/stores';
-  import { getFormValues } from '$lib/util/form.util';
   import { TAGS_MOCK } from './tags.mock';
-  import { shouldTextBeBlack } from '$lib/util/color.util';
 
   let theme = 'macchiato';
 
@@ -30,7 +29,7 @@
     />
     <h1>Force list display</h1>
 
-    <form on:submit|preventDefault={(e) => console.log(getFormValues(e))}>
+    <form>
       <Picker
         placeholder="pick an item"
         popUpClass="flex-col flex-nowrap"

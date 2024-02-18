@@ -19,7 +19,6 @@ export const load = async ({ params, fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
-  console.log(server);
   const col = createTableHeadGenerator<typeof server>();
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
@@ -119,7 +118,6 @@ export const load = async ({ params, fetch }) => {
       }
     ),
 
-    //TODO: authkey should only be changed if approved
     col(
       {
         key: 'authkey',
@@ -140,7 +138,6 @@ export const load = async ({ params, fetch }) => {
       label: 'Internal',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
-    //TODO: text: Sync methods
     col(
       {
         key: 'push',
@@ -225,7 +222,6 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    //TODO: text: misc settings
     col(
       {
         key: 'unpublish_event',

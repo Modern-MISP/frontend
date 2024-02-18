@@ -15,7 +15,6 @@ export const load = async ({ fetch }) => {
   const getResult = await get(api).GET('/workflows/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = (getResult.data! as { Workflow: Trigger['Workflow'] }[]).map((x) => x.Workflow!);
-  console.log(data);
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

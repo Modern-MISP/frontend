@@ -23,16 +23,11 @@
   let currentOption: string = $store[0].label;
   $: option = $store.find(({ label }) => label === currentOption);
   $: optionValue = option?.value(undefined);
-
-  let value: unknown;
-  $: console.log(value);
 </script>
 
 <div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2">
   <form
     on:submit|preventDefault={(e) => {
-      console.log('values', getFormValues(e));
-
       currentFilter = { ...currentFilter, ...getFormValues(e) };
     }}
   >
@@ -46,17 +41,9 @@
       />
 
       {#if optionValue && typeof optionValue != 'string'}
-        <svelte:component
-          this={optionValue.display}
-          {...optionValue.props}
-          on:formValue={({ detail }) => (value = detail)}
-        />
+        <svelte:component this={optionValue.display} {...optionValue.props} />
       {:else}
-        <Input
-          name={optionValue}
-          placeholder={option?.label}
-          on:formValue={({ detail }) => (value = detail)}
-        />
+        <Input name={optionValue} placeholder={option?.label} />
       {/if}
 
       <Button

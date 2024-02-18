@@ -152,7 +152,7 @@ export async function handleEventPromise<
   invalidateAll();
 }
 
-// TODO: update the relation here, if we have any idea how to get the id. Attention. The required id is another then the id from the tag. It is an event specific idea and I have no clue how to access it.
+// TODO: update the relation here, if we have any idea how to get the id. Attention. The required id is another then the id from the tag. It is an event specific id and I have no clue how to access it.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function updateRelation({ id, relation }: { id: string; relation: string }) {
   const endpoint = `tags/modifyTagRelationship/event/{id}`;

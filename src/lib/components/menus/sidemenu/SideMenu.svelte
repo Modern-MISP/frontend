@@ -90,7 +90,7 @@
   <div class="relative flex items-center w-full px-4">
     {#if isOpen}
       <span class="absolute text-sky left-10 line-clamp-1" transition:fade={FADE_OPTIONS}
-        >Version: 0.0.1</span
+        >Version: 0.1.0</span
       >
     {/if}
     <button
