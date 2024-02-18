@@ -1,12 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import ActionBarEntry from '$lib/components/menus/topmenu/actionbar/ActionBarEntry.svelte';
-  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
