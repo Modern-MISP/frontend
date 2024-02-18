@@ -11,6 +11,18 @@ Dort findet sich auch der grafische Editor.
 
 Einigen Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
 
+## Contact Reporter
+
+Statt einer separaten Funktionalität kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gewünschte Nachricht per E-Mail senden.
+
+## Tabellenspalten
+
+Die dargestellten Spalten bei Tabellendarstellungen sind nicht individuell auswählbar.
+
+## Aktionsleiste vs. Schnellaktionen
+
+Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als überflüssig und wurden somit nicht implementiert.
+
 ## Auswahl dargestellter Eigenschaften
 
 Eigenschaften, die sich im Laufe der Programmierung als überflüssig herausgestellt hatten,
@@ -25,19 +37,7 @@ Einige Kategorien, zum Beispiel Nutzername und Nutzer-E-Mail, sind immer identis
 
 Es werden keine Warnungen angezeigt, wenn keine Attribute oder Tags hinzugefügt worden sind.
 
-## Aktionsleiste vs. Schnellaktionen
-
-Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als überflüssig und wurden somit nicht implementiert.
-
-## Contact Reporter
-
-Statt einer separaten Funktionalität kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gewünschte Nachricht per E-Mail senden.
-
-## Tabellenspalten
-
-Die dargestellten Spalten bei Tabellendarstellungen sind nicht individuell auswählbar.
-
-## Links
+### Links
 
 An einigen Stellen (z. B. /admin/keys/) enthält 'email' einen Link zum Nutzer (in /users/[id]), anstatt das E-Mail-Programm zu öffnen.
 
