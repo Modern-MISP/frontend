@@ -21,9 +21,25 @@ Parallel dazu wurden andere sinnvollere Eigenschaften hinzugefügt.
 
 Einige Kategorien, zum Beispiel Nutzername und Nutzer-E-Mail, sind immer identisch, weshalb nur eine beider Kategorien dargestellt wird.
 
-## Warnungen
+### Warnungen
 
 Es werden keine Warnungen angezeigt, wenn keine Attribute oder Tags hinzugefügt worden sind.
+
+## Aktionsleiste vs. Schnellaktionen
+
+Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als überflüssig und wurden somit nicht implementiert.
+
+## Contact Reporter
+
+Statt einer separaten Funktionalität kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gewünschte Nachricht per E-Mail senden.
+
+## Tabellenspalten
+
+Die dargestellten Spalten bei Tabellendarstellungen sind nicht individuell auswählbar.
+
+## Links
+
+An einigen Stellen (z. B. /admin/keys/) enthält 'email' einen Link zum Nutzer (in /users/[id]), anstatt das E-Mail-Programm zu öffnen.
 
 ## Neu hinzugefügt
 
@@ -44,21 +60,5 @@ mit einem Klick auf das Info-Symbol eingesehen werden.
 
 Das Symbol ist standardmäßig hellgrau und wird farbig,
 wenn für den aktuellen Kontext Informationen zur Verfügung stehen.
-
-## Aktionsleiste vs. Schnellaktionen
-
-Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als überflüssig und wurden somit nicht implementiert.
-
-## Contact Reporter
-
-Statt einer separaten Funktionalität kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gewünschte Nachricht per E-Mail senden.
-
-## Tabellenspalten
-
-Die dargestellten Spalten bei Tabellendarstellungen sind nicht individuell auswählbar.
-
-## Links
-
-An einigen Stellen (z. B. /admin/keys/) enthält 'email' einen Link zum Nutzer (in /users/[id]), anstatt das E-Mail-Programm zu öffnen.
 
 ![context info screenshot](context_info.png)
