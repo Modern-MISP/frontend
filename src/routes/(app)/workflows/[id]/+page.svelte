@@ -349,7 +349,7 @@
 </div>
 
 <div use:melt={$helpContent} class="z-10 shaodw shadow-black">
-  <Card class="!resize-none">
+  <Card >
     <p>Left-Click and Drag on Background: Drag View</p>
     <p>Left-Click and Drag on Node: Drag Node (Edit Mode only)</p>
     <p>Left-Click and Drag on Handle: Create Connection (Edit Mode only)</p>

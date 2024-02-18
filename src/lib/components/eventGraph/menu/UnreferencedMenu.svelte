@@ -56,7 +56,7 @@
         out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
-        <div class="flex flex-col !resize-none rounded-lg bg-surface0">
+        <div class="flex flex-col rounded-lg bg-surface0">
           {#each objects as object}
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div
@@ -81,7 +81,7 @@
         out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
-        <div class="flex flex-col !resize-none rounded-lg bg-surface0">
+        <div class="flex flex-col rounded-lg bg-surface0">
           <!-- svelte-ignore a11y-no-static-element-interactions -->
           {#each attributes as attribute}
             <div

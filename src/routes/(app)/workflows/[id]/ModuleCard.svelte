@@ -34,7 +34,7 @@
   class:border-red={module.disabled}
   class:rounded-lg={module.disabled}
 >
-  <Card class="!resize-none !bg-surface1">
+  <Card class="!bg-surface1">
     <div class="flex flex-row gap-2 items-center">
       <Icon icon={`fa6-solid:${module.icon}`} />
       <span class="basis-full text-text">{module.name}</span>
