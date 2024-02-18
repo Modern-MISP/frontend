@@ -1,7 +1,7 @@
 <script lang="ts">
   import { addContextInfo, lockViewMode } from '$lib/actions';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { contextInfo, mode } from '$lib/stores';
+  import { mode } from '$lib/stores';
   import type { PageData } from './$types';
 
   /** Data that is displayed on this page. */

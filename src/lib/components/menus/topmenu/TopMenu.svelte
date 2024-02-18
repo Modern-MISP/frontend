@@ -5,6 +5,7 @@
   import ActionBar from './actionbar/ActionBar.svelte';
   import ToggleModeEntry from './actionbar/ToggleModeEntry.svelte';
   import ContextInfo from './contextInfo/ContextInfo.svelte';
+  import UserInfo from './UserInfo.svelte';
 
   /**
    * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
@@ -57,15 +58,7 @@
     </div>
 
     <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl">
-      <ContextInfo
-        info={[userData.email, userData.admin ? 'Administrator account' : 'User account']}
-      >
-        {#if userData.admin}
-          <Icon icon="mdi:shield-account" width="30" />
-        {:else}
-          <Icon icon="mdi:account" width="30" />
-        {/if}
-      </ContextInfo>
+      <UserInfo {userData}></UserInfo>
     </div>
 
     <!-- <div class="flex flex-col items-center gap-1">
