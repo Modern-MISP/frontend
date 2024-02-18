@@ -51,7 +51,7 @@ einzuarbeiten.
 Besonders, wenn es um die Implementierung des Edit Mode und der Filter ging,
 machten sich Probleme mit der MISP API bemerkbar.
 
-Die unvollständige und teils falsche API Spezifikation, 
+Die unvollständige und teils falsche API Spezifikation,
 inkonsistentes Verhalten und Error-Nachrichten mit geringfügiger Aussagekraft der API kosteten uns viel nicht eingeplante
 Zeit.
 
