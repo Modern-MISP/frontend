@@ -103,11 +103,11 @@
           <CreateTag on:close={() => (state = 'add')}></CreateTag>
         </Card>
       {:else}
-        <section class="h-full">
+        <section class="h-full overflow-auto">
           <DynCard header={data.header} data={data.attribute} />
         </section>
       {/if}
-      <section class="h-full">
+      <section class="h-full overflow-hidden">
         <Card>
           <CardHeading>Tags</CardHeading>
           <TagCollection

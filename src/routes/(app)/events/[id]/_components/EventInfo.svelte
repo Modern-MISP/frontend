@@ -55,7 +55,7 @@
       {:else if state === 'create' && $mode === 'edit'}
         <slot name="create" />
       {:else}
-        <section class="h-full">
+        <section class="h-full overflow-auto">
           <DynCard data={data.event} {header} />
         </section>
       {/if}

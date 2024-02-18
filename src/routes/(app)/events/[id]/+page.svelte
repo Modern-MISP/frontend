@@ -50,7 +50,7 @@
       <CreateTag on:close={() => (state = 'add')}></CreateTag>
     </Card>
   </svelte:fragment>
-  <Card>
+  <Card class="h-full">
     <CardHeading>Tags</CardHeading>
     <EventTags
       on:close={() => (state = 'info')}
