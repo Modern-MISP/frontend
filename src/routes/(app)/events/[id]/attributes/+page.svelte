@@ -208,21 +208,22 @@
   {topMenuActions}
   groupInfo={(x) => (x.object_id === '0' ? undefined : `Object: ${x.object_id}`)}
 >
-  <div
-    slot="added"
-    class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
-  >
-    {#if freetextImport}
-      <FilterCard>
-        <CardHeading>Freetext Import</CardHeading>
-        <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
-      </FilterCard>
-    {:else if attributeReplacement}
-      <FilterCard>
-        <CardHeading>Attribute Replacement</CardHeading>
-        <AttributeReplacement on:close={() => (attributeReplacement = false)}
-        ></AttributeReplacement>
-      </FilterCard>
+  <svelte:fragment slot="added">
+    {#if freetextImport || attributeReplacement}
+      <div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1">
+        {#if freetextImport}
+          <FilterCard>
+            <CardHeading>Freetext Import</CardHeading>
+            <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
+          </FilterCard>
+        {:else if attributeReplacement}
+          <FilterCard>
+            <CardHeading>Attribute Replacement</CardHeading>
+            <AttributeReplacement on:close={() => (attributeReplacement = false)}
+            ></AttributeReplacement>
+          </FilterCard>
+        {/if}
+      </div>
     {/if}
-  </div>
+  </svelte:fragment>
 </ComplexTableLayout>
