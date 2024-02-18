@@ -25,7 +25,7 @@
     
     Indicate context specific information that is displayed as a popover on click.
   -->
-<button class="text-subtext0" use:melt={$trigger}>
+<button use:melt={$trigger}>
   {#if userData.admin}
     <Icon icon="mdi:shield-account" width="30" />
   {:else}
