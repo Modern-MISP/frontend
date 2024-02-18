@@ -131,8 +131,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         value: (x) => ({
           display: PillCollection,
           props: {
-            pills:
-              x?.authors?.map((a) => ({ icon: 'streamline:user-circle-single', text: a })) ?? [],
+            pills: x?.authors?.map((a) => ({ icon: 'mdi:account-outline', text: a })) ?? [],
             class: 'pl-4'
           }
         })
@@ -147,10 +146,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
               x?.authors?.map((a) => ({
                 value: a,
                 text: a,
-                icon: 'streamline:user-circle-single'
+                icon: 'mdi:account-outline'
               })) ?? [], // NOTE: The `?? []` is required for some reason, otherwise the component throws an error. I don't understand it either.
             arbitraryInput: (a: string) => ({
-              icon: 'streamline:user-circle-single',
+              icon: 'mdi:account-outline',
               text: a,
               value: a
             })
@@ -295,7 +294,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const elementsHeader = [
     col2({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col2({
-      icon: 'mdi:key',
+      icon: 'mdi:key-outline',
       key: 'key',
       label: 'Key',
       value: (x) => ({

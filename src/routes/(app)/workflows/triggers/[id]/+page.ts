@@ -37,7 +37,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.name ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:information',
+      icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
       value: (x) => ({ display: Info, props: { text: x.description ?? '' } })
