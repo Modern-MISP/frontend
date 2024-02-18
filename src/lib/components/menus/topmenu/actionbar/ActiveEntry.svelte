@@ -27,6 +27,6 @@
   An {@link ActionBarEntry} with an `on:click` callback action associated with it.
 -->
 
-<button on:click={() => (active = !active)} class:text-sky={active} on:click>
+<button type="button" on:click={() => (active = !active)} class:text-sky={active} on:click>
   <ActionBarEntry {icon} {label} class={clazz} />
 </button>

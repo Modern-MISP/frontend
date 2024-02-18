@@ -27,7 +27,7 @@
 
 <div class="flex flex-row items-center justify-between gap-4 p-4 rounded-xl bg-mantle text-text">
   <div class="flex items-center gap-4">
-    <button on:click={() => (isOpen = !isOpen)} class="lg:hidden">
+    <button type="button" on:click={() => (isOpen = !isOpen)} class="lg:hidden">
       {#if isOpen}
         <Icon icon="mdi:close-circle-outline" class="text-4xl shrink-0" />
       {:else}

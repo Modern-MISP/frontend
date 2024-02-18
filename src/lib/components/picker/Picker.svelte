@@ -147,6 +147,7 @@
       >
         {#each autocomplete as props}
           <button
+            type="button"
             on:click={() => {
               // if there is only one value, just add this one. No seed to search. Also handles arbitraryInput in a easy way
               if (autocomplete.length === 1) {
