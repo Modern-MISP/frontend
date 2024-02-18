@@ -12,55 +12,53 @@ In diesem Abschnitt wird der Verlauf der Phase analysiert.
 
 An einigen Stellen konnte unser Zeitplan leider nicht wie vorgesehen eingehalten werden.
 
-Rote Balken symbolisieren, dass die entsprechende Aufgabe nicht zum geplanten Zeitpunkt vollständig abgeschlossen war.
+Rote Balken symbolisieren, dass die entsprechende Aufgabe zum geplanten Zeitpunkt nicht vollständig abgeschlossen war.
 
 ![commit frequency](commit_frequency.png)
 
 ## Erste Phasenhälfte
 
-Gerade in den ersten 1-2 Wochen ist die Implementierungsarbeit nur langsam in gang gekommen.
+Gerade in den ersten 1-2 Wochen kam die Implementierungsarbeit nur langsam in Gang.
 
 ### Planung
 
-Die erste Woche war noch geprägt von der Vorbereitung der Entwurfspräsentation, sowie Planung der Implementierungsphase.
-In dieser Zeit ist das ursprüngliche Gantt-Diagramm entstanden.
+In der ersten Woche arbeiteten wir vor allem an der Entwurfspräsentation. Außerdem planten wir die Implementierungsphase.
+In dieser Zeit entstand das ursprüngliche Gantt-Diagramm.
 
 Da wir die grundlegende Projektstruktur und einzelne Teile der Funktionalität bereits in der Entwurfsphase umgesetzt hatten, lagen wir zu diesem Zeitpunkt noch recht gut im Zeitplan.
 
 ### Start der Implementierung
 
-Die Verzögerungen am Anfang haben leider dazu geführt,
-dass sich auch der Beginn von darauffolgenden Aufgaben verzögert hat.
+Die Verzögerungen am Anfang führten dazu,
+dass sich auch der Beginn der darauffolgenden Aufgaben verzögerte.
 
-#### View mode
+#### View Mode
 
-Bei den Seiten für den view mode gab es keine größeren Probleme,
-allerdings hat die Implementierung trotzdem etwas länger gedauert als geplant.
+Bei den Seiten für den View Mode gab es keine größeren Probleme,
+trotzdem dauerte die Implementierung länger als geplant.
 
 #### Workflows
 
-Bei den Workflows hat es Anfangs Zeit gekostet,
+Bei den Workflows kostete es zu Beginn viel Zeit,
 sich in [SvelteFlow](https://svelteflow.dev/),
-die von uns verwendete Bibliothek zum realisieren das graphischen Editors,
+die von uns verwendete Bibliothek zur Realisierunf des graphischen Editors,
 einzuarbeiten.
 
 ## Zweite Phasenhälfte
 
 ### API Probleme
 
-Besonders als es an die Implementierung des edit mode und der Filter ging,
-haben sich die Probleme mit der MISP API bemerkbar gemacht.
+Besonders, wenn es um die Implementierung des Edit Mode und der Filter ging,
+machten sich Probleme mit der MISP API bemerkbar.
 
-Die teils falsche und unvollständige API Spezifikation,
-sowie inkonsistentes Verhalten und wenig aussagende oder irreführende
-Error-Nachrichten der API haben uns viel nicht eingeplante
-Zeit und Mühen gekostet.
+Die unvollständige und teils falsche API Spezifikation, 
+inkonsistentes Verhalten und Error-Nachrichten mit geringfügiger Aussagekraft der API kosteten uns viel nicht eingeplante
+Zeit.
 
 So mussten wir unter anderem API Endpoints "reverse-engineeren",
-um sie richtig ansprechen zu können
+um sie richtig ansprechen zu können,
 und eigene Typen für deren Rückgabewerte definieren.
 
 ### Endspurt
 
-In den letzten paar Tagen haben wir nochmal besonders viel gearbeitet,
-da die Zeit knapp wurde und wir noch alles fertig bekommen wollten.
+In den letzten paar Tagen arbeiteten wir besonders viel, um das Projekt trotz knapper Zeit zu vervollständigen.

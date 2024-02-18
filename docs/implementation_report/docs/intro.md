@@ -1,8 +1,6 @@
 # Einleitung
 
-In der Implementierungsphase haben wir den zuvor angefertigten Entwurf umgesetzt und
-uns weiter am Pflichtenheft orientiert, um die dort gelisteten Anforderungen in
-angemessenem Maße zu erfüllen.
+In der Implementierungsphase setzten wir den zuvor angefertigten Entwurf mit. 
+Basis ist ebenso das Pflichtenheft, um die angemessene Erfüllung der dort gelisteten Anforderungen zu gewährleisten.
 
-Im Verlaufe der Implementierung sind jedoch, wie bereits erwartet,
-einige Anpassungen am Entwurf notwendig geworden.
+Im Verlauf der Implementierung mussten wir jedoch einige Anpassungen am Entwurf machen.

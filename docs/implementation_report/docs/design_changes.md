@@ -4,22 +4,21 @@
 
 Ursprünglich war geplant, Workflows bei ihren Triggern anzuzeigen.
 
-Wir haben es für sinnvoll erachtet, Workflows ihre eigene Liste
-und ihre eigene Einzelansicht zu geben.
+Stattdessesn entschieden wir uns dazu, Workflows in einer eigenen Liste mit jeweils einer eigenen View Page darzustellen.
 Dort findet sich auch der graphische Editor.
 
 ## Neu hinzugefügt
 
-An einigen Stellen hat es sich angeboten neue Elemente zum Design hinzu zu fügen, um die UX zu verbessern.
+An einigen Stellen bot es sich an, neue Elemente zum Design hinzuzufügen, um die UX zu verbessern.
 
 ### Mode lock
 
-Das Umschalten zwischen view und edit mode wird in bestimmen Fällen gesperrt.
+Das Umschalten zwischen View und Edit Mode wird in bestimmen Fällen gesperrt.
 
 ### Context info
 
-In bestimmten Fällen ist es für den Nutzer hilfreich kontextuelle Informationen zu erhalten.
-Zum Beispiel, wenn sich Oberfläche anders verhält als gewöhnlich.
+In bestimmten Fällen ist es für den Nutzer hilfreich, kontextuelle Informationen zu erhalten,
+zum Beispiel, wenn sich die Oberfläche anders als gewöhnlich verhält.
 
 Diese zusätzlichen Informationen können im oberen Menü,
 rechts neben der Aktionsleiste,
