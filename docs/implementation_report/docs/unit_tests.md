@@ -29,7 +29,7 @@ Für unsere Unittests benutzen wir [Vitest](https://vitest.dev/).
 Die Tests beschränken sich auf wenige, rein logische Funktionen,
 für die kein aufwendiger DOM Mock notwendig war.
 
-Somit sind wir auf eine Unittestüberdeckung von knapp über 10 % gekommen.
+Somit sind wir auf eine Unittestüberdeckung von ungefähr 10 % gekommen.
 
 ## Weiteres
 
