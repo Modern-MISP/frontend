@@ -20,7 +20,6 @@ export const load: PageLoad = async ({ fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
   const tableData = data.map(
     (x) =>
-      // TODO: remove if openapi is valid
       x.Galaxy as (typeof x)['Galaxy'] & {
         enabled: boolean;
         local_only?: boolean;
