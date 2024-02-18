@@ -48,17 +48,16 @@ einzuarbeiten.
 
 ### API Probleme
 
-Besonders, wenn es um die Implementierung des Edit Mode und der Filter ging,
+Besonders bei der Implementierung des Edit Mode und der Filter,
 machten sich Probleme mit der MISP API bemerkbar.
 
-Die unvollständige und teils falsche API Spezifikation,
-inkonsistentes Verhalten und Fehlermeldungen mit geringfügiger Aussagekraft der API kosteten uns viel nicht eingeplante
-Zeit.
+Die unvollständige und teils falsche API Spezifikation, Fehlermeldungen mit geringfügiger Aussagekraft
+und inkonsistentes Verhalten der API kosteten uns viel nicht eingeplante Zeit.
 
-So mussten wir unter anderem API Endpoints "reverse-engineeren",
+So mussten wir unter anderem API-Endpunkte "reverse-engineeren",
 um sie richtig ansprechen zu können
 und eigene Typen für deren Rückgabewerte definieren.
 
 ### Endspurt
 
-In den letzten paar Tagen arbeiteten wir besonders viel, um das Projekt trotz knapper Zeit zu vervollständigen.
+In den letzten paar Tagen arbeiteten wir besonders viel, um das Projekt trotz knapper Frist zu beenden.
