@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { api } from '$lib/api/index.js';
   import { useEdges, useNodes } from '@xyflow/svelte';
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
@@ -38,6 +39,10 @@
 
   function showNodeDetails() {
     console.log(data);
+    const node = $nodes.find((node) => node.id === id);
+    if (node && node.type === 'attribute') {
+      history.pushState(null, '', `/attributes/${node.data.id}`);
+    }
   }
 
   function manipulateNode(expand: boolean) {
@@ -50,7 +55,7 @@
       // Iterate to find associated attribute nodes
       nodeEdges.forEach((edge) => {
         const associatedNode = $nodes.find((n) => n.id === edge.target);
-        if (associatedNode && associatedNode.type === 'attribute') {
+        if (associatedNode && associatedNode.type === 'attribute' && edge.type === 'relation') {
           // Update visibility based on expand parameter
           const hiddenValue = expand ? false : true;
 
@@ -89,8 +94,17 @@
   }
 
   function deleteNode() {
-    hideNode();
-    // need to delete (api)
+    const node = $nodes.find((node) => node.id === id);
+    if (node && node.type === 'attribute') {
+      hideNode();
+      $api
+        .DELETE('/attributes/delete/{attributeId}', {
+          params: { path: { attributeId: node.id } }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        });
+    }
   }
 
   function editNode() {
@@ -109,7 +123,9 @@
 
 <div in:fly={{ x: -200 }} out:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
   <IconCardRow class="border-2 border-sky flex-col">
-    <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
+    {#if type === 'attribute'}
+      <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
+    {/if}
   </IconCardRow>
 
   <IconCardRow class="border-2 border-sky">
@@ -126,7 +142,9 @@
 
   {#if $mode === 'edit'}
     <IconCardRow class="border-2 border-sky">
-      <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
+      {#if type === 'attribute'}
+        <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
+      {/if}
       <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
       <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
     </IconCardRow>

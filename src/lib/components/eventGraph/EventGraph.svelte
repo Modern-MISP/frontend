@@ -294,7 +294,7 @@
     if (type === 'object' || type === 'attribute') {
       const data = JSON.parse(event.dataTransfer.getData('node')).data;
 
-      if ($nodes.find(({ id }) => id === `unref-${data.type}-${data.id}`)) {
+      if ($nodes.find(({ id }) => id === `unreferenced-${data.type}-${data.id}`)) {
         return;
       }
 
@@ -304,7 +304,7 @@
       });
 
       const newNode = {
-        id: `unref-${data.type}-${data.id}`,
+        id: `unreferenced-${data.type}-${data.id}`,
         type,
         position,
         data: data,
@@ -343,8 +343,8 @@
   ]}
 />
 
-<header class="flex justify-between w-full gap-2">
-  <div class="flex flex-col justify-end gap-1">
+<header class="flex justify-end w-full gap-2">
+  <div class="flex flex-col gap-1">
     <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
 </header>

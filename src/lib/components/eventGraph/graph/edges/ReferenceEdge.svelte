@@ -27,7 +27,7 @@
   An edge representing a generic event graph reference.
 -->
 
-<BaseEdge path={edgePath} />
+<BaseEdge path={edgePath} style="stroke: #bae6fd;" />
 <EdgeLabelRenderer>
   <div
     style:transform="translate(-50%, -50%) translate({labelX}px,{labelY}px)"
