@@ -99,7 +99,16 @@
       hideNode();
       $api
         .DELETE('/attributes/delete/{attributeId}', {
-          params: { path: { attributeId: node.id } }
+          params: { path: { attributeId: node.data.id } }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        });
+    } else if (node && node.type === 'object') {
+      hideNode();
+      $api
+        .DELETE('/objects/delete/{objectId}/{hardDelete}', {
+          params: { path: { objectId: node.data.id, hardDelete: '1' } }
         })
         .then((resp) => {
           if (resp.error) throw new Error(resp.error.message);
