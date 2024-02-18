@@ -25,6 +25,10 @@ Eine Validierung möglicher Eingabewerte wird bei UUIDs nicht durchgeführt.
 
 Der Typ eines Attributs kann beim Bearbeiten nicht abhängig von der ausgewählten Kategorie ausgewählt werden, sodass illegale Kategorie/ Typ-Kombinationen möglich sind. Beim Erstellen eines Attributs über den Erstelldialog ist eine legale Kombination jedoch gesichert.
 
+### Objekte
+
+Objekte werden wegen aus Zeitgründen nicht unterstützt.
+
 ### Abhängigkeit von API
 
 Die MISP API verhält sich an vielen Stellen anders als spezifiziert
@@ -34,6 +38,10 @@ In einigen Fällen weicht das tatsächliche Verhalten der API so von unseren Erw
 #### Login
 
 Die API liefert keinen Endpunkt für ein passwortbasiertes Anmelden, also kann Login nur über MISP-Token durchgeführt werden.
+
+#### Events
+
+Die API liefert keine Endpunkt, um zwischen 'Publish with/without Email' zu unterscheiden.
 
 #### Tags
 
@@ -59,6 +67,10 @@ Die API liefert keinen Endpunkt für Enrichments.
 ##### Batch Import Flag
 
 Die API liefert keinen Endpunkt für Batch Import Flags.
+
+##### Merge
+
+Die API liefert keinen Endpunkt für 'Merge Attributes'.
 
 #### Galaxies
 
