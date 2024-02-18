@@ -13,6 +13,7 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { notifySave } from '$lib/util/notifications.util';
+  import type { EventState } from '../../events/[id]/_components/EventState.interface';
   import type { PageData } from './$types';
   import { addTags, deleteTags } from './attribute.util';
 
@@ -23,7 +24,7 @@
 
   let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 
-  let state: 'addTag' | 'info' | 'createTag' = 'info';
+  let state: EventState = 'info';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -87,17 +88,17 @@
 <div class="h-full overflow-auto">
   <Form callback={editCallback} bind:actions={formActions}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'addTag'}
+      {#if state === 'add'}
         <AddTagForm
           bind:selection
-          on:createTag={() => (state = 'createTag')}
+          on:createTag={() => (state = 'create')}
           on:close={() => (state = 'info')}
-          on:add={({ detail }) => {
-            addTags(detail.map((x) => ({ ...x, attributeId: $page.params.id })));
-          }}
         />
-      {:else if state === 'createTag'}
-        <CreateTagForm on:close={() => (state = 'addTag')}></CreateTagForm>
+      {:else if state === 'create'}
+        <Card>
+          <CardHeading>Create a Tag</CardHeading>
+          <CreateTagForm on:close={() => (state = 'add')}></CreateTagForm>
+        </Card>
       {:else}
         <section class="h-full">
           <DynCard header={data.header} data={data.attribute} />
@@ -107,10 +108,17 @@
         <Card>
           <CardHeading>Tags</CardHeading>
           <TagCollection
+            bind:selection
+            on:close={() => (state = 'info')}
+            on:open={() => (state = 'add')}
             on:delete={({ detail }) => {
               deleteTags(
                 detail.map((x) => ({ attributeId: $page.params.id, value: x.value ?? '' }))
               );
+            }}
+            on:save={({ detail }) => {
+              // @ts-expect-error svelte error. Does not detect the generic correctly.
+              addTags(detail.map((x) => ({ ...x, attributeId: $page.params.id })));
             }}
             tags={data.attribute.Tag ?? []}
           ></TagCollection>

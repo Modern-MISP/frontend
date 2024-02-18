@@ -8,18 +8,18 @@ import { handleEventPromise } from '../../events/[id]/_components/event.util';
  */
 export async function addTags(
   tags: {
-    local: boolean;
-    id: string;
+    local_only: boolean;
+    value: string;
     attributeId: string;
   }[]
 ) {
-  const promises = tags.map(({ id, local, attributeId }) =>
+  const promises = tags.map(({ value, local_only, attributeId }) =>
     get(api).POST('/attributes/addTag/{attributeId}/{tagId}/local:{local}', {
       params: {
         path: {
           attributeId,
-          tagId: id,
-          local: local ? 1 : 0
+          tagId: value,
+          local: local_only ? 1 : 0
         }
       },
       headers: {
