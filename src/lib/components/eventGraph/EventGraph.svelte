@@ -358,7 +358,7 @@
 
 <header class="flex justify-between w-full gap-4">
   <div class="flex flex-col gap-1">
-    <span>Reference Type</span>
+    <span>Reference Type for new references</span>
     <Select
       bind:value={referenceType}
       options={referenceTypes.map((r) => ({
