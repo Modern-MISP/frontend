@@ -47,7 +47,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'ph:hash-bold',
       key: 'tagged_events',
       label: 'Tagged Events',
-      value: (x) => ({ display: Info, props: { text: x.count, class: 'm-auto' } })
+      value: (x) => ({
+        display: Pill,
+        props: { text: x.count, class: 'm-auto', icon: 'mdi:pound' }
+      })
     }),
     col({
       icon: 'mdi:export-variant',

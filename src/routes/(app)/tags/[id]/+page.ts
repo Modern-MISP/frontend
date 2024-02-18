@@ -6,10 +6,9 @@ import type { PageLoad } from './$types';
 import { shouldTextBeBlack } from '$lib/util/color.util';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Info from '$lib/components/info/Info.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -52,7 +51,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
     col({
       key: 'tagged_events',
       label: 'Tagged Events',
-      value: (x) => ({ display: Info, props: { text: x.count } })
+      value: (x) => ({
+        display: Pill,
+        props: { text: x.count, icon: 'mdi:pound' }
+      })
     }),
     col({
       key: 'exportable',
@@ -84,8 +86,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
       // class: 'whitespace-nowrap',
       value: (x) => ({ display: Boolean, props: { isTrue: x.user_id !== '0' } })
     })
-
-    //TODO: more categories necessary?
   ];
 
   return {
