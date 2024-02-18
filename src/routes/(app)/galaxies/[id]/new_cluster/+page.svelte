@@ -105,8 +105,7 @@
         value: (x) => ({
           display: PillCollection,
           props: {
-            pills:
-              x?.authors?.map((a) => ({ icon: 'mdi:account-outline', text: a })) ?? [],
+            pills: x?.authors?.map((a) => ({ icon: 'mdi:account-outline', text: a })) ?? [],
             class: 'pl-4'
           }
         })
