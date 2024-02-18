@@ -17,7 +17,7 @@ Als Werkzeug zum Generieren unseres Storybooks nutzen wir [Histoire](https://his
 
 ## Unittests
 
-An den Stellen, an denen es sinnvoll war, verwendeen wir ergänzend
+An den Stellen, an denen es sinnvoll war, verwenden wir ergänzend
 normale Unittests.
 
 ### Testsuite
