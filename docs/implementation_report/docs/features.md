@@ -29,6 +29,10 @@ Der Typ eines Attributs kann beim Bearbeiten nicht abhängig von der ausgewählt
 
 Objekte werden wegen aus Zeitgründen nicht unterstützt.
 
+### Zertifikate
+
+Das Zufügen und Entfernen von Zertifikaten wird nicht unterstützt.
+
 ### Abhängigkeit von API
 
 Die MISP API verhält sich an vielen Stellen anders als spezifiziert
