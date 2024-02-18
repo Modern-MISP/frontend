@@ -19,7 +19,7 @@
   A list of all galaxies.
 -->
 
-<ComplexTableLayout {...data} tableData={filtered} filter={[]} pagination={false}>
+<ComplexTableLayout {...data} {tableData}>
   <div slot="filter">
     <EnableFilter bind:data={tableData} bind:filtered></EnableFilter>
   </div>

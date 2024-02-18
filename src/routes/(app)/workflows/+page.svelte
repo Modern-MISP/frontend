@@ -17,14 +17,7 @@
   
   A list of all workflows.
 -->
-<ComplexTableLayout
-  tableHref={({ id }) => `/workflows/${id}`}
-  {header}
-  tableData={filtered}
-  topMenuActions={[]}
-  filter={[]}
-  pagination={false}
->
+<ComplexTableLayout tableHref={({ id }) => `/workflows/${id}`} {header} tableData={filtered}>
   <div slot="filter">
     <EnableFilter data={filterableTableData} bind:filtered></EnableFilter>
   </div>

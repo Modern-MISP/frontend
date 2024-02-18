@@ -540,6 +540,7 @@ export const load = async ({ fetch }) => {
     tableData,
     filter,
     topMenuActions,
-    editActions
+    editActions,
+    maxCount: +response.headers.get('X-result-count')!
   };
 };
