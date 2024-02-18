@@ -2,6 +2,7 @@
   import { invalidateAll } from '$app/navigation';
   import { api } from '$lib/api/index.js';
   import type { components } from '$lib/api/misp.js';
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Info from '$lib/components/info/Info.svelte';
   import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
   import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
@@ -15,6 +16,8 @@
   import { shouldTextBeBlack } from '$lib/util/color.util.js';
   import { notifySave } from '$lib/util/notifications.util.js';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+  import AttributeReplacement from './AttributeReplacement.svelte';
+  import FreetextImport from './FreetextImport.svelte';
 
   export let data;
 
@@ -87,7 +90,7 @@
     }),
 
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'object_relation',
       label: 'Object Relation',
       value: (x) => x.object_relation ?? ''
@@ -123,18 +126,56 @@
     })
   ];
 
-  const topMenuActions: ActionBarEntryProps[] = [
+  let freetextImport = false;
+  let attributeReplacement = false;
+
+  let topMenuActions: ActionBarEntryProps[];
+  $: topMenuActions = [
     {
-      icon: 'mdi:plus',
+      icon: 'mdi:flag-plus',
       label: 'Add',
       action: `/events/${data.event.id}/attributes/new`
-    }
+    },
+    freetextImport
+      ? {
+          icon: 'mdi:close-circle-outline',
+          label: 'Close Freetext Import Tool',
+          action: () => {
+            freetextImport = false;
+          },
+          class: 'text-red'
+        }
+      : {
+          icon: 'mdi:pencil-outline',
+          label: 'Freetext Import Tool',
+          action: () => {
+            freetextImport = true;
+            attributeReplacement = false;
+          }
+        },
+    attributeReplacement
+      ? {
+          icon: 'mdi:close-circle-outline',
+          label: 'Close Attribute Replacement Tool',
+          action: () => {
+            attributeReplacement = false;
+          },
+          class: 'text-red'
+        }
+      : {
+          icon: 'mdi:pencil-outline',
+          label: 'Attribute Replacement Tool',
+          action: () => {
+            attributeReplacement = true;
+            freetextImport = false;
+          }
+        }
   ];
 
   const editActions: DynCardActionHeader<Data[]>[] = [
     {
       label: 'Delete Attribute',
-      icon: 'mdi:delete',
+      icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (attributes) => {
         notifySave(
@@ -165,4 +206,23 @@
   filter={[]}
   {topMenuActions}
   groupInfo={(x) => (x.object_id === '0' ? undefined : `Object: ${x.object_id}`)}
-></ComplexTableLayout>
+>
+  <svelte:fragment slot="added">
+    {#if freetextImport || attributeReplacement}
+      <div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1">
+        {#if freetextImport}
+          <FilterCard>
+            <span slot="heading">Freetext Import</span>
+            <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
+          </FilterCard>
+        {:else if attributeReplacement}
+          <FilterCard>
+            <span slot="heading">Attribute Replacement</span>
+            <AttributeReplacement on:close={() => (attributeReplacement = false)}
+            ></AttributeReplacement>
+          </FilterCard>
+        {/if}
+      </div>
+    {/if}
+  </svelte:fragment>
+</ComplexTableLayout>

@@ -59,12 +59,12 @@
   </slot>
 
   <SideMenuDivider />
-  <nav class="flex flex-col justify-start w-full gap-2 overflow-auto">
+  <nav class="flex flex-col w-full gap-2 overflow-auto overflow-x-hidden">
     <slot>
       {#if contextRoutes.length > 0}
-        <div class="flex flex-col justify-center w-full gap-2 px-1 py-2 bg-crust rounded-2xl">
+        <div class="flex flex-col justify-center w-full gap-2 bg-crust rounded-2xl">
           {#each contextRoutes as route}
-            <div class="flex-row px-4 rounded-2xl" class:bg-crust={isOpen}>
+            <div class="flex-row rounded-2xl" class:bg-crust={isOpen}>
               <SideMenuEntry
                 {...route}
                 isMenuOpen={isOpen}
@@ -76,7 +76,7 @@
         <SideMenuDivider />
       {/if}
       {#each routes as route}
-        <div class="flex flex-col px-5 rounded-2xl" class:bg-crust={isOpen}>
+        <div class="flex flex-col rounded-2xl" class:bg-crust={isOpen}>
           <SideMenuEntry
             {...route}
             isMenuOpen={isOpen}

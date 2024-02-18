@@ -27,7 +27,7 @@
 <svelte:window
   use:actionBar={[
     {
-      icon: 'mdi:plus',
+      icon: 'mdi:plus-circle-outline',
       label: 'Add Cluster',
       action: `/galaxies/${$page.params.id}/new_cluster`
     },

@@ -40,7 +40,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.module_type ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:checkbox-outline',
+      icon: 'mdi:checkbox-marked-outline',
       key: 'enabled',
       label: 'Enabled',
       value: (x) => ({ display: Boolean, props: { isTrue: !x.disabled } })

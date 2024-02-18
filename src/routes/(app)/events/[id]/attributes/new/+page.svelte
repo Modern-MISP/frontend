@@ -128,7 +128,7 @@
 
   $: $currentRoute = [
     ...($currentRoute ?? []),
-    { name: 'New Attribute', icon: 'mdi:plus', href: 'new' }
+    { name: 'New Attribute', icon: 'mdi:flag-plus', href: 'new' }
   ];
 </script>
 

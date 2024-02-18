@@ -1,6 +1,7 @@
-<script lang="ts">
-  import EventPillCollectionCard from './EventPillCollectionCard.svelte';
+<script lang="ts" generics="T">
+  import EventPillCollectionCard from '$lib/components/pills/pillCollection/PillCollectionWithDeleteAndAdd.svelte';
 
+  import type { components } from '$lib/api/misp';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -8,37 +9,33 @@
   import { mode } from '$lib/stores';
   import { isEqual, merge } from 'lodash-es';
   import { type ComponentProps } from 'svelte';
-  import type { PageData } from '../$types';
-  import type { EventState } from './EventState.interface';
-  import { detachCluster } from './event.util';
-  import { page } from '$app/stores';
 
   /**
    * The Page data.
    */
-  export let data: PageData;
-
-  /**
-   * The current mode of the page.
-   */
-  export let state: EventState;
+  export let galaxies: (components['schemas']['Galaxy'] & {
+    GalaxyCluster?: (components['schemas']['GalaxyCluster'] & {
+      local?: boolean;
+      relationship_type?: string;
+      tag_id: string;
+    })[];
+  })[] = [];
 
   /**
    * The currently selected pills
    */
-  export let selection: PickerPill[] = [];
+  export let selection: PickerPill<T>[] = [];
   /**
    * Pills that are marked for deletion
    */
-  export let deletion: PickerPill[] = [];
+  export let deletion: PickerPill<T>[] = [];
 
   let pillsByGalaxy: Record<string, ComponentProps<HrefPill>[]>;
 
   function generatePills(includeAction: boolean) {
-    if (!data.event.Galaxy) return;
     pillsByGalaxy = merge(
       {},
-      ...data.event.Galaxy.map((x: (typeof data.event.Galaxy)[number]) => ({
+      ...galaxies.map((x) => ({
         [x.id!]:
           x.GalaxyCluster?.map((y) => {
             const pill: ComponentProps<HrefPill> = {
@@ -65,7 +62,7 @@
                         pillsByGalaxy[x.id!] = [...pillsByGalaxy[x.id!], pill];
                       }
                     }
-                  };
+                  } as unknown as PickerPill<T>; // Not cast safe.
                   deletion = [...deletion, deletionPill];
                 }
               };
@@ -76,18 +73,11 @@
     );
   }
 
-  $: if (data) generatePills($mode === 'edit');
+  $: if (galaxies) generatePills($mode === 'edit');
 </script>
 
-<EventPillCollectionCard
-  title="Galaxies"
-  bind:state
-  bind:selection
-  bind:deletion
-  on:delete={({ detail }) =>
-    detachCluster(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
->
-  {#each data.event?.Galaxy ?? [] as galaxy}
+<EventPillCollectionCard on:close on:open on:delete on:save bind:selection bind:deletion>
+  {#each galaxies as galaxy}
     <a href="/galaxies/{galaxy.id}">
       <CardHeading class="py-2 pt-3 text-xl">{galaxy.name}</CardHeading>
     </a>

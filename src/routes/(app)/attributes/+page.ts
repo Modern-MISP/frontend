@@ -1,27 +1,29 @@
+import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
+import type { components } from '$lib/api/misp';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
+import Info from '$lib/components/info/Info.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
+import {
+  DISTRIBUTION_LOOKUP,
+  EXPORT_FORMAT_LOOKUP,
+  THREAT_LEVEL_LOOKUP
+} from '$lib/consts/PillLookups';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { shouldTextBeBlack } from '$lib/util/color.util';
+import { notifySave } from '$lib/util/notifications.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-import type { components } from '$lib/api/misp';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
-import Info from '$lib/components/info/Info.svelte';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
-import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { shouldTextBeBlack } from '$lib/util/color.util';
-import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Select from '$lib/components/form/Select.svelte';
-import Input from '$lib/components/input/Input.svelte';
-import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
-import { THREAT_LEVEL_LOOKUP, EXPORT_FORMAT_LOOKUP } from '$lib/consts/PillLookups';
-import { invalidateAll } from '$app/navigation';
-import { notifySave } from '$lib/util/notifications.util';
 
 export const load = async ({ fetch }) => {
   const {
@@ -30,7 +32,17 @@ export const load = async ({ fetch }) => {
     error: mispError
   } = await get(api).POST('/attributes/restSearch', { fetch, body: { limit: 50, page: 1 } });
 
-  if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
+  const {
+    data: attributeLength,
+    error: attributeLengthError,
+    response: attributeResponse
+  } = await get(api).GET('/attributes/attributeStatistics/{context}/{percentage}', {
+    params: { path: { context: 'type', percentage: 0 } }
+  });
+
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  if (attributeLengthError)
+    error(attributeResponse.status as NumericRange<400, 599>, attributeLengthError.message);
 
   const tableData = data.response?.Attribute ?? [];
 
@@ -125,10 +137,28 @@ export const load = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'object_relation',
       label: 'Object Relation',
       value: (x) => x.object_relation ?? ''
+    }),
+    col({
+      icon: 'mdi:tag',
+      key: 'tags',
+      label: 'Tags',
+      value: (x) => ({
+        display: PillCollection,
+        props: {
+          pills: (x.Tag ?? []).map((y) => ({
+            icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
+            label: y.relationship_type ? y.relationship_type : undefined,
+            text: y.name,
+            style: `background-color: ${y.colour}; color: ${
+              shouldTextBeBlack(y.colour!) ? 'black' : 'white'
+            }`
+          }))
+        }
+      })
     }),
     col({
       icon: 'mdi:circle',
@@ -174,24 +204,6 @@ export const load = async ({ fetch }) => {
         props: {
           date: x.last_seen ? new Date(+x.last_seen || 0) : null,
           onNullText: 'no sighting'
-        }
-      })
-    }),
-    col({
-      icon: 'mdi:tag',
-      key: 'tags',
-      label: 'Tags',
-      value: (x) => ({
-        display: PillCollection,
-        props: {
-          pills: (x.Tag ?? []).map((y) => ({
-            icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-            label: y.relationship_type ? y.relationship_type : undefined,
-            text: y.name,
-            style: `background-color: ${y.colour}; color: ${
-              shouldTextBeBlack(y.colour!) ? 'black' : 'white'
-            }`
-          }))
         }
       })
     })
@@ -472,23 +484,6 @@ export const load = async ({ fetch }) => {
       value: () => 'limit'
     })
   ];
-  const topMenuActions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:event-add',
-      label: 'Add Attributes',
-      action: '' //TODO: /attributes/new
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Freetext Import Tool',
-      action: '' //TODO: freetext import tool
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Attribute Replacement Tool',
-      action: '' //TODO: attribute replacement tool
-    }
-  ];
 
   const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
@@ -539,8 +534,7 @@ export const load = async ({ fetch }) => {
     header,
     tableData,
     filter,
-    topMenuActions,
     editActions,
-    maxCount: +response.headers.get('X-result-count')!
+    maxCount: Object.values(attributeLength).reduce((a, b) => +a + +b, 0) - 1
   };
 };
