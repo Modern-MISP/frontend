@@ -48,7 +48,7 @@
   {title}
 >
   {#if icon || label}
-    <div class="flex items-center gap-2 px-2 py-1 text-white shrink-0 bg-crust">
+    <div class="flex items-center gap-2 px-2 py-1 text-text shrink-0 bg-crust">
       {#if icon}
         <Icon {icon} />
       {/if}

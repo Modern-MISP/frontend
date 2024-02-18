@@ -18,3 +18,14 @@
 .overflow-initial {
   overflow: initial;
 }
+
+.latte {
+  --ctp-overlay0: 220, 220, 220;
+  --ctp-text: 110, 110, 120;
+  --ctp-surface2: 240, 240, 240;
+  --ctp-surface1: 250, 250, 255;
+  --ctp-mantle: 240, 240, 240;
+  --ctp-crust: 240, 245, 255;
+  --ctp-base: 248, 248, 248;
+  --ctp-surface0: 255, 255, 255;
+}
