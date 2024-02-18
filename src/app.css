@@ -20,12 +20,21 @@
 }
 
 .latte {
-  --ctp-overlay0: 220, 220, 220;
+  /* --ctp-overlay0: 220, 220, 220;
   --ctp-text: 110, 110, 120;
   --ctp-surface2: 240, 240, 240;
   --ctp-surface1: 250, 250, 255;
   --ctp-mantle: 240, 240, 240;
   --ctp-crust: 240, 245, 255;
   --ctp-base: 248, 248, 248;
+  --ctp-surface0: 255, 255, 255; */
+
+  /* --ctp-overlay0: 190, 190, 190;
+  --ctp-text: 70, 70, 80;
+  --ctp-surface2: 230, 230, 230;
+  --ctp-mantle: 245, 245, 245;
+  --ctp-crust: 220, 225, 255;
+  --ctp-base: 230, 230, 230;
   --ctp-surface0: 255, 255, 255;
+  --ctp-surface1: 245, 245, 245; */
 }
