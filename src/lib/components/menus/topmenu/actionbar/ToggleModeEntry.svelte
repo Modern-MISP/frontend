@@ -32,7 +32,11 @@
         on:change={() => (mode = mode === 'view' ? 'edit' : 'view')}
       />
     </div>
-    <div class="top-0 left-2 absolute text-red" class:hidden={!disabled} title="mode locked">
+    <div
+      class="top-0 left-2 absolute text-red drop-shadow-md"
+      class:hidden={!disabled}
+      title="mode locked"
+    >
       <Icon icon="mdi:lock" width="30" />
     </div>
   </div>
