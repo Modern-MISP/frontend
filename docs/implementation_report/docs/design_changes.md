@@ -48,6 +48,10 @@ wenn für den aktuellen Kontext Informationen zur Verfügung stehen.
 
 Einige Funktionen wurden zwischen Aktionsleisten und Schnellaktionenleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als überflüssig und wurden somit nicht implementiert.
 
+## Contact Reporter
+
+Statt einer separaten Funktionalität kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gewünschte Nachricht per E-Mail senden.
+
 ## Tabellenspalten
 
 Die Spalten bei Tabellendarstellungen sind nicht vom Nutzer auszuwählen.
