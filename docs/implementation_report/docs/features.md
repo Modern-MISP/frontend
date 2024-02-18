@@ -25,7 +25,7 @@ Eine Validierung möglicher Eingabewerte wird bei UUIDs nicht durchgeführt.
 
 Der Typ eines Attributs kann beim Bearbeiten nicht abhängig von der ausgewählten Kategorie ausgewählt werden, sodass illegale Kategorie/ Typ-Kombinationen möglich sind. Beim Erstellen eines Attributs über den Erstelldialog ist eine legale Kombination jedoch gesichert.
 
-### Der API verschuldet
+### Abhängigkeit von API
 
 Die MISP API verhält sich an vielen Stellen anders als spezifiziert
 oder anderweitig inkonsistent.
