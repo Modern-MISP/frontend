@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
