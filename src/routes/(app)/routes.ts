@@ -9,12 +9,14 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Attributes',
     icon: 'mdi:flag',
-    href: '/attributes'
+    href: '/attributes',
+    userAccess: 'viewOnly'
   },
   {
     name: 'Tags',
     icon: 'mdi:tag',
-    href: '/tags'
+    href: '/tags',
+    userAccess: 'viewOnly'
   },
   {
     name: 'Galaxies',
@@ -56,21 +58,25 @@ export const routes: SideMenuRoute[] = [
     name: 'Admin',
     icon: 'mdi-shield-account',
     href: '/admin',
+    userAccess: 'none',
     children: [
       {
         name: 'Users',
         icon: 'mdi:account',
+        userAccess: 'none',
         href: '/admin/users'
       },
       {
         name: 'Keys',
         icon: 'mdi:key',
+        userAccess: 'none',
         href: '/admin/keys'
       },
 
       {
         name: 'Remote Server',
         icon: 'mdi:server',
+        userAccess: 'none',
         href: '/admin/servers'
       }
     ]
