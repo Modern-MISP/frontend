@@ -39,7 +39,7 @@ trotzdem dauerte die Implementierung länger als geplant.
 
 #### Workflows
 
-Bei den Workflows kostete es zu Beginn viel Zeit,
+Bei den Workflows war es sehr zeitaufwendig,
 sich in [SvelteFlow](https://svelteflow.dev/),
 die von uns verwendete Bibliothek zur Realisierung des grafischen Editors,
 einzuarbeiten.
