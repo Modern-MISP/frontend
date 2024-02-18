@@ -7,30 +7,10 @@
   import { fly } from 'svelte/transition';
 
   export let id: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export let data: any;
   export let type: string;
 
   const nodes = useNodes();
   const edges = useEdges();
-
-  function duplicateNode() {
-    const node = $nodes.find((node) => node.id === id);
-    if (node) {
-      $nodes.push({
-        ...node,
-        // need better id
-        id: `${id}-copy${Math.random()}`,
-        position: {
-          x: node.position.x,
-          y: node.position.y + 50
-        },
-        // need to copy all data except ids
-        data: node.data
-      });
-    }
-    $nodes = $nodes;
-  }
 
   function hideNode() {
     $nodes = $nodes.filter((node) => node.id !== id);
@@ -134,7 +114,6 @@
       {#if type === 'attribute'}
         <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
       {/if}
-      <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
       <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
     </IconCardRow>
   {/if}

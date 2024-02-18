@@ -378,7 +378,7 @@
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu id={menu.id} data={menu.data} type={menu.type} />
+      <ContextMenu id={menu.id} type={menu.type} />
     {/if}
     <Flow
       {nodes}
