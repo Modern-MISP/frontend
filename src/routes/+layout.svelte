@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { afterNavigate, beforeNavigate } from '$app/navigation';
   import { settings } from '$lib/stores';
   import { tweened } from 'svelte/motion';
@@ -6,12 +6,16 @@
   const progressValue = tweened(0, { duration: 0 });
 
   const max = 100;
+
+  let timeout: ReturnType<typeof setTimeout>;
   beforeNavigate(() => {
-    progressValue.set(99, { duration: 200 });
+    timeout = setTimeout(() => {
+      progressValue.set(99, { duration: 200 });
+    }, 100);
   });
 
   afterNavigate(() => {
-    $progressValue = 100;
+    if (timeout) clearTimeout(timeout);
     $progressValue = 0;
   });
 </script>
