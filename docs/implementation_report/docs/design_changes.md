@@ -21,7 +21,7 @@ Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. E
 
 ## Benennung Eigenschaften
 
-Einigen Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
+Einige Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
 
 ## Auswahl dargestellter Eigenschaften
 
