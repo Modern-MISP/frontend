@@ -5,6 +5,8 @@
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
+  import ActionBarEntry from '$lib/components/menus/topmenu/actionbar/ActionBarEntry.svelte';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
@@ -53,9 +55,10 @@
   
 -->
 
-<svelte:window use:actionBar={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]} />
-
-<Form callback={editCallback}>
+<Form
+  callback={editCallback}
+  additionalActions={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]}
+>
   <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
     <DynCard header={left} data={user} />
     <DynCard header={right} data={user} />

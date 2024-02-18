@@ -23,9 +23,14 @@
       }
     }
   ];
+
+  /**
+   * Additional actions to display.
+   */
+  export let additionalActions: ActionBarEntryProps[] = [];
 </script>
 
-<svelte:window use:actionBar={actions} />
+<svelte:window use:actionBar={[...additionalActions, ...actions]} />
 <form bind:this={form} on:submit|preventDefault={(e) => callback(getFormValues(e))} class="h-full">
   <slot />
 </form>

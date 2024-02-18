@@ -135,7 +135,7 @@ export default {
   notification_daily: col(
     {
       key: 'notification_daily',
-      label: 'daily',
+      label: 'Daily notifications',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.notification_daily ?? false } })
     },
     {
@@ -148,7 +148,7 @@ export default {
   notification_weekly: col(
     {
       key: 'notification_weekly',
-      label: 'weekly',
+      label: 'Weekly notifications',
       value: (x) => ({
         display: Boolean,
         props: { isTrue: x.User?.notification_weekly ?? false }
@@ -164,7 +164,7 @@ export default {
   notification_monthly: col(
     {
       key: 'notification_monthly',
-      label: 'monthly',
+      label: 'Monthly notifications',
       value: (x) => ({
         display: Boolean,
         props: { isTrue: x.User?.notification_monthly ?? false }
