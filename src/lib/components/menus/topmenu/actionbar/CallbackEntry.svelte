@@ -29,6 +29,6 @@
   An {@link ActionBarEntry} with an `on:click` callback action associated with it.
 -->
 
-<button on:click={action} {disabled} type="button">
+<button type="button" on:click={action} {disabled}>
   <ActionBarEntry {icon} {label} {disabled} class={clazz} />
 </button>

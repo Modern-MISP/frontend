@@ -4,6 +4,7 @@
   import type { components } from '$lib/api/misp';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
+  import { mode } from '$lib/stores';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from '../$types';
   import type { EventState } from './EventState.interface';
@@ -49,12 +50,12 @@
 <div class="h-full overflow-auto">
   <Form callback={formCallback}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'add'}
+      {#if state === 'add' && $mode === 'edit'}
         <slot name="add" />
-      {:else if state === 'create'}
+      {:else if state === 'create' && $mode === 'edit'}
         <slot name="create" />
       {:else}
-        <section class="h-full">
+        <section class="h-full overflow-auto">
           <DynCard data={data.event} {header} />
         </section>
       {/if}

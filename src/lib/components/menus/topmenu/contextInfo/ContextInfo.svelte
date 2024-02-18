@@ -22,13 +22,16 @@
   
   Indicate context specific information that is displayed as a popover on click.
 -->
-<button class="text-subtext0" class:!text-yellow={info.length > 0} use:melt={$trigger}>
-  <slot>
-    <Icon icon="mdi:information" width="30" />
-  </slot>
+<button
+  type="button"
+  class="text-subtext0"
+  class:!text-yellow={info.length > 0}
+  use:melt={$trigger}
+>
+  <Icon icon="mdi:information" width="30" />
 </button>
 {#if $open}
-  <div use:melt={$content} class="bg-surface1 text-text rounded-lg p-3">
+  <div use:melt={$content} class="p-3 rounded-lg bg-surface1 text-text">
     <div use:melt={$arrow} />
     <div class="flex flex-col gap-2">
       {#each info as message}

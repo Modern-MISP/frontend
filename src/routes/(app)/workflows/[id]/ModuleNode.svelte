@@ -93,12 +93,17 @@
         </span>
       {/if}
       {#if fullData.disabled}
-        <button class="text-2xl text-red hover:mix-blend-hard-light" title="Module disabled">
+        <button
+          type="button"
+          class="text-2xl text-red hover:mix-blend-hard-light"
+          title="Module disabled"
+        >
           <Icon icon="fa6-solid:circle-exclamation" />
         </button>
       {/if}
       {#if fullData.blocking}
         <button
+          type="button"
           class="text-2xl text-peach hover:mix-blend-hard-light"
           title="Blocking module might not work as intended"
         >
@@ -108,6 +113,7 @@
       {#if fullData.support_filters}
         <!-- Module filters are not yet supported -->
         <button
+          type="button"
           class="text-2xl text-sky hover:mix-blend-hard-light"
           title="module filtering conditions (not yet supported)"
           disabled

@@ -91,6 +91,7 @@
   {#if children}
     {#if isMenuOpen}
       <button
+        type="button"
         class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
         class:rotate-180={isOpen}
         on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}

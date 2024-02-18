@@ -59,6 +59,7 @@
           <PillCollection pills={deletion}></PillCollection>
 
           <button
+            type="button"
             on:click={_onDelete}
             class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
           >

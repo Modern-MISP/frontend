@@ -20,7 +20,7 @@
   /**
    * The tags that can be picked.
    */
-  export let selection: PickerPill[] = [];
+  export let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 
   let relation = TAG_RELATION_TYPES[0];
 
@@ -29,7 +29,9 @@
   $: selection = pickedItems.map((x) => ({
     ...x,
     icon: local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
-    label: relation !== 'Unspecified' ? relation : undefined
+    label: relation !== 'Unspecified' ? relation : undefined,
+    local_only,
+    relation
   }));
 
   let local_only = false;
@@ -57,22 +59,6 @@
         class="w-min whitespace-nowrap bg-surface1"
         suffixIcon="mdi:plus-circle-outline"
         on:click={() => dispatch('createTag')}>Create new Tag</Button
-      >
-      <Button
-        class="w-min text-red bg-surface1"
-        suffixIcon="mdi:close-circle-outline"
-        on:click={() => dispatch('close')}>Cancel</Button
-      >
-      <Button
-        class="w-min text-green bg-surface1"
-        suffixIcon="material-symbols:save-outline"
-        on:click={() =>
-          dispatch(
-            'add',
-            selection.map((x) => ({ id: x.value ?? '', relation, local: local_only }))
-          )}
-      >
-        Add</Button
       >
     </div>
   </Card>
