@@ -73,6 +73,10 @@
           href: 'settings'
         }
       ]}
+      userData={{
+        admin: false,
+        email: 'user@domain.tld'
+      }}
     />
   </div>
 </Hst.Story>

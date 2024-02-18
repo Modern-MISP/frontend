@@ -45,6 +45,6 @@
     />
   </div>
   <main class="flex w-full h-full">
-    <slot />
+    <slot {progressValue} />
   </main>
 </body>

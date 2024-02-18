@@ -14,6 +14,6 @@
   </svelte:fragment>
 
   <div class={theme}>
-    <TopMenu />
+    <TopMenu userData={{ admin: false, email: 'user@domain.tld' }} />
   </div>
 </Hst.Story>

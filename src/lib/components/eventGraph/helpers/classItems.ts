@@ -1,5 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export function getReferencedItems(objects: any[], attributes: any[], references: any[]) {
+import type { components } from '$lib/api/misp';
+import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
+
+type Objects = components['schemas']['Object'][];
+type Attributes = components['schemas']['Attribute'][];
+type References = EventGraphReferences['relations'];
+
+export function getReferencedItems(
+  objects: Objects,
+  attributes: Attributes,
+  references: References
+) {
   const referencedItemsIds = extractReferencedItemsIds(references);
   const referencedObjectsIds = filterReferencedObjectsIds(referencedItemsIds);
   const referencedAttributesIds = filterReferencedAttributesIds(referencedItemsIds);
@@ -13,7 +23,7 @@ export function getReferencedItems(objects: any[], attributes: any[], references
   return { referencedObjects, referencedAttributes, unreferencedObjects, unreferencedAttributes };
 }
 
-function extractReferencedItemsIds(references: any[]) {
+function extractReferencedItemsIds(references: References) {
   return Array.from(new Set(references.flatMap(({ from, to }) => [from, to])));
 }
 
@@ -25,18 +35,18 @@ function filterReferencedAttributesIds(referencedItemsIds: string[]) {
   return referencedItemsIds.filter((id) => !id.startsWith('o-'));
 }
 
-function findReferencedObjects(objects: any[], referencedObjectsIds: string[]) {
-  return objects.filter(({ id }) => referencedObjectsIds.includes(`o-${id}`));
+function findReferencedObjects(objects: Objects, referencedObjectsIds: string[]) {
+  return objects.filter(({ id }) => id && referencedObjectsIds.includes(`o-${id}`));
 }
 
-function findReferencedAttributes(attributes: any[], referencedAttributesIds: string[]) {
-  return attributes.filter(({ id }) => referencedAttributesIds.includes(id));
+function findReferencedAttributes(attributes: Attributes, referencedAttributesIds: string[]) {
+  return attributes.filter(({ id }) => id && referencedAttributesIds.includes(id));
 }
 
-function findUnreferencedObjects(objects: any[], referencedObjectsIds: string[]) {
-  return objects.filter(({ id }) => !referencedObjectsIds.includes(`o-${id}`));
+function findUnreferencedObjects(objects: Objects, referencedObjectsIds: string[]) {
+  return objects.filter(({ id }) => id && !referencedObjectsIds.includes(`o-${id}`));
 }
 
-function findUnreferencedAttributes(attributes: any[], referencedAttributesIds: string[]) {
-  return attributes.filter(({ id }) => !referencedAttributesIds.includes(id));
+function findUnreferencedAttributes(attributes: Attributes, referencedAttributesIds: string[]) {
+  return attributes.filter(({ id }) => id && !referencedAttributesIds.includes(id));
 }
