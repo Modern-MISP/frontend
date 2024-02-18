@@ -55,7 +55,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const leftCardHeader = [
     col(
       {
-        label: 'Value',
+        label: 'Name',
         value: (x) => x?.value ?? 'unknown'
       },
       {

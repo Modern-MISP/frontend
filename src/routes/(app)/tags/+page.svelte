@@ -14,7 +14,7 @@
 
   let tagFilter = '';
 
-  $: filtered = tableData.filter((x) => x.name?.includes(tagFilter));
+  $: filtered = tableData.filter((x) => x.name?.toLowerCase()?.includes(tagFilter.toLowerCase()));
 
   let addTag = false;
 

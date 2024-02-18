@@ -1,7 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
@@ -53,10 +52,11 @@
   
 -->
 
-<svelte:window use:actionBar={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]} />
-
-<Form callback={editCallback}>
-  <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
+<Form
+  callback={editCallback}
+  additionalActions={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]}
+>
+  <div class="flex flex-wrap w-full h-full gap-2 lg:flex-nowrap">
     <DynCard header={left} data={user} />
     <DynCard header={right} data={user} />
   </div>

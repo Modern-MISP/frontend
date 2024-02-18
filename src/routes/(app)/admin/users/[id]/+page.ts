@@ -23,7 +23,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
     idCardHeaders.role,
     idCardHeaders.organisation,
     idCardHeaders.nids_sid,
-    idCardHeaders.last_pw_change
+    idCardHeaders.last_pw_change,
+    idCardHeaders.last_login,
+    idCardHeaders.created
   ];
 
   const right = [

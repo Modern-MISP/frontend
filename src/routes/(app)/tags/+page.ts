@@ -2,7 +2,6 @@ import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
@@ -47,7 +46,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'ph:hash-bold',
       key: 'tagged_events',
       label: 'Tagged Events',
-      value: (x) => ({ display: Info, props: { text: x.count, class: 'm-auto' } })
+      value: (x) => ({
+        display: Pill,
+        props: { text: x.count, class: 'm-auto', icon: 'mdi:pound' }
+      })
     }),
     col({
       icon: 'mdi:export-variant',
