@@ -28,8 +28,7 @@
   </svelte:fragment>
 
   <Card>
-    <CardHeading class="absolute">Galaxies</CardHeading>
-    <br />
+    <CardHeading>Galaxies</CardHeading>
     <EventGalaxies
       on:close={() => (state = 'info')}
       on:open={() => (state = 'add')}
