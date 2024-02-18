@@ -77,7 +77,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         display: Pill,
         props: {
           icon: 'ph:hash-bold',
-          text: '!apiResponse'
+          text: '?'
         }
       })
     }),
