@@ -52,7 +52,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col({
-      icon: 'mdi:information',
+      icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
       value: (x) => ({ display: Info, props: { text: x.info } })
