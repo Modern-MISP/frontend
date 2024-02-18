@@ -1,25 +1,21 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import type { components } from '$lib/api/misp';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { mode } from '$lib/stores';
   import { shouldTextBeBlack } from '$lib/util/color.util';
   import type { ComponentProps } from 'svelte';
-  import type { PageData } from '../$types';
-  import EventPillCollectionCard from './EventPillCollectionCard.svelte';
-  import type { EventState } from './EventState.interface';
-  import { deleteTags } from './event.util';
-  import { mode } from '$lib/stores';
+  import EventPillCollectionCard from './PillCollectionCardWithDeleteAndAdd.svelte';
 
   /**
    * The Page data.
    */
-  export let data: PageData;
+  export let tags: components['schemas']['Tag'][];
 
   /**
    * The current mode of the page.
    */
-  export let state: EventState;
 
   /**
    * The currently selected pills
@@ -31,8 +27,7 @@
   let pills: ComponentProps<HrefPill>[] = [];
 
   function generatePills(includeAction: boolean) {
-    if (!data.event?.Tag) return;
-    pills = data.event.Tag.map((y) => {
+    pills = tags.map((y) => {
       const pill: ComponentProps<HrefPill> = {
         /// @ts-expect-error Wrong API spec
         icon: y.local == 1 ? 'mdi:cloud-off-outline' : 'mdi:earth',
@@ -74,16 +69,9 @@
     });
   }
 
-  $: if (data) generatePills($mode === 'edit');
+  $: if (tags) generatePills($mode === 'edit');
 </script>
 
-<EventPillCollectionCard
-  title="Tags"
-  bind:state
-  bind:selection
-  bind:deletion
-  on:delete={({ detail }) =>
-    deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
->
+<EventPillCollectionCard title="Tags" on:close on:open bind:selection bind:deletion on:delete>
   <PillCollection base={HrefPill} {pills} />
 </EventPillCollectionCard>

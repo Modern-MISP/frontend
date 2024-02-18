@@ -2,10 +2,10 @@
   import { page } from '$app/stores';
   import AddGalaxyClusterForm from '$lib/components/addGalaxyClusterForm/AddGalaxyClusterForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import EventGalaxies from '../_components/EventGalaxies.svelte';
+  import EventGalaxies from '$lib/components/pills/pillCollection/GalaxyCollection.svelte';
   import EventInfo from '../_components/EventInfo.svelte';
   import type { EventState } from '../_components/EventState.interface';
-  import { attachCluster } from '../_components/event.util';
+  import { attachCluster, detachCluster } from '../_components/event.util';
 
   /**
    *
@@ -29,5 +29,12 @@
     />
   </svelte:fragment>
 
-  <EventGalaxies bind:state {data} bind:selection />
+  <EventGalaxies
+    on:close={() => (state = 'info')}
+    on:open={() => (state = 'add')}
+    on:delete={({ detail }) =>
+      detachCluster(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+    galaxies={data.event.Galaxy}
+    bind:selection
+  />
 </EventInfo>

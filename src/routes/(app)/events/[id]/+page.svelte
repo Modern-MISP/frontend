@@ -8,8 +8,8 @@
   import type { PageData } from './$types';
   import EventInfo from './_components/EventInfo.svelte';
   import type { EventState } from './_components/EventState.interface';
-  import EventTags from './_components/EventTags.svelte';
-  import { addTags } from './_components/event.util';
+  import EventTags from '$lib/components/pills/pillCollection/TagCollection.svelte';
+  import { addTags, deleteTags } from './_components/event.util';
 
   /**
    * Page data containing the data of the event with the id in the url
@@ -54,5 +54,12 @@
       <CreateTag on:close={() => (state = 'add')}></CreateTag>
     </Card>
   </svelte:fragment>
-  <EventTags bind:state {data} bind:selection />
+  <EventTags
+    on:close={() => (state = 'info')}
+    on:open={() => (state = 'add')}
+    on:delete={({ detail }) =>
+      deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+    tags={data.event.Tag ?? []}
+    bind:selection
+  />
 </EventInfo>

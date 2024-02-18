@@ -5,15 +5,16 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { mode } from '$lib/stores';
   import Icon from '@iconify/svelte';
-  import type { EventState } from './EventState.interface';
   import { createEventDispatcher } from 'svelte';
 
-  const dispatch = createEventDispatcher<{ delete: PickerPill[] }>();
+  const dispatch = createEventDispatcher<{ delete: PickerPill[]; open: void; close: void }>();
 
   /**
    * The current mode of the page.
    */
-  export let state: EventState;
+  export let add = false;
+
+  $: add ? dispatch('open') : dispatch('close');
 
   /**
    * The currently selected pills
@@ -39,8 +40,8 @@
   <div class="flex justify-between">
     <CardHeading>{title}</CardHeading>
     {#if $mode === 'edit'}
-      <button type="button" on:click={() => (state = state === 'add' ? 'info' : 'add')}>
-        {#if state === 'add'}
+      <button type="button" on:click={() => (add = !add)}>
+        {#if add}
           <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
         {:else}
           <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
@@ -68,7 +69,7 @@
       {/if}
     </slot>
   </slot>
-  {#if state === 'add'}
+  {#if add}
     <slot name="addition">
       <div class="flex flex-col gap-4 p-2 border rounded-md border-text">
         <h3>Those elements will be added:</h3>
