@@ -3,13 +3,15 @@
   import { api } from '$lib/api';
   import { getFormValues } from '$lib/util/form.util';
   import { error, type NumericRange } from '@sveltejs/kit';
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import type { ChangeEventHandler, EventHandler } from 'svelte/elements';
   import Select from '$lib/components/form/Select.svelte';
   import type { components } from '$lib/api/misp';
   import { notifications } from '$lib/stores';
   import { successPill } from '$lib/util/pill.util';
   import { invalidateAll } from '$app/navigation';
+
+  const dispatch = createEventDispatcher<{ close: void }>();
 
   type ResponseType = Omit<
     components['responses']['DescribeAttributeTypesResponse']['content']['application/json'],
@@ -47,6 +49,7 @@
       successPill("Request has been sent, but response can't be displayed because of CORS")
     );
     invalidateAll();
+    dispatch('close');
   };
 
   let typeSelect: Select<string>;

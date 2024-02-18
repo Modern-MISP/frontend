@@ -215,12 +215,13 @@
     {#if freetextImport}
       <FilterCard>
         <CardHeading>Freetext Import</CardHeading>
-        <FreetextImport></FreetextImport>
+        <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
       </FilterCard>
     {:else if attributeReplacement}
       <FilterCard>
         <CardHeading>Attribute Replacement</CardHeading>
-        <AttributeReplacement></AttributeReplacement>
+        <AttributeReplacement on:close={() => (attributeReplacement = false)}
+        ></AttributeReplacement>
       </FilterCard>
     {/if}
   </div>

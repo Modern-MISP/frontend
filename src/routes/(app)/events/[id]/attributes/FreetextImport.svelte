@@ -10,6 +10,10 @@
   import Info from '$lib/components/info/Info.svelte';
   import Button from '$lib/components/button/Button.svelte';
   import { notifySave } from '$lib/util/notifications.util';
+  import { createEventDispatcher } from 'svelte';
+  import { invalidateAll } from '$app/navigation';
+
+  const dispatch = createEventDispatcher<{ close: void }>();
 
   type ReturnData = {
     value: string;
@@ -37,7 +41,10 @@
     });
 
     freetextData = data as ReturnData[];
+  };
 
+  const finalSubmit: EventHandler<SubmitEvent, HTMLFormElement> = (e) => {
+    const { default_comment } = getFormValues(e);
     notifySave(
       $api
         // @ts-expect-error Not in the OpenAPI spec
@@ -47,7 +54,7 @@
             Attribute: {
               force: '0',
               JsonObject: JSON.stringify(freetextData),
-              default_comment: ''
+              default_comment
             }
           }
         })
@@ -55,27 +62,9 @@
           if (resp.error) throw new Error(resp.error.message);
         })
     );
+    invalidateAll();
+    dispatch('close');
   };
-
-  // const finalSubmit = () => {
-  //   notifySave(
-  //     $api
-  //       // @ts-expect-error Not in the OpenAPI spec
-  //       .POST('/events/saveFreeText/{eventId}', {
-  //         params: { path: { eventId: $page.params.id } },
-  //         body: {
-  //           Attribute: {
-  //             force: '0',
-  //             JsonObject: '',
-  //             default_comment: ''
-  //           }
-  //         }
-  //       })
-  //       .then((resp) => {
-  //         if (resp.error) throw new Error(resp.error.message);
-  //       })
-  //   );
-  // };
 
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
 </script>
@@ -90,43 +79,45 @@
       <Button type="submit">Submit</Button>
     </form>
   {:else}
-    <DynTable
-      header={[
-        col({
-          label: 'Value',
-          value: (x) => ({
-            display: Pill,
-            props: {
-              text: x.value
-            }
+    <form on:submit={finalSubmit}>
+      <DynTable
+        header={[
+          col({
+            label: 'Value',
+            value: (x) => ({
+              display: Pill,
+              props: {
+                text: x.value
+              }
+            }),
+            icon: 'mdi:circle',
+            key: 'value'
           }),
-          icon: 'mdi:circle',
-          key: 'value'
-        }),
-        col({
-          icon: 'mdi:circle',
-          key: 'category',
-          label: 'Category',
-          value: (x) => ({
-            display: Pill,
-            props: {
-              text: x.category
-            }
+          col({
+            icon: 'mdi:circle',
+            key: 'category',
+            label: 'Category',
+            value: (x) => ({
+              display: Pill,
+              props: {
+                text: x.category
+              }
+            })
+          }),
+          col({
+            icon: '',
+            key: 'type',
+            label: 'Type',
+            value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
           })
-        }),
-        col({
-          icon: '',
-          key: 'type',
-          label: 'Type',
-          value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
-        })
-      ]}
-      data={freetextData}
-    ></DynTable>
-    <!-- <CardRow>
-      <span>Default comment</span>
-      <Input name="default_comment" />
-    </CardRow> -->
-    <!-- <Button on:click={finalSubmit}>Submit</Button> -->
+        ]}
+        data={freetextData}
+      ></DynTable>
+      <CardRow>
+        <span>Default comment</span>
+        <Input name="default_comment" />
+      </CardRow>
+      <Button type="submit">Submit</Button>
+    </form>
   {/if}
 </div>
