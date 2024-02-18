@@ -41,7 +41,7 @@ trotzdem dauerte die Implementierung länger als geplant.
 
 Bei den Workflows kostete es zu Beginn viel Zeit,
 sich in [SvelteFlow](https://svelteflow.dev/),
-die von uns verwendete Bibliothek zur Realisierung des grafischen Editors
+die von uns verwendete Bibliothek zur Realisierung des grafischen Editors,
 einzuarbeiten.
 
 ## Zweite Phasenhälfte
