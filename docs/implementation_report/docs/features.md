@@ -47,6 +47,26 @@ Die API liefert keinen Endpunkt für ein passwortbasiertes Anmelden, also kann L
 
 Die API liefert keine Endpunkt, um zwischen 'Publish with/without Email' zu unterscheiden.
 
+#### Eventgraphen
+
+Wegen mangelndem API-Support sind die Möglichkeiten für Eventgraphen beschränkt.
+
+##### Objekte
+
+Objekte können nicht bearbeitet und hinzugefügt werden. Ferner gibt es keine Detailansicht.
+
+##### Referenzen
+
+Referenzen können nicht bearbeitet und gelöscht werden.
+
+##### Attribute
+
+Attribute können nicht ein- und ausgeblendet werden.
+
+##### Tags
+
+Tags werden nicht unterstützt.
+
 #### Tags
 
 Die API liefert keinen Endpunkt, der die Anzahl getaggter Events oder Attribute zurückgibt.
@@ -131,6 +151,11 @@ Die API liefert keinen Endpunkt, der Benachrichtigungen nach Event verwalten kan
 Tägliche, wöchentliche und monatliche Benachrichtigungen werden jedoch unterstützt.
 
 #### Remote Server
+
+##### Quick Actions
+
+Die API liefert keine Endpunkte für 'Sync with Local Events',
+'Push All', 'Pull All', 'Test Connection', 'Reset API Key'.
 
 ##### Auth Key
 
