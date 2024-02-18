@@ -35,7 +35,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     fac({
       icon: 'mdi:circle',
       key: 'value',
-      label: 'Value',
+      label: 'Name',
       value: (x) => ({ display: Info, props: { text: x.value } })
     }),
     fac({

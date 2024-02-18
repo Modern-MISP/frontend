@@ -55,7 +55,7 @@
   const header = [
     col(
       {
-        label: 'Value',
+        label: 'Name',
         value: (x) => x?.value ?? 'unknown'
       },
       {
