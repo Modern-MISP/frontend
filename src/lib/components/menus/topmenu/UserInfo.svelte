@@ -45,7 +45,7 @@
           goto('/login');
         }}
       >
-        Logout
+        Log out
       </Button>
     </div>
   </div>
