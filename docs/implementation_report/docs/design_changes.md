@@ -1,4 +1,12 @@
-# Änderungen am Entwurf
+# Änderungen an Design und Entwurf
+
+## Workflows
+
+Ursprünglich war geplant, Workflows bei ihren Triggern anzuzeigen.
+
+Wir haben es für sinnvoll erachtet, Workflows ihre eigene Liste
+und ihre eigene Einzelansicht zu geben.
+Dort findet sich auch der graphische Editor.
 
 ## Neu hinzugefügt
 
