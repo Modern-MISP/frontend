@@ -1,14 +1,16 @@
 <script lang="ts">
+  import { invalidateAll } from '$app/navigation';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { notifySave } from '$lib/util/notifications.util';
-  import type { PageData } from './$types';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { notifySave } from '$lib/util/notifications.util';
+  import type { PageData } from './$types';
   import AttributeTags from './AttributeTags.svelte';
   import { addTags } from './attribute.util';
 
@@ -22,15 +24,20 @@
   let state: 'addTag' | 'info' | 'createTag' = 'info';
 
   function editCallback(formData: Record<string, string>) {
-    $api
-      .PUT('/attributes/edit/{attributeId}', {
-        params: { path: { attributeId: $page.params.id } },
-        body: formData
-      })
-      .then((resp) => {
-        if (resp.error) throw Error(resp.error.message);
-      });
+    notifySave(
+      $api
+        .PUT('/attributes/edit/{attributeId}', {
+          params: { path: { attributeId: $page.params.id } },
+          body: { last_seen: '', first_seen: '', ...formData } // default last_seen and first_seen to empty to set to null, if disabled in form
+        })
+        .then((resp) => {
+          if (resp.error) throw Error(resp.error.message);
+        })
+        .then(invalidateAll)
+    );
   }
+
+  let formActions: ActionBarEntryProps[] = [];
 </script>
 
 <svelte:window
@@ -49,7 +56,25 @@
             })
         );
       }
-    }
+    },
+    {
+      label: 'Delete Attribute',
+      class: 'hover:text-red',
+      icon: 'mdi:delete-outline',
+      action: () => {
+        notifySave(
+          $api
+            .DELETE('/attributes/delete/{attributeId}', {
+              params: { path: { attributeId: $page.params.id } }
+            })
+            .then((resp) => {
+              if (resp.error) throw new Error(resp.error.message);
+            })
+            .then(() => history.back())
+        );
+      }
+    },
+    ...formActions
   ]}
 />
 
@@ -58,7 +83,7 @@
 
 -->
 <div class="h-full overflow-auto">
-  <Form callback={editCallback}>
+  <Form callback={editCallback} bind:actions={formActions}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
       {#if state === 'addTag'}
         <AddTagForm

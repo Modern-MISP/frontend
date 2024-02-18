@@ -4,18 +4,18 @@ import { get } from 'svelte/store';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
+import Info from '$lib/components/info/Info.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
-import Info from '$lib/components/info/Info.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import Select from '$lib/components/form/Select.svelte';
 
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { components } from '$lib/api/misp';
+import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { format } from 'date-fns';
 
 export const load = async ({ params, fetch }) => {
@@ -220,18 +220,21 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({
           display: DatePill,
           props: {
-            date: x.first_seen ? new Date(+x.first_seen || 0) : null,
+            date: x.first_seen ? new Date(x.first_seen) : null,
             onNullText: 'no sighting'
           }
         })
       },
       {
         value: (x) => ({
-          display: Input,
+          display: InputWithCheckbox,
           props: {
-            value: x?.first_seen ? format(new Date(+x.first_seen * 1000), 'yyyy-MM-dd') : undefined,
-            name: 'first_seen',
-            type: 'date'
+            checked: !!x?.first_seen,
+            inputProps: {
+              value: x?.first_seen ? format(x.first_seen, 'yyyy-MM-dd') : undefined,
+              name: 'first_seen',
+              type: 'date'
+            }
           }
         })
       }
@@ -244,18 +247,21 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({
           display: DatePill,
           props: {
-            date: x.last_seen ? new Date(+x.last_seen || 0) : null,
+            date: x.last_seen ? new Date(x.last_seen) : null,
             onNullText: 'no sighting'
           }
         })
       },
       {
         value: (x) => ({
-          display: Input,
+          display: InputWithCheckbox,
           props: {
-            value: x?.last_seen ? format(new Date(+x.last_seen * 1000), 'yyyy-MM-dd') : undefined,
-            name: 'last_seen',
-            type: 'date'
+            checked: !!x?.last_seen,
+            inputProps: {
+              value: x?.last_seen ? format(x.last_seen, 'yyyy-MM-dd') : undefined,
+              name: 'last_seen',
+              type: 'date'
+            }
           }
         })
       }
