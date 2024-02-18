@@ -38,50 +38,53 @@
   };
 </script>
 
-<div class="relative flex flex-col gap-2">
-  {#if $mode === 'edit'}
-    <button type="button" class="absolute right-0 -top-10" on:click={() => (add = !add)}>
-      {#if add}
-        <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
-      {:else}
-        <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
-      {/if}
-    </button>
-  {/if}
-  <div class="overflow-auto">
+{#if $mode === 'edit'}
+  <button type="button" class="absolute top-6 right-4" on:click={() => (add = !add)}>
+    {#if add}
+      <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
+    {:else}
+      <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
+    {/if}
+  </button>
+{/if}
+<div class="relative flex flex-col h-full gap-2 overflow-hidden">
+  <div class="h-full overflow-auto">
     <slot />
   </div>
-  <slot name="footer">
-    <slot name="deletion">
-      {#if deletion.length > 0 && $mode === 'edit'}
-        <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
-          <h3>Those elements will be deleted:</h3>
-          <PillCollection pills={deletion}></PillCollection>
 
-          <button
-            on:click={_onDelete}
-            class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
-            type="button"
-          >
-            <Icon icon="mdi:delete-outline"></Icon>
-          </button>
-        </div>
+  <div class="relative w-full rounded-md bg-surface0 h-fit">
+    <slot name="footer">
+      <slot name="deletion">
+        {#if deletion.length > 0 && $mode === 'edit'}
+          <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
+            <h3>Those elements will be deleted:</h3>
+            <PillCollection pills={deletion}></PillCollection>
+
+            <button
+              on:click={_onDelete}
+              class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
+              type="button"
+            >
+              <Icon icon="mdi:delete-outline"></Icon>
+            </button>
+          </div>
+        {/if}
+      </slot>
+      {#if add && $mode === 'edit'}
+        <slot name="addition">
+          <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
+            <h3>Those elements will be added:</h3>
+            <PillCollection pills={selection}></PillCollection>
+            <button
+              on:click={_onSave}
+              class="absolute p-2 text-2xl text-white rounded-md bg-green right-2 bottom-2"
+              type="button"
+            >
+              <Icon icon="material-symbols:save-outline"></Icon>
+            </button>
+          </div>
+        </slot>
       {/if}
     </slot>
-  </slot>
-  {#if add && $mode === 'edit'}
-    <slot name="addition">
-      <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
-        <h3>Those elements will be added:</h3>
-        <PillCollection pills={selection}></PillCollection>
-        <button
-          on:click={_onSave}
-          class="absolute p-2 text-2xl text-white rounded-md bg-green right-2 bottom-2"
-          type="button"
-        >
-          <Icon icon="material-symbols:save-outline"></Icon>
-        </button>
-      </div>
-    </slot>
-  {/if}
+  </div>
 </div>
