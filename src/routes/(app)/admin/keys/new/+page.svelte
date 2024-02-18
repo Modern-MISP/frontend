@@ -11,6 +11,7 @@
   import { currentRoute, mode, notifications } from '$lib/stores.js';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+  import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
 
   export let data;
 
@@ -58,6 +59,20 @@
       value: () => ({
         display: Checkbox,
         props: { name: 'read_only', checked: false }
+      })
+    }),
+    col({
+      label: 'Expiration',
+      value: () => ({
+        display: InputWithCheckbox,
+        props: {
+          checked: false,
+          inputProps: {
+            value: undefined,
+            name: 'expiration',
+            type: 'Date'
+          }
+        }
       })
     }),
     col({

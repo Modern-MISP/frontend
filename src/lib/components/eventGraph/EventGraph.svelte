@@ -45,7 +45,7 @@
   const { referencedObjects, referencedAttributes, unreferencedObjects, unreferencedAttributes } =
     getReferencedItems(objects, attributes, references);
 
-  const { updateNode } = useSvelteFlow();
+  const { updateNode, fitBounds, getNodes } = useSvelteFlow();
   const { nodesDraggable } = useStore();
 
   $nodesDraggable = false;
@@ -171,7 +171,11 @@
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  function layoutElements() {
+  /**
+   *
+   * @param followNodeIds IDs of Nodes to keep in viewport
+   */
+  function layoutElements(followNodeIds: string[] = []) {
     dagreGraph.setGraph({ rankdir: 'LR' });
 
     $nodes.forEach((node) => {
@@ -201,7 +205,12 @@
         x: nodeWithPosition.x - nodeWithPosition.width / 2,
         y: nodeWithPosition.y - nodeWithPosition.height / 2
       });
-      pos.subscribe((p) => updateNode(node.id, { position: p }));
+      pos.subscribe((p) => {
+        updateNode(node.id, { position: p });
+        if (followNodeIds.includes(node.id)) {
+          fitBounds(getNodesBounds(getNodes(followNodeIds)));
+        }
+      });
     });
   }
 
@@ -280,7 +289,7 @@
           if (resp.error) throw new Error(resp.error.message);
         })
     );
-    layoutElements();
+    layoutElements([source.id, target.id]);
   };
 
   const onDrop = (event: DragEvent) => {

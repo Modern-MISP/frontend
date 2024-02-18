@@ -321,6 +321,7 @@ export const load: PageLoad = async ({ fetch }) => {
     header,
     editActions,
     topMenuActions,
-    filter
+    filter,
+    maxCount: +response.headers.get('X-result-count')!
   };
 };

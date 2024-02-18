@@ -1,16 +1,16 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import type { PageData } from './$types';
-  import { actionBar } from '$lib/actions';
   import { page } from '$app/stores';
+  import { actionBar } from '$lib/actions';
+  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import type { PageData } from './$types';
 
   /** Data that is displayed on this page. */
   export let data: PageData;
 
-  const { left, right, galaxy, header } = data;
+  $: ({ left, right, galaxy, header } = data);
 
-  const galaxyData = galaxy.Galaxy!;
+  $: galaxyData = galaxy.Galaxy!;
 </script>
 
 <!--
@@ -39,8 +39,8 @@
   ]}
 />
 
-<DynTable
-  href={({ id }) => `/galaxies/clusters/${id}`}
-  data={galaxy.GalaxyCluster ?? []}
+<ComplexTableLayout
+  tableHref={({ id }) => `/galaxies/clusters/${id}`}
+  tableData={galaxy.GalaxyCluster ?? []}
   {header}
 />

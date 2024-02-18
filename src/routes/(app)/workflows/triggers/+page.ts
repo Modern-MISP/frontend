@@ -63,7 +63,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({
         display: HrefPill,
         props: {
-          href: `/workflows/${x.Workflow!.id}`,
+          href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : '#',
           icon: 'material-symbols:network-node',
           text: x.Workflow?.id ?? 'unknown'
         }
