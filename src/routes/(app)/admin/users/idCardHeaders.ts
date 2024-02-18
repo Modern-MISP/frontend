@@ -5,6 +5,7 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
@@ -22,7 +23,14 @@ export default {
   email: col(
     {
       label: 'Email',
-      value: (x) => x.User?.email ?? 'unknown'
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:email-outline',
+          text: x.User?.email ?? 'unknown',
+          href: x.User?.email ? 'mailto:' + x.User?.email : ''
+        }
+      })
     },
     {
       value: (x) => ({
@@ -69,7 +77,23 @@ export default {
     // class: 'whitespace-nowrap',
     value: (x) => ({
       display: DatePill,
-      props: { date: new Date(+(x.User?.last_pw_change || 0) * 1000) }
+      props: { date: x.User?.last_pw_change ? new Date(+x.User?.last_pw_change * 1000) : null }
+    })
+  }),
+  last_login: col({
+    icon: 'mdi:clock-outline',
+    label: 'Last login',
+    value: (x) => ({
+      display: DatePill,
+      props: { date: x.User?.last_login ? new Date(+x.User?.last_login * 1000) : null }
+    })
+  }),
+  created: col({
+    icon: 'mdi:clock-outline',
+    label: 'Created',
+    value: (x) => ({
+      display: DatePill,
+      props: { date: x.User?.date_created ? new Date(+x.User?.date_created * 1000) : null }
     })
   }),
   disabled: col(
@@ -122,11 +146,20 @@ export default {
       })
     }
   ),
-  gpgkey: col({
-    key: 'gpgkey',
-    label: 'PGP key',
-    value: (x) => ({ display: Boolean, props: { isTrue: x.User?.gpgkey ?? false } })
-  }),
+  gpgkey: col(
+    {
+      key: 'gpgkey',
+      label: 'PGP key',
+      value: (x) => ({ display: Boolean, props: { isTrue: x.User?.gpgkey ?? false } })
+    },
+
+    {
+      value: () => ({
+        display: Input,
+        props: { name: 'pgpKey', placeholder: 'set new PGP key' }
+      })
+    }
+  ),
   change_pw: col({
     key: 'change_pw',
     label: 'Must change password',

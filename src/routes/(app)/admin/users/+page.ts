@@ -15,6 +15,7 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import Input from '$lib/components/input/Input.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
@@ -258,11 +259,23 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     fil({
       label: 'Last Login',
-      value: () => 'last_login'
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'last_login',
+          type: 'date'
+        }
+      })
     }),
     fil({
       label: 'Created',
-      value: () => 'created'
+      value: () => ({
+        display: Input,
+        props: {
+          name: 'created',
+          type: 'date'
+        }
+      })
     }),
     fil({
       label: 'TOTP',

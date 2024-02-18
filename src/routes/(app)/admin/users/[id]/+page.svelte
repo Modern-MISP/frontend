@@ -56,7 +56,7 @@
   callback={editCallback}
   additionalActions={[{ label: 'Delete User', icon: 'mdi:delete', action: deleteUser }]}
 >
-  <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
+  <div class="flex flex-wrap w-full h-full gap-2 lg:flex-nowrap">
     <DynCard header={left} data={user} />
     <DynCard header={right} data={user} />
   </div>
