@@ -17,12 +17,12 @@ Als Werkzeug zum Generieren unseres Storybooks nutzen wir [Histoire](https://his
 
 ## Unittests
 
-An den wenigen Stellen, an denen es sinnvoll war, verwendeten wir ergänzend
+An den Stellen, an denen es sinnvoll war, verwendeten wir ergänzend
 normale Unittests.
 
 ### Test Suite
 
-Für unsere Unit Tests nutzten wir [Vitest](https://vitest.dev/).
+Für unsere Unit Tests benutzen wir [Vitest](https://vitest.dev/).
 
 ### Überdeckung
 
