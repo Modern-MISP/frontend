@@ -65,16 +65,18 @@
       class: 'hover:text-red',
       icon: 'mdi:delete-outline',
       action: () => {
-        notifySave(
-          $api
-            .DELETE('/attributes/delete/{attributeId}', {
-              params: { path: { attributeId: $page.params.id } }
-            })
-            .then((resp) => {
-              if (resp.error) throw new Error(resp.error.message);
-            })
-            .then(() => history.back())
-        );
+        if (confirm('Are you sure you want to delete this attribute?')) {
+          notifySave(
+            $api
+              .DELETE('/attributes/delete/{attributeId}', {
+                params: { path: { attributeId: $page.params.id } }
+              })
+              .then((resp) => {
+                if (resp.error) throw new Error(resp.error.message);
+              })
+              .then(() => history.back())
+          );
+        }
       }
     },
     ...formActions
