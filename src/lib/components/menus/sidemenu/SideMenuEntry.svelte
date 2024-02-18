@@ -77,10 +77,9 @@
   class="flex items-center justify-between text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   title={name}
-  use:melt={$trigger}
 >
   <a class="flex items-center w-full h-16 gap-4 p-4" title={name} {href}>
-    <div class="flex items-center justify-center h-full aspect-square">
+    <div class="flex items-center justify-center h-full aspect-square" use:melt={$trigger}>
       <Icon {icon} class="mx-auto shrink-0" />
     </div>
     {#if isMenuOpen}
