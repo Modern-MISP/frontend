@@ -16,14 +16,15 @@ import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { notifications } from '$lib/stores';
-import { errorPill } from '$lib/util/pill.util';
 import { shouldTextBeBlack } from '$lib/util/color.util';
+import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
+import { invalidateAll } from '$app/navigation';
 import Select from '$lib/components/form/Select.svelte';
-import { genSelectProps } from '$lib/util/select.util';
 import Input from '$lib/components/input/Input.svelte';
 import type { FastFilter } from '$lib/models/FastFilter.interface';
+import { genSelectProps } from '$lib/util/select.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -308,10 +309,19 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        // TODO: add a endpoint if found.
-        notifications.add(
-          errorPill('Do not know the endpoint. Delete: ' + x.map((y) => y.id).join())
-        );
+        Promise.all(
+          x
+            .map((y) => y.id)
+            .map((eventId) =>
+              get(api).DELETE('/events/delete/{eventId}', {
+                fetch,
+                params: { path: { eventId: eventId! } }
+              })
+            )
+        ).then(() => {
+          notifications.add(successPill('Deleted events ' + x.map((y) => y.id).join(', ')));
+          invalidateAll();
+        });
       }
     }
   ];

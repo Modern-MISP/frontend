@@ -237,6 +237,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Decrease priority',
       icon: 'iconoir:priority-down',
       action: (x) => {
+        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. decrease prio: ' + x.map((y) => y.Server?.id).join())
         );

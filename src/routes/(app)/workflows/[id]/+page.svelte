@@ -94,7 +94,6 @@
 
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
   // or when adding the frames in the first place, but apparently it works.
-  // TODO: (Optional) Find out why this happens?
   setTimeout(
     () =>
       $nodes
@@ -276,7 +275,6 @@
     frame: FrameNode
   };
 
-  // TODO: Maybe make this better and prettier
   const {
     elements: { content: helpContent, trigger: helpTrigger }
   } = createTooltip({
@@ -349,7 +347,7 @@
 </div>
 
 <div use:melt={$helpContent} class="z-10 shaodw shadow-black">
-  <Card >
+  <Card>
     <p>Left-Click and Drag on Background: Drag View</p>
     <p>Left-Click and Drag on Node: Drag Node (Edit Mode only)</p>
     <p>Left-Click and Drag on Handle: Create Connection (Edit Mode only)</p>

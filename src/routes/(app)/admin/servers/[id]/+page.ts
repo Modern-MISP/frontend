@@ -118,7 +118,6 @@ export const load = async ({ params, fetch }) => {
       }
     ),
 
-    //TODO: authkey should only be changed if approved
     col(
       {
         key: 'authkey',
@@ -139,7 +138,6 @@ export const load = async ({ params, fetch }) => {
       label: 'Internal',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
-    //TODO: text: Sync methods
     col(
       {
         key: 'push',
@@ -224,7 +222,6 @@ export const load = async ({ params, fetch }) => {
         })
       }
     ),
-    //TODO: text: misc settings
     col(
       {
         key: 'unpublish_event',
