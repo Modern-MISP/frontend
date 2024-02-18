@@ -155,7 +155,7 @@ Tägliche, wöchentliche und monatliche Benachrichtigungen werden jedoch unterst
 ##### Quick Actions
 
 Die API liefert keine Endpunkte für 'Sync with Local Events',
-'Push All', 'Pull All', 'Test Connection', 'Reset API Key'.
+'Push All', 'Pull All', 'Test Connection' und 'Reset API Key'.
 
 ##### Auth Key
 
