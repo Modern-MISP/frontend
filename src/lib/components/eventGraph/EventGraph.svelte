@@ -26,7 +26,8 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
-
+  import referenceTypes from './referenceTypes';
+  import Select from '../form/Select.svelte';
   /**
    * The Event to be displayed on this page.
    */
@@ -36,6 +37,9 @@
    * The event graph references for the event to be displayed.
    */
   export let eventGraphReferences: EventGraphReferences;
+
+  // The currently selected reference type, will be used for new references
+  let referenceType = referenceTypes[0];
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
@@ -278,7 +282,7 @@
           params: { path: { objectId: source.data.id } },
           body: {
             ObjectReference: {
-              relationship_type_select: 'Acquaintance',
+              relationship_type_select: referenceType,
               relationship_type: '',
               comment: '',
               referenced_uuid: target.data.uuid
@@ -352,11 +356,22 @@
   ]}
 />
 
-<header class="flex justify-end w-full gap-2">
+<header class="flex justify-between w-full gap-4">
   <div class="flex flex-col gap-1">
+    <span>Reference Type</span>
+    <Select
+      bind:value={referenceType}
+      options={referenceTypes.map((r) => ({
+        label: r,
+        value: r
+      }))}
+    ></Select>
+  </div>
+  <div>
     <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
 </header>
+
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
