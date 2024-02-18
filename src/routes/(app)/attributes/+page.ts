@@ -1,27 +1,29 @@
+import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
+import type { components } from '$lib/api/misp';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Select from '$lib/components/form/Select.svelte';
+import Info from '$lib/components/info/Info.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
+import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
+import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
+import {
+  DISTRIBUTION_LOOKUP,
+  EXPORT_FORMAT_LOOKUP,
+  THREAT_LEVEL_LOOKUP
+} from '$lib/consts/PillLookups';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { notifySave } from '$lib/util/notifications.util';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-import type { components } from '$lib/api/misp';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
-import Info from '$lib/components/info/Info.svelte';
-import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
-import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
-import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import { shouldTextBeBlack } from '$lib/util/color.util';
-import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Select from '$lib/components/form/Select.svelte';
-import Input from '$lib/components/input/Input.svelte';
-import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
-import { THREAT_LEVEL_LOOKUP, EXPORT_FORMAT_LOOKUP } from '$lib/consts/PillLookups';
-import { invalidateAll } from '$app/navigation';
-import { notifySave } from '$lib/util/notifications.util';
 
 export const load = async ({ fetch }) => {
   const {
@@ -131,6 +133,25 @@ export const load = async ({ fetch }) => {
       value: (x) => x.object_relation ?? ''
     }),
     col({
+      icon: 'mdi:tag',
+      key: 'tags',
+      label: 'Tags',
+      value: (x) => ({
+        display: TagCollection,
+        props: {
+          tags: x.Tag ?? []
+          // pills: (x.Tag ?? []).map((y) => ({
+          //   icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
+          //   label: y.relationship_type ? y.relationship_type : undefined,
+          //   text: y.name,
+          //   style: `background-color: ${y.colour}; color: ${
+          //     shouldTextBeBlack(y.colour!) ? 'black' : 'white'
+          //   }`
+          // }))
+        }
+      })
+    }),
+    col({
       icon: 'mdi:circle',
       key: 'disable_correlation',
       label: 'Correlate',
@@ -174,24 +195,6 @@ export const load = async ({ fetch }) => {
         props: {
           date: x.last_seen ? new Date(+x.last_seen || 0) : null,
           onNullText: 'no sighting'
-        }
-      })
-    }),
-    col({
-      icon: 'mdi:tag',
-      key: 'tags',
-      label: 'Tags',
-      value: (x) => ({
-        display: PillCollection,
-        props: {
-          pills: (x.Tag ?? []).map((y) => ({
-            icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-            label: y.relationship_type ? y.relationship_type : undefined,
-            text: y.name,
-            style: `background-color: ${y.colour}; color: ${
-              shouldTextBeBlack(y.colour!) ? 'black' : 'white'
-            }`
-          }))
         }
       })
     })

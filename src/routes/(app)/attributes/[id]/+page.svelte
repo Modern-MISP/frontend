@@ -3,15 +3,17 @@
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
+  import Card from '$lib/components/card/Card.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
+  import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
-  import AttributeTags from './AttributeTags.svelte';
   import { addTags } from './attribute.util';
 
   /**
@@ -19,7 +21,7 @@
    */
   export let data: PageData;
 
-  let selection: PickerPill[] = [];
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 
   let state: 'addTag' | 'info' | 'createTag' = 'info';
 
@@ -102,7 +104,10 @@
         </section>
       {/if}
       <section class="h-full">
-        <AttributeTags bind:state {data} bind:selection />
+        <Card>
+          <CardHeading>Tags</CardHeading>
+          <TagCollection tags={data.attribute.Tag ?? []}></TagCollection>
+        </Card>
       </section>
     </div>
   </Form>
