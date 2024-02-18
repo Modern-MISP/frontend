@@ -51,7 +51,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:information',
+      icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
       value: (x) => ({ display: Info, props: { text: x.description ?? '' } })
@@ -118,7 +118,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const editActions: DynCardActionHeader<typeof data>[] = [
     {
       label: 'Enable',
-      icon: 'mdi:check',
+      icon: 'mdi:checkbox-outline',
       action: (x) => {
         if (!x) return;
         if (
@@ -140,7 +140,7 @@ export const load: PageLoad = async ({ fetch }) => {
     },
     {
       label: 'Disable',
-      icon: 'mdi:close',
+      icon: 'mdi:close-box-outline',
       action: (x) => {
         if (!x) return;
         if (

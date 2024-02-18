@@ -32,7 +32,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'icon',
       label: 'Icon',
       value: (x) => ({
@@ -53,7 +53,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.namespace ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:information',
+      icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
       value: (x) => ({
@@ -62,7 +62,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'material-symbols:conversion-path',
       key: 'version',
       label: 'Version',
       value: (x) => ({

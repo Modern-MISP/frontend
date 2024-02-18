@@ -94,7 +94,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.published, class: 'm-auto' } })
     }),
     fac({
-      icon: 'mdi:web',
+      icon: 'mdi:share',
       key: 'distribution',
       label: 'Distribution',
       value: (x) => ({

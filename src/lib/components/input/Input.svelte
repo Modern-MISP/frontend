@@ -42,6 +42,11 @@
    */
   export { clazz as class };
 
+  /**
+   * The title to apply to the input.
+   */
+  export let title: string | undefined = undefined;
+
   let clazz = '';
 
   const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
@@ -73,6 +78,7 @@
   class="relative flex items-center gap-2 px-4 py-2 text-text rounded-lg bg-surface1 cursor-text {clazz}"
   class:!bg-overlay0={disabled}
   class:!cursor-not-allowed={disabled}
+  {title}
 >
   <slot name="icon">
     {#if icon}

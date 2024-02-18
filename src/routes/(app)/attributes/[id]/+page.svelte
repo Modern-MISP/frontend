@@ -48,7 +48,7 @@
   use:actionBar={[
     {
       label: 'Add Sighting',
-      icon: 'mdi:plus',
+      icon: 'mdi:eye-add',
       action: () => {
         notifySave(
           $api

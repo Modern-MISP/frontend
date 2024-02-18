@@ -86,19 +86,19 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
     col({
-      icon: 'mdi:share',
+      icon: 'mdi:upload',
       key: 'push',
       label: 'Push',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
     }),
     col({
-      icon: 'mdi:share',
+      icon: 'mdi:download',
       key: 'pull',
       label: 'Pull',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
     }),
     col({
-      icon: 'mdi:eye',
+      icon: 'mdi:eye-outline',
       key: 'push_sightings',
       label: 'Push Sightings',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_sightings ?? false } })
@@ -119,7 +119,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
     }),
     col({
-      icon: 'mdi:share-all',
+      icon: '',
       key: 'unpublish_event',
       label: 'Unpublish Event',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.unpublish_event ?? false } })
@@ -134,7 +134,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:id-card',
+      icon: '',
       key: 'self_signed',
       label: 'Self Signed',
       value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })

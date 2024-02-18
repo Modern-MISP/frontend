@@ -18,7 +18,6 @@ import {
   EXPORT_FORMAT_LOOKUP,
   THREAT_LEVEL_LOOKUP
 } from '$lib/consts/PillLookups';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import { notifySave } from '$lib/util/notifications.util';
@@ -138,7 +137,7 @@ export const load = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'object_relation',
       label: 'Object Relation',
       value: (x) => x.object_relation ?? ''
@@ -485,18 +484,6 @@ export const load = async ({ fetch }) => {
       value: () => 'limit'
     })
   ];
-  const topMenuActions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Freetext Import Tool',
-      action: '' //TODO: freetext import tool
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Attribute Replacement Tool',
-      action: '' //TODO: attribute replacement tool
-    }
-  ];
 
   const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
@@ -547,7 +534,6 @@ export const load = async ({ fetch }) => {
     header,
     tableData,
     filter,
-    topMenuActions,
     editActions,
     maxCount: Object.values(attributeLength).reduce((a, b) => +a + +b, 0) - 1
   };
