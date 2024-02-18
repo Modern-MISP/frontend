@@ -53,7 +53,7 @@
   </div>
   <slot name="footer">
     <slot name="deletion">
-      {#if deletion.length > 0}
+      {#if deletion.length > 0 && $mode === 'edit'}
         <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
           <h3>Those elements will be deleted:</h3>
           <PillCollection pills={deletion}></PillCollection>
@@ -69,7 +69,7 @@
       {/if}
     </slot>
   </slot>
-  {#if add}
+  {#if add && $mode === 'edit'}
     <slot name="addition">
       <div class="relative flex flex-col gap-4 p-2 mt-4 border rounded-md border-text">
         <h3>Those elements will be added:</h3>

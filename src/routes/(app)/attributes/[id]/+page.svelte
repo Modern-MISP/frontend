@@ -9,11 +9,12 @@
   import Form from '$lib/components/form/Form.svelte';
   import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
-  import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { mode } from '$lib/stores';
   import { notifySave } from '$lib/util/notifications.util';
   import type { EventState } from '../../events/[id]/_components/EventState.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
   import type { PageData } from './$types';
   import { addTags, deleteTags } from './attribute.util';
 
@@ -90,16 +91,16 @@
 <div class="h-full overflow-auto">
   <Form callback={editCallback} bind:actions={formActions}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'add'}
+      {#if state === 'add' && $mode === 'edit'}
         <AddTagForm
           bind:selection
           on:createTag={() => (state = 'create')}
           on:close={() => (state = 'info')}
         />
-      {:else if state === 'create'}
+      {:else if state === 'create' && $mode === 'edit'}
         <Card>
           <CardHeading>Create a Tag</CardHeading>
-          <CreateTagForm on:close={() => (state = 'add')}></CreateTagForm>
+          <CreateTag on:close={() => (state = 'add')}></CreateTag>
         </Card>
       {:else}
         <section class="h-full">
