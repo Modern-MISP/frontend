@@ -49,7 +49,7 @@ Die API liefert keine Endpunkt, um zwischen 'Publish with/without Email' zu unte
 
 #### Eventgraphen
 
-Wegen mangelndem API-Support sind die Möglichkeiten für Eventgraphen beschränkt.
+Wegen mangelnder API-Unterstützung sind die Möglichkeiten für Eventgraphen beschränkt.
 
 ##### Objekte
 
