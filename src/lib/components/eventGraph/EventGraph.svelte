@@ -1,26 +1,36 @@
 <script lang="ts">
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import type { components } from '$lib/api/misp';
-  import { mode } from '$lib/stores';
-  import { Position, type Edge, type Node, useSvelteFlow, getNodesBounds } from '@xyflow/svelte';
+  import {
+    Position,
+    type Edge,
+    type Node,
+    useSvelteFlow,
+    getNodesBounds,
+    useStore
+  } from '@xyflow/svelte';
   import { writable, type Writable } from 'svelte/store';
   import dagre from '@dagrejs/dagre';
-  import { spring } from 'svelte/motion';
-  import IconCard from './cards/IconCard.svelte';
-  import IconCardRow from './cards/IconCardRow.svelte';
+  import { tweened } from 'svelte/motion';
+  import { page } from '$app/stores';
+  import { actionBar } from '$lib/actions';
+  import { mode } from '$lib/stores';
+  import { api } from '$lib/api';
+  import { notifySave } from '$lib/util/notifications.util';
   import ObjectNode from './graph/nodes/ObjectNode.svelte';
   import AttributeNode from './graph/nodes/AttributeNode.svelte';
   import CategoryNode from './graph/nodes/CategoryNode.svelte';
+  import MinimizedNode from './graph/nodes/MinimizedNode.svelte';
   import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
+  import RelationEdge from './graph/edges/RelationEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
+  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { getReferencedItems } from './helpers/classItems';
-  import { fly } from 'svelte/transition';
-  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
   import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
-
-  const edges: Writable<Edge[]> = writable([]);
-
+  import referenceTypes from './referenceTypes';
+  import Select from '../form/Select.svelte';
+  import { fly } from 'svelte/transition';
   /**
    * The Event to be displayed on this page.
    */
@@ -31,6 +41,9 @@
    */
   export let eventGraphReferences: EventGraphReferences;
 
+  // The currently selected reference type, will be used for new references
+  let referenceType = referenceTypes[0];
+
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
 
@@ -39,12 +52,34 @@
   const { referencedObjects, referencedAttributes, unreferencedObjects, unreferencedAttributes } =
     getReferencedItems(objects, attributes, references);
 
-  const { updateNode } = useSvelteFlow();
+  const { updateNode, fitBounds, getNodes } = useSvelteFlow();
+  const { nodesDraggable } = useStore();
+
+  $nodesDraggable = false;
 
   const position = { x: 0, y: 0 };
 
-  const nodes: Writable<Node[]> = writable([]);
-  $nodes.push({ id: 'event', position, data: { label: `Event ${event.id}` }, type: 'category' });
+  const nodes: Writable<
+    Node<
+      Pick<
+        components['schemas']['Object'],
+        | 'id'
+        | 'uuid'
+        | 'event_id'
+        | 'distribution'
+        | 'name'
+        | 'description'
+        | 'comment'
+        | 'first_seen'
+        | 'last_seen'
+        | 'deleted'
+      > & { attributes?: components['schemas']['Attribute'][] } & Pick<
+          components['schemas']['Attribute'],
+          'object_id' | 'object_relation' | 'category' | 'type' | 'value' | 'disable_correlation'
+        >
+    >[]
+  > = writable([]);
+  const edges: Writable<Edge[]> = writable([]);
 
   for (const referencedObject of referencedObjects) {
     $nodes.push({
@@ -94,8 +129,10 @@
         id: `object-${referencedObject.id}-to-attribute-${attribute.id}`,
         source: `o-${referencedObject.id}`,
         target: `attribute-${attribute.id}`,
-        label: attribute.object_relation ?? undefined,
-        type: 'bezier'
+        data: {
+          label: attribute.object_relation ?? undefined
+        },
+        type: 'relation'
       });
     }
   }
@@ -130,7 +167,9 @@
       id: `reference-${reference.id}`,
       source: `${reference.from}`,
       target: `${reference.to}`,
-      label: reference.type,
+      data: {
+        label: reference.type
+      },
       type: 'reference',
       animated: true
     });
@@ -139,53 +178,63 @@
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  function getLayoutedElements(nodes: Node[], edges: Edge[]) {
+  /**
+   *
+   * @param followNodeIds IDs of Nodes to keep in viewport
+   */
+  function layoutElements(followNodeIds: string[] = []) {
     dagreGraph.setGraph({ rankdir: 'LR' });
 
-    nodes.forEach((node) => {
+    $nodes.forEach((node) => {
       const { width, height } = getNodesBounds([node]);
-      const [offsetX, offsetY] = [300, 50];
+      // const [offsetX, offsetY] = [300, 50];
       dagreGraph.setNode(node.id, {
-        width: width + offsetX,
-        height: height + offsetY
+        width,
+        height
       });
     });
 
-    edges.forEach((edge) => {
+    $edges.forEach((edge) => {
       dagreGraph.setEdge(edge.source, edge.target);
     });
 
     dagre.layout(dagreGraph);
 
-    nodes.forEach((node) => {
+    $nodes.forEach((node) => {
       const nodeWithPosition = dagreGraph.node(node.id);
       node.targetPosition = Position.Left;
       node.sourcePosition = Position.Right;
 
       // We are shifting the dagre node position (anchor=center center) to the top left
       // so it matches the React Flow node anchor point (top left).
-      node.position = {
+      const pos = tweened(node.position);
+      pos.set({
         x: nodeWithPosition.x - nodeWithPosition.width / 2,
         y: nodeWithPosition.y - nodeWithPosition.height / 2
-      };
+      });
+      pos.subscribe((p) => {
+        updateNode(node.id, { position: p });
+        if (followNodeIds.includes(node.id)) {
+          fitBounds(getNodesBounds(getNodes(followNodeIds)));
+        }
+      });
     });
-
-    return { nodes, edges };
   }
 
-  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements($nodes, $edges);
-
-  $nodes = layoutedNodes;
-  $edges = layoutedEdges;
+  setTimeout(() => {
+    if ($nodes.length) layoutElements();
+  });
 
   const nodeTypes = {
     object: ObjectNode,
     attribute: AttributeNode,
-    category: CategoryNode
+    category: CategoryNode,
+    minimized: MinimizedNode
   };
 
   const edgeTypes = {
-    reference: ReferenceEdge
+    reference: ReferenceEdge,
+    relation: RelationEdge
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -205,7 +254,7 @@
 
       removePreviousHighlightBorder();
 
-      addHighlightBorder(node.id);
+      addHighlightBorder(node.type, node.data.id);
     }
   }
 
@@ -224,17 +273,47 @@
   };
 
   const { screenToFlowPosition } = useSvelteFlow();
+  const { onconnect } = useStore();
+
+  $onconnect = (connection) => {
+    const source = $nodes.find(({ id }) => id === connection.source);
+    const target = $nodes.find(({ id }) => id === connection.target);
+    if (!source || !target) return;
+    notifySave(
+      $api
+        // @ts-expect-error Not in the OpenAPI spec
+        .POST('/objectReferences/add/{objectId}', {
+          params: { path: { objectId: source.data.id } },
+          body: {
+            ObjectReference: {
+              relationship_type_select: referenceType,
+              relationship_type: '',
+              comment: '',
+              referenced_uuid: target.data.uuid
+            }
+          }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        })
+    );
+    layoutElements([source.id, target.id]);
+  };
 
   const onDrop = (event: DragEvent) => {
     event.preventDefault();
 
     if (!event.dataTransfer) {
-      return null;
+      return;
     }
 
     const type = event.dataTransfer.getData('type');
     if (type === 'object' || type === 'attribute') {
       const data = JSON.parse(event.dataTransfer.getData('node')).data;
+
+      if ($nodes.find(({ id }) => id === `unreferenced-${data.type}-${data.id}`)) {
+        return;
+      }
 
       const position = screenToFlowPosition({
         x: event.clientX,
@@ -242,7 +321,7 @@
       });
 
       const newNode = {
-        id: `unref-${data.type}-${data.id}`,
+        id: `unreferenced-${data.type}-${data.id}`,
         type,
         position,
         data: data,
@@ -263,27 +342,43 @@
 
 -->
 
-<header class="flex justify-between w-full gap-2">
-  <div class="flex justify-start gap-4">
+<svelte:window
+  use:actionBar={[
+    {
+      action: `/events/${$page.params.id}/attributes/new`,
+      icon: 'mdi:flag-add',
+      label: 'Add attribute'
+    }
+  ]}
+  on:focus={() => {
+    if ($nodes.length) layoutElements();
+  }}
+/>
+
+<header class="flex justify-between w-full gap-4">
+  <div class="flex flex-col gap-1">
     {#if $mode === 'edit'}
       <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
-        <IconCardRow>
-          <IconCard icon="mdi:web-plus" text="Add Object" />
-          <IconCard icon="mdi:flag-add" text="Add Attribute" />
-          <IconCard icon="icon-park-outline:connection" text="Add Reference" />
-        </IconCardRow>
+        <span>Reference Type for new references</span>
+        <Select
+          bind:value={referenceType}
+          options={referenceTypes.map((r) => ({
+            label: r,
+            value: r
+          }))}
+        ></Select>
       </div>
     {/if}
   </div>
-
-  <div class="flex flex-col justify-end gap-1">
+  <div>
     <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
   </div>
 </header>
+
 <div class="flex flex-row w-full h-full">
   <div class="flex-col w-full">
     {#if menu}
-      <ContextMenu id={menu.id} data={menu.data} type={menu.type} />
+      <ContextMenu id={menu.id} type={menu.type} />
     {/if}
     <Flow
       {nodes}
@@ -292,15 +387,11 @@
       {edgeTypes}
       on:nodecontextmenu={handleContextMenu}
       on:paneclick={handlePaneClick}
-      on:nodedragstop={({ detail: { node } }) => {
-        if (!node) return;
-        const position = spring(node.position);
-        const computedPosition = layoutedNodes.find((n) => n.id === node.id)?.position;
-        if (computedPosition) position.set(computedPosition);
-        position.subscribe((position) => updateNode(node.id, { position }));
-      }}
       on:dragover={onDragOver}
       on:drop={onDrop}
+      on:edgecontextmenu={() => {
+        /*handleEdgeContextMenu)e */
+      }}
     />
   </div>
 </div>

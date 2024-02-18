@@ -2,16 +2,15 @@
   import { fly } from 'svelte/transition';
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
+  import type { components } from '$lib/api/misp';
+  import { mode } from '$lib/stores';
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export let objects: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export let attributes: any;
+  export let objects: components['schemas']['Object'][];
+  export let attributes: components['schemas']['Attribute'][];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onDragStart = (event: DragEvent, node: any, type: string) => {
-    if (!event.dataTransfer) {
-      return null;
+  const onDragStart = (event: DragEvent, node: unknown, type: string) => {
+    if ($mode !== 'edit' || !event.dataTransfer) {
+      return;
     }
 
     event.dataTransfer.setData('type', type);

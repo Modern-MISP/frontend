@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { api } from '$lib/api/index.js';
   import { useEdges, useNodes } from '@xyflow/svelte';
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
@@ -6,38 +7,14 @@
   import { fly } from 'svelte/transition';
 
   export let id: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export let data: any;
   export let type: string;
 
   const nodes = useNodes();
   const edges = useEdges();
 
-  function duplicateNode() {
-    const node = $nodes.find((node) => node.id === id);
-    if (node) {
-      $nodes.push({
-        ...node,
-        // need better id
-        id: `${id}-copy${Math.random()}`,
-        position: {
-          x: node.position.x,
-          y: node.position.y + 50
-        },
-        // need to copy all data except ids
-        data: node.data
-      });
-    }
-    $nodes = $nodes;
-  }
-
   function hideNode() {
     $nodes = $nodes.filter((node) => node.id !== id);
     $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
-  }
-
-  function showNodeDetails() {
-    console.log(data);
   }
 
   function manipulateNode(expand: boolean) {
@@ -50,7 +27,7 @@
       // Iterate to find associated attribute nodes
       nodeEdges.forEach((edge) => {
         const associatedNode = $nodes.find((n) => n.id === edge.target);
-        if (associatedNode && associatedNode.type === 'attribute') {
+        if (associatedNode && associatedNode.type === 'attribute' && edge.type === 'relation') {
           // Update visibility based on expand parameter
           const hiddenValue = expand ? false : true;
 
@@ -89,8 +66,25 @@
   }
 
   function deleteNode() {
+    const node = $nodes.find((node) => node.id === id);
     hideNode();
-    // need to delete (api)
+    if (node && node.type === 'attribute') {
+      $api
+        .DELETE('/attributes/delete/{attributeId}', {
+          params: { path: { attributeId: node.data.id } }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        });
+    } else if (node && node.type === 'object') {
+      $api
+        .DELETE('/objects/delete/{objectId}/{hardDelete}', {
+          params: { path: { objectId: node.data.id, hardDelete: '1' } }
+        })
+        .then((resp) => {
+          if (resp.error) throw new Error(resp.error.message);
+        });
+    }
   }
 
   function editNode() {
@@ -108,15 +102,6 @@
  -->
 
 <div in:fly={{ x: -200 }} out:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
-  <IconCardRow class="border-2 border-sky flex-col">
-    <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
-  </IconCardRow>
-
-  <IconCardRow class="border-2 border-sky">
-    <IconCard icon="mdi:show" text="Show" />
-    <IconCard icon="mdi:hide" text="Hide" class="!text-red" on:click={hideNode} />
-  </IconCardRow>
-
   {#if type === 'object'}
     <IconCardRow class="border-2 border-sky">
       <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
@@ -126,8 +111,9 @@
 
   {#if $mode === 'edit'}
     <IconCardRow class="border-2 border-sky">
-      <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
-      <IconCard icon="bx:duplicate" text="Duplicate" on:click={duplicateNode} />
+      {#if type === 'attribute'}
+        <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
+      {/if}
       <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
     </IconCardRow>
   {/if}
