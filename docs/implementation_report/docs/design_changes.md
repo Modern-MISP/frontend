@@ -49,7 +49,7 @@ An einigen Stellen bot es sich an, neue Elemente zum Design hinzuzufügen, um di
 
 Das Umschalten zwischen View und Edit Mode wird in bestimmen Fällen gesperrt.
 
-### Context info
+### Context Info
 
 In bestimmten Fällen ist es für den Nutzer hilfreich, kontextuelle Informationen zu erhalten,
 zum Beispiel, wenn sich die Oberfläche anders als gewöhnlich verhält.

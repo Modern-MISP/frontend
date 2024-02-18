@@ -88,11 +88,11 @@ Es existiert kein Endpunkt zum Filtern von Triggern und Modulen.
 
 Die Implementierung der Taxonomie war unerwartet komplex. In Abhängigkeit davon konnte auch eine Gruppierung von Tags, die diese Methodik benutzt, nicht implementiert werden.
 
-#### Users
+#### User
 
 ##### Filter
 
-Es existiert kein dedizierter Endpunkt zum Filtern von Usern.
+Es existiert kein dedizierter Endpunkt zum Filtern von Nutzern.
 Zwar können Filter als Teil der URL mitgegeben werden, jedoch
 erfordert dies eine spezielle Formatierung der Parameter, die
 sich als ungeplanter Zusatzaufwand nicht mehr im Rahmen der Implementierungsphase umsetzen ließ.
