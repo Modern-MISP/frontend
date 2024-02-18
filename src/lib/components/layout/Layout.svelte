@@ -7,6 +7,7 @@
   import { mode } from '$lib/stores';
   import Breadcrumbs from '../breadcrumbs/Breadcrumbs.svelte';
   import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
+  import { page } from '$app/stores';
   /**
    * The routes to be displayed in the side menu.
    */
@@ -37,7 +38,7 @@
 
 <div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
   <slot name="sideMenu">
-    <SideMenu {routes} {contextRoutes} bind:isOpen />
+    <SideMenu {routes} {contextRoutes} activeRoute={$page.url.pathname} bind:isOpen />
   </slot>
 
   <div class="flex flex-col h-full min-w-0 grow">

@@ -4,28 +4,15 @@
   // Max pages before the gap decreases.
   const BIG_GAPS_BEFORE = 50;
 
-  // Default limit per page
-  const DEFAULT_LIMIT = 50;
-
   /**
    * The current page.
    */
   export let page: number = 1;
 
   /**
-   * Some input data that should be paginated. => Sliced client side.
-   */
-  export let input: T[] = [];
-  /**
-   * The client side sliced data. You should probably bind to this.
-   */
-  export let sliced: T[] = [];
-  /**
    * The total number of pages.
    */
-  export let length: number = input.length / DEFAULT_LIMIT;
-
-  $: sliced = input.slice(DEFAULT_LIMIT * page - DEFAULT_LIMIT, DEFAULT_LIMIT * page);
+  export let length: number;
 
   $: length = Math.ceil(length);
 </script>
