@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CardHeading from '../card/CardHeading.svelte';
+
   /**
    * List of items to display.
    */
@@ -14,6 +16,11 @@
    * Title of the list.
    */
   export let title: string;
+
+  /**
+   * Override the list body class
+   */
+  export let bodyClass = '';
 </script>
 
 <!-- 
@@ -23,13 +30,20 @@
  -->
 
 <div>
-  <h1 class="sticky top-0 px-2 py-6 text-2xl font-bold bg-surface0">{title}</h1>
-  <div class="pl-6">
+  <div class="flex justify-between">
+    <CardHeading class="sticky top-0 z-20 px-2 py-6 text-2xl font-bold bg-surface0"
+      >{title}</CardHeading
+    >
+    <slot name="moreHeader" />
+  </div>
+  <div class="pl-6 {bodyClass}">
     <ol class="list-decimal">
-      {#each items as item}
-        <li class="list-disc {elemClass(item)}">
-          {item}
-        </li>
+      {#each items as item, index}
+        <slot {item} {index}>
+          <li class="list-disc {elemClass(item)}">
+            {item}
+          </li>
+        </slot>
       {/each}
     </ol>
   </div>
