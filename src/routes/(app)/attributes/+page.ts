@@ -5,7 +5,6 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { components } from '$lib/api/misp';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
@@ -472,23 +471,6 @@ export const load = async ({ fetch }) => {
       value: () => 'limit'
     })
   ];
-  const topMenuActions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:event-add',
-      label: 'Add Attributes',
-      action: '' //TODO: /attributes/new
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Freetext Import Tool',
-      action: '' //TODO: freetext import tool
-    },
-    {
-      icon: 'mdi:pencil-outline',
-      label: 'Attribute Replacement Tool',
-      action: '' //TODO: attribute replacement tool
-    }
-  ];
 
   const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
@@ -539,7 +521,6 @@ export const load = async ({ fetch }) => {
     header,
     tableData,
     filter,
-    topMenuActions,
     editActions,
     maxCount: +response.headers.get('X-result-count')!
   };

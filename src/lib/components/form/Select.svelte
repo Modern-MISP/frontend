@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts" generics="T extends string">
   import type { ChangeEventHandler } from 'svelte/elements';
   import { createEventDispatcher } from 'svelte';
