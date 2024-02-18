@@ -54,7 +54,7 @@
   <slot name="footer">
     <slot name="deletion">
       {#if deletion.length > 0}
-        <div class="relative flex flex-col gap-4 p-2 border rounded-md border-text">
+        <div class="relative flex flex-col gap-4 p-2 mt-8 border rounded-md border-text">
           <h3>Those elements will be deleted:</h3>
           <PillCollection pills={deletion}></PillCollection>
 
@@ -71,7 +71,7 @@
   </slot>
   {#if add}
     <slot name="addition">
-      <div class="relative flex flex-col gap-4 p-2 border rounded-md border-text">
+      <div class="relative flex flex-col gap-4 p-2 mt-8 border rounded-md border-text">
         <h3>Those elements will be added:</h3>
         <PillCollection pills={selection}></PillCollection>
         <button
