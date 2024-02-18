@@ -21,7 +21,7 @@
   /**
    * The currently selected pills
    */
-  let selection: PickerPill[] = [];
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 </script>
 
 <!-- 
@@ -41,10 +41,6 @@
       bind:selection
       on:createTag={() => (state = 'create')}
       on:close={() => (state = 'info')}
-      on:add={({ detail }) => {
-        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
-        selection = [];
-      }}
     />
   </svelte:fragment>
 
@@ -54,12 +50,19 @@
       <CreateTag on:close={() => (state = 'add')}></CreateTag>
     </Card>
   </svelte:fragment>
-  <EventTags
-    on:close={() => (state = 'info')}
-    on:open={() => (state = 'add')}
-    on:delete={({ detail }) =>
-      deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
-    tags={data.event.Tag ?? []}
-    bind:selection
-  />
+  <Card>
+    <CardHeading>Tags</CardHeading>
+    <EventTags
+      on:close={() => (state = 'info')}
+      on:open={() => (state = 'add')}
+      on:save={({ detail }) => {
+        // @ts-expect-error svelte error. Does not detect the generic correctly.
+        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
+      }}
+      on:delete={({ detail }) =>
+        deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+      tags={data.event.Tag ?? []}
+      bind:selection
+    />
+  </Card>
 </EventInfo>

@@ -1,5 +1,5 @@
-<script lang="ts">
-  import EventPillCollectionCard from '$lib/components/pills/pillCollection/PillCollectionCardWithDeleteAndAdd.svelte';
+<script lang="ts" generics="T">
+  import EventPillCollectionCard from '$lib/components/pills/pillCollection/PillCollectionWithDeleteAndAdd.svelte';
 
   import type { components } from '$lib/api/misp';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
@@ -24,11 +24,11 @@
   /**
    * The currently selected pills
    */
-  export let selection: PickerPill[] = [];
+  export let selection: PickerPill<T>[] = [];
   /**
    * Pills that are marked for deletion
    */
-  export let deletion: PickerPill[] = [];
+  export let deletion: PickerPill<T>[] = [];
 
   let pillsByGalaxy: Record<string, ComponentProps<HrefPill>[]>;
 
@@ -62,7 +62,7 @@
                         pillsByGalaxy[x.id!] = [...pillsByGalaxy[x.id!], pill];
                       }
                     }
-                  };
+                  } as unknown as PickerPill<T>; // Not cast safe.
                   deletion = [...deletion, deletionPill];
                 }
               };
@@ -76,7 +76,7 @@
   $: if (galaxies) generatePills($mode === 'edit');
 </script>
 
-<EventPillCollectionCard title="Galaxies" on:close on:open on:delete bind:selection bind:deletion>
+<EventPillCollectionCard on:close on:open on:delete on:save bind:selection bind:deletion>
   {#each galaxies as galaxy}
     <a href="/galaxies/{galaxy.id}">
       <CardHeading class="py-2 pt-3 text-xl">{galaxy.name}</CardHeading>

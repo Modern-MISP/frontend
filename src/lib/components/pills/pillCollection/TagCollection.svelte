@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T">
   import type { components } from '$lib/api/misp';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -6,7 +6,7 @@
   import { mode } from '$lib/stores';
   import { shouldTextBeBlack } from '$lib/util/color.util';
   import type { ComponentProps } from 'svelte';
-  import EventPillCollectionCard from './PillCollectionCardWithDeleteAndAdd.svelte';
+  import EventPillCollectionCard from './PillCollectionWithDeleteAndAdd.svelte';
 
   /**
    * The Page data.
@@ -20,9 +20,9 @@
   /**
    * The currently selected pills
    */
-  export let selection: PickerPill[] = [];
+  export let selection: PickerPill<T>[] = [];
 
-  let deletion: PickerPill[] = [];
+  let deletion: PickerPill<T>[] = [];
 
   let pills: ComponentProps<HrefPill>[] = [];
 
@@ -39,7 +39,6 @@
         }`,
         href: `/tags/${y.id}`,
         enforceTextColor: false,
-        // On click remove pill from pills list and add to deletion list.
         action: undefined
       };
 
@@ -47,10 +46,13 @@
         pill.action = {
           icon: 'mdi:delete-outline',
           class: 'hover:text-red',
+
+          // On click remove pill from pills list and add to deletion list.
           onClick: () => {
             pills = pills.filter((x) => x !== pill);
             const deletionPill = {
               ...pill,
+
               value: y.id,
               // Add an restore option, that adds the pill back to the pill array.
               action: {
@@ -61,7 +63,7 @@
                   pills = [...pills, pill];
                 }
               }
-            };
+            } as unknown as PickerPill<T>; // Not cast safe.
             deletion = [...deletion, deletionPill];
           }
         };
@@ -72,6 +74,6 @@
   $: if (tags) generatePills($mode === 'edit');
 </script>
 
-<EventPillCollectionCard title="Tags" on:close on:open bind:selection bind:deletion on:delete>
+<EventPillCollectionCard on:close on:save on:open bind:selection bind:deletion on:delete>
   <PillCollection base={HrefPill} {pills} />
 </EventPillCollectionCard>
