@@ -7,7 +7,6 @@
   import { routes } from './routes';
   import { beforeNavigate, goto } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
-  import { get } from 'svelte/store';
 
   export let data;
 
