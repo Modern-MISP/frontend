@@ -5,17 +5,13 @@
 
   const progressValue = tweened(0, { duration: 0 });
 
-  const max = 100;
+  const maxProgress = 100;
 
-  let timeout: ReturnType<typeof setTimeout>;
   beforeNavigate(() => {
-    timeout = setTimeout(() => {
-      progressValue.set(99, { duration: 200 });
-    }, 100);
+    progressValue.set(99, { duration: 200, delay: 100 });
   });
 
   afterNavigate(() => {
-    if (timeout) clearTimeout(timeout);
     $progressValue = 0;
   });
 </script>
@@ -41,7 +37,8 @@
     <div
       class="h-full w-full bg-sky/80 transition-transform duration-500
         ease-[cubic-bezier(0.65,0,0.35,1)]"
-      style={`transform: translateX(-${100 - (100 * ($progressValue ?? 0)) / (max ?? 1)}%)`}
+      class:hidden={$progressValue === 0}
+      style={`transform: translateX(-${100 - (100 * ($progressValue ?? 0)) / (maxProgress ?? 1)}%)`}
     />
   </div>
   <main class="flex w-full h-full">
