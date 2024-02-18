@@ -5,7 +5,6 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { components } from '$lib/api/misp';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';

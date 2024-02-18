@@ -17,9 +17,6 @@
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
-  import Input from '$lib/components/input/Input.svelte';
-  import { getFormValues } from '$lib/util/form.util';
-  import { page } from '$app/stores';
   import FreetextImport from './FreetextImport.svelte';
   import AttributeReplacement from './AttributeReplacement.svelte';
 
