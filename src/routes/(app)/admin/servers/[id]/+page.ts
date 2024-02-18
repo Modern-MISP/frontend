@@ -19,7 +19,6 @@ export const load = async ({ params, fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
-  console.log(server);
   const col = createTableHeadGenerator<typeof server>();
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
