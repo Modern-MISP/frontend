@@ -7,10 +7,6 @@ Urspr체nglich war geplant, Workflows in der Trigger-Ansicht anzuzeigen.
 Stattdessen entschieden wir uns dazu, Workflows in einer eigenen Liste mit jeweils einer eigenen View Page darzustellen.
 Dort findet sich auch der grafische Editor.
 
-## Benennung Eigenschaften
-
-Einigen Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
-
 ## Contact Reporter
 
 Statt einer separaten Funktionalit채t kann der Nutzer auf die E-Mail-Adresse des Erstellers klicken und die gew체nschte Nachricht per E-Mail senden.
@@ -22,6 +18,10 @@ Die dargestellten Spalten bei Tabellendarstellungen sind nicht individuell ausw�
 ## Aktionsleiste vs. Schnellaktionen
 
 Einige Funktionen wurden zwischen Aktions- und Schnellaktionsleiste getauscht. Ebenso erwiesen sich manche Schnellaktionen, insbesondere die Aktion 'Edit', in der Implementierung als 체berfl체ssig und wurden somit nicht implementiert.
+
+## Benennung Eigenschaften
+
+Einigen Eigenschaften wurden zur intuitiven Benutzbarkeit umbenannt.
 
 ## Auswahl dargestellter Eigenschaften
 
