@@ -36,7 +36,7 @@
   class="absolute z-10"
   style={`top: ${top}px; left: ${left}px; right: ${right}px; bottom: ${bottom}px;`}
 >
-  <Card class="!resize-none shadow-lg shadow-black">
+  <Card class="shadow-lg shadow-black">
     <span>{capitalize(type)}: {id}</span>
     <hr class="w-full border-text" />
     <Button on:click={deleteTarget} prefixIcon="mdi:delete" class="text-red">Delete</Button>

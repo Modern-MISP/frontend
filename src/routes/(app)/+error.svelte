@@ -11,7 +11,7 @@
 
   See: https://kit.svelte.dev/docs/errors
 -->
-<Card class="!resize-none">
+<Card>
   <div
     class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-red"
   >
