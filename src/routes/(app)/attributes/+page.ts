@@ -125,7 +125,7 @@ export const load = async ({ fetch }) => {
       })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'object_relation',
       label: 'Object Relation',
       value: (x) => x.object_relation ?? ''

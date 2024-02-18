@@ -87,7 +87,7 @@
     }),
 
     col({
-      icon: 'mdi:circle',
+      icon: '',
       key: 'object_relation',
       label: 'Object Relation',
       value: (x) => x.object_relation ?? ''
@@ -125,7 +125,7 @@
 
   const topMenuActions: ActionBarEntryProps[] = [
     {
-      icon: 'mdi:plus',
+      icon: 'mdi:flag-plus',
       label: 'Add',
       action: `/events/${data.event.id}/attributes/new`
     }
@@ -134,7 +134,7 @@
   const editActions: DynCardActionHeader<Data[]>[] = [
     {
       label: 'Delete Attribute',
-      icon: 'mdi:delete',
+      icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (attributes) => {
         notifySave(

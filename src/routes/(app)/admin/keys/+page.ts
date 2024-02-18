@@ -100,7 +100,7 @@ export const load: PageLoad = async ({ fetch }) => {
       // class: 'whitespace-nowrap'
     }),
     col({
-      icon: 'mdi:eye-circle-outline',
+      icon: 'mdi:eye-outline',
       key: 'last_seen_ip',
       label: 'Last seen Ip',
       value: (x) => ({
