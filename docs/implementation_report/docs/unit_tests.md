@@ -15,21 +15,21 @@ Aus dem Storybook wird ersichtlich, aus welchen Teilen sich die Oberfläche zusa
 
 Als Werkzeug zum Generieren unseres Storybooks nutzen wir [Histoire](https://histoire.dev/).
 
-## Unit Tests
+## Unittests
 
 An den wenigen Stellen, an denen es sinnvoll war, verwendeten wir ergänzend
-normale Unit Tests.
+normale Unittests.
 
-### Test suite
+### Test Suite
 
 Für unsere Unit Tests nutzten wir [Vitest](https://vitest.dev/).
 
-### Coverage
+### Überdeckung
 
 Die Tests beschränken sich auf wenige, rein logische Funktionen,
-für die kein aufwändiger DOM mock notwendig war.
+für die kein aufwendiger DOM Mock notwendig war.
 
-Somit sind wir auf eine Unit Test Coverage von knapp über 10% gekommen.
+Somit sind wir auf eine Unittestüberdeckung von knapp über 10 % gekommen.
 
 ## Weiteres
 
