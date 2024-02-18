@@ -1,11 +1,8 @@
 <script lang="ts">
+  import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
   import { fade } from 'svelte/transition';
   import { FADE_OPTIONS } from './config';
-  import SideMenuDivider from './SideMenuDivider.svelte';
-  import type { Route } from '$lib/models/Route.interface';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import type SideMenuEntry from './SideMenuEntry.svelte';
   import { createTooltip, melt } from '@melt-ui/svelte';
 
   /**
