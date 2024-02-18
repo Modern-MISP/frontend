@@ -5,7 +5,7 @@
   import { createTableHeadGenerator } from '../../../util/tableBuilder.util';
   import type { DynTableHeadExtent } from './DynTable.model';
   import DynTable from './DynTable.svelte';
-  import { TABLE_DATA } from './exampleTableData';
+  import { TABLE_DATA } from './exampleTableData.mock';
   import Boolean from '$lib/components/boolean/Boolean.svelte';
 
   export let Hst: Hst;
@@ -21,16 +21,14 @@
       key: 'boolean',
       icon: 'mdi:check',
       label: 'Boolean',
-      display: Boolean,
-      value: (x) => ({ isTrue: !x.disabled })
+      value: (x) => ({ display: Boolean, props: { isTrue: !x.disabled } })
     }),
     col({ key: 'name', icon: 'mdi:account-outline', label: 'Name', value: (x) => x.name }),
     col({
       key: 'description',
       icon: 'mdi:information-outline',
       label: 'Description',
-      display: Info,
-      value: (x) => ({ text: x.description })
+      value: (x) => ({ display: Info, props: { text: x.description } })
     })
   ];
 </script>

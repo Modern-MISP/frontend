@@ -1,18 +1,37 @@
 <script lang="ts">
-  import Pagination from '$lib/components/pagination/Pagination.svelte';
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { PageData } from './$types';
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
+  import Input from '$lib/components/input/Input.svelte';
+  import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import CreateTag from './CreateTag.svelte';
 
   /**
    * Page data
    */
-  export let data: PageData;
+  export let data;
 
-  let { tableData, header } = data;
+  $: ({ tableData } = data);
 
-  // FIXME: should be implemented with paginated post request to api. Server fault...
-  $: sliced = tableData.slice(50 * page - 50, 50 * page);
-  $: page = 1;
+  let tagFilter = '';
+
+  $: filtered = tableData.filter((x) => x.name?.toLowerCase()?.includes(tagFilter.toLowerCase()));
+
+  let addTag = false;
+
+  $: topMenuActions = [
+    addTag
+      ? {
+          icon: 'mdi:close-circle-outline',
+          label: 'Close Create Tag',
+          action: () => (addTag = false),
+          class: 'text-red'
+        }
+      : {
+          icon: 'mdi:tag-plus',
+          label: 'Create Tag',
+          action: () => (addTag = true)
+        }
+  ];
 </script>
 
 <!--
@@ -21,6 +40,24 @@
   
 -->
 
-<DynTable href={({ id }) => `tags/${id}`} {header} data={sliced} />
+<ComplexTableLayout {...data} {topMenuActions} tableData={filtered}>
+  <div slot="filter">
+    <ActionCard class="h-20">
+      <Input placeholder="Search tag" class="w-max" on:value={({ detail }) => (tagFilter = detail)}
+      ></Input>
+    </ActionCard>
+  </div>
 
-<Pagination bind:page />
+  <svelte:fragment slot="added">
+    {#if addTag}
+      <div
+        class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
+      >
+        <FilterCard>
+          <span slot="heading"> Create a new Tag</span>
+          <CreateTag on:close={() => (addTag = false)}></CreateTag>
+        </FilterCard>
+      </div>
+    {/if}
+  </svelte:fragment>
+</ComplexTableLayout>

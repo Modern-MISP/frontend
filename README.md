@@ -1,5 +1,9 @@
 # MISP-frontend
 
+### Current implementation timeline
+
+![gantt chart](https://gitlab.kit.edu/api/v4/projects/159800/jobs/artifacts/docs/raw/docs/implementation_report/docs/ganttChart.svg?job=generate_uml_svg)
+
 ## Setup
 
 ### Install
@@ -31,7 +35,7 @@ https://localhost/servers/serverSettings/Security
 
 ## Develope
 
-### Start misp instance to use as api
+### Start MISP instance to use as api
 
 `npm run start:misp`
 

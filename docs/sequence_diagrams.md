@@ -34,7 +34,7 @@ Only Allowed after switching to Edit-Mode.
 ## Freetext Import
 
 Suggest attribute patterns of an event according to IoCs (“Indicator of Compromise”).
-The attributes can be edited and added to the event. 
+The attributes can be edited and added to the event.
 Only Allowed after switching to Edit-Mode.
 
 !["Freetext Import" Sequence Diagram](sequencediagrams/svg/freetext_import.svg)

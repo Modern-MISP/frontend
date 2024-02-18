@@ -1,10 +1,21 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { PageData } from './$types';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import EnableFilter from '../../galaxies/EnableFilter.svelte';
 
-  export let data: PageData;
+  export let data;
 
-  const { tableData, header } = data;
+  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: !d.disabled }));
+
+  let filtered: typeof filterableTableData = [];
 </script>
 
-<DynTable href={({ id }) => `/workflows/modules/${id}`} {header} data={tableData} />
+<!--
+  @component
+  
+  A list of all workflow modules except triggers.
+-->
+<ComplexTableLayout {...data} tableData={filtered}>
+  <div slot="filter">
+    <EnableFilter bind:data={filterableTableData} bind:filtered></EnableFilter>
+  </div>
+</ComplexTableLayout>

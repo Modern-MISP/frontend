@@ -3,4 +3,5 @@ export interface Route {
   icon: string;
   href: string;
   hidden?: boolean;
+  userAccess?: 'viewOnly' | 'none';
 }

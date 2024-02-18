@@ -19,6 +19,11 @@
   export let routes: SideMenuRoute[] = [];
 
   /**
+   * Context dependant routes to be displayed in a separate section.
+   */
+  export let contextRoutes: SideMenuRoute[] = [];
+
+  /**
    * The current route that is active.
    *
    * Should usually be the current URL provided by SvelteKit (`$page.url.href`).
@@ -44,7 +49,9 @@
 >
   <slot name="logo">
     <div class="flex h-10 gap-12 px-5 overflow-hidden text-2xl" class:text-4xl={isOpen}>
-      <Icon icon="mdi:home" class="text-inherit shrink-0" />
+      <a href="/events">
+        <Icon icon="mdi:home" class="text-inherit shrink-0" />
+      </a>
       {#if isOpen}
         <h1 class="font-bold line-clamp-1" transition:fade={FADE_OPTIONS}>MISP</h1>
       {/if}
@@ -52,14 +59,28 @@
   </slot>
 
   <SideMenuDivider />
-  <nav class="flex flex-col justify-center w-full gap-2 overflow-auto">
+  <nav class="flex flex-col w-full gap-2 overflow-auto overflow-x-hidden">
     <slot>
+      {#if contextRoutes.length > 0}
+        <div class="flex flex-col justify-center w-full gap-2 bg-crust rounded-2xl">
+          {#each contextRoutes as route}
+            <div class="flex-row rounded-2xl" class:bg-crust={isOpen}>
+              <SideMenuEntry
+                {...route}
+                isMenuOpen={isOpen}
+                active={activeRoute?.includes(route.href)}
+              />
+            </div>
+          {/each}
+        </div>
+        <SideMenuDivider />
+      {/if}
       {#each routes as route}
-        <div class="flex flex-col px-5 rounded-2xl" class:bg-crust={isOpen}>
+        <div class="flex flex-col rounded-2xl" class:bg-crust={isOpen}>
           <SideMenuEntry
             {...route}
             isMenuOpen={isOpen}
-            active={activeRoute?.includes(route.href)}
+            active={activeRoute?.startsWith(route.href)}
           />
         </div>
       {/each}
@@ -69,10 +90,11 @@
   <div class="relative flex items-center w-full px-4">
     {#if isOpen}
       <span class="absolute text-sky left-10 line-clamp-1" transition:fade={FADE_OPTIONS}
-        >Version: 0.0.1</span
+        >Version: 0.1.0</span
       >
     {/if}
     <button
+      type="button"
       class="ml-auto text-4xl transition-all duration-500 cursor-pointer hover:text-sky"
       on:click={() => (isOpen = !isOpen)}
       class:rotate-180={isOpen}

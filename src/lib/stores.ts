@@ -1,49 +1,38 @@
-import { browser } from '$app/environment';
 import type BreadCrumbs from '$lib/components/breadcrumbs/Breadcrumbs.svelte';
-import { writable } from 'svelte/store';
-import type { ActionBarEntry } from './models/ActionBarEntry.interface';
-import type { Mode } from './models/Mode';
 import type { ComponentProps } from 'svelte';
+import { writable } from 'svelte/store';
+import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
+import type { Mode } from './models/Mode';
+import { createLocalStorageStore, createTimeoutStore } from './util/store.util';
+import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { INITIAL_SETTINGS } from './settings';
-const createSettingsStore = <T>(init: T) => {
-  const { subscribe, set, update } = writable<T>(init);
+import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
+import { PUBLIC_MAINTENANCE_MODE } from '$env/static/public';
 
-  function saveOnSet(value: T) {
-    if (browser) localStorage.setItem('settings', JSON.stringify(value));
-    set(value);
-  }
+export const actionBarEntries = writable<ActionBarEntryProps[]>([]);
+export const contextRouteEntries = writable<SideMenuRoute[]>([]);
+export const contextInfo = writable<string[]>([]);
 
-  return {
-    subscribe,
-    set: saveOnSet,
-    update
-  };
-};
-
-export const actionBarEntries = writable<ActionBarEntry[]>([]);
-let init = INITIAL_SETTINGS;
-
-if (browser) {
-  const localSettings = JSON.parse(localStorage.getItem('settings') || '{}');
-  if (isSetting(localSettings)) init = localSettings;
-}
-
-// TODO: finish this typeguard
-function isSetting(toCheck: unknown): toCheck is typeof init {
-  return (
-    typeof toCheck === 'object' && toCheck !== null && 'theme' in toCheck && 'openOnInit' in toCheck
-  );
-}
-
-export const settings = createSettingsStore(init);
+export const settings = createLocalStorageStore(INITIAL_SETTINGS, 'settings');
 
 export type Themes = (typeof themes)[number]['value'];
 export const themes = [
   { value: 'mocha', label: 'Mocha' },
   { value: 'macchiato', label: 'Macchiato' },
   { value: 'frappe', label: 'Frappe' },
-  { value: 'latte', label: 'Latte' }
+  { value: 'latte', label: 'Latte' },
+  { value: 'latte lighter', label: 'Brighter Latte ' },
+  { value: 'latte bright', label: 'Brightest Latte ' }
 ] as const;
 
 export const mode = writable<Mode>('view');
+export const lockModeToggle = writable<boolean>(false);
+
+// enforce view mode when in maintenance mode
+if (PUBLIC_MAINTENANCE_MODE === 'true') {
+  mode.subscribe(() => mode.set('view'));
+}
+
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
+
+export const notifications = createTimeoutStore<ComponentProps<Pill>>(8000);

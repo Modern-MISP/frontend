@@ -1,16 +1,16 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { PageData } from './$types';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  export let data: PageData;
+  export let data;
 
-  const { tableData, header } = data;
+  $: ({ tableData } = data);
 </script>
 
 <!--
   @component
-  
+  All user keys. I think the pagination is not working, because the api does not support the request. I will still let it in, maybe they fix it in the future.
   
 -->
 
-<DynTable {header} data={tableData} />
+<ComplexTableLayout tableHref={(x) => `/admin/keys/${x.AuthKey?.id}`} {...data} {tableData}
+></ComplexTableLayout>

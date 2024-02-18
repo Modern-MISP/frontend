@@ -1,14 +1,23 @@
 {
   "cSpell.words": [
+    "anyputs",
     "catppuccin",
     "clazz",
+    "colour",
     "histoire",
     "iconify",
+    "luminence",
+    "Luminence",
     "misp",
     "MISP",
+    "MMISP",
     "openapi",
+    "pickable",
+    "sidemenu",
+    "svelteflow",
     "tailwindcss",
     "xyflow"
   ],
-  "eslint.validate": ["svelte"] // Not sure if this is needed but I couldn't make eslint work in svelte files otherwise
+  "eslint.validate": ["svelte"],
+  "cSpell.language": "en,de,de-DE" // Not sure if this is needed but I couldn't make eslint work in svelte files otherwise
 }

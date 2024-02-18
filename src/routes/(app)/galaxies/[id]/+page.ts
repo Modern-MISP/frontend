@@ -1,10 +1,10 @@
-import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
-
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
@@ -13,140 +13,141 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await GET('/galaxies/view/{galaxyId}', { params: { path: { galaxyId: params.id } } });
+  } = await get(api).GET('/galaxies/view/{galaxyId}', {
+    params: { path: { galaxyId: params.id } },
+    fetch
+  });
 
-  if (mispError) throw error(response.status, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<
-    Required<(typeof data)['GalaxyCluster']>[number],
+  const fac = createTableHeadGenerator<
+    NonNullable<(typeof data)['GalaxyCluster']>[number],
     DynTableHeadExtent
   >();
 
   const header = [
-    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
-    col({
+    fac({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id! }),
+    fac({
       icon: 'mdi:circle',
       key: 'value',
-      label: 'Value',
-      display: Info,
-      value: (x) => ({ text: x.value })
+      label: 'Name',
+      value: (x) => ({ display: Info, props: { text: x.value } })
     }),
-    col({
+    fac({
       icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
-      display: Info,
-      value: (x) => ({ text: x.description || 'none', class: 'line-clamp-3' })
+      value: (x) => ({
+        display: Info,
+        props: { text: x.description || 'none', class: 'line-clamp-3' }
+      })
     }),
-    col({
+    fac({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organisations',
-      display: PillCollection,
+      label: 'Organizations',
       value: (x) => ({
-        class: 'flex-col',
-        pills: [
-          {
-            icon: 'material-symbols:work-outline',
-            text: x.org_id ?? 'unknown'
-          },
+        display: PillCollection,
+        props: {
+          class: 'flex-col',
+          pills: [
+            {
+              icon: 'material-symbols:work-outline',
+              text: x.org_id ?? 'unknown'
+            },
 
-          {
-            icon: 'mdi:account-outline',
-            text: x.orgc_id ?? 'unknown'
-          }
-        ]
+            {
+              icon: 'mdi:account-outline',
+              text: x.orgc_id ?? 'unknown'
+            }
+          ]
+        }
       })
     }),
-    col({
+    fac({
       icon: 'ph:hash-bold',
       key: 'event_count',
-      label: 'Evens',
-      display: Pill,
+      label: 'Events',
       value: () => ({
-        icon: 'ph:hash-bold',
-        text: '!apiResponse'
+        display: Pill,
+        props: {
+          icon: 'ph:hash-bold',
+          text: '?'
+        }
       })
     }),
-    col({
+    fac({
       icon: 'mdi:checkbox-marked-outline',
       key: 'default',
       label: 'Default',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.default, class: 'm-auto' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.default, class: 'm-auto' } })
     }),
-    col({
+    fac({
       icon: 'mdi:web-sync',
       key: 'published',
       label: 'Published',
-      display: Boolean,
-      value: (x) => ({ isTrue: x.published, class: 'm-auto' })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.published, class: 'm-auto' } })
     }),
-    col({
-      icon: 'mdi:web',
+    fac({
+      icon: 'mdi:share',
       key: 'distribution',
       label: 'Distribution',
-      display: LookupPill,
-      value: (x) => ({ value: +x.distribution, class: '!w-56', options: DISTRIBUTION_LOOKUP })
+      value: (x) => ({
+        display: LookupPill,
+        props: { value: +x.distribution!, class: '!w-56', options: DISTRIBUTION_LOOKUP }
+      })
     })
   ];
 
-  const col2 = createTableHeadGenerator<typeof data.Galaxy>();
-  // const left = [([data.Galaxy ?? {}], DynCard, {});
+  const fac2 = createTableHeadGenerator<
+    typeof data.Galaxy & { enabled?: boolean; local_only?: boolean }
+  >();
 
   const left = [
-    col2({
-      key: 'name',
+    fac2({
       label: 'Name',
       value: (x) => x?.name ?? 'unknown'
     }),
-    col2({
-      key: 'description',
+    fac2({
       label: 'Description',
-      display: Info,
       value: (x) => ({
-        text: x?.description ?? 'unknown'
+        display: Info,
+        props: {
+          text: x?.description ?? 'unknown'
+        }
       })
     }),
-    col2({
-      key: 'namespace',
+    fac2({
       label: 'Namespace',
       value: (x) => x?.namespace ?? 'unknown'
     })
   ];
 
   const right = [
-    col2({
-      key: 'version',
+    fac2({
       label: 'Version',
       value: (x) => x?.version ?? 'unknown'
     }),
-    col2({
-      key: 'id',
+    fac2({
       label: 'ID',
       value: (x) => x?.id ?? 'unknown'
     }),
-    col2({
-      key: 'uuid',
+    fac2({
       label: 'UUID',
       value: (x) => x?.uuid ?? 'unknown'
     }),
-    col2({
-      key: 'enabled',
+    fac2({
       label: 'Enabled',
-      display: Boolean,
-      value: (x) => ({ isTrue: x?.enabled ?? false })
+      value: (x) => ({ display: Boolean, props: { isTrue: x?.enabled ?? false } })
     }),
-    col2({
-      key: 'local_only',
+    fac2({
       label: 'Local Only',
-      display: Boolean,
-      value: (x) => ({ isTrue: x?.local_only ?? false })
+      value: (x) => ({ display: Boolean, props: { isTrue: x?.local_only ?? false } })
     })
   ];
 

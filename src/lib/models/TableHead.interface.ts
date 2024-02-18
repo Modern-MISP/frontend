@@ -6,8 +6,10 @@ export type TableHead<
   DefaultValueReturn = string
 > = {
   label: string;
-  display?: DisplayComp extends SvelteComponent ? ComponentType<DisplayComp> : undefined;
-  value: (
-    value: Value
-  ) => DisplayComp extends SvelteComponent ? ComponentProps<DisplayComp> : DefaultValueReturn;
+  value: (value: Value) => DisplayComp extends SvelteComponent
+    ? {
+        display: ComponentType<DisplayComp>;
+        props: ComponentProps<DisplayComp>;
+      }
+    : DefaultValueReturn;
 };

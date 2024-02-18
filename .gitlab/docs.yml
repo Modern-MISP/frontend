@@ -1,5 +1,5 @@
 stages:
-  - generate_docs
+  # - generate_docs # Don't run generate_docs job because it always hangs on install for some reason
   - generate_uml_svg
   - generate_mkdocs
   - push_docs
@@ -10,57 +10,51 @@ workflow:
 
 default:
   tags:
-    - docker # Tag is required to make the CI runner accept the jobs
-  image:
-    name: node:latest
-    pull_policy: if-not-present
-
+    - kit-intranet # Tag is required to make the CI runner accept the jobs
+  image: node:latest
 
 variables:
   SOURCE_DATE_EPOCH: 0
 
-generate_docs:
-  stage: generate_docs
-  script:
-    - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
-    - npx @feathecutie/svelte-to-uml@latest . ./docs/generated
-  artifacts:
-    paths:
-      - docs/generated
-  needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: install_dependencies
-      artifacts: true
+# generate_docs:
+#   stage: generate_docs
+#   script:
+#     - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
+#     - npx @feathecutie/svelte-to-uml@latest . ./docs/generated
+#   artifacts:
+#     paths:
+#       - docs/generated
+#   needs:
+#     - pipeline: $PARENT_PIPELINE_ID
+#       job: install_dependencies
+#       artifacts: true
 
 generate_uml_svg:
   stage: generate_uml_svg
-  image: 
+  image:
     name: docker.io/plantuml/plantuml
-    entrypoint: [""]
-    pull_policy: if-not-present
+    entrypoint: ['']
   script:
-    - find docs/generated -type f -name *.plantuml -exec java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg {} \;
-    - find docs/sequencediagrams/plantuml/ -type f -name *.plantuml -exec sh -c "cat '{}' | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > docs/sequencediagrams/svg/\$(basename '{}' .plantuml).svg" \;
+    - find docs -type f -name *.plantuml -exec sh -c "cat '{}' | java -Djava.awt.headless=true -jar /opt/plantuml.jar -tsvg -p > \$(dirname '{}')/\$(basename '{}' .plantuml).svg" \;
+    - mv docs/sequencediagrams/plantuml/*.svg docs/sequencediagrams/svg/
   artifacts:
     paths:
       - docs
 
 generate_mkdocs:
   stage: generate_mkdocs
-  image:
-    name: hub.cert.kit.edu:5000/mkdocs
-    pull_policy: if-not-present
+  image: hub.cert.kit.edu:5000/mkdocs
   script:
-    - source /root/.venv/bin/activate; mkdocs build
+    # - source /root/.venv/bin/activate; mkdocs build
+    - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
       - site
+      - docs/implementation_report/site
 
 push_docs:
   stage: push_docs
-  image: 
-    name: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
-    pull_policy: if-not-present
+  image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
@@ -72,12 +66,12 @@ push_docs:
     - if: $CI_PIPELINE_SOURCE == "parent_pipeline"
       when: manual
   script:
-     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
-     - cp site/pdf/document.pdf docs/
-     - cp docs/generated/uml.svg docs/
-     - rm -r docs/generated/
-     - git add docs/
-     - git config user.name uml-pipeline
-     - git config user.email uml-pipeline@example.com
-     - git commit -m "Auto-generated docs for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
-     - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
+    - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
+    # - cp site/pdf/document.pdf docs/
+    # - cp docs/generated/uml.svg docs/
+    - cp docs/implementation_report/site/pdf/document.pdf docs/implementation_report
+    - git add docs/
+    - git config user.name uml-pipeline
+    - git config user.email uml-pipeline@example.com
+    - git commit -m "Auto-generated docs for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
+    - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
