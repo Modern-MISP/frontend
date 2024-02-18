@@ -49,7 +49,8 @@ Die API liefert keinen Endpunkt, der verwandte Events oder Tags anzeigt.
 
 ##### Sightings
 
-Die API liefert keinen Endpunkt, der Sightings für Events anzeigt oder als false-positive erklärt.
+Die API liefert keinen Endpunkt, der Sightings für Attribute anzeigt oder als false-positive erklärt.
+Das Hinzufügen von Sightings wird jedoch unterstützt.
 
 ##### Enrichments
 
