@@ -37,14 +37,6 @@
     $edges = $edges.filter((edge) => edge.source !== id && edge.target !== id);
   }
 
-  function showNodeDetails() {
-    console.log(data);
-    const node = $nodes.find((node) => node.id === id);
-    if (node && node.type === 'attribute') {
-      history.pushState(null, '', `/attributes/${node.data.id}`);
-    }
-  }
-
   function manipulateNode(expand: boolean) {
     const node = $nodes.find((node) => node.id === id);
     // Only objects are collapsible
@@ -130,12 +122,6 @@
  -->
 
 <div in:fly={{ x: -200 }} out:fly={{ x: -200 }} class="flex items-center gap-2 absolute z-50">
-  <IconCardRow class="border-2 border-sky flex-col">
-    {#if type === 'attribute'}
-      <IconCard icon="mdi:magnify" text="Details" on:click={showNodeDetails} />
-    {/if}
-  </IconCardRow>
-
   {#if type === 'object'}
     <IconCardRow class="border-2 border-sky">
       <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
