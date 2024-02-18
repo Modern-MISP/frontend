@@ -1,5 +1,5 @@
 stages:
-  - generate_docs
+  # - generate_docs # Don't run generate_docs job because it always hangs on install for some reason
   - generate_uml_svg
   - generate_mkdocs
   - push_docs
@@ -16,18 +16,18 @@ default:
 variables:
   SOURCE_DATE_EPOCH: 0
 
-generate_docs:
-  stage: generate_docs
-  script:
-    - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
-    - npx @feathecutie/svelte-to-uml@latest . ./docs/generated
-  artifacts:
-    paths:
-      - docs/generated
-  needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: install_dependencies
-      artifacts: true
+# generate_docs:
+#   stage: generate_docs
+#   script:
+#     - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
+#     - npx @feathecutie/svelte-to-uml@latest . ./docs/generated
+#   artifacts:
+#     paths:
+#       - docs/generated
+#   needs:
+#     - pipeline: $PARENT_PIPELINE_ID
+#       job: install_dependencies
+#       artifacts: true
 
 generate_uml_svg:
   stage: generate_uml_svg
@@ -45,10 +45,12 @@ generate_mkdocs:
   stage: generate_mkdocs
   image: hub.cert.kit.edu:5000/mkdocs
   script:
-    - source /root/.venv/bin/activate; mkdocs build
+    # - source /root/.venv/bin/activate; mkdocs build
+    - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
       - site
+      - docs/implementation_report/site
 
 push_docs:
   stage: push_docs
@@ -65,9 +67,9 @@ push_docs:
       when: manual
   script:
     - git remote set-url origin https://gitlab-ci-token:${PUSH_TOKEN}@gitlab.kit.edu/kit/kit-cert/mmisp/frontend.git
-    - cp site/pdf/document.pdf docs/
-    - cp docs/generated/uml.svg docs/
-    - rm -r docs/generated/
+    # - cp site/pdf/document.pdf docs/
+    # - cp docs/generated/uml.svg docs/
+    - cp docs/implementation_report/site/pdf/document.pdf docs/implementation_report
     - git add docs/
     - git config user.name uml-pipeline
     - git config user.email uml-pipeline@example.com

@@ -9,6 +9,7 @@
     "dbaeumer.vscode-eslint",
     "jebbs.plantuml",
     "well-ar.plantuml",
-    "qhoekman.language-plantuml"
+    "qhoekman.language-plantuml",
+    "streetsidesoftware.code-spell-checker-german"
   ]
 }
