@@ -12,9 +12,5 @@
   
 -->
 
-<ComplexTableLayout
-  tableHref={(x) => `/admin/keys/${x.AuthKey?.id}`}
-  {...data}
-  {tableData}
-  filter={[]}
+<ComplexTableLayout tableHref={(x) => `/admin/keys/${x.AuthKey?.id}`} {...data} {tableData}
 ></ComplexTableLayout>

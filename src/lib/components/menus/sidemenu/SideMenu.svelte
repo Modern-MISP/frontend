@@ -80,7 +80,7 @@
           <SideMenuEntry
             {...route}
             isMenuOpen={isOpen}
-            active={activeRoute?.includes(route.href)}
+            active={activeRoute?.startsWith(route.href)}
           />
         </div>
       {/each}

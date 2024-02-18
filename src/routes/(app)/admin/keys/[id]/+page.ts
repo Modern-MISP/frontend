@@ -12,6 +12,7 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { format } from 'date-fns';
+import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -76,16 +77,18 @@ export const load: PageLoad = async ({ params, fetch }) => {
           }
         })
       },
-      // FIXME: This should also alow for never expiring keys
       {
         value: (x) => ({
-          display: Input,
+          display: InputWithCheckbox,
           props: {
-            value: x.AuthKey?.expiration
-              ? format(new Date(+x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
-              : undefined,
-            name: 'date',
-            type: 'Date'
+            checked: !!x.AuthKey?.expiration && +x.AuthKey?.expiration !== 0,
+            inputProps: {
+              value: x.AuthKey?.expiration
+                ? format(new Date(+x.AuthKey?.expiration * 1000), 'yyyy-MM-dd')
+                : undefined,
+              name: 'expiration',
+              type: 'Date'
+            }
           }
         })
       }

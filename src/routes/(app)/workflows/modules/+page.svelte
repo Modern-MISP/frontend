@@ -14,13 +14,7 @@
   
   A list of all workflow modules except triggers.
 -->
-<ComplexTableLayout
-  {...data}
-  tableData={filtered}
-  topMenuActions={[]}
-  filter={[]}
-  pagination={false}
->
+<ComplexTableLayout {...data} tableData={filtered}>
   <div slot="filter">
     <EnableFilter bind:data={filterableTableData} bind:filtered></EnableFilter>
   </div>
