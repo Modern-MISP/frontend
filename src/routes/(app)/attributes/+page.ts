@@ -11,7 +11,6 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
 import {
