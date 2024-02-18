@@ -73,6 +73,6 @@
     condition: editModeRestricted
   }}
 />
-<Layout {routes} currentRoute={$currentRoute} contextRoutes={$contextRouteEntries}>
+<Layout {routes} currentRoute={$currentRoute} contextRoutes={$contextRouteEntries} userData={data}>
   <slot />
 </Layout>

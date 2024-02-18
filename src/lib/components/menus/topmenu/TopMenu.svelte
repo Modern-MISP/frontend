@@ -15,6 +15,11 @@
    * Whether the side menu is open or not. TODO: probably should search for a better solution for this.
    */
   export let isOpen = false;
+
+  /**
+   * Data about the current user.
+   */
+  export let userData: { email: string; admin: boolean };
 </script>
 
 <!-- 
@@ -39,7 +44,7 @@
       <Icon icon="mdi:magnify" slot="icon" class="w-10 h-10" />
     </Input> -->
   </div>
-  <div class="flex items-center gap-6">
+  <div class="flex items-center gap-4">
     <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl bg-crust">
       {#if mode === 'edit'}
         <ActionBar entries={$actionBarEntries} />
@@ -49,6 +54,18 @@
 
     <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl">
       <ContextInfo info={$contextInfo} />
+    </div>
+
+    <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl">
+      <ContextInfo
+        info={[userData.email, userData.admin ? 'Administrator account' : 'User account']}
+      >
+        {#if userData.admin}
+          <Icon icon="mdi:shield-account" width="30" />
+        {:else}
+          <Icon icon="mdi:account" width="30" />
+        {/if}
+      </ContextInfo>
     </div>
 
     <!-- <div class="flex flex-col items-center gap-1">

@@ -23,6 +23,11 @@
    */
   export let currentRoute: Route[] = [];
 
+  /**
+   * Data about the current user
+   */
+  export let userData: { email: string; admin: boolean };
+
   let isOpen = false;
 </script>
 
@@ -43,7 +48,7 @@
 
   <div class="flex flex-col h-full min-w-0 grow">
     <div class="ml-0 lg:ml-4">
-      <TopMenu bind:mode={$mode} bind:isOpen>
+      <TopMenu bind:mode={$mode} bind:isOpen {userData}>
         <div class="pl-4">
           <Breadcrumbs routes={currentRoute} />
         </div>

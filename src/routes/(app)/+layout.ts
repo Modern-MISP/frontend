@@ -19,6 +19,8 @@ export const load = async () => {
 
   return {
     // @ts-expect-error Not in the OpenAPI spec
-    admin: (data?.Role?.perm_admin ?? false) as boolean
+    admin: (data?.Role?.perm_admin ?? false) as boolean,
+    // @ts-expect-error Not in the OpenAPI spec
+    email: (data?.User?.email ?? '') as string
   };
 };
