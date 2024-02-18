@@ -55,7 +55,7 @@
         class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
       >
         <FilterCard>
-          <CardHeading>Create a new Tag</CardHeading>
+          <span slot="heading"> Create a new Tag</span>
           <CreateTag on:close={() => (addTag = false)}></CreateTag>
         </FilterCard>
       </div>
