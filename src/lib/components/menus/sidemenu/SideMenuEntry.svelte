@@ -1,11 +1,8 @@
 <script lang="ts">
+  import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
   import { fade } from 'svelte/transition';
   import { FADE_OPTIONS } from './config';
-  import SideMenuDivider from './SideMenuDivider.svelte';
-  import type { Route } from '$lib/models/Route.interface';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import type SideMenuEntry from './SideMenuEntry.svelte';
   import { createTooltip, melt } from '@melt-ui/svelte';
 
   /**
@@ -77,15 +74,16 @@
  -->
 
 <div
-  class="flex items-center justify-between h-16 gap-8 text-lg transition-all duration-200 cursor-pointer hover:text-sky"
+  class="flex items-center justify-between text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   title={name}
-  use:melt={$trigger}
 >
-  <a class="flex items-center gap-4" title={name} {href}>
-    <Icon {icon} class="mx-auto shrink-0" />
+  <a class="flex items-center w-full h-16 gap-4 p-4" title={name} {href}>
+    <div class="flex items-center justify-center h-full aspect-square" use:melt={$trigger}>
+      <Icon {icon} class="mx-auto shrink-0" />
+    </div>
     {#if isMenuOpen}
-      <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
+      <span class="w-full font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
         {name}
       </span>
     {/if}
@@ -94,7 +92,7 @@
     {#if isMenuOpen}
       <button
         type="button"
-        class="text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
+        class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
         class:rotate-180={isOpen}
         on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
       >
@@ -113,7 +111,6 @@
   {/if}
 </div>
 {#if children && isOpen}
-  <SideMenuDivider class="w-full" />
   {#each children as child}
     <svelte:self {...child} {isMenuOpen} isChild={true} />
   {/each}

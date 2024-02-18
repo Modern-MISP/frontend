@@ -1,11 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { PUBLIC_MISP_KEY } from '$env/static/public';
   import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
-  import { login } from './authMock';
 
   let error: string = '';
 
@@ -16,18 +14,6 @@
       $token = entries.token;
       goto('/events');
       return;
-    }
-
-    try {
-      const res = await login(entries as { email: string; password: string }); // Can not get the form builder type safe
-      if (res) {
-        $token = PUBLIC_MISP_KEY;
-        goto('/events');
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (e: any) {
-      console.warn(e.body.message);
-      error = e.body.message;
     }
   }
 </script>
@@ -49,8 +35,22 @@
     Login
     <hr />
   </h1>
-  <Input name="email" placeholder="Email" icon="mdi:email-outline" />
-  <Input name="password" placeholder="Password" type="password" icon="mdi:lock-outline" />
+
+  <Input
+    name="email"
+    placeholder="Email"
+    icon="mdi:email-outline"
+    disabled={true}
+    title="Password-based login is disabled due to missing API support"
+  />
+  <Input
+    name="password"
+    placeholder="Password"
+    type="password"
+    icon="mdi:lock-outline"
+    disabled={true}
+    title="Password-based login is disabled due to missing API support"
+  />
 
   <div class="relative flex items-center justify-center">
     <hr class="absolute w-full" />
