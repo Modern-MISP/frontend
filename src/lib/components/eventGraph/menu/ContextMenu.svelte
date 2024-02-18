@@ -95,8 +95,8 @@
 
   function deleteNode() {
     const node = $nodes.find((node) => node.id === id);
+    hideNode();
     if (node && node.type === 'attribute') {
-      hideNode();
       $api
         .DELETE('/attributes/delete/{attributeId}', {
           params: { path: { attributeId: node.data.id } }
@@ -105,7 +105,6 @@
           if (resp.error) throw new Error(resp.error.message);
         });
     } else if (node && node.type === 'object') {
-      hideNode();
       $api
         .DELETE('/objects/delete/{objectId}/{hardDelete}', {
           params: { path: { objectId: node.data.id, hardDelete: '1' } }
