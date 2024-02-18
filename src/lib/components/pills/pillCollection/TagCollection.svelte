@@ -1,38 +1,33 @@
-<script lang="ts">
-  import { page } from '$app/stores';
+<script lang="ts" generics="T">
+  import type { components } from '$lib/api/misp';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
+  import { mode } from '$lib/stores';
   import { shouldTextBeBlack } from '$lib/util/color.util';
   import type { ComponentProps } from 'svelte';
-  import type { PageData } from '../$types';
-  import EventPillCollectionCard from './EventPillCollectionCard.svelte';
-  import type { EventState } from './EventState.interface';
-  import { deleteTags } from './event.util';
-  import { mode } from '$lib/stores';
+  import EventPillCollectionCard from './PillCollectionWithDeleteAndAdd.svelte';
 
   /**
    * The Page data.
    */
-  export let data: PageData;
+  export let tags: components['schemas']['Tag'][];
 
   /**
    * The current mode of the page.
    */
-  export let state: EventState;
 
   /**
    * The currently selected pills
    */
-  export let selection: PickerPill[] = [];
+  export let selection: PickerPill<T>[] = [];
 
-  let deletion: PickerPill[] = [];
+  let deletion: PickerPill<T>[] = [];
 
   let pills: ComponentProps<HrefPill>[] = [];
 
   function generatePills(includeAction: boolean) {
-    if (!data.event?.Tag) return;
-    pills = data.event.Tag.map((y) => {
+    pills = tags.map((y) => {
       const pill: ComponentProps<HrefPill> = {
         /// @ts-expect-error Wrong API spec
         icon: y.local == 1 ? 'mdi:cloud-off-outline' : 'mdi:earth',
@@ -44,7 +39,6 @@
         }`,
         href: `/tags/${y.id}`,
         enforceTextColor: false,
-        // On click remove pill from pills list and add to deletion list.
         action: undefined
       };
 
@@ -52,10 +46,13 @@
         pill.action = {
           icon: 'mdi:delete-outline',
           class: 'hover:text-red',
+
+          // On click remove pill from pills list and add to deletion list.
           onClick: () => {
             pills = pills.filter((x) => x !== pill);
             const deletionPill = {
               ...pill,
+
               value: y.id,
               // Add an restore option, that adds the pill back to the pill array.
               action: {
@@ -66,7 +63,7 @@
                   pills = [...pills, pill];
                 }
               }
-            };
+            } as unknown as PickerPill<T>; // Not cast safe.
             deletion = [...deletion, deletionPill];
           }
         };
@@ -74,16 +71,9 @@
     });
   }
 
-  $: if (data) generatePills($mode === 'edit');
+  $: if (tags) generatePills($mode === 'edit');
 </script>
 
-<EventPillCollectionCard
-  title="Tags"
-  bind:state
-  bind:selection
-  bind:deletion
-  on:delete={({ detail }) =>
-    deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
->
+<EventPillCollectionCard on:close on:save on:open bind:selection bind:deletion on:delete>
   <PillCollection base={HrefPill} {pills} />
 </EventPillCollectionCard>

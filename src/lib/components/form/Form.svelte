@@ -10,10 +10,14 @@
 
   let form: HTMLFormElement;
 
-  const actions: ActionBarEntryProps[] = [
+  /**
+   * Default save action. You should bind to this.
+   */
+  export const actions: ActionBarEntryProps[] = [
     {
       icon: 'material-symbols:save-outline',
       label: 'Save',
+      class: 'hover:text-green',
       action: () => {
         form.requestSubmit();
       }

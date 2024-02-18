@@ -11,23 +11,23 @@ import { get } from 'svelte/store';
  */
 export async function attachCluster(
   clusters: {
-    local: boolean;
-    id: string;
+    local_only: boolean;
+    value: string;
     eventId: string;
   }[]
 ) {
-  const promises = clusters.map(({ id, local, eventId }) =>
+  const promises = clusters.map(({ value, local_only, eventId }) =>
     get(api).POST('/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}', {
       params: {
         path: {
           attachTargetId: eventId,
           attachTargetType: 'event',
-          local: local ? 1 : 0
+          local: local_only ? 1 : 0
         }
       },
       body: {
         Galaxy: {
-          target_id: +id
+          target_id: +value
         }
       }
     })
@@ -67,18 +67,18 @@ export async function detachCluster(
  */
 export async function addTags(
   tags: {
-    local: boolean;
-    id: string;
+    local_only: boolean;
+    value: string;
     eventId: string;
   }[]
 ) {
-  const promises = tags.map(({ id, local, eventId }) =>
+  const promises = tags.map(({ value, local_only, eventId }) =>
     get(api).POST('/events/addTag/{eventId}/{tagId}/local:{local}', {
       params: {
         path: {
           eventId,
-          tagId: id,
-          local: local ? 1 : 0
+          tagId: value,
+          local: local_only ? 1 : 0
         }
       },
       headers: {
@@ -115,7 +115,7 @@ export async function deleteTags(
   handleEventPromise(promises);
 }
 
-async function handleEventPromise<
+export async function handleEventPromise<
   T extends {
     data?:
       | {

@@ -4,4 +4,6 @@ import type { ComponentProps } from 'svelte';
 /**
  * The pill that can be picked.
  */
-export type PickerPill = ComponentProps<Pill> & { value?: string };
+export type PickerPill<T = unknown> = ComponentProps<Pill> & {
+  value?: string;
+} & T;
