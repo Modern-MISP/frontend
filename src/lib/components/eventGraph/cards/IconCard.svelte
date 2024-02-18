@@ -29,7 +29,7 @@
   Sets the default padding and border radius. You can override this by passing your own classes.
   
  -->
-<button on:click>
+<button on:click type="button">
   <a {href}>
     <Card
       class="!resize-none p-3 overflow-hidden items-center cursor-pointer hover:text-sky {clazz}"

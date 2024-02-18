@@ -93,6 +93,7 @@
   {#if children}
     {#if isMenuOpen}
       <button
+        type="button"
         class="text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
         class:rotate-180={isOpen}
         on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
@@ -102,7 +103,7 @@
     {:else}
       <div
         use:melt={$content}
-        class="z-10 bg-surface0 rounded-md text-text shadow shadow-black px-4"
+        class="z-10 px-4 rounded-md shadow bg-surface0 text-text shadow-black"
       >
         {#each children as child}
           <svelte:self {...child} isMenuOpen={true} isChild={true}></svelte:self>

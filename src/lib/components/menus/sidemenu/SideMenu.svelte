@@ -94,6 +94,7 @@
       >
     {/if}
     <button
+      type="button"
       class="ml-auto text-4xl transition-all duration-500 cursor-pointer hover:text-sky"
       on:click={() => (isOpen = !isOpen)}
       class:rotate-180={isOpen}
