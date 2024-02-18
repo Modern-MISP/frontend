@@ -3,7 +3,6 @@
   import { api } from '$lib/api';
   import { getFormValues } from '$lib/util/form.util';
   import type { EventHandler } from 'svelte/elements';
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
   import Pill from '$lib/components/pills/pill/Pill.svelte';
@@ -14,6 +13,8 @@
   import { invalidateAll } from '$app/navigation';
   import CardRow from '$lib/components/card/CardRow.svelte';
   import Input from '$lib/components/input/Input.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import { isEqual } from 'lodash-es';
 
   const dispatch = createEventDispatcher<{ close: void }>();
 
@@ -82,7 +83,7 @@
     </form>
   {:else}
     <form on:submit={finalSubmit}>
-      <DynTable
+      <ComplexTableLayout
         header={[
           col({
             label: 'Value',
@@ -113,8 +114,16 @@
             value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
           })
         ]}
-        data={freetextData}
-      ></DynTable>
+        tableData={freetextData}
+        editActions={[
+          {
+            icon: 'mdi:delete',
+            label: 'Delete',
+            action: (x) =>
+              x.forEach((row) => (freetextData = freetextData.filter((d) => !isEqual(row, d))))
+          }
+        ]}
+      ></ComplexTableLayout>
       <CardRow>
         <span>Default comment</span>
         <Input name="default_comment" />
