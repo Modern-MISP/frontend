@@ -269,7 +269,9 @@ export const load = async ({ params, fetch }) => {
   ];
 
   return {
-    attribute: tableData,
+    attribute: tableData as typeof tableData & {
+      Tag?: (components['schemas']['Tag'] & { relationship_type?: string; local?: boolean })[];
+    },
     header
   };
 };
