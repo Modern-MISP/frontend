@@ -77,15 +77,17 @@
  -->
 
 <div
-  class="flex items-center justify-between h-16 gap-8 text-lg transition-all duration-200 cursor-pointer hover:text-sky"
+  class="flex items-center justify-between text-lg transition-all duration-200 cursor-pointer hover:text-sky"
   class:text-sky={active}
   title={name}
   use:melt={$trigger}
 >
-  <a class="flex items-center gap-4" title={name} {href}>
-    <Icon {icon} class="mx-auto shrink-0" />
+  <a class="flex items-center w-full h-16 gap-4 p-4" title={name} {href}>
+    <div class="flex items-center justify-center h-full aspect-square">
+      <Icon {icon} class="mx-auto shrink-0" />
+    </div>
     {#if isMenuOpen}
-      <span class="font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
+      <span class="w-full font-medium line-clamp-1" transition:fade={FADE_OPTIONS}>
         {name}
       </span>
     {/if}
@@ -93,7 +95,7 @@
   {#if children}
     {#if isMenuOpen}
       <button
-        class="text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
+        class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
         class:rotate-180={isOpen}
         on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
       >
@@ -102,7 +104,7 @@
     {:else}
       <div
         use:melt={$content}
-        class="z-10 bg-surface0 rounded-md text-text shadow shadow-black px-4"
+        class="z-10 px-4 rounded-md shadow bg-surface0 text-text shadow-black"
       >
         {#each children as child}
           <svelte:self {...child} isMenuOpen={true} isChild={true}></svelte:self>
@@ -112,7 +114,6 @@
   {/if}
 </div>
 {#if children && isOpen}
-  <SideMenuDivider class="w-full" />
   {#each children as child}
     <svelte:self {...child} {isMenuOpen} isChild={true} />
   {/each}
