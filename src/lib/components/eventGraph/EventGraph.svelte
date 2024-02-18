@@ -245,7 +245,7 @@
     event.preventDefault();
 
     // Context menu only for object and attribute nodes
-    if (node.type === 'object' || node.type === 'attribute' {
+    if (node.type === 'object' || node.type === 'attribute') {
       menu = {
         id: node.id,
         data: node.data,
@@ -350,9 +350,6 @@
       label: 'Add attribute'
     }
   ]}
-  on:focus={() => {
-    if ($nodes.length) layoutElements();
-  }}
 />
 
 <header class="flex justify-between w-full gap-4">
