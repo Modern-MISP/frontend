@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CardHeading from '$lib/components/card/CardHeading.svelte';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
@@ -55,7 +54,7 @@
         class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
       >
         <FilterCard>
-          <CardHeading>Create a new Tag</CardHeading>
+          <span slot="heading"> Create a new Tag</span>
           <CreateTag on:close={() => (addTag = false)}></CreateTag>
         </FilterCard>
       </div>

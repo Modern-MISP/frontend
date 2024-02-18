@@ -14,6 +14,8 @@
 
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
 
+  if (data.cardData?.default) $mode = 'view';
+
   let entries: [string, string][] = tableData.map(({ key, value }) => [key ?? '', value ?? '']);
 
   function formCallback(formData: Record<string, string>) {

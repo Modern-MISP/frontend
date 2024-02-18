@@ -66,6 +66,7 @@
    * max number of elements.
    */
   export let maxCount = tableData.length;
+  $: if (!endpoint) maxCount = tableData.length;
 
   /**
    * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
@@ -134,6 +135,7 @@
   $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
 
   let sliced: typeof tableData = [];
+  $: if (!endpoint) sliced = tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
@@ -185,7 +187,7 @@
       <DynTable
         href={tableHref}
         {header}
-        data={sliced.length > 0 ? sliced : tableData}
+        data={!endpoint ? sliced : tableData}
         selectMode={$mode === 'edit'}
         bind:activeRows
         {groupInfo}
@@ -200,12 +202,8 @@
 
 {#if pagination}
   <slot name="pagination">
-    {#if endpoint}
-      {#if maxCount > LIMIT}
-        <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
-      {/if}
-    {:else}
-      <Pagination input={tableData} bind:sliced />
+    {#if maxCount > LIMIT}
+      <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
     {/if}
   </slot>
 {/if}

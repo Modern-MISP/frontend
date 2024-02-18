@@ -105,8 +105,7 @@
         value: (x) => ({
           display: PillCollection,
           props: {
-            pills:
-              x?.authors?.map((a) => ({ icon: 'streamline:user-circle-single', text: a })) ?? [],
+            pills: x?.authors?.map((a) => ({ icon: 'mdi:account-outline', text: a })) ?? [],
             class: 'pl-4'
           }
         })
@@ -119,10 +118,10 @@
             pickedItems: x?.authors?.map((a) => ({
               value: a,
               text: a,
-              icon: 'streamline:user-circle-single'
+              icon: 'mdi:account-outline'
             })),
             arbitraryInput: (a: string) => ({
-              icon: 'streamline:user-circle-single',
+              icon: 'mdi:account-outline',
               text: a,
               value: a
             })

@@ -4,7 +4,7 @@
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
-  import { mode } from '$lib/stores';
+  import { mode, settings } from '$lib/stores';
   import Breadcrumbs from '../breadcrumbs/Breadcrumbs.svelte';
   import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
   import { page } from '$app/stores';
@@ -28,7 +28,7 @@
    */
   export let userData: { email: string; admin: boolean };
 
-  let isOpen = false;
+  let isOpen = $settings.openOnInit;
 </script>
 
 <!-- 
