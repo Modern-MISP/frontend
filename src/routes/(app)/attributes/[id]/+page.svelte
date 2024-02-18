@@ -14,7 +14,7 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
-  import { addTags } from './attribute.util';
+  import { addTags, deleteTags } from './attribute.util';
 
   /**
    * Page data containing the data of the attribute with the id in the url
@@ -106,7 +106,14 @@
       <section class="h-full">
         <Card>
           <CardHeading>Tags</CardHeading>
-          <TagCollection tags={data.attribute.Tag ?? []}></TagCollection>
+          <TagCollection
+            on:delete={({ detail }) => {
+              deleteTags(
+                detail.map((x) => ({ attributeId: $page.params.id, value: x.value ?? '' }))
+              );
+            }}
+            tags={data.attribute.Tag ?? []}
+          ></TagCollection>
         </Card>
       </section>
     </div>
