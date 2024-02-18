@@ -10,7 +10,7 @@
 
   $: ({ left, right, galaxy, header } = data);
 
-  const galaxyData = galaxy.Galaxy!;
+  $: galaxyData = galaxy.Galaxy!;
 </script>
 
 <!--
