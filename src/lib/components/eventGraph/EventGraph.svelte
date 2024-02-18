@@ -350,6 +350,9 @@
       label: 'Add attribute'
     }
   ]}
+  on:focus={() => {
+    if ($nodes.length) layoutElements();
+  }}
 />
 
 <header class="flex justify-between w-full gap-4">
