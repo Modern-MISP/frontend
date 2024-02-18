@@ -2,7 +2,6 @@ import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Info from '$lib/components/info/Info.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
