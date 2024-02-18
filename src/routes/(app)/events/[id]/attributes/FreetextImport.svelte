@@ -31,6 +31,7 @@
   let freetextData: ReturnData[];
 
   const initialSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
+    e.preventDefault();
     const { freetext } = getFormValues(e);
     // @ts-expect-error Not in the OpenAPI spec
     const { data } = await $api.POST('/events/freeTextImport/{eventId}', {
@@ -47,6 +48,7 @@
   };
 
   const finalSubmit: EventHandler<SubmitEvent, HTMLFormElement> = (e) => {
+    e.preventDefault();
     const { default_comment } = getFormValues(e);
     notifySave(
       $api
@@ -82,7 +84,7 @@
       <Button type="submit">Submit</Button>
     </form>
   {:else}
-    <form on:submit={finalSubmit}>
+    <form on:submit={finalSubmit} class="flex flex-col gap-2">
       <ComplexTableLayout
         header={[
           col({
