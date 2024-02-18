@@ -215,7 +215,7 @@
   }
 
   setTimeout(() => {
-    layoutElements();
+    if ($nodes.length) layoutElements();
   });
 
   const nodeTypes = {
