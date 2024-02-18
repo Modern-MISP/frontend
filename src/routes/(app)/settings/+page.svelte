@@ -26,9 +26,6 @@
   <SettingsEntry label="Menu is open per default">
     <Checkbox bind:checked={$settings.openOnInit} />
   </SettingsEntry>
-  <SettingsEntry label="Table Max Width">
-    <Checkbox bind:checked={$settings.tableMaxSize} />
-  </SettingsEntry>
   <SettingsEntry label="Theme">
     <Select options={themes} bind:value={$settings.theme} />
   </SettingsEntry>

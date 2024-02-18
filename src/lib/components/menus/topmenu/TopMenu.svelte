@@ -31,7 +31,7 @@
   
  -->
 
-<div class="flex flex-row items-center justify-between gap-4 p-4 rounded-xl bg-mantle text-text">
+<div class="flex flex-row items-center justify-between gap-4 p-2 rounded-xl bg-mantle text-text">
   <div class="flex items-center gap-4">
     <button type="button" on:click={() => (isOpen = !isOpen)} class="lg:hidden">
       {#if isOpen}
@@ -45,15 +45,15 @@
       <Icon icon="mdi:magnify" slot="icon" class="w-10 h-10" />
     </Input> -->
   </div>
-  <div class="flex items-center gap-4">
-    <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl bg-crust">
+  <div class="flex items-center gap-6">
+    <div class="flex flex-row items-center justify-between gap-4 p-3 text-text rounded-xl bg-crust">
       {#if mode === 'edit'}
         <ActionBar entries={$actionBarEntries} />
       {/if}
       <ToggleModeEntry bind:mode disabled={$lockModeToggle} />
     </div>
 
-    <div class="flex flex-row items-center justify-between gap-4 p-4 text-text rounded-xl">
+    <div class="flex flex-row items-center justify-between gap-4 p-3 text-text rounded-xl">
       <ContextInfo info={$contextInfo} />
     </div>
 
