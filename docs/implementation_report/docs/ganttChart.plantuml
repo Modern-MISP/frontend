@@ -14,7 +14,7 @@ today is colored in lightblue
 [Edit Mode setup] requires 9 days and is 100% complete and is colored in red
 [Edit Actions] requires 9 days and is 100% complete and is colored in red
 [SvelteFlow setup] requires 5 days and is 100% complete
-[Write Phase Report] requires 9 days and is 80% complete
+[Write Phase Report] requires 9 days and is 100% complete
 -- Pages --
 [List Pages] requires 14 days and is 100% complete and is colored in red
 note bottom
@@ -39,7 +39,7 @@ note bottom
     The respective edit mode implementations of <color:gray>View Pages</color>,
     usually consisting of an HTML form.
 end note
-[Add Pages] requires 11 days and is 100% complete and is colored in red
+[Add Pages] requires 12 days and is 100% complete and is colored in red
 note bottom
     Pages for adding an item (event/tag/etc.)
 end note
@@ -47,7 +47,7 @@ end note
 [Auth] requires 4 days
 [Settings] requires 3 days
 [Workflows] requires 11 days and is 100% complete and is colored in red
-[Event Graph] requires 18 days and is 80% complete and is colored in red
+[Event Graph] requires 18 days and is 100% complete and is colored in red
 
 Project starts 2024-01-15
 [Layout / Menus] starts at D+0
