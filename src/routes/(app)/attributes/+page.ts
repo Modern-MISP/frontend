@@ -10,6 +10,7 @@ import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
@@ -20,6 +21,7 @@ import {
 } from '$lib/consts/PillLookups';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { shouldTextBeBlack } from '$lib/util/color.util';
 import { notifySave } from '$lib/util/notifications.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
@@ -32,7 +34,17 @@ export const load = async ({ fetch }) => {
     error: mispError
   } = await get(api).POST('/attributes/restSearch', { fetch, body: { limit: 50, page: 1 } });
 
-  if (mispError) throw error(response.status as NumericRange<400, 599>, mispError.message);
+  const {
+    data: attributeLength,
+    error: attributeLengthError,
+    response: attributeResponse
+  } = await get(api).GET('/attributes/attributeStatistics/{context}/{percentage}', {
+    params: { path: { context: 'type', percentage: 0 } }
+  });
+
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  if (attributeLengthError)
+    error(attributeResponse.status as NumericRange<400, 599>, attributeLengthError.message);
 
   const tableData = data.response?.Attribute ?? [];
 
@@ -45,6 +57,7 @@ export const load = async ({ fetch }) => {
   const options: components['schemas']['DescribeAttributeTypesResponse'] = (
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
   ).result;
+  console.log(tableData, response.headers);
 
   const col = createTableHeadGenerator<
     Omit<(typeof tableData)[number], 'Tag'> & {
@@ -137,17 +150,16 @@ export const load = async ({ fetch }) => {
       key: 'tags',
       label: 'Tags',
       value: (x) => ({
-        display: TagCollection,
+        display: PillCollection,
         props: {
-          tags: x.Tag ?? []
-          // pills: (x.Tag ?? []).map((y) => ({
-          //   icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-          //   label: y.relationship_type ? y.relationship_type : undefined,
-          //   text: y.name,
-          //   style: `background-color: ${y.colour}; color: ${
-          //     shouldTextBeBlack(y.colour!) ? 'black' : 'white'
-          //   }`
-          // }))
+          pills: (x.Tag ?? []).map((y) => ({
+            icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
+            label: y.relationship_type ? y.relationship_type : undefined,
+            text: y.name,
+            style: `background-color: ${y.colour}; color: ${
+              shouldTextBeBlack(y.colour!) ? 'black' : 'white'
+            }`
+          }))
         }
       })
     }),
@@ -544,6 +556,6 @@ export const load = async ({ fetch }) => {
     filter,
     topMenuActions,
     editActions,
-    maxCount: +response.headers.get('X-result-count')!
+    maxCount: Object.values(attributeLength).reduce((a, b) => +a + +b, 0) - 1
   };
 };
