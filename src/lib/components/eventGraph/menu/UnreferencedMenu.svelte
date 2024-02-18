@@ -52,8 +52,8 @@
   <div class="flex flex-row">
     {#if showUnreferencedObjects}
       <div
-        in:fly={{ x: -200 }}
-        out:fly={{ x: -200 }}
+        in:fly={{ x: 200 }}
+        out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
         <div class="flex flex-col !resize-none rounded-lg bg-surface0">
@@ -77,8 +77,8 @@
 
     {#if showUnreferencedAttributes}
       <div
-        in:fly={{ x: -200 }}
-        out:fly={{ x: -200 }}
+        in:fly={{ x: 200 }}
+        out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
         <div class="flex flex-col !resize-none rounded-lg bg-surface0">

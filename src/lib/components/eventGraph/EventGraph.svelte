@@ -26,8 +26,10 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
+  import { mode } from '$lib/stores';
   import referenceTypes from './referenceTypes';
   import Select from '../form/Select.svelte';
+  import { fly } from 'svelte/transition';
   /**
    * The Event to be displayed on this page.
    */
@@ -283,7 +285,7 @@
           body: {
             ObjectReference: {
               relationship_type_select: referenceType,
-              relationship_type: '',
+              relationship_type: referenceType,
               comment: '',
               referenced_uuid: target.data.uuid
             }
@@ -358,14 +360,18 @@
 
 <header class="flex justify-between w-full gap-4">
   <div class="flex flex-col gap-1">
-    <span>Reference Type</span>
-    <Select
-      bind:value={referenceType}
-      options={referenceTypes.map((r) => ({
-        label: r,
-        value: r
-      }))}
-    ></Select>
+    {#if $mode === 'edit'}
+      <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
+        <span>Reference Type</span>
+        <Select
+          bind:value={referenceType}
+          options={referenceTypes.map((r) => ({
+            label: r,
+            value: r
+          }))}
+        ></Select>
+      </div>
+    {/if}
   </div>
   <div>
     <UnreferencedMenu objects={unreferencedObjects} attributes={unreferencedAttributes} />
