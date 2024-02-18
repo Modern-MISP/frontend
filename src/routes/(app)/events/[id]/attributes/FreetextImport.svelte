@@ -12,6 +12,8 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { createEventDispatcher } from 'svelte';
   import { invalidateAll } from '$app/navigation';
+  import CardRow from '$lib/components/card/CardRow.svelte';
+  import Input from '$lib/components/input/Input.svelte';
 
   const dispatch = createEventDispatcher<{ close: void }>();
 
