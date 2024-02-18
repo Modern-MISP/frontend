@@ -488,11 +488,6 @@ export const load = async ({ fetch }) => {
   ];
   const topMenuActions: ActionBarEntryProps[] = [
     {
-      icon: 'mdi:event-add',
-      label: 'Add Attributes',
-      action: '' //TODO: /attributes/new
-    },
-    {
       icon: 'mdi:pencil-outline',
       label: 'Freetext Import Tool',
       action: '' //TODO: freetext import tool
