@@ -41,7 +41,7 @@ trotzdem dauerte die Implementierung länger als geplant.
 
 Bei den Workflows kostete es zu Beginn viel Zeit,
 sich in [SvelteFlow](https://svelteflow.dev/),
-die von uns verwendete Bibliothek zur Realisierunf des graphischen Editors,
+die von uns verwendete Bibliothek zur Realisierung des grafischen Editors
 einzuarbeiten.
 
 ## Zweite Phasenhälfte
@@ -52,11 +52,11 @@ Besonders, wenn es um die Implementierung des Edit Mode und der Filter ging,
 machten sich Probleme mit der MISP API bemerkbar.
 
 Die unvollständige und teils falsche API Spezifikation,
-inkonsistentes Verhalten und Error-Nachrichten mit geringfügiger Aussagekraft der API kosteten uns viel nicht eingeplante
+inkonsistentes Verhalten und Fehlermeldungen mit geringfügiger Aussagekraft der API kosteten uns viel nicht eingeplante
 Zeit.
 
 So mussten wir unter anderem API Endpoints "reverse-engineeren",
-um sie richtig ansprechen zu können,
+um sie richtig ansprechen zu können
 und eigene Typen für deren Rückgabewerte definieren.
 
 ### Endspurt
