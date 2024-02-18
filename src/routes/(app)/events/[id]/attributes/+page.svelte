@@ -2,6 +2,7 @@
   import { invalidateAll } from '$app/navigation';
   import { api } from '$lib/api/index.js';
   import type { components } from '$lib/api/misp.js';
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Info from '$lib/components/info/Info.svelte';
   import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
   import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
@@ -15,10 +16,8 @@
   import { shouldTextBeBlack } from '$lib/util/color.util.js';
   import { notifySave } from '$lib/util/notifications.util.js';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-  import FilterCard from '$lib/components/filter/FilterCard.svelte';
-  import CardHeading from '$lib/components/card/CardHeading.svelte';
-  import FreetextImport from './FreetextImport.svelte';
   import AttributeReplacement from './AttributeReplacement.svelte';
+  import FreetextImport from './FreetextImport.svelte';
 
   export let data;
 
@@ -213,12 +212,12 @@
       <div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1">
         {#if freetextImport}
           <FilterCard>
-            <CardHeading>Freetext Import</CardHeading>
+            <span slot="heading">Freetext Import</span>
             <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
           </FilterCard>
         {:else if attributeReplacement}
           <FilterCard>
-            <CardHeading>Attribute Replacement</CardHeading>
+            <span slot="heading">Attribute Replacement</span>
             <AttributeReplacement on:close={() => (attributeReplacement = false)}
             ></AttributeReplacement>
           </FilterCard>

@@ -10,6 +10,7 @@
   import { notifications } from '$lib/stores';
   import { successPill } from '$lib/util/pill.util';
   import { invalidateAll } from '$app/navigation';
+  import Button from '$lib/components/button/Button.svelte';
 
   const dispatch = createEventDispatcher<{ close: void }>();
 
@@ -62,9 +63,9 @@
   };
 </script>
 
-<div>
+<div class="h-full">
   {#if attributeTypes}
-    <form on:submit|preventDefault={onSubmit}>
+    <form on:submit|preventDefault={onSubmit} class="flex flex-col h-full gap-4">
       <Select
         options={(attributeTypes.categories ?? []).map((x) => ({ label: x, value: x }))}
         name="category"
@@ -81,7 +82,12 @@
         class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
         name="value"
       ></textarea>
-      <button type="submit">Submit</button>
+
+      <Button
+        class="self-end w-min text-green bg-surface1"
+        suffixIcon="material-symbols:save-outline"
+        type="submit">Submit</Button
+      >
     </form>
   {/if}
 </div>

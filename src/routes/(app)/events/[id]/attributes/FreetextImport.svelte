@@ -74,17 +74,19 @@
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
 </script>
 
-<div>
+<div class="h-full">
   {#if !freetextData}
-    <form on:submit|preventDefault={initialSubmit}>
+    <form on:submit|preventDefault={initialSubmit} class="flex flex-col h-full gap-4">
       <textarea
         class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
         name="freetext"
       ></textarea>
-      <Button type="submit">Submit</Button>
+      <Button class="self-end w-min text-sky" suffixIcon="mdi:arrow-right" type="submit"
+        >Continue</Button
+      >
     </form>
   {:else}
-    <form on:submit={finalSubmit} class="flex flex-col gap-2">
+    <form on:submit={finalSubmit} class="flex flex-col gap-4">
       <ComplexTableLayout
         header={[
           col({
@@ -130,7 +132,11 @@
         <span>Default comment</span>
         <Input name="default_comment" />
       </CardRow>
-      <Button type="submit">Submit</Button>
+      <Button
+        class="self-end w-min text-green "
+        suffixIcon="material-symbols:save-outline"
+        type="submit">Submit</Button
+      >
     </form>
   {/if}
 </div>
