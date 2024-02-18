@@ -1,58 +1,24 @@
 <script lang="ts">
-  import { useEdges, type EdgeProps, getBezierPath, BaseEdge } from '@xyflow/svelte';
+  import { type EdgeProps, getBezierPath, BaseEdge, EdgeLabelRenderer } from '@xyflow/svelte';
 
   type $$Props = EdgeProps;
 
-  export let target: $$Props['target'];
-  export let source: $$Props['source'];
   export let sourceX: $$Props['sourceX'];
   export let sourceY: $$Props['sourceY'];
   export let sourcePosition: $$Props['sourcePosition'];
   export let targetX: $$Props['targetX'];
   export let targetY: $$Props['targetY'];
   export let targetPosition: $$Props['targetPosition'];
-  export let markerEnd: $$Props['markerEnd'] = undefined;
+  export let data: $$Props['data'] = undefined;
 
-  const edges = useEdges();
-
-  let isBidirectionalEdge: boolean;
-  $: isBidirectionalEdge = $edges.some(
-    (e) =>
-      (e.source === target && e.target === source) || (e.target === source && e.source === target)
-  );
-
-  let path: string;
-  $: {
-    const edgePathParams = {
-      sourceX,
-      sourceY,
-      sourcePosition,
-      targetX,
-      targetY,
-      targetPosition
-    };
-
-    if (isBidirectionalEdge) {
-      path = getSpecialPath(edgePathParams, sourceX < targetX ? 25 : -25);
-    } else {
-      [path] = getBezierPath(edgePathParams);
-    }
-  }
-
-  function getSpecialPath(
-    {
-      sourceX,
-      sourceY,
-      targetX,
-      targetY
-    }: { sourceX: number; sourceY: number; targetX: number; targetY: number },
-    offset: number
-  ) {
-    const centerX = (sourceX + targetX) / 2;
-    const centerY = (sourceY + targetY) / 2;
-
-    return `M ${sourceX} ${sourceY} Q ${centerX} ${centerY + offset} ${targetX} ${targetY}`;
-  }
+  $: [edgePath, labelX, labelY] = getBezierPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition
+  });
 </script>
 
 <!--
@@ -60,4 +26,13 @@
   
   An edge representing a generic event graph reference.
 -->
-<BaseEdge {path} {markerEnd} />
+
+<BaseEdge path={edgePath} />
+<EdgeLabelRenderer>
+  <div
+    style:transform="translate(-50%, -50%) translate({labelX}px,{labelY}px)"
+    class="nodrag nopan absolute text-xs"
+  >
+    {data.label}
+  </div>
+</EdgeLabelRenderer>

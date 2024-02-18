@@ -16,6 +16,7 @@
   import AttributeNode from './graph/nodes/AttributeNode.svelte';
   import CategoryNode from './graph/nodes/CategoryNode.svelte';
   import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
+  import RelationEdge from './graph/edges/RelationEdge.svelte';
   import ContextMenu from './menu/ContextMenu.svelte';
   import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
   import { getReferencedItems } from './helpers/classItems';
@@ -121,8 +122,10 @@
         id: `object-${referencedObject.id}-to-attribute-${attribute.id}`,
         source: `o-${referencedObject.id}`,
         target: `attribute-${attribute.id}`,
-        label: attribute.object_relation ?? undefined,
-        type: 'bezier'
+        data: {
+          label: attribute.object_relation ?? undefined
+        },
+        type: 'relation'
       });
     }
   }
@@ -157,7 +160,9 @@
       id: `reference-${reference.id}`,
       source: `${reference.from}`,
       target: `${reference.to}`,
-      label: reference.type,
+      data: {
+        label: reference.type
+      },
       type: 'reference',
       animated: true
     });
@@ -211,7 +216,8 @@
   };
 
   const edgeTypes = {
-    reference: ReferenceEdge
+    reference: ReferenceEdge,
+    relation: RelationEdge
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -231,7 +237,7 @@
 
       removePreviousHighlightBorder();
 
-      addHighlightBorder(node.id);
+      addHighlightBorder(node.type, node.data.id);
     }
   }
 

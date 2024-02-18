@@ -6,9 +6,9 @@ export function removePreviousHighlightBorder() {
   }
 }
 
-export function addHighlightBorder(nodeId: string) {
+export function addHighlightBorder(nodeType: string, nodeId: string) {
   // Add highlight border to the currently selected node
-  const selectedNode = document.getElementById(nodeId);
+  const selectedNode = document.getElementById(nodeType + '-' + nodeId);
   if (selectedNode) {
     selectedNode.classList.add('border-2', 'border-sky-200');
   }
