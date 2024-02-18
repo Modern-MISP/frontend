@@ -136,11 +136,6 @@
     {/if}
   </IconCardRow>
 
-  <IconCardRow class="border-2 border-sky">
-    <IconCard icon="mdi:show" text="Show" />
-    <IconCard icon="mdi:hide" text="Hide" class="!text-red" on:click={hideNode} />
-  </IconCardRow>
-
   {#if type === 'object'}
     <IconCardRow class="border-2 border-sky">
       <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />

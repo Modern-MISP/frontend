@@ -12,21 +12,22 @@
   import { writable, type Writable } from 'svelte/store';
   import dagre from '@dagrejs/dagre';
   import { tweened } from 'svelte/motion';
-  import ObjectNode from './graph/nodes/ObjectNode.svelte';
-  import AttributeNode from './graph/nodes/AttributeNode.svelte';
-  import CategoryNode from './graph/nodes/CategoryNode.svelte';
-  import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
-  import RelationEdge from './graph/edges/RelationEdge.svelte';
-  import ContextMenu from './menu/ContextMenu.svelte';
-  import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
-  import { getReferencedItems } from './helpers/classItems';
-  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
-  import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
-  import { api } from '$lib/api';
-  import { notifySave } from '$lib/util/notifications.util';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
   import { mode } from '$lib/stores';
+  import { api } from '$lib/api';
+  import { notifySave } from '$lib/util/notifications.util';
+  import ObjectNode from './graph/nodes/ObjectNode.svelte';
+  import AttributeNode from './graph/nodes/AttributeNode.svelte';
+  import CategoryNode from './graph/nodes/CategoryNode.svelte';
+  import MinimizedNode from './graph/nodes/MinimizedNode.svelte';
+  import ReferenceEdge from './graph/edges/ReferenceEdge.svelte';
+  import RelationEdge from './graph/edges/RelationEdge.svelte';
+  import ContextMenu from './menu/ContextMenu.svelte';
+  import UnreferencedMenu from './menu/UnreferencedMenu.svelte';
+  import { removePreviousHighlightBorder, addHighlightBorder } from './helpers/highlight';
+  import { getReferencedItems } from './helpers/classItems';
+  import type { EventGraphReferences } from '$lib/models/EventGraphReferences';
   import referenceTypes from './referenceTypes';
   import Select from '../form/Select.svelte';
   import { fly } from 'svelte/transition';
@@ -227,7 +228,8 @@
   const nodeTypes = {
     object: ObjectNode,
     attribute: AttributeNode,
-    category: CategoryNode
+    category: CategoryNode,
+    minimized: MinimizedNode
   };
 
   const edgeTypes = {
@@ -243,7 +245,7 @@
     event.preventDefault();
 
     // Context menu only for object and attribute nodes
-    if (node.type === 'object' || node.type === 'attribute') {
+    if (node.type === 'object' || node.type === 'attribute' {
       menu = {
         id: node.id,
         data: node.data,
@@ -330,14 +332,6 @@
       $nodes = $nodes;
     }
   };
-
-  // Don't think there's an API for deleting references, also didn't find a way to do it in original MISP
-  // function handleEdgeContextMenu({
-  //   detail: { event, edge }
-  // }: Flow['$$events_def']['edgecontextmenu']) {
-  //   event.preventDefault();
-  //   $edges = $edges.filter(({ id }) => id !== edge.id);
-  // }
 </script>
 
 <!--
