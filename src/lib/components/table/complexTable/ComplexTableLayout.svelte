@@ -32,6 +32,8 @@
   import { mode, notifications } from '$lib/stores';
   import { constant, isMatch, merge, omitBy } from 'lodash-es';
 
+  const LIMIT = 50;
+
   /**
    * Your initial data
    */
@@ -59,6 +61,12 @@
    * Do you want to include pagination in the request and in the page. Default: true
    */
   export let pagination = true;
+
+  /**
+   * max number of elements.
+   */
+  export let maxCount = tableData.length;
+  $: if (!endpoint) maxCount = tableData.length;
 
   /**
    * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
@@ -105,7 +113,7 @@
 
   $: pagPage = 1;
 
-  $: loadMore({ ...merge({}, currentFilter, pagination ? { page: pagPage, limit: 50 } : {}) });
+  $: loadMore({ ...merge({}, currentFilter, pagination ? { page: pagPage, limit: LIMIT } : {}) });
 
   let filterOpen = false;
   let currentFilter: Record<string, string> = {};
@@ -125,6 +133,9 @@
   export let fastFilter: FastFilter[] = [];
   // The fastFilter should be active if ifActive is a subset of currentFilter
   $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
+
+  let sliced: typeof tableData = [];
+  $: if (!endpoint) sliced = tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
 </script>
 
 <svelte:window use:actionBar={topMenuActions} />
@@ -176,7 +187,7 @@
       <DynTable
         href={tableHref}
         {header}
-        data={tableData}
+        data={!endpoint ? sliced : tableData}
         selectMode={$mode === 'edit'}
         bind:activeRows
         {groupInfo}
@@ -191,6 +202,8 @@
 
 {#if pagination}
   <slot name="pagination">
-    <Pagination bind:page={pagPage} />
+    {#if maxCount > LIMIT}
+      <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
+    {/if}
   </slot>
 {/if}

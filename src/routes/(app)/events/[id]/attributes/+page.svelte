@@ -1,20 +1,20 @@
 <script lang="ts">
-  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-  import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
-  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-  import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-  import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
-  import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups.js';
-  import Pill from '$lib/components/pills/pill/Pill.svelte';
+  import { invalidateAll } from '$app/navigation';
+  import { api } from '$lib/api/index.js';
+  import type { components } from '$lib/api/misp.js';
   import Info from '$lib/components/info/Info.svelte';
   import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
+  import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+  import Pill from '$lib/components/pills/pill/Pill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
-  import { shouldTextBeBlack } from '$lib/util/color.util.js';
-  import type { components } from '$lib/api/misp.js';
-  import { api } from '$lib/api/index.js';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+  import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups.js';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface.js';
-  import { invalidateAll } from '$app/navigation';
+  import { shouldTextBeBlack } from '$lib/util/color.util.js';
   import { notifySave } from '$lib/util/notifications.util.js';
+  import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
   import Input from '$lib/components/input/Input.svelte';
@@ -25,7 +25,7 @@
 
   export let data;
 
-  $: tableData = data.event.Attribute!;
+  $: tableData = [...data.event.Attribute!, ...data.event.Object!.flatMap((o) => o.Attribute!)];
 
   type Data = (typeof tableData)[number] & {
     Tag?: (components['schemas']['Tag'] & {
@@ -209,6 +209,7 @@
   {editActions}
   filter={[]}
   {topMenuActions}
+  groupInfo={(x) => (x.object_id === '0' ? undefined : `Object: ${x.object_id}`)}
 >
   <div
     slot="added"

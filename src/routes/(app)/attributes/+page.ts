@@ -522,6 +522,7 @@ export const load = async ({ fetch }) => {
     header,
     tableData,
     filter,
-    editActions
+    editActions,
+    maxCount: +response.headers.get('X-result-count')!
   };
 };
