@@ -31,9 +31,9 @@ Die MISP API verhält sich an vielen Stellen anders als spezifiziert
 oder anderweitig inkonsistent.
 In einigen Fällen weicht das tatsächliche Verhalten der API so von unseren Erwartungen ab, dass unsere geplanten Funktionen nicht umsetzbar waren.
 
-#### Taxonomie
+#### Login
 
-Die Implementierung der Taxonomie war unerwartet komplex. In Abhängigkeit davon konnte auch eine Gruppierung von Tags, die diese Methodik benutzt, nicht implementiert werden.
+Die API liefert keinen Endpunkt für ein passwortbasiertes Anmelden, also kann Login nur über MISP-Token durchgeführt werden.
 
 #### Tags
 
@@ -82,6 +82,10 @@ Die API liefert keinen Endpunkt für Connector Tags.
 ##### Filter
 
 Es existiert kein Endpunkt zum Filtern von Triggern und Modulen.
+
+#### Taxonomie
+
+Die Implementierung der Taxonomie war unerwartet komplex. In Abhängigkeit davon konnte auch eine Gruppierung von Tags, die diese Methodik benutzt, nicht implementiert werden.
 
 #### Users
 
