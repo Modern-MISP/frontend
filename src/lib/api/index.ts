@@ -16,7 +16,7 @@ function genDisabledFunction(message = 'The REST method you try to use is disabl
   };
 }
 
-export const token = createLocalStorageStore('no token', 'token');
+export const token = createLocalStorageStore('', 'token');
 
 export const api = derived(token, ($token) => {
   const client = {

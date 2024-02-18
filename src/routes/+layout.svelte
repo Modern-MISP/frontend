@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { afterNavigate, beforeNavigate } from '$app/navigation';
+  import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+  import { token } from '$lib/api';
   import { settings } from '$lib/stores';
   import { tweened } from 'svelte/motion';
 
@@ -14,6 +15,8 @@
   afterNavigate(() => {
     $progressValue = 0;
   });
+
+  $: if (!$token) goto('/login');
 </script>
 
 <!--
