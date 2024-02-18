@@ -41,16 +41,19 @@ export const routes: SideMenuRoute[] = [
     name: 'Workflows',
     icon: 'material-symbols:network-node',
     href: '/workflows',
+    userAccess: 'none',
     children: [
       {
         name: 'Triggers',
         icon: 'material-symbols:line-start-diamond',
-        href: '/workflows/triggers'
+        href: '/workflows/triggers',
+        userAccess: 'none'
       },
       {
         name: 'Modules',
         icon: 'material-symbols:package-2-outline',
-        href: '/workflows/modules'
+        href: '/workflows/modules',
+        userAccess: 'none'
       }
     ]
   },

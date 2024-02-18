@@ -7,8 +7,11 @@
   import { routes } from './routes';
   import { beforeNavigate, goto } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
+  import type { Tweened } from 'svelte/motion';
 
   export let data;
+
+  export let progressValue: Tweened<number>;
 
   const idEntry = (name: string) => ({
     name,
@@ -36,6 +39,7 @@
     if (userAccess === 'none' && !data.admin) {
       notifications.add(errorPill('Access restricted to administrators'));
       cancel();
+      progressValue.set(0, { duration: 0 });
     }
   });
 
