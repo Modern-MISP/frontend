@@ -10,8 +10,23 @@
 // ***********************************************
 //
 //
+// Cypress.Commands.add("login", () => {
+//     cy.window().invoke("localStorage").set
+// })
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (token: string) => {
+  cy.session(token, () => {
+    cy.visit('/login');
+    cy.get('input[name="token"]').type(token);
+    cy.get('button').click();
+    cy.url().should('include', '/event');
+  });
+});
+
+Cypress.Commands.add('defaultLogin', () => {
+  cy.login(Cypress.env('adminToken'));
+});
+
 //
 //
 // -- This is a child command --
@@ -25,13 +40,3 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
