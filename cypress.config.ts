@@ -2,6 +2,9 @@ import { defineConfig } from 'cypress';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
+  env: {
+    adminToken: 'FDyqG9EzxpyFBriJiu9TBScoPYVKrG2UvHI4Kadr'
+  },
   component: {
     devServer: {
       framework: 'svelte',
@@ -17,6 +20,10 @@ export default defineConfig({
   },
 
   e2e: {
+    baseUrl: 'http://localhost:4173',
+    viewportHeight: 1080,
+    viewportWidth: 1920
+
     // setupNodeEvents(on, config) {
     // implement node event listeners here
     // },
