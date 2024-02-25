@@ -2,9 +2,6 @@ import { defineConfig } from 'cypress';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-  env: {
-    adminToken: 'FDyqG9EzxpyFBriJiu9TBScoPYVKrG2UvHI4Kadr'
-  },
   component: {
     devServer: {
       framework: 'svelte',
