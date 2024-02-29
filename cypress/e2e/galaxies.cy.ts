@@ -56,7 +56,46 @@ describe('galaxy cluster', () => {
   });
 
   it('should be editable', () => {
+    const newCluster = {
+      name: "new test name",
+      description: "new test description",
+      source: "new test source",
+      authors: ['lorem', 'ipsum', 'dolor'],
+      distribution: "0",
+      entries: {
+        "test key": "test value",
+        "new key": "new value"
+      }
+    }
+
     cy.visit(`/galaxies/clusters/${clusterId}`);
     cy.toggleMode();  // enter edit mode
+    cy.get('input[name="value"]').clear().type(newCluster.name);
+    cy.get('input[name="description"]').clear().type(newCluster.description);
+    cy.get('input[name="source"]').clear().type(newCluster.source);
+    cy.get('div:has(> span:contains("Authors")) button').as('deleteAuthor');
+    // TODO: delete authors
+    cy.get('div:has(> span:contains("Authors")) input[type="text"]').type(newCluster.authors.join('\n') + '\n');
+    cy.get('select[name="distribution"]').select(newCluster.distribution);
+    let i = 1;
+    for (const key in newCluster.entries) {
+      cy.get(`tbody tr:nth-of-type(${i}) input:first`).clear().type(key);
+      cy.get(`tbody tr:nth-of-type(${i}) input:last`).clear().type(newCluster.entries[key]);
+      i++;
+    }
+    cy.get('button:contains(Save)').click();
+
+    cy.reload();
+
+    const check = (field: string, value: string) => cy.get(
+      `form div:has(> span:first-child:contains("${field}")) span:last`
+      ).should('have.text', value);
+    check("Name", newCluster.name);
+    check("Description", newCluster.description);
+    check("Source", newCluster.source);
+    cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
+      cy.wrap($el).should('have.text', newCluster.authors[index]);
+    });
+    // TODO: check distribution
   });
 });
