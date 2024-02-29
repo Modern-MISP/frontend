@@ -42,7 +42,7 @@ describe('galaxy cluster', () => {
     cy.wait(100);
     cy.url().should('include', '/galaxies/clusters/');
     cy.url().then((url) => clusterId = url.split('/').at(-1));
-    cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first').click();  // enter view mode
+    cy.toggleMode();  // enter view mode
     const check = (field: string, value: string) => cy.get(
       `form div:has(> span:first-child:contains("${field}")) span:last`
       ).should('have.text', value);
@@ -52,9 +52,11 @@ describe('galaxy cluster', () => {
     cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
       cy.wrap($el).should('have.text', cluster.authors[index]);
     });
+    // TODO: check distribution
   });
 
   it('should be editable', () => {
     cy.visit(`/galaxies/clusters/${clusterId}`);
+    cy.toggleMode();  // enter edit mode
   });
 });
