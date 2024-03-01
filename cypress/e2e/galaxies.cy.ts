@@ -20,7 +20,7 @@ describe('galaxy cluster', () => {
       description: 'test description',
       source: 'test source',
       authors: ['lorem', 'ipsum'],
-      distribution: '3',
+      distribution: '3', // all communities
       entries: {
         'test key': 'test value'
       }
@@ -53,7 +53,7 @@ describe('galaxy cluster', () => {
     cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
       cy.wrap($el).should('have.text', cluster.authors[index]);
     });
-    // TODO: check distribution
+    check('Distribution', 'All communities');
   });
 
   it('should be editable', () => {
@@ -102,6 +102,6 @@ describe('galaxy cluster', () => {
     cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
       cy.wrap($el).should('have.text', newCluster.authors[index]);
     });
-    // TODO: check distribution
+    check('Distribution', 'Your organization only');
   });
 });
