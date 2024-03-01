@@ -73,8 +73,10 @@ describe('galaxy cluster', () => {
     cy.get('input[name="value"]').clear().type(newCluster.name);
     cy.get('input[name="description"]').clear().type(newCluster.description);
     cy.get('input[name="source"]').clear().type(newCluster.source);
-    cy.get('div:has(> span:contains("Authors")) button').as('deleteAuthor');
-    // TODO: delete authors
+    cy.get('div:has(> span:contains("Authors")) button:first').as('deleteAuthor');
+    // TODO: fix to be dynamic
+    cy.get('@deleteAuthor').click();
+    cy.get('@deleteAuthor').click();
     cy.get('div:has(> span:contains("Authors")) input[type="text"]').type(newCluster.authors.join('\n') + '\n');
     cy.get('select[name="distribution"]').select(newCluster.distribution);
     let i = 1;
