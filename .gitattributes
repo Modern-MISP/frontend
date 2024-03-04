@@ -1,0 +1,2 @@
+/dump01.sql filter=lfs diff=lfs merge=lfs -text
+/misp-docker-override/dump01.sql filter=lfs diff=lfs merge=lfs -text
