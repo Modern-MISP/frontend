@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.defaultLogin();
-})
+});
 
 describe('tags', () => {
   it('should be creatable', () => {
@@ -11,7 +11,7 @@ describe('tags', () => {
     cy.get('select[name="org_id"]').select('1');
     cy.get(':has(> input[name="hide_tag"])').click();
     cy.get(':has(> input[name="local_only"])').click();
-    cy.get('button[type="submit"]').click()  // save
+    cy.get('button[type="submit"]').click(); // save
 
     // TODO: check if created
   });
