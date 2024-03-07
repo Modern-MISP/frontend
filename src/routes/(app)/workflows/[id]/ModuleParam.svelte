@@ -13,8 +13,6 @@
 
   let stringValue: string = Array.isArray(value) ? '' : value;
   let arrayValue: string[] = Array.isArray(value) ? value : [];
-  $: value = arrayValue;
-  $: value = stringValue;
 
   const selectOptions = objectEntries(param.options ?? {}).map(([k, v]) => ({
     value: k,
@@ -33,6 +31,20 @@
   }
   const pickerOptions = getPickerPills(Object.values(param.options ?? {}));
   let pickerValues = getPickerPills(arrayValue);
+
+  // need setValue to avoid cyclic dependency of reactive statements
+  const setValue = (newValue: string | string[]) => {
+    if (value !== newValue) value = newValue;
+  };
+  $: setValue(arrayValue);
+  $: setValue(stringValue);
+  $: {
+    if (Array.isArray(value)) {
+      arrayValue = value;
+    } else {
+      stringValue = value;
+    }
+  }
   $: arrayValue = pickerValues.map((p) => p.text);
 </script>
 
