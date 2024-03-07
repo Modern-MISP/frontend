@@ -4,10 +4,11 @@ beforeEach(() => {
 
 describe('tags', () => {
   it('should be creatable', () => {
+    const name = `test tag ${crypto.randomUUID()}`;
     cy.visit('/tags');
     cy.toggleMode();
     cy.get('#actionBar > :contains("Create Tag")').click();
-    cy.get('input[name="name"]').type('test tag');
+    cy.get('input[name="name"]').type(name);
     cy.get('select[name="org_id"]').select('1');
     cy.get(':has(> input[name="hide_tag"])').click();
     cy.get(':has(> input[name="local_only"])').click();
