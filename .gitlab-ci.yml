@@ -36,6 +36,7 @@ docker:
     - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
     - docker compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
     - docker compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
+    # Somehow MISP stops responding after setting options via the CLI, so just restart it for now
     - docker compose down misp-core
     - docker compose up cypress
 

@@ -1,6 +1,8 @@
 version: '3.8'
 include:
-  - misp-docker/docker-compose.yml
+  - path:
+      - misp-docker/docker-compose.yml
+      - misp-docker-override.yml
 services:
   frontend:
     build:

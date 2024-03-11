@@ -1,0 +1,12 @@
+services:
+  misp-core:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  db:
+    volumes:
+      # This file gets executed from the context of the misp-docker directory, so use .. to access our project
+      - ../dump01.sql:/docker-entrypoint-initdb.d/dump01.sql
