@@ -39,7 +39,7 @@ docker:
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
     # - echo "127.0.0.1 docker" >> /etc/hosts
-    - podman compose up --wait misp-core
+    - podman compose up misp-core
     - podman compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
     - podman compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
     - podman compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
