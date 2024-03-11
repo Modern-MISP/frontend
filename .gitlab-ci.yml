@@ -26,7 +26,7 @@ docker:
   #   - docker.io/library/docker:25-dind
   stage: docker
   image:
-    name: docker.io/library/docker:25-dind
+    name: docker.io/library/docker:25
     pull_policy: if-not-present
   tags:
     - dind
@@ -35,13 +35,13 @@ docker:
   script:
     - cp misp-docker/template.env misp-docker/.env
     - echo "127.0.0.1 docker" >> /etc/hosts
-    - docker-compose up --wait misp-core
-    - docker-compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
-    - docker-compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
-    - docker-compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
+    - docker compose up --wait misp-core
+    - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
+    - docker compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
+    - docker compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
     # Somehow MISP stops responding after setting options via the CLI, so just restart it for now
-    - docker-compose down misp-core
-    - docker-compose up cypress
+    - docker compose down misp-core
+    - docker compose up cypress
 
 # === pre-build stage ===
 
