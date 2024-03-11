@@ -24,7 +24,7 @@ workflow:
 docker:
   stage: docker
   image:
-    name: docker:dind
+    name: docker.io/library/docker:dind
     pull_policy: if-not-present
   tags:
     - dind
