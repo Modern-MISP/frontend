@@ -87,7 +87,7 @@ unit_tests:
 prettier:
   stage: test
   script:
-    - npx prettier --check .
+    - npx prettier --check . "!misp-docker/**"
   dependencies:
     - install_dependencies
 

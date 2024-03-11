@@ -11,3 +11,8 @@ node_modules
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Idk why prettier somehow randomly decided to start linting the misp-docker submodule too
+# Adding this here doesn't always seem to be enough, as prettier still tries to access the files in misp-docker
+# and can fail with a permission error, so all prettier invokations in package.json and .gitlab-ci.yml were fixed too
+misp-docker/**
