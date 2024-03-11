@@ -1,6 +1,32 @@
 version: '3.8'
+include:
+  - misp-docker/docker-compose.yml
 services:
   frontend:
-    build: .
+    build:
+      context: .
+      no_cache: true
+      args:
+        PUBLIC_MAINTENANCE_MODE: "false"
+        PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
+        PUBLIC_REST_DISABLED: "{}"
+        PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
+        PUBLIC_MISP_API_ENDPOINT: https://localhost
+        PUBLIC_DATE_FORMAT: yyyy-mm-DD
     ports:
-      - 80:80
+      - 4173:80
+    depends_on:
+      misp-core:
+        condition: service_healthy
+  cypress:
+    image: cypress/included
+    volumes:
+      - .:/e2e:ro
+    working_dir: /e2e
+    environment:
+      CYPRESS_BASE_URL: http://frontend
+      CYPRESS_VIDEO: "false"
+      CYPRESS_SCREENSHOT_ON_RUN_FAILURE: "false"
+    depends_on:
+      - frontend
+ 

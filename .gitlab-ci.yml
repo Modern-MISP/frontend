@@ -2,6 +2,7 @@
 #   - template: Code-Quality.gitlab-ci.yml
 
 stages:
+  - docker
   - pre-build
   - build
   - test
@@ -18,6 +19,22 @@ workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH
+
+# === docker stage ===
+docker:
+  stage: docker
+  image:
+    name: docker:dind
+    pull_policy: if-not-present
+  tags:
+    - dind
+  script:
+    - docker compose up --wait misp-core
+    - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
+    - docker compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
+    - docker compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
+    - docker compose down misp-core
+    - docker compose up cypress
 
 # === pre-build stage ===
 

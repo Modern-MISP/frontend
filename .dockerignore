@@ -5,3 +5,4 @@ misp-docker
 coverage
 .vscode
 openapi
+.env
