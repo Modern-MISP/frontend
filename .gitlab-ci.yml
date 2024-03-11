@@ -35,7 +35,7 @@ docker:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
     - export PATH=$PATH:/root/.local/bin
-    - dnf install -y podman-docker docker-compose
+    - dnf install -y podman-docker docker
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
     # - echo "127.0.0.1 docker" >> /etc/hosts
