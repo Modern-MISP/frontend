@@ -23,16 +23,15 @@ workflow:
 # === docker stage ===
 docker:
   services:
-    - docker.io/library/docker:dind
+    - docker.io/library/docker:25-dind
   stage: docker
   image:
-    name: docker.io/library/docker:latest
+    name: docker.io/library/docker:25
     pull_policy: if-not-present
   tags:
     - dind
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
-    GIT_STRATEGY: clone
   script:
     - cp misp-docker/template.env misp-docker/.env
     - docker compose up --wait misp-core
