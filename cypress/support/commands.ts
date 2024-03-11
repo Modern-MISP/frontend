@@ -40,3 +40,6 @@ Cypress.Commands.add('defaultLogin', () => {
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
+
+// Cypress drag and drop
+import '@4tw/cypress-drag-drop';

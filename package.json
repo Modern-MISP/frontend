@@ -19,6 +19,7 @@
     "gen:api-types": "openapi-typescript https://raw.githubusercontent.com/MISP/MISP/develop/app/webroot/doc/openapi.yaml -o src/lib/api/misp.d.ts"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.5",
     "@catppuccin/tailwindcss": "^0.1.6",
     "@dagrejs/dagre": "^1.0.4",
     "@histoire/plugin-svelte": "^0.17.9",
