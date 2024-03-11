@@ -5,6 +5,7 @@
   import { mode } from '$lib/stores';
   import { objectEntries } from 'ts-extras';
   import type { ModuleParam as Param } from '../../../../routes/(app)/workflows/modules/module';
+  import type { PickerPill } from '$lib/models/Picker.interface';
 
   /** The parameter data from the workflow module. */
   export let param: Param;
@@ -23,21 +24,20 @@
     tags: 'mdi:tag',
     clusters: 'carbon:assembly-cluster'
   };
-  function getPickerPills(textValues: string[]) {
+  function getPickerPills(textValues: string[]): PickerPill[] {
     return textValues.map((v) => ({
       icon: pickerIconLookup[param.id],
       text: v
     }));
   }
   const pickerOptions = getPickerPills(Object.values(param.options ?? {}));
-  let pickerValues = getPickerPills(arrayValue);
 
   // need setValue to avoid cyclic dependency of reactive statements
   const setValue = (newValue: string | string[]) => {
-    if (value !== newValue) value = newValue;
+    if (JSON.stringify(value) !== JSON.stringify(newValue)) value = newValue;
   };
-  $: setValue(arrayValue);
-  $: setValue(stringValue);
+  $: if (Array.isArray(value)) setValue(arrayValue);
+  $: if (!Array.isArray(value)) setValue(stringValue);
   $: {
     if (Array.isArray(value)) {
       arrayValue = value;
@@ -45,7 +45,10 @@
       stringValue = value;
     }
   }
-  $: arrayValue = pickerValues.map((p) => p.text);
+
+  function onPickerUpdate(event: CustomEvent<PickerPill[]>) {
+    arrayValue = event.detail.map((p) => p.text!);
+  }
 </script>
 
 <!--
@@ -67,8 +70,9 @@
       name={param.id}
       placeholder={param.placeholder}
       pickableItems={pickerOptions}
-      bind:pickedItems={pickerValues}
+      pickedItems={getPickerPills(arrayValue)}
       disabled={$mode === 'view'}
+      on:update={onPickerUpdate}
     />
   {:else}
     <Input
