@@ -42,4 +42,5 @@ Cypress.Commands.add('defaultLogin', () => {
 //
 
 // Cypress drag and drop
+// Docs: https://github.com/4teamwork/cypress-drag-drop
 import '@4tw/cypress-drag-drop';
