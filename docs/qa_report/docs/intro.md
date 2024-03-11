@@ -8,3 +8,4 @@ Stuff I gotta write about (TODO):
 - List test cases from pflichtenheft and how we tested them
 - Additional e2e tests we implemented
 - Maybe talk more about unit tests and stuff
+- Also linting (eslint (code quality) & prettier (formatting)), automated build, svelte-check (typesafety)
