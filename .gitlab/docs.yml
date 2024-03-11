@@ -47,10 +47,12 @@ generate_mkdocs:
   script:
     # - source /root/.venv/bin/activate; mkdocs build
     - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
+    - cd docs/qa_report; source /root/.venv/bin/activate; mkdocs build
   artifacts:
     paths:
       - site
       - docs/implementation_report/site
+      - docs/qa_report/site
 
 push_docs:
   stage: push_docs
@@ -70,6 +72,7 @@ push_docs:
     # - cp site/pdf/document.pdf docs/
     # - cp docs/generated/uml.svg docs/
     - cp docs/implementation_report/site/pdf/document.pdf docs/implementation_report
+    - cp docs/qa_report/site/pdf/document.pdf docs/qa_report
     - git add docs/
     - git config user.name uml-pipeline
     - git config user.email uml-pipeline@example.com
