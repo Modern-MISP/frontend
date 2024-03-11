@@ -30,6 +30,7 @@ docker:
     - dind
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
+    GIT_STRATEGY: clone
   script:
     - docker compose up --wait misp-core
     - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
