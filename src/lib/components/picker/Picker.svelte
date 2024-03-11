@@ -49,6 +49,11 @@
     value: string
   ) => pill.text?.includes(value);
 
+  const dispatch = createEventDispatcher<{
+    formValue: Record<string, PickerPill[]>;
+    update: PickerPill[];
+  }>();
+
   /**
    * Adds the current value to pickedItems if possible.
    */
@@ -60,6 +65,7 @@
     pickedItems = [...pickedItems, match];
     pickableItems = pickableItems.filter((x) => x !== match);
     value = '';
+    dispatch('update', pickedItems);
   }
 
   function onKeyDown(event: KeyboardEvent) {
@@ -92,7 +98,6 @@
   $: if (autocomplete.length === 0 && arbitraryInput) autocomplete = [arbitraryInput(value)];
   $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
 
-  const dispatch = createEventDispatcher<{ formValue: Record<string, PickerPill[]> }>();
   $: if (name) dispatch('formValue', { [name]: pickedItems });
 
   let input: HTMLInputElement;
@@ -119,12 +124,14 @@
             action={!disabled
               ? {
                   class: 'hover:text-red',
-                  onClick: () =>
-                    ([pickedItems, pickableItems] = removeFromAddToIndex(
+                  onClick: () => {
+                    [pickedItems, pickableItems] = removeFromAddToIndex(
                       pickedItems,
                       pickableItems,
                       i
-                    )),
+                    );
+                    dispatch('update', pickedItems);
+                  },
                   icon: 'mdi:close-circle-outline'
                 }
               : undefined}
@@ -152,12 +159,14 @@
               // if there is only one value, just add this one. No seed to search. Also handles arbitraryInput in a easy way
               if (autocomplete.length === 1) {
                 addValue();
-              } else
+              } else {
                 [pickableItems, pickedItems] = removeFromAddToIndex(
                   pickableItems,
                   pickedItems,
                   pickableItems.findIndex((x) => x === props)
                 );
+                dispatch('update', pickedItems);
+              }
               // Always reset value and refocus
               value = '';
               input.focus();
