@@ -22,11 +22,11 @@ workflow:
 
 # === docker stage ===
 docker:
-  services:
-    - docker.io/library/docker:25-dind
+  # services:
+  #   - docker.io/library/docker:25-dind
   stage: docker
   image:
-    name: docker.io/library/docker:25
+    name: docker.io/library/docker:25-dind
     pull_policy: if-not-present
   tags:
     - dind
@@ -34,6 +34,7 @@ docker:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
     - cp misp-docker/template.env misp-docker/.env
+    - echo "127.0.0.1 docker" >> /etc/hosts
     - docker compose up --wait misp-core
     - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
     - docker compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
