@@ -26,23 +26,27 @@ docker:
   #   - docker.io/library/docker:25-dind
   stage: docker
   image:
-    name: docker.io/library/docker:25
+    # name: docker.io/library/docker:25
+    name: quay.io/podman/stable:latest
     pull_policy: if-not-present
   tags:
     - dind
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
+    - export PATH=$PATH:/root/.local/bin
+    - dnf install -y pipx
+    - pipx install podman-compose
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
-    - echo "127.0.0.1 docker" >> /etc/hosts
-    - docker compose up --wait misp-core
-    - docker compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
-    - docker compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
-    - docker compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
+    # - echo "127.0.0.1 docker" >> /etc/hosts
+    - podman compose up --wait misp-core
+    - podman compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
+    - podman compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
+    - podman compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
     # Somehow MISP stops responding after setting options via the CLI, so just restart it for now
-    - docker compose down misp-core
-    - docker compose up cypress
+    - podman compose down misp-core
+    - podman compose up cypress
 
 # === pre-build stage ===
 
