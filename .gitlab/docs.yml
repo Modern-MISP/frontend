@@ -46,8 +46,8 @@ generate_mkdocs:
   image: hub.cert.kit.edu:5000/mkdocs
   script:
     # - source /root/.venv/bin/activate; mkdocs build
-    - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
-    - cd docs/qa_report; source /root/.venv/bin/activate; mkdocs build
+    - pushd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build; popd
+    - pushd docs/qa_report; source /root/.venv/bin/activate; mkdocs build; popd
   artifacts:
     paths:
       - site
