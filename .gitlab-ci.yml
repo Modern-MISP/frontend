@@ -44,12 +44,6 @@ podman:
     - mkdir /run/podman
     - podman system service --time 0 unix:///run/podman/podman.sock &
     # Start containers via compose
-    - podman compose up --wait misp-core
-    - podman compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
-    - podman compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
-    - podman compose exec misp-core app/Console/cake Admin setSetting Plugin.Workflow_enable true
-    # Somehow MISP stops responding after setting options via the CLI, so just restart it for now
-    - podman compose down misp-core
     - podman compose up cypress
   cache:
     key: ${CI_COMMIT_REF_SLUG}
