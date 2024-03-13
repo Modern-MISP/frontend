@@ -36,6 +36,7 @@ podman:
     - sudo dnf -y install podman-docker docker-compose-plugin
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
+    - mkdir /run/podman
     - podman system service --time 0 unix:///run/podman/podman.sock &
     - ls -la /run/podman/
     # - echo "127.0.0.1 docker" >> /etc/hosts
