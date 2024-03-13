@@ -2,6 +2,12 @@
 
 services:
   misp-core:
+    healthcheck:
+      test: ['CMD', 'true']
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
     volumes:
       - '../custom/:/custom/'
   db:
