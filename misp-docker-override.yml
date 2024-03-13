@@ -1,11 +1,11 @@
 services:
   misp-core:
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ['CMD', 'curl', '-f', 'http://localhost']
       interval: 20s
       timeout: 10s
       retries: 5
-      start_period: 40s
+      start_period: 120s
   db:
     volumes:
       # This file gets executed from the context of the misp-docker directory, so use .. to access our project
