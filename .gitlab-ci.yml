@@ -44,7 +44,7 @@ podman:
     - mkdir /run/podman
     - podman system service --time 0 unix:///run/podman/podman.sock &
     # Start containers via compose
-    - podman compose up cypress
+    - podman compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
