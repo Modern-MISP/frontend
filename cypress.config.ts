@@ -2,6 +2,8 @@ import { defineConfig } from 'cypress';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
+  experimentalMemoryManagement: true,
+
   component: {
     devServer: {
       framework: 'svelte',
