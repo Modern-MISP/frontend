@@ -31,7 +31,7 @@ podman:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - podman system service --time 0 unix:///var/run/docker.sock &
+    - podman system service --time 0 unix:///run/podman/podman.sock &
     - sudo dnf -y install dnf-plugins-core
     - sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
     - sudo dnf -y install podman-docker docker-compose-plugin
