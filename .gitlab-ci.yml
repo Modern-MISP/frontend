@@ -31,12 +31,13 @@ podman:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - podman system service --time 0 unix:///run/podman/podman.sock &
     - sudo dnf -y install dnf-plugins-core
     - sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
     - sudo dnf -y install podman-docker docker-compose-plugin
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
+    - podman system service --time 0 unix:///run/podman/podman.sock &
+    - file /run/podman/podman.sock
     # - echo "127.0.0.1 docker" >> /etc/hosts
     - podman compose up misp-core
     - podman compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
