@@ -2,7 +2,7 @@
 #   - template: Code-Quality.gitlab-ci.yml
 
 stages:
-  - docker
+  - podman
   - pre-build
   - build
   - test
@@ -21,12 +21,9 @@ workflow:
     - if: $CI_COMMIT_BRANCH
 
 # === docker stage ===
-docker:
-  # services:
-  #   - docker.io/library/docker:25-dind
-  stage: docker
+podman:
+  stage: podman
   image:
-    # name: docker.io/library/docker:25
     name: quay.io/podman/stable:latest
     pull_policy: if-not-present
   tags:
@@ -34,7 +31,7 @@ docker:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - export PATH=$PATH:/root/.local/bin
+    - podman system service --time 0 unix:///var/run/docker.sock &
     - dnf install -y podman-docker docker
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
