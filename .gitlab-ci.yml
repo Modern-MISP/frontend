@@ -31,14 +31,17 @@ podman:
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   script:
+    # Install podman-docker and docker-compose for using docker-compose with podman
     - sudo dnf -y install dnf-plugins-core
     - sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
     - sudo dnf -y install podman-docker docker-compose-plugin
+    # Create environment files
     - cp misp-docker/template.env misp-docker/.env
     - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
+    # Start podman socket
     - mkdir /run/podman
     - podman system service --time 0 unix:///run/podman/podman.sock &
-    # - echo "127.0.0.1 docker" >> /etc/hosts
+    # Start containers via compose
     - podman compose up --wait misp-core
     - podman compose exec misp-core app/Console/cake Admin setSetting Security.allow_cors true
     - podman compose exec misp-core app/Console/cake Admin setSetting Security.cors_origins '*'
@@ -46,6 +49,11 @@ podman:
     # Somehow MISP stops responding after setting options via the CLI, so just restart it for now
     - podman compose down misp-core
     - podman compose up cypress
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - /var/cache/dnf
+  needs: []
 
 # === pre-build stage ===
 
@@ -62,6 +70,7 @@ install_dependencies:
     paths:
       - node_modules
       - .svelte-kit
+  needs: []
 
 # === build stage ===
 
@@ -77,6 +86,8 @@ build_production:
       - dist_production
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+  needs:
+    - install_dependencies
 
 build_staging:
   stage: build
@@ -88,6 +99,8 @@ build_staging:
     expire_in: 1 day
     paths:
       - dist_staging
+  needs:
+    - install_dependencies
 
 docs:
   stage: build
@@ -97,6 +110,8 @@ docs:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
   rules:
     - if: $CI_COMMIT_BRANCH == "docs"
+  needs:
+    - install_dependencies
 
 # === test stage ===
 
@@ -111,29 +126,33 @@ unit_tests:
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+  needs:
+    - install_dependencies
 
 prettier:
   stage: test
   script:
     - npx prettier --check . "!misp-docker/**"
-  dependencies:
+  needs:
     - install_dependencies
 
 eslint:
   stage: test
   script:
     - npx eslint --format gitlab .
-  dependencies:
-    - install_dependencies
   artifacts:
     reports:
       codequality: gl-code-quality-report.json
+  needs:
+    - install_dependencies
 
 svelte-check:
   stage: test
   script:
     - cp $ENV_FILE .env
     - npm run check
+  needs:
+    - install_dependencies
 
 # === deploy stage ===
 
@@ -147,5 +166,5 @@ ftp_deploy:
   script:
     - apt-get update -qq && apt-get install -y -qq lftp
     - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_staging/ ./ --parallel=10 -X .htaccess"
-  dependencies:
+  needs:
     - build_staging
