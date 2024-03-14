@@ -2,6 +2,7 @@
   import Icon from '@iconify/svelte';
   import { createEventDispatcher } from 'svelte';
   import type { HTMLInputTypeAttribute } from 'svelte/elements';
+  import { v4 as uuidv4 } from 'uuid';
 
   /**
    * Placeholder of the input.
@@ -51,7 +52,7 @@
 
   const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
 
-  const id = crypto.randomUUID();
+  const id = uuidv4();
 
   let inputElement: HTMLInputElement;
 
