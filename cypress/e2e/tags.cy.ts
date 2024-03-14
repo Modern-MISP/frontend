@@ -14,6 +14,22 @@ describe('tags', () => {
     cy.get(':has(> input[name="local_only"])').click();
     cy.get('button[type="submit"]').click(); // save
 
-    // TODO: check if created
+    cy.toggleMode();
+
+    cy.get('[slot="filter"] input').type(name); // search tag
+    cy.get('tbody tr:first').click();
+
+    const check = (label, text) => {
+      cy.get(`main main div:has(> span:first:contains(${label})) > :last-child`).should(
+        'contain.text',
+        text
+      );
+    };
+    check('Name', name);
+    check('Exportable', 'No');
+    check('Hidden', 'Yes');
+    check('Local only', 'Yes');
+    check('Restricted to Org', 'Yes');
+    check('Restricted to User', 'No');
   });
 });
