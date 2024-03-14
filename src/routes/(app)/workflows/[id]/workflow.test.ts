@@ -4,7 +4,7 @@ import { wfData } from './wfData.mock';
 
 describe('workflow', () => {
   it('should be able to reconstruct workflow data', () => {
-    const { nodes, edges } = generateFlowContent(wfData, () => {});
+    const { nodes, edges } = generateFlowContent(wfData, { onNodeUpdate: () => {} });
 
     const resultWfData = constructWorkflowData(wfData, nodes, edges);
     expect(resultWfData).toStrictEqual(wfData);
