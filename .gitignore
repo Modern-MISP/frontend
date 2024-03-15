@@ -14,3 +14,4 @@ cypress.env.json
 /cypress/screenshots
 /cypress/videos
 mysql_data
+reports

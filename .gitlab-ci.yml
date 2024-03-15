@@ -150,9 +150,11 @@ integration_tests:
   artifacts:
     reports:
       junit: reports/report-*.xml
+    expose_as: Cypress artifacts
+    when: always
     paths:
-      - cypress/screenshots
-      - cypress/videos
+      - cypress/screenshots/
+      - cypress/videos/
 
 # === deploy stage ===
 
