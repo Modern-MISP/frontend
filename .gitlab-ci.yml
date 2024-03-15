@@ -145,10 +145,6 @@ integration_tests:
     - docker compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
   needs:
     - install_dependencies
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - mysql_data/
   artifacts:
     expire_in: 1 day
     reports:
