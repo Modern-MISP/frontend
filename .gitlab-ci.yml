@@ -1,6 +1,3 @@
-# include:
-#   - template: Code-Quality.gitlab-ci.yml
-
 stages:
   - pre-build
   - build
@@ -13,11 +10,16 @@ default:
   image:
     name: node:latest
     pull_policy: if-not-present
+  interruptible: true
 
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
     - if: $CI_COMMIT_BRANCH
+  auto_cancel:
+    on_new_commit: interruptible
 
 # === pre-build stage ===
 
@@ -34,6 +36,7 @@ install_dependencies:
     paths:
       - node_modules
       - .svelte-kit
+  needs: []
 
 # === build stage ===
 
@@ -44,11 +47,13 @@ build_production:
     - npm run build -- --mode production
     - mv build dist_production
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - dist_production
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+  needs:
+    - install_dependencies
 
 build_staging:
   stage: build
@@ -60,6 +65,8 @@ build_staging:
     expire_in: 1 day
     paths:
       - dist_staging
+  needs:
+    - install_dependencies
 
 docs:
   stage: build
@@ -69,6 +76,8 @@ docs:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
   rules:
     - if: $CI_COMMIT_BRANCH == "docs"
+  needs:
+    - install_dependencies
 
 # === test stage ===
 
@@ -78,40 +87,79 @@ unit_tests:
     - npx vitest run
   coverage: /All files[^|]*\|[^|]*\|\s+([\d\.]+)/
   artifacts:
+    expire_in: 1 day
     reports:
       junit: report.xml
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+  needs:
+    - install_dependencies
 
 prettier:
   stage: test
   script:
-    - npx prettier --check .
-  dependencies:
+    - npx prettier --check . "!misp-docker/**"
+  needs:
     - install_dependencies
 
 eslint:
   stage: test
   script:
     - npx eslint --format gitlab .
-  dependencies:
-    - install_dependencies
   artifacts:
+    expire_in: 1 day
     reports:
       codequality: gl-code-quality-report.json
+  needs:
+    - install_dependencies
 
 svelte-check:
   stage: test
   script:
     - cp $ENV_FILE .env
     - npm run check
+  needs:
+    - install_dependencies
+
+integration_tests:
+  stage: test
+  services:
+    - name: docker.io/library/docker:dind
+      alias: docker
+  image:
+    name: docker.io/library/docker:latest
+    pull_policy: if-not-present
+  tags:
+    - dind
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    # Make dockerd listen via HTTP instead of HTTPS
+    DOCKER_TLS_CERTDIR: ''
+  script:
+    # Create environment files
+    - cp misp-docker/template.env misp-docker/.env
+    - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
+    # Start containers via compose
+    - docker compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
+  needs:
+    - install_dependencies
+  artifacts:
+    expire_in: 1 day
+    reports:
+      junit: reports/report-*.xml
+    expose_as: Cypress artifacts
+    when: always
+    paths:
+      - cypress/screenshots/
+      - cypress/videos/
 
 # === deploy stage ===
 
 ftp_deploy:
   stage: deploy
   image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  interruptible: false
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
   environment:
@@ -119,5 +167,5 @@ ftp_deploy:
   script:
     - apt-get update -qq && apt-get install -y -qq lftp
     - lftp -c "set ftp:ssl-allow yes; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST; mirror -Rnev ./dist_staging/ ./ --parallel=10 -X .htaccess"
-  dependencies:
+  needs:
     - build_staging

@@ -28,6 +28,9 @@ Cypress.Commands.add('defaultLogin', () => {
   cy.login(Cypress.env('adminToken'));
 });
 
+Cypress.Commands.add('toggleMode', () => {
+  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first').click();
+});
 //
 //
 // -- This is a child command --

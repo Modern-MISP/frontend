@@ -1,0 +1,38 @@
+version: '3.8'
+include:
+  - path:
+      - misp-docker/docker-compose.yml
+      - misp-docker-override/docker-compose.yml
+services:
+  frontend:
+    build:
+      context: .
+      no_cache: true
+      args:
+        PUBLIC_MAINTENANCE_MODE: 'false'
+        PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
+        PUBLIC_REST_DISABLED: '{}'
+        PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
+        PUBLIC_MISP_API_ENDPOINT: https://misp-core
+        PUBLIC_DATE_FORMAT: yyyy-mm-DD
+    depends_on:
+      misp-core:
+        condition: service_healthy
+  cypress:
+    image: cypress/included:13.6.4 # https://github.com/cypress-io/github-action/issues/1136#issuecomment-1983439957
+    command:
+      - --reporter
+      - junit
+      - --reporter-options
+      - mochaFile=reports/report-[hash].xml
+      - --record
+    volumes:
+      - .:/e2e
+    working_dir: /e2e
+    environment:
+      CYPRESS_BASE_URL: http://frontend:80
+      CYPRESS_VIDEO: 'true'
+      ELECTRON_ENABLE_LOGGING: 'true'
+      CYPRESS_RECORD_KEY:
+    depends_on:
+      - frontend
