@@ -57,7 +57,7 @@ describe('filter Events', () => {
         cy.get("input[placeholder='Value']").type('test');
         cy.get("button:contains('Add')").click();
         cy.get('select').select('Published');
-        cy.get('label').click();
+        cy.get('label:first').click();
         cy.get("button:contains('Add')").click();
         cy.get("[id='pill']").should('have.length', 2);
       });
