@@ -47,7 +47,7 @@ build_production:
     - npm run build -- --mode production
     - mv build dist_production
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - dist_production
   rules:
@@ -87,6 +87,7 @@ unit_tests:
     - npx vitest run
   coverage: /All files[^|]*\|[^|]*\|\s+([\d\.]+)/
   artifacts:
+    expire_in: 1 day
     reports:
       junit: report.xml
       coverage_report:
@@ -107,6 +108,7 @@ eslint:
   script:
     - npx eslint --format gitlab .
   artifacts:
+    expire_in: 1 day
     reports:
       codequality: gl-code-quality-report.json
   needs:
@@ -148,6 +150,7 @@ integration_tests:
     paths:
       - mysql_data/
   artifacts:
+    expire_in: 1 day
     reports:
       junit: reports/report-*.xml
     expose_as: Cypress artifacts
