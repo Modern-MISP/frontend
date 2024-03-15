@@ -3,11 +3,12 @@
 services:
   misp-core:
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost']
+      # test: ['CMD', 'curl', '-f', 'http://localhost', '&&', 'grep', "'Workflow_enable' => true", '/var/www/MISP/app/Config/config.php']
+      test: ['CMD', '/custom/healthcheck.sh']
       interval: 20s
       timeout: 10s
       retries: 5
-      start_period: 240s
+      start_period: 300s
     volumes:
       - '../custom/:/custom/'
   db:
