@@ -8,7 +8,7 @@ services:
       interval: 20s
       timeout: 10s
       retries: 5
-      start_period: 300s
+      start_period: 600s
     volumes:
       - '../custom/:/custom/'
   db:
