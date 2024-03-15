@@ -2,7 +2,10 @@ import { type Node, type Edge, getNodesBounds } from '@xyflow/svelte';
 import { objectEntries, objectFromEntries } from 'ts-extras';
 import type { ModuleNode, WorkflowData } from '../workflow';
 
-export function generateFlowContent(wfData: WorkflowData, onNodeUpdate: (id: string) => void) {
+export function generateFlowContent(
+  wfData: WorkflowData,
+  nodeCallbacks: { onNodeUpdate: (id: string) => void }
+) {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
@@ -14,7 +17,7 @@ export function generateFlowContent(wfData: WorkflowData, onNodeUpdate: (id: str
         inputs: Object.keys(module.inputs),
         outputs: Object.keys(module.outputs),
         moduleData: module.data,
-        onUpdate: onNodeUpdate
+        onUpdate: nodeCallbacks.onNodeUpdate
       },
       position: { x: module.pos_x, y: module.pos_y }
     });
@@ -32,6 +35,20 @@ export function generateFlowContent(wfData: WorkflowData, onNodeUpdate: (id: str
       }
     }
   }
+
+  for (const frame of Object.values(wfData._frames ?? {})) {
+    const node = {
+      id: frame.id,
+      type: 'frame',
+      data: { nodes: frame.nodes, width: 0, height: 0, label: frame.text },
+      position: { x: 0, y: 0 },
+      zIndex: -100,
+      draggable: false,
+      selectable: false
+    };
+    nodes.push(node);
+  }
+
   return { nodes, edges };
 }
 

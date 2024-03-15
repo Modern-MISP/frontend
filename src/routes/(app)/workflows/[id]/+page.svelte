@@ -14,7 +14,7 @@
   import ModuleCard from './ModuleCard.svelte';
   import { fly } from 'svelte/transition';
   import type { Module } from '../modules/module';
-  import type { ModuleNodeData, Workflow, WorkflowData } from '../workflow';
+  import type { ModuleNodeData, WorkflowData } from '../workflow';
   import { constructWorkflowData, generateFlowContent, updateFrame } from './utils';
   import { writable } from 'svelte/store';
   import { objectEntries } from 'ts-extras';
@@ -34,35 +34,30 @@
 
   const svelteFlow = useSvelteFlow();
 
-  const { infoHeader, moduleData, checkGraph, saveWorkflow, toggleDebug } = data;
-  const workflow = (data.workflow as Workflow)!;
-  const wfData = workflow.data!;
-  const originalWfData = cloneDeep(wfData);
-
+  let { workflow } = data;
+  let wfData = workflow.data!;
+  let originalWfData = cloneDeep(wfData);
   let modifiedWfData = wfData;
   let isModified = false;
-  const getModified = debounce((mNodes, mEdges) => {
-    return constructWorkflowData(wfData, mNodes, mEdges);
-  }, 100);
-  $: modifiedWfData = getModified($nodes, $edges) ?? modifiedWfData;
-  $: isModified = JSON.stringify(originalWfData) !== JSON.stringify(modifiedWfData);
 
-  const _generatedFlowContent = generateFlowContent(wfData, onNodeUpdate);
+  const _generatedFlowContent = generateFlowContent(wfData, { onNodeUpdate });
   const nodes = writable(_generatedFlowContent.nodes);
   const edges = writable(_generatedFlowContent.edges);
 
-  for (const frame of Object.values(wfData._frames ?? {})) {
-    const node = {
-      id: frame.id,
-      type: 'frame',
-      data: { nodes: frame.nodes, width: 0, height: 0, label: frame.text },
-      position: { x: 0, y: 0 },
-      zIndex: -100,
-      draggable: false,
-      selectable: false
-    };
-    $nodes.push(node);
+  $: {
+    // handle invalidateAll
+    workflow = data.workflow;
+    wfData = workflow.data!;
+    originalWfData = cloneDeep(wfData);
+    modifiedWfData = wfData;
+    const _generatedFlowContent = generateFlowContent(wfData, { onNodeUpdate });
+    $nodes = _generatedFlowContent.nodes;
+    $edges = _generatedFlowContent.edges;
+    updateAllFrames();
   }
+
+  $: modifiedWfData = constructWorkflowData(wfData, $nodes, $edges) ?? modifiedWfData;
+  $: isModified = JSON.stringify(originalWfData) !== JSON.stringify(modifiedWfData);
 
   async function onNodeUpdate(nodeId: string) {
     $nodes.forEach((frameNode) => {
@@ -94,13 +89,12 @@
 
   // Idk why this works with `setTimeout` but not with `onMount` (not even with `await tick()` in the `onMount`),
   // or when adding the frames in the first place, but apparently it works.
-  setTimeout(
-    () =>
-      $nodes
-        .filter((n) => n.type === 'frame')
-        .forEach((n) => svelteFlow.updateNode(...updateFrame($nodes, n))),
-    1000
-  );
+  const updateAllFrames = () => {
+    $nodes
+      .filter((n) => n.type === 'frame')
+      .forEach((n) => svelteFlow.updateNode(...updateFrame($nodes, n)));
+  };
+  setTimeout(updateAllFrames, 1000);
 
   function onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -155,7 +149,7 @@
   }
 
   const applyGraphCheck = debounce(async () => {
-    const checkResult = await checkGraph(() => constructWorkflowData(wfData, $nodes, $edges));
+    const checkResult = await data.checkGraph(() => constructWorkflowData(wfData, $nodes, $edges));
     if (checkResult.multiple_output_connection.has_multiple_output_connection) {
       const nodesWithBadEdges = checkResult.multiple_output_connection.edges;
       if (Array.isArray(nodesWithBadEdges)) return;
@@ -200,14 +194,14 @@
         icon: 'material-symbols:save-outline-rounded',
         label: 'Save',
         class: 'text-green',
-        action: () => saveWorkflow(workflow.name ?? '', workflow.description ?? '', saveData),
+        action: () => data.saveWorkflow(workflow.name ?? '', workflow.description ?? '', saveData),
         disabled: !isModified
       },
       {
         icon: workflow.debug_enabled ? 'mdi:bug-check' : 'mdi:bug',
         label: 'Debug',
         class: workflow.debug_enabled ? 'text-green' : 'text-text',
-        action: () => toggleDebug(!(workflow.debug_enabled ?? false))
+        action: () => data.toggleDebug(!(workflow.debug_enabled ?? false))
       }
     ];
   }
@@ -295,7 +289,7 @@
   <div class="flex flex-col max-w-md gap-1">
     {#if $mode === 'view'}
       <div class="flex-row basis-full">
-        <DynCard header={infoHeader} data={workflow} />
+        <DynCard header={data.infoHeader} data={workflow} />
       </div>
       {#if nodeContext}
         <div class="flex-row">
@@ -305,7 +299,7 @@
     {:else}
       <div in:fly={{ x: -200 }} class="overflow-auto">
         <Card class="flex flex-col">
-          {#await moduleData}
+          {#await data.moduleData}
             Loading
           {:then modules}
             {#each modules as module}
