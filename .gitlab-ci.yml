@@ -10,6 +10,7 @@ default:
   image:
     name: node:latest
     pull_policy: if-not-present
+  interruptible: true
 
 workflow:
   rules:
@@ -17,6 +18,8 @@ workflow:
     - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
       when: never
     - if: $CI_COMMIT_BRANCH
+  auto_cancel:
+    on_new_commit: interruptible
 
 # === pre-build stage ===
 
@@ -145,6 +148,7 @@ integration_tests:
 ftp_deploy:
   stage: deploy
   image: hub.cert.kit.edu:5000/kit-cert-debrelease:latest
+  interruptible: false
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
   environment:
