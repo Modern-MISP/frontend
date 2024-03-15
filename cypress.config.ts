@@ -5,6 +5,7 @@ export default defineConfig({
   projectId: 'git4di',
 
   experimentalMemoryManagement: true,
+  defaultCommandTimeout: 10000,
 
   component: {
     devServer: {
