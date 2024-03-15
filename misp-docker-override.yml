@@ -12,5 +12,5 @@ services:
       - '../custom/:/custom/'
   db:
     volumes: !override
-      - ./mysql_data:/var/lib/mysql
+      - ../mysql_data:/var/lib/mysql
       - ../dump01.sql:/docker-entrypoint-initdb.d/dump01.sql
