@@ -139,7 +139,7 @@ integration_tests:
   script:
     # Create environment files
     - cp misp-docker/template.env misp-docker/.env
-    - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
+    - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
     # Start containers via compose
     - mkdir mysql_data
     - docker compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
