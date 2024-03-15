@@ -22,6 +22,7 @@ services:
         condition: service_healthy
   cypress:
     image: cypress/included:13.6.4 # https://github.com/cypress-io/github-action/issues/1136#issuecomment-1983439957
+    entrypoint: ['cypress', 'run', '--reporter' , 'junit', '--reporter-options', 'mochaFile=reports/report-[hash].xml']
     volumes:
       - .:/e2e
     working_dir: /e2e

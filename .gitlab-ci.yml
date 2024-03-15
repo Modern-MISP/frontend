@@ -148,6 +148,8 @@ integration_tests:
     paths:
       - mysql_data
   artifacts:
+    reports:
+      junit: reports/report-*.xml
     paths:
       - cypress/screenshots
       - cypress/videos
