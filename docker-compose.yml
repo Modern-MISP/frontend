@@ -27,11 +27,15 @@ services:
       - junit
       - --reporter-options
       - mochaFile=reports/report-[hash].xml
+      - --record
     volumes:
       - .:/e2e
     working_dir: /e2e
     environment:
-      CYPRESS_BASE_URL: http://frontend
+      CYPRESS_BASE_URL: http://frontend:80
       CYPRESS_VIDEO: 'true'
+      ELECTRON_ENABLE_LOGGING: 'true'
+      # DEBUG: cypress:*
+      CYPRESS_RECORD_KEY:
     depends_on:
       - frontend

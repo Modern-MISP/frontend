@@ -146,7 +146,7 @@ integration_tests:
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-      - mysql_data
+      - mysql_data/
   artifacts:
     reports:
       junit: reports/report-*.xml
