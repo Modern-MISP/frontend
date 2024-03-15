@@ -136,6 +136,7 @@ integration_tests:
     GIT_SUBMODULE_STRATEGY: recursive
     # Make dockerd listen via HTTP instead of HTTPS
     DOCKER_TLS_CERTDIR: ''
+    CYPRESS_RECORD_KEY: $CYPRESS_RECORD_KEY
   script:
     # Create environment files
     - cp misp-docker/template.env misp-docker/.env
