@@ -142,6 +142,10 @@ integration_tests:
     - docker compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
   needs:
     - install_dependencies
+  artifacts:
+    paths:
+      - cypress/screenshots
+      - cypress/videos
 
 # === deploy stage ===
 
