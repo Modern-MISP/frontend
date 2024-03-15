@@ -7,7 +7,7 @@ services:
       interval: 20s
       timeout: 10s
       retries: 5
-      start_period: 600s
+      start_period: 900s
     volumes:
       - '../misp-docker-override/custom/:/custom/'
   db:
