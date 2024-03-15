@@ -1,8 +1,4 @@
-# include:
-#   - template: Code-Quality.gitlab-ci.yml
-
 stages:
-  - podman
   - pre-build
   - build
   - test
@@ -21,35 +17,6 @@ workflow:
     - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
       when: never
     - if: $CI_COMMIT_BRANCH
-
-# === docker stage ===
-podman:
-  stage: podman
-  image:
-    name: quay.io/podman/stable:latest
-    pull_policy: if-not-present
-  tags:
-    - dind
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
-  script:
-    # Install podman-docker and docker-compose for using docker-compose with podman
-    - sudo dnf -y install dnf-plugins-core
-    - sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-    - sudo dnf -y install podman-docker docker-compose-plugin
-    # Create environment files
-    - cp misp-docker/template.env misp-docker/.env
-    - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
-    # Start podman socket
-    - mkdir /run/podman
-    - podman system service --time 0 unix:///run/podman/podman.sock &
-    # Start containers via compose
-    - podman compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - /var/cache/dnf
-  needs: []
 
 # === pre-build stage ===
 
@@ -147,6 +114,29 @@ svelte-check:
   script:
     - cp $ENV_FILE .env
     - npm run check
+  needs:
+    - install_dependencies
+
+integration_tests:
+  stage: test
+  services:
+    - name: docker.io/library/docker:dind
+      alias: docker
+  image:
+    name: docker.io/library/docker:latest
+    pull_policy: if-not-present
+  tags:
+    - dind
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    # Make dockerd listen via HTTP instead of HTTPS
+    DOCKER_TLS_CERTDIR: ''
+  script:
+    # Create environment files
+    - cp misp-docker/template.env misp-docker/.env
+    - cat cypress.env.template.json | sed 's/<your admin token>/$MISP01_AUTH_TOKEN/' > cypress.env.json
+    # Start containers via compose
+    - docker compose up --abort-on-container-exit --quiet-pull --timestamps --attach-dependencies cypress
   needs:
     - install_dependencies
 

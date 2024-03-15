@@ -23,11 +23,10 @@ services:
   cypress:
     image: cypress/included:13.6.4 # https://github.com/cypress-io/github-action/issues/1136#issuecomment-1983439957
     volumes:
-      - .:/e2e:ro
+      - .:/e2e
     working_dir: /e2e
     environment:
       CYPRESS_BASE_URL: http://frontend
-      CYPRESS_VIDEO: 'false'
-      CYPRESS_SCREENSHOT_ON_RUN_FAILURE: 'false'
+      CYPRESS_VIDEO: 'true'
     depends_on:
       - frontend
