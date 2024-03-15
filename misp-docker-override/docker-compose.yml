@@ -1,0 +1,15 @@
+# This file gets executed from the context of the misp-docker directory, so use ../misp-docker-override instead of . to access this directory
+
+services:
+  misp-core:
+    healthcheck:
+      test: ['CMD', '/custom/healthcheck.sh']
+      interval: 20s
+      timeout: 10s
+      retries: 5
+      start_period: 600s
+    volumes:
+      - '../misp-docker-override/custom/:/custom/'
+  db:
+    volumes:
+      - ../misp-docker-override/dump01.sql:/docker-entrypoint-initdb.d/dump01.sql

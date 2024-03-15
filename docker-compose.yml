@@ -2,7 +2,7 @@ version: '3.8'
 include:
   - path:
       - misp-docker/docker-compose.yml
-      - misp-docker-override.yml
+      - misp-docker-override/docker-compose.yml
 services:
   frontend:
     build:
@@ -33,7 +33,6 @@ services:
       CYPRESS_BASE_URL: http://frontend:80
       CYPRESS_VIDEO: 'true'
       ELECTRON_ENABLE_LOGGING: 'true'
-      # DEBUG: cypress:*
       CYPRESS_RECORD_KEY:
     depends_on:
       - frontend
