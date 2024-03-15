@@ -2,7 +2,6 @@ describe('add tag to event', () => {
   beforeEach(() => {
     cy.defaultLogin();
     cy.visit('/events/2');
-    cy.get("input[type='checkbox']");
     cy.toggleMode();
   });
   it('should be able to select tags from the picker and they should show on the right side', () => {
