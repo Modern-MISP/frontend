@@ -13,10 +13,8 @@ services:
         PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
         PUBLIC_REST_DISABLED: '{}'
         PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
-        PUBLIC_MISP_API_ENDPOINT: https://localhost
+        PUBLIC_MISP_API_ENDPOINT: https://misp-core
         PUBLIC_DATE_FORMAT: yyyy-mm-DD
-    ports:
-      - 4173:80
     depends_on:
       misp-core:
         condition: service_healthy
