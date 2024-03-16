@@ -8,6 +8,7 @@ theme:
 
 nav:
   - intro.md
+  - test_cases.md
 
 plugins:
   - search

@@ -9,3 +9,5 @@ Stuff I gotta write about (TODO):
 - Additional e2e tests we implemented
 - Maybe talk more about unit tests and stuff
 - Also linting (eslint (code quality) & prettier (formatting)), automated build, svelte-check (typesafety)
+- Fixed page crashing because Crypto.randomUUID wasn't available in insecure contexts
+- Newer versions of MISP return object_id `null` for attributes without objects, which we accidentally grouped as object `null`
