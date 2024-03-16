@@ -37,27 +37,27 @@ describe('User tests', () => {
   it('should edit an existing user', () => {
     cy.visit('/admin/users');
 
-    cy.get('tbody').find('tr').last().click();
+    cy.get('tbody > tr:last-child').click();
 
     cy.url().should('match', /\/admin\/users\/\d+/);
 
     cy.toggleMode();
 
-    const appendedText = 'aaa';
+    const newEmail = 'new2@email.test';
 
-    cy.get(cardRowRight('Email')).should('not.be.disabled').type(appendedText);
+    cy.get(cardRowRight('Email')).should('not.be.disabled').clear().type(newEmail);
 
     cy.get('button:has(span:contains("Save"))').click();
 
     cy.toggleMode();
 
-    cy.get(cardRowRight('Email')).should('contain.text', email + appendedText);
+    cy.get(cardRowRight('Email')).should('contain.text', newEmail);
   });
 
   it('should be able to delete the created user', () => {
     cy.visit('/admin/users');
     cy.toggleMode();
     cy.get('tbody').find('tr').last().click();
-    cy.get('button:contains("Delete User")').click();
+    cy.get('button:contains("Delete User")').should('not.be.disabled').click();
   });
 });

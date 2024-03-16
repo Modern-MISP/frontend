@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-  projectId: 'git4di',
+  projectId: '9pats2',
 
   experimentalMemoryManagement: true,
   defaultCommandTimeout: 10000,
@@ -24,10 +24,20 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:4173',
     viewportHeight: 1080,
-    viewportWidth: 1920
+    viewportWidth: 1920,
 
-    // setupNodeEvents(on, config) {
-    // implement node event listeners here
-    // },
+    setupNodeEvents(on, config) {
+      on('before:browser:launch', (browser, launchOptions) => {
+        const width = 1920;
+        const height = 1080;
+
+        if (browser.name === 'chrome' && browser.isHeadless) {
+          launchOptions.args.push(`--window-size=${width},${height}`);
+          launchOptions.args.push('--force-device-scale-factor=1');
+        }
+
+        return launchOptions;
+      });
+    }
   }
 });
