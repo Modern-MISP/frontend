@@ -44,10 +44,15 @@ describe('add tag to event', () => {
 
       const firstTag = 'green';
       cy.get('@tagsInput').type(firstTag);
+
+      cy.get(`[id=pill]:contains("${firstTag}")`).should('have.length', 1);
       cy.get('@tagsInput').type('{enter}');
       const secondTagPrefix = 'Fl';
       cy.get('@tagsInput').type(secondTagPrefix);
+      cy.get(`[id=pill]:contains("${secondTagPrefix}")`).should('have.length', 6);
       cy.get(`[id=pill]:contains("FruitFly")`).click();
+
+      cy.get('[id=pill]').should('have.length', 2);
     });
     cy.get('h3:contains("Those elements will be added:")')
       .parent()
