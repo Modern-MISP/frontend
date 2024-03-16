@@ -57,7 +57,12 @@ describe('User tests', () => {
   it('should be able to delete the created user', () => {
     cy.visit('/admin/users');
     cy.toggleMode();
-    cy.get('tbody').find('tr').last().click();
+    cy.wait(100);
+    cy.get('tbody').find('tr').last().as('lastRow');
+    cy.get('@lastRow').scrollIntoView();
+    cy.wait(100);
+    cy.get('@lastRow').click();
+    cy.wait(100);
     cy.get('button:contains("Delete User")').should('not.be.disabled').click();
   });
 });
