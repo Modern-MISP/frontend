@@ -39,6 +39,8 @@ describe('User tests', () => {
 
     cy.get('tbody').find('tr').last().click();
 
+    cy.url().should('match', /\/admin\/users\/\d+/);
+
     cy.toggleMode();
 
     const appendedText = 'aaa';
