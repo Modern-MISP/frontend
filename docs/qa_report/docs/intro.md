@@ -11,3 +11,4 @@ Stuff I gotta write about (TODO):
 - Also linting (eslint (code quality) & prettier (formatting)), automated build, svelte-check (typesafety)
 - Fixed page crashing because Crypto.randomUUID wasn't available in insecure contexts
 - Newer versions of MISP return object_id `null` for attributes without objects, which we accidentally grouped as object `null`
+- Standard MISP Docker installations do not allow X-Requested-With header, so don't use it
