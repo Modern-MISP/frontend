@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 beforeEach(() => {
   cy.defaultLogin();
 });
@@ -5,7 +7,7 @@ beforeEach(() => {
 describe('tags', () => {
   describe('create', () => {
     it('should save correctly', () => {
-      const name = `test tag ${crypto.randomUUID()}`;
+      const name = `test tag ${uuidv4()}`;
       cy.visit('/tags');
       cy.toggleMode();
       cy.get('#actionBar > :contains("Create Tag")').click();
