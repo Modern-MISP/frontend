@@ -41,9 +41,6 @@
           category,
           type,
           value: value.replaceAll('\n', '\r\n')
-        },
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
         }
       });
     notifications.add(

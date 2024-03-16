@@ -51,9 +51,6 @@ export async function detachCluster(
           eventId,
           clusterId: id
         }
-      },
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
       }
     })
   );
@@ -80,9 +77,6 @@ export async function addTags(
           tagId: value,
           local: local_only ? 1 : 0
         }
-      },
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
       }
     })
   );
@@ -106,9 +100,6 @@ export async function deleteTags(
           eventId,
           tagId: id
         }
-      },
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
       }
     })
   );
