@@ -35,7 +35,7 @@
   <meta charset="utf-8" />
 </svelte:head>
 
-<body id="layout" class="{$settings.theme} bg-base w-full h-screen flex flex-col">
+<div id="layout" class="{$settings.theme} bg-base w-full h-screen flex flex-col">
   <div class="relative w-full h-1 overflow-hidden bg-base">
     <div
       class="h-full w-full bg-sky/80 transition-transform duration-500
@@ -47,4 +47,4 @@
   <main class="flex w-full h-full">
     <slot {progressValue} />
   </main>
-</body>
+</div>

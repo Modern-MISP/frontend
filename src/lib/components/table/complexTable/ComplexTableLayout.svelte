@@ -140,7 +140,7 @@
 
 <svelte:window use:actionBar={topMenuActions} />
 
-<div class="flex gap-4">
+<div class="flex gap-4" id="filterRow">
   <slot name="filter">
     {#if filter.length > 0}
       <FilterCard bind:currentFilter bind:filterOpen>
