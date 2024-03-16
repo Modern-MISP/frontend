@@ -23,8 +23,8 @@ describe('workflows', () => {
     cy.toggleMode();
     cy.get('#actionBar > button:contains("Save")').should('be.disabled');
     const sourceHandle = cy.get('.svelte-flow__node-trigger .svelte-flow__handle');
-    sourceHandle.drag('.svelte-flow__node:contains("Enrich+Event") .svelte-flow__handle-left');
+    sourceHandle.drag('.svelte-flow__node:contains("Webhook") .svelte-flow__handle-left');
     cy.get('#actionBar > button:contains("Save")').should('not.be.disabled');
-    cy.get('.svelte-flow__edge[data-id="xy-edge__1output_1-4input_1"]').should('exist');
+    cy.get('.svelte-flow__edge[data-id="xy-edge__1output_1-3input_1"]').should('exist');
   });
 });
