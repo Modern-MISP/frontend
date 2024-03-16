@@ -29,7 +29,9 @@ Cypress.Commands.add('defaultLogin', () => {
 });
 
 Cypress.Commands.add('toggleMode', () => {
-  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first').click();
+  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first')
+    .should('exist')
+    .click();
 });
 //
 //
