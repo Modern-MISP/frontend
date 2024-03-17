@@ -1,6 +1,6 @@
 # Behobene Bugs
 
-Im Rahmen der Qualitätssicherungsphase fanden wir durch 
+Im Rahmen der Qualitätssicherungsphase fanden wir durch
 ausgiebiges manuelles und automatisiertes Testen einige Bugs in unserer
 Software, die wir daraufhin behoben.
 

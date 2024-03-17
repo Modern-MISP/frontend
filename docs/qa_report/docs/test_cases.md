@@ -28,14 +28,14 @@ der Nutzer richtig weiter geleitet wird.
 
 **5 Testfälle**
 
-Es wird überprüft, ob neue Events hinzugefügt werden können 
+Es wird überprüft, ob neue Events hinzugefügt werden können
 und der Erstellprozess abgebrochen werden kann.
 
 ### /T003/ Event veröffentlichen
 
 **2 Testfälle**
 
-Es wird überprüft, ob Events veröffentlicht werden können und 
+Es wird überprüft, ob Events veröffentlicht werden können und
 ihre Veröffentlichung zurückgenommen werden kann.
 
 ### /T004/ Tag zu Event hinzufügen
@@ -73,7 +73,7 @@ Menüleiste erreichbar ist.
 
 **2 Testfälle**
 
-Es wird überprüft, ob neue Galaxy Cluster erstellt werden 
+Es wird überprüft, ob neue Galaxy Cluster erstellt werden
 und erstellte Cluster bearbeitet werden können.
 
 ### /T010/ Tag hinzufügen
@@ -126,7 +126,7 @@ und neue Verbindungen zwischen Modulen erstellt werden können.
 
 Während des Testens ergaben sich auch einige weitere Testfälle.
 
-### Event anzeigen 
+### Event anzeigen
 
 **2 Testfälle**
 
@@ -138,7 +138,7 @@ Es wird überprüft, ob Events über die Eingabe ihrer URL bzw. Navigation über
 
 Es wird überprüft, ob Events bearbeitet werden können und der Bearbeitungsprozess abgebrochen werden kann.
 
-### Event-Filter 
+### Event-Filter
 
 **5 Testfälle**
 
