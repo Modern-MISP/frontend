@@ -37,6 +37,11 @@ entfernt werden können.
 
 ### /T005/ Referenz im Event-Graphen hinzufügen
 
+**2 Testfälle**
+Es wird überprüft, dass neue Referenzen (vom Objekt auf ein nicht referenziertes Attribut) im Event-Graphen hinzugefügt werden können
+und dass nicht referenzierte Attribute vom Seitenmenü auf den Graphen gezogen und abgelegt (Drag & Drop) werden können.
+Bei jeder Testausführung werden zufällige Werte zugewiesen.
+
 ### /T006/ Galaxy zu Event hinzufügen
 
 **2 Testfälle**
