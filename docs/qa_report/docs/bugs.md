@@ -1,7 +1,7 @@
 # Behobene Bugs
 
-Durch ausgiebiges manuelles und automatisiertes Testen im Rahmen
-der Qualitätssicherungsphase, fanden wir einige Bugs in unserer
+Im Rahmen der Qualitätssicherungsphase fanden wir durch 
+ausgiebiges manuelles und automatisiertes Testen einige Bugs in unserer
 Software, die wir daraufhin behoben.
 
 ## Workflow Reaktivität
@@ -19,15 +19,15 @@ dass nicht gespeicherte Änderungen vorhanden sind.
 
 ### Ursache
 
-Nach dem Abbrechen oder Speichern werden alle `load` Funktionen neu
+Nach dem Abbrechen oder Speichern werden alle `load`-Funktionen neu
 ausgeführt, um die Daten zu aktualisieren.
 
-Diese Daten stehen innerhalb der Workflow Seite im `data` property
-zur Verfügung, welche sich beim reload reaktiv aktualisiert.
+Diese Daten stehen innerhalb der Workflow Seite im `data`-Property
+zur Verfügung, welche sich beim Neuladen reaktiv aktualisiert.
 
 Innerhalb der Seite wurde nicht konsequent beachtet,
 dass sich die Daten ändern können.
-So wurde `data` an einigen Stellen als konstante behandelt bzw.
+So wurde `data` an einigen Stellen als Konstante behandelt bzw.
 einzelne Werte aus `data` an Konstanten gebunden,
 wodurch die Reaktivität verloren ging.
 
@@ -35,7 +35,7 @@ wodurch die Reaktivität verloren ging.
 
 Einige Konstanten wurden durch Variablen ersetzt.
 Außerdem wurden reaktive Statements hinzugefügt,
-die bei jedem neuen laden von `data` ausgeführt werden,
+die bei jedem neuen Laden von `data` ausgeführt werden,
 um aktiv die internen Daten neu zu initialisieren.
 
 ## Nutzung von `crypto.randomUUID`
@@ -49,7 +49,7 @@ ansgesprochen wurde, ist das Frontend auf bestimmten Seiten mit dem Fehler
 ### Ursache
 
 Die Funktion `cypto.randomUUId`, die wir zum Generieren von zufälligen UUIDs für Seitenelemente genutzt haben,
-ist nur in "Secure contexts" wie beispielsweise einer HTTPS-Verbindung verfügbar.
+ist nur in "Secure Contexts" wie beispielsweise einer HTTPS-Verbindung verfügbar.
 Wenn das Frontend über HTTP angesprochen wird, ohne die Domain `localhost` zu verwenden (die auch als Secure Context zählt),
 kann der Code nicht auf diese Funktion zugreifen und crasht.
 
@@ -58,7 +58,7 @@ kann der Code nicht auf diese Funktion zugreifen und crasht.
 Da wir `crypto.randomUUID` nur für zufällige IDs von Inputs genutzt haben und nicht in einem Kontext verwenden,
 in dem kryptografische Sicherheit bei diesen IDs von Bedeutung ist, wurde `crypto.randomUUID` durch die
 Funktion `v4` aus dem [npm-Package `uuid`](https://www.npmjs.com/package/uuid) ersetzt.
-Somit kann das Frontend (vor allem zum testen) auch in anderen Kontexten verwendet werden,
+Somit kann das Frontend (vor allem zum Testen) auch in anderen Kontexten verwendet werden,
 wobei eine TLS-basierte Verbindung natürlich immer empfohlen ist.
 
 ## User Reaktivität
@@ -66,11 +66,11 @@ wobei eine TLS-basierte Verbindung natürlich immer empfohlen ist.
 ### Symptom
 
 Beim Speichern nach dem Bearbeiten eines Nutzers auf `/admin/users/[id]` wurden die aktuellen Werte
-nicht automatisch angezeigt, sondern erfordern ein Neuladen der Seite bis sie aktualisiert werden.
+nicht automatisch angezeigt, sondern erfordern ein Neuladen der Seite, bis sie aktualisiert werden.
 
 ### Ursache
 
-Wie bei [Workflow Reaktivität](#workflow-reaktivität) wurden die in der `data` property übergebenen Daten
+Wie bei [Workflow Reaktivität](#workflow-reaktivität) wurden die in der `data`-Property übergebenen Daten
 nicht konsequent als reaktiv behandelt, sondern an Konstanten gebunden.
 Somit ging die Reaktivität der Daten an diesen Stellen verloren, weshalb diese somit nicht automatisch
 dynamisch im UI aktualisiert werden konnten.
@@ -96,34 +96,34 @@ Dieser Fall wurde von uns nicht erkannt, da nur `0` als gesonderter Wert behande
 
 Um alle Versionen von MISP zu unterstützen, testen wir nun, ob `object_id` existiert (i.e. nicht `null` oder `undefined` ist), und ob sie nicht `0` ist, um zu entscheiden ob ein Attribut zu einem Objekt gehört.
 
-## Fehlende Mode Sperre bei direkter Navigation
+## Fehlende Mode-Sperre bei direkter Navigation
 
 ### Symptom
 
 Einige Seiten stehen nur im View Mode zur Verfügung
 (z.B. default Galaxy Cluster).
-Dort soll das umschalten in den Edit Mode deaktiviert sein.
+Dort soll das Umschalten in den Edit Mode deaktiviert sein.
 
-Bei direktem Aufrufen einer solchen Seite im Browser,
+Beim direkten Aufruf einer solchen Seite im Browser,
 d.h. nicht über Navigation innerhalb der Anwendung,
 wurde der Edit Mode nicht gesperrt.
 
 ### Ursache
 
-Es wurden an mehreren Stellen Bedingungen zum Sperren des Mode Toggle
+Es wurden an mehreren Stellen Bedingungen zum Sperren des Mode-Toggles
 implementiert.
-Auch bei nicht erfüllter Bedingung wurde der Zustand des Mode Toggle
+Auch bei nicht erfüllter Bedingung wurde der Zustand des Mode-Toggles
 weiterhin reaktiv aktualisiert, wenn sich der Mode änderte.
 
-Da bei direktem aufrufen der Seite der Mode neu initialisiert wird,
-wird auch an allen Stellen der Mode Toggle aktualisiert.
-Dabei kommen sich die verschiedenen Stellen in die quere
+Da beim direkten Aufruf der Seite der Mode neu initialisiert wird,
+wird auch an allen Stellen der Mode-Toggle aktualisiert.
+Dabei kommen sich die verschiedenen Stellen in die Quere
 und überschreiben gegenseitig ihre Werte.
 
 ## Behebung
 
-Nur erfüllte Bedingungen zum Sperren des Mode Toggle
-aktualisieren dessen Zustand bei Änderung des Mode.
+Nur erfüllte Bedingungen zum Sperren des Mode-Toggles
+aktualisieren dessen Zustand bei Änderung des Modes.
 
-Nicht erfüllte Bedingungen aktualisieren den Mode Toggle nur jeweils
-beim Wechsel von erfüllt auf nicht erfüllt.
+Nicht erfüllte Bedingungen aktualisieren den Mode-Toggle nur jeweils
+beim Wechsel von "erfüllt" auf "nicht erfüllt".
