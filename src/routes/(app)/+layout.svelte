@@ -29,10 +29,10 @@
   ];
 
   beforeNavigate(({ cancel, to }) => {
-    // FIXME: This can only access statically defined routes in ./routes.ts,
-    //        not the dynamically defined $currentRoute additions that exist across the codebase.
-    //        The problem is that $currentRoute isn't updated yet in beforeNavigate if the change gets
-    //        applied in the +page.svelte of the route.
+    // This can only access statically defined routes in ./routes.ts,
+    // not the dynamically defined $currentRoute additions that exist across the codebase.
+    // The problem is that $currentRoute isn't updated yet in beforeNavigate if the change gets
+    // applied in the +page.svelte of the route.
     const userAccess = routes
       .flatMap((r) => [r, ...(r.children ?? [])])
       ?.findLast((r) => to?.url.pathname.startsWith(r.href))?.userAccess;
