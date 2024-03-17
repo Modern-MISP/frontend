@@ -22,6 +22,8 @@ describe('tags', () => {
       cy.get('[slot="filter"] input').type(name); // search tag
       cy.get('tbody tr:first').click();
 
+      cy.url().should('match', /\/tags\/\d+/);
+
       const check = (label, text) => {
         cy.get(`main main div:has(> span:first:contains(${label})) > :last-child`).should(
           'contain.text',

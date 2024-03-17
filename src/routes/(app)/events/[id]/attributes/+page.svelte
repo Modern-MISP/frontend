@@ -205,7 +205,7 @@
   {editActions}
   filter={[]}
   {topMenuActions}
-  groupInfo={(x) => (x.object_id === '0' ? undefined : `Object: ${x.object_id}`)}
+  groupInfo={(x) => (x.object_id && x.object_id !== '0' ? `Object: ${x.object_id}` : undefined)}
 >
   <svelte:fragment slot="added">
     {#if freetextImport || attributeReplacement}
