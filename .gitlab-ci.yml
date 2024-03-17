@@ -15,6 +15,7 @@ default:
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "docs"
     - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
       when: never
     - if: $CI_COMMIT_BRANCH
@@ -132,6 +133,8 @@ integration_tests:
     pull_policy: if-not-present
   tags:
     - dind
+  rules:
+    - if: $CI_COMMIT_BRANCH != "docs"
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
     # Make dockerd listen via HTTP instead of HTTPS
