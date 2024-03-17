@@ -7,6 +7,7 @@
     "cobertura",
     "codequality",
     "colour",
+    "contactalert",
     "debrelease",
     "dind",
     "gitlab",
@@ -28,6 +29,7 @@
     "sidemenu",
     "svelteflow",
     "tailwindcss",
+    "uuidv",
     "vitest",
     "xyflow"
   ],
