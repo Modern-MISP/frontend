@@ -13,4 +13,5 @@ vite.config.ts.timestamp-*
 cypress.env.json
 /cypress/screenshots
 /cypress/videos
+/cypress/downloads
 reports

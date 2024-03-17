@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
+  import { goto, invalidateAll } from '$app/navigation';
   import { page } from '$app/stores';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
@@ -10,7 +10,7 @@
   /** Data that is displayed on this page. */
   export let data: PageData;
 
-  const { left, right, user } = data;
+  $: ({ left, right, user } = data);
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -24,6 +24,8 @@
             // @ts-expect-error MISP API return custom errors object
             const mispErrors: string[] = Object.values(resp.error.errors ?? {});
             throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
+          } else {
+            invalidateAll();
           }
         })
     );
