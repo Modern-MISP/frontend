@@ -85,7 +85,13 @@ export default {
     label: 'Last login',
     value: (x) => ({
       display: DatePill,
-      props: { date: x.User?.last_login ? new Date(+x.User?.last_login * 1000) : null }
+      props: {
+        date:
+          x.User?.last_login && x.User.last_login !== '0'
+            ? new Date(+x.User?.last_login * 1000)
+            : null,
+        onNullText: 'Never logged in'
+      }
     })
   }),
   created: col({
