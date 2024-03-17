@@ -8,12 +8,12 @@
   import UserInfo from './UserInfo.svelte';
 
   /**
-   * The mode of the current page. Possible modes are currently "view" and "edit": TODO: maybe extract this to a store?
+   * The mode of the current page. Possible modes are currently "view" and "edit"
    */
   export let mode: Mode = 'view';
 
   /**
-   * Whether the side menu is open or not. TODO: probably should search for a better solution for this.
+   * Whether the side menu is open or not.
    */
   export let isOpen = false;
 

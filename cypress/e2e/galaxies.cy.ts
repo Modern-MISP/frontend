@@ -77,7 +77,6 @@ describe('galaxy cluster', () => {
     cy.get('input[name="description"]').clear().type(newCluster.description);
     cy.get('input[name="source"]').clear().type(newCluster.source);
     cy.get('div:has(> span:contains("Authors")) button:first').as('deleteAuthor');
-    // TODO: fix to be dynamic
     cy.get('@deleteAuthor').click();
     cy.get('@deleteAuthor').click();
     cy.get('div:has(> span:contains("Authors")) input[type="text"]').type(
