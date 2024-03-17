@@ -32,6 +32,9 @@ Cypress.Commands.add('toggleMode', () => {
     .should('exist')
     .click();
 });
+
+import '@4tw/cypress-drag-drop';
+
 //
 //
 // -- This is a child command --
