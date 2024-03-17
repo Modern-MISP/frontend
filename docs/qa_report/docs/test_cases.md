@@ -4,14 +4,14 @@ Durch die Nutzung von Cypress als Browser-Automatisierungs-Tool
 lassen sich komplexe Testszenarien mit simulierter Nutzerinteraktion einfach
 darstellen und automatisiert testen.
 
-Im folgenden sind von uns implementierte Testszenarien kurz beschrieben.
+Im Folgenden sind von uns implementierte Testszenarien kurz beschrieben.
 
 ## Pflichtenheft
 
 Priorität war es für uns, die im Pflichtenheft festgelegten
 Testfälle automatisiert überprüfen zu können.
 
-Im folgenden bezieht sich die Nummerierung der Testfälle auf deren äquivalente Nummerierung im Pflichtenheft.
+Im Folgenden bezieht sich die Nummerierung der Testfälle auf deren äquivalente Nummerierung im Pflichtenheft.
 
 Die ursprünglich im Pflichtenheft beschriebenen Testfälle
 wurden dabei meist noch durch weitere Fälle zum gleichen
@@ -21,7 +21,7 @@ Grundszenario ergänzt oder in kleinere Teilfälle aufgeteilt.
 
 **4 Testfälle**
 
-Es wird überprüft, dass das Einloggen möglich ist und
+Es wird überprüft, ob das Einloggen möglich ist und
 der Nutzer richtig weiter geleitet wird.
 
 ### /T002/ Event hinzufügen
@@ -32,7 +32,7 @@ der Nutzer richtig weiter geleitet wird.
 
 **3 Testfälle**
 
-Es wird überprüft, dass Tags zu einem Event hinzugefügt und
+Es wird überprüft, ob Tags zu einem Event hinzugefügt und
 entfernt werden können.
 
 ### /T005/ Referenz im Event-Graphen hinzufügen
@@ -41,7 +41,7 @@ entfernt werden können.
 
 **2 Testfälle**
 
-Es wird überprüft, dass Galaxy Cluster zu einem Event
+Es wird überprüft, ob Galaxy Cluster zu einem Event
 hinzugefügt unt entfernt werden können.
 
 ### /T007/ Attribut zu Event hinzufügen
@@ -50,22 +50,22 @@ hinzugefügt unt entfernt werden können.
 
 **1 Testfall**
 
-Es wird überprüft, dass die Galaxy Liste über die
+Es wird überprüft, ob die Galaxy-Liste über die
 Menüleiste erreichbar ist.
 
 ### /T009/ Ein Galaxy Cluster bearbeiten
 
 **2 Testfälle**
 
-Es wird überprüft, dass neue Galaxy Cluster erstellt werden können
+Es wird überprüft, ob neue Galaxy Cluster erstellt werden 
 und erstellte Cluster bearbeitet werden können.
 
 ### /T010/ Tag hinzufügen
 
 **3 Testfälle**
 
-Es wird überprüft, dass neue Tags erstellt werden können
-und, dass die Erstellung abgebrochen werden kann.
+Es wird überprüft, ob neue Tags erstellt werden können
+und ob die Erstellung abgebrochen werden kann.
 
 ### /T011/ Benutzer filtern
 
@@ -73,33 +73,33 @@ und, dass die Erstellung abgebrochen werden kann.
 
 **2 Testfälle**
 
-Es wird überprüft, dass zur Nutzer-Erstellungsseite navigiert werden kann
-und neue Nutzer erstellt erstellt werden können.
+Es wird überprüft, ob zur Nutzer-Erstellungsseite navigiert werden kann
+und neue Nutzer erstellt werden können.
 
 ### /T013/ Benutzer bearbeiten
 
 **2 Testfälle**
 
-Es wird überprüft, dass bestehende Nutzer bearbeitet
+Es wird überprüft, ob bestehende Nutzer bearbeitet
 und gelöscht werden können.
 
 ### /T014/ Authentifizierungsschlüssel hinzufügen
 
 **3 Testfälle**
 
-Es wird überprüft, dass zur Token-Erstellungsseite navigiert werden kann
+Es wird überprüft, ob zur Token-Erstellungsseite navigiert werden kann
 und neue Authentifizierungsschlüssel erstellt werden können.
 
 ### /T015/ Remote Server hinzufügen
 
 **3 Testfälle**
 
-Es wird überprüft, dass zur Server-Erstellungsseite navigiert werden kann,
+Es wird überprüft, ob zur Server-Erstellungsseite navigiert werden kann,
 neue Remote Server erstellt und bestehende gelöscht werden können.
 
 ### /T016/ Workflow bearbeiten
 
 **2 Testfälle**
 
-Es wird überprüft, dass neue Module zu einem Workflow hinzugefügt werden
+Es wird überprüft, ob neue Module zu einem Workflow hinzugefügt werden
 und neue Verbindungen zwischen Modulen erstellt werden können.
