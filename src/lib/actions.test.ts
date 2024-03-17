@@ -109,28 +109,4 @@ describe('svelte actions', () => {
       expect(get(lockModeToggle)).toStrictEqual(false);
     });
   });
-
-  // FIXME: the test below seems to interfere with lockEditMode
-  /*describe('lockViewMode', () => {
-    const element = document.createElement('div');
-    mode.set('view');
-    const { update, destroy } = lockViewMode(element, true)!;
-    it('should initialize', () => {
-      expect(get(lockModeToggle)).toStrictEqual(true);
-    });
-    it('should update', () => {
-      update!(false);
-      expect(get(lockModeToggle)).toStrictEqual(false);
-      update!(true);
-      expect(get(lockModeToggle)).toStrictEqual(true);
-      mode.set('edit');
-      expect(get(lockModeToggle)).toStrictEqual(false);
-      mode.set('view');
-      expect(get(lockModeToggle)).toStrictEqual(true);
-    })
-    it('should destroy', () => {
-      destroy!();
-      expect(get(lockModeToggle)).toStrictEqual(false);
-    });
-  });*/
 });
