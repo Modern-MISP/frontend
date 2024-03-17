@@ -46,11 +46,13 @@ generate_mkdocs:
   image: hub.cert.kit.edu:5000/mkdocs
   script:
     # - source /root/.venv/bin/activate; mkdocs build
-    - cd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build
+    - pushd docs/implementation_report; source /root/.venv/bin/activate; mkdocs build; popd
+    - pushd docs/qa_report; source /root/.venv/bin/activate; mkdocs build; popd
   artifacts:
     paths:
       - site
       - docs/implementation_report/site
+      - docs/qa_report/site
   needs:
     - generate_uml_svg
 
@@ -72,6 +74,7 @@ push_docs:
     # - cp site/pdf/document.pdf docs/
     # - cp docs/generated/uml.svg docs/
     - cp docs/implementation_report/site/pdf/document.pdf docs/implementation_report
+    - cp docs/qa_report/site/pdf/document.pdf docs/qa_report
     - git add docs/
     - git config user.name uml-pipeline
     - git config user.email uml-pipeline@example.com
