@@ -52,6 +52,11 @@ hinzugefügt unt entfernt werden können.
 
 ### /T007/ Attribut zu Event hinzufügen
 
+**1 Testfall**
+
+Es wird überprüft, dass neue Attribute zu Event hinzugefügt werden können.
+Bei jeder Testausführung werden zufällige Werte zugewiesen.
+
 ### /T008/ Galaxy-Liste anzeigen
 
 **1 Testfall**
