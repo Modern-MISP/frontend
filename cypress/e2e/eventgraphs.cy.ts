@@ -6,9 +6,19 @@ describe('eventgraphs', () => {
   it('should add new attribute from Event-Graph', () => {
     const now = Date.now();
     const eventId = 34;
+
+    const randomDistributionId = Math.floor(Math.random() * 5);
+    const distributions = [
+      'Your organization only',
+      'This community only',
+      'Connected communities',
+      'All communities',
+      'Inherit Event'
+    ];
+
     const distribution = {
-      id: '3', // all communities
-      name: 'All communities'
+      id: randomDistributionId, // all communities
+      name: distributions[randomDistributionId]
     };
     const attribute = {
       value: 'test value @ ' + now,
@@ -50,10 +60,27 @@ describe('eventgraphs', () => {
   });
 
   it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
+    const referenceTypes = [
+      'Acquaintance',
+      'Child',
+      'Co-resident',
+      'Co-worker',
+      'Colleague',
+      'Contact',
+      'Crush',
+      'Date',
+      'Friend',
+      'Kin',
+      'Me',
+      'Met',
+      'Muse'
+    ];
+    const randomReferenceTypeIndex = Math.floor(Math.random() * referenceTypes.length);
+
     const eventId = 34;
 
     const reference = {
-      type: 'causes'
+      type: referenceTypes[randomReferenceTypeIndex]
     };
 
     const object = {
