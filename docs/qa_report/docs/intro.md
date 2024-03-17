@@ -6,6 +6,8 @@ automatisiert die Qualität und Zuverlässigkeit unserer Software sicherzustelle
 Hierbei haben wir vor allem auf End-zu-End-Testing mit [Cypress](https://www.cypress.io/) gesetzt,
 um die Interaktion von Nutzern mit dem Frontend zu simulieren und mit erwarteten Ergebnissen zu vergleichen.
 
+## Cypress
+
 Cypress ist Browser-Automatisierungssoftware, die vor allem auf automatische Tests ausgelegt ist.
 Mithilfe von [docker compose](https://docs.docker.com/compose/) und dem
 [misp-docker](https://github.com/MISP/misp-docker)-Projekt haben wir damit eine Docker-Umgebung gebaut,
@@ -26,32 +28,40 @@ könnten wir sicherstellen, dass unser Hauptentwicklungsbranch nur Code und Test
 die alle unsere Anforderungen erfüllen, und waren gezwungen, gefundene Bugs bei fehlschlagenden Tests
 direkt zu verbessern, bevor die Tests in den Hauptentwicklungsbranch aufgenommen werden können.
 
+## Weitere Tools
+
 Neben End-to-End-Tests hatten wir weiterhin, wie auch schon in der Implementierungsphase,
 weitere automatische Tests, die unter anderem Typsicherheit, Code-Formatierung und korrektes Kompilieren
 prüfen.
 
 Dabei haben wir folgende Werkzeuge verwendet:
 
-`eslint`:
+### eslint
+
 Allgemeiner JavaScript Linter, weißt auf häufige Probleme im Code hin.
 Ist im Repository per Continuous Integration (CI) mit dem
 [GitLab Code Quality](https://docs.gitlab.com/ee/ci/testing/code_quality.html) Feature
 verknüpft, um Code-Qualitätsfehler direkt in der Merge Request-Übersicht zu sehen.
 Schlägt bei schwerwiegenden Fehlern in CI fehl.
 
-`prettier`:
+### prettier
+
 Code-Formatierungs-Tool, das in der gesamten Codebase verwendet wird.
 Schlägt in CI fehl, wenn abweichende Formatierung gefunden wird.
 
-`svelte-check`:
+### svelte-check
+
 Prüft, ob Svelte-Code sich korrekt an das erwartete Schema hält, und prüft Typfehler.
 Schlägt bei gefunden Fehlern in CI fehl.
 
-`vite build` (nutzt Svelte & SvelteKit):
-Nutzt [Vite](https://vitejs.dev/) und [SvelteKit](https://kit.svelte.dev/), um das Projekt zu kompilieren.
+### Vite, Svelte & SvelteKit
+
+Verwendet zur automatischen Kompilierung unserer Software.
+Diese wird vom `dev`-Branch aus automatisch zu einer Test-Instanz deployed.
 Schlägt bei Fehlern in CI fehl.
 
-`vitest`:
+### vitest
+
 JavaScript Unit Test Framework.
 Ist im Repository per CI mit dem
 [GitLab Unit Test Report](https://docs.gitlab.com/ee/ci/testing/unit_test_reports.html) Feature

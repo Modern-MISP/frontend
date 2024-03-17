@@ -1,6 +1,17 @@
 # Testfälle
 
+Durch die Nutzung von Cypress als Browser-Automatisierungs-Tool
+lassen sich komplexe Testszenarien mit simulierter Nutzerinteraktion einfach
+darstellen und automatisiert testen.
+
+Im folgenden sind von uns implementierte Testszenarien kurz beschrieben.
+
 ## Pflichtenheft
+
+Priorität war es für uns, die im Pflichtenheft festgelegten
+Testfälle automatisiert überprüfen zu können.
+
+Im folgenden bezieht sich die Nummerierung der Testfälle auf deren äquivalente Nummerierung im Pflichtenheft.
 
 ### /T001/ Einloggen
 
