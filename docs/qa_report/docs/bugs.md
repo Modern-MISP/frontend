@@ -95,3 +95,35 @@ Dieser Fall wurde von uns nicht erkannt, da nur `0` als gesonderter Wert behande
 ### Behebung
 
 Um alle Versionen von MISP zu unterstützen, testen wir nun, ob `object_id` existiert (i.e. nicht `null` oder `undefined` ist), und ob sie nicht `0` ist, um zu entscheiden ob ein Attribut zu einem Objekt gehört.
+
+## Fehlende Mode Sperre bei direkter Navigation
+
+### Symptom
+
+Einige Seiten stehen nur im View Mode zur Verfügung
+(z.B. default Galaxy Cluster).
+Dort soll das umschalten in den Edit Mode deaktiviert sein.
+
+Bei direktem Aufrufen einer solchen Seite im Browser,
+d.h. nicht über Navigation innerhalb der Anwendung,
+wurde der Edit Mode nicht gesperrt.
+
+### Ursache
+
+Es wurden an mehreren Stellen Bedingungen zum Sperren des Mode Toggle
+implementiert.
+Auch bei nicht erfüllter Bedingung wurde der Zustand des Mode Toggle
+weiterhin reaktiv aktualisiert, wenn sich der Mode änderte.
+
+Da bei direktem aufrufen der Seite der Mode neu initialisiert wird,
+wird auch an allen Stellen der Mode Toggle aktualisiert.
+Dabei kommen sich die verschiedenen Stellen in die quere
+und überschreiben gegenseitig ihre Werte.
+
+## Behebung
+
+Nur erfüllte Bedingungen zum Sperren des Mode Toggle
+aktualisieren dessen Zustand bei Änderung des Mode.
+
+Nicht erfüllte Bedingungen aktualisieren den Mode Toggle nur jeweils
+beim Wechsel von erfüllt auf nicht erfüllt.
