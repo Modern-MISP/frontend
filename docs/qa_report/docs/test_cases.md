@@ -26,7 +26,17 @@ der Nutzer richtig weiter geleitet wird.
 
 ### /T002/ Event hinzufügen
 
+**5 Testfälle**
+
+Es wird überprüft, ob neue Events hinzugefügt werden können 
+und der Erstellprozess abgebrochen werden kann.
+
 ### /T003/ Event veröffentlichen
+
+**2 Testfälle**
+
+Es wird überprüft, ob Events veröffentlicht werden können und 
+ihre Veröffentlichung zurückgenommen werden kann.
 
 ### /T004/ Tag zu Event hinzufügen
 
@@ -39,8 +49,8 @@ entfernt werden können.
 
 **2 Testfälle**
 
-Es wird überprüft, dass neue Referenzen (vom Objekt auf ein nicht referenziertes Attribut) im Event-Graphen hinzugefügt werden können
-und dass nicht referenzierte Attribute vom Seitenmenü auf den Graphen gezogen und abgelegt (Drag & Drop) werden können.
+Es wird überprüft, ob neue Referenzen (vom Objekt auf ein nicht referenziertes Attribut) im Event-Graphen hinzugefügt werden können
+und ob nicht referenzierte Attribute vom Seitenmenü auf den Graphen gezogen und abgelegt (Drag & Drop) werden können.
 Bei jeder Testausführung werden zufällige Werte zugewiesen.
 
 ### /T006/ Galaxy zu Event hinzufügen
@@ -51,11 +61,6 @@ Es wird überprüft, ob Galaxy Cluster zu einem Event
 hinzugefügt unt entfernt werden können.
 
 ### /T007/ Attribut zu Event hinzufügen
-
-**1 Testfall**
-
-Es wird überprüft, dass neue Attribute zu Event hinzugefügt werden können.
-Bei jeder Testausführung werden zufällige Werte zugewiesen.
 
 ### /T008/ Galaxy-Liste anzeigen
 
@@ -79,6 +84,8 @@ Es wird überprüft, ob neue Tags erstellt werden können
 und ob die Erstellung abgebrochen werden kann.
 
 ### /T011/ Benutzer filtern
+
+Dieser Testfall wird durch [Event-Filter](#Event-Filter) überdeckt.
 
 ### /T012/ Benutzer hinzufügen
 
@@ -114,3 +121,31 @@ neue Remote Server erstellt und bestehende gelöscht werden können.
 
 Es wird überprüft, ob neue Module zu einem Workflow hinzugefügt werden
 und neue Verbindungen zwischen Modulen erstellt werden können.
+
+## Weitere Testfälle
+
+Während des Testens ergaben sich auch einige weitere Testfälle.
+
+### Event anzeigen 
+
+**2 Testfälle**
+
+Es wird überprüft, ob Events über die Eingabe ihrer URL bzw. Navigation über die Event-Tabelle erreicht werden.
+
+### Event bearbeiten
+
+**5 Testfälle**
+
+Es wird überprüft, ob Events bearbeitet werden können und der Bearbeitungsprozess abgebrochen werden kann.
+
+### Event-Filter 
+
+**5 Testfälle**
+
+Es wird überprüft, ob Event-Filter hinzugefügt und entfernt werden können.
+
+### Einstellungen
+
+**1 Testfall**
+
+Es wird überprüft, ob das Theme gewechselt werden kann.
