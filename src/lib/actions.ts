@@ -96,14 +96,17 @@ export const addContextInfo: Action<HTMLElement, { message: string; condition?: 
  */
 export const lockEditMode: Action<HTMLElement, boolean> = function (node, enabled) {
   let unsubscribe = mode.subscribe((m) => {
-    lockModeToggle.set(enabled && m === 'edit');
+    if (enabled) lockModeToggle.set(m === 'edit');
   });
 
   return {
     update(enabled) {
       unsubscribe();
+      // update lock state
+      lockModeToggle.set(enabled && get(mode) === 'edit');
+      // update subscription
       unsubscribe = mode.subscribe((m) => {
-        lockModeToggle.set(enabled && m === 'edit');
+        if (enabled) lockModeToggle.set(m === 'edit');
       });
     },
     destroy() {
@@ -120,14 +123,17 @@ export const lockEditMode: Action<HTMLElement, boolean> = function (node, enable
  */
 export const lockViewMode: Action<HTMLElement, boolean> = function (node, enabled) {
   let unsubscribe = mode.subscribe((m) => {
-    lockModeToggle.set(enabled && m === 'view');
+    if (enabled) lockModeToggle.set(m === 'view');
   });
 
   return {
     update(enabled) {
       unsubscribe();
+      // update lock state
+      lockModeToggle.set(enabled && get(mode) === 'view');
+      // update subscription
       unsubscribe = mode.subscribe((m) => {
-        lockModeToggle.set(enabled && m === 'view');
+        if (enabled) lockModeToggle.set(m === 'view');
       });
     },
     destroy() {
