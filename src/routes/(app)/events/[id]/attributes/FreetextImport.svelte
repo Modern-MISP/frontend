@@ -9,14 +9,8 @@
   import Info from '$lib/components/info/Info.svelte';
   import Button from '$lib/components/button/Button.svelte';
   import { notifySave } from '$lib/util/notifications.util';
-  import { createEventDispatcher } from 'svelte';
   import { invalidateAll } from '$app/navigation';
-  import CardRow from '$lib/components/card/CardRow.svelte';
-  import Input from '$lib/components/input/Input.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-  import { isEqual } from 'lodash-es';
-
-  const dispatch = createEventDispatcher<{ close: void }>();
 
   type ReturnData = {
     value: string;
@@ -30,113 +24,78 @@
 
   let freetextData: ReturnData[];
 
-  const initialSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
+  const submit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
     e.preventDefault();
     const { freetext } = getFormValues(e);
-    // @ts-expect-error Not in the OpenAPI spec
-    const { data } = await $api.POST('/events/freeTextImport/{eventId}', {
-      params: { path: { eventId: $page.params.id } },
-      body: {
-        Attribute: {
-          event_id: $page.params.id,
-          value: freetext
-        }
-      }
-    });
-
-    freetextData = data as ReturnData[];
-  };
-
-  const finalSubmit: EventHandler<SubmitEvent, HTMLFormElement> = (e) => {
-    e.preventDefault();
-    const { default_comment } = getFormValues(e);
-    notifySave(
+    await notifySave(
       $api
         // @ts-expect-error Not in the OpenAPI spec
-        .POST('/events/saveFreeText/{eventId}', {
+        .POST('/events/freeTextImport/{eventId}', {
           params: { path: { eventId: $page.params.id } },
           body: {
             Attribute: {
-              force: '0',
-              JsonObject: JSON.stringify(freetextData),
-              default_comment
+              event_id: $page.params.id,
+              value: freetext
             }
           }
         })
         .then((resp) => {
           if (resp.error) throw new Error(resp.error.message);
+          freetextData = resp.data as ReturnData[];
+          invalidateAll();
         })
     );
-    invalidateAll();
-    dispatch('close');
   };
 
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
 </script>
 
-<div class="h-full">
+<div class="h-full" id="freetext-import">
   {#if !freetextData}
-    <form on:submit|preventDefault={initialSubmit} class="flex flex-col h-full gap-4">
+    <form on:submit|preventDefault={submit} class="flex flex-col h-full gap-4">
       <textarea
         class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
         name="freetext"
       ></textarea>
-      <Button class="self-end w-min text-sky" suffixIcon="mdi:arrow-right" type="submit"
-        >Continue</Button
-      >
+      <Button class="self-end w-min text-sky" suffixIcon="mdi:arrow-right" type="submit">
+        Submit
+      </Button>
     </form>
   {:else}
-    <form on:submit={finalSubmit} class="flex flex-col gap-4">
-      <ComplexTableLayout
-        header={[
-          col({
-            label: 'Value',
-            value: (x) => ({
-              display: Pill,
-              props: {
-                text: x.value
-              }
-            }),
-            icon: 'mdi:circle',
-            key: 'value'
+    These attributes have been added:
+
+    <ComplexTableLayout
+      header={[
+        col({
+          label: 'Value',
+          value: (x) => ({
+            display: Pill,
+            props: {
+              text: x.value
+            }
           }),
-          col({
-            icon: 'mdi:circle',
-            key: 'category',
-            label: 'Category',
-            value: (x) => ({
-              display: Pill,
-              props: {
-                text: x.category
-              }
-            })
-          }),
-          col({
-            icon: '',
-            key: 'type',
-            label: 'Type',
-            value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
+          icon: 'mdi:circle',
+          key: 'value'
+        }),
+        col({
+          icon: 'mdi:circle',
+          key: 'category',
+          label: 'Category',
+          value: (x) => ({
+            display: Pill,
+            props: {
+              text: x.category
+            }
           })
-        ]}
-        tableData={freetextData}
-        editActions={[
-          {
-            icon: 'mdi:delete',
-            label: 'Delete',
-            action: (x) =>
-              x.forEach((row) => (freetextData = freetextData.filter((d) => !isEqual(row, d))))
-          }
-        ]}
-      ></ComplexTableLayout>
-      <CardRow>
-        <span>Default comment</span>
-        <Input name="default_comment" />
-      </CardRow>
-      <Button
-        class="self-end w-min text-green "
-        suffixIcon="material-symbols:save-outline"
-        type="submit">Submit</Button
-      >
-    </form>
+        }),
+        col({
+          icon: '',
+          key: 'type',
+          label: 'Type',
+          value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
+        })
+      ]}
+      tableData={freetextData}
+    ></ComplexTableLayout>
   {/if}
 </div>
