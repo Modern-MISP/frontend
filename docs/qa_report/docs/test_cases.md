@@ -62,6 +62,11 @@ hinzugefügt unt entfernt werden können.
 
 ### /T007/ Attribut zu Event hinzufügen
 
+**1 Testfall**
+
+Es wird vom Event-Graphen aus überprüft, ob dort über die
+Schaltfläche "Add attribute" ein Attribut zu dem Event hinzugefügt werden kann.
+
 ### /T008/ Galaxy-Liste anzeigen
 
 **1 Testfall**
