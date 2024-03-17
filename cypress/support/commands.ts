@@ -44,9 +44,6 @@ Cypress.Commands.add('toggleMode', () => {
         .should('not.eq', text);
     });
 });
-
-import '@4tw/cypress-drag-drop';
-
 //
 //
 // -- This is a child command --
