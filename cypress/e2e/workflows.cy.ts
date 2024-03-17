@@ -3,6 +3,21 @@ beforeEach(() => {
 });
 
 describe('workflows', () => {
+  // Enable "Attach warninglists" module
+  before(() => {
+    cy.defaultLogin();
+
+    cy.visit('/workflows/modules');
+
+    cy.url().should('include', 'modules');
+
+    cy.toggleMode();
+
+    cy.get('tbody > tr:nth-child(5)').click();
+
+    cy.get('button:contains(Enable):not(:contains(Enabled))').should('be.enabled').click();
+  });
+
   it('can add module', () => {
     cy.visit('/workflows/1');
     cy.get('.svelte-flow__node:contains("Attach warninglist")').should('not.exist');

@@ -28,9 +28,20 @@ Cypress.Commands.add('defaultLogin', () => {
 });
 
 Cypress.Commands.add('toggleMode', () => {
-  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first')
-    .should('exist')
-    .click();
+  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first').as(
+    'toggleModeButton'
+  );
+
+  cy.get('@toggleModeButton')
+    .find('span:contains("mode")')
+    .invoke('text')
+    .then((text) => {
+      cy.get('@toggleModeButton').click();
+      cy.get('@toggleModeButton')
+        .find('span:contains("mode")')
+        .invoke('text')
+        .should('not.eq', text);
+    });
 });
 //
 //
