@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 describe('Freetext import tool', () => {
-  it('', () => {
+  it('should return as many attributes as were entered', () => {
     cy.visit('/events/1/attributes');
 
     cy.url().should('include', 'attributes');
