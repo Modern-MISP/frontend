@@ -1,5 +1,6 @@
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
+  import { lockEditMode } from '$lib/actions';
   import { api } from '$lib/api/index.js';
   import type { components } from '$lib/api/misp.js';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
@@ -198,6 +199,7 @@
   ];
 </script>
 
+<svelte:window use:lockEditMode={attributeReplacement || freetextImport} />
 <ComplexTableLayout
   {tableData}
   {header}
