@@ -53,6 +53,8 @@ generate_mkdocs:
       - site
       - docs/implementation_report/site
       - docs/qa_report/site
+  needs:
+    - generate_uml_svg
 
 push_docs:
   stage: push_docs
@@ -78,3 +80,5 @@ push_docs:
     - git config user.email uml-pipeline@example.com
     - git commit -m "Auto-generated docs for '${CI_COMMIT_TITLE}'" || true # This let's the commit fail in case there was no change without failing the pipeline
     - git push -o ci.skip origin HEAD:${CI_COMMIT_BRANCH} # Try to push from detached HEAD because idk what's happening anymore
+  needs:
+    - generate_mkdocs

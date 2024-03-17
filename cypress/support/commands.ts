@@ -19,6 +19,7 @@ Cypress.Commands.add('login', (token: string) => {
     cy.visit('/login');
     cy.get('input[name="token"]').type(token);
     cy.get('button').click();
+    cy.wait(100);
     cy.url().should('include', '/event');
   });
 });
@@ -27,6 +28,11 @@ Cypress.Commands.add('defaultLogin', () => {
   cy.login(Cypress.env('adminToken'));
 });
 
+Cypress.Commands.add('toggleMode', () => {
+  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first')
+    .should('exist')
+    .click();
+});
 //
 //
 // -- This is a child command --

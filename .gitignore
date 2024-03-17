@@ -11,3 +11,7 @@ vite.config.ts.timestamp-*
 /coverage
 /report.xml
 cypress.env.json
+/cypress/screenshots
+/cypress/videos
+/cypress/downloads
+reports

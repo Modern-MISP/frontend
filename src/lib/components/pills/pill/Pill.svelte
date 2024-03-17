@@ -44,6 +44,7 @@
 
 <div
   class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}"
+  id="pill"
   {style}
   {title}
 >
