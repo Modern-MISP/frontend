@@ -24,4 +24,12 @@
   
  -->
 
-<Pill {text} class="text-white font-bold px-2 {isTrue ? '!bg-green' : '!bg-red'} {clazz}" />
+<Pill
+  class="text-white font-bold !w-16 justify-center items-center px-2 {isTrue
+    ? '!bg-green'
+    : '!bg-red'} {clazz}"
+>
+  <span class="w-full text-center">
+    {text}
+  </span></Pill
+>

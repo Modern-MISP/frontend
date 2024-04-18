@@ -1,0 +1,8 @@
+node_modules
+build
+.svelte-kit
+misp-docker
+coverage
+.vscode
+openapi
+.env

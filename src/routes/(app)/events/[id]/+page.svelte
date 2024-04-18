@@ -1,24 +1,27 @@
 <script lang="ts">
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
-  import { mode } from '$lib/stores';
-  import type { PageData } from './$types';
-  import EditMode from './EditMode.svelte';
-
-  import AddTagForm from '$lib/components/addTagForm/AddTagForm.svelte';
-  import EventTags from './EventTags.svelte';
-  import { editHeader, viewHeader } from './formHeaders';
-  import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-
+  import { page } from '$app/stores';
   import Card from '$lib/components/card/Card.svelte';
-  import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+  import CardHeading from '$lib/components/card/CardHeading.svelte';
+  import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
+  import type { PickerPill } from '$lib/models/Picker.interface';
+  import CreateTag from '../../tags/CreateTag.svelte';
+  import type { PageData } from './$types';
+  import EventInfo from './_components/EventInfo.svelte';
+  import type { EventState } from './_components/EventState.interface';
+  import EventTags from '$lib/components/pills/pillCollection/TagCollection.svelte';
+  import { addTags, deleteTags } from './_components/event.util';
 
   /**
    * Page data containing the data of the event with the id in the url
    */
   export let data: PageData;
 
-  let addTag = false;
+  let state: EventState;
+
+  /**
+   * The currently selected pills
+   */
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 </script>
 
 <!-- 
@@ -32,52 +35,34 @@
   The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
  -->
 
-<div class="h-full overflow-auto">
-  <EditMode>
-    <div class="grid gap-2 g lg:flex-nowrap">
-      {#if addTag}
-        <AddTagForm />
-      {:else}
-        <section class="h-full">
-          <DynCard data={data.event} header={$mode === 'view' ? viewHeader : editHeader} />
-        </section>
-      {/if}
-      <section class="h-full">
-        <EventTags bind:addTag {data} />
-      </section>
+<EventInfo {data} bind:state>
+  <svelte:fragment slot="add">
+    <AddTagForm
+      bind:selection
+      on:createTag={() => (state = 'create')}
+      on:close={() => (state = 'info')}
+    />
+  </svelte:fragment>
 
-      <section class="h-full">
-        <Card class="h-full ">
-          {#each data.event?.Galaxy ?? [] as galaxy}
-            <div>
-              <h1 class="text-xl text-center text-sky text-bold">{galaxy.name}</h1>
-              <hr />
-              <br />
-              <PillCollection
-                pills={galaxy.GalaxyCluster
-                  ? galaxy.GalaxyCluster.map((y) => ({
-                      icon: y.local ? 'mdi:cloud-off-outline' : 'mdi:earth',
-                      label: y.relationship_type ? y.relationship_type : undefined,
-                      text: y.value
-                    }))
-                  : []}
-              />
-            </div>
-          {/each}
-        </Card>
-      </section>
-    </div>
-  </EditMode>
-  <section>
-    <h1>Attributes</h1>
-    <DynTable data={[]} header={[]} />
-  </section>
-
-  <EventGraph event={data.event} />
-</div>
-
-<style>
-  .g {
-    grid: 50rem 50rem / 1fr 1fr;
-  }
-</style>
+  <svelte:fragment slot="create">
+    <Card>
+      <CardHeading>Create a Tag</CardHeading>
+      <CreateTag on:close={() => (state = 'add')}></CreateTag>
+    </Card>
+  </svelte:fragment>
+  <Card class="h-full">
+    <CardHeading>Tags</CardHeading>
+    <EventTags
+      on:close={() => (state = 'info')}
+      on:open={() => (state = 'add')}
+      on:save={({ detail }) => {
+        // @ts-expect-error svelte error. Does not detect the generic correctly.
+        addTags(detail.map((x) => ({ ...x, eventId: $page.params.id })));
+      }}
+      on:delete={({ detail }) =>
+        deleteTags(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+      tags={data.event.Tag ?? []}
+      bind:selection
+    />
+  </Card>
+</EventInfo>

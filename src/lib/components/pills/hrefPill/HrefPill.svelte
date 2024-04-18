@@ -1,5 +1,7 @@
 <script lang="ts">
+  import type { HTMLAttributeAnchorTarget } from 'svelte/elements';
   import Pill from '../pill/Pill.svelte';
+  import type { ComponentProps } from 'svelte';
 
   /**
    * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
@@ -17,14 +19,33 @@
    * The target URL of the pill, which will be navigated to when the pill is clicked.
    */
   export let href: string;
+  /**
+   * The target browsing context i.e. where to open the URL.
+   */
+  export let target: HTMLAttributeAnchorTarget | undefined = undefined;
+
+  /**
+   * Some style overrides.
+   */
+  export let style = '';
+
+  /**
+   * Whether to force the text to be blue.
+   */
+  export let enforceTextColor = true;
+
+  /**
+   * Action of this pill
+   */
+  export let action: ComponentProps<Pill>['action'] = undefined;
 </script>
 
 <!-- 
   @component
-  A pill component that acts as a link. This pills text will be blue:
+  A pill component that acts as a link. This pill's text will be blue:
 
  -->
 
-<a {href}>
-  <Pill {label} {text} {icon} class="!text-blue-400" />
-</a>
+<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? '!text-blue-400' : ''}>
+  <a {href} {target}>{text}</a>
+</Pill>

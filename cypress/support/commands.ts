@@ -10,8 +10,40 @@
 // ***********************************************
 //
 //
+// Cypress.Commands.add("login", () => {
+//     cy.window().invoke("localStorage").set
+// })
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (token: string) => {
+  cy.session(token, () => {
+    cy.visit('/login');
+    cy.get('input[name="token"]').type(token);
+    cy.get('button').click();
+    cy.wait(100);
+    cy.url().should('include', '/event');
+  });
+});
+
+Cypress.Commands.add('defaultLogin', () => {
+  cy.login(Cypress.env('adminToken'));
+});
+
+Cypress.Commands.add('toggleMode', () => {
+  cy.get('main > div > div > div:first-child label:has(input[type="checkbox"]):first').as(
+    'toggleModeButton'
+  );
+
+  cy.get('@toggleModeButton')
+    .find('span:contains("mode")')
+    .invoke('text')
+    .then((text) => {
+      cy.get('@toggleModeButton').click();
+      cy.get('@toggleModeButton')
+        .find('span:contains("mode")')
+        .invoke('text')
+        .should('not.eq', text);
+    });
+});
 //
 //
 // -- This is a child command --
@@ -25,13 +57,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+// Cypress drag and drop
+// Docs: https://github.com/4teamwork/cypress-drag-drop
+import '@4tw/cypress-drag-drop';

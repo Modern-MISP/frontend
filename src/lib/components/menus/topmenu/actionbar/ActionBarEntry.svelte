@@ -2,6 +2,7 @@
   import Icon from '@iconify/svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type ActionBar from './ActionBar.svelte';
+  import ActionBarEntryTemplate from './ActionBarEntryTemplate.svelte';
 
   /**
    * The label of this ActionBar entry.
@@ -12,6 +13,16 @@
    * The icon of this ActionBar entry.
    */
   export let icon: string;
+
+  /** When true, the action cannot be clicked. */
+  export let disabled: boolean = false;
+
+  let clazz = '';
+
+  /**
+   * The class of this ActionBar entry.
+   */
+  export { clazz as class };
 </script>
 
 <!--
@@ -20,7 +31,7 @@
   
 -->
 
-<div class="flex flex-col items-center gap-1">
+<ActionBarEntryTemplate {disabled} class={clazz}>
   <Icon {icon} class="w-6 h-6" />
-  <span class="text-xs">{label}</span>
-</div>
+  <span slot="label">{label}</span>
+</ActionBarEntryTemplate>

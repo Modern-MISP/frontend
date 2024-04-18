@@ -2,6 +2,7 @@
   import Icon from '@iconify/svelte';
   import { createEventDispatcher } from 'svelte';
   import type { HTMLInputTypeAttribute } from 'svelte/elements';
+  import { v4 as uuidv4 } from 'uuid';
 
   /**
    * Placeholder of the input.
@@ -10,7 +11,7 @@
   /**
    * The name of the input. Used for the label and for form submission.
    */
-  export let name = 'default';
+  export let name: string | undefined = undefined;
 
   /**
    * The current value of the input.
@@ -28,13 +29,40 @@
   export let type: HTMLInputTypeAttribute = 'text';
 
   /**
+   * When true, the input is disabled an cannot be changed.
+   */
+  export let disabled: boolean = false;
+
+  /**
+   * Whether the input is required.
+   */
+  export let required: boolean = false;
+
+  /**
    * Additional classes to be applied.
    */
   export { clazz as class };
 
+  /**
+   * The title to apply to the input.
+   */
+  export let title: string | undefined = undefined;
+
   let clazz = '';
 
-  const dispatch = createEventDispatcher<{ value: string }>();
+  const dispatch = createEventDispatcher<{ value: string; formValue: Record<string, string> }>();
+
+  const id = uuidv4();
+
+  let inputElement: HTMLInputElement;
+
+  /**
+   * Sets the inner input's value.
+   * @param value The value to use.
+   */
+  export function setValue(value: string) {
+    inputElement.value = value;
+  }
 </script>
 
 <!-- 
@@ -47,29 +75,40 @@
   You can also set the placeholder prop, if you want to set an placeholder. 
  -->
 
-<label class="relative flex items-center gap-2 px-2 py-2 bg-crust text-text rounded-lg {clazz}">
+<label
+  class="relative flex items-center gap-2 px-4 py-2 text-text rounded-lg bg-surface1 cursor-text {clazz}"
+  class:!bg-overlay0={disabled}
+  class:!cursor-not-allowed={disabled}
+  {title}
+>
   <slot name="icon">
     {#if icon}
       <Icon {icon} />
     {/if}
   </slot>
   <input
-    on:input={({ currentTarget }) => dispatch('value', currentTarget.value)}
+    on:input={({ currentTarget }) => {
+      if (name) dispatch('formValue', { [name]: currentTarget.value });
+      dispatch('value', currentTarget.value);
+    }}
     on:blur
     on:focus
-    id={name}
+    {id}
     {placeholder}
     {name}
     {type}
     {value}
-    class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer"
+    {disabled}
+    {required}
+    class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
+    bind:this={inputElement}
   />
-  {#if placeholder}
+  {#if placeholder && (!disabled || !value)}
     <label
-      for={name}
-      class="rounded-md absolute bg-inherit px-2 -top-3 left-2 text-sm transition-all
-			peer-placeholder-shown:text-text peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
-			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0"
+      for={id}
+      class="rounded-md absolute bg-inherit -top-3 left-2 px-2 text-sm transition-all
+			peer-placeholder-shown:top-[50%] peer-placeholder-shown:-translate-y-1/2
+			peer-focus:-top-3 peer-focus:text-sm peer-focus:text-inherit peer-focus:left-2 peer-focus-within:translate-y-0 cursor-inherit"
       class:peer-placeholder-shown:left-9={$$slots.icon || icon}
     >
       {placeholder}</label

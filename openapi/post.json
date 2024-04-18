@@ -4,9 +4,7 @@
       "summary": "add Attributes",
       "description": "POST a MISP Attribute JSON to this API to create an Attribute.",
       "operationId": "addAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -54,10 +52,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value",
-                "type"
-              ]
+              "required": ["value", "type"]
             }
           }
         }
@@ -81,9 +76,7 @@
       "summary": "edit Attributes",
       "description": "POST a MISP Attribute JSON to this API to update an Attribute. If the timestamp is set, it has to be newer than the existing Attribute.",
       "operationId": "editAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -155,9 +148,7 @@
       "summary": "deleteSelected Attributes",
       "description": "POST a list of attribute IDs in JSON format to this API to delete the given attributes. This API also expects an event ID passed via the URL or via the event_id key. The id key also takes 'all' as a parameter for a wildcard search to mass delete attributes. If you want the function to also hard-delete already soft-deleted attributes, pass the allow_hard_delete key.",
       "operationId": "deleteSelectedAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -175,9 +166,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "id"
-              ]
+              "required": ["id"]
             }
           }
         }
@@ -201,9 +190,7 @@
       "summary": "restSearch Attributes",
       "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
       "operationId": "restSearchAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -311,9 +298,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "returnFormat"
-              ]
+              "required": ["returnFormat"]
             }
           }
         }
@@ -327,9 +312,7 @@
       "summary": "addTag Attributes",
       "description": "Add a tag or a tag collection to an attribute.",
       "operationId": "addTagAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -344,10 +327,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "attribute",
-                "tag"
-              ]
+              "required": ["attribute", "tag"]
             }
           }
         }
@@ -361,9 +341,7 @@
       "summary": "removeTag Attributes",
       "description": "Remove a tag from an attribute.",
       "operationId": "removeTagAttributes",
-      "tags": [
-        "attributes"
-      ],
+      "tags": ["attributes"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -378,10 +356,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "attribute",
-                "tag"
-              ]
+              "required": ["attribute", "tag"]
             }
           }
         }
@@ -395,9 +370,7 @@
       "summary": "requestAccess Communities",
       "description": "POST a request object describing yourself and your organisation to request access to the desired community.",
       "operationId": "requestAccessCommunities",
-      "tags": [
-        "communities"
-      ],
+      "tags": ["communities"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -457,9 +430,7 @@
       "summary": "add Events",
       "description": "POST a MISP Event JSON to this API to create an Event. Contained objects can also be included (such as attributes, objects, tags, etc).",
       "operationId": "addEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -507,9 +478,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "info"
-              ]
+              "required": ["info"]
             }
           }
         }
@@ -523,9 +492,7 @@
       "summary": "edit Events",
       "description": "POST a MISP Event JSON to this API to update an Event. Contained objects can also be included (such as attributes, objects, tags, etc). If the timestamp is set, it has to be newer than the existing Attribute.",
       "operationId": "editEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -597,9 +564,7 @@
       "summary": "index Events",
       "description": "POST a JSON filter object to this API to get the meta-data about matching events.",
       "operationId": "indexEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -682,9 +647,7 @@
       "summary": "restSearch Events",
       "description": "Search MISP using a list of filter parameters and return the data in the selected format. The search is available on an event and an attribute level, just select the scope via the URL (/events/restSearch vs /attributes/restSearch). Besides the parameters listed, other, format specific ones can be passed along (for example: requested_attributes and includeContext for the CSV export). This API allows pagination via the page and limit parameters.",
       "operationId": "restSearchEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -771,9 +734,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "returnFormat"
-              ]
+              "required": ["returnFormat"]
             }
           }
         }
@@ -787,9 +748,7 @@
       "summary": "addTag Events",
       "description": "Add a tag or a tag collection to an event.",
       "operationId": "addTagEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -804,10 +763,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "event",
-                "tag"
-              ]
+              "required": ["event", "tag"]
             }
           }
         }
@@ -821,9 +777,7 @@
       "summary": "removeTag Events",
       "description": "Remove a tag from an event.",
       "operationId": "removeTagEvents",
-      "tags": [
-        "events"
-      ],
+      "tags": ["events"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -838,10 +792,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "event",
-                "tag"
-              ]
+              "required": ["event", "tag"]
             }
           }
         }
@@ -855,9 +806,7 @@
       "summary": "add Eventgraph",
       "description": "POST a network in JSON format to this API to to keep an history of it",
       "operationId": "addEventgraph",
-      "tags": [
-        "eventgraph"
-      ],
+      "tags": ["eventgraph"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -875,10 +824,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "event_id",
-                "network_json"
-              ]
+              "required": ["event_id", "network_json"]
             }
           }
         }
@@ -892,9 +838,7 @@
       "summary": "add Eventreports",
       "description": "POST a report in JSON format to create a report for the provided event",
       "operationId": "addEventreports",
-      "tags": [
-        "eventreports"
-      ],
+      "tags": ["eventreports"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -912,9 +856,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -928,9 +870,7 @@
       "summary": "edit Eventreports",
       "description": "POST a report in JSON format to update the report",
       "operationId": "editEventreports",
-      "tags": [
-        "eventreports"
-      ],
+      "tags": ["eventreports"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -962,9 +902,7 @@
       "summary": "add Feeds",
       "description": "POST a MISP Feed descriptor JSON to this API to add a Feed.",
       "operationId": "addFeeds",
-      "tags": [
-        "feeds"
-      ],
+      "tags": ["feeds"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1039,13 +977,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "source_format",
-                "url",
-                "name",
-                "input_source",
-                "provider"
-              ]
+              "required": ["source_format", "url", "name", "input_source", "provider"]
             }
           }
         }
@@ -1059,9 +991,7 @@
       "summary": "edit Feeds",
       "description": "POST a MISP Feed descriptor JSON to this API to edit a Feed.",
       "operationId": "editFeeds",
-      "tags": [
-        "feeds"
-      ],
+      "tags": ["feeds"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1160,9 +1090,7 @@
       "summary": "previewIndex Feeds",
       "description": "Sending a GET request to this endpoint will show the parsed feed in JSON format.",
       "operationId": "previewIndexFeeds",
-      "tags": [
-        "feeds"
-      ],
+      "tags": ["feeds"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1194,9 +1122,7 @@
       "summary": "add Galaxyclusters",
       "description": "POST a MISP GalaxyCluster JSON to this API to create a GalaxyCluster. Contained objects can also be included (such as relations, elements, tags, etc).",
       "operationId": "addGalaxyclusters",
-      "tags": [
-        "galaxyclusters"
-      ],
+      "tags": ["galaxyclusters"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1235,10 +1161,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value",
-                "description"
-              ]
+              "required": ["value", "description"]
             }
           }
         }
@@ -1262,9 +1185,7 @@
       "summary": "edit Galaxyclusters",
       "description": "POST a MISP GalaxyCluster JSON to this API to edit a GalaxyCluster",
       "operationId": "editGalaxyclusters",
-      "tags": [
-        "galaxyclusters"
-      ],
+      "tags": ["galaxyclusters"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1300,10 +1221,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "value",
-                "description"
-              ]
+              "required": ["value", "description"]
             }
           }
         }
@@ -1327,9 +1245,7 @@
       "summary": "restSearch Galaxyclusters",
       "description": "Search MISP using a list of filter parameters and return the data in the selected format. This API allows pagination via the page and limit parameters.",
       "operationId": "restSearchGalaxyclusters",
-      "tags": [
-        "galaxyclusters"
-      ],
+      "tags": ["galaxyclusters"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1403,9 +1319,7 @@
       "summary": "add Galaxyclusterrelations",
       "description": "POST a MISP GalaxyClusterRelation JSON to this API to create a GalaxyCluster relation. Contained objects can also be included (such as tags).",
       "operationId": "addGalaxyclusterrelations",
-      "tags": [
-        "galaxyclusterrelations"
-      ],
+      "tags": ["galaxyclusterrelations"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1450,9 +1364,7 @@
       "summary": "edit Galaxyclusterrelations",
       "description": "POST a MISP GalaxyClusterRelation JSON to this API to edit a GalaxyCluster relation. Contained objects can also be included (such as tags).",
       "operationId": "editGalaxyclusterrelations",
-      "tags": [
-        "galaxyclusterrelations"
-      ],
+      "tags": ["galaxyclusterrelations"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1507,9 +1419,7 @@
       "summary": "admin_index Logs",
       "description": "POST a filter object to receive a JSON with the log entries matching the query. A simple get request will return the entire DB. You can use the filter parameters as url parameters with a GET request such as: https://path.to.my.misp/admin/logs/page:1/limit:200 - to run substring queries simply append/prepend/encapsulate the search term with %. All restSearch rules apply.",
       "operationId": "admin_indexLogs",
-      "tags": [
-        "logs"
-      ],
+      "tags": ["logs"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1568,9 +1478,7 @@
       "summary": "event_index Logs",
       "description": "Simply run a get request on this endpoint to get the relevant log entries for a given event. This functionality is open to any user having access to a given event.",
       "operationId": "event_indexLogs",
-      "tags": [
-        "logs"
-      ],
+      "tags": ["logs"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1592,9 +1500,7 @@
       "summary": "admin_add Organisations",
       "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
       "operationId": "admin_addOrganisations",
-      "tags": [
-        "organisations"
-      ],
+      "tags": ["organisations"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1627,9 +1533,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -1643,9 +1547,7 @@
       "summary": "admin_edit Organisations",
       "description": "POST an Organisation object in JSON format to this API to create a new organsiation.",
       "operationId": "admin_editOrganisations",
-      "tags": [
-        "organisations"
-      ],
+      "tags": ["organisations"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1678,9 +1580,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -1694,9 +1594,7 @@
       "summary": "admin_add Roles",
       "description": "POST a Role object in JSON format to this API to create a new role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
       "operationId": "admin_addRoles",
-      "tags": [
-        "roles"
-      ],
+      "tags": ["roles"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1753,9 +1651,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -1769,9 +1665,7 @@
       "summary": "admin_edit Roles",
       "description": "POST a Role object in JSON format to this API to edit a role. 'permission' sets the data access permission (0 => read only, 1 => add/edit own, 2 => add/edit org, 3 => publish)",
       "operationId": "admin_editRoles",
-      "tags": [
-        "roles"
-      ],
+      "tags": ["roles"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1828,9 +1722,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -1844,9 +1736,7 @@
       "summary": "add Servers",
       "description": "POST an Server object in JSON format to this API to add a server.",
       "operationId": "addServers",
-      "tags": [
-        "servers"
-      ],
+      "tags": ["servers"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1891,12 +1781,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "url",
-                "name",
-                "remote_org_id",
-                "authkey"
-              ]
+              "required": ["url", "name", "remote_org_id", "authkey"]
             }
           }
         }
@@ -1910,9 +1795,7 @@
       "summary": "edit Servers",
       "description": "POST an Server object in JSON format to this API to edit a server.",
       "operationId": "editServers",
-      "tags": [
-        "servers"
-      ],
+      "tags": ["servers"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1971,9 +1854,7 @@
       "summary": "serverSettings Servers",
       "description": "Send a GET request to this endpoint to get a full diagnostic along with all currently set settings of the current instance. This will also include the worker status",
       "operationId": "serverSettingsServers",
-      "tags": [
-        "servers"
-      ],
+      "tags": ["servers"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -1995,9 +1876,7 @@
       "summary": "restSearch Sightings",
       "description": "Search MISP sightings using a list of filter parameters and return the data in the JSON format. The search is available on an event, attribute or instance level, just select the scope via the URL (/sighting/restSearch/event vs /sighting/restSearch/attribute vs /sighting/restSearch/). id or uuid MUST be provided if context is set.",
       "operationId": "restSearchSightings",
-      "tags": [
-        "sightings"
-      ],
+      "tags": ["sightings"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2042,9 +1921,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "returnFormat"
-              ]
+              "required": ["returnFormat"]
             }
           }
         }
@@ -2068,9 +1945,7 @@
       "summary": "add Sharinggroups",
       "description": "POST a Sharing Group object in JSON format to this API to add a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
       "operationId": "addSharinggroups",
-      "tags": [
-        "sharinggroups"
-      ],
+      "tags": ["sharinggroups"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2106,10 +1981,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name",
-                "releasability"
-              ]
+              "required": ["name", "releasability"]
             }
           }
         }
@@ -2123,9 +1995,7 @@
       "summary": "edit Sharinggroups",
       "description": "POST a Sharing Group object in JSON format to this API to edit a Sharing Group. The API will also try to capture attached organisations and servers if applicable to the current user.",
       "operationId": "editSharinggroups",
-      "tags": [
-        "sharinggroups"
-      ],
+      "tags": ["sharinggroups"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2175,9 +2045,7 @@
       "summary": "add Tags",
       "description": "POST a Tag object in JSON format to this API to create a new tag.",
       "operationId": "addTags",
-      "tags": [
-        "tags"
-      ],
+      "tags": ["tags"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2204,9 +2072,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name"
-              ]
+              "required": ["name"]
             }
           }
         }
@@ -2220,9 +2086,7 @@
       "summary": "edit Tags",
       "description": "POST or PUT a Tag object in JSON format to this API to create a edit an existing tag.",
       "operationId": "editTags",
-      "tags": [
-        "tags"
-      ],
+      "tags": ["tags"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2273,9 +2137,7 @@
       "summary": "removeTagFromObject Tags",
       "description": "Untag an event or attribute. Tag can be the id or the name.",
       "operationId": "removeTagFromObjectTags",
-      "tags": [
-        "tags"
-      ],
+      "tags": ["tags"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2290,10 +2152,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "uuid",
-                "tag"
-              ]
+              "required": ["uuid", "tag"]
             }
           }
         }
@@ -2307,9 +2166,7 @@
       "summary": "attachTagToObject Tags",
       "description": "Attach a Tag to an object, refenced by an UUID. Tag can either be a tag id or a tag name.",
       "operationId": "attachTagToObjectTags",
-      "tags": [
-        "tags"
-      ],
+      "tags": ["tags"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2324,10 +2181,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "uuid",
-                "tag"
-              ]
+              "required": ["uuid", "tag"]
             }
           }
         }
@@ -2341,9 +2195,7 @@
       "summary": "search Tags",
       "description": "GET or POST the tags to search for as a raw string or as a list. The strict_tag_name_only parameter only returns tags matching exactly the tag name (thus, skipping synonyms and cluster's value)",
       "operationId": "searchTags",
-      "tags": [
-        "tags"
-      ],
+      "tags": ["tags"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2375,9 +2227,7 @@
       "summary": "admin_add Users",
       "description": "POST a User object in JSON format to this API to create a new user.",
       "operationId": "admin_addUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2437,11 +2287,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "email",
-                "org_id",
-                "role_id"
-              ]
+              "required": ["email", "org_id", "role_id"]
             }
           }
         }
@@ -2455,9 +2301,7 @@
       "summary": "admin_edit Users",
       "description": "POST a User object in JSON format to this API to edit a user.",
       "operationId": "admin_editUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2531,9 +2375,7 @@
       "summary": "admin_quickEmail Users",
       "description": "POST a body and a subject in a JSON to send an e-mail through MISP to the user ID given in the URL",
       "operationId": "admin_quickEmailUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2548,10 +2390,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "subject",
-                "body"
-              ]
+              "required": ["subject", "body"]
             }
           }
         }
@@ -2565,9 +2404,7 @@
       "summary": "change_pw Users",
       "description": "POST a password via a JSON object containing the password key to reset the given user's password.",
       "operationId": "change_pwUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2579,9 +2416,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "password"
-              ]
+              "required": ["password"]
             }
           }
         }
@@ -2595,9 +2430,7 @@
       "summary": "statistics Users",
       "description": "Simply GET the url endpoint to view the API output of the statistics API. Additional statistics are available via the following tab-options similar to the UI: data, orgs, users, tags, attributehistogram, sightings, attackMatrix",
       "operationId": "statisticsUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2629,9 +2462,7 @@
       "summary": "totp_delete Users",
       "description": "Simply do a DELETE or POST request to the url",
       "operationId": "totp_deleteUsers",
-      "tags": [
-        "users"
-      ],
+      "tags": ["users"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2663,9 +2494,7 @@
       "summary": "setSetting Usersettings",
       "description": "POST a User setting object in JSON format to this API to create a new setting or update the equivalent existing setting. Admins/site admins can specify a user ID besides their own.",
       "operationId": "setSettingUsersettings",
-      "tags": [
-        "usersettings"
-      ],
+      "tags": ["usersettings"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2683,10 +2512,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "setting",
-                "value"
-              ]
+              "required": ["setting", "value"]
             }
           }
         }
@@ -2700,9 +2526,7 @@
       "summary": "delete Usersettings",
       "description": "POST or DELETE to this API to delete an existing setting.",
       "operationId": "deleteUsersettings",
-      "tags": [
-        "usersettings"
-      ],
+      "tags": ["usersettings"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2734,9 +2558,7 @@
       "summary": "checkValue Warninglists",
       "description": "POST a JSON list with value(s) to check against the warninglists to get a JSON dictionary as a response with any hits, if there are any (with the key being the passed value triggering a warning).",
       "operationId": "checkValueWarninglists",
-      "tags": [
-        "warninglists"
-      ],
+      "tags": ["warninglists"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2748,9 +2570,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "[]"
-              ]
+              "required": ["[]"]
             }
           }
         }
@@ -2764,9 +2584,7 @@
       "summary": "toggleEnable Warninglists",
       "description": "POST a json object with a single or a list of warninglist IDsIDs, or alternatively a (list of) substring(s) that match the names of warninglist(s) to toggle whether they're enabled or disabled. Specify the optional enabled boolean flag if you would like to enforce the outcome state. Not setting this flag will just toggle the current state.",
       "operationId": "toggleEnableWarninglists",
-      "tags": [
-        "warninglists"
-      ],
+      "tags": ["warninglists"],
       "parameters": [],
       "requestBody": {
         "content": {
@@ -2784,9 +2602,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "id"
-              ]
+              "required": ["id"]
             }
           }
         }

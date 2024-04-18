@@ -1,31 +1,16 @@
 <script lang="ts">
-  import { actionBar } from '$lib/actions';
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import type { ActionBarEntry } from '$lib/models/ActionBarEntry.interface';
+  import EnableFilter from './EnableFilter.svelte';
 
-  import type { PageData } from './$types';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   /**
    * The data that will be displayed on this page
    */
-  export let data: PageData;
+  export let data;
 
-  const { tableData, header } = data;
+  $: ({ tableData } = data);
 
-  const actions: ActionBarEntry[] = [
-    {
-      icon: 'mdi:plus',
-      label: 'add',
-      action: '/add'
-    },
-    {
-      icon: 'mdi:lightbulb-question',
-      label: 'test',
-      action: () => {
-        alert('hi');
-      }
-    }
-  ];
+  let filtered: typeof tableData = [];
 </script>
 
 <!--
@@ -34,5 +19,8 @@
   A list of all galaxies.
 -->
 
-<svelte:window use:actionBar={actions} />
-<DynTable href={(x) => `/galaxies/${x.Galaxy?.id}`} {header} data={tableData} />
+<ComplexTableLayout {...data} tableData={filtered}>
+  <div slot="filter">
+    <EnableFilter bind:data={tableData} bind:filtered></EnableFilter>
+  </div>
+</ComplexTableLayout>

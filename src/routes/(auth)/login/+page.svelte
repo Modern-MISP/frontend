@@ -1,26 +1,19 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
-  import Icon from '@iconify/svelte';
-  import { login } from './authMock';
-  import { goto } from '$app/navigation';
+  import { getFormValues } from '$lib/util/form.util';
 
-  let error: string | null = null;
+  let error: string = '';
 
-  async function submit({ currentTarget }: SubmitEvent) {
-    if (!(currentTarget && currentTarget instanceof HTMLFormElement)) return;
+  async function submit(event: SubmitEvent) {
+    const entries = getFormValues(event);
 
-    const data = new FormData(currentTarget);
-    const entries: any = Object.fromEntries(data.entries());
-    try {
-      const res = await login(entries);
-      if (res) {
-        localStorage.setItem('authToken', 'Bearer: secür.it.be');
-        goto('/events');
-      }
-    } catch (e) {
-      console.warn(e.body.message);
-      error = e.body.message;
+    if (entries.token) {
+      $token = entries.token;
+      goto('/events');
+      return;
     }
   }
 </script>
@@ -33,20 +26,43 @@
   
 -->
 
-<form class="flex flex-col gap-4 m-auto w-80" method="post" on:submit|preventDefault={submit}>
-  <h1 class="text-4xl font-bold text-white">
+<form
+  class="flex flex-col gap-4 m-auto w-80 text-text"
+  method="post"
+  on:submit|preventDefault={submit}
+>
+  <h1 class="text-4xl font-bold leading-normal">
     Login
     <hr />
   </h1>
-  <Input name="email" placeholder="Email" icon="mdi:email-outline" />
-  <Input name="password" placeholder="Password" icon="mdi:lock-outline" />
-  <Button class="py-2 !w-fit self-end gap-2">
-    Login
-    <Icon icon="mdi:chevron-right" />
-  </Button>
-  {#if error}
-    <div class="text-red">
-      {error}
-    </div>
-  {/if}
+
+  <Input
+    name="email"
+    placeholder="Email"
+    icon="mdi:email-outline"
+    disabled={true}
+    title="Password-based login is disabled due to missing API support"
+  />
+  <Input
+    name="password"
+    placeholder="Password"
+    type="password"
+    icon="mdi:lock-outline"
+    disabled={true}
+    title="Password-based login is disabled due to missing API support"
+  />
+
+  <div class="relative flex items-center justify-center">
+    <hr class="absolute w-full" />
+
+    <div class="z-10 px-2 bg-base">or</div>
+  </div>
+
+  <Input name="token" placeholder="Token" icon="mdi:key-outline" />
+  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    >Login</Button
+  >
+  <span class="h-12 text-red">
+    {error}
+  </span>
 </form>

@@ -23,4 +23,4 @@
   Converts the value given by the `value` prop to an entry from the `options` lookup array and displays the result as a pill.
  -->
 
-<Pill {...options[value]} class={clazz} />
+<Pill {...options[value]} class="{clazz} w-max" />

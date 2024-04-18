@@ -1,7 +1,9 @@
+import { token } from '$lib/api';
 import { redirect } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 
 export const load = async () => {
-  const token = localStorage.getItem('authToken');
-  if (!token) throw redirect(307, '/login');
-  throw redirect(307, '/events');
+  if (!get(token)) redirect(307, '/login');
+
+  redirect(307, '/events');
 };

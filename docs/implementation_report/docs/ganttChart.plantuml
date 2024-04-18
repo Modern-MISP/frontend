@@ -1,0 +1,84 @@
+@startgantt implementation_plan
+printscale daily zoom 1.6
+
+header Modern MISP Frontend
+title Implementierungsphase
+footer last rendered %date("YYYY-MM-dd HH:mm' UTC'")
+
+today is colored in lightblue
+
+[Layout / Menus] requires 4 days
+[Action Bar] requires 3 days
+[Setup CI] requires 3 days and is 100% complete
+[Table Filter] requires 9 days and is 100% complete and is colored in red
+[Edit Mode setup] requires 9 days and is 100% complete and is colored in red
+[Edit Actions] requires 9 days and is 100% complete and is colored in red
+[SvelteFlow setup] requires 5 days and is 100% complete
+[Write Phase Report] requires 9 days and is 100% complete
+-- Pages --
+[List Pages] requires 14 days and is 100% complete and is colored in red
+note bottom
+    Pages that consist of a
+    single table listing data.
+end note
+[List Pages > Filter] requires 8 days and is 100% complete and is colored in red
+note bottom
+    Dynamic filters for the tables on <color:gray>List Pages</color>.
+end note
+[List Pages > Edit Mode] requires 8 days and is 100% complete and is colored in red
+note bottom
+    The respective edit mode implementations of <color:gray>List Pages</color>.
+end note
+[View Pages] requires 13 days and is 100% complete and is colored in red
+note bottom
+    Pages that display detailed data of a
+    single item (event/attribute/etc).
+end note
+[View Pages > Edit Mode] requires 10 days and is 100% complete and is colored in red
+note bottom
+    The respective edit mode implementations of <color:gray>View Pages</color>,
+    usually consisting of an HTML form.
+end note
+[Add Pages] requires 12 days and is 100% complete and is colored in red
+note bottom
+    Pages for adding an item (event/tag/etc.)
+end note
+[Import Galaxy] requires 2 days and is 100% complete
+[Auth] requires 4 days
+[Settings] requires 3 days
+[Workflows] requires 11 days and is 100% complete and is colored in red
+[Event Graph] requires 18 days and is 100% complete and is colored in red
+
+Project starts 2024-01-15
+[Layout / Menus] starts at D+0
+[Layout / Menus] -> [Action Bar]
+[Layout / Menus] -> [List Pages]
+[Layout / Menus] -> [View Pages]
+[Layout / Menus] -> [Auth]
+[Layout / Menus] -> [Settings]
+[Präsentation Entwurf] happens at 2024-01-23
+[Table Filter] starts 2024-01-23
+[Setup CI] ends 2024-01-24
+[Edit Actions] starts 2024-01-25
+[SvelteFlow setup] ends 2024-01-24
+[Action Bar] -> [Edit Mode setup]
+[Edit Mode setup] -> [Add Pages]
+[Table Filter] -> [List Pages > Filter]
+[List Pages] -> [List Pages > Filter]
+[List Pages] -> [List Pages > Edit Mode]
+[Edit Mode setup] -> [List Pages > Edit Mode]
+[List Pages > Edit Mode] starts 2024-02-02
+[Edit Mode setup] -> [View Pages > Edit Mode]
+[View Pages] -> [View Pages > Edit Mode]
+[SvelteFlow setup] -> [Workflows]
+[SvelteFlow setup] -> [Event Graph]
+2024-02-03 to 2024-02-09 is closed and are named [Pause Klausurenphase]
+[Import Galaxy] ends 2024-02-13
+[Write Phase Report] ends at 2024-02-18
+[Abgabe Ursprünglich] happens at 2024-02-16
+[Abgabe] happens at 2024-02-18
+
+
+' [List Pages > Filter] displays on same row as [List Pages]
+[Präsentation Entwurf] displays on same row as [Abgabe Ursprünglich]
+@endgantt

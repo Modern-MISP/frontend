@@ -4,6 +4,11 @@
    * Additional classes to be applied to this component.
    */
   export { clazz as class };
+
+  /**
+   * Title of this component.
+   */
+  export let title = '';
 </script>
 
 <!-- 
@@ -13,7 +18,8 @@
   
  -->
 <div
-  class="flex gap-4 flex-col text-text w-full h-full p-4 rounded-lg bg-surface0 resize-x overflow-auto {clazz}"
+  class="flex gap-4 flex-col text-text w-full h-full p-4 rounded-lg bg-surface0 overflow-auto {clazz}"
+  {title}
 >
   <slot />
 </div>

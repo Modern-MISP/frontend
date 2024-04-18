@@ -1,10 +1,8 @@
 <script lang="ts">
-  import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import type { PageData } from './$types';
 
   export let data: PageData;
-
-  const { tableData, header } = data;
 </script>
 
 <!--
@@ -13,4 +11,5 @@
   
 -->
 
-<DynTable href={(x) => `/servers/${x.Server?.id}`} {header} data={tableData} />
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/servers/${x.Server?.id}`}
+></ComplexTableLayout>

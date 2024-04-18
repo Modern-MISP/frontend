@@ -1,48 +1,325 @@
-import { GET } from '$lib/api';
-import { error } from '@sveltejs/kit';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from '../../[id]/$types';
-
 import Info from '$lib/components/info/Info.svelte';
-
-import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
+import LookupPill from '$lib/components/pills/lookupPill/LookupPill.svelte';
+import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import Picker from '$lib/components/picker/Picker.svelte';
+import Select from '$lib/components/form/Select.svelte';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
     error: mispError,
     response
-  } = await GET('/galaxy_clusters/view/{galaxyClusterId}', {
-    params: { path: { galaxyClusterId: params.id } }
+  } = await get(api).GET('/galaxy_clusters/view/{galaxyClusterId}', {
+    params: { path: { galaxyClusterId: params.id } },
+    fetch
   });
 
-  if (mispError) throw error(response.status, mispError.message);
-  const col = createTableHeadGenerator<
-    (typeof data.GalaxyCluster.GalaxyElement)[number], // FIXME: make typesafe
-    DynTableHeadExtent
-  >();
-  const header = [
-    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id }),
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+
+  /**
+   * Editable properties according to OpenAPI spec:
+   * - [ ] GalaxyElement
+   * - [x] authors
+   * - [ ] collection_uuid
+   * - [x] default
+   * - [ ] deleted
+   * - [ ] description
+   * - [x] distribution
+   * - [ ] extends_uuid
+   * - [ ] extends_version
+   * - [ ] galaxy_id
+   * - [x] id
+   * - [ ] locked
+   * - [ ] org_id
+   * - [ ] orgc_id
+   * - [ ] published
+   * - [ ] sharing_group_id
+   * - [x] source
+   * - [ ] tag_name
+   * - [x] type
+   * - [x] uuid
+   * - [x] value
+   * - [x] version
+   */
+  const col = createTableHeadGenerator<(typeof data)['GalaxyCluster']>();
+  const leftCardHeader = [
+    col(
+      {
+        label: 'Name',
+        value: (x) => x?.value ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.value,
+            name: 'value'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Description',
+        value: (x) => x?.description ?? ''
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.description,
+            name: 'description'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Type',
+        value: (x) => x?.type ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.type,
+            name: 'type'
+          }
+        })
+      }
+    ),
     col({
-      icon: 'mdi:key',
-      key: 'key',
-      label: 'key',
-      display: Info,
-      value: (x) => ({ text: x.key })
+      label: 'Parent Galaxy',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'streamline:galaxy-2-solid',
+          label: x?.galaxy_id ?? 'unknown',
+          text: x?.Galaxy?.name,
+          href: `/galaxies/${x?.galaxy_id}`
+        }
+      })
+    }),
+    col(
+      {
+        label: 'Source',
+        value: (x) => x?.source ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.source,
+            name: 'source'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Authors',
+        value: (x) => ({
+          display: PillCollection,
+          props: {
+            pills: x?.authors?.map((a) => ({ icon: 'mdi:account-outline', text: a })) ?? [],
+            class: 'pl-4'
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Picker,
+          props: {
+            placeholder: 'Authors',
+            name: 'authors',
+            pickedItems:
+              x?.authors?.map((a) => ({
+                value: a,
+                text: a,
+                icon: 'mdi:account-outline'
+              })) ?? [], // NOTE: The `?? []` is required for some reason, otherwise the component throws an error. I don't understand it either.
+            arbitraryInput: (a: string) => ({
+              icon: 'mdi:account-outline',
+              text: a,
+              value: a
+            })
+          }
+        })
+      }
+    ),
+    col({
+      label: 'Events',
+      value: (x) => x?.tag_count?.toString() ?? 'unknown'
     }),
     col({
+      label: 'Tag',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:tag',
+          label: x?.tag_id ?? 'unknown',
+          text: x?.tag_name ?? 'unknown',
+          href: x?.tag_id ? '/tags/' + x.tag_id : '#'
+        }
+      })
+    })
+  ];
+  const rightCardHeader = [
+    col(
+      {
+        label: 'Version',
+        value: (x) => x?.version ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.version ?? undefined,
+            name: 'version'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'ID',
+        value: (x) => x?.id ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.id,
+            name: 'id'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'UUID',
+        value: (x) => x?.uuid ?? 'unknown'
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            value: x?.uuid,
+            name: 'uuid'
+          }
+        })
+      }
+    ),
+    col({
+      label: 'Collection UUID',
+      value: (x) => x?.collection_uuid ?? 'unknown'
+    }),
+    col({
+      label: 'Organizations',
+      value: (x) => ({
+        display: PillCollection,
+        props: {
+          pills: [
+            {
+              icon: 'mdi:home',
+              label: 'Owner',
+              text: x?.Org?.name
+            },
+            {
+              icon: 'mdi:creation',
+              label: 'Creator',
+              text: x?.Orgc?.name
+            }
+          ]
+        }
+      })
+    }),
+    col(
+      {
+        label: 'Distribution',
+        value: (x) => ({
+          display: LookupPill,
+          props: {
+            value: +(x?.distribution ?? 0),
+            options: DISTRIBUTION_LOOKUP
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Select,
+          props: {
+            value: '' + (x?.distribution ?? 1),
+            options: DISTRIBUTION_LOOKUP.map((x, i) => ({
+              label: x.text ?? 'unknown',
+              value: '' + i
+            })),
+            name: 'distribution'
+          }
+        })
+      }
+    ),
+    col({
+      label: 'Default',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.default
+        }
+      })
+    }),
+    col({
+      label: 'Locked',
+      value: (x) => ({
+        display: Boolean,
+        props: {
+          isTrue: x?.locked
+        }
+      })
+    })
+  ];
+
+  const galaxyElements = data.GalaxyCluster?.GalaxyElement ?? [];
+  const col2 = createTableHeadGenerator<(typeof galaxyElements)[number], DynTableHeadExtent>();
+  const elementsHeader = [
+    col2({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
+    col2({
+      icon: 'mdi:key-outline',
+      key: 'key',
+      label: 'Key',
+      value: (x) => ({
+        display: Info,
+        props: {
+          text: x.key
+        }
+      })
+    }),
+    col2({
       icon: 'mdi:circle',
       key: 'value',
       label: 'Value',
-      display: Info,
-      value: (x) => ({ text: x.value })
+      value: (x) => ({
+        display: Info,
+        props: { text: x.value }
+      })
     })
   ];
 
   return {
-    galaxyCluster: data,
-    tableData: data?.GalaxyCluster?.GalaxyElement ?? [],
-    header
+    cardData: data.GalaxyCluster,
+    leftCardHeader,
+    rightCardHeader,
+    tableData: galaxyElements,
+    tableHeader: elementsHeader
   };
 };

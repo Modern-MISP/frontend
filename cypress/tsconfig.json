@@ -1,9 +1,9 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": ["es5", "dom"],
-		"types": ["cypress", "node"],
-		"sourceMap": false
-	},
-	"include": ["**/*.ts"]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node", "@4tw/cypress-drag-drop"],
+    "sourceMap": false
+  },
+  "include": ["**/*.ts"]
 }

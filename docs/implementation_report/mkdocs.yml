@@ -1,0 +1,23 @@
+# Note: Don't change docs_dir or site_dir, that would break CI
+site_name: MMISP Frontend Implementierungsbericht
+repo_url: https://gitlab.kit.edu/kit/kit-cert/mmisp/frontend
+site_author: MMISP Frontend Team
+
+theme:
+  name: 'material'
+
+nav:
+  - intro.md
+  - design_changes.md
+  - features.md
+  - delays.md
+  - unit_tests.md
+
+plugins:
+  - search
+  - with-pdf:
+      # See https://github.com/orzih/mkdocs-with-pdf
+      cover_subtitle: Implementierungsphase
+      # NOTE: There's a zero width space in these parentheses because I couldn't make the copyright not show up otherwise.
+      #       It's also possible to use custom templates with mkdocs-with-pdf, might be worth it, see github linked above.
+      copyright: '​'
