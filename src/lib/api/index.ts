@@ -1,8 +1,5 @@
-import {
-  PUBLIC_MISP_API_ENDPOINT,
-  PUBLIC_REST_DISABLED,
-  PUBLIC_REST_DISABLED_MESSAGE
-} from '$env/static/public';
+import config from '$lib/settings';
+
 import { createLocalStorageStore } from '$lib/util/store.util';
 import { error } from '@sveltejs/kit';
 import createClient, { type FetchResponse } from 'openapi-fetch';
@@ -18,10 +15,12 @@ function genDisabledFunction(message = 'The REST method you try to use is disabl
 
 export const token = createLocalStorageStore('', 'token');
 
+const cfg = await config();
+
 export const api = derived(token, ($token) => {
   const client = {
     ...createClient<paths>({
-      baseUrl: PUBLIC_MISP_API_ENDPOINT,
+      baseUrl: cfg.MISP_API_ENDPOINT,
       headers: {
         Authorization: $token,
         Accept: 'application/json',
@@ -38,10 +37,7 @@ export const api = derived(token, ($token) => {
     }
   };
 
-  if (PUBLIC_REST_DISABLED)
-    client.disableRESTMethods(
-      JSON.parse(PUBLIC_REST_DISABLED),
-      genDisabledFunction(PUBLIC_REST_DISABLED_MESSAGE)
-    );
+  if (cfg.REST_DISABLED)
+    client.disableRESTMethods(cfg.REST_DISABLED, genDisabledFunction(cfg.REST_DISABLED_MESSAGE));
   return client;
 });

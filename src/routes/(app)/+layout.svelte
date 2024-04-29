@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { PUBLIC_MAINTENANCE_MESSAGE, PUBLIC_MAINTENANCE_MODE } from '$env/static/public';
   import { addContextInfo, lockViewMode } from '$lib/actions';
   import Layout from '$lib/components/layout/Layout.svelte';
   import { currentRoute, contextRouteEntries, notifications, mode } from '$lib/stores';
@@ -67,10 +66,10 @@
   
 -->
 <svelte:window
-  use:lockViewMode={PUBLIC_MAINTENANCE_MODE === 'true' || editModeRestricted}
+  use:lockViewMode={data.cfg.MAINTENANCE_MODE || editModeRestricted}
   use:addContextInfo={{
-    message: PUBLIC_MAINTENANCE_MESSAGE,
-    condition: PUBLIC_MAINTENANCE_MODE === 'true'
+    message: data.cfg.MAINTENANCE_MESSAGE,
+    condition: data.cfg.MAINTENANCE_MODE
   }}
   use:addContextInfo={{
     message: 'Edit mode is restricted to administrators',
