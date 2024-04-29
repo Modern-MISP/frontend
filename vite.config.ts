@@ -18,5 +18,13 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     conditions: mode === 'test' ? ['browser'] : []
+  },
+  server: {
+    fs: {
+      allow: ['config.yaml']
+    }
+  },
+  build: {
+    target: 'esnext'
   }
 }));
