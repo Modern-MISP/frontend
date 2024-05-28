@@ -35,6 +35,8 @@ function checkConfig() {
   if (config.MAINTENANCE_MESSAGE == null || config.MAINTENANCE_MESSAGE == undefined)
     config.MAINTENANCE_MESSAGE =
       'Website is currently in maintenance mode. All editing is disabled.';
+  if (config.COMPATIBILITY_MODE == null || config.COMPATIBILITY_MODE == undefined)
+    config.COMPATIBILITY_MODE = false;
 }
 
 async function fetchConfig(): Promise<typeof config> {

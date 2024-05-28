@@ -4,6 +4,7 @@
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
+  import { compatibility } from '$lib/stores';
 
   let error: string = '';
 
@@ -16,6 +17,8 @@
       return;
     }
   }
+
+  const visible = !compatibility;
 </script>
 
 <!--
@@ -36,20 +39,22 @@
     <hr />
   </h1>
 
-  <Input name="email" placeholder="Email" icon="mdi:email-outline" disabled={false} />
-  <Input
-    name="password"
-    placeholder="Password"
-    type="password"
-    icon="mdi:lock-outline"
-    disabled={false}
-  />
+  {#if visible}
+    <Input name="email" placeholder="Email" icon="mdi:email-outline" disabled={false} />
+    <Input
+      name="password"
+      placeholder="Password"
+      type="password"
+      icon="mdi:lock-outline"
+      disabled={false}
+    />
 
-  <div class="relative flex items-center justify-center">
-    <hr class="absolute w-full" />
+    <div class="relative flex items-center justify-center">
+      <hr class="absolute w-full" />
 
-    <div class="z-10 px-2 bg-base">or</div>
-  </div>
+      <div class="z-10 px-2 bg-base">or</div>
+    </div>
+  {/if}
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
   <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
