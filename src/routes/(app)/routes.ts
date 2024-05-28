@@ -87,6 +87,23 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Settings',
     icon: 'mdi-cog',
-    href: '/settings'
+    href: '/settings',
+    children: [
+      {
+        name: 'Information',
+        icon: 'mdi:information',
+        href: '/settings/information'
+      },
+      {
+        name: 'Visual Settings',
+        icon: 'mdi:palette',
+        href: '/settings/visual'
+      },
+      {
+        name: 'Security Settings',
+        icon: 'mdi:security',
+        href: '/settings/security'
+      }
+    ]
   }
 ];

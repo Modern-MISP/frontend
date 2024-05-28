@@ -36,20 +36,13 @@
     <hr />
   </h1>
 
-  <Input
-    name="email"
-    placeholder="Email"
-    icon="mdi:email-outline"
-    disabled={true}
-    title="Password-based login is disabled due to missing API support"
-  />
+  <Input name="email" placeholder="Email" icon="mdi:email-outline" disabled={false} />
   <Input
     name="password"
     placeholder="Password"
     type="password"
     icon="mdi:lock-outline"
-    disabled={true}
-    title="Password-based login is disabled due to missing API support"
+    disabled={false}
   />
 
   <div class="relative flex items-center justify-center">
