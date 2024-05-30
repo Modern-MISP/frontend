@@ -5,6 +5,9 @@
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
   import { compatibility } from '$lib/stores';
+  import OidcButton from '$lib/components/button/oidcButton/OidcButton.svelte';
+  import { onMount } from 'svelte';
+  import { forEach } from 'lodash-es';
 
   let error: string = '';
 
@@ -19,6 +22,35 @@
   }
 
   const visible = !compatibility;
+  let oidc = true;
+
+  const data = [
+    {
+      id: '1',
+      name: 'Google'
+    },
+    {
+      id: '2',
+      name: 'Facebook'
+    },
+    {
+      id: '3',
+      name: 'Illias'
+    }
+  ];
+
+  onMount(() => {
+    if (data.length === 0) oidc = false;
+    forEach(data, (item) => {
+      new OidcButton({
+        target: document.querySelector('.oidc') ?? document,
+        props: {
+          name: item.name,
+          id: item.id
+        }
+      });
+    });
+  });
 </script>
 
 <!--
@@ -55,6 +87,15 @@
       <div class="z-10 px-2 bg-base">or</div>
     </div>
   {/if}
+  {#if oidc}
+    <div class="oidc flex w-80"></div>
+
+    <div class="relative flex items-center justify-center">
+      <hr class="absolute w-full" />
+
+      <div class="z-10 px-2 bg-base">or</div>
+    </div>
+  {/if}
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
   <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
@@ -64,3 +105,13 @@
     {error}
   </span>
 </form>
+
+<style>
+  .oidc {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+</style>
