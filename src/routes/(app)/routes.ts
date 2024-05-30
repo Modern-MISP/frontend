@@ -7,6 +7,23 @@ export const routes: SideMenuRoute[] = [
     href: '/events'
   },
   {
+    name: 'Statistics',
+    icon: 'mdi:google-analytics',
+    href: '/statistics',
+    children: [
+      {
+        name: 'Organisations',
+        icon: 'mdi:account-group',
+        href: '/statistics/organisations'
+      },
+      {
+        name: 'Attribute Histogramm',
+        icon: 'mdi:google-analytics',
+        href: '/statistics/attribute_histogramm',
+      }
+    ]
+  },
+  {
     name: 'Attributes',
     icon: 'mdi:flag',
     href: '/attributes',
