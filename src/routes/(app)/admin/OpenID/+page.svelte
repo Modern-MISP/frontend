@@ -1,7 +1,7 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import { api } from '$lib/api';
- // import { get } from 'svelte/store';
+  //import { get } from 'svelte/store';
 
   import type { PageData } from './$types';
 
@@ -10,7 +10,7 @@
 
 <!--
   @component
-  Displays a list of all users of the instance.
+  Displays a list of all providers of the instance.
   
 -->
 <ComplexTableLayout
@@ -19,5 +19,5 @@
     return get(api).POST('/admin/users/index', { body: x });
   }}
   {...data}
-  tableHref={(x) => `/admin/users/${x.User?.id}`}
+  tableHref={(x) => `/admin/OpenID/${x.Provider?.id}`}
 ></ComplexTableLayout>

@@ -1,5 +1,3 @@
-import { api } from '$lib/api';
-import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
@@ -12,15 +10,58 @@ import { notifications } from '$lib/stores';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
-import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Input from '$lib/components/input/Input.svelte';
+import { invalidateAll } from '$app/navigation';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
 
-export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
+export const load: PageLoad = async () => {
+  // Static data
+  const data = [
+    {
+      User: {
+        id: '1',
+        email: 'user1@example.com',
+        password: 'asdsad',
+        nids_sid: '12345',
+        last_login: 1625140800,
+        date_created: 1612137600,
+        authkey: 'true',
+        contactalert: true,
+        autoalert: true,
+        gpgkey: 'true',
+        termsaccepted: true
+      },
+      Organisation: { name: 'Org 1' },
+      Role: { name: 'Admin' }
+    },
+    {
+      User: {
+        id: '2',
+        password: 'sdasda',
+        email: 'user2@example.com',
+        nids_sid: '67890',
+        last_login: 1625140800,
+        date_created: 1612137600,
+        authkey: 'false',
+        contactalert: false,
+        autoalert: false,
+        gpgkey: 'false',
+        termsaccepted: false
+      },
+      Organisation: { name: 'Org 2' },
+      Role: { name: 'User' }
+    }
+  ];
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
+
+  const orgData = [
+    { Organisation: { id: '1', name: 'Org 1' } },
+    { Organisation: { id: '2', name: 'Org 2' } }
+  ];
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
@@ -29,18 +70,23 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organizations',
+      label: 'Organization',
       value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:lock-outline',
+      icon: 'mdi:circle',
       key: 'role',
       label: 'Role',
       value: (x) => ({ display: Info, props: { text: x.Role?.name ?? 'unknown' } })
     }),
-
     col({
-      icon: 'mdi:email-outline',
+      icon: 'mdi:person-outline',
+      key: 'nids_sid',
+      label: 'Name',
+      value: (x) => ({ display: Info, props: { text: x.User?.nids_sid ?? 'unknown' } })
+    }),
+    col({
+      icon: 'mdi:person-outline',
       key: 'email',
       label: 'Email',
       value: (x) => ({
@@ -52,26 +98,17 @@ export const load: PageLoad = async ({ fetch }) => {
         }
       })
     }),
-
-    col({
-      icon: 'mdi:id-card',
-      key: 'nids_sid',
-      label: 'NIDS SID',
-      // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Info, props: { text: x.User?.nids_sid ?? 'unknown' } })
-    }),
     col({
       icon: 'mdi:clock-outline',
       key: 'last_login',
       label: 'Last Login',
-      // class: 'whitespace-nowrap',
       value: (x) => ({
         display: DatePill,
         props: { date: new Date(+(x.User?.last_login || 0) * 1000) }
       })
     }),
     col({
-      icon: 'mdi:clock-outline',
+      icon: 'mdi:eye-outline',
       key: 'created',
       label: 'Created',
       value: (x) => ({
@@ -111,6 +148,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.termsaccepted } })
     })
   ];
+
 
   const editActions: DynCardActionHeader<typeof data>[] = [
     {
@@ -153,24 +191,51 @@ export const load: PageLoad = async ({ fetch }) => {
         });
       }
     },
+
     {
       label: 'Delete User',
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        Promise.all(
-          x
-            .map((y) => y.User?.id)
-            .map((userId) =>
-              get(api).DELETE('/admin/users/delete/{userId}', {
-                fetch,
-                params: { path: { userId: userId! } }
-              })
-            )
-        ).then(() => {
-          notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
-          invalidateAll();
-        });
+        notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
+      }
+    },
+    {
+      label: 'Delete Token',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        notifications.add(successPill('Deleted tokens ' + x.map((y) => y.User?.id).join(', ')));
+      }
+    },
+    {
+      label: 'Edit Name',
+      icon: 'mdi:pencil-outline',
+      action: (x) => {
+        notifications.add(successPill('Edited name for ' + x.map((y) => y.User?.id).join(', ')));
+      }
+    },
+    {
+      label: 'Edit E-mail',
+      icon: 'mdi:pencil-outline',
+      action: (x) => {
+        notifications.add(successPill('Edited E-Mail for ' + x.map((y) => y.User?.id).join(', ')));
+      }
+    },
+    {
+      label: 'New Password',
+      icon: 'mdi:lock-outline',
+      action: (x) => {
+        notifications.add(
+          successPill('New password set for ' + x.map((y) => y.User?.id).join(', '))
+        );
+      }
+    },
+    {
+      label: 'New Token',
+      icon: 'mdi:lock-outline',
+      action: (x) => {
+        notifications.add(successPill('New token set for ' + x.map((y) => y.User?.id).join(', ')));
       }
     },
     {
@@ -207,12 +272,8 @@ export const load: PageLoad = async ({ fetch }) => {
     }
   ];
 
-  // @ts-expect-error Not in the OpenAPI spec.. great.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: roleData }: { data: any[] } = await get(api).GET('/roles');
-  const { data: orgData } = await get(api).GET('/organisations');
-
   const fil = createTableHeadGenerator<undefined>();
+
   const filter = [
     fil({
       label: 'ID',
@@ -328,6 +389,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     })
   ];
+
   return {
     data,
     tableData: data,
@@ -335,6 +397,6 @@ export const load: PageLoad = async ({ fetch }) => {
     editActions,
     topMenuActions,
     filter,
-    maxCount: +response.headers.get('X-result-count')!
+    maxCount: data.length
   };
 };

@@ -6,6 +6,12 @@ import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import Select from '$lib/components/form/Select.svelte';
+import Button from '$lib/components/button/Button.svelte';
+import Icon from '@iconify/svelte';
+import { xor } from 'lodash-es';
+import OidcButton from '$lib/components/button/oidcButton/OidcButton.svelte';
+
 
 const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
@@ -20,6 +26,52 @@ const col = createTableHeadGenerator<
 >();
 
 export default {
+  name: col(
+    {
+      label: 'Name',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.User?.name ?? 'unknown',
+          href: x.User?.name ? 'nameto:' + x.User?.name : ''
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Input,
+        props: {
+          placeholder: 'Name',
+          name: 'name',
+          icon: 'mdi:person-outline'
+        }
+      })
+    }
+  ),
+  key: col(
+    {
+      label: 'Key',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.User?.key ?? 'unknown',
+          href: x.User?.key ? 'keyto:' + x.User?.key : ''
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Input,
+        props: {
+          placeholder: 'Key',
+          name: 'key',
+          icon: 'mdi:key-outline'
+        }
+      })
+    }
+  ),
   email: col(
     {
       label: 'Email',
@@ -35,10 +87,51 @@ export default {
     {
       value: (x) => ({
         display: Input,
-        props: { value: x.User?.email ?? '', name: 'email' }
+        props: {
+          value: x.User?.email ?? '',
+          name: 'email',
+          placeholder: 'E-mail',
+          icon: 'mdi:person-outline'
+        }
       })
     }
   ),
+  password: col(
+    {
+      label: 'Password',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.User?.password ?? 'unknown',
+          href: x.User?.password ? 'passwordto:' + x.User?.password : ''
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Input,
+        props: {
+          value: x.User?.password ?? 'generated password',
+          placeholder: 'Password',
+          name: 'password',
+          icon: 'mdi:key-outline'
+        }
+      })
+    }
+  ),
+  generate: col({//////
+    label: 'Copy password',
+    value: (x) => ({
+      display: Button,
+      props: {
+        name:"copy password",
+        class: "w-min",
+        prefixIcon: 'mdi:content-copy'
+      }
+    })
+  }),
+
   id: col({
     label: 'ID',
     value: (x) => x.User?.id ?? 'unknown'
@@ -49,12 +142,11 @@ export default {
       value: (x) => x.Role?.name ?? 'unknown'
     },
     {
-      // TODO: Role selection (or role system in general)
-      value: () => ({
-        display: Input,
+      value: (x) => ({
+        display: Select,
         props: {
-          disabled: true,
-          placeholder: 'Not supported'
+          options: 'undefined',
+          name: 'org'
         }
       })
     }
@@ -216,15 +308,29 @@ export default {
       })
     }
   ),
-  organisation: col({
-    key: 'org',
-    label: 'Organizations',
-    value: (x) => ({
-      display: Pill,
-      props: {
-        text: x?.Organisation?.name,
-        icon: 'material-symbols:work-outline'
-      }
-    })
-  })
+  organisation: col(
+    {
+      key: 'org',
+      label: 'Organizations',
+      value: (x) => ({
+        display: Pill,
+        props: {
+          text: x?.Organisation?.name,
+          icon: 'material-symbols:work-outline'
+        }
+      })
+    },
+    {
+      value: (x) => ({
+        display: Select,
+        props: {
+          options: 'undefined',
+          name: 'org'
+        }
+      })
+    }
+  )
+  
 };
+
+

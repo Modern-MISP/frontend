@@ -1575,6 +1575,9 @@ export interface components {
       server_id?: components['schemas']['ServerId'];
       /** Format: email */
       email?: string;
+      password?: string;
+      name?: string;
+      key?: string;
       autoalert?: boolean;
       /**
        * @description API auth key used for the API, only set if MISP setting `Security.advanced_authkeys` is set to `false`.

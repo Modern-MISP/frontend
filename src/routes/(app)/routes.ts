@@ -19,7 +19,7 @@ export const routes: SideMenuRoute[] = [
       {
         name: 'Attribute Histogramm',
         icon: 'mdi:google-analytics',
-        href: '/statistics/attribute_histogramm',
+        href: '/statistics/attribute_histogramm'
       }
     ]
   },
@@ -85,6 +85,12 @@ export const routes: SideMenuRoute[] = [
         icon: 'mdi:account',
         userAccess: 'none',
         href: '/admin/users'
+      },
+      {
+        name: 'OpenID',
+        icon: 'mdi:openid',
+        userAccess: 'none',
+        href: '/admin/OpenID'
       },
       {
         name: 'Keys',

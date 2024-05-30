@@ -9,8 +9,6 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
-  import Button from '$lib/components/button/Button.svelte';
-
 
   $mode = 'edit';
 
@@ -35,7 +33,7 @@
 
   $: $currentRoute = [
     ...($currentRoute ?? []),
-    { name: 'Create a new User', href: 'new', icon: 'mdi:account-plus-outline' }
+    { name: 'New Provider', href: 'new', icon: 'mdi:plus-outline' }
   ];
 </script>
 
@@ -44,19 +42,7 @@
 <Form callback={editCallback}>
   <DynCard
     header={[
-      idCardHeaders.name,
-      idCardHeaders.email,
-      idCardHeaders.password,
-      idCardHeaders.generate,
-      idCardHeaders.role,
-      idCardHeaders.nids_sid,
-      idCardHeaders.disabled,
-      idCardHeaders.authkey,
-      idCardHeaders.contactaltert,
-      idCardHeaders.notification_daily,
-      idCardHeaders.notification_weekly,
-      idCardHeaders.notification_monthly,
-      idCardHeaders.termsaccepted
+      idCardHeaders.name
     ]}
     data={{}}
   ></DynCard>
