@@ -9,6 +9,7 @@ import { shouldTextBeBlack } from '$lib/util/color.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/tags', { fetch });
@@ -92,6 +93,70 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const fil = createTableHeadGenerator<undefined>();
+  const filter = [
+    fil({
+      label: 'Search all',
+      value: () => 'searchall'
+    }),
+    fil({
+      label: 'Exportable',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          name: 'exportable',
+          checked: false
+        }
+      })
+    }),
+    fil({
+      label: 'Hidden',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          name: 'hidden',
+          checked: false
+        }
+      })
+    }),
+    fil({
+      label: 'Local Only',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          name: 'local_only',
+          checked: false
+        }
+      })
+    }),
+    fil({
+      label: 'Restricted to Org',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          name: 'restrict_org',
+          checked: false
+        }
+      })
+    }),
+    fil({
+      label: 'Restricted to User',
+      value: () => ({
+        display: Checkbox,
+        props: {
+          name: 'restrict_user',
+          checked: false
+        }
+      })
+    }),
+    // You can override the page limit with this.
+
+    fil({
+      label: 'Page Limit',
+      value: () => 'limit'
+    })
+  ];
+
   const editActions: DynCardActionHeader<(typeof data)['Tag']>[] = [
     {
       label: 'Delete',
@@ -123,6 +188,7 @@ export const load: PageLoad = async ({ fetch }) => {
   return {
     data,
     tableData: data.Tag ?? [],
+    filter,
     header,
     editActions
   };
