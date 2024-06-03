@@ -1,18 +1,10 @@
-import Boolean from '$lib/components/boolean/Boolean.svelte';
-import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-import Select from '$lib/components/form/Select.svelte';
-import Info from '$lib/components/info/Info.svelte';
-import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { notifications } from '$lib/stores';
-import { errorPill, successPill } from '$lib/util/pill.util';
+import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Input from '$lib/components/input/Input.svelte';
 
 export const load: PageLoad = async () => {
   // Static data
@@ -35,11 +27,6 @@ export const load: PageLoad = async () => {
         name: 'Facebook'
       }
     }
-  ];
-  const providerData = [
-    { Name: { id: '1', name: 'Google' } },
-    { Name: { id: '2', name: 'Ilias' } },
-    { Name: { id: '3', name: 'Facebook' } }
   ];
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
@@ -75,7 +62,7 @@ export const load: PageLoad = async () => {
     }
   ];
 
-  const fil = createTableHeadGenerator<undefined>();
+  /*const fil = createTableHeadGenerator<undefined>();
 
   const filter = [
     fil({
@@ -93,7 +80,7 @@ export const load: PageLoad = async () => {
         }
       })
     })
-  ];
+  ];*/
 
   return {
     data,

@@ -153,7 +153,6 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
-
   const editActions: DynCardActionHeader<typeof data>[] = [
     {
       label: 'Enable User',

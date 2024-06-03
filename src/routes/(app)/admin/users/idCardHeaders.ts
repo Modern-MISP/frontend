@@ -8,10 +8,6 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import Button from '$lib/components/button/Button.svelte';
-import Icon from '@iconify/svelte';
-import { xor } from 'lodash-es';
-import OidcButton from '$lib/components/button/oidcButton/OidcButton.svelte';
-
 
 const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
@@ -39,7 +35,7 @@ export default {
       })
     },
     {
-      value: (x) => ({
+      value: () => ({
         display: Input,
         props: {
           placeholder: 'Name',
@@ -62,7 +58,7 @@ export default {
       })
     },
     {
-      value: (x) => ({
+      value: () => ({
         display: Input,
         props: {
           placeholder: 'Key',
@@ -120,13 +116,14 @@ export default {
       })
     }
   ),
-  generate: col({//////
+  generate: col({
+    //////
     label: 'Copy password',
-    value: (x) => ({
+    value: () => ({
       display: Button,
       props: {
-        name:"copy password",
-        class: "w-min",
+        name: 'copy password',
+        class: 'w-min',
         prefixIcon: 'mdi:content-copy'
       }
     })
@@ -142,7 +139,7 @@ export default {
       value: (x) => x.Role?.name ?? 'unknown'
     },
     {
-      value: (x) => ({
+      value: () => ({
         display: Select,
         props: {
           options: 'undefined',
@@ -321,7 +318,7 @@ export default {
       })
     },
     {
-      value: (x) => ({
+      value: () => ({
         display: Select,
         props: {
           options: 'undefined',
@@ -330,7 +327,4 @@ export default {
       })
     }
   )
-  
 };
-
-

@@ -40,10 +40,5 @@
 <svelte:window use:lockEditMode={true} />
 
 <Form callback={editCallback}>
-  <DynCard
-    header={[
-      idCardHeaders.name
-    ]}
-    data={{}}
-  ></DynCard>
+  <DynCard header={[idCardHeaders.name]} data={{}}></DynCard>
 </Form>

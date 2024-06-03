@@ -1,7 +1,5 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-  import { api } from '$lib/api';
- // import { get } from 'svelte/store';
 
   import type { PageData } from './$types';
 
@@ -13,7 +11,4 @@
   Displays a list of all users of the instance.
   
 -->
-<ComplexTableLayout
-  {...data}
-  tableHref={(x) => `/admin/users/${x.User?.id}`}
-></ComplexTableLayout>
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/users/${x.User?.id}`}></ComplexTableLayout>

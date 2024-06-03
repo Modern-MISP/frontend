@@ -9,8 +9,6 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
-  import Button from '$lib/components/button/Button.svelte';
-
 
   $mode = 'edit';
 
