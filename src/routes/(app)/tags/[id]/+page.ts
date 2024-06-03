@@ -9,6 +9,8 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import Input from '$lib/components/input/Input.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -34,20 +36,28 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'ID',
       value: (x) => x.id ?? 'unknown'
     }),
-    col({
-      key: 'name',
-      label: 'Name',
-      value: (x) => ({
-        display: Pill,
-        props: {
-          icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
-          text: x.name,
-          style: `background-color: ${x.colour}; color: ${
-            shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
-          }`
-        }
-      })
-    }),
+    col(
+      {
+        key: 'name',
+        label: 'Name',
+        value: (x) => ({
+          display: Pill,
+          props: {
+            icon: x.local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
+            text: x.name,
+            style: `background-color: ${x.colour}; color: ${
+              shouldTextBeBlack(x.colour ?? '') ? 'black' : 'white'
+            }`
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: { name: 'name', value: x?.name ?? 'unknown' }
+        })
+      }
+    ),
     col({
       key: 'tagged_events',
       label: 'Tagged Events',
@@ -56,36 +66,76 @@ export const load: PageLoad = async ({ params, fetch }) => {
         props: { text: x.count, icon: 'mdi:pound' }
       })
     }),
-    col({
-      key: 'exportable',
-      label: 'Exportable',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.exportable ?? false } })
-    }),
-    col({
-      key: 'hidden',
-      label: 'Hidden',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.hide_tag ?? false } })
-    }),
-    col({
-      icon: 'mdi:cloud-off-outline',
-      key: 'local_only',
-      label: 'Local only',
-      // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.local_only ?? false } })
-    }),
-    col({
-      key: 'restrict_org',
-      label: 'Restricted to Org',
-      // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.org_id !== '0' } })
-    }),
-    col({
-      icon: 'mdi:account-cancel-outline',
-      key: 'restrict_user',
-      label: 'Restricted to User',
-      // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.user_id !== '0' } })
-    })
+    col(
+      {
+        key: 'exportable',
+        label: 'Exportable',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.exportable ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'exportable', checked: x.exportable ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        key: 'hidden',
+        label: 'Hidden',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.hide_tag ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'hidden', checked: x.hide_tag ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        icon: 'mdi:cloud-off-outline',
+        key: 'local_only',
+        label: 'Local only',
+        // class: 'whitespace-nowrap',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.local_only ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'local_only', checked: x.local_only ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        key: 'restrict_org',
+        label: 'Restricted to Org',
+        // class: 'whitespace-nowrap',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.org_id !== '0' } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'restrict_org', checked: x.org_id !== '0' ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        icon: 'mdi:account-cancel-outline',
+        key: 'restrict_user',
+        label: 'Restricted to User',
+        // class: 'whitespace-nowrap',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.user_id !== '0' } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'restrict_user', checked: x.user_id !== '0' ?? false }
+        })
+      }
+    )
   ];
 
   return {
