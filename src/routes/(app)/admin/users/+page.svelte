@@ -14,10 +14,6 @@
   
 -->
 <ComplexTableLayout
-  endpoint={(x) => {
-    // @ts-expect-error Not in the OpenAPI spec.. great. AND not even implemented wtf...
-    return get(api).POST('/admin/users/index', { body: x });
-  }}
   {...data}
   tableHref={(x) => `/admin/users/${x.User?.id}`}
 ></ComplexTableLayout>

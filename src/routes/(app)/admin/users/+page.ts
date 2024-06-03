@@ -17,9 +17,11 @@ import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async ({ fetch }) => {
+  const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
+
   // Static data
-  const data = [
+  /*const data = [
     {
       User: {
         id: '1',
@@ -54,14 +56,16 @@ export const load: PageLoad = async () => {
       Organisation: { name: 'Org 2' },
       Role: { name: 'User' }
     }
-  ];
+  ];*/
 
-  const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const orgData = [
+  //const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
+
+  /*const orgData = [
     { Organisation: { id: '1', name: 'Org 1' } },
     { Organisation: { id: '2', name: 'Org 2' } }
-  ];
+  ];*/
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
@@ -70,7 +74,7 @@ export const load: PageLoad = async () => {
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organization',
+      label: 'Organisation',
       value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
     }),
     col({
@@ -271,6 +275,11 @@ export const load: PageLoad = async () => {
       action: '/admin/users/new'
     }
   ];
+
+  // @ts-expect-error Not in the OpenAPI spec.. great.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: roleData }: { data: any[] } = await get(api).GET('/roles');
+  const { data: orgData } = await get(api).GET('/organisations');
 
   const fil = createTableHeadGenerator<undefined>();
 
