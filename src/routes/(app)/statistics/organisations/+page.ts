@@ -4,6 +4,7 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { PageLoad } from './$types';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import type { FastFilter } from '$lib/models/FastFilter.interface';
 
 export const load: PageLoad = async () => {
   // Static data
@@ -149,12 +150,25 @@ export const load: PageLoad = async () => {
       })
     })
   ];
+  const fastFilter: FastFilter[] = [
+    {
+      label: 'Local Organisations',
+      icon: 'mdi:monitor',
+      ifActive: {}
+    },
+    {
+      label: 'Known remote Organisations',
+      icon: 'mdi:remote-desktop',
+      ifActive: {}
+    }
+  ];
 
   return {
     data,
     tableData: data,
     header,
     filter,
+    fastFilter,
     maxCount: data.length
   };
 };
