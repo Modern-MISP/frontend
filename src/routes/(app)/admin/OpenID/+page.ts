@@ -51,6 +51,13 @@ export const load: PageLoad = async () => {
           successPill('Deleted providers ' + x.map((y) => y.Provider?.id).join(', '))
         );
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
   ];
 

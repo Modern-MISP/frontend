@@ -264,6 +264,13 @@ export const load: PageLoad = async ({ fetch }) => {
           errorPill('Do not know the endpoint. reset api key: ' + x.map((y) => y.Server?.id).join())
         );
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
   ];
   return {

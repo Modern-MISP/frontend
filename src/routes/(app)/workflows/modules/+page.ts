@@ -124,6 +124,13 @@ export const load: PageLoad = async ({ fetch }) => {
           ).then(invalidateAll);
         }
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
   ];
 

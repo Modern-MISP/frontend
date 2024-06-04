@@ -527,6 +527,13 @@ export const load = async ({ fetch }) => {
           `Added sightings for attributes ${x.map(({ id }) => id).join(', ')}`
         );
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
   ];
 

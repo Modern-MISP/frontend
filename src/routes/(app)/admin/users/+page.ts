@@ -264,6 +264,13 @@ export const load: PageLoad = async ({ fetch }) => {
           )
         );
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
   ];
 
