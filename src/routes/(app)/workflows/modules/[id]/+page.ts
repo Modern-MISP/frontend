@@ -59,8 +59,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
     })
   ];
 
+  const title = 'Module details';
+  const description = 'Some detailed information about the selected module';
+
   return {
     module,
-    infoHeader
+    infoHeader,
+    title,
+    description
   };
 };

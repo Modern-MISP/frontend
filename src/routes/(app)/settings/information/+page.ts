@@ -81,8 +81,14 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const title = 'User Information';
+  const description =
+    'Detailed information about your user account. Only the name can be changed by you. For other changes, please contact your administrator.';
+
   return {
     header,
-    data
+    data,
+    title,
+    description
   };
 };

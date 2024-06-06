@@ -8,6 +8,7 @@
    * Page data containing the data of the tag with the id in the url
    */
   export let data;
+  $: ({ title, description } = data);
 
   function editCallback(formData: Record<string, string>) {
     console.log('editCallback', formData);
@@ -47,5 +48,5 @@
 
 -->
 <Form callback={editCallback} bind:actions={formActions}>
-  <DynCard header={data.header} data={data.user} />
+  <DynCard header={data.header} data={data.user} {title} {description} />
 </Form>

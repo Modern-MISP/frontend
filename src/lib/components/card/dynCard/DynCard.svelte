@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+  import CardHeading from '../CardHeading.svelte';
+
   import { derived, type Readable } from 'svelte/store';
   import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
@@ -37,7 +39,7 @@
 
 <Card class="gap-4">
   {#if title != ''}
-    <span class="font-bold text-2xl">{title}</span>
+    <CardHeading>{title}</CardHeading>
     <span class="">{description}</span>
     <br />
     <p></p>

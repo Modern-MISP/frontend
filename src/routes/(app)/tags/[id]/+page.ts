@@ -138,8 +138,13 @@ export const load: PageLoad = async ({ params, fetch }) => {
     )
   ];
 
+  const title = 'Tag details';
+  const description = 'Some detailed information about the selected tag';
+
   return {
     user: data,
-    header
+    header,
+    title,
+    description
   };
 };

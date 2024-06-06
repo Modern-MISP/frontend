@@ -58,8 +58,13 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const title = 'Visual Settings';
+  const description = 'Change your personal design settings here.';
+
   return {
     header,
-    data
+    data,
+    title,
+    description
   };
 };
