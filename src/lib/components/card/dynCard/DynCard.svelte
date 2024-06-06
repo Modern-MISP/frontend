@@ -1,6 +1,5 @@
 <script lang="ts" generics="T">
   import { derived, type Readable } from 'svelte/store';
-
   import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
   import CardRow from '$lib/components/card/CardRow.svelte';
@@ -17,6 +16,14 @@
    * The data that will be displayed in the table.
    */
   export let data: T;
+  /**
+   * The titel of the card.
+   */
+  export let title: string = '';
+  /**
+   * The description of the card.
+   */
+  export let description: string = '';
 
   const store = derived(header, (arr) => arr);
 </script>
@@ -29,6 +36,12 @@
  -->
 
 <Card class="gap-4">
+  {#if title != ''}
+    <span class="font-bold text-2xl">{title}</span>
+    <span class="">{description}</span>
+    <br />
+    <p></p>
+  {/if}
   {#each $store as { label, value } (label)}
     <CardRow class="gap-2">
       <span class="font-bold">{label}</span>

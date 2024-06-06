@@ -12,11 +12,11 @@
 
   export let data;
 
-  $: ({ header } = data);
+  $: ({ header, title, description } = data);
 </script>
 
 <svelte:window use:lockViewMode={true} />
 
 <Form callback={editCallback}>
-  <DynCard {header} data={{}}></DynCard>
+  <DynCard {header} data={{}} {title} {description}></DynCard>
 </Form>

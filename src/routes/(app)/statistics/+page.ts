@@ -99,8 +99,14 @@ export const load: PageLoad = async ({ fetch }) => {
     })
   ];
 
+  const title = 'Usage data';
+  const description =
+    'Some statistics about this instance. The changes since the beginning of this month are noted in brackets wherever applicable';
+
   return {
     header,
-    data
+    data,
+    title,
+    description
   };
 };
