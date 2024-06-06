@@ -3,12 +3,23 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import { mode } from '$lib/stores';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   $mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     console.log(formData);
   }
+
+  const Export: ActionBarEntryProps[] = [
+    {
+      icon: 'mdi:download',
+      label: 'Export',
+      action: () => {
+        console.log('YAY');
+      }
+    }
+  ];
 
   export let data;
 
@@ -17,6 +28,6 @@
 
 <svelte:window use:lockEditMode={true} />
 
-<Form callback={editCallback}>
+<Form callback={editCallback} additionalActions={Export}>
   <DynCard {header} data={{}}></DynCard>
 </Form>
