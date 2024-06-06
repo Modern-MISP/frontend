@@ -41,6 +41,8 @@
 
   onMount(() => {
     if (data.length === 0) oidc = false;
+    if (!visible) oidc = false;
+    if (!oidc) return;
     forEach(data, (item) => {
       new OidcButton({
         target: document.querySelector('.oidc') ?? document,
