@@ -62,9 +62,11 @@ async function fetchConfig(): Promise<typeof config> {
 export const INITIAL_SETTINGS: {
   theme: Themes;
   openOnInit: boolean;
+  workflowsAllowed: boolean;
 } = {
   theme: 'mocha',
-  openOnInit: true
+  openOnInit: true,
+  workflowsAllowed: true
 };
 
 export default fetchConfig;
