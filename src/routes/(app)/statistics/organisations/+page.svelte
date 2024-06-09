@@ -1,14 +1,26 @@
 <script lang="ts">
+  import LocalFilter from './LocalFilter.svelte';
+
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  import type { PageData } from './$types';
+  /**
+   * The data that will be displayed on this page
+   */
+  export let data;
 
-  export let data: PageData;
+  $: ({ tableData } = data);
+
+  let filtered: typeof tableData = [];
 </script>
 
 <!--
   @component
-  Displays a list of all users of the instance.
   
+  A list of all the organisations available to the user.
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/admin/users/${x.User?.id}`}></ComplexTableLayout>
+
+<ComplexTableLayout {...data} tableData={filtered}>
+  <div slot="filter">
+    <LocalFilter bind:data={tableData} bind:filtered></LocalFilter>
+  </div>
+</ComplexTableLayout>

@@ -194,13 +194,24 @@ export const load: PageLoad = async ({ fetch }) => {
         });
       }
     },
-
     {
       label: 'Delete User',
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
+        Promise.all(
+          x
+            .map((y) => y.User?.id)
+            .map((userId) =>
+              get(api).DELETE('/admin/users/delete/{userId}', {
+                fetch,
+                params: { path: { userId: userId! } }
+              })
+            )
+        ).then(() => {
+          notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
+          invalidateAll();
+        });
       }
     },
     {
