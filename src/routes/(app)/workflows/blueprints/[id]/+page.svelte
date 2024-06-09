@@ -1,0 +1,18 @@
+<script lang="ts">
+  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
+
+  /** The data that will be displayed on this page. */
+  export let data;
+
+  const { blueprint, infoHeader, workflowHeader } = data;
+</script>
+
+<!--
+  @component
+  Display of all the information about a specific workflow-blueprint.
+-->
+
+<div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
+  <DynCard header={infoHeader} data={blueprint} />
+  <DynCard header={workflowHeader} data={blueprint} />
+</div>

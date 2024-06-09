@@ -18,7 +18,9 @@
 
 <!--
   @component
-  Exposes various global settings of the application.
+  Represents a menu for admin-right restricted settings regarding workflows
+
+  - Contains a toggle-switch which allows for enabling/disabling workflows globally
 -->
 
 <div class="flex flex-col rounded-lg">
