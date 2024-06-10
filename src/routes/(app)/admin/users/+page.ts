@@ -178,20 +178,26 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
-        Promise.all(
-          x
-            .map((y) => y.User?.id)
-            .map((userId) =>
-              get(api).PUT('/admin/users/edit/{userId}', {
-                fetch,
-                params: { path: { userId: userId! } },
-                body: { disabled: true }
-              })
-            )
-        ).then(() => {
-          notifications.add(successPill('Disabled users ' + x.map((y) => y.User?.id).join(', ')));
-          invalidateAll();
-        });
+        if (
+          confirm(
+            `Are you sure you want to disable the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).PUT('/admin/users/edit/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } },
+                  body: { disabled: true }
+                })
+              )
+          ).then(() => {
+            notifications.add(successPill('Disabled users ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
+        }
       }
     },
     {
@@ -199,19 +205,25 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        Promise.all(
-          x
-            .map((y) => y.User?.id)
-            .map((userId) =>
-              get(api).DELETE('/admin/users/delete/{userId}', {
-                fetch,
-                params: { path: { userId: userId! } }
-              })
-            )
-        ).then(() => {
-          notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
-          invalidateAll();
-        });
+        if (
+          confirm(
+            `Are you sure you want to delete the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).DELETE('/admin/users/delete/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } }
+                })
+              )
+          ).then(() => {
+            notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
+        }
       }
     },
     {
@@ -219,7 +231,13 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        notifications.add(successPill('Deleted tokens ' + x.map((y) => y.User?.id).join(', ')));
+        if (
+          confirm(
+            `Are you sure you want to delete the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          notifications.add(successPill('Deleted tokens ' + x.map((y) => y.User?.id).join(', ')));
+        }
       }
     },
     {
