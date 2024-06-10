@@ -86,8 +86,14 @@ export const load: PageLoad = async ({ fetch }) => {
     col({
       icon: 'mdi:person-outline',
       key: 'nids_sid',
-      label: 'Name',
+      label: 'NIDS',
       value: (x) => ({ display: Info, props: { text: x.User?.nids_sid ?? 'unknown' } })
+    }),
+    col({
+      icon: 'mdi:person-outline',
+      key: 'name',
+      label: 'Name',
+      value: () => ({ display: Info, props: { text: 'unknown' } })
     }),
     col({
       icon: 'mdi:person-outline',

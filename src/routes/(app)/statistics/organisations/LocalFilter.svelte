@@ -8,7 +8,7 @@
   import { findKey, values } from 'lodash-es';
 
   /**
-   * any array that extends Enabled ({enabled: boolean})
+   * any array that extends Local ({local: boolean})
    */
   export let data: T[];
 

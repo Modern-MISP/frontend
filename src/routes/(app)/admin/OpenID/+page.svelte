@@ -8,7 +8,7 @@
 
 <!--
   @component
-  Displays a list of all providers of the instance.
+  Displays a list of all current providers.
   
 -->
 <ComplexTableLayout {...data} tableHref={(x) => `/admin/OpenID/${x.Provider?.id}`}

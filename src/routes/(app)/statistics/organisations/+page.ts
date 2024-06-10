@@ -3,7 +3,6 @@ import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 
@@ -11,7 +10,7 @@ export const load: PageLoad = async () => {
   const data = [
     {
       Organisation: {
-        id: '123456',
+        id: '1',
         name: 'Org 1',
         users: '3',
         attributes: '2',
@@ -42,33 +41,33 @@ export const load: PageLoad = async () => {
       icon: 'mdi:person-outline',
       key: 'nids_sid',
       label: 'Name',
-      value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.name } })
+      value: (x) => ({ display: Pill, props: { icon: 'mdi:person-outline', text: x.name } })
     }),
 
     col({
       icon: 'mdi:pound',
       key: 'users',
       label: 'Users',
-      value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.users } })
+      value: (x) => ({ display: Pill, props: { icon: 'mdi:pound', text: x.users } })
     }),
     col({
       icon: 'mdi:pound',
       key: 'events',
       label: 'Events',
-      value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.events } })
+      value: (x) => ({ display: Pill, props: { icon: 'mdi:pound', text: x.events } })
     }),
 
     col({
       icon: 'mdi:pound',
       key: 'attributes',
       label: 'Attributes',
-      value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.attributes } })
+      value: (x) => ({ display: Pill, props: { icon: 'mdi:pound', text: x.attributes } })
     }),
     col({
       icon: 'mdi:alert-circle-outline',
       key: 'type',
       label: 'Type',
-      value: (x) => ({ display: Pill, props: { icon: 'ph:hash-bold', text: x.type } })
+      value: (x) => ({ display: Pill, props: { icon: 'mdi:alert-circle-outline', text: x.type } })
     }),
     col({
       icon: 'mdi:update',
@@ -92,18 +91,10 @@ export const load: PageLoad = async () => {
       }
     }
   ];
-  const topMenuActions: ActionBarEntryProps[] = [
-    {
-      icon: 'mdi:import',
-      label: 'Open Editor',
-      action: ''
-    }
-  ];
 
   return {
     tableData,
     header,
-    editActions,
-    topMenuActions
+    editActions
   };
 };

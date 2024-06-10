@@ -46,10 +46,8 @@ export const load: PageLoad = async () => {
       label: 'Delete Provider',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: (x) => {
-        notifications.add(
-          successPill('Deleted providers ' + x.map((y) => y.Provider?.id).join(', '))
-        );
+      action: () => {
+        notifications.add(successPill('Deleted providers'));
       }
     },
     {
@@ -68,26 +66,6 @@ export const load: PageLoad = async () => {
       action: '/admin/OpenID/new'
     }
   ];
-
-  /*const fil = createTableHeadGenerator<undefined>();
-
-  const filter = [
-    fil({
-      label: 'Role',
-      value: () => ({
-        display: Select,
-        props: {
-          options:
-            providerData?.map((x) => ({
-              label: x.Name?.name ?? 'unknown',
-              value: x.Name?.id ?? 'unknown'
-            })) ?? [],
-          value: providerData && providerData.length > 0 ? providerData[0].Name?.id ?? '0' : '0',
-          name: 'role'
-        }
-      })
-    })
-  ];*/
 
   return {
     data,
