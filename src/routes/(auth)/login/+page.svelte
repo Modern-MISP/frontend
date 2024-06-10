@@ -18,6 +18,8 @@
       $token = entries.token;
       goto('/events');
       return;
+    } else if (entries.email && entries.password) {
+      goto('/login/setPassword');
     }
   }
 
