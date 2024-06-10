@@ -2,11 +2,12 @@
   /* Imports for search options
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
-  import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import CreateTag from './CreateTag.svelte';
   */
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
+  import CreateTag from './CreateTag.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   /**
@@ -54,7 +55,7 @@
       ></Input>
     </ActionCard>
   </div>
-
+-->
   <svelte:fragment slot="added">
     {#if addTag}
       <div
@@ -67,5 +68,4 @@
       </div>
     {/if}
   </svelte:fragment>
-  -->
 </ComplexTableLayout>
