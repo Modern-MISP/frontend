@@ -1,41 +1,41 @@
-import { api } from '$lib/api';
-import { get } from 'svelte/store';
-import { error, type NumericRange } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
-
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Input from '$lib/components/input/Input.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import Pill from '$lib/components/pills/pill/Pill.svelte';
+import { createTableHeadGenerator } from "$lib/util/tableBuilder.util";
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load = async () => {
+  // Static data
   const data = {
     id: '1',
     name: 'Google',
     path: 'https://accounts.google.com/.well-known/openid-configuration',
     token: 'eyJh••••••••••••••yZjI'
   };
-
-  const col = createTableHeadGenerator<typeof data>();
+  type Provider = {
+    name?: string;
+    path?: string;
+    token?: string;
+  };
+  
+  const col = createTableHeadGenerator<Provider>();
 
   const header = [
     col(
       {
         label: 'Name',
         value: (x) => ({
-          display: Pill,
+          display: HrefPill,
           props: {
             icon: 'mdi:watermark',
-            text: x.name ?? 'unknown'
+            text: x.name ?? 'unknown',
+            href: x.name ? 'nameto:' + x.name : ''
           }
         })
       },
       {
-        value: (x) => ({
+        value: () => ({
           display: Input,
           props: {
             placeholder: 'Name',
-            value: x.name ?? '',
             name: 'name',
             icon: 'mdi:watermark'
           }
@@ -50,16 +50,15 @@ export const load: PageLoad = async ({ params, fetch }) => {
           props: {
             icon: 'mdi:link-variant',
             text: x.path ?? 'unknown',
-            href: x.path ?? ''
+            href: x.path ? 'nameto:' + x.token : ''
           }
         })
       },
       {
-        value: (x) => ({
+        value: () => ({
           display: Input,
           props: {
             placeholder: 'Path',
-            value: x.path ?? '',
             name: 'path',
             icon: 'mdi:link-variant'
           }
@@ -70,7 +69,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       {
         label: 'Token',
         value: (x) => ({
-          display: Pill,
+          display: HrefPill,
           props: {
             icon: 'mdi:key-outline',
             text: x.token ?? 'unknown',
@@ -91,13 +90,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
     )
   ];
 
-  const title = 'Provider details';
-  const description = '';
-
   return {
-    user: data,
-    header,
-    title,
-    description
+    tableData: data,
+    header
   };
 };

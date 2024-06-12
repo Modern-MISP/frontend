@@ -2,7 +2,6 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-  import { lockViewMode } from '$lib/actions';
 
   /**
    * Page data containing the data of the provider with the id in the url
@@ -26,8 +25,6 @@
   <DynCard {header} data={user} />
 </div>
 -->
-
-<svelte:window use:lockViewMode={true} />
 
 <!--
 @component Displays information about a provider specified by ID.

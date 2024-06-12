@@ -31,5 +31,51 @@ export default {
         }
       })
     }
+  ),
+  path: col(
+    {
+      label: 'Name',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.name ?? 'unknown',
+          href: x.name ? 'nameto:' + x.name : ''
+        }
+      })
+    },
+    {
+      value: () => ({
+        display: Input,
+        props: {
+          placeholder: 'Name',
+          name: 'name',
+          icon: 'mdi:person-outline'
+        }
+      })
+    }
+  ),
+  token: col(
+    {
+      label: 'Name',
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.name ?? 'unknown',
+          href: x.name ? 'nameto:' + x.name : ''
+        }
+      })
+    },
+    {
+      value: () => ({
+        display: Input,
+        props: {
+          placeholder: 'Name',
+          name: 'name',
+          icon: 'mdi:person-outline'
+        }
+      })
+    }
   )
 };

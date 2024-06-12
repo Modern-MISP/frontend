@@ -12,19 +12,25 @@ export const load: PageLoad = async () => {
     {
       Provider: {
         id: '1',
-        name: 'Google'
+        name: 'Google',
+        path: 'https://accounts.google.com/.well-known/openid-configuration',
+        token: 'eyJh••••••••••••••yZjI'
       }
     },
     {
       Provider: {
         id: '2',
-        name: 'Ilias'
+        name: 'Ilias',
+        path: 'https://ilias.kit.edu/auth/realms/ilias/.well-known/openid-configuration',
+        token: 'eyJh••••••••••••••yZjI'
       }
     },
     {
       Provider: {
         id: '3',
-        name: 'Facebook'
+        name: 'Facebook',
+        path: 'https://www.facebook.com/.well-known/openid-configuration',
+        token: 'eyJh••••••••••••••yZjI'
       }
     }
   ];
@@ -38,6 +44,18 @@ export const load: PageLoad = async () => {
       key: 'provider',
       label: 'Provider',
       value: (x) => x.Provider?.name ?? 'unknown'
+    }),
+    col({
+      icon: 'mdi:link-variant',
+      key: 'path',
+      label: 'Path',
+      value: (x) => x.Provider?.path ?? 'unknown'
+    }),
+    col({
+      icon: 'mdi:key-outline',
+      key: 'token',
+      label: 'Token',
+      value: (x) => x.Provider?.token ?? 'unknown'
     })
   ];
 
@@ -63,7 +81,7 @@ export const load: PageLoad = async () => {
     {
       icon: 'mdi:plus-outline',
       label: 'Add Provider',
-      action: '/admin/OpenID/new'
+      action: '/admin/OIDConnect/new'
     }
   ];
 

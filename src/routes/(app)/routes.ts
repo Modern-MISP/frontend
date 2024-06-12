@@ -87,10 +87,10 @@ export const routes: SideMenuRoute[] = [
         href: '/admin/users'
       },
       {
-        name: 'OpenID',
+        name: 'OpenID Connect',
         icon: 'mdi:openid',
         userAccess: 'none',
-        href: '/admin/OpenID'
+        href: '/admin/OIDConnect'
       },
       {
         name: 'Keys',
