@@ -15,7 +15,7 @@
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
     console.log(entries);
-    goto('/login');
+    goto('/events');
   }
 </script>
 
