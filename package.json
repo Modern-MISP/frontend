@@ -65,5 +65,8 @@
     "vitest": "^1.2.1",
     "vitest-fetch-mock": "^0.2.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "svelte-heatmap": "github:Studsministern/svelte-heatmap#master"
+  }
 }

@@ -1,6 +1,3 @@
-import { api } from '$lib/api';
-import { get } from 'svelte/store';
-import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -9,6 +6,10 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
+  params;
+  fetch;
+
+  // Mock data
   const data = {
     id: '1',
     name: 'Google',

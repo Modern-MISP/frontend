@@ -57,7 +57,7 @@
   });
 
   function forgot_password() {
-    alert("Please Contact your Administrator to reset your password.");
+    alert('Please Contact your Administrator to reset your password.');
   }
 </script>
 
@@ -90,7 +90,12 @@
     />
 
     <div class="flex">
-      <a on:click="{forgot_password}" href="/login" class="text-sky" style="text-decoration: underline;">Forgot password?</a>
+      <a
+        on:click={forgot_password}
+        href="/login"
+        class="text-sky"
+        style="text-decoration: underline;">Forgot password?</a
+      >
     </div>
 
     <div class="relative flex items-center justify-center">

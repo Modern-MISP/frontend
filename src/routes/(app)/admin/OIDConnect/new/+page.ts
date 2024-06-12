@@ -1,6 +1,6 @@
 import Input from '$lib/components/input/Input.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
-import { createTableHeadGenerator } from "$lib/util/tableBuilder.util";
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 export const load = async () => {
   // Static data
@@ -15,7 +15,7 @@ export const load = async () => {
     path?: string;
     token?: string;
   };
-  
+
   const col = createTableHeadGenerator<Provider>();
 
   const header = [
