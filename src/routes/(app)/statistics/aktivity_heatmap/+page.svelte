@@ -11,7 +11,6 @@
   export let data;
 
   $: ({ heatmapData, settings, title, description, dropdown } = data);
-  $: console.log(dropdown);
 </script>
 
 <svelte:window use:lockViewMode={true} />
