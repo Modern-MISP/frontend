@@ -2,7 +2,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import EnableFilter from '../galaxies/EnableFilter.svelte';
 
-  /** The data that will be displayed on this page. */
+  /** Page data containing the workflows table */
   export let data;
 
   $: ({ tableData, header, editActions } = data);
@@ -15,7 +15,7 @@
 <!--
   @component
   
-  A list of all workflows.
+  Displays a list of all workflows.
 -->
 <ComplexTableLayout
   tableHref={({ id }) => `/workflows/${id}`}

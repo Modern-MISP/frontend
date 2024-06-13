@@ -13,6 +13,7 @@
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
 
+  /** Page data */
   export let data;
 
   $mode = 'edit';
@@ -91,6 +92,12 @@
 </script>
 
 <svelte:window use:lockEditMode={true} />
+
+<!--
+  @component
+  Displays the form for creating a new key.
+
+   -->
 
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>

@@ -5,6 +5,11 @@
   const childRoutes = routes.find(({ href }) => href === '/admin')?.children ?? [];
 </script>
 
+<!--
+@component
+Displays the admin page with all subpages.
+
+-->
 {#each childRoutes as childRoute}
   <SideMenuEntry {...childRoute} isMenuOpen={true}></SideMenuEntry>
 {/each}

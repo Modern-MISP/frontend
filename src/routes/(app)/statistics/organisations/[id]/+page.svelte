@@ -5,7 +5,7 @@
   import { lockViewMode } from '$lib/actions';
 
   /**
-   * Page data containing the data of the organisation with the id in the url
+   * Page data containing the data of the organisation with the 'id' in the url
    */
   export let data;
   $: ({ title, description } = data);
@@ -30,7 +30,7 @@
 <svelte:window use:lockViewMode={true} />
 
 <!--
-@component Displays information about an organisation specified by ID.
+@component Displays information about an organisation specified by 'id'.
 
 -->
 <Form callback={editCallback} bind:actions={formActions}>

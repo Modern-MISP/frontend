@@ -11,7 +11,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   /**
-   * Page data
+   * Page data containing the tags table.
    */
   export let data;
 

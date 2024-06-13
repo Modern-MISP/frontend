@@ -10,6 +10,9 @@
     console.log(formData);
   }
 
+  /**
+   * Page data containing usage data information.
+   */
   export let data;
 
   $: ({ header, title, description } = data);
@@ -17,6 +20,10 @@
 
 <svelte:window use:lockViewMode={true} />
 
+<!-- 
+    @component
+    Displays the statistics page.
+ -->
 <Form callback={editCallback}>
   <DynCard {header} data={{}} {title} {description}></DynCard>
 </Form>

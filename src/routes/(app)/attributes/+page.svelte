@@ -5,6 +5,7 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { actionBar } from '$lib/actions';
 
+  /** Page data of the attribute table */
   export let data;
 
   const Add_Attributes: ActionBarEntryProps[] = [
@@ -17,7 +18,8 @@
 </script>
 
 <!--
-    @component Displays a list of all attributes. 
+    @component
+    Displays a list of all attributes. 
     
 -->
 

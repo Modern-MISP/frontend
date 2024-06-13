@@ -4,7 +4,7 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   /**
-   * Page data containing the data of the provider with the id in the url
+   * Page data containing the data of the provider with the 'id' in the url
    */
   export let data;
   $: ({ title, description } = data);
@@ -17,17 +17,13 @@
 </script>
 
 <!--
-    @component
-    Shows information about a specific provider, specified by `id`.
--->
-<!--
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">
   <DynCard {header} data={user} />
 </div>
 -->
 
 <!--
-@component Displays information about a provider specified by ID.
+@component Displays information about a provider specified by 'id'.
 
 -->
 <Form callback={editCallback} bind:actions={formActions}>

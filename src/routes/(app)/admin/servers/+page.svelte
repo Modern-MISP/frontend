@@ -2,6 +2,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import type { PageData } from './$types';
 
+  /**Page data containing data of the servers */
   export let data: PageData;
 </script>
 

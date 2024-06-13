@@ -11,7 +11,7 @@
   import { invalidateAll } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
 
-  /** Data that is displayed on this page. */
+  /** Page data containing the data of the auth keys. */
   export let data: PageData;
 
   $: ({ left, key } = data);
@@ -48,7 +48,7 @@
 
 <!--
   @component
-  Displays information about a specific auth key, specified by `id`.
+  Displays information about auth keys, specified by `id`.
   
 -->
 <Form callback={editCallback}>

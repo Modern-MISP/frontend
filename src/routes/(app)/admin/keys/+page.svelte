@@ -1,6 +1,8 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
+  /**I think the pagination is not working, because the api does not support the request. I will still let it in, maybe they fix it in the future. */
+  /**Page data containing data of the keys */
   export let data;
 
   $: ({ tableData } = data);
@@ -8,7 +10,7 @@
 
 <!--
   @component
-  All user keys. I think the pagination is not working, because the api does not support the request. I will still let it in, maybe they fix it in the future.
+  Displays the list of all user keys.
   
 -->
 

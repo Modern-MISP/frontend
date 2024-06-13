@@ -5,6 +5,9 @@
 
   $mode = 'view';
 
+  /**
+   * Page data containing the activity heatmap.
+   */
   export let data;
 
   $: ({ heatmapData, settings, title, description, dropdown } = data);
@@ -13,4 +16,8 @@
 
 <svelte:window use:lockViewMode={true} />
 
+<!-- 
+    @component
+    Displays the activity heatmap.
+ -->
 <Heatmap data={heatmapData} {settings} {title} {description} {dropdown} />

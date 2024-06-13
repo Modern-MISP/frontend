@@ -11,6 +11,9 @@
     console.log(formData);
   }
 
+  /**
+   * Page data containing security information about the user.
+   */
   export let data;
 
   $: ({ header } = data.card);
@@ -19,6 +22,11 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!--
+  @component
+  Displays the information security settings page.
+
+-->
 <ComplexTableLayout
   tableHref={(x) => `/settings/security/${x.AuthKey?.id}`}
   {...data.table}

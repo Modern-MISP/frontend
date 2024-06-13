@@ -19,6 +19,10 @@
   }
 </script>
 
+<!-- 
+    @component
+    Displays the set password page. 
+-->
 <form
   class="flex flex-col gap-4 m-auto w-80 text-text"
   method="post"

@@ -140,7 +140,7 @@
 <!--
   @component
   
-  Page for exporting a galaxy.
+  Displays the form for exporting a galaxy.
 -->
 <svelte:window use:lockEditMode={true} />
 <Form callback={onExport}>

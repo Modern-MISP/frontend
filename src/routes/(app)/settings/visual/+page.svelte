@@ -21,6 +21,9 @@
     }
   ];
 
+  /**
+   * Page data containing visual information about the users preferences.
+   */
   export let data;
 
   $: ({ header, title, description } = data);
@@ -28,6 +31,10 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+    @component
+    Displays the visual information settings page.
+ -->
 <Form callback={editCallback} additionalActions={Export}>
   <DynCard {header} data={{}} {title} {description}></DynCard>
 </Form>

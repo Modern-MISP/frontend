@@ -21,13 +21,20 @@
     }
   ];
 
+  /**
+   * Page data containing information about the user.
+   */
   export let data;
 
   $: ({ header, title, description } = data);
 </script>
 
 <svelte:window use:lockEditMode={true} />
+<!--
+  @component
+  Displays the information settings page.
 
+-->
 <Form callback={editCallback} additionalActions={Export}>
   <DynCard {header} data={{}} {title} {description}></DynCard>
 </Form>

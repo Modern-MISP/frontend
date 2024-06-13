@@ -11,7 +11,9 @@
   import { invalidateAll } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
 
-  /** Data that is displayed on this page. */
+  /**
+   * Page data containing the data of the key with the 'id' in the url
+   */
   export let data: PageData;
 
   $: ({ left, key } = data);

@@ -13,6 +13,7 @@
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
 
+  /** Page data containing the form for new auth keys */
   export let data;
 
   $mode = 'edit';
@@ -92,6 +93,10 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+    @component
+    Displays the form for creating a new auth key.
+-->
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
 </Form>

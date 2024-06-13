@@ -15,6 +15,7 @@
 
   $mode = 'edit';
 
+  /** Page data */
   export let data;
 
   let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
@@ -29,7 +30,8 @@
 </script>
 
 <!--
-@component Displays information about an attribute specified by ID, allows adding of tags.
+@component 
+Displays the form for creating a new attribute.
 
 -->
 <div class="h-full overflow-auto">

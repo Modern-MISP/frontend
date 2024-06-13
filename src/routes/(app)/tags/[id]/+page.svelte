@@ -5,7 +5,7 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
   /**
-   * Page data containing the data of the tag with the id in the url
+   * Page data containing the data of the tag with the 'id' in the url
    */
   export let data;
   $: ({ title, description } = data);
@@ -44,7 +44,7 @@
 />
 
 <!--
-@component Displays information about an tag specified by ID.
+@component Displays information about an tag specified by 'id'.
 
 -->
 <Form callback={editCallback} bind:actions={formActions}>

@@ -3,6 +3,7 @@
 
   import type { PageData } from './$types';
 
+  /**Page data of the provider table */
   export let data: PageData;
 </script>
 

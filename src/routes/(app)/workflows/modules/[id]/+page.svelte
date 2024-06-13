@@ -2,7 +2,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
 
-  /** Data that is displayed on this page. */
+  /** Page data of an module specified by `id` in the url */
   export let data: PageData;
 
   const { infoHeader, module, title, description } = data;

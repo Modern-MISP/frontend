@@ -5,7 +5,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import type { PageData } from './$types';
 
-  /** Data that is displayed on this page. */
+  /** Page data containing the data and cluster overview of the galaxy with the 'id' in the url  */
   export let data: PageData;
 
   $: ({ left, right, galaxy, header } = data);
@@ -16,7 +16,8 @@
 <!--
   @component
   
-  Information about a single galaxy, including a list of its clusters.
+  Information about an galaxy specified by 'id', including a list of its clusters.
+
 -->
 
 <div class="flex flex-wrap w-full gap-2 lg:flex-nowrap">

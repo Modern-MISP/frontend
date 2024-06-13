@@ -39,6 +39,10 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+  @component 
+  Displays a form to add a new user.
+-->
 <Form callback={editCallback}>
   <DynCard
     header={[

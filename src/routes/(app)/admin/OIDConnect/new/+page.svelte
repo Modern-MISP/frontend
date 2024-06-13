@@ -6,6 +6,9 @@
   import { lockEditMode } from '$lib/actions';
   import type { PageData } from './$types';
 
+  /**
+   * Page data
+   */
   export let data: PageData;
 
   $: ({ header } = data);
@@ -22,6 +25,11 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!--
+  @component
+  Displays the form for creating a new provider.
+  
+-->
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
 </Form>

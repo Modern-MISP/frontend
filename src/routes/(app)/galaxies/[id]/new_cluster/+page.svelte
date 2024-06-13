@@ -159,6 +159,12 @@
 
 <svelte:window use:lockEditMode={true} />
 
+
+<!-- 
+    @component
+    Displays the form for creating a new galaxy cluster.
+
+-->
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
 </Form>
