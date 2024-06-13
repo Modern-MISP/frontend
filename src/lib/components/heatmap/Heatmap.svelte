@@ -96,6 +96,21 @@
     ...defaultSettings,
     ...settings
   };
+
+  $: height =
+    6 * (heatmapData.cellSize + heatmapData.cellGap) -
+    heatmapData.cellGap +
+    heatmapData.monthLabelHeight +
+    heatmapData.fontSize;
+  $: width =
+    (7 * (heatmapData.cellSize + heatmapData.cellGap) -
+      heatmapData.cellGap +
+      heatmapData.monthGap) *
+      7 -
+    heatmapData.monthGap;
+  function calcX(index: number) {
+    return (heatmapData.cellSize + heatmapData.cellGap) * index;
+  }
 </script>
 
 <!--
@@ -113,5 +128,23 @@
     <div style="margin: 3rem">
       <SvelteHeatmap {...heatmapData} />
     </div>
+    <svg viewBox={`0 0 ${width} ${height}`} style="margin-left: 3rem">
+      <rect
+        fill={heatmapData.emptyColor}
+        height={heatmapData.cellSize}
+        width={heatmapData.cellSize}
+        rx={heatmapData.cellRadius}
+        x="0"
+      ></rect>
+      {#each heatmapData.colors as color, index}
+        <rect
+          fill={color}
+          height={heatmapData.cellSize}
+          width={heatmapData.cellSize}
+          rx={heatmapData.cellRadius}
+          x={calcX(index + 1)}
+        ></rect>
+      {/each}
+    </svg>
   </div>
 </div>
