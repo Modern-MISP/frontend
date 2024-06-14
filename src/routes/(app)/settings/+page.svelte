@@ -22,7 +22,7 @@
 <!-- 
     @component
     Displays the settings page with all subpages.
--->	
+-->
 {#each childRoutes as childRoute}
   <SideMenuEntry {...childRoute} isMenuOpen={true}></SideMenuEntry>
 {/each}

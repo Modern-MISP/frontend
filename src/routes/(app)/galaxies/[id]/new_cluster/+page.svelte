@@ -159,7 +159,6 @@
 
 <svelte:window use:lockEditMode={true} />
 
-
 <!-- 
     @component
     Displays the form for creating a new galaxy cluster.
