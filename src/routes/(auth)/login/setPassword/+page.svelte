@@ -35,6 +35,13 @@
 
   <Input
     name="password"
+    placeholder="Old password"
+    type="password"
+    icon="mdi:lock-outline"
+    disabled={false}
+  />
+  <Input
+    name="password"
     placeholder="New password"
     type="password"
     icon="mdi:lock-outline"
