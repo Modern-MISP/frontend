@@ -5,7 +5,7 @@
   $mode = 'view';
 
   /**
-   * Page data containing the activity heatmap.
+   * Page data containing the Attribute Histogramm.
    */
   export let data;
 
@@ -14,4 +14,8 @@
 
 <svelte:window use:lockViewMode={true} />
 
+<!-- 
+    @component
+    Displays the Attribute Histogramm.
+ -->
 <Histogram title="Histogram" description="This is a histogram" data={histogramData} {dataTypes} />
