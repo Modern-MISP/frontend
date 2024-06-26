@@ -1,9 +1,9 @@
 export type Blueprint = {
-  id?: number;
+  id?: string; //number?
   uuid?: string;
   name?: string;
   description?: string;
-  timestamp?: number; //datetime?
-  default?: number; //bool/tinyint
+  timestamp?: string; //datetime/number?
+  default?: boolean; //tinyint?
   data?: string;
 };
