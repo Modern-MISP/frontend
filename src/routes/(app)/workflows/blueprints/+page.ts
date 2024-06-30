@@ -10,8 +10,9 @@ import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
+  // @ts-expect-error Not in the OpenAPI spec ;-;
   //TODO Template String?
-  const getResult = await get(api).GET(`/workflows/blueprints/index`, { fetch });
+  const getResult = await get(api).GET('/workflows/blueprints/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];
 
