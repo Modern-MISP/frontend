@@ -1,4 +1,4 @@
-import type { PageLoad } from "./$types";
+import type { PageLoad } from './$types';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { get } from 'svelte/store';
 import { api } from '$lib/api';
@@ -9,11 +9,9 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
-
-
 export const load: PageLoad = async ({ fetch }) => {
-
-  const getResult = await get(api).GET('/workflows/blueprints/index', {fetch});
+  //TODO Template String?
+  const getResult = await get(api).GET(`/workflows/blueprints/index`, { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];
 
@@ -38,7 +36,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:circle',
       key: 'name',
       label: 'Name',
-      value: (x) => ({display: Info, props: { text: x.name }})
+      value: (x) => ({ display: Info, props: { text: x.name } })
     }),
     col({
       icon: 'mdi:circle',
@@ -50,7 +48,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:circle',
       key: 'timestamp',
       label: 'Timestamp',
-      value: (x) => ({display: Info, props: { text: x.timestamp}})
+      value: (x) => ({ display: Info, props: { text: x.timestamp } })
     }),
     col({
       icon: 'mdi:circle',
@@ -62,15 +60,16 @@ export const load: PageLoad = async ({ fetch }) => {
 
   if (!data) error(500, 'No data returned');
 
-  const editActions: DynCardActionHeader<typeof data>[] = [ //TODO
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    //TODO
     {
       label: '',
       icon: '',
       action: (x) => {
-        x
+        x;
       }
     }
-  ]
+  ];
 
   return {
     data,

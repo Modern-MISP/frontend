@@ -2,6 +2,7 @@
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import { currentRoute, settings } from '$lib/stores';
   import SettingsEntry from '$lib/components/settingsEntry/SettingsEntry.svelte';
+
   $currentRoute = [
     {
       name: 'Admin',
