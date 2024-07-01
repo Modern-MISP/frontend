@@ -1,4 +1,4 @@
-import type { PageLoad } from './$types';
+import type { PageLoad } from '../../../../../.svelte-kit/types/src/routes/(app)/workflows/modules/[id]/$types'; //TODO types
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { get } from 'svelte/store';
 import { api } from '$lib/api';
@@ -11,7 +11,7 @@ import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interf
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  //TODO Template String?
+  //TODO API Endpoint
   const getResult = await get(api).GET('/workflows/blueprints/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];

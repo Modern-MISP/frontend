@@ -4,7 +4,7 @@
 
   export let data;
 
-  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: !d.disabled }));
+  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: d.default ?? true })); //TODO necessary?
 
   let filtered: typeof filterableTableData = [];
 </script>

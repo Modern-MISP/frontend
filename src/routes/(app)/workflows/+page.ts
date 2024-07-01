@@ -12,7 +12,7 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load = async ({ fetch }) => {
-  /// @ts-expect-error Not in the OpenAPI spec.. great.
+  /// @ts-expect-error Not in the OpenAPI spec. great.
   const getResult = await get(api).GET('/workflows/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = (getResult.data! as { Workflow: Trigger['Workflow'] }[]).map((x) => x.Workflow!);
