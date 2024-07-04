@@ -79,7 +79,7 @@ export const routes: SideMenuRoute[] = [
       },
       {
         name: 'Blueprints',
-        icon: '',
+        icon: 'mdi:arrange-send-backward',
         href: '/workflows/blueprints',
         userAccess: 'none'
       }
@@ -118,7 +118,7 @@ export const routes: SideMenuRoute[] = [
       },
       {
         name: 'Workflow Settings',
-        icon: '',
+        icon: 'mdi:toggle-switch-outline',
         userAccess: 'none',
         href: '/admin/workflowSettings'
       }
