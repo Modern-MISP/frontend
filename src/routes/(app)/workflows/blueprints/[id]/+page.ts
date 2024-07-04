@@ -10,7 +10,7 @@ import type { Blueprint } from '../blueprint';
 export const load: PageLoad = async ({ params, fetch }) => {
   // @ts-expect-error Not in OpenAPI spec
   //TODO Icons + API Endpoint
-  const getResult = await get(api).GET('/workflows/blueprintView/{blueprintId}', {
+  const getResult = await get(api).GET('/workflowBlueprints/view/{blueprintId}', {
     fetch,
     params: { path: { blueprintId: params.id } }
   });

@@ -76,6 +76,12 @@ export const routes: SideMenuRoute[] = [
         icon: 'material-symbols:package-2-outline',
         href: '/workflows/modules',
         userAccess: 'none'
+      },
+      {
+        name: 'Blueprints',
+        icon: '',
+        href: '/workflows/blueprints',
+        userAccess: 'none'
       }
     ]
   },
@@ -109,6 +115,12 @@ export const routes: SideMenuRoute[] = [
         icon: 'mdi:server',
         userAccess: 'none',
         href: '/admin/servers'
+      },
+      {
+        name: 'Workflow Settings',
+        icon: '',
+        userAccess: 'none',
+        href: '/admin/workflowSettings'
       }
     ]
   },

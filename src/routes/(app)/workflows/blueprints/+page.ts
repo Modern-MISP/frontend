@@ -12,7 +12,7 @@ import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interf
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
   //TODO API Endpoint
-  const getResult = await get(api).GET('/workflows/blueprints/index', { fetch });
+  const getResult = await get(api).GET('/workflowBlueprints/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];
 
