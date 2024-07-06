@@ -86,6 +86,12 @@ export const routes: SideMenuRoute[] = [
     ]
   },
   {
+    name: 'Logs',
+    icon: 'mdi:tag',
+    href: '/logs',
+    userAccess: 'none'
+  },
+  {
     name: 'Admin',
     icon: 'mdi-shield-account',
     href: '/admin',

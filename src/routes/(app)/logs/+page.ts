@@ -10,7 +10,7 @@ import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interf
 
 export const load = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } });
+  const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages
 
   const { error: mispError, response } = getResult;
   const data = getResult.data as Log[];
@@ -88,6 +88,7 @@ export const load = async ({ fetch }) => {
 
   return {
     data,
+    tableData: data,
     header,
     editActions
   };
