@@ -1,9 +1,9 @@
 export type Log = {
-  id?: number;
+  id?: string; //TODO should be number
   title?: string;
   created?: string;
   model?: string;
-  model_id?: number;
+  model_id?: string; //TODO should be number
   action?: string;
   user_id?: number;
   change?: string;

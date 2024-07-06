@@ -64,8 +64,8 @@ export const load: PageLoad = async ({ fetch }) => {
   const editActions: DynCardActionHeader<typeof data>[] = [
     //TODO
     {
-      label: '',
-      icon: '',
+      label: 'Delete',
+      icon: 'mdi:delete-outline',
       action: (x) => {
         x;
       }

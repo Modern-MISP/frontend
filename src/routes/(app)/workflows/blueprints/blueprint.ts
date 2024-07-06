@@ -1,5 +1,5 @@
 export type Blueprint = {
-  id?: string; //number?
+  id?: string; //TODO number?
   uuid?: string;
   name?: string;
   description?: string;

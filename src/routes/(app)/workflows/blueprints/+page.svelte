@@ -1,12 +1,7 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-  import EnableFilter from '../../galaxies/EnableFilter.svelte';
 
   export let data;
-
-  $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: d.default ?? true })); //TODO necessary?
-
-  let filtered: typeof filterableTableData = [];
 </script>
 
 <!--
@@ -20,8 +15,5 @@
   - Description
   - Timestamp
 -->
-<ComplexTableLayout {...data} tableData={filtered}>
-  <div slot="filter">
-    <EnableFilter bind:data={filterableTableData} bind:filtered></EnableFilter>
-  </div>
+<ComplexTableLayout {...data} tableHref={(x) => `/workflowBlueprints/view/${x.id}`}>
 </ComplexTableLayout>
