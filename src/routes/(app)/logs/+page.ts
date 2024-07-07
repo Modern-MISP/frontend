@@ -7,8 +7,9 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import Info from '$lib/components/info/Info.svelte';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import type { PageLoad } from './$types';
 
-export const load = async ({ fetch }) => {
+export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
   const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages
 
@@ -24,7 +25,7 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => ({ display: Info, props: { text: x.id } }) //TODO type of id should be number
+      value: (x) => x.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:ip-outline',
@@ -60,22 +61,22 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:circle',
       key: 'model-id',
       label: 'Model-ID',
-      value: (x) => ({ display: Info, props: { text: x.model_id } }) //TODO Number
+      value: (x) => x.model_id ?? 'unknown'
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:autorenew',
       key: 'action',
       label: 'Action',
       value: (x) => ({ display: Boolean, props: { isTrue: x.action } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:subtitles-outline',
       key: 'title',
       label: 'Title',
       value: (x) => ({ display: Info, props: { text: x.title } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:swap-horizontal',
       key: 'change',
       label: 'Change',
       value: (x) => ({ display: Info, props: { text: x.change } })

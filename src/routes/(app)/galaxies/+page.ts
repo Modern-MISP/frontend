@@ -94,7 +94,7 @@ export const load: PageLoad = async ({ fetch }) => {
           selected
             .map((y) => y.id)
             .map((galaxyId) =>
-              // @ts-expect-error Not in the OpenAPI spec.. great.
+              // @ts-expect-error Not in the OpenAPI spec.
               get(api).POST('/galaxies/enable/{galaxyId}', {
                 fetch,
                 params: { path: { galaxyId } }
@@ -111,7 +111,7 @@ export const load: PageLoad = async ({ fetch }) => {
           selected
             .map((y) => y.id)
             .map((galaxyId) =>
-              // @ts-expect-error Not in the OpenAPI spec.. great.
+              // @ts-expect-error Not in the OpenAPI spec.
               get(api).POST('/galaxies/disable/{galaxyId}', {
                 fetch,
                 params: { path: { galaxyId } }
@@ -134,7 +134,7 @@ export const load: PageLoad = async ({ fetch }) => {
             x
               .map((y) => y.id)
               .map((galaxyId) =>
-                //  @ts-expect-error Not in the OpenAPI spec.. great.
+                //  @ts-expect-error Not in the OpenAPI spec.
                 get(api).POST('/galaxies/delete/{galaxyId}', {
                   fetch,
                   params: { path: { galaxyId } }

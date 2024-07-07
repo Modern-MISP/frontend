@@ -1,4 +1,4 @@
-import type { PageLoad } from '../../../../../../.svelte-kit/types/src/routes/(app)/workflows/modules/[id]/$types'; //TODO types
+import type { PageLoad } from './$types';
 import { get } from 'svelte/store';
 import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';

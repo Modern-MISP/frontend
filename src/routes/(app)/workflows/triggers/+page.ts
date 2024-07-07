@@ -16,7 +16,7 @@ import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interf
 import { invalidateAll } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch }) => {
-  /// @ts-expect-error Not in the OpenAPI spec.. great.
+  /// @ts-expect-error Not in the OpenAPI spec.
   const getResult = await get(api).GET('/workflows/triggers', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as unknown as Trigger[];
@@ -64,7 +64,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({
         display: HrefPill,
         props: {
-          href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : '#',
+          href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : `workflows/editor/${x.name}`,
           icon: 'material-symbols:network-node',
           text: x.Workflow?.id ?? 'unknown'
         }
