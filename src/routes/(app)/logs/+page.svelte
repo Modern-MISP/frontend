@@ -1,5 +1,7 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import { get } from 'svelte/store';
+  import { api } from '$lib/api';
 
   export let data;
 

@@ -11,10 +11,10 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages
+  const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages, POST?
 
   const { error: mispError, response } = getResult;
-  const data = getResult.data as Log[];
+  const data = getResult.data as unknown as Log[];
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
