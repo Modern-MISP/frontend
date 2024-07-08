@@ -10,7 +10,7 @@ import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
-  // @ts-expect-error Not in the OpenAPI spec ;-;
+  // @ts-expect-error Not in the OpenAPI spec.
   //TODO API Endpoint
   const getResult = await get(api).GET('/workflowBlueprints/index', { fetch });
   const { error: mispError, response } = getResult;
@@ -25,37 +25,40 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => ({ display: Info, props: { text: x.id } })
+      value: (x) => x.WorkflowBlueprint.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:id-card',
       key: 'uuid',
       label: 'UUID',
-      value: (x) => ({ display: Info, props: { text: x.uuid } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.uuid ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'name',
       label: 'Name',
-      value: (x) => ({ display: Info, props: { text: x.name } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.name ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'description',
       label: 'Description',
-      value: (x) => ({ display: Info, props: { text: x.description } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.description ?? 'none' } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'timestamp',
       label: 'Timestamp',
-      value: (x) => ({ display: Info, props: { text: x.timestamp } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.timestamp ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'default',
       label: 'Default',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.default } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.WorkflowBlueprint.default ?? 'unknown' }
+      })
     })
   ];
 

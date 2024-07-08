@@ -15,5 +15,7 @@
   - Description
   - Timestamp
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/workflowBlueprints/view/${x.id}`}
+<ComplexTableLayout
+  {...data}
+  tableHref={(x) => `/workflowBlueprints/view/${x.WorkflowBlueprint.id}`}
 ></ComplexTableLayout>

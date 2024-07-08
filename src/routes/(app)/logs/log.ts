@@ -1,14 +1,16 @@
 export type Log = {
-  id?: number;
-  title?: string;
-  created?: string;
-  model?: string;
-  model_id?: number;
-  action?: string;
-  user_id?: number;
-  change?: string;
-  email?: string;
-  org?: string;
-  description?: string;
-  ip?: string;
+  Log: {
+    id?: string;
+    title?: string;
+    created: string;
+    model?: string;
+    model_id?: string;
+    action?: string;
+    user_id?: string;
+    change?: string;
+    email?: string;
+    org?: string;
+    description?: string;
+    ip?: string;
+  };
 };

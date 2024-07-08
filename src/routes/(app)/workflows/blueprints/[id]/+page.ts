@@ -26,43 +26,43 @@ export const load: PageLoad = async ({ params, fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => ({ display: Info, props: { text: x.id ?? 'unknown' } })
+      value: (x) => x.WorkflowBlueprint.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:id-card',
       key: 'uuid',
       label: 'UUID',
-      value: (x) => ({ display: Info, props: { text: x.uuid ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.uuid ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:id-card',
       key: 'name',
       label: 'Name',
-      value: (x) => ({ display: Info, props: { text: x.name ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.name ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:information-outline',
       key: 'description',
       label: 'Description',
-      value: (x) => ({ display: Info, props: { text: x.description ?? '' } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.description ?? 'none' } })
     }),
     col({
       icon: 'mdi:circle',
       key: 'timestamp',
       label: 'Timestamp',
-      value: (x) => ({ display: Info, props: { text: x.timestamp ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.timestamp ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:checkbox-marked-outline',
       key: 'default',
       label: 'Default Blueprint',
-      value: (x) => ({ display: Boolean, props: { isTrue: !x.default } })
+      value: (x) => ({ display: Boolean, props: { isTrue: !x.WorkflowBlueprint.default } })
     }),
     col({
       icon: 'mdi:information-outline',
       key: 'data',
       label: 'Data',
-      value: (x) => ({ display: Info, props: { text: x.data ?? '' } })
+      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.data ?? 'unknown' } })
     })
   ];
 

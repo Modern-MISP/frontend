@@ -23,4 +23,4 @@
 
 -->
 
-<ComplexTableLayout {...data} tableHref={(x) => `/logs/index/${x.id}`}></ComplexTableLayout>
+<ComplexTableLayout {...data} tableHref={(x) => `/logs/index/${x.Log.id}`}></ComplexTableLayout>

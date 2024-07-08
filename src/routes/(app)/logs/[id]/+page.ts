@@ -26,73 +26,73 @@ export const load: PageLoad = async ({ params, fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => x.id ?? 'unknown'
+      value: (x) => x.Log.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:ip-outline',
       key: 'ip',
       label: 'IP',
-      value: (x) => ({ display: Info, props: { text: x.ip } })
+      value: (x) => ({ display: Info, props: { text: x.Log.ip } })
     }),
     col({
       icon: 'mdi:email',
       key: 'email',
       label: 'E-Mail',
-      value: (x) => ({ display: Info, props: { text: x.email } })
+      value: (x) => ({ display: Info, props: { text: x.Log.email } })
     }),
     col({
       icon: 'mdi:factory', //or mdi:store-outline
       key: 'org',
       label: 'Organisation',
-      value: (x) => ({ display: Info, props: { text: x.org } })
+      value: (x) => ({ display: Info, props: { text: x.Log.org } })
     }),
     col({
       icon: 'mdi:timer-edit-outline',
       key: 'created',
       label: 'Created',
-      value: (x) => ({ display: Info, props: { text: x.created } })
+      value: (x) => ({ display: Info, props: { text: x.Log.created } })
     }),
     col({
       icon: 'mdi:dots-circle',
       key: 'model',
       label: 'Model',
-      value: (x) => ({ display: Info, props: { text: x.model } })
+      value: (x) => ({ display: Info, props: { text: x.Log.model } })
     }),
     col({
       icon: 'mdi:id-card',
       key: 'model-id',
       label: 'Model-ID',
-      value: (x) => x.model_id ?? 'unknown'
+      value: (x) => x.Log.model_id ?? 'unknown'
     }),
     col({
       icon: 'mdi:autorenew',
       key: 'action',
       label: 'Action',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.action } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Log.action } })
     }),
     col({
       icon: 'mdi:subtitles-outline',
       key: 'title',
       label: 'Title',
-      value: (x) => ({ display: Info, props: { text: x.title } })
+      value: (x) => ({ display: Info, props: { text: x.Log.title } })
     }),
     col({
       icon: 'mdi:swap-horizontal',
       key: 'change',
       label: 'Change',
-      value: (x) => ({ display: Info, props: { text: x.change } })
+      value: (x) => ({ display: Info, props: { text: x.Log.change } })
     }),
     col({
       icon: 'mdi:id-card',
       key: 'user_id',
       label: 'User ID',
-      value: (x) => x.user_id ?? 'unknown'
+      value: (x) => x.Log.user_id ?? 'unknown'
     }),
     col({
       icon: 'mdi:text-box-outline',
       key: 'description',
       label: 'Description',
-      value: (x) => ({ display: Info, props: { text: x.description } })
+      value: (x) => ({ display: Info, props: { text: x.Log.description } })
     })
   ];
 
