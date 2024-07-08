@@ -10,6 +10,9 @@
     >
   >;
 
+  /**
+   *
+   */
   export let data: $$Props['data'];
 
   const { id, name, comment } = data;

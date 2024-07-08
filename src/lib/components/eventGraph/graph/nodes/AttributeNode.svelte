@@ -19,6 +19,9 @@
     >
   >;
 
+  /**
+   *
+   */
   export let data: $$Props['data'];
 
   const { id, type, value } = data;
