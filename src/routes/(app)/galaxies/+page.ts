@@ -16,8 +16,9 @@ import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/galaxies', { fetch });
+  console.log(mispError);
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.detail);
   const tableData = data.map(
     (x) =>
       x.Galaxy as (typeof x)['Galaxy'] & {
