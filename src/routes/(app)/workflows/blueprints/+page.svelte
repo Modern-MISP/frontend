@@ -17,5 +17,5 @@
 -->
 <ComplexTableLayout
   {...data}
-  tableHref={(x) => `/workflowBlueprints/view/${x.WorkflowBlueprint.id}`}
+  tableHref={(x) => `/workflows/blueprints/${x.id}`}
 ></ComplexTableLayout>

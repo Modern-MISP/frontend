@@ -23,47 +23,45 @@ function download(content: string, fileName: string, contentType: string) {
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec?
-  //TODO API Endpoint
   const getResult = await get(api).GET('/workflowBlueprints/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];
 
-  //const tableData = data.map((x) => (x.WorkflowBlueprint))
+  const tableData = data.map((x) => x.WorkflowBlueprint);
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
-  //TODO Icons
+  const col = createTableHeadGenerator<(typeof tableData)[number], DynTableHeadExtent>();
   const header = [
     col({
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => x.WorkflowBlueprint.id ?? 'unknown'
+      value: (x) => x.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:ticket-account',
       key: 'uuid',
       label: 'UUID',
-      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.uuid ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.uuid ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:card-account-details',
       key: 'name',
       label: 'Name',
-      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.name ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.name ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:subtitles-outline',
       key: 'description',
       label: 'Description',
-      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.description ?? 'none' } })
+      value: (x) => ({ display: Info, props: { text: x.description ?? 'none' } })
     }),
     col({
       icon: 'mdi:timer',
       key: 'timestamp',
       label: 'Timestamp',
-      value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.timestamp ?? 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.timestamp ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:selection-ellipse-arrow-inside',
@@ -71,7 +69,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Default',
       value: (x) => ({
         display: Boolean,
-        props: { isTrue: x.WorkflowBlueprint.default ?? 'unknown' }
+        props: { isTrue: x.default ?? 'unknown' }
       })
     })
   ];
@@ -82,7 +80,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       icon: 'mdi:upload',
       label: 'Import Blueprint',
-      action: '/workflowBlueprints/import'
+      action: '/workflows/blueprints/import'
     }
   ];
 
@@ -93,7 +91,7 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         Promise.all(
           x
-            .map((y) => y.WorkflowBlueprint.id)
+            .map((y) => y.id)
             .map((blueprintId) =>
               // @ts-expect-error Not in the OpenAPI spec?
               get(api).DELETE('/workflowBlueprints/delete//{blueprintId}', {
@@ -102,36 +100,36 @@ export const load: PageLoad = async ({ fetch }) => {
               })
             )
         ).then(() => {
-          notifications.add(
-            successPill('Deleted blueprint ' + x.map((y) => y.WorkflowBlueprint.id).join(', '))
-          );
+          notifications.add(successPill('Deleted blueprint ' + x.map((y) => y.id).join(', ')));
           invalidateAll();
         });
       }
     },
     {
-      //TODO Content???? return of api req?
       label: 'Export Blueprint',
       icon: 'mdi:download',
       action: (x) => {
         Promise.all(
           x
-            .map((y) => y.WorkflowBlueprint.id)
-            .map((blueprintId) =>
-              // @ts-expect-error Not in the OpenAPI spec?
-              download(
-                get(api).GET('/workflowBlueprints/export/{blueprintId}', {
-                  fetch,
-                  params: { path: { blueprintId: blueprintId! } }
-                }),
-                'blueprint.json',
-                'JSON'
-              )
+            .map((y) => y.id)
+            .map(
+              (blueprintId) =>
+                // @ts-expect-error Not in the OpenAPI spec?
+                get(api)
+                  .GET('/workflowBlueprints/export/{blueprintId}', {
+                    fetch,
+                    params: { path: { blueprintId: blueprintId! } }
+                  })
+                  .then((response) =>
+                    download(
+                      JSON.stringify(response.data, undefined, 2),
+                      `blueprint-${blueprintId}.json`,
+                      'JSON'
+                    )
+                  )
             )
         ).then(() => {
-          notifications.add(
-            successPill('Exported blueprint ' + x.map((y) => y.WorkflowBlueprint.id).join(', '))
-          );
+          notifications.add(successPill('Exported blueprint ' + x.map((y) => y.id).join(', ')));
           invalidateAll();
         });
       }
@@ -139,8 +137,7 @@ export const load: PageLoad = async ({ fetch }) => {
   ];
 
   return {
-    data,
-    tableData: data,
+    tableData: tableData,
     header,
     editActions,
     topMenuActions
