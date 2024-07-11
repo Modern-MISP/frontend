@@ -8,6 +8,8 @@
   import OidcButton from '$lib/components/button/oidcButton/OidcButton.svelte';
   import { onMount } from 'svelte';
   import { forEach } from 'lodash-es';
+  import { api } from '$lib/api';
+  import { get } from 'svelte/store';
 
   let error: string = '';
 
@@ -19,7 +21,29 @@
       goto('/events');
       return;
     } else if (entries.email && entries.password) {
-      goto('/login/setPassword');
+      get(api)
+        .POST('/auth/login/password', {
+          body: {
+            email: entries.email,
+            password: entries.password
+          }
+        })
+        .then((resp) => {
+          if (resp.error) {
+            if (typeof resp.error.detail === 'string') {
+              if (resp.error.detail === "Forbidden") {
+                goto(`/login/setPassword/${entries.email}`);
+              } else {
+                throw new Error(resp.error.detail);
+              }
+            } else if (resp.error.detail != null) {
+              throw new Error(resp.error.detail[0].msg);
+            }
+          } else {
+            $token = resp.data.token;
+            goto('/events');
+          }
+        })
     }
   }
 

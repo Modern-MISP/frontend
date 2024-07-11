@@ -1,8 +1,12 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
+  import { api } from '$lib/api';
+  import { get } from 'svelte/store';
+  import { page } from '$app/stores';
 
   const passwordRequirements = [
     'At least 8 characters',
@@ -14,8 +18,41 @@
 
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
-    console.log(entries);
-    goto('/events');
+    const email = $page.params.email;
+    
+    if (entries.password !== entries['password-repeat']) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    // TODO password requirements?
+    get(api)
+      .POST('/auth/login/setOwnPassword', {
+        body: {
+          email: email,
+          password: entries.password,
+          oldPassword: entries['old-password']
+        }
+      })
+      .then((resp) => {
+        if (resp.error) {
+          // @ts-expect-error MISP API return custom errors object
+          if (typeof resp.error.detail === 'string') {
+            if (resp.error.detail === 'Bad Request') {
+              alert("New password can't contain old Password");
+            } else if (resp.error.detail === 'Unauthorized') {
+              alert('Old password is incorrect');
+            } else {
+              throw new Error(resp.error.detail);
+            }
+          } else if (resp.error.detail != null) {
+            throw new Error(resp.error.detail[0].msg);
+          }
+        } else {
+          $token = resp.data.token;
+          goto('/events');
+        }
+      })
   }
 </script>
 
@@ -34,7 +71,7 @@
   </h1>
 
   <Input
-    name="password"
+    name="old-password"
     placeholder="Old password"
     type="password"
     icon="mdi:lock-outline"
