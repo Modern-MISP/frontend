@@ -10,6 +10,9 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import type { Trigger } from './triggers/trigger.js';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { notifications } from '$lib/stores';
+import { successPill } from '$lib/util/pill.util';
+import { invalidateAll } from '$app/navigation';
 
 export const load = async ({ fetch }) => {
   /// @ts-expect-error Not in the OpenAPI spec. great.
@@ -96,6 +99,23 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:download',
       action(x) {
         console.log(x);
+      label: 'Delete Workflow',
+      icon: 'mdi:delete-outline',
+      action: (x) => {
+        Promise.all(
+          x
+            .map((y) => y.id)
+            .map((workflowId) =>
+              // @ts-expect-error Not in the OpenAPI spec?
+              get(api).DELETE('/workflows/delete/{workflowId}', {
+                fetch,
+                params: { path: { workflowId: workflowId! } }
+              })
+            )
+        ).then(() => {
+          notifications.add(successPill('Deleted workflow ' + x.map((y) => y.id).join(', ')));
+          invalidateAll();
+        });
       }
     }
   ];

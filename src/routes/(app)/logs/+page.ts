@@ -40,7 +40,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.Log.email } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:factory',
       key: 'org',
       label: 'Organisation',
       value: (x) => ({ display: Info, props: { text: x.Log.org } })
@@ -52,13 +52,13 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.Log.created } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:view-grid-plus',
       key: 'model',
       label: 'Model',
       value: (x) => ({ display: Info, props: { text: x.Log.model } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:view-grid-plus-outline',
       key: 'model-id',
       label: 'Model-ID',
       value: (x) => x.Log.model_id ?? 'unknown'

@@ -74,10 +74,10 @@
   export let groupInfo: (x: T) => unknown | undefined = constant(undefined);
 
   /**
-   * The href where the use will be navigated, if clicked on an row {@see DynTable.href}
+   * The href where the user will be navigated, if clicked on a row {@see DynTable.href}
    * @param row The row the user clicked. Defaults to the id. You should define this, if your data does not include an id.
    * @param row.id Defaults to the id of the row
-   * @returns The href th user will be navigate to
+   * @returns The href the user will be navigated to
    */
   export let tableHref: ((row: T) => string | undefined) | undefined = ({ id }) =>
     `${$page.url}/${id}`;

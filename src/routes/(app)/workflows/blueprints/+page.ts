@@ -8,13 +8,27 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
+import { notifications } from '$lib/stores';
+import { successPill } from '$lib/util/pill.util';
+import { invalidateAll } from '$app/navigation';
+import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+
+function download(content: string, fileName: string, contentType: string) {
+  const a = document.createElement('a');
+  const file = new Blob([content], { type: contentType });
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
 
 export const load: PageLoad = async ({ fetch }) => {
-  // @ts-expect-error Not in the OpenAPI spec.
+  // @ts-expect-error Not in the OpenAPI spec?
   //TODO API Endpoint
   const getResult = await get(api).GET('/workflowBlueprints/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = getResult.data as Blueprint[];
+
+  //const tableData = data.map((x) => (x.WorkflowBlueprint))
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -28,31 +42,31 @@ export const load: PageLoad = async ({ fetch }) => {
       value: (x) => x.WorkflowBlueprint.id ?? 'unknown'
     }),
     col({
-      icon: 'mdi:id-card',
+      icon: 'mdi:ticket-account',
       key: 'uuid',
       label: 'UUID',
       value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.uuid ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:card-account-details',
       key: 'name',
       label: 'Name',
       value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.name ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:subtitles-outline',
       key: 'description',
       label: 'Description',
       value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.description ?? 'none' } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:timer',
       key: 'timestamp',
       label: 'Timestamp',
       value: (x) => ({ display: Info, props: { text: x.WorkflowBlueprint.timestamp ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:circle',
+      icon: 'mdi:selection-ellipse-arrow-inside',
       key: 'default',
       label: 'Default',
       value: (x) => ({
@@ -64,13 +78,62 @@ export const load: PageLoad = async ({ fetch }) => {
 
   if (!data) error(500, 'No data returned');
 
-  const editActions: DynCardActionHeader<typeof data>[] = [
-    //TODO
+  const topMenuActions: ActionBarEntryProps[] = [
     {
-      label: 'Delete',
+      icon: 'mdi:upload',
+      label: 'Import Blueprint',
+      action: '/workflowBlueprints/import'
+    }
+  ];
+
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Delete Blueprint',
       icon: 'mdi:delete-outline',
       action: (x) => {
-        x;
+        Promise.all(
+          x
+            .map((y) => y.WorkflowBlueprint.id)
+            .map((blueprintId) =>
+              // @ts-expect-error Not in the OpenAPI spec?
+              get(api).DELETE('/workflowBlueprints/delete//{blueprintId}', {
+                fetch,
+                params: { path: { blueprintId: blueprintId! } }
+              })
+            )
+        ).then(() => {
+          notifications.add(
+            successPill('Deleted blueprint ' + x.map((y) => y.WorkflowBlueprint.id).join(', '))
+          );
+          invalidateAll();
+        });
+      }
+    },
+    {
+      //TODO Content???? return of api req?
+      label: 'Export Blueprint',
+      icon: 'mdi:download',
+      action: (x) => {
+        Promise.all(
+          x
+            .map((y) => y.WorkflowBlueprint.id)
+            .map((blueprintId) =>
+              // @ts-expect-error Not in the OpenAPI spec?
+              download(
+                get(api).GET('/workflowBlueprints/export/{blueprintId}', {
+                  fetch,
+                  params: { path: { blueprintId: blueprintId! } }
+                }),
+                'blueprint.json',
+                'JSON'
+              )
+            )
+        ).then(() => {
+          notifications.add(
+            successPill('Exported blueprint ' + x.map((y) => y.WorkflowBlueprint.id).join(', '))
+          );
+          invalidateAll();
+        });
       }
     }
   ];
@@ -79,6 +142,7 @@ export const load: PageLoad = async ({ fetch }) => {
     data,
     tableData: data,
     header,
-    editActions
+    editActions,
+    topMenuActions
   };
 };

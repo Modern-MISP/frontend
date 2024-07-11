@@ -1,20 +1,10 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-  import { currentRoute, settings } from '$lib/stores';
   import SettingsEntry from '$lib/components/settingsEntry/SettingsEntry.svelte';
+  import { api } from '$lib/api';
+  import { get } from 'svelte/store';
 
-  $currentRoute = [
-    {
-      name: 'Admin',
-      icon: 'mdi:shield-account',
-      href: 'admin'
-    },
-    {
-      name: 'Settings',
-      icon: 'mdi:cog',
-      href: 'settings'
-    }
-  ];
+  $: state = get(api).GET('/workflows/workflowsSetting', { fetch });
 </script>
 
 <!--
@@ -26,6 +16,9 @@
 
 <div class="flex flex-col rounded-lg">
   <SettingsEntry label="Execution of workflows is allowed:">
-    <Checkbox bind:checked={$settings.workflowsAllowed} />
+    <Checkbox
+      bind:checked={state}
+      on:change={(get(api).POST(`/workflows/toggleWorkflows/${state}`), { fetch })}
+    />
   </SettingsEntry>
 </div>
