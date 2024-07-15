@@ -23,9 +23,9 @@ export const routes: SideMenuRoute[] = [
         href: '/statistics/organisations'
       },
       {
-        name: 'Aktivity Heatmap',
+        name: 'Activity Heatmap',
         icon: 'mdi:google-analytics',
-        href: '/statistics/aktivity_heatmap'
+        href: '/statistics/activity_heatmap'
       },
       {
         name: 'Attribute Histogramm',

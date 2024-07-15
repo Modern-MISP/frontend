@@ -142,7 +142,7 @@ export const load: PageLoad = async ({ fetch }) => {
 
   const settings = {};
 
-  const title = 'Aktivity Heatmap';
+  const title = 'Activity Heatmap';
   const description =
     'A heatmap showing user activity for each day during this month and the 4 months that preceded it. Use the buttons below to only show the heatmap of a specific organisation.';
 
