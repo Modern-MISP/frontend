@@ -11,10 +11,10 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { invalidateAll } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const { data, error: mispError, response } = await get(api).GET('/auth/openID/getAllOpenIDConnectProviders', { fetch });
+  const { data } = await get(api).GET('/auth/openID/getAllOpenIDConnectProviders', { fetch });
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
-  
+
   const header = [
     col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.id ?? 'unknown' }),
     col({

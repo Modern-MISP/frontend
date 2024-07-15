@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto, invalidateAll } from '$app/navigation';
+  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
@@ -30,7 +30,6 @@
         })
     );
   }
-
 </script>
 
 <!--
@@ -39,11 +38,8 @@
   
 -->
 
-<Form
-  callback={editCallback}
->
+<Form callback={editCallback}>
   <div class="flex flex-wrap w-full h-full gap-2 lg:flex-nowrap">
     <DynCard header={left} data={provider} />
-    
   </div>
 </Form>

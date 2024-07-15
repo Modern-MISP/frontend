@@ -9,7 +9,6 @@ import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
     data,
@@ -155,10 +154,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
         })
       }
     )
-    
-    
   ];
-
 
   return {
     provider: data,
