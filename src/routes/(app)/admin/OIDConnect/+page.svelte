@@ -12,5 +12,5 @@
   Displays a list of all current providers.
   
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/admin/OIDConnect/${x.Provider?.id}`}
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/OIDConnect/${x.id}`}
 ></ComplexTableLayout>

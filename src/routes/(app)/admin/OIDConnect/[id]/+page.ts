@@ -1,25 +1,29 @@
+import { api } from '$lib/api';
+import { error, type NumericRange } from '@sveltejs/kit';
+import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
-
-import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Input from '$lib/components/input/Input.svelte';
-import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
+import Boolean from '$lib/components/boolean/Boolean.svelte';
+import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+
 
 export const load: PageLoad = async ({ params, fetch }) => {
-  params;
-  fetch;
-
-  // Mock data
-  const data = {
-    id: '1',
-    name: 'Google',
-    path: 'https://accounts.google.com/.well-known/openid-configuration',
-    token: 'eyJh••••••••••••••yZjI'
-  };
-
+  const {
+    data,
+    error: mispError,
+    response
+  } = await get(api).GET('/auth/openID/getOpenIDConnectProvider/{providerId}', {
+    params: { path: { providerId: params.id } },
+    fetch
+  });
   const col = createTableHeadGenerator<typeof data>();
 
-  const header = [
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+
+  const left = [
     col(
       {
         label: 'Name',
@@ -50,8 +54,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: HrefPill,
           props: {
             icon: 'mdi:link-variant',
-            text: x.path ?? 'unknown',
-            href: x.path ?? ''
+            text: x.base_url ?? 'unknown',
+            href: x.base_url ?? ''
           }
         })
       },
@@ -60,8 +64,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Path',
-            value: x.path ?? '',
-            name: 'path',
+            value: x.base_url ?? '',
+            name: 'base_url',
             icon: 'mdi:link-variant'
           }
         })
@@ -71,34 +75,93 @@ export const load: PageLoad = async ({ params, fetch }) => {
       {
         label: 'Token',
         value: (x) => ({
-          display: Pill,
+          display: HrefPill,
           props: {
             icon: 'mdi:key-outline',
-            text: x.token ?? 'unknown',
-            href: x.token ? 'nameto:' + x.token : ''
+            text: x.client_secret ?? 'unknown',
+            href: x.client_secret ?? ''
           }
         })
       },
       {
-        value: () => ({
+        value: (x) => ({
           display: Input,
           props: {
             placeholder: 'Token',
-            name: 'token',
+            value: x.client_secret ?? '',
+            name: 'client_secret',
             icon: 'mdi:key-outline'
           }
         })
       }
+    ),
+    col(
+      {
+        key: 'active',
+        label: 'Active',
+        value: (x) => ({ display: Boolean, props: { isTrue: x.active ?? false } })
+      },
+      {
+        value: (x) => ({
+          display: Checkbox,
+          props: { name: 'active', checked: x.active ?? false }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Organization',
+        value: (x) => ({
+          display: HrefPill,
+          props: {
+            icon: 'mdi:account-group',
+            text: x.org_id ?? 'unknown',
+            href: x.org_id ?? ''
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            placeholder: 'Organization',
+            value: x.org_id ?? '',
+            name: 'org_id',
+            icon: 'mdi:account-group'
+          }
+        })
+      }
+    ),
+    col(
+      {
+        label: 'Client ID',
+        value: (x) => ({
+          display: Pill,
+          props: {
+            icon: 'mdi:clipboard-account-outline',
+            text: x.client_id ?? 'unknown'
+          }
+        })
+      },
+      {
+        value: (x) => ({
+          display: Input,
+          props: {
+            placeholder: 'Client ID',
+            value: x.client_id ?? '',
+            name: 'client_id',
+            icon: 'mdi:clipboard-account-outline'
+          }
+        })
+      }
     )
+    
+    
   ];
 
-  const title = 'Provider details';
-  const description = '';
 
   return {
-    user: data,
-    header,
-    title,
-    description
+    provider: data,
+    left
   };
 };
