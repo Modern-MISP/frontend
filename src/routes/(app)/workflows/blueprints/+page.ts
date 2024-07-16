@@ -84,7 +84,7 @@ export const load: PageLoad = async ({ fetch }) => {
     }
   ];
 
-  const editActions: DynCardActionHeader<typeof data>[] = [
+  const editActions: DynCardActionHeader<typeof tableData>[] = [
     {
       label: 'Delete Blueprint',
       icon: 'mdi:delete-outline',
@@ -113,8 +113,8 @@ export const load: PageLoad = async ({ fetch }) => {
           x
             .map((y) => y.id)
             .map((blueprintId) =>
-              // @ts-expect-error Not in the OpenAPI spec?
               get(api)
+                // @ts-expect-error Not in the OpenAPI spec?
                 .GET('/workflowBlueprints/export/{blueprintId}', {
                   fetch,
                   params: { path: { blueprintId: blueprintId! } }

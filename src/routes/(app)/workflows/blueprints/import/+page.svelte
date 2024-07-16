@@ -14,6 +14,7 @@
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
+      //@ts-expect-error Not in Openapi spec.
       $api.POST('/workflowBlueprints/import', { body: { ...formData } }).then((response) => {
         if (response.error) {
           // throw new Error(resp.error.message);

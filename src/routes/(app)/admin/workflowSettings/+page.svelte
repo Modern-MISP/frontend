@@ -4,6 +4,7 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
 
+  //@ts-expect-error Not in Openapi spec.
   $: state = get(api).GET('/workflows/workflowsSetting', { fetch });
 </script>
 

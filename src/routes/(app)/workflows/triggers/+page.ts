@@ -80,6 +80,7 @@ export const load: PageLoad = async ({ fetch }) => {
             : {
                 icon: 'mdi:circle',
                 class: 'class',
+                //@ts-expect-error Not in Openapi spec.
                 onClick: () => get(api).POST(`/workflows/editor/${x.id}`, { fetch })
               }
         }

@@ -19,6 +19,3 @@
   <DynCard header={infoHeader} data={trigger} />
   <DynCard header={workflowHeader} data={trigger} />
 </div>
-<Button on:click={async (x) => await get(api).GET(`workflows/editor/${x.name}`, { fetch })}>
-  Create Workflow if not existent
-</Button>
