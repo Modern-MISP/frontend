@@ -112,21 +112,20 @@ export const load: PageLoad = async ({ fetch }) => {
         Promise.all(
           x
             .map((y) => y.id)
-            .map(
-              (blueprintId) =>
-                // @ts-expect-error Not in the OpenAPI spec?
-                get(api)
-                  .GET('/workflowBlueprints/export/{blueprintId}', {
-                    fetch,
-                    params: { path: { blueprintId: blueprintId! } }
-                  })
-                  .then((response) =>
-                    download(
-                      JSON.stringify(response.data, undefined, 2),
-                      `blueprint-${blueprintId}.json`,
-                      'JSON'
-                    )
+            .map((blueprintId) =>
+              // @ts-expect-error Not in the OpenAPI spec?
+              get(api)
+                .GET('/workflowBlueprints/export/{blueprintId}', {
+                  fetch,
+                  params: { path: { blueprintId: blueprintId! } }
+                })
+                .then((response) =>
+                  download(
+                    JSON.stringify(response.data, undefined, 2),
+                    `blueprint-${blueprintId}.json`,
+                    'JSON'
                   )
+                )
             )
         ).then(() => {
           notifications.add(successPill('Exported blueprint ' + x.map((y) => y.id).join(', ')));
