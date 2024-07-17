@@ -20,44 +20,6 @@ import { get } from 'svelte/store';
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
 
-  // Static data
-  /*const data = [
-    {
-      User: {
-        id: '1',
-        email: 'user1@example.com',
-        password: 'asdsad',
-        nids_sid: '12345',
-        last_login: 1625140800,
-        date_created: 1612137600,
-        authkey: 'true',
-        contactalert: true,
-        autoalert: true,
-        gpgkey: 'true',
-        termsaccepted: true
-      },
-      Organisation: { name: 'Org 1' },
-      Role: { name: 'Admin' }
-    },
-    {
-      User: {
-        id: '2',
-        password: 'sdasda',
-        email: 'user2@example.com',
-        nids_sid: '67890',
-        last_login: 1625140800,
-        date_created: 1612137600,
-        authkey: 'false',
-        contactalert: false,
-        autoalert: false,
-        gpgkey: 'false',
-        termsaccepted: false
-      },
-      Organisation: { name: 'Org 2' },
-      Role: { name: 'User' }
-    }
-  ];*/
-
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   //const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
@@ -70,7 +32,12 @@ export const load: PageLoad = async ({ fetch }) => {
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
   const header = [
-    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.User?.id ?? 'unknown' }),
+    col({
+      icon: 'mdi:id-card',
+      key: 'id',
+      label: 'ID',
+      value: (x) => ({ display: Info, props: { text: x.User?.id ?? 'unknown' } })
+    }),
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
