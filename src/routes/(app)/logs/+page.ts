@@ -14,7 +14,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages, POST?
 
   const { error: mispError, response } = getResult;
-  const data = getResult.data as Log[];
+  const data = (getResult.data as Log[]).map((x) => x.Log!);
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -25,61 +25,61 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x) => x.Log.id ?? 'unknown'
+      value: (x) => x.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:ip-outline',
       key: 'ip',
       label: 'IP',
-      value: (x) => ({ display: Info, props: { text: x.Log.ip } })
+      value: (x) => ({ display: Info, props: { text: x.ip } })
     }),
     col({
       icon: 'mdi:email',
       key: 'email',
       label: 'E-Mail',
-      value: (x) => ({ display: Info, props: { text: x.Log.email } })
+      value: (x) => ({ display: Info, props: { text: x.email } })
     }),
     col({
       icon: 'mdi:factory',
       key: 'org',
       label: 'Organisation',
-      value: (x) => ({ display: Info, props: { text: x.Log.org } })
+      value: (x) => ({ display: Info, props: { text: x.org } })
     }),
     col({
       icon: 'mdi:timer-edit-outline',
       key: 'created',
       label: 'Created',
-      value: (x) => ({ display: Info, props: { text: x.Log.created } })
+      value: (x) => ({ display: Info, props: { text: x.created } })
     }),
     col({
       icon: 'mdi:view-grid-plus',
       key: 'model',
       label: 'Model',
-      value: (x) => ({ display: Info, props: { text: x.Log.model } })
+      value: (x) => ({ display: Info, props: { text: x.model } })
     }),
     col({
       icon: 'mdi:view-grid-plus-outline',
       key: 'model-id',
       label: 'Model-ID',
-      value: (x) => x.Log.model_id ?? 'unknown'
+      value: (x) => x.model_id ?? 'unknown'
     }),
     col({
       icon: 'mdi:autorenew',
       key: 'action',
       label: 'Action',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Log.action } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.action } })
     }),
     col({
       icon: 'mdi:subtitles-outline',
       key: 'title',
       label: 'Title',
-      value: (x) => ({ display: Info, props: { text: x.Log.title } })
+      value: (x) => ({ display: Info, props: { text: x.title } })
     }),
     col({
       icon: 'mdi:swap-horizontal',
       key: 'change',
       label: 'Change',
-      value: (x) => ({ display: Info, props: { text: x.Log.change } })
+      value: (x) => ({ display: Info, props: { text: x.change } })
     })
   ];
 

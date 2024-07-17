@@ -9,6 +9,7 @@
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
+  import type { Blueprint } from '../blueprint';
 
   $mode = 'edit';
 
@@ -22,7 +23,8 @@
           const mispErrors: string[] = Object.values(response.error.errors ?? {});
           throw new Error(mispErrors.length ? mispErrors[0] : response.error.message);
         } else {
-          goto(`/workflowBlueprints/view/${response.data.WorkflowBlueprint.id!}`);
+          const data = response.data as Blueprint;
+          goto(`/workflowBlueprints/view/${data.WorkflowBlueprint.id!}`);
         }
       })
     );

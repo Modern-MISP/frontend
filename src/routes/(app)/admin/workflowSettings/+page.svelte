@@ -19,7 +19,7 @@
   <SettingsEntry label="Execution of workflows is allowed:">
     <Checkbox
       bind:checked={state}
-      on:change={(get(api).POST(`/workflows/toggleWorkflows/${state}`), { fetch })}
+      on:change={get(api).POST(`/workflows/toggleWorkflows/${state}`, { fetch })}
     />
   </SettingsEntry>
 </div>
