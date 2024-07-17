@@ -5,7 +5,6 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import Info from '$lib/components/info/Info.svelte';
-import Boolean from '$lib/components/boolean/Boolean.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import type { PageLoad } from './$types';
 
