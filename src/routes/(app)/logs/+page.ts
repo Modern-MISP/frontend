@@ -67,7 +67,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:autorenew',
       key: 'action',
       label: 'Action',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.action } })
+      value: (x) => ({ display: Info, props: { text: x.action } })
     }),
     col({
       icon: 'mdi:subtitles-outline',
