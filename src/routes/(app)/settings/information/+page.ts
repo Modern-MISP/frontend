@@ -6,6 +6,7 @@ import { get } from 'svelte/store';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
+import { compatibility } from '$lib/stores';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -19,16 +20,18 @@ export const load: PageLoad = async ({ fetch }) => {
   const col = createTableHeadGenerator();
 
   const header = [
-    col({
-      label: 'Name',
-      value: () => ({
-        display: Input,
-        props: {
-          value: data[0].UserSetting.name,
-          name: 'name',
-        }
-      })
-    }),
+    (!compatibility ? 
+      col({
+        label: 'Name',
+        value: () => ({
+          display: Input,
+          props: {
+            value: data.User?.name,
+            name: 'name',
+          }
+        })
+      }) :  undefined
+    ),
     col({
       label: 'Role',
       value: () => ({
@@ -67,7 +70,7 @@ export const load: PageLoad = async ({ fetch }) => {
         }
       })
     })
-  ];
+  ].filter((x) => typeof x !== 'undefined');
 
   const title = 'User Information';
   const description =

@@ -11,6 +11,8 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
 
+  export let data;
+
   let error: string = '';
 
   async function submit(event: SubmitEvent) {
@@ -54,31 +56,17 @@
   const visible = !compatibility;
   let oidc = true;
 
-  const data = [
-    {
-      id: '1',
-      name: 'Google'
-    },
-    {
-      id: '2',
-      name: 'Facebook'
-    },
-    {
-      id: '3',
-      name: 'Illias'
-    }
-  ];
-
   onMount(() => {
-    if (data.length === 0) oidc = false;
+    if (data.data.length === 0) oidc = false;
     if (!visible) oidc = false;
     if (!oidc) return;
-    forEach(data, (item) => {
+    forEach(data.data, (item) => {
+      console.log(item.url);
       new OidcButton({
         target: document.querySelector('.oidc') ?? document,
         props: {
           name: item.name,
-          id: item.id
+          url: item.url + '&redirect_uri=' + window.location.origin + '/login/oidc/' + item.name + '/callback',
         }
       });
     });
