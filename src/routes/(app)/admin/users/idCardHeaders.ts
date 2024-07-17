@@ -8,6 +8,8 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import Button from '$lib/components/button/Button.svelte';
+import { get } from 'svelte/store';
+import { api } from '$lib/api';
 
 const col = createTableHeadGenerator<
   paths['/admin/users/view/{userId}']['get']['responses']['200']['content']['application/json'] & {
@@ -20,6 +22,9 @@ const col = createTableHeadGenerator<
     Organisation?: components['schemas']['Organisation'];
   }
 >();
+
+const { data: roleData }: { data: any[] } = await get(api).GET('/roles');
+const { data: orgData }: {data: any[] } = await get(api).GET('/organisations');
 
 export default {
   name: col(
@@ -35,10 +40,11 @@ export default {
       })
     },
     {
-      value: () => ({
+      value: (x) => ({
         display: Input,
         props: {
           placeholder: 'Name',
+          value: x.User?.name ?? '',
           name: 'name',
           icon: 'mdi:person-outline'
         }
@@ -108,7 +114,7 @@ export default {
       value: (x) => ({
         display: Input,
         props: {
-          value: x.User?.password ?? 'generated password',
+          value: x.User?.password ?? '',
           placeholder: 'Password',
           name: 'password',
           icon: 'mdi:key-outline'
@@ -117,14 +123,13 @@ export default {
     }
   ),
   generate: col({
-    //////
     label: 'Copy password',
     value: () => ({
       display: Button,
       props: {
         name: 'copy password',
         class: 'w-min',
-        prefixIcon: 'mdi:content-copy'
+        prefixIcon: 'mdi:content-copy',
       }
     })
   }),
@@ -142,8 +147,9 @@ export default {
       value: () => ({
         display: Select,
         props: {
-          options: 'undefined',
-          name: 'org'
+          options: roleData.map((r) => ({ label: r.name!, value: r.id! })),
+          value: roleData[0].id,
+          name: 'role'
         }
       })
     }
@@ -308,7 +314,7 @@ export default {
   organisation: col(
     {
       key: 'org',
-      label: 'Organizations',
+      label: 'Organisations',
       value: (x) => ({
         display: Pill,
         props: {
@@ -321,7 +327,8 @@ export default {
       value: () => ({
         display: Select,
         props: {
-          options: 'undefined',
+          options: orgData.map((o) => ({ label: o.name!, value: o.id!})),
+          value: orgData[0].id,
           name: 'org'
         }
       })

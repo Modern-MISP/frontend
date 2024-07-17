@@ -4,6 +4,7 @@ import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import idCardHeaders from '../idCardHeaders';
+import { compatibility } from '$lib/stores';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {
@@ -18,6 +19,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const left = [
+    (!compatibility ? idCardHeaders.name : undefined),
     idCardHeaders.email,
     idCardHeaders.id,
     idCardHeaders.role,
@@ -26,7 +28,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     idCardHeaders.last_pw_change,
     idCardHeaders.last_login,
     idCardHeaders.created
-  ];
+  ].filter((x) => typeof x !== 'undefined');
 
   const right = [
     idCardHeaders.disabled,

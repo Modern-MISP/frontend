@@ -214,29 +214,6 @@ export const load: PageLoad = async ({ fetch }) => {
       }
     },
     {
-      label: 'Edit Name',
-      icon: 'mdi:pencil-outline',
-      action: (x) => {
-        notifications.add(successPill('Edited name for ' + x.map((y) => y.User?.id).join(', ')));
-      }
-    },
-    {
-      label: 'Edit E-mail',
-      icon: 'mdi:pencil-outline',
-      action: (x) => {
-        notifications.add(successPill('Edited E-Mail for ' + x.map((y) => y.User?.id).join(', ')));
-      }
-    },
-    {
-      label: 'New Password',
-      icon: 'mdi:lock-outline',
-      action: (x) => {
-        notifications.add(
-          successPill('New password set for ' + x.map((y) => y.User?.id).join(', '))
-        );
-      }
-    },
-    {
       label: 'New Token',
       icon: 'mdi:lock-outline',
       action: (x) => {
