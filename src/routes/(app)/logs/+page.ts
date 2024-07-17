@@ -11,7 +11,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).POST('/logs/index', { fetch, body: { limit: 50, page: 1 } }); //TODO Pages, POST?
+  const getResult = await get(api).POST('/logs/index', { fetch, body: { model: 'Workflow' } }); //TODO Pages
 
   const { error: mispError, response } = getResult;
   const data = (getResult.data as Log[]).map((x) => x.Log!);

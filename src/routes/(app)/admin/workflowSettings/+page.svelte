@@ -5,7 +5,13 @@
   import { get } from 'svelte/store';
 
   //@ts-expect-error Not in Openapi spec.
-  $: state = get(api).GET('/workflows/workflowsSetting', { fetch });
+  //$: state = get(api).GET('/workflows/workflowsSetting', { fetch });
+  export let data;
+
+  function onchange() {
+    /* @ts-expect-error Not in Openapi spec. */
+    get(api).POST(`/workflows/toggleWorkflows/${data.data}`, { fetch });
+  }
 </script>
 
 <!--
@@ -17,9 +23,6 @@
 
 <div class="flex flex-col rounded-lg">
   <SettingsEntry label="Execution of workflows is allowed:">
-    <Checkbox
-      bind:checked={state}
-      on:change={get(api).POST(`/workflows/toggleWorkflows/${state}`, { fetch })}
-    />
+    <Checkbox bind:checked={data.data} on:change={onchange} />
   </SettingsEntry>
 </div>

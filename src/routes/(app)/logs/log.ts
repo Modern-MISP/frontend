@@ -1,6 +1,6 @@
 export type Log = {
   Log: {
-    id?: string;
+    id: string;
     title?: string;
     created: string;
     model?: string;

@@ -61,20 +61,16 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'material-symbols:network-node',
       key: 'workflow',
       label: 'Workflow',
-      /*value: (x) => ({
-        display: HrefPill,
-        props: {
-          href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : `workflows/editor/${x.name}`,
-          icon: 'material-symbols:network-node',
-          text: x.Workflow?.id ?? 'unknown'
-        }
-      })*/
       value: (x) => ({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
         display: x.Workflow?.id ? HrefPill : Pill,
         props: {
           href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : '',
           text: x.Workflow?.id ? `${x.Workflow?.id}` : 'Create:',
           icon: x.Workflow?.id ? 'material-symbols:network-node' : 'mdi:close-box-outline',
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-expect-error
           action: x.Workflow?.id
             ? {}
             : {
