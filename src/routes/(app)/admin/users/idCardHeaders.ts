@@ -211,7 +211,7 @@ export default {
   ),
   authkey: col(
     {
-      label: 'TOTP set',
+      label: 'Auth key',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.authkey ?? false } })
     },
     {

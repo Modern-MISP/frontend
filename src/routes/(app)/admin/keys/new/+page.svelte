@@ -12,6 +12,7 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
+  import { page } from '$app/stores';
 
   /** Page data */
   export let data;
@@ -50,7 +51,7 @@
         display: Select,
         props: {
           options: data.users.map((u) => ({ label: u.User!.email!, value: u.User!.id! })),
-          value: data.users[0].User!.id!,
+          value: data.users.find((u) => u.User!.id == $page.url.searchParams.get('id'))?.User!.id,
           name: 'user_id'
         }
       })

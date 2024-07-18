@@ -16,6 +16,7 @@ import Input from '$lib/components/input/Input.svelte';
 import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
+import { goto } from '$app/navigation';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
@@ -200,24 +201,44 @@ export const load: PageLoad = async ({ fetch }) => {
       }
     },
     {
-      label: 'Delete Token',
+      label: 'End Session',
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to delete the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+            `Are you sure you want to disable the token for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
           )
         ) {
-          notifications.add(successPill('Deleted tokens ' + x.map((y) => y.User?.id).join(', ')));
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).PUT('/admin/users/edit/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } },
+                  body: { force_logout: true }
+                })
+              )
+          ).then(() => {
+            notifications.add(successPill('Disabled token for user ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
         }
       }
     },
     {
-      label: 'New Token',
+      label: 'New Authkey',
       icon: 'mdi:lock-outline',
       action: (x) => {
-        notifications.add(successPill('New token set for ' + x.map((y) => y.User?.id).join(', ')));
+        goto(`/admin/keys/new?id=${x.map((x) => x.User?.id).join(', ')}`);
+      }
+    },
+    {
+      label: 'New Password',
+      icon: 'mdi:lock-outline',
+      action: (x) => {
+        notifications.add(successPill('New password set for user ' + x.map((y) => y.User?.id).join(', ')));
       }
     },
     {
