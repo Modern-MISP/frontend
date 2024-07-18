@@ -61,7 +61,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:timer',
       key: 'timestamp',
       label: 'Timestamp',
-      value: (x) => ({ display: Info, props: { text: x.timestamp ?? 'unknown' } })
+      value: (x) => ({
+        display: Info,
+        props: { text: new Date(parseInt(x.timestamp!) * 1000).toISOString() ?? 'unknown' }
+      })
     }),
     col({
       icon: 'mdi:selection-ellipse-arrow-inside',
