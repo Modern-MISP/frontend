@@ -61,7 +61,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:person-outline',
       key: 'name',
       label: 'Name',
-      value: () => ({ display: Info, props: { text: 'unknown' } })
+      value: (x) => ({ display: Info, props: { text: x.User?.name ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:person-outline',
@@ -82,7 +82,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Last Login',
       value: (x) => ({
         display: DatePill,
-        props: { date: new Date(+(x.User?.last_login || 0) * 1000) }
+        props: { date: new Date(+(x.User?.last_login) *1000) ?? 'never logged in' }
       })
     }),
     col({
@@ -115,8 +115,8 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     col({
       icon: 'mdi:key-outline',
-      key: 'pgp_key',
-      label: 'PGP',
+      key: 'gpg_key',
+      label: 'GPG',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.gpgkey === 'true' } })
     }),
     col({
@@ -238,7 +238,28 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'New Password',
       icon: 'mdi:lock-outline',
       action: (x) => {
-        notifications.add(successPill('New password set for user ' + x.map((y) => y.User?.id).join(', ')));
+        if (
+          confirm(
+            `Are you sure you want to generate a new password for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          const  randomstring = Math.random().toString(36).slice(-12);
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).PUT('/admin/users/edit/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } },
+                  body: { password: randomstring }
+                })
+              )
+          ).then(() => {
+            navigator.clipboard.writeText(randomstring);
+            notifications.add(successPill('New password copied to clipbord ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
+        }
       }
     },
     {
@@ -384,12 +405,12 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     fil({
-      label: 'PGP-Key',
+      label: 'GPG-Key',
       value: () => ({
         display: Checkbox,
         props: {
           checked: false,
-          name: 'pgp_key'
+          name: 'gpg_key'
         }
       })
     }),

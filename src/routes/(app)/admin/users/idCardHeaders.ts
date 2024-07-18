@@ -114,7 +114,7 @@ export default {
       value: (x) => ({
         display: Input,
         props: {
-          value: x.User?.password ?? '',
+          value: x.User?.password ?? Math.random().toString(36).slice(-12),
           placeholder: 'Password',
           name: 'password',
           icon: 'mdi:key-outline'
@@ -136,7 +136,14 @@ export default {
 
   id: col({
     label: 'ID',
-    value: (x) => x.User?.id ?? 'unknown'
+    value: (x) => ({
+      display: HrefPill,
+      props: {
+        icon: 'mdi:lock-outline',
+        text: x.User?.id ?? 'unknown',
+        href: x.User?.id ? 'idto:' + x.User?.id : ''
+      }
+    })
   }),
   role: col(
     {
@@ -157,7 +164,14 @@ export default {
   nids_sid: col(
     {
       label: 'NIDS SID',
-      value: (x) => x.User?.nids_sid ?? 'unknown'
+      value: (x) => ({
+        display: HrefPill,
+        props: {
+          icon: 'mdi:lock-outline',
+          text: x.User?.nids_sid ?? 'unknown',
+          href: x.User?.nids_sid ? 'idto:' + x.User?.nids_sid : ''
+        }
+      })
     },
     {
       value: (x) => ({
@@ -250,14 +264,14 @@ export default {
   gpgkey: col(
     {
       key: 'gpgkey',
-      label: 'PGP key',
+      label: 'GPG key',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.gpgkey ?? false } })
     },
 
     {
       value: () => ({
         display: Input,
-        props: { name: 'pgpKey', placeholder: 'set new PGP key' }
+        props: { name: 'pgpKey', placeholder: 'set new GPG key' }
       })
     }
   ),

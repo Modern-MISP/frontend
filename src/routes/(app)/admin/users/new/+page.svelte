@@ -9,6 +9,9 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
+  import { notifications } from '$lib/stores';
+import { errorPill } from '$lib/util/pill.util';
+import { invalidateAll } from '$app/navigation';
 
   $mode = 'edit';
 
@@ -21,6 +24,12 @@
         .then((resp) => {
           if (resp.error) {
             // @ts-expect-error MISP API return custom errors object
+            console.log(resp);
+            if (resp.response.status == 406) {
+              console.log('User already exists');
+              notifications.add(errorPill('User already exists'));
+              invalidateAll();
+            }
             const mispErrors: string[] = Object.values(resp.error.errors ?? {});
             throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
           } else {
@@ -49,7 +58,6 @@
       idCardHeaders.name,
       idCardHeaders.email,
       idCardHeaders.password,
-      idCardHeaders.generate,
       idCardHeaders.organisation,
       idCardHeaders.role,
       idCardHeaders.nids_sid,
