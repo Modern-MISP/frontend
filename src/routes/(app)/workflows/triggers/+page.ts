@@ -14,6 +14,8 @@ import type { PageLoad } from './$types';
 import type { Trigger } from './trigger';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { invalidateAll } from '$app/navigation';
+import { notifications } from '$lib/stores';
+import { successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec.
@@ -67,18 +69,8 @@ export const load: PageLoad = async ({ fetch }) => {
         display: x.Workflow?.id ? HrefPill : Pill,
         props: {
           href: x.Workflow?.id ? `/workflows/${x.Workflow?.id}` : '',
-          text: x.Workflow?.id ? `${x.Workflow?.id}` : 'Create:',
-          icon: x.Workflow?.id ? 'material-symbols:network-node' : 'mdi:close-box-outline',
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-expect-error
-          action: x.Workflow?.id
-            ? {}
-            : {
-                icon: 'mdi:circle',
-                class: 'class',
-                //@ts-expect-error Not in Openapi spec.
-                onClick: () => get(api).POST(`/workflows/editor/${x.id}`, { fetch })
-              }
+          text: x.Workflow?.id ? `${x.Workflow?.id}` : 'unknown',
+          icon: x.Workflow?.id ? 'material-symbols:network-node' : 'mdi:close-box-outline'
         }
       })
     }),
@@ -178,6 +170,29 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:download',
       action(x) {
         console.log(x);
+    },
+    {
+      label: 'Create',
+      icon: 'mdi:open-in-new',
+      action: (x) => {
+        {
+          Promise.all(
+            x.map((trigger) => {
+              if (!trigger.Workflow?.id) {
+                // @ts-expect-error Not in the OpenAPI spec
+                get(api).POST(`/workflows/editor/{triggerId}`, {
+                  fetch,
+                  params: { path: { triggerId: trigger.id } }
+                });
+              }
+            })
+          ).then(() => {
+            notifications.add(
+              successPill('Created Workflow for Trigger ' + x.map((y) => y.id).join(', '))
+            );
+            invalidateAll();
+          });
+        }
       }
     }
   ];
