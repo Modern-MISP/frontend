@@ -17,7 +17,7 @@ import { successPill } from '$lib/util/pill.util';
 export const load: PageLoad = async ({ fetch }) => {
   const { userId } = await getUserId(fetch);
   const card = await loadCard(fetch);
-  const table = await loadTable(fetch);
+  const table = await loadTable(fetch, userId);
 
   return {
     userId,
@@ -74,12 +74,18 @@ async function loadCard(fetch: {
 }
 
 // Funktion zum Laden der Auth-Keys des Benutzers
-async function loadTable(fetch: {
-  (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
-  (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
-}) {
+async function loadTable(
+  fetch: {
+    (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+    (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
+  },
+  userId: string
+) {
   // API-Aufruf zum Abrufen der Auth-Keys
-  const { data } = await get(api).GET('/auth_keys', { fetch });
+  const { data } = await get(api).GET('/auth_keys/index/{userId}', {
+    params: { path: { userId: userId } },
+    fetch
+  });
 
   const col = createTableHeadGenerator<
     (typeof data)[number] & { AuthKey?: { unique_ips?: string[] } },
