@@ -8,7 +8,7 @@
   import { notifySave } from '$lib/util/notifications.util';
   import ListEdit from '$lib/components/list/ListEdit.svelte';
   import { mode, notifications } from '$lib/stores';
-  import { invalidateAll } from '$app/navigation';
+  import { goto } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
 
   /** Page data containing the data of the auth keys. */
@@ -23,8 +23,8 @@
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
-        .POST('/auth_keys/edit/{authKeyId}', {
-          params: { path: { authKeyId: key.AuthKey!.id! } },
+        .POST('/auth_keys/edit/{AuthKeyId}', {
+          params: { path: { AuthKeyId: key.AuthKey!.id! } },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any -- No expiration in api spec...
           body: { allowed_ips: [], expiration: '', ...formData } as any // Allow all ips if no override is given. Set to never expire by default if not overridden
         })
@@ -39,9 +39,10 @@
               notifications.add(errorPill(error));
             });
             throw new Error(resp.error.message);
+          } else {
+            goto(`/settings/security/`);
           }
         })
-        .then(invalidateAll)
     );
   }
 </script>

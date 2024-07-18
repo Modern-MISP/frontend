@@ -8,44 +8,39 @@ import RelativeDatePill from '$lib/components/pills/datePill/RelativeDatePill.sv
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { invalidateAll } from '$app/navigation';
+import { notifications } from '$lib/stores';
+import { successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
+  const { userId } = await getUserId(fetch);
   const card = await loadCard(fetch);
   const table = await loadTable(fetch);
 
   return {
+    userId,
     card,
     table
   };
 };
 
-function loadCard(fetch: {
+// Funktion zum Laden der Benutzer-ID
+async function getUserId(fetch: {
   (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
   (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
 }) {
-  // This is a mock data. Actual Data will be fetched from API.
-  fetch;
-
-  const data = [
-    {
-      User: {
-        email: 'admin@admin.test',
-        date_created: '2023-09-01',
-        last_login: '2024-05-03'
-      },
-      Role: {
-        name: 'admin'
-      },
-      Organisation: {
-        name: 'Musterorganisation'
-      },
-      UserSetting: {
-        name: 'Max Mustermann',
-        menu_open_default: true,
-        theme: 0
-      }
-    }
-  ];
+  const { data } = await get(api).GET('/users/view/me', { fetch });
+  return { userId: data.User?.id };
+}
+// Funktion zum Laden der Benutzerinformationen und Auth-Keys
+async function loadCard(fetch: {
+  (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+  (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
+}) {
+  // API-Aufruf zum Abrufen der Benutzerdaten
+  const { data } = await get(api).GET('/users/view/me', { fetch });
 
   const col = createTableHeadGenerator();
 
@@ -55,7 +50,7 @@ function loadCard(fetch: {
       value: () => ({
         display: Input,
         props: {
-          value: data[0].User.email,
+          value: data.User?.email,
           name: 'email'
         }
       })
@@ -78,39 +73,13 @@ function loadCard(fetch: {
   };
 }
 
-function loadTable(fetch: {
+// Funktion zum Laden der Auth-Keys des Benutzers
+async function loadTable(fetch: {
   (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
   (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
 }) {
-  // This is a mock data. Actual Data will be fetched from API.
-  fetch;
-
-  const data = [
-    {
-      AuthKey: {
-        allowed_ips: null,
-        authkey_end: 'GGMX',
-        authkey_start: 'RQYG',
-        comment: 'Initial auto-generated key',
-        expiration: '0',
-        id: '1',
-        last_used: null,
-        unique_ips: []
-      }
-    },
-    {
-      AuthKey: {
-        allowed_ips: [],
-        authkey_end: 'JKDA',
-        authkey_start: 'CIEA',
-        comment: 'Login key',
-        expiration: '0',
-        id: '2',
-        last_used: null,
-        unique_ips: []
-      }
-    }
-  ];
+  // API-Aufruf zum Abrufen der Auth-Keys
+  const { data } = await get(api).GET('/auth_keys', { fetch });
 
   const col = createTableHeadGenerator<
     (typeof data)[number] & { AuthKey?: { unique_ips?: string[] } },
@@ -223,7 +192,27 @@ function loadTable(fetch: {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        console.log(x);
+        if (
+          confirm(
+            `Are you sure you want to delete the auth key with ids: ${x.map((x) => x.AuthKey?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.AuthKey?.id)
+              .map((AuthKeyId) =>
+                get(api).DELETE('/auth_keys/delete/{AuthKeyId}', {
+                  fetch,
+                  params: { path: { AuthKeyId: AuthKeyId! } }
+                })
+              )
+          ).then(() => {
+            notifications.add(
+              successPill('Deleted auth key ' + x.map((y) => y.AuthKey?.id).join(', '))
+            );
+            invalidateAll();
+          });
+        }
       }
     },
     {

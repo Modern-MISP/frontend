@@ -5,9 +5,7 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import Select from '$lib/components/form/Select.svelte';
   import Input from '$lib/components/input/Input.svelte';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode, notifications } from '$lib/stores.js';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -15,10 +13,12 @@
 
   /** Page data containing the form for new auth keys */
   export let data;
+  $: ({ user } = data);
 
   $mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
+    formData.user_id = user.User?.id;
     notifySave(
       $api
         .POST('/auth_keys/add/{userId}', {
@@ -27,15 +27,13 @@
         })
         .then((resp) => {
           if (resp.error) {
-            // throw new Error(resp.error.message);
-            // @ts-expect-error MISP API return custom errors object
             const mispErrors: string[] = Object.values(resp.error.errors ?? {});
             throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
           } else {
             notifications.add({
               text: `Added Authkey: ${resp.data.AuthKey?.authkey_start}••••••••••••••${resp.data.AuthKey?.authkey_end} (sorry, the API doesn't give us the full key)`
             });
-            goto(`/settings/security/${resp.data.AuthKey?.id}`);
+            goto(`/settings/security/`);
           }
         })
     );
@@ -44,17 +42,6 @@
   const col = createTableHeadGenerator();
 
   const header = [
-    col({
-      label: 'User',
-      value: () => ({
-        display: Select,
-        props: {
-          options: data.users.map((u) => ({ label: u.User!.email!, value: u.User!.id! })),
-          value: data.users[0].User!.id!,
-          name: 'user_id'
-        }
-      })
-    }),
     col({
       label: 'Read only',
       value: () => ({
@@ -85,10 +72,12 @@
     })
   ];
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
-  ];
+  $: {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
+    ];
+  }
 </script>
 
 <svelte:window use:lockEditMode={true} />
