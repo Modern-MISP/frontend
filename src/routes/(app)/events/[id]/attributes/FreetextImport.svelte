@@ -9,20 +9,17 @@
   import Info from '$lib/components/info/Info.svelte';
   import Button from '$lib/components/button/Button.svelte';
   import { notifySave } from '$lib/util/notifications.util';
-  import { invalidateAll } from '$app/navigation';
+  import { goto, invalidateAll } from '$app/navigation';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+    import { get } from 'svelte/store';
 
   type ReturnData = {
+    types: string[];
+    default_type: string;
     value: string;
-    original_value: string;
-    to_ids: 0 | 1;
-    type: string;
-    category: string;
-    distribution: number;
-    event_id: string;
   };
 
-  let freetextData: ReturnData[];
+  let freetextData;
 
   const submit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -30,7 +27,7 @@
     await notifySave(
       $api
         // @ts-expect-error Not in the OpenAPI spec
-        .POST('/events/freeTextImport/{eventId}', {
+        .POST('/events/freeTextImport/', {
           params: { path: { eventId: $page.params.id } },
           body: {
             Attribute: {
@@ -40,14 +37,49 @@
           }
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
-          freetextData = resp.data as ReturnData[];
-          invalidateAll();
+          if (resp.error) throw new Error(resp.error.detail);
+          getResponseData(resp.data.id);
         })
     );
   };
 
+  async function getResponseData(job_id:string) {
+    await $api
+      .GET('/jobs/{job_id}', {
+        params: { path: { job_id } }
+      })
+      .then(async (resp) => {
+        if (resp.error) {
+          if (resp.response.status == 409) {
+            await new Promise(f => setTimeout(f, 1000));
+            getResponseData(job_id);
+          } else {
+            throw new Error(resp.error.detail);
+          }
+        }
+        if (resp.data.attributes) {
+          freetextData = resp.data.attributes;
+          console.log(freetextData);
+        }
+      });
+  }
+
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
+  const actionBar: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Save',
+      icon: 'mdi:content-save',
+      action: (x) => {
+        get(api).POST('/events/freeTextImport/{eventId}', {
+          params: { path: { eventId: $page.params.id } },
+          body: { attributes: x }
+        }).then((resp) => {
+          if (resp.error) throw new Error(resp.error.detail);
+          invalidateAll();
+        });
+      }
+    }
+  ];
 </script>
 
 <div class="h-full" id="freetext-import">
@@ -78,24 +110,14 @@
           key: 'value'
         }),
         col({
-          icon: 'mdi:circle',
-          key: 'category',
-          label: 'Category',
-          value: (x) => ({
-            display: Pill,
-            props: {
-              text: x.category
-            }
-          })
-        }),
-        col({
           icon: '',
           key: 'type',
           label: 'Type',
-          value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
+          value: (x) => ({ display: Info, props: { text: x.default_type ?? '' } })
         })
       ]}
       tableData={freetextData}
+      editActions={actionBar}
     ></ComplexTableLayout>
   {/if}
 </div>
