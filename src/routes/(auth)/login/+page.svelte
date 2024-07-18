@@ -31,19 +31,23 @@
         .then((resp) => {
           if (resp.error) {
             if (typeof resp.error.detail === 'string') {
-              if (resp.error.detail === "Forbidden") {
+              if (resp.error.detail === 'Forbidden') {
                 goto(`/login/setPassword/${entries.email}`);
               } else {
+                error =
+                  'Wrong password or email address. Try again or click Forgot password? to reset it.';
                 throw new Error(resp.error.detail);
               }
             } else if (resp.error.detail != null) {
+              error =
+                'Wrong password or email address. Try again or click Forgot password? to reset it.';
               throw new Error(resp.error.detail[0].msg);
             }
           } else {
             $token = resp.data.token;
             goto('/events');
           }
-        })
+        });
     }
   }
 
@@ -122,6 +126,12 @@
       >
     </div>
 
+    {#if error}
+      <span class="h-12 text-red">
+        {error}
+      </span>
+    {/if}
+
     <div class="relative flex items-center justify-center">
       <hr class="absolute w-full" />
 
@@ -142,9 +152,6 @@
   <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
     >Login</Button
   >
-  <span class="h-12 text-red">
-    {error}
-  </span>
 </form>
 
 <style>

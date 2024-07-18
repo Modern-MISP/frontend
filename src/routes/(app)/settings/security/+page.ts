@@ -10,14 +10,15 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
-import { invalidateAll } from '$app/navigation';
+import { goto, invalidateAll } from '$app/navigation';
 import { notifications } from '$lib/stores';
 import { successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { userId } = await getUserId(fetch);
+  const { userEmail } = await getUserEmail(fetch);
   const card = await loadCard(fetch);
-  const table = await loadTable(fetch, userId);
+  const table = await loadTable(fetch, userId, userEmail);
 
   return {
     userId,
@@ -34,6 +35,15 @@ async function getUserId(fetch: {
   const { data } = await get(api).GET('/users/view/me', { fetch });
   return { userId: data.User?.id };
 }
+
+async function getUserEmail(fetch: {
+  (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
+  (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
+}) {
+  const { data } = await get(api).GET('/users/view/me', { fetch });
+  return { userEmail: data.User?.email };
+}
+
 // Funktion zum Laden der Benutzerinformationen und Auth-Keys
 async function loadCard(fetch: {
   (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
@@ -54,16 +64,6 @@ async function loadCard(fetch: {
           name: 'email'
         }
       })
-    }),
-    col({
-      label: 'Password',
-      value: () => ({
-        display: Input,
-        props: {
-          placeholder: 'Enter New Password',
-          name: 'password'
-        }
-      })
     })
   ];
 
@@ -79,7 +79,8 @@ async function loadTable(
     (input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response>;
     (input: string | Request | URL, init?: RequestInit | undefined): Promise<Response>;
   },
-  userId: string
+  userId: string,
+  userEmail: string
 ) {
   // API-Aufruf zum Abrufen der Auth-Keys
   const { data } = await get(api).GET('/auth_keys/index/{userId}', {
@@ -186,6 +187,11 @@ async function loadTable(
 
   const topMenuActions: ActionBarEntryProps[] = [
     {
+      icon: 'mdi:lock-reset',
+      label: 'Change Password',
+      action: () => goto(`/login/setPassword/${userEmail}`)
+    },
+    {
       icon: 'mdi:key-add',
       label: 'Add Key',
       action: '/settings/security/new'
@@ -207,7 +213,7 @@ async function loadTable(
             x
               .map((y) => y.AuthKey?.id)
               .map((AuthKeyId) =>
-                get(api).DELETE('/auth_keys/delete/{AuthKeyId}', {
+                get(api).POST('/auth_keys/delete/{AuthKeyId}', {
                   fetch,
                   params: { path: { AuthKeyId: AuthKeyId! } }
                 })
