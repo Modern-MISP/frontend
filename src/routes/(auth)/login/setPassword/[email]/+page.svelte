@@ -7,25 +7,48 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
   import { page } from '$app/stores';
+  import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core'
+  import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common'
+  import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en'
 
-  const passwordRequirements = [
-    'At least 8 characters',
-    'At least one uppercase letter',
-    'At least one lowercase letter',
-    'At least one number',
-    'At least one special character'
-  ];
+  const email = $page.params.email;
+
+  const passwordRequirements = [];
+
+  let passwordFeedback: string[] = [];
+
+  let password: string = '';
+
+  const options = {
+    translations: zxcvbnEnPackage.translations,
+    graphs: zxcvbnCommonPackage.adjacencyGraphs,
+    dictionary: {
+      ...zxcvbnCommonPackage.dictionary,
+      ...zxcvbnEnPackage.dictionary,
+      userInputs: [email, "MISP"],
+    },
+  }
+
+  zxcvbnOptions.setOptions(options)
+
+  $: {
+    passwordFeedback = zxcvbn(password).feedback.suggestions;
+    console.log(passwordFeedback)
+  }
 
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
-    const email = $page.params.email;
+
+    console.log("password", password)
+    console.log(zxcvbn(entries.password))
     
     if (entries.password !== entries['password-repeat']) {
       alert('Passwords do not match');
       return;
     }
 
-    // TODO password requirements?
+    return;
+
     get(api)
       .POST('/auth/login/setOwnPassword', {
         body: {
@@ -78,6 +101,7 @@
     disabled={false}
   />
   <Input
+    bind:value={password}
     name="password"
     placeholder="New password"
     type="password"
@@ -92,15 +116,23 @@
     disabled={false}
   />
 
+  <span class="text-red">
+    {#each passwordFeedback as feedback}
+      {feedback}
+      <br />
+    {/each}
+
   <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
     >continue</Button
   >
 
-  <div class="z-10 px-2 bg-base">Your password musst have:</div>
-  <span class="z-10 px-2 text-red">
-    {#each passwordRequirements as requirement}
-      {requirement}
-      <br />
-    {/each}
-  </span>
+  {#if passwordRequirements.length > 0}
+    <div class="z-10 px-2 bg-base">Your password musst have:</div>
+    <span class="z-10 px-2 text-red">
+      {#each passwordRequirements as requirement}
+        {requirement}
+        <br />
+      {/each}
+    </span>
+  {/if}
 </form>
