@@ -7,7 +7,7 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
   import { page } from '$app/stores';
-  import { zxcvbnAsync, zxcvbnOptions } from '@zxcvbn-ts/core'
+  import { zxcvbnAsync, zxcvbnOptions, debounce } from '@zxcvbn-ts/core'
   import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common'
   import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en'
   import { matcherPwnedFactory } from '@zxcvbn-ts/matcher-pwned'
@@ -19,18 +19,26 @@
   let password: string = '';
   let retypedPassword: string = '';
   let oldPassword: string = '';
+  const debouncedZxcvbn = debounce(getPasswordFeedback, 200);
+  
   $: {
+    password;
+    debouncedZxcvbn();
+  }
+
+
+  function getPasswordFeedback() {
     zxcvbnAsync(password, [oldPassword]).then((result) => {
-      passwordFeedback = [];
+      let feedback: string[] = [];
       if (result.feedback.warning) {
-        passwordFeedback = [ result.feedback.warning ];
+        feedback = [ result.feedback.warning ];
       } else if (result.feedback.suggestions.length > 0) {
-        passwordFeedback = result.feedback.suggestions;
+        feedback = result.feedback.suggestions;
       } else if (password !== retypedPassword) {
-        passwordFeedback = ['New Password and Repeat Password do not match'];
+        feedback = ['New Password and Repeat Password do not match'];
       }
+      passwordFeedback = feedback;
     });
-    
   }
 
   const options = {
@@ -56,7 +64,7 @@
     }
 
     if (passwordFeedback.length > 0) {
-      alert('Password is too weak');
+      alert(passwordFeedback.join('\n'));
       return;
     }
 
