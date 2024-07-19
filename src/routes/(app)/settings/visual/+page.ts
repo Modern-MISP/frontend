@@ -3,31 +3,39 @@ import Select from '$lib/components/form/Select.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import type { PageLoad } from './$types';
 import { themes } from '$lib/stores';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { error } from '@sveltejs/kit';
+import { notifySave } from '$lib/util/notifications.util';
 
-export const load: PageLoad = async ({ fetch }) => {
-  // This is a mock data. Actual Data will be fetched from API.
-  fetch;
+export const load: PageLoad = async ({  fetch }) => {
+   
+  const {
+    data,
+    error: mispError,
+    response
+  } = await get(api).GET('/user_settings/me/visual_setting',
+  {fetch}); 
 
-  const data = [
+    
+  
+  const data1 = [
     {
-      User: {
-        email: 'admin@admin.test',
-        date_created: '2023-09-01',
-        last_login: '2024-05-03'
-      },
-      Role: {
-        name: 'admin'
-      },
-      Organisation: {
-        name: 'Musterorganisation'
-      },
       UserSetting: {
-        name: 'Max Mustermann',
         menu_open_default: true,
         theme: 0
       }
     }
   ];
+
+
+  if (mispError){
+    data1[0].UserSetting.menu_open_default = true
+    data1[0].UserSetting.theme = 0
+  } else {
+    data1[0].UserSetting.theme = data.UserSetting.value[0]
+    data1[0].UserSetting.menu_open_default = data.UserSetting.value[1]
+  }
 
   const col = createTableHeadGenerator();
 
@@ -37,7 +45,7 @@ export const load: PageLoad = async ({ fetch }) => {
       value: () => ({
         display: Checkbox,
         props: {
-          checked: data[0].UserSetting.menu_open_default,
+          checked: data1[0].UserSetting.menu_open_default,
           name: 'is_menu_open'
         }
       })
@@ -52,18 +60,19 @@ export const load: PageLoad = async ({ fetch }) => {
             label: theme.label
           })),
           name: 'theme',
-          value: themes[data[0].UserSetting.theme].value
+          value: themes[data1[0].UserSetting.theme].value
         }
       })
     })
   ];
+
 
   const title = 'Visual Settings';
   const description = 'Change your personal design settings here.';
 
   return {
     header,
-    data,
+    data: data1,
     title,
     description
   };
