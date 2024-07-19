@@ -18,6 +18,10 @@
   let passwordFeedback: string[] = [];
 
   let password: string = '';
+  $: {
+    console.log(password);
+    passwordFeedback = zxcvbn(password).feedback.suggestions;
+  }
 
   const options = {
     translations: zxcvbnEnPackage.translations,
@@ -30,11 +34,6 @@
   }
 
   zxcvbnOptions.setOptions(options)
-
-  $: {
-    passwordFeedback = zxcvbn(password).feedback.suggestions;
-    console.log(passwordFeedback)
-  }
 
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
@@ -101,7 +100,7 @@
     disabled={false}
   />
   <Input
-    bind:value={password}
+    on:value={(input) => password = input.detail}
     name="password"
     placeholder="New password"
     type="password"
