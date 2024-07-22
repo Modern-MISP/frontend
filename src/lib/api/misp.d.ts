@@ -321,6 +321,49 @@ export interface paths {
      */
     delete: operations["delete_attribute_depr_attributes_delete__attributeId__delete"];
   };
+  "/auth/openID/getAllOpenIDConnectProvidersInfo": {
+    /**
+     * Get All Open Id Connect Providers Info
+     * @description Fetches all OpenID Connect providers
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     *
+     * Output:
+     * - List of OpenID Connect providers
+     */
+    get: operations["get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get"];
+  };
+  "/auth/openID/getAllOpenIDConnectProviders": {
+    /**
+     * Get All Open Id Connect Providers
+     * @description Fetches all OpenID Connect providers
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     *
+     * Output:
+     * - List of OpenID Connect providers
+     */
+    get: operations["get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get"];
+  };
+  "/auth/openID/getOpenIDConnectProvider/{providerId}": {
+    /**
+     * Get Open Id Connect Provider By Id
+     * @description Fetches a single OpenID Connect provider by its ID
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     * - Provider ID
+     *
+     * Output:
+     * - OpenID Connect provider details
+     */
+    get: operations["get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get"];
+  };
   "/auth/openID/addOpenIDConnectProvider": {
     /**
      * Add Openid Connect Provider
@@ -419,24 +462,7 @@ export interface paths {
      */
     post: operations["set_password_auth_login_setOwnPassword_post"];
   };
-  "/auth/login/idp/{identityProviderId}/authorize": {
-    /**
-     * Redirect To Idp
-     * @description Redirects to Idp.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * - the identity provider id
-     *
-     * Output:
-     *
-     * - the redirection
-     */
-    get: operations["redirect_to_idp_auth_login_idp__identityProviderId__authorize_get"];
-  };
-  "/auth/login/idp/{identityProviderId}/callback": {
+  "/auth/login/idp/{identityProviderName}/callback": {
     /**
      * Redirect To Frontend
      * @description Redirects to the frontend.
@@ -453,7 +479,7 @@ export interface paths {
      *
      * - the redirection
      */
-    get: operations["redirect_to_frontend_auth_login_idp__identityProviderId__callback_get"];
+    get: operations["redirect_to_frontend_auth_login_idp__identityProviderName__callback_get"];
     /**
      * Redirect To Frontend
      * @description Redirects to the frontend.
@@ -470,7 +496,7 @@ export interface paths {
      *
      * - the redirection
      */
-    post: operations["redirect_to_frontend_auth_login_idp__identityProviderId__callback_post"];
+    post: operations["redirect_to_frontend_auth_login_idp__identityProviderName__callback_post"];
   };
   "/auth/login/token": {
     /**
@@ -635,6 +661,26 @@ export interface paths {
      */
     get: operations["auth_keys_view_own_auth_keys_auth_keys_viewOwn_get"];
   };
+  "/auth_keys/index/{userId}": {
+    /**
+     * View own AuthKeys
+     * @deprecated
+     * @description Deprecated. View own Authkeys by the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the user
+     *
+     * Output:
+     *
+     * - the auth keys
+     */
+    get: operations["auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get"];
+  };
   "/auth_keys/add/{userId}": {
     /**
      * Add an AuthKey.
@@ -697,7 +743,7 @@ export interface paths {
      *
      * - the response from the api after the deleting request
      */
-    delete: operations["auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__delete"];
+    post: operations["auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post"];
   };
   "/events": {
     /**
@@ -717,7 +763,7 @@ export interface paths {
     get: operations["get_all_events_events_get"];
     /**
      * Add new event
-     * @description Add a new event with the given details.
+     * @description Add a new event with the gi ven details.
      *
      * Input:
      *
@@ -912,33 +958,41 @@ export interface paths {
      */
     post: operations["remove_tag_from_event_events_removeTag__eventId___tagId__post"];
   };
-  "/events/freeTextImport/{eventId}": {
+  "/events/freeTextImport": {
     /**
-     * Add attribute to event
-     * @description Add attribute to event via free text import.
+     * start the freetext import process via worker
+     * @description Starts the freetext import process by submitting the freetext to the worker.
      *
      * Input:
      *
      * - the user's authentification status
      *
+     * - the body of the freetext
+     *
+     * Output:
+     *
+     * - dict
+     */
+    post: operations["start_freeTextImport_events_freeTextImport_post"];
+  };
+  "/events/freeTextImport/{eventID}": {
+    /**
+     * Start the freetext import process via worker
+     * @description Adds the Attributes the user has selected
+     *
+     * Input:
+     *
      * - the current database
      *
      * - the event id
      *
-     * - the request body
+     * - the selected Attributes
      *
      * Output:
      *
-     * - the result of adding the tag to the event given by the api
+     * - the processed data to be viewed and selected by the user
      */
-    post: operations["add_attribute_via_free_text_import_events_freeTextImport__eventId__post"];
-  };
-  "/events/freeTextImportProcessID/{eventId}": {
-    /**
-     * Fetches the process ID from the current freetext Import
-     * @description Gets the processID from the worker.
-     */
-    get: operations["get_pid_from_free_text_import_events_freeTextImportProcessID__eventId__get"];
+    post: operations["start_freetext_import_events_freeTextImport__eventID__post"];
   };
   "/events/add": {
     /**
@@ -1548,6 +1602,27 @@ export interface paths {
      */
     post: operations["galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post"];
   };
+  "/galaxy_clusters/view/{galaxyClusterId}": {
+    /**
+     * Gets information from a galaxy cluster
+     * @deprecated
+     * @description Deprecated
+     * Returns information from a galaxy cluster selected by its id.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * Output:
+     *
+     * - the information of the galaxy cluster
+     */
+    get: operations["get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get"];
+  };
   "/jobs/{id}": {
     /**
      * Get Job
@@ -1824,6 +1899,20 @@ export interface paths {
   };
   "/organisations": {
     /**
+     * Gets a list of all organisations
+     * @deprecated
+     * @description Gets all organisations as a list.
+     *
+     * Input:
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - List of all organisations
+     */
+    get: operations["get_organisations_deprecated_organisations_get"];
+    /**
      * Add a new organisation
      * @description Adds a new organisation.
      *
@@ -1908,6 +1997,21 @@ export interface paths {
      * - Updated organisation data
      */
     post: operations["update_organisation_organisations_update__orgId__post"];
+  };
+  "/roles": {
+    /**
+     * Get all roles
+     * @description Get all roles and their details.
+     *
+     * Input:
+     *
+     * - Authentification details of the logged in user.
+     *
+     * Output:
+     *
+     * - Information about all roles.
+     */
+    get: operations["get_all_roles_roles_get"];
   };
   "/servers/remote/getAll": {
     /**
@@ -1994,6 +2098,60 @@ export interface paths {
      * - Filter sightings flag
      */
     get: operations["get_version_servers_getVersion_get"];
+  };
+  "/servers/remote/edit/{org_Id}": {
+    /**
+     * Edits remote servers by org id
+     * @description Edits servers given by org_id.
+     *
+     * Input:
+     *
+     * - org_id
+     *
+     * - The current database
+     *
+     * - auth: Authentication details
+     *
+     * Output:
+     *
+     * - Updated servers as a list
+     */
+    post: operations["update_remote_server_servers_remote_edit__org_Id__post"];
+  };
+  "/servers/": {
+    /**
+     * Requests a list of all remote servers
+     * @deprecated
+     * @description Deprecated
+     * Returns a list of all currently active remote servers.
+     *
+     * Input:
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - List of remote servers
+     */
+    get: operations["get_remote_servers_depr_servers__get"];
+  };
+  "/servers/add": {
+    /**
+     * Adds a new remote server to the list
+     * @deprecated
+     * @description Adds a new remote server based on the input of an admin.
+     *
+     * Input:
+     *
+     * - Data containing details of the remote server to be added
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Response indicating the result of the server addition operation
+     */
+    post: operations["add_remote_server_depr_servers_add_post"];
   };
   "/sharing_groups": {
     /**
@@ -3066,7 +3224,98 @@ export interface paths {
      */
     put: operations["update_user_users__userId__put"];
   };
-  "/user_settings/setSetting/{userId}/{userSettingName}": {
+  "/admin/users/add": {
+    /**
+     * Add new user
+     * @deprecated
+     * @description Adds a new user with the given details.
+     *
+     * Input:
+     *
+     * - Data representing the new user to be added
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Data representing the attributes of the new user
+     */
+    post: operations["add_user_deprecated_admin_users_add_post"];
+  };
+  "/admin/users/edit/{userId}": {
+    /**
+     * Update a user
+     * @deprecated
+     * @description Deprecated. Updates an existing user using the old route.
+     *
+     * Input:
+     *
+     * - ID of the user to update
+     *
+     * - Updated data for the user
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Data representing the updated attributes of the user
+     */
+    put: operations["update_user_depr_admin_users_edit__userId__put"];
+  };
+  "/admin/users/view/{userId}": {
+    /**
+     * Get a user by id
+     * @deprecated
+     * @description Deprecated. Retrieves a user specified by id with the old route.
+     *
+     * Input:
+     *
+     * - ID of the user to get
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Data representing the attributes of the searched user
+     */
+    get: operations["get_user_by_id_depr_admin_users_view__userId__get"];
+  };
+  "/admin/users": {
+    /**
+     * Get all users
+     * @deprecated
+     * @description Retrieves a list of all users.
+     *
+     * Input:
+     *
+     * - None
+     *
+     * Output:
+     *
+     * - List containing all users
+     */
+    get: operations["get_all_users_deprecated_admin_users_get"];
+  };
+  "/admin/users/delete/{userId}": {
+    /**
+     * Delete a user
+     * @deprecated
+     * @description Deprecated. Deletes a user by their ID with the old route.
+     *
+     * Input:
+     *
+     * - ID of the user to delete
+     *
+     * - auth: Authentication details of the current user
+     *
+     * - The current database
+     *
+     * Output:
+     * - StandardStatusIdentifiedResponse: Response indicating success or failure
+     */
+    delete: operations["delete_user_depr_admin_users_delete__userId__delete"];
+  };
+  "/user_settings/setSetting/me/{userSettingName}": {
     /**
      * Set user setting.
      * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
@@ -3087,7 +3336,7 @@ export interface paths {
      *
      * - SetUserSettingResponse: Response indicating success or failure
      */
-    post: operations["set_user_settings_user_settings_setSetting__userId___userSettingName__post"];
+    post: operations["set_user_settings_user_settings_setSetting_me__userSettingName__post"];
   };
   "/user_settings/{userSettingId}": {
     /**
@@ -3125,7 +3374,7 @@ export interface paths {
      */
     delete: operations["delete_user_settings_user_settings__userSettingId__delete"];
   };
-  "/user_settings/{userId}/{userSettingName}": {
+  "/user_settings/me/{userSettingName}": {
     /**
      * View UserSetting.
      * @description Displays a UserSetting by given userID and UserSetting name.
@@ -3144,7 +3393,7 @@ export interface paths {
      *
      * - ViewUserSettingResponse: Response with details of the viewed user setting
      */
-    get: operations["get_user_setting_by_id_user_settings__userId___userSettingName__get"];
+    get: operations["get_user_setting_by_id_user_settings_me__userSettingName__get"];
   };
   "/user_settings": {
     /**
@@ -3535,8 +3784,8 @@ export interface components {
     };
     /** AddAttributeViaFreeTextImportEventResponse */
     AddAttributeViaFreeTextImportEventResponse: {
-      /** Comment */
-      comment?: string;
+      /** Event Id */
+      event_id: string;
       /** Value */
       value: string;
       /** Original Value */
@@ -3966,7 +4215,7 @@ export interface components {
       /** Name */
       name: string;
       /** Uuid */
-      uuid: string;
+      uuid?: string;
       /** Local */
       local?: boolean;
     };
@@ -4065,6 +4314,31 @@ export interface components {
       /** Extend */
       extend?: boolean;
     };
+    /** AddOrganisation */
+    AddOrganisation: {
+      /** Id */
+      id: string;
+      /** Name */
+      name: string;
+      /** Description */
+      description?: string;
+      /** Type */
+      type: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Created By */
+      created_by: string;
+      /** Contacts */
+      contacts?: string;
+      /** Local */
+      local: boolean;
+      /** Restricted To Domain */
+      restricted_to_domain?: string;
+      /** Landingpage */
+      landingpage?: string;
+    };
     /** AddRemoveTagAttributeResponse */
     AddRemoveTagAttributeResponse: {
       /** Saved */
@@ -4143,16 +4417,18 @@ export interface components {
     };
     /** AddUserBody */
     AddUserBody: {
-      /** Org Id */
-      org_id: string;
+      /** Authkey */
+      authkey: string;
+      /** Contactalert */
+      contactalert: boolean;
+      /** Nids Sid */
+      nids_sid: number;
+      /** Org */
+      org: string;
       /** Email */
       email: string;
-      /** Gpgkey */
-      gpgkey: string;
       /** Termsaccepted */
       termsaccepted: boolean;
-      /** Role Id */
-      role_id: string;
       /** Disabled */
       disabled: boolean;
       /** Notification Daily */
@@ -4161,17 +4437,81 @@ export interface components {
       notification_weekly: boolean;
       /** Notification Monthly */
       notification_monthly: boolean;
-      /** Totp */
-      totp?: string;
       /** Password */
       password: string;
       /** Name */
       name: string;
+      /** Role */
+      role: string;
     };
     /** AddUserResponse */
     AddUserResponse: {
+      User: components["schemas"]["AddUserResponseData"];
+    };
+    /** AddUserResponseData */
+    AddUserResponseData: {
       /** Id */
       id: string;
+      /** Org Id */
+      org_id: number;
+      /** Server Id */
+      server_id: number;
+      /** Email */
+      email: string;
+      /** Autoalert */
+      autoalert: boolean;
+      /** Authkey */
+      authkey: string;
+      /** Invited By */
+      invited_by: number;
+      /** Gpgkey */
+      gpgkey?: string;
+      /** Certif Public */
+      certif_public?: string;
+      /** Nids Sid */
+      nids_sid: number;
+      /** Termsaccepted */
+      termsaccepted: boolean;
+      /** Newsread */
+      newsread?: number;
+      /** Role Id */
+      role_id: number;
+      /** Change Pw */
+      change_pw: boolean;
+      /** Contactalert */
+      contactalert: boolean;
+      /** Disabled */
+      disabled: boolean;
+      /** Expiration */
+      expiration?: number;
+      /** Current Login */
+      current_login: number;
+      /** Force Logout */
+      force_logout: boolean;
+      /** Date Created */
+      date_created: number;
+      /** Date Modified */
+      date_modified: number;
+      /** Sub */
+      sub?: string;
+      /** External Auth Required */
+      external_auth_required: boolean;
+      /** External Auth Key */
+      external_auth_key?: string;
+      /** Last Api Access */
+      last_api_access: number;
+      /** Notification Daily */
+      notification_daily: boolean;
+      /** Notification Weekly */
+      notification_weekly: boolean;
+      /** Notification Monthly */
+      notification_monthly: boolean;
+      /** Totp */
+      totp?: boolean;
+      /** Hotp Counter */
+      hotp_counter?: number;
+      /** Last Pw Change */
+      last_pw_change?: number;
     };
     /** AttachClusterGalaxyAttributes */
     AttachClusterGalaxyAttributes: {
@@ -4190,6 +4530,15 @@ export interface components {
       success: string;
       /** Check Publish */
       check_publish: boolean;
+    };
+    /** AttributeType */
+    AttributeType: {
+      /** Types */
+      types: string[];
+      /** Default Type */
+      default_type: string;
+      /** Value */
+      value: string;
     };
     /** ChangeLoginInfoResponse */
     ChangeLoginInfoResponse: {
@@ -4481,15 +4830,15 @@ export interface components {
       /** Allowed Ips */
       allowed_ips?: string[];
       /** Expiration */
-      expiration?: number;
+      expiration?: string;
     };
-    /** EditAuthKeyResponse */
-    EditAuthKeyResponse: {
-      AuthKey: components["schemas"]["EditAuthKeyResponseAuthKey"];
+    /** EditAuthKeyResponseCompl */
+    EditAuthKeyResponseCompl: {
+      AuthKey: components["schemas"]["EditAuthKeyResponseCompleteAuthKey"];
       User: components["schemas"]["EditAuthKeyResponseUser"];
     };
-    /** EditAuthKeyResponseAuthKey */
-    EditAuthKeyResponseAuthKey: {
+    /** EditAuthKeyResponseCompleteAuthKey */
+    EditAuthKeyResponseCompleteAuthKey: {
       /** Id */
       id: string;
       /** Uuid */
@@ -4510,6 +4859,8 @@ export interface components {
       comment: string;
       /** Allowed Ips */
       allowed_ips?: string;
+      /** Unique Ips */
+      unique_ips?: string[];
     };
     /** EditAuthKeyResponseUser */
     EditAuthKeyResponseUser: {
@@ -4562,6 +4913,62 @@ export interface components {
       protected?: string;
       /** Cryptographic Key */
       cryptographic_key?: string;
+    };
+    /** EditOrganisation */
+    EditOrganisation: {
+      /** Name */
+      name: string;
+      /** Description */
+      description?: string;
+      /** Type */
+      type: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Contacts */
+      contacts?: string;
+      /** Local */
+      local: boolean;
+      /** Restricted To Domain */
+      restricted_to_domain?: string;
+      /** Landingpage */
+      landingpage?: string;
+    };
+    /** EditServer */
+    EditServer: {
+      /** Name */
+      name: string;
+      /** Url */
+      url: string;
+      /** Priority */
+      priority: number;
+      /** Authkey */
+      authkey: string;
+      /** Remote Org Id */
+      remote_org_id: number;
+      /** Internal */
+      internal: boolean;
+      /** Push */
+      push: boolean;
+      /** Pull */
+      pull: boolean;
+      /** Pull Rules */
+      pull_rules: string;
+      /** Push Rules */
+      push_rules: string;
+      /** Push Galaxy Clusters */
+      push_galaxy_clusters: boolean;
+      /** Caching Enabled */
+      caching_enabled: boolean;
+      /** Unpublish Event */
+      unpublish_event: boolean;
+      /** Publish Without Email */
+      publish_without_email: boolean;
+      /** Self Signed */
+      self_signed: boolean;
+      /** Skip Proxy */
+      skip_proxy: boolean;
     };
     /** ExchangeTokenLoginBody */
     ExchangeTokenLoginBody: {
@@ -4860,6 +5267,11 @@ export interface components {
       /** Orgc Id */
       orgc_id?: string;
     };
+    /** FreeTextProcessID */
+    FreeTextProcessID: {
+      /** Id */
+      id: string;
+    };
     /** GetAllAttributesResponse */
     GetAllAttributesResponse: {
       /** Id */
@@ -5011,7 +5423,7 @@ export interface components {
       /** Name */
       name: string;
       /** Uuid */
-      uuid: string;
+      uuid?: string;
     };
     /** GetAllEventsResponse */
     GetAllEventsResponse: {
@@ -5068,6 +5480,47 @@ export interface components {
     GetAllNoticelists: {
       Noticelist: components["schemas"]["NoticelistAttributes"];
     };
+    /** GetAllOrganisationResponse */
+    GetAllOrganisationResponse: {
+      /** Id */
+      id: string;
+      /** Name */
+      name: string;
+      /**
+       * Date Created
+       * Format: date-time
+       */
+      date_created: string;
+      /**
+       * Date Modified
+       * Format: date-time
+       */
+      date_modified: string;
+      /** Description */
+      description?: string;
+      /** Type */
+      type?: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Created By */
+      created_by: string;
+      /** Uuid */
+      uuid?: string;
+      /** Contacts */
+      contacts?: string;
+      /** Local */
+      local: boolean;
+      /** Restricted To Domain */
+      restricted_to_domain?: string;
+      /** Landingpage */
+      landingpage?: string;
+      /** User Count */
+      user_count: number;
+      /** Created By Email */
+      created_by_email: string;
+    };
     /** GetAllSearchGalaxiesAttributes */
     GetAllSearchGalaxiesAttributes: {
       /** Id */
@@ -5096,35 +5549,6 @@ export interface components {
     /** GetAllSearchGalaxiesResponse */
     GetAllSearchGalaxiesResponse: {
       Galaxy: components["schemas"]["GetAllSearchGalaxiesAttributes"];
-    };
-    /** GetAllUsersUser */
-    GetAllUsersUser: {
-      /** Id */
-      id: number;
-      /** Organisation */
-      organisation: number;
-      /** Role */
-      role: number;
-      /** Nids */
-      nids: number;
-      /** Name */
-      name: string;
-      /** Email */
-      email: string;
-      /** Last Login */
-      last_login: number;
-      /** Created */
-      created: number;
-      /** Totp */
-      totp?: boolean;
-      /** Contact */
-      contact: boolean;
-      /** Notification */
-      notification: boolean;
-      /** Gpg Key */
-      gpg_key: string;
-      /** Terms */
-      terms: boolean;
     };
     /** GetAttributeAttributes */
     GetAttributeAttributes: {
@@ -6597,10 +7021,136 @@ export interface components {
        *     "text",
        *     "xmr"
        *   ],
-       *   "Internal reference": [
+       *   "Persistence mechanism": [
        *     "anonymised",
        *     "comment",
-       *     "git-commit-id",
+       *     "filename",
+       *     "hex",
+       *     "other",
+       *     "regkey",
+       *     "regkey|value",
+       *     "text"
+       *   ],
+       *   "Artifacts dropped": [
+       *     "anonymised",
+       *     "attachment",
+       *     "authentihash",
+       *     "cdhash",
+       *     "comment",
+       *     "cookie",
+       *     "filename",
+       *     "filename|authentihash",
+       *     "filename|impfuzzy",
+       *     "filename|imphash",
+       *     "filename|md5",
+       *     "filename-pattern",
+       *     "filename|pehash",
+       *     "filename|sha1",
+       *     "filename|sha224",
+       *     "filename|sha256",
+       *     "filename|sha384",
+       *     "filename|sha3-224",
+       *     "filename|sha3-256",
+       *     "filename|sha3-384",
+       *     "filename|sha3-512",
+       *     "filename|sha512",
+       *     "filename|sha512/224",
+       *     "filename|sha512/256",
+       *     "filename|ssdeep",
+       *     "filename|tlsh",
+       *     "filename|vhash",
+       *     "gene",
+       *     "hex",
+       *     "impfuzzy",
+       *     "imphash",
+       *     "kusto-query",
+       *     "malware-sample",
+       *     "md5",
+       *     "mime-type",
+       *     "mutex",
+       *     "named pipe",
+       *     "other",
+       *     "pattern-in-file",
+       *     "pattern-in-memory",
+       *     "pdb",
+       *     "pgp-private-key",
+       *     "pgp-public-key",
+       *     "process-state",
+       *     "regkey",
+       *     "regkey|value",
+       *     "sha1",
+       *     "sha256",
+       *     "sha384",
+       *     "sha3-224",
+       *     "sha3-256",
+       *     "sha3-384",
+       *     "sha3-512",
+       *     "sha512",
+       *     "sha512/224",
+       *     "sha512/256",
+       *     "sigma",
+       *     "ssdeep",
+       *     "stix2-pattern",
+       *     "telfhash",
+       *     "text",
+       *     "vhash",
+       *     "windows-scheduled-task",
+       *     "windows-service-displayname",
+       *     "windows-service-name",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "yara"
+       *   ],
+       *   "Targeting data": [
+       *     "anonymised",
+       *     "comment",
+       *     "target-email",
+       *     "target-external",
+       *     "target-location",
+       *     "target-machine",
+       *     "target-org",
+       *     "target-user"
+       *   ],
+       *   "Person": [
+       *     "anonymised",
+       *     "comment",
+       *     "country-of-residence",
+       *     "date-of-birth",
+       *     "email",
+       *     "first-name",
+       *     "frequent-flyer-number",
+       *     "full-name",
+       *     "gender",
+       *     "identity-card-number",
+       *     "issue-date-of-the-visa",
+       *     "last-name",
+       *     "middle-name",
+       *     "nationality",
+       *     "other",
+       *     "passenger-name-record-locator-number",
+       *     "passport-country",
+       *     "passport-expiration",
+       *     "passport-number",
+       *     "payment-details",
+       *     "pgp-private-key",
+       *     "pgp-public-key",
+       *     "phone-number",
+       *     "place-of-birth",
+       *     "place-port-of-clearance",
+       *     "place-port-of-onward-foreign-destination",
+       *     "place-port-of-original-embarkation",
+       *     "primary-residence",
+       *     "redress-number",
+       *     "special-service-request",
+       *     "text",
+       *     "travel-details",
+       *     "visa-number"
+       *   ],
+       *   "Support Tool": [
+       *     "anonymised",
+       *     "attachment",
+       *     "comment",
        *     "hex",
        *     "link",
        *     "other",
@@ -6626,6 +7176,91 @@ export interface components {
        *     "x509-fingerprint-sha1",
        *     "x509-fingerprint-sha256"
        *   ],
+       *   "External analysis": [
+       *     "anonymised",
+       *     "AS",
+       *     "attachment",
+       *     "bro",
+       *     "comment",
+       *     "community-id",
+       *     "cortex",
+       *     "cpe",
+       *     "domain",
+       *     "domain|ip",
+       *     "filename",
+       *     "filename|md5",
+       *     "filename-pattern",
+       *     "filename|sha1",
+       *     "filename|sha256",
+       *     "filename|sha3-224",
+       *     "filename|sha3-256",
+       *     "filename|sha3-384",
+       *     "filename|sha3-512",
+       *     "github-repository",
+       *     "hasshserver-md5",
+       *     "hassh-md5",
+       *     "hostname",
+       *     "ip-dst",
+       *     "ip-dst|port",
+       *     "ip-src",
+       *     "ip-src|port",
+       *     "ja3-fingerprint-md5",
+       *     "jarm-fingerprint",
+       *     "link",
+       *     "mac-address",
+       *     "mac-eui-64",
+       *     "malware-sample",
+       *     "md5",
+       *     "other",
+       *     "pattern-in-file",
+       *     "pattern-in-memory",
+       *     "pattern-in-traffic",
+       *     "regkey",
+       *     "regkey|value",
+       *     "sha1",
+       *     "sha256",
+       *     "sha3-224",
+       *     "sha3-256",
+       *     "sha3-384",
+       *     "sha3-512",
+       *     "snort",
+       *     "text",
+       *     "url",
+       *     "user-agent",
+       *     "vulnerability",
+       *     "weakness",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "zeek"
+       *   ],
+       *   "Internal reference": [
+       *     "anonymised",
+       *     "comment",
+       *     "git-commit-id",
+       *     "hex",
+       *     "link",
+       *     "other",
+       *     "text"
+       *   ],
+       *   "Social network": [
+       *     "anonymised",
+       *     "comment",
+       *     "email",
+       *     "email-dst",
+       *     "email-src",
+       *     "eppn",
+       *     "github-organisation",
+       *     "github-repository",
+       *     "github-username",
+       *     "jabber-id",
+       *     "other",
+       *     "pgp-private-key",
+       *     "pgp-public-key",
+       *     "text",
+       *     "twitter-id",
+       *     "whois-registrant-email"
+       *   ],
        *   "Other": [
        *     "anonymised",
        *     "boolean",
@@ -6641,6 +7276,61 @@ export interface components {
        *     "phone-number",
        *     "port",
        *     "size-in-bytes",
+       *     "text"
+       *   ],
+       *   "Network activity": [
+       *     "anonymised",
+       *     "AS",
+       *     "attachment",
+       *     "bro",
+       *     "comment",
+       *     "community-id",
+       *     "cookie",
+       *     "dkim",
+       *     "dkim-signature",
+       *     "domain",
+       *     "domain|ip",
+       *     "email",
+       *     "email-dst",
+       *     "email-src",
+       *     "email-subject",
+       *     "eppn",
+       *     "favicon-mmh3",
+       *     "filename-pattern",
+       *     "hasshserver-md5",
+       *     "hassh-md5",
+       *     "hex",
+       *     "hostname",
+       *     "hostname|port",
+       *     "http-method",
+       *     "ip-dst",
+       *     "ip-dst|port",
+       *     "ip-src",
+       *     "ip-src|port",
+       *     "ja3-fingerprint-md5",
+       *     "jarm-fingerprint",
+       *     "mac-address",
+       *     "mac-eui-64",
+       *     "other",
+       *     "pattern-in-file",
+       *     "pattern-in-traffic",
+       *     "port",
+       *     "snort",
+       *     "ssh-fingerprint",
+       *     "stix2-pattern",
+       *     "text",
+       *     "uri",
+       *     "url",
+       *     "user-agent",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "zeek"
+       *   ],
+       *   "Payload type": [
+       *     "anonymised",
+       *     "comment",
+       *     "other",
        *     "text"
        *   ],
        *   "Payload delivery": [
@@ -6742,237 +7432,6 @@ export interface components {
        *     "x509-fingerprint-sha256",
        *     "yara"
        *   ],
-       *   "Person": [
-       *     "anonymised",
-       *     "comment",
-       *     "country-of-residence",
-       *     "date-of-birth",
-       *     "email",
-       *     "first-name",
-       *     "frequent-flyer-number",
-       *     "full-name",
-       *     "gender",
-       *     "identity-card-number",
-       *     "issue-date-of-the-visa",
-       *     "last-name",
-       *     "middle-name",
-       *     "nationality",
-       *     "other",
-       *     "passenger-name-record-locator-number",
-       *     "passport-country",
-       *     "passport-expiration",
-       *     "passport-number",
-       *     "payment-details",
-       *     "pgp-private-key",
-       *     "pgp-public-key",
-       *     "phone-number",
-       *     "place-of-birth",
-       *     "place-port-of-clearance",
-       *     "place-port-of-onward-foreign-destination",
-       *     "place-port-of-original-embarkation",
-       *     "primary-residence",
-       *     "redress-number",
-       *     "special-service-request",
-       *     "text",
-       *     "travel-details",
-       *     "visa-number"
-       *   ],
-       *   "Social network": [
-       *     "anonymised",
-       *     "comment",
-       *     "email",
-       *     "email-dst",
-       *     "email-src",
-       *     "eppn",
-       *     "github-organisation",
-       *     "github-repository",
-       *     "github-username",
-       *     "jabber-id",
-       *     "other",
-       *     "pgp-private-key",
-       *     "pgp-public-key",
-       *     "text",
-       *     "twitter-id",
-       *     "whois-registrant-email"
-       *   ],
-       *   "External analysis": [
-       *     "anonymised",
-       *     "AS",
-       *     "attachment",
-       *     "bro",
-       *     "comment",
-       *     "community-id",
-       *     "cortex",
-       *     "cpe",
-       *     "domain",
-       *     "domain|ip",
-       *     "filename",
-       *     "filename|md5",
-       *     "filename-pattern",
-       *     "filename|sha1",
-       *     "filename|sha256",
-       *     "filename|sha3-224",
-       *     "filename|sha3-256",
-       *     "filename|sha3-384",
-       *     "filename|sha3-512",
-       *     "github-repository",
-       *     "hasshserver-md5",
-       *     "hassh-md5",
-       *     "hostname",
-       *     "ip-dst",
-       *     "ip-dst|port",
-       *     "ip-src",
-       *     "ip-src|port",
-       *     "ja3-fingerprint-md5",
-       *     "jarm-fingerprint",
-       *     "link",
-       *     "mac-address",
-       *     "mac-eui-64",
-       *     "malware-sample",
-       *     "md5",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-memory",
-       *     "pattern-in-traffic",
-       *     "regkey",
-       *     "regkey|value",
-       *     "sha1",
-       *     "sha256",
-       *     "sha3-224",
-       *     "sha3-256",
-       *     "sha3-384",
-       *     "sha3-512",
-       *     "snort",
-       *     "text",
-       *     "url",
-       *     "user-agent",
-       *     "vulnerability",
-       *     "weakness",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "zeek"
-       *   ],
-       *   "Network activity": [
-       *     "anonymised",
-       *     "AS",
-       *     "attachment",
-       *     "bro",
-       *     "comment",
-       *     "community-id",
-       *     "cookie",
-       *     "dkim",
-       *     "dkim-signature",
-       *     "domain",
-       *     "domain|ip",
-       *     "email",
-       *     "email-dst",
-       *     "email-src",
-       *     "email-subject",
-       *     "eppn",
-       *     "favicon-mmh3",
-       *     "filename-pattern",
-       *     "hasshserver-md5",
-       *     "hassh-md5",
-       *     "hex",
-       *     "hostname",
-       *     "hostname|port",
-       *     "http-method",
-       *     "ip-dst",
-       *     "ip-dst|port",
-       *     "ip-src",
-       *     "ip-src|port",
-       *     "ja3-fingerprint-md5",
-       *     "jarm-fingerprint",
-       *     "mac-address",
-       *     "mac-eui-64",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-traffic",
-       *     "port",
-       *     "snort",
-       *     "ssh-fingerprint",
-       *     "stix2-pattern",
-       *     "text",
-       *     "uri",
-       *     "url",
-       *     "user-agent",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "zeek"
-       *   ],
-       *   "Artifacts dropped": [
-       *     "anonymised",
-       *     "attachment",
-       *     "authentihash",
-       *     "cdhash",
-       *     "comment",
-       *     "cookie",
-       *     "filename",
-       *     "filename|authentihash",
-       *     "filename|impfuzzy",
-       *     "filename|imphash",
-       *     "filename|md5",
-       *     "filename-pattern",
-       *     "filename|pehash",
-       *     "filename|sha1",
-       *     "filename|sha224",
-       *     "filename|sha256",
-       *     "filename|sha384",
-       *     "filename|sha3-224",
-       *     "filename|sha3-256",
-       *     "filename|sha3-384",
-       *     "filename|sha3-512",
-       *     "filename|sha512",
-       *     "filename|sha512/224",
-       *     "filename|sha512/256",
-       *     "filename|ssdeep",
-       *     "filename|tlsh",
-       *     "filename|vhash",
-       *     "gene",
-       *     "hex",
-       *     "impfuzzy",
-       *     "imphash",
-       *     "kusto-query",
-       *     "malware-sample",
-       *     "md5",
-       *     "mime-type",
-       *     "mutex",
-       *     "named pipe",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-memory",
-       *     "pdb",
-       *     "pgp-private-key",
-       *     "pgp-public-key",
-       *     "process-state",
-       *     "regkey",
-       *     "regkey|value",
-       *     "sha1",
-       *     "sha256",
-       *     "sha384",
-       *     "sha3-224",
-       *     "sha3-256",
-       *     "sha3-384",
-       *     "sha3-512",
-       *     "sha512",
-       *     "sha512/224",
-       *     "sha512/256",
-       *     "sigma",
-       *     "ssdeep",
-       *     "stix2-pattern",
-       *     "telfhash",
-       *     "text",
-       *     "vhash",
-       *     "windows-scheduled-task",
-       *     "windows-service-displayname",
-       *     "windows-service-name",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "yara"
-       *   ],
        *   "Payload installation": [
        *     "anonymised",
        *     "attachment",
@@ -7039,41 +7498,6 @@ export interface components {
        *     "x509-fingerprint-sha1",
        *     "x509-fingerprint-sha256",
        *     "yara"
-       *   ],
-       *   "Support Tool": [
-       *     "anonymised",
-       *     "attachment",
-       *     "comment",
-       *     "hex",
-       *     "link",
-       *     "other",
-       *     "text"
-       *   ],
-       *   "Persistence mechanism": [
-       *     "anonymised",
-       *     "comment",
-       *     "filename",
-       *     "hex",
-       *     "other",
-       *     "regkey",
-       *     "regkey|value",
-       *     "text"
-       *   ],
-       *   "Payload type": [
-       *     "anonymised",
-       *     "comment",
-       *     "other",
-       *     "text"
-       *   ],
-       *   "Targeting data": [
-       *     "anonymised",
-       *     "comment",
-       *     "target-email",
-       *     "target-external",
-       *     "target-location",
-       *     "target-machine",
-       *     "target-org",
-       *     "target-user"
        *   ],
        *   "Antivirus detection": [
        *     "anonymised",
@@ -7180,6 +7604,25 @@ export interface components {
     GetIdTaxonomyResponseWrapper: {
       Taxonomy: components["schemas"]["GetIdTaxonomyResponse"];
     };
+    /** GetIdentityProviderResponse */
+    GetIdentityProviderResponse: {
+      /** Id */
+      id: string;
+      /** Name */
+      name: string;
+      /** Org Id */
+      org_id: string;
+      /** Active */
+      active: boolean;
+      /** Base Url */
+      base_url: string;
+      /** Client Id */
+      client_id: string;
+      /** Client Secret */
+      client_secret: string;
+      /** Scope */
+      scope?: string;
+    };
     /** GetOrganisationResponse */
     GetOrganisationResponse: {
       /** Id */
@@ -7199,7 +7642,7 @@ export interface components {
       /** Description */
       description?: string;
       /** Type */
-      type: string;
+      type?: string;
       /** Nationality */
       nationality?: string;
       /** Sector */
@@ -7207,7 +7650,7 @@ export interface components {
       /** Created By */
       created_by: string;
       /** Uuid */
-      uuid: string;
+      uuid?: string;
       /** Contacts */
       contacts?: string;
       /** Local */
@@ -7302,6 +7745,87 @@ export interface components {
       /** Timestamp */
       timestamp: string;
     };
+    /** GetUsersElement */
+    GetUsersElement: {
+      User: components["schemas"]["GetUsersUser"];
+      Role: components["schemas"]["RoleUsersResponse"];
+      Organisation: components["schemas"]["OrganisationUsersResponse"];
+      /** Usersetting */
+      UserSetting?: Record<string, never>;
+    };
+    /** GetUsersUser */
+    GetUsersUser: {
+      /** Id */
+      id: number;
+      /** Org Id */
+      org_id: number;
+      /** Server Id */
+      server_id: number;
+      /** Email */
+      email: string;
+      /** Autoalert */
+      autoalert: boolean;
+      /** Auth Key */
+      auth_key?: string;
+      /** Invited By */
+      invited_by: number;
+      /** Gpg Key */
+      gpg_key?: string;
+      /** Certif Public */
+      certif_public?: string;
+      /** Nids Sid */
+      nids_sid: number;
+      /** Termsaccepted */
+      termsaccepted: boolean;
+      /** Newsread */
+      newsread?: number;
+      /** Role Id */
+      role_id: number;
+      /** Change Pw */
+      change_pw: boolean;
+      /** Contactalert */
+      contactalert: boolean;
+      /** Disabled */
+      disabled: boolean;
+      /** Expiration */
+      expiration?: number;
+      /** Current Login */
+      current_login?: number;
+      /** Last Login */
+      last_login?: number;
+      /** Last Api Access */
+      last_api_access?: number;
+      /** Force Logout */
+      force_logout: boolean;
+      /** Date Created */
+      date_created: number;
+      /** Date Modified */
+      date_modified?: number;
+      /** Last Pw Change */
+      last_pw_change?: number;
+      /** Totp */
+      totp?: boolean;
+      /** Hotp Counter */
+      hotp_counter?: number;
+      /** Notification Daily */
+      notification_daily?: boolean;
+      /** Notification Weekly */
+      notification_weekly?: boolean;
+      /** Notification Monthly */
+      notification_monthly?: boolean;
+      /** External Auth Required */
+      external_auth_required?: boolean;
+      /** External Auth Key */
+      external_auth_key?: string;
+      /** Sub */
+      sub?: string;
+      /** Name */
+      name: string;
+      /** Contact */
+      contact: boolean;
+      /** Notification */
+      notification: boolean;
+    };
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -7323,6 +7847,13 @@ export interface components {
       client_secret: string;
       /** Scope */
       scope?: string;
+    };
+    /** IdentityProviderCallbackBody */
+    IdentityProviderCallbackBody: {
+      /** Code */
+      code: string;
+      /** Redirect Uri */
+      redirect_uri: string;
     };
     /** IdentityProviderEditBody */
     IdentityProviderEditBody: {
@@ -7347,6 +7878,8 @@ export interface components {
       id: string;
       /** Name */
       name: string;
+      /** Url */
+      url?: string;
     };
     /** ImportGalaxyBody */
     ImportGalaxyBody: {
@@ -7680,6 +8213,15 @@ export interface components {
       Attribute?: components["schemas"]["GetAllAttributesResponse"][];
       Event?: components["schemas"]["ObjectEventResponse"];
     };
+    /** OrgDataResponseModel */
+    OrgDataResponseModel: {
+      /** Users */
+      users: number;
+      /** Events */
+      events: number;
+      /** Attributes */
+      attributes: number;
+    };
     /** Organisation */
     Organisation: {
       /** Id */
@@ -7712,6 +8254,43 @@ export interface components {
       contacts?: string;
       /** Local */
       local: boolean;
+      /** Restricted To Domain */
+      restricted_to_domain?: string;
+      /** Landingpage */
+      landingpage?: string;
+    };
+    /** OrganisationUsersResponse */
+    OrganisationUsersResponse: {
+      /** Id */
+      id: number;
+      /** Name */
+      name: string;
+      /**
+       * Date Created
+       * Format: date-time
+       */
+      date_created?: string;
+      /**
+       * Date Modified
+       * Format: date-time
+       */
+      date_modified?: string;
+      /** Description */
+      description?: string;
+      /** Type */
+      type?: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Created By */
+      created_by?: number;
+      /** Uuid */
+      uuid?: string;
+      /** Contacts */
+      contacts?: string;
+      /** Local */
+      local?: boolean;
       /** Restricted To Domain */
       restricted_to_domain?: string;
       /** Landingpage */
@@ -8320,6 +8899,87 @@ export interface components {
       all_orgs?: boolean;
       Server?: components["schemas"]["PartialGetSharingGroupInfoResponseServerInfo"];
     };
+    /** PartialGetUsersElement */
+    PartialGetUsersElement: {
+      User?: components["schemas"]["PartialGetUsersUser"];
+      Role?: components["schemas"]["PartialRoleUsersResponse"];
+      Organisation?: components["schemas"]["PartialOrganisationUsersResponse"];
+      /** Usersetting */
+      UserSetting?: Record<string, never>;
+    };
+    /** PartialGetUsersUser */
+    PartialGetUsersUser: {
+      /** Id */
+      id?: number;
+      /** Org Id */
+      org_id?: number;
+      /** Server Id */
+      server_id?: number;
+      /** Email */
+      email?: string;
+      /** Autoalert */
+      autoalert?: boolean;
+      /** Auth Key */
+      auth_key?: string;
+      /** Invited By */
+      invited_by?: number;
+      /** Gpg Key */
+      gpg_key?: string;
+      /** Certif Public */
+      certif_public?: string;
+      /** Nids Sid */
+      nids_sid?: number;
+      /** Termsaccepted */
+      termsaccepted?: boolean;
+      /** Newsread */
+      newsread?: number;
+      /** Role Id */
+      role_id?: number;
+      /** Change Pw */
+      change_pw?: boolean;
+      /** Contactalert */
+      contactalert?: boolean;
+      /** Disabled */
+      disabled?: boolean;
+      /** Expiration */
+      expiration?: number;
+      /** Current Login */
+      current_login?: number;
+      /** Last Login */
+      last_login?: number;
+      /** Last Api Access */
+      last_api_access?: number;
+      /** Force Logout */
+      force_logout?: boolean;
+      /** Date Created */
+      date_created?: number;
+      /** Date Modified */
+      date_modified?: number;
+      /** Last Pw Change */
+      last_pw_change?: number;
+      /** Totp */
+      totp?: boolean;
+      /** Hotp Counter */
+      hotp_counter?: number;
+      /** Notification Daily */
+      notification_daily?: boolean;
+      /** Notification Weekly */
+      notification_weekly?: boolean;
+      /** Notification Monthly */
+      notification_monthly?: boolean;
+      /** External Auth Required */
+      external_auth_required?: boolean;
+      /** External Auth Key */
+      external_auth_key?: string;
+      /** Sub */
+      sub?: string;
+      /** Name */
+      name?: string;
+      /** Contact */
+      contact?: boolean;
+      /** Notification */
+      notification?: boolean;
+    };
     /** PartialOrganisation */
     PartialOrganisation: {
       /** Id */
@@ -8357,10 +9017,47 @@ export interface components {
       /** Landingpage */
       landingpage?: string;
     };
-    /** PartialRole */
-    PartialRole: {
+    /** PartialOrganisationUsersResponse */
+    PartialOrganisationUsersResponse: {
       /** Id */
-      id?: string;
+      id?: number;
+      /** Name */
+      name?: string;
+      /**
+       * Date Created
+       * Format: date-time
+       */
+      date_created?: string;
+      /**
+       * Date Modified
+       * Format: date-time
+       */
+      date_modified?: string;
+      /** Description */
+      description?: string;
+      /** Type */
+      type?: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Created By */
+      created_by?: number;
+      /** Uuid */
+      uuid?: string;
+      /** Contacts */
+      contacts?: string;
+      /** Local */
+      local?: boolean;
+      /** Restricted To Domain */
+      restricted_to_domain?: string;
+      /** Landingpage */
+      landingpage?: string;
+    };
+    /** PartialRoleUsersResponse */
+    PartialRoleUsersResponse: {
+      /** Id */
+      id?: number;
       /** Name */
       name?: string;
       /**
@@ -8431,10 +9128,6 @@ export interface components {
       perm_warninglist?: boolean;
       /** Perm View Feed Correlations */
       perm_view_feed_correlations?: boolean;
-      /** Permission */
-      permission?: string;
-      /** Permission Description */
-      permission_description?: string;
     };
     /** PartialSearchEventsResponse */
     PartialSearchEventsResponse: {
@@ -8585,77 +9278,6 @@ export interface components {
       /** Highlighted */
       highlighted?: boolean;
     };
-    /** PartialUser */
-    PartialUser: {
-      /** Id */
-      id?: string;
-      /** Org Id */
-      org_id?: string;
-      /** Email */
-      email?: string;
-      /** Autoalert */
-      autoalert?: boolean;
-      /** Invited By */
-      invited_by?: string;
-      /** Gpgkey */
-      gpgkey?: string;
-      /** Certif Public */
-      certif_public?: string;
-      /** Termsaccepted */
-      termsaccepted?: boolean;
-      /** Role Id */
-      role_id?: string;
-      /** Change Pw */
-      change_pw?: boolean;
-      /** Contactalert */
-      contactalert?: boolean;
-      /** Disabled */
-      disabled?: boolean;
-      /**
-       * Expiration
-       * Format: date-time
-       */
-      expiration?: string;
-      /** Current Login */
-      current_login?: string;
-      /** Last Login */
-      last_login?: string;
-      /** Force Logout */
-      force_logout?: boolean;
-      /** Date Created */
-      date_created?: string;
-      /** Date Modified */
-      date_modified?: string;
-      /** External Auth Required */
-      external_auth_required?: boolean;
-      /** External Auth Key */
-      external_auth_key?: string;
-      /** Last Api Access */
-      last_api_access?: string;
-      /** Notification Daily */
-      notification_daily?: boolean;
-      /** Notification Weekly */
-      notification_weekly?: boolean;
-      /** Notification Monthly */
-      notification_monthly?: boolean;
-      /** Totp */
-      totp?: string;
-      /** Hotp Counter */
-      hotp_counter?: string;
-      /** Last Pw Change */
-      last_pw_change?: string;
-    };
-    /** PartialUsersViewMeResponse */
-    PartialUsersViewMeResponse: {
-      User?: components["schemas"]["PartialUser"];
-      Role?: components["schemas"]["PartialRole"];
-      /**
-       * Usersetting
-       * @default []
-       */
-      UserSetting?: unknown[];
-      Organisation?: components["schemas"]["PartialOrganisation"];
-    };
     /** PartialViewUpdateSharingGroupLegacyResponse */
     PartialViewUpdateSharingGroupLegacyResponse: {
       SharingGroup?: components["schemas"]["PartialSharingGroup"];
@@ -8716,6 +9338,11 @@ export interface components {
       /** Password */
       password: string;
     };
+    /** ProcessFreeTextResponse */
+    ProcessFreeTextResponse: {
+      /** Attributes */
+      attributes: components["schemas"]["AttributeType"][];
+    };
     /** PublishEventResponse */
     PublishEventResponse: {
       /** Saved */
@@ -8730,6 +9357,158 @@ export interface components {
       url: string;
       /** Id */
       id?: string;
+    };
+    /** RoleAttributeResponse */
+    RoleAttributeResponse: {
+      /** Id */
+      id: number;
+      /** Name */
+      name: string;
+      /** Created */
+      created?: string;
+      /** Modified */
+      modified?: string;
+      /** Perm Add */
+      perm_add: boolean;
+      /** Perm Modify */
+      perm_modify: boolean;
+      /** Perm Modify Org */
+      perm_modify_org: boolean;
+      /** Perm Publish */
+      perm_publish: boolean;
+      /** Perm Delegate */
+      perm_delegate: boolean;
+      /** Perm Sync */
+      perm_sync: boolean;
+      /** Perm Admin */
+      perm_admin: boolean;
+      /** Perm Audit */
+      perm_audit: boolean;
+      /** Perm Auth */
+      perm_auth: boolean;
+      /** Perm Site Admin */
+      perm_site_admin: boolean;
+      /** Perm Regexp Access */
+      perm_regexp_access: boolean;
+      /** Perm Tagger */
+      perm_tagger: boolean;
+      /** Perm Template */
+      perm_template: boolean;
+      /** Perm Sharing Group */
+      perm_sharing_group: boolean;
+      /** Perm Tag Editor */
+      perm_tag_editor: boolean;
+      /** Perm Sighting */
+      perm_sighting: boolean;
+      /** Perm Object Template */
+      perm_object_template: boolean;
+      /** Default Role */
+      default_role: boolean;
+      /** Memory Limit */
+      memory_limit: string;
+      /** Max Execution Time */
+      max_execution_time: string;
+      /** Restricted To Site Admin */
+      restricted_to_site_admin: boolean;
+      /** Perm Publish Zmq */
+      perm_publish_zmq: boolean;
+      /** Perm Publish Kafka */
+      perm_publish_kafka: boolean;
+      /** Perm Decaying */
+      perm_decaying: boolean;
+      /** Enforce Rate Limit */
+      enforce_rate_limit: boolean;
+      /** Rate Limit Count */
+      rate_limit_count: number;
+      /** Perm Galaxy Editor */
+      perm_galaxy_editor: boolean;
+      /** Perm Warninglist */
+      perm_warninglist: boolean;
+      /** Perm View Feed Correlations */
+      perm_view_feed_correlations: boolean;
+      /** Perm Analyst Data */
+      perm_analyst_data?: boolean;
+      /** Permission */
+      permission?: number;
+      /** Permission Description */
+      permission_description?: string;
+      /** Default */
+      default?: boolean;
+    };
+    /** RoleUsersResponse */
+    RoleUsersResponse: {
+      /** Id */
+      id: number;
+      /** Name */
+      name: string;
+      /**
+       * Created
+       * Format: date-time
+       */
+      created?: string;
+      /**
+       * Modified
+       * Format: date-time
+       */
+      modified?: string;
+      /** Perm Add */
+      perm_add?: boolean;
+      /** Perm Modify */
+      perm_modify?: boolean;
+      /** Perm Modify Org */
+      perm_modify_org?: boolean;
+      /** Perm Publish */
+      perm_publish?: boolean;
+      /** Perm Delegate */
+      perm_delegate?: boolean;
+      /** Perm Sync */
+      perm_sync?: boolean;
+      /** Perm Admin */
+      perm_admin?: boolean;
+      /** Perm Audit */
+      perm_audit?: boolean;
+      /** Perm Auth */
+      perm_auth: boolean;
+      /** Perm Site Admin */
+      perm_site_admin: boolean;
+      /** Perm Regexp Access */
+      perm_regexp_access?: boolean;
+      /** Perm Tagger */
+      perm_tagger?: boolean;
+      /** Perm Template */
+      perm_template?: boolean;
+      /** Perm Sharing Group */
+      perm_sharing_group?: boolean;
+      /** Perm Tag Editor */
+      perm_tag_editor?: boolean;
+      /** Perm Sighting */
+      perm_sighting?: boolean;
+      /** Perm Object Template */
+      perm_object_template?: boolean;
+      /** Default Role */
+      default_role?: boolean;
+      /** Memory Limit */
+      memory_limit?: string;
+      /** Max Execution Time */
+      max_execution_time?: string;
+      /** Restricted To Site Admin */
+      restricted_to_site_admin?: boolean;
+      /** Perm Publish Zmq */
+      perm_publish_zmq?: boolean;
+      /** Perm Publish Kafka */
+      perm_publish_kafka?: boolean;
+      /** Perm Decaying */
+      perm_decaying?: boolean;
+      /** Enforce Rate Limit */
+      enforce_rate_limit?: boolean;
+      /** Rate Limit Count */
+      rate_limit_count?: string;
+      /** Perm Galaxy Editor */
+      perm_galaxy_editor?: boolean;
+      /** Perm Warninglist */
+      perm_warninglist?: boolean;
+      /** Perm View Feed Correlations */
+      perm_view_feed_correlations?: boolean;
     };
     /** SearchAttributesAttributes */
     SearchAttributesAttributes: {
@@ -9042,6 +9821,41 @@ export interface components {
     SearchGalaxiesbyValue: {
       /** Value */
       value: string;
+    };
+    /** SearchGetAuthKeysResponse */
+    SearchGetAuthKeysResponse: {
+      AuthKey: components["schemas"]["SearchGetAuthKeysResponseAuthKey"];
+      User: components["schemas"]["SearchGetAuthKeysResponseItemUser"];
+    };
+    /** SearchGetAuthKeysResponseAuthKey */
+    SearchGetAuthKeysResponseAuthKey: {
+      /** Id */
+      id: string;
+      /** Uuid */
+      uuid: string;
+      /** Authkey Start */
+      authkey_start: string;
+      /** Authkey End */
+      authkey_end: string;
+      /** Created */
+      created: string;
+      /** Expiration */
+      expiration: string;
+      /** Read Only */
+      read_only: boolean;
+      /** User Id */
+      user_id: string;
+      /** Comment */
+      comment?: string;
+      /** Allowed Ips */
+      allowed_ips?: string[];
+      /**
+       * Unique Ips
+       * @default []
+       */
+      unique_ips?: string[];
+      /** Last Used */
+      last_used?: string;
     };
     /** SearchGetAuthKeysResponseItem */
     SearchGetAuthKeysResponseItem: {
@@ -9569,6 +10383,27 @@ export interface components {
       /** Roaming */
       roaming?: boolean;
     };
+    /** UsageDataResponseModel */
+    UsageDataResponseModel: {
+      /** Events */
+      events: number;
+      /** Attributes */
+      attributes: number;
+      /** Eventattributes */
+      eventAttributes: number;
+      /** Users */
+      users: number;
+      /** Userswithgpgkeys */
+      usersWithGPGKeys: number;
+      /** Organisations */
+      organisations: number;
+      /** Localorganisations */
+      localOrganisations: number;
+      /** Eventcreatororgs */
+      eventCreatorOrgs: number;
+      /** Averageusersperorg */
+      averageUsersPerOrg: number;
+    };
     /** User */
     User: {
       /** Id */
@@ -9631,20 +10466,22 @@ export interface components {
     };
     /** UserAttributesBody */
     UserAttributesBody: {
-      /** Org Id */
-      org_id?: string;
+      /** Org */
+      org?: string;
+      /** Authkey */
+      authkey?: string;
       /** Email */
       email?: string;
       /** Autoalert */
       autoalert?: boolean;
-      /** Gpgkey */
-      gpgkey?: string;
+      /** Pgpkey */
+      pgpkey?: string;
       /** Certif Public */
       certif_public?: string;
       /** Termsaccepted */
       termsaccepted?: boolean;
-      /** Role Id */
-      role_id?: string;
+      /** Role */
+      role?: string;
       /** Change Pw */
       change_pw?: boolean;
       /** Contactalert */
@@ -9674,6 +10511,8 @@ export interface components {
       hotp_counter?: string;
       /** Name */
       name?: string;
+      /** Nids Sid */
+      nids_sid?: number;
     };
     /** UserSettingResponse */
     UserSettingResponse: {
@@ -10537,6 +11376,81 @@ export interface operations {
     };
   };
   /**
+   * Get All Open Id Connect Providers Info
+   * @description Fetches all OpenID Connect providers
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   *
+   * Output:
+   * - List of OpenID Connect providers
+   */
+  get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["IdentityProviderInfo"][];
+        };
+      };
+    };
+  };
+  /**
+   * Get All Open Id Connect Providers
+   * @description Fetches all OpenID Connect providers
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   *
+   * Output:
+   * - List of OpenID Connect providers
+   */
+  get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetIdentityProviderResponse"][];
+        };
+      };
+    };
+  };
+  /**
+   * Get Open Id Connect Provider By Id
+   * @description Fetches a single OpenID Connect provider by its ID
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   * - Provider ID
+   *
+   * Output:
+   * - OpenID Connect provider details
+   */
+  get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get: {
+    parameters: {
+      path: {
+        providerId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetIdentityProviderResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
    * Add Openid Connect Provider
    * @description Adds a new OpenID Connect provider
    *
@@ -10748,8 +11662,8 @@ export interface operations {
     };
   };
   /**
-   * Redirect To Idp
-   * @description Redirects to Idp.
+   * Redirect To Frontend
+   * @description Redirects to the frontend.
    *
    * Input:
    *
@@ -10757,20 +11671,29 @@ export interface operations {
    *
    * - the identity provider id
    *
+   * - the code
+   *
    * Output:
    *
    * - the redirection
    */
-  redirect_to_idp_auth_login_idp__identityProviderId__authorize_get: {
+  redirect_to_frontend_auth_login_idp__identityProviderName__callback_get: {
     parameters: {
       path: {
-        identityProviderId: number;
+        identityProviderName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["IdentityProviderCallbackBody"];
       };
     };
     responses: {
       /** @description Successful Response */
-      302: {
-        content: never;
+      200: {
+        content: {
+          "application/json": components["schemas"]["TokenResponse"];
+        };
       };
       /** @description Validation Error */
       422: {
@@ -10796,57 +11719,23 @@ export interface operations {
    *
    * - the redirection
    */
-  redirect_to_frontend_auth_login_idp__identityProviderId__callback_get: {
+  redirect_to_frontend_auth_login_idp__identityProviderName__callback_post: {
     parameters: {
-      query: {
-        code: string;
-      };
       path: {
-        identityProviderId: number;
+        identityProviderName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["IdentityProviderCallbackBody"];
       };
     };
     responses: {
       /** @description Successful Response */
-      302: {
-        content: never;
-      };
-      /** @description Validation Error */
-      422: {
+      200: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          "application/json": components["schemas"]["TokenResponse"];
         };
-      };
-    };
-  };
-  /**
-   * Redirect To Frontend
-   * @description Redirects to the frontend.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * - the identity provider id
-   *
-   * - the code
-   *
-   * Output:
-   *
-   * - the redirection
-   */
-  redirect_to_frontend_auth_login_idp__identityProviderId__callback_post: {
-    parameters: {
-      query: {
-        code: string;
-      };
-      path: {
-        identityProviderId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      302: {
-        content: never;
       };
       /** @description Validation Error */
       422: {
@@ -11029,7 +11918,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchGetAuthKeysResponseItem"][];
+          "application/json": components["schemas"]["SearchGetAuthKeysResponse"][];
         };
       };
     };
@@ -11104,7 +11993,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAuthKeyResponse"];
+          "application/json": components["schemas"]["EditAuthKeyResponseCompl"];
         };
       };
       /** @description Validation Error */
@@ -11174,6 +12063,33 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["SearchGetAuthKeysResponseItem"][];
+        };
+      };
+    };
+  };
+  /**
+   * View own AuthKeys
+   * @deprecated
+   * @description Deprecated. View own Authkeys by the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the user
+   *
+   * Output:
+   *
+   * - the auth keys
+   */
+  auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["SearchGetAuthKeysResponse"][];
         };
       };
     };
@@ -11257,7 +12173,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAuthKeyResponse"];
+          "application/json": components["schemas"]["EditAuthKeyResponseCompl"];
         };
       };
       /** @description Validation Error */
@@ -11285,7 +12201,7 @@ export interface operations {
    *
    * - the response from the api after the deleting request
    */
-  auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__delete: {
+  auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post: {
     parameters: {
       path: {
         AuthKeyId: number;
@@ -11332,7 +12248,7 @@ export interface operations {
   };
   /**
    * Add new event
-   * @description Add a new event with the given details.
+   * @description Add a new event with the gi ven details.
    *
    * Input:
    *
@@ -11721,29 +12637,20 @@ export interface operations {
     };
   };
   /**
-   * Add attribute to event
-   * @description Add attribute to event via free text import.
+   * start the freetext import process via worker
+   * @description Starts the freetext import process by submitting the freetext to the worker.
    *
    * Input:
    *
    * - the user's authentification status
    *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the request body
+   * - the body of the freetext
    *
    * Output:
    *
-   * - the result of adding the tag to the event given by the api
+   * - dict
    */
-  add_attribute_via_free_text_import_events_freeTextImport__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
+  start_freeTextImport_events_freeTextImport_post: {
     requestBody: {
       content: {
         "application/json": components["schemas"]["AddAttributeViaFreeTextImportEventBody"];
@@ -11753,7 +12660,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddAttributeViaFreeTextImportEventResponse"][];
+          "application/json": components["schemas"]["FreeTextProcessID"];
         };
       };
       /** @description Validation Error */
@@ -11765,20 +12672,37 @@ export interface operations {
     };
   };
   /**
-   * Fetches the process ID from the current freetext Import
-   * @description Gets the processID from the worker.
+   * Start the freetext import process via worker
+   * @description Adds the Attributes the user has selected
+   *
+   * Input:
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the selected Attributes
+   *
+   * Output:
+   *
+   * - the processed data to be viewed and selected by the user
    */
-  get_pid_from_free_text_import_events_freeTextImportProcessID__eventId__get: {
+  start_freetext_import_events_freeTextImport__eventID__post: {
     parameters: {
       path: {
-        eventId: number;
+        eventID: string;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ProcessFreeTextResponse"];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["AddAttributeViaFreeTextImportEventResponse"][];
         };
       };
       /** @description Validation Error */
@@ -12943,6 +13867,45 @@ export interface operations {
     };
   };
   /**
+   * Gets information from a galaxy cluster
+   * @deprecated
+   * @description Deprecated
+   * Returns information from a galaxy cluster selected by its id.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * Output:
+   *
+   * - the information of the galaxy cluster
+   */
+  get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get: {
+    parameters: {
+      path: {
+        galaxyClusterId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetGalaxyClusterResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
    * Get Job
    * @description Gets a job.
    *
@@ -13452,6 +14415,29 @@ export interface operations {
     };
   };
   /**
+   * Gets a list of all organisations
+   * @deprecated
+   * @description Gets all organisations as a list.
+   *
+   * Input:
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - List of all organisations
+   */
+  get_organisations_deprecated_organisations_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetAllOrganisationResponse"][];
+        };
+      };
+    };
+  };
+  /**
    * Add a new organisation
    * @description Adds a new organisation.
    *
@@ -13466,16 +14452,16 @@ export interface operations {
    * - The added organisation data
    */
   add_organisation_organisations_post: {
-    parameters: {
-      query: {
-        body: null;
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AddOrganisation"];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["GetOrganisationResponse"];
         };
       };
       /** @description Validation Error */
@@ -13503,7 +14489,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetOrganisationResponse"][];
+          "application/json": components["schemas"]["GetAllOrganisationResponse"][];
         };
       };
     };
@@ -13602,17 +14588,44 @@ export interface operations {
         orgId: string;
       };
     };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["EditOrganisation"];
+      };
+    };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["GetOrganisationResponse"];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
           "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
+   * Get all roles
+   * @description Get all roles and their details.
+   *
+   * Input:
+   *
+   * - Authentification details of the logged in user.
+   *
+   * Output:
+   *
+   * - Information about all roles.
+   */
+  get_all_roles_roles_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RoleAttributeResponse"][];
         };
       };
     };
@@ -13767,6 +14780,108 @@ export interface operations {
       200: {
         content: {
           "application/json": Record<string, never>;
+        };
+      };
+    };
+  };
+  /**
+   * Edits remote servers by org id
+   * @description Edits servers given by org_id.
+   *
+   * Input:
+   *
+   * - org_id
+   *
+   * - The current database
+   *
+   * - auth: Authentication details
+   *
+   * Output:
+   *
+   * - Updated servers as a list
+   */
+  update_remote_server_servers_remote_edit__org_Id__post: {
+    parameters: {
+      path: {
+        org_Id: string;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["EditServer"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetRemoteServersResponse"][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
+   * Requests a list of all remote servers
+   * @deprecated
+   * @description Deprecated
+   * Returns a list of all currently active remote servers.
+   *
+   * Input:
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - List of remote servers
+   */
+  get_remote_servers_depr_servers__get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetRemoteServersResponse"][];
+        };
+      };
+    };
+  };
+  /**
+   * Adds a new remote server to the list
+   * @deprecated
+   * @description Adds a new remote server based on the input of an admin.
+   *
+   * Input:
+   *
+   * - Data containing details of the remote server to be added
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Response indicating the result of the server addition operation
+   */
+  add_remote_server_depr_servers_add_post: {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AddServer"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["AddServerResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
         };
       };
     };
@@ -14833,7 +15948,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["UsageDataResponseModel"];
         };
       };
     };
@@ -14861,7 +15976,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["OrgDataResponseModel"];
         };
       };
       /** @description Validation Error */
@@ -14894,7 +16009,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          "application/json": number;
         };
       };
       /** @description Validation Error */
@@ -15628,7 +16743,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialUsersViewMeResponse"];
+          "application/json": components["schemas"]["PartialGetUsersElement"];
         };
       };
     };
@@ -15650,7 +16765,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialUsersViewMeResponse"];
+          "application/json": components["schemas"]["PartialGetUsersElement"];
         };
       };
     };
@@ -15672,7 +16787,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllUsersUser"][];
+          "application/json": components["schemas"]["GetUsersElement"][];
         };
       };
     };
@@ -15701,7 +16816,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllUsersUser"];
+          "application/json": components["schemas"]["GetUsersElement"];
         };
       };
       /** @description Validation Error */
@@ -15826,6 +16941,181 @@ export interface operations {
     };
   };
   /**
+   * Add new user
+   * @deprecated
+   * @description Adds a new user with the given details.
+   *
+   * Input:
+   *
+   * - Data representing the new user to be added
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Data representing the attributes of the new user
+   */
+  add_user_deprecated_admin_users_add_post: {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["AddUserBody"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["AddUserResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
+   * Update a user
+   * @deprecated
+   * @description Deprecated. Updates an existing user using the old route.
+   *
+   * Input:
+   *
+   * - ID of the user to update
+   *
+   * - Updated data for the user
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Data representing the updated attributes of the user
+   */
+  update_user_depr_admin_users_edit__userId__put: {
+    parameters: {
+      path: {
+        userId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserAttributesBody"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["UserWithName"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
+   * Get a user by id
+   * @deprecated
+   * @description Deprecated. Retrieves a user specified by id with the old route.
+   *
+   * Input:
+   *
+   * - ID of the user to get
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Data representing the attributes of the searched user
+   */
+  get_user_by_id_depr_admin_users_view__userId__get: {
+    parameters: {
+      path: {
+        userId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetUsersElement"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
+   * Get all users
+   * @deprecated
+   * @description Retrieves a list of all users.
+   *
+   * Input:
+   *
+   * - None
+   *
+   * Output:
+   *
+   * - List containing all users
+   */
+  get_all_users_deprecated_admin_users_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["GetUsersElement"][];
+        };
+      };
+    };
+  };
+  /**
+   * Delete a user
+   * @deprecated
+   * @description Deprecated. Deletes a user by their ID with the old route.
+   *
+   * Input:
+   *
+   * - ID of the user to delete
+   *
+   * - auth: Authentication details of the current user
+   *
+   * - The current database
+   *
+   * Output:
+   * - StandardStatusIdentifiedResponse: Response indicating success or failure
+   */
+  delete_user_depr_admin_users_delete__userId__delete: {
+    parameters: {
+      path: {
+        userId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /**
    * Set user setting.
    * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
    *
@@ -15845,10 +17135,9 @@ export interface operations {
    *
    * - SetUserSettingResponse: Response indicating success or failure
    */
-  set_user_settings_user_settings_setSetting__userId___userSettingName__post: {
+  set_user_settings_user_settings_setSetting_me__userSettingName__post: {
     parameters: {
       path: {
-        userId: number;
         userSettingName: string;
       };
     };
@@ -15964,10 +17253,9 @@ export interface operations {
    *
    * - ViewUserSettingResponse: Response with details of the viewed user setting
    */
-  get_user_setting_by_id_user_settings__userId___userSettingName__get: {
+  get_user_setting_by_id_user_settings_me__userSettingName__get: {
     parameters: {
       path: {
-        userId: number;
         userSettingName: string;
       };
     };
