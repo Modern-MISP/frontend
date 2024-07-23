@@ -5,13 +5,16 @@
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import { get } from 'svelte/store';
-  import idCardHeaders from '../idCardHeaders';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
   import { notifications } from '$lib/stores';
-import { errorPill } from '$lib/util/pill.util';
-import { invalidateAll } from '$app/navigation';
+  import { errorPill } from '$lib/util/pill.util';
+  import { invalidateAll } from '$app/navigation';
+
+  export let data;
+
+  $: ({ roles, header } = data);
 
   $mode = 'edit';
 
@@ -54,21 +57,7 @@ import { invalidateAll } from '$app/navigation';
 -->
 <Form callback={editCallback}>
   <DynCard
-    header={[
-      idCardHeaders.name,
-      idCardHeaders.email,
-      idCardHeaders.password,
-      idCardHeaders.organisation,
-      idCardHeaders.role,
-      idCardHeaders.nids_sid,
-      idCardHeaders.disabled,
-      idCardHeaders.authkey,
-      idCardHeaders.contactaltert,
-      idCardHeaders.notification_daily,
-      idCardHeaders.notification_weekly,
-      idCardHeaders.notification_monthly,
-      idCardHeaders.termsaccepted
-    ]}
-    data={{}}
+    header={header}
+    data={roles}
   ></DynCard>
 </Form>

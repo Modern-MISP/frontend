@@ -18,6 +18,22 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
+  const {
+    data: roles,
+    error: mispErrorRoles,
+    response : responseRoles
+  } = await get(api).GET('/roles', { fetch });
+
+  if (mispErrorRoles) error(responseRoles.status as NumericRange<400, 599>, mispErrorRoles.message);
+
+  const {
+    data: orgs,
+    error: mispErrorOrgs,
+    response: responseOrgs
+  } = await get(api).GET('/organisations', { fetch });
+
+  if (mispErrorOrgs) error(responseOrgs.status as NumericRange<400, 599>, mispErrorOrgs.message);
+
   const left = [
     (!compatibility ? idCardHeaders.name : undefined),
     idCardHeaders.email,
@@ -43,7 +59,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   ];
 
   return {
-    user: data,
+    user: {User: data, Roles: roles, Organisations: orgs},
     left,
     right
   };
