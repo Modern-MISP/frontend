@@ -18,7 +18,7 @@ Cypress.Commands.add('login', (token: string) => {
   cy.session(token, () => {
     cy.visit('/login');
     cy.get('input[name="token"]').type(token);
-    cy.get('button').click();
+    cy.get('button[type="submit"]').click();
     cy.wait(100);
     cy.url().should('include', '/event');
   });

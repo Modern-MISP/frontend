@@ -28,7 +28,17 @@ describe('login', () => {
   it('should login with default token', () => {
     cy.visit('/login');
     cy.get('input[name="token"]').type(Cypress.env('adminToken'));
-    cy.get('button').click();
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/event');
+  });
+});
+
+describe('login password', () => {
+  it('should login with password', () => {
+    cy.visit('/login');
+    cy.get('input[name="email"]').type(Cypress.env('adminEmail'));
+    cy.get('input[name="password"]').type(Cypress.env('adminPassword'));
+    cy.get('button[type="submit"]').click();
     cy.url().should('include', '/event');
   });
 });
