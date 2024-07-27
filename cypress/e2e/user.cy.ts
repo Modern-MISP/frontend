@@ -3,6 +3,7 @@ beforeEach(() => {
 });
 
 const email = 'cypress-test@example.com';
+const user_name = 'Cypress Test';
 
 const cardRowRight = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
@@ -20,6 +21,7 @@ describe('User tests', () => {
   it('should create a new user', () => {
     cy.visit('/admin/users/new');
 
+    cy.get(cardRowRight('Name')).type(user_name);
     cy.get(cardRowRight('Email')).type(email);
     cy.get(cardRowRight('Contact enables')).click();
     cy.get(cardRowRight('Weekly notifications')).click();
@@ -32,6 +34,7 @@ describe('User tests', () => {
     cy.toggleMode();
 
     cy.get(cardRowRight('Email')).should('contain.text', email);
+    cy.get(cardRowRight('Name')).should('contain.text', user_name);
   });
 
   it('should edit an existing user', () => {
