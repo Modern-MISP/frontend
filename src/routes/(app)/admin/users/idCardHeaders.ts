@@ -10,7 +10,9 @@ import Select from '$lib/components/form/Select.svelte';
 import Button from '$lib/components/button/Button.svelte';
 
 const col = createTableHeadGenerator<{
-  User: components['schemas']['GetUsersElement'] & { User?: { password: string, nids_sid: string } };
+  User: components['schemas']['GetUsersElement'] & {
+    User?: { password: string; nids_sid: string };
+  };
   Roles: components['schemas']['PartialRoleUsersResponse'][];
   Organisations: components['schemas']['Organisation'][];
 }>();
@@ -146,7 +148,7 @@ export default {
       value: (x) => ({
         display: Select,
         props: {
-          options: x.Roles?.map((r) => ({ label: r.name!, value: r.id! })),
+          options: x.Roles?.map((r) => ({ label: r.Role.name!, value: r.Role.id! })),
           value: x.User?.Role?.id,
           name: 'role'
         }
@@ -168,7 +170,11 @@ export default {
     {
       value: (x) => ({
         display: Input,
-        props: { value: x.User?.User?.nids_sid ?? '0', name: 'nids_sid', placeholder: 'set new nids sid' }
+        props: {
+          value: x.User?.User?.nids_sid ?? '0',
+          name: 'nids_sid',
+          placeholder: 'set new nids sid'
+        }
       })
     }
   ),
@@ -334,8 +340,7 @@ export default {
       value: (x) => ({
         display: Pill,
         props: {
-          text:
-            x.Organisations?.find((o) => Number(o.id) === x.User?.User?.org_id)?.name ?? 'unknown',
+          text: x.User?.Organisation?.name ?? 'unknown',
           icon: 'material-symbols:work-outline'
         }
       })
@@ -344,8 +349,11 @@ export default {
       value: (x) => ({
         display: Select,
         props: {
-          options: x.Organisations?.map((o) => ({ label: o.name!, value: o.id! })),
-          value: x.Organisations[0].id,
+          options: x.Organisations?.map((o) => ({
+            label: o.Organisation.name!,
+            value: o.Organisation.id!
+          })),
+          value: x.Organisations[0].Organisation?.id,
           name: 'org'
         }
       })
