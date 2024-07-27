@@ -6,6 +6,7 @@
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import Input from '$lib/components/input/Input.svelte';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode, notifications } from '$lib/stores.js';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
