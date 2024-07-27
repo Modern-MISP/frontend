@@ -13,18 +13,20 @@
   function editCallback(formData: Record<string, string>) {
     console.log('formData', formData);
     notifySave(
-      $api.POST('/user_settings/setSetting/{userId}/{userSettingName}', {
-        params: { path: { userId: Number(data.userid), userSettingName: 'user_name' } },
-        body: { value: { name: String(formData.name) } }
-      }).then((resp) => {
-        if (resp.error) {
-          throw new Error(
-            // @ts-expect-error Wrong error type from OpenAPI spec
-            error(resp.status as NumericRange<400, 599>, resp.data)
-          );
-        }
-      })
-    )
+      $api
+        .POST('/user_settings/setSetting/{userId}/{userSettingName}', {
+          params: { path: { userId: Number(data.userid), userSettingName: 'user_name' } },
+          body: { value: { name: String(formData.name) } }
+        })
+        .then((resp) => {
+          if (resp.error) {
+            throw new Error(
+              // @ts-expect-error Wrong error type from OpenAPI spec
+              error(resp.status as NumericRange<400, 599>, resp.data)
+            );
+          }
+        })
+    );
   }
 
   const Export: ActionBarEntryProps[] = [

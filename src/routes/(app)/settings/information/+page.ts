@@ -9,29 +9,25 @@ import Pill from '$lib/components/pills/pill/Pill.svelte';
 import { compatibility } from '$lib/stores';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const {
-    data,
-    error: mispError,
-    response
-  } = await get(api).GET('/users/view/me', {fetch});
+  const { data, error: mispError, response } = await get(api).GET('/users/view/me', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
   const col = createTableHeadGenerator();
 
   const header = [
-    (!compatibility ? 
-      col({
-        label: 'Name',
-        value: () => ({
-          display: Input,
-          props: {
-            value: data.User?.name,
-            name: 'name',
-          }
+    !compatibility
+      ? col({
+          label: 'Name',
+          value: () => ({
+            display: Input,
+            props: {
+              value: data.User?.name,
+              name: 'name'
+            }
+          })
         })
-      }) :  undefined
-    ),
+      : undefined,
     col({
       label: 'Role',
       value: () => ({

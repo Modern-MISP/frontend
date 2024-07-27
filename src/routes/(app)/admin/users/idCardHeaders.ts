@@ -9,13 +9,11 @@ import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import Button from '$lib/components/button/Button.svelte';
 
-const col = createTableHeadGenerator<
-  {
-    User: components['schemas']['GetUsersElement'] & {User?: {password: string}},
-    Roles: components['schemas']['PartialRoleUsersResponse'][],
-    Organisations: components['schemas']['Organisation'][],
-  }
->();
+const col = createTableHeadGenerator<{
+  User: components['schemas']['GetUsersElement'] & { User?: { password: string } };
+  Roles: components['schemas']['PartialRoleUsersResponse'][];
+  Organisations: components['schemas']['Organisation'][];
+}>();
 
 //const { data: roleData }: { data: any[] } = await get(api).GET('/roles');
 //const { data: orgData }: {data: any[] } = await get(api).GET('/organisations');
@@ -123,7 +121,7 @@ export default {
       props: {
         name: 'copy password',
         class: 'w-min',
-        prefixIcon: 'mdi:content-copy',
+        prefixIcon: 'mdi:content-copy'
       }
     })
   }),
@@ -180,7 +178,9 @@ export default {
     // class: 'whitespace-nowrap',
     value: (x) => ({
       display: DatePill,
-      props: { date: x.User?.User?.last_pw_change ? new Date(+x.User?.User?.last_pw_change * 1000) : null }
+      props: {
+        date: x.User?.User?.last_pw_change ? new Date(+x.User?.User?.last_pw_change * 1000) : null
+      }
     })
   }),
   last_login: col({
@@ -202,7 +202,9 @@ export default {
     label: 'Created',
     value: (x) => ({
       display: DatePill,
-      props: { date: x.User?.User?.date_created ? new Date(+x.User?.User?.date_created * 1000) : null }
+      props: {
+        date: x.User?.User?.date_created ? new Date(+x.User?.User?.date_created * 1000) : null
+      }
     })
   }),
   disabled: col(
@@ -278,7 +280,10 @@ export default {
     {
       key: 'notification_daily',
       label: 'Daily notifications',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.User?.User?.notification_daily ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.User?.User?.notification_daily ?? false }
+      })
     },
     {
       value: (x) => ({
@@ -315,7 +320,10 @@ export default {
     {
       value: (x) => ({
         display: Checkbox,
-        props: { name: 'notification_monthly', checked: x.User?.User?.notification_monthly ?? false }
+        props: {
+          name: 'notification_monthly',
+          checked: x.User?.User?.notification_monthly ?? false
+        }
       })
     }
   ),
@@ -326,7 +334,8 @@ export default {
       value: (x) => ({
         display: Pill,
         props: {
-          text: x.Organisations?.find((o) => Number(o.id) === x.User?.User?.org_id)?.name ?? 'unknown',
+          text:
+            x.Organisations?.find((o) => Number(o.id) === x.User?.User?.org_id)?.name ?? 'unknown',
           icon: 'material-symbols:work-outline'
         }
       })
@@ -335,7 +344,7 @@ export default {
       value: (x) => ({
         display: Select,
         props: {
-          options: x.Organisations?.map((o) => ({ label: o.name!, value: o.id!})),
+          options: x.Organisations?.map((o) => ({ label: o.name!, value: o.id! })),
           value: x.Organisations[0].id,
           name: 'org'
         }

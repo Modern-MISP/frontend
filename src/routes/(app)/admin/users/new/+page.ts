@@ -6,11 +6,7 @@ import type { PageLoad } from './$types';
 import idCardHeaders from '../idCardHeaders';
 
 export const load: PageLoad = async ({ fetch }) => {
-  const {
-    data: roles,
-    error: mispError,
-    response
-  } = await get(api).GET('/roles', { fetch });
+  const { data: roles, error: mispError, response } = await get(api).GET('/roles', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -37,10 +33,9 @@ export const load: PageLoad = async ({ fetch }) => {
     idCardHeaders.notification_monthly,
     idCardHeaders.termsaccepted
   ];
-  
 
   return {
-    roles: {Roles: roles, Organisations: orgs},
+    roles: { Roles: roles, Organisations: orgs },
     header
   };
 };

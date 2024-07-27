@@ -9,9 +9,9 @@
   import Info from '$lib/components/info/Info.svelte';
   import Button from '$lib/components/button/Button.svelte';
   import { notifySave } from '$lib/util/notifications.util';
-  import { goto, invalidateAll } from '$app/navigation';
+  import { invalidateAll } from '$app/navigation';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-    import { get } from 'svelte/store';
+  import { get } from 'svelte/store';
 
   type ReturnData = {
     types: string[];
@@ -43,7 +43,7 @@
     );
   };
 
-  async function getResponseData(job_id:string) {
+  async function getResponseData(job_id: string) {
     await $api
       .GET('/jobs/{job_id}', {
         params: { path: { job_id } }
@@ -51,7 +51,7 @@
       .then(async (resp) => {
         if (resp.error) {
           if (resp.response.status == 409) {
-            await new Promise(f => setTimeout(f, 1000));
+            await new Promise((f) => setTimeout(f, 1000));
             getResponseData(job_id);
           } else {
             throw new Error(resp.error.detail);
@@ -70,13 +70,15 @@
       label: 'Save',
       icon: 'mdi:content-save',
       action: (x) => {
-        get(api).POST('/events/freeTextImport/{eventId}', {
-          params: { path: { eventId: $page.params.id } },
-          body: { attributes: x }
-        }).then((resp) => {
-          if (resp.error) throw new Error(resp.error.detail);
-          invalidateAll();
-        });
+        get(api)
+          .POST('/events/freeTextImport/{eventId}', {
+            params: { path: { eventId: $page.params.id } },
+            body: { attributes: x }
+          })
+          .then((resp) => {
+            if (resp.error) throw new Error(resp.error.detail);
+            invalidateAll();
+          });
       }
     }
   ];

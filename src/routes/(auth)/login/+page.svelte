@@ -66,7 +66,13 @@
         target: document.querySelector('.oidc') ?? document,
         props: {
           name: item.name,
-          url: item.url + '&redirect_uri=' + window.location.origin + '/login/oidc/' + item.name + '/callback',
+          url:
+            item.url +
+            '&redirect_uri=' +
+            window.location.origin +
+            '/login/oidc/' +
+            item.name +
+            '/callback'
         }
       });
     });

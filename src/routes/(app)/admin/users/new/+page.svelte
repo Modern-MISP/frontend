@@ -56,8 +56,5 @@
   Displays a form to add a new user.
 -->
 <Form callback={editCallback}>
-  <DynCard
-    header={header}
-    data={roles}
-  ></DynCard>
+  <DynCard {header} data={roles}></DynCard>
 </Form>

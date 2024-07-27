@@ -5,20 +5,14 @@ import type { PageLoad } from './$types';
 import { themes } from '$lib/stores';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
-import { error } from '@sveltejs/kit';
-import { notifySave } from '$lib/util/notifications.util';
 
-export const load: PageLoad = async ({  fetch }) => {
-   
+export const load: PageLoad = async ({ fetch }) => {
   const {
     data,
-    error: mispError,
-    response
-  } = await get(api).GET('/user_settings/me/visual_setting',
-  {fetch}); 
+    error: mispError
+    //response
+  } = await get(api).GET('/user_settings/me/visual_setting', { fetch });
 
-    
-  
   const data1 = [
     {
       UserSetting: {
@@ -28,13 +22,12 @@ export const load: PageLoad = async ({  fetch }) => {
     }
   ];
 
-
-  if (mispError){
-    data1[0].UserSetting.menu_open_default = true
-    data1[0].UserSetting.theme = 0
+  if (mispError) {
+    data1[0].UserSetting.menu_open_default = true;
+    data1[0].UserSetting.theme = 0;
   } else {
-    data1[0].UserSetting.theme = data.UserSetting.value[0]
-    data1[0].UserSetting.menu_open_default = data.UserSetting.value[1]
+    data1[0].UserSetting.theme = data.UserSetting.value[0];
+    data1[0].UserSetting.menu_open_default = data.UserSetting.value[1];
   }
 
   const col = createTableHeadGenerator();
@@ -65,7 +58,6 @@ export const load: PageLoad = async ({  fetch }) => {
       })
     })
   ];
-
 
   const title = 'Visual Settings';
   const description = 'Change your personal design settings here.';

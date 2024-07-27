@@ -7,10 +7,10 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
   import { page } from '$app/stores';
-  import { zxcvbnAsync, zxcvbnOptions, debounce } from '@zxcvbn-ts/core'
-  import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common'
-  import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en'
-  import { matcherPwnedFactory } from '@zxcvbn-ts/matcher-pwned'
+  import { zxcvbnAsync, zxcvbnOptions, debounce } from '@zxcvbn-ts/core';
+  import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
+  import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en';
+  import { matcherPwnedFactory } from '@zxcvbn-ts/matcher-pwned';
 
   const email = $page.params.email;
 
@@ -20,18 +20,17 @@
   let retypedPassword: string = '';
   let oldPassword: string = '';
   const debouncedZxcvbn = debounce(getPasswordFeedback, 200);
-  
+
   $: {
     password;
     debouncedZxcvbn();
   }
 
-
   function getPasswordFeedback() {
     zxcvbnAsync(password, [oldPassword]).then((result) => {
       let feedback: string[] = [];
       if (result.feedback.warning) {
-        feedback = [ result.feedback.warning ];
+        feedback = [result.feedback.warning];
       } else if (result.feedback.suggestions.length > 0) {
         feedback = result.feedback.suggestions;
       } else if (password !== retypedPassword) {
@@ -48,16 +47,16 @@
     dictionary: {
       ...zxcvbnCommonPackage.dictionary,
       ...zxcvbnEnPackage.dictionary,
-      userInputs: [email, "MISP"],
-    },
-  }
-  const matcherPwned = matcherPwnedFactory(fetch, zxcvbnOptions)
-  zxcvbnOptions.addMatcher('pwned', matcherPwned)
-  zxcvbnOptions.setOptions(options)
+      userInputs: [email, 'MISP']
+    }
+  };
+  const matcherPwned = matcherPwnedFactory(fetch, zxcvbnOptions);
+  zxcvbnOptions.addMatcher('pwned', matcherPwned);
+  zxcvbnOptions.setOptions(options);
 
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
-    
+
     if (entries.password !== entries['password-repeat']) {
       alert('Passwords do not match');
       return;
@@ -67,7 +66,6 @@
       alert(passwordFeedback.join('\n'));
       return;
     }
-
 
     get(api)
       .POST('/auth/login/setOwnPassword', {
@@ -95,7 +93,7 @@
           $token = resp.data.token;
           goto('/events');
         }
-      })
+      });
   }
 </script>
 
@@ -114,7 +112,7 @@
   </h1>
 
   <Input
-    on:value={(input) => oldPassword = input.detail}
+    on:value={(input) => (oldPassword = input.detail)}
     name="old-password"
     placeholder="Old password"
     type="password"
@@ -122,7 +120,7 @@
     disabled={false}
   />
   <Input
-    on:value={(input) => password = input.detail}
+    on:value={(input) => (password = input.detail)}
     name="password"
     placeholder="New password"
     type="password"
@@ -130,7 +128,7 @@
     disabled={false}
   />
   <Input
-    on:value={(input) => retypedPassword = input.detail}
+    on:value={(input) => (retypedPassword = input.detail)}
     name="password-repeat"
     placeholder="Repeat new password"
     type="password"
@@ -144,7 +142,8 @@
       <br />
     {/each}
 
-  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
-    >continue</Button
-  >
+    <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+      >continue</Button
+    >
+  </span>
 </form>

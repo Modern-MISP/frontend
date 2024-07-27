@@ -17,6 +17,7 @@ import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { goto } from '$app/navigation';
+import { compatibility } from '$lib/stores';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
@@ -82,7 +83,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Last Login',
       value: (x) => ({
         display: DatePill,
-        props: { date: new Date(+(x.User?.last_login) *1000) ?? 'never logged in' }
+        props: { date: new Date(+x.User?.last_login * 1000) ?? 'never logged in' }
       })
     }),
     col({
@@ -221,7 +222,9 @@ export const load: PageLoad = async ({ fetch }) => {
                 })
               )
           ).then(() => {
-            notifications.add(successPill('Disabled token for user ' + x.map((y) => y.User?.id).join(', ')));
+            notifications.add(
+              successPill('Disabled token for user ' + x.map((y) => y.User?.id).join(', '))
+            );
             invalidateAll();
           });
         }
@@ -231,48 +234,57 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'New Authkey',
       icon: 'mdi:lock-outline',
       action: (x) => {
-        if ( x.length === 1) {
-        goto(`/admin/keys/new?id=${x.map((x) => x.User?.id).join(', ')}`);
-        } else { notifications.add(errorPill('Only one user can be selected'));
+        if (x.length === 1) {
+          goto(`/admin/keys/new?id=${x.map((x) => x.User?.id).join(', ')}`);
+        } else {
+          notifications.add(errorPill('Only one user can be selected'));
         }
       }
     },
-    ( !compatibility ?
-      {
-        label: 'New Password',
-        icon: 'mdi:lock-outline',
-        action: (x) => {
-          if (
-            confirm(
-              `Are you sure you want to generate a new password for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
-            )
-          ) {
-            const  randomstring = Math.random().toString(36).slice(-12);
-            if (x.length === 1) {
-              Promise.all(
-                x
-                  .map((y) => y.User?.id)
-                  .map((userId) =>
-                    get(api).PUT('/auth/setPassword/{userId}', {
-                      fetch,
-                      params: { path: { userId: userId! } },
-                      body: { password: randomstring }
-                    })
-                  )
-              ).then((resp) => {
-                if (resp.error) {
-                  notifications.add(errorPill('Failed to set password ' + x.map((y) => y.User?.id).join(', ')));
-                  return;
-                }
-                navigator.clipboard.writeText(randomstring);
-                notifications.add(successPill('New password copied to clipbord ' + x.map((y) => y.User?.id).join(', ')));
-                invalidateAll();
-              }); 
-            }else { notifications.add(errorPill('Only one user can be selected'));} 
+    !compatibility
+      ? {
+          label: 'New Password',
+          icon: 'mdi:lock-outline',
+          action: (x) => {
+            if (
+              confirm(
+                `Are you sure you want to generate a new password for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+              )
+            ) {
+              const randomstring = Math.random().toString(36).slice(-12);
+              if (x.length === 1) {
+                Promise.all(
+                  x
+                    .map((y) => y.User?.id)
+                    .map((userId) =>
+                      get(api).PUT('/auth/setPassword/{userId}', {
+                        fetch,
+                        params: { path: { userId: userId! } },
+                        body: { password: randomstring }
+                      })
+                    )
+                ).then((resp) => {
+                  if (resp.error) {
+                    notifications.add(
+                      errorPill('Failed to set password ' + x.map((y) => y.User?.id).join(', '))
+                    );
+                    return;
+                  }
+                  navigator.clipboard.writeText(randomstring);
+                  notifications.add(
+                    successPill(
+                      'New password copied to clipbord ' + x.map((y) => y.User?.id).join(', ')
+                    )
+                  );
+                  invalidateAll();
+                });
+              } else {
+                notifications.add(errorPill('Only one user can be selected'));
+              }
+            }
           }
         }
-      }
-    },
+      : undefined,
     {
       label: 'Enable Email Publish',
       icon: 'icon-park-outline:send-email',
@@ -304,7 +316,7 @@ export const load: PageLoad = async ({ fetch }) => {
         console.log(x);
       }
     }
-  ];
+  ].filter((x) => typeof x !== 'undefined');
 
   const topMenuActions: ActionBarEntryProps[] = [
     {

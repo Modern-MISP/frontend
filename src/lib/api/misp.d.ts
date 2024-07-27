@@ -3,9 +3,8 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/attributes/restSearch": {
+  '/attributes/restSearch': {
     /**
      * Search attributes
      * @description Search for attributes based on various filters.
@@ -22,9 +21,9 @@ export interface paths {
      *
      * - the attributes the search finds
      */
-    post: operations["rest_search_attributes_attributes_restSearch_post"];
+    post: operations['rest_search_attributes_attributes_restSearch_post'];
   };
-  "/attributes/{eventId}": {
+  '/attributes/{eventId}': {
     /**
      * Add new attribute
      * @description Add a new attribute with the given details.
@@ -43,9 +42,9 @@ export interface paths {
      *
      * - the response of the added attribute from the api
      */
-    post: operations["add_attribute_attributes__eventId__post"];
+    post: operations['add_attribute_attributes__eventId__post'];
   };
-  "/attributes/describeTypes": {
+  '/attributes/describeTypes': {
     /**
      * Get all attribute describe types
      * @description Retrieve a list of all available attribute types and categories.
@@ -58,9 +57,9 @@ export interface paths {
      *
      * - the attributes describe types
      */
-    get: operations["get_attributes_describe_types_attributes_describeTypes_get"];
+    get: operations['get_attributes_describe_types_attributes_describeTypes_get'];
   };
-  "/attributes/{attributeId}": {
+  '/attributes/{attributeId}': {
     /**
      * Get attribute details
      * @description Retrieve details of a specific attribute by its ID.
@@ -77,7 +76,7 @@ export interface paths {
      *
      * - the attribute details
      */
-    get: operations["get_attribute_details_attributes__attributeId__get"];
+    get: operations['get_attribute_details_attributes__attributeId__get'];
     /**
      * Update an attribute
      * @description Update an existing attribute by its ID.
@@ -96,7 +95,7 @@ export interface paths {
      *
      * - the response from the api for the edit request
      */
-    put: operations["update_attribute_attributes__attributeId__put"];
+    put: operations['update_attribute_attributes__attributeId__put'];
     /**
      * Delete an Attribute
      * @description Delete an attribute by its ID.
@@ -113,9 +112,9 @@ export interface paths {
      *
      * - the response from the api for the delete request
      */
-    delete: operations["delete_attribute_attributes__attributeId__delete"];
+    delete: operations['delete_attribute_attributes__attributeId__delete'];
   };
-  "/attributes": {
+  '/attributes': {
     /**
      * Get all Attributes
      * @description Retrieve a list of all attributes.
@@ -128,9 +127,9 @@ export interface paths {
      *
      * - the list of all attributes
      */
-    get: operations["get_attributes_attributes_get"];
+    get: operations['get_attributes_attributes_get'];
   };
-  "/attributes/deleteSelected/{eventId}": {
+  '/attributes/deleteSelected/{eventId}': {
     /**
      * Delete the selected attributes
      * @description Deletes the attributes associated with the event from the list in the body.
@@ -151,9 +150,9 @@ export interface paths {
      *
      * - the response from the api for the deleting of the selection
      */
-    post: operations["delete_selected_attributes_attributes_deleteSelected__eventId__post"];
+    post: operations['delete_selected_attributes_attributes_deleteSelected__eventId__post'];
   };
-  "/attributes/attributeStatistics/{context}/{percentage}": {
+  '/attributes/attributeStatistics/{context}/{percentage}': {
     /**
      * Get attribute statistics
      * @description Get the count/percentage of attributes per category/type.
@@ -172,9 +171,9 @@ export interface paths {
      *
      * - the attributes statistics for one category/type
      */
-    get: operations["get_attributes_statistics_attributes_attributeStatistics__context___percentage__get"];
+    get: operations['get_attributes_statistics_attributes_attributeStatistics__context___percentage__get'];
   };
-  "/attributes/restore/{attributeId}": {
+  '/attributes/restore/{attributeId}': {
     /**
      * Restore an attribute
      * @description Restore an attribute by its ID.
@@ -191,9 +190,9 @@ export interface paths {
      *
      * - the restored attribute
      */
-    post: operations["restore_attribute_attributes_restore__attributeId__post"];
+    post: operations['restore_attribute_attributes_restore__attributeId__post'];
   };
-  "/attributes/addTag/{attributeId}/{tagId}/local:{local}": {
+  '/attributes/addTag/{attributeId}/{tagId}/local:{local}': {
     /**
      * Add tag to attribute
      * @description Add a tag to an attribute by there ids.
@@ -214,9 +213,9 @@ export interface paths {
      *
      * - the response from the api for adding a tag to an attribute
      */
-    post: operations["add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post"];
+    post: operations['add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post'];
   };
-  "/attributes/removeTag/{attributeId}/{tagId}": {
+  '/attributes/removeTag/{attributeId}/{tagId}': {
     /**
      * Remove tag from attribute
      * @description Remove a tag from an attribute by there ids.
@@ -235,9 +234,9 @@ export interface paths {
      *
      * - the response from the api for removing a tag to an attribute
      */
-    post: operations["remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post"];
+    post: operations['remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post'];
   };
-  "/attributes/add/{eventId}": {
+  '/attributes/add/{eventId}': {
     /**
      * Add new attribute (Deprecated)
      * @deprecated
@@ -257,9 +256,9 @@ export interface paths {
      *
      * - the attribute
      */
-    post: operations["add_attribute_depr_attributes_add__eventId__post"];
+    post: operations['add_attribute_depr_attributes_add__eventId__post'];
   };
-  "/attributes/view/{attributeId}": {
+  '/attributes/view/{attributeId}': {
     /**
      * Get attribute details (Deprecated)
      * @deprecated
@@ -277,9 +276,9 @@ export interface paths {
      *
      * - the details of an attribute
      */
-    get: operations["get_attribute_details_depr_attributes_view__attributeId__get"];
+    get: operations['get_attribute_details_depr_attributes_view__attributeId__get'];
   };
-  "/attributes/edit/{attributeId}": {
+  '/attributes/edit/{attributeId}': {
     /**
      * Update an attribute (Deprecated)
      * @deprecated
@@ -299,9 +298,9 @@ export interface paths {
      *
      * - the updated version af an attribute
      */
-    put: operations["update_attribute_depr_attributes_edit__attributeId__put"];
+    put: operations['update_attribute_depr_attributes_edit__attributeId__put'];
   };
-  "/attributes/delete/{attributeId}": {
+  '/attributes/delete/{attributeId}': {
     /**
      * Delete an Attribute (Deprecated)
      * @deprecated
@@ -319,9 +318,9 @@ export interface paths {
      *
      * - the response from the api for the deleting request
      */
-    delete: operations["delete_attribute_depr_attributes_delete__attributeId__delete"];
+    delete: operations['delete_attribute_depr_attributes_delete__attributeId__delete'];
   };
-  "/auth/openID/getAllOpenIDConnectProvidersInfo": {
+  '/auth/openID/getAllOpenIDConnectProvidersInfo': {
     /**
      * Get All Open Id Connect Providers Info
      * @description Fetches all OpenID Connect providers
@@ -333,9 +332,9 @@ export interface paths {
      * Output:
      * - List of OpenID Connect providers
      */
-    get: operations["get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get"];
+    get: operations['get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get'];
   };
-  "/auth/openID/getAllOpenIDConnectProviders": {
+  '/auth/openID/getAllOpenIDConnectProviders': {
     /**
      * Get All Open Id Connect Providers
      * @description Fetches all OpenID Connect providers
@@ -347,9 +346,9 @@ export interface paths {
      * Output:
      * - List of OpenID Connect providers
      */
-    get: operations["get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get"];
+    get: operations['get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get'];
   };
-  "/auth/openID/getOpenIDConnectProvider/{providerId}": {
+  '/auth/openID/getOpenIDConnectProvider/{providerId}': {
     /**
      * Get Open Id Connect Provider By Id
      * @description Fetches a single OpenID Connect provider by its ID
@@ -362,9 +361,9 @@ export interface paths {
      * Output:
      * - OpenID Connect provider details
      */
-    get: operations["get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get"];
+    get: operations['get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get'];
   };
-  "/auth/openID/addOpenIDConnectProvider": {
+  '/auth/openID/addOpenIDConnectProvider': {
     /**
      * Add Openid Connect Provider
      * @description Adds a new OpenID Connect provider
@@ -377,9 +376,9 @@ export interface paths {
      *
      * - openID Connect provider
      */
-    post: operations["add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post"];
+    post: operations['add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post'];
   };
-  "/auth/openID/editOpenIDConnectProvider/{openIDConnectProvider}": {
+  '/auth/openID/editOpenIDConnectProvider/{openIDConnectProvider}': {
     /**
      * Edit Openid Connect Provider
      * @description Edits an OpenID Connect provider
@@ -394,9 +393,9 @@ export interface paths {
      *
      * - updated OpenID Connect provider
      */
-    post: operations["edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post"];
+    post: operations['edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post'];
   };
-  "/auth/openID/delete/{openIDConnectProvider}": {
+  '/auth/openID/delete/{openIDConnectProvider}': {
     /**
      * Deletes an OpenID Connect Provider by its ID
      * @description Deletes an OpenID Connect provider
@@ -411,9 +410,9 @@ export interface paths {
      *
      * - database
      */
-    delete: operations["delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete"];
+    delete: operations['delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete'];
   };
-  "/auth/login/start": {
+  '/auth/login/start': {
     /**
      * Start Login
      * @description Starts the login process.
@@ -428,9 +427,9 @@ export interface paths {
      *
      * - dict
      */
-    post: operations["start_login_auth_login_start_post"];
+    post: operations['start_login_auth_login_start_post'];
   };
-  "/auth/login/password": {
+  '/auth/login/password': {
     /**
      * Password Login
      * @description Login with password.
@@ -445,9 +444,9 @@ export interface paths {
      *
      * - the login token
      */
-    post: operations["password_login_auth_login_password_post"];
+    post: operations['password_login_auth_login_password_post'];
   };
-  "/auth/login/setOwnPassword": {
+  '/auth/login/setOwnPassword': {
     /**
      * User sets their password to a new password
      * @description Sets the password of the user to a new password.
@@ -460,9 +459,9 @@ export interface paths {
      *
      * - the response form the api after the password change request
      */
-    post: operations["set_password_auth_login_setOwnPassword_post"];
+    post: operations['set_password_auth_login_setOwnPassword_post'];
   };
-  "/auth/login/idp/{identityProviderName}/callback": {
+  '/auth/login/idp/{identityProviderName}/callback': {
     /**
      * Redirect To Frontend
      * @description Redirects to the frontend.
@@ -479,7 +478,7 @@ export interface paths {
      *
      * - the redirection
      */
-    get: operations["redirect_to_frontend_auth_login_idp__identityProviderName__callback_get"];
+    get: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_get'];
     /**
      * Redirect To Frontend
      * @description Redirects to the frontend.
@@ -496,9 +495,9 @@ export interface paths {
      *
      * - the redirection
      */
-    post: operations["redirect_to_frontend_auth_login_idp__identityProviderName__callback_post"];
+    post: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_post'];
   };
-  "/auth/login/token": {
+  '/auth/login/token': {
     /**
      * Exchange Token Login
      * @description Login with exchange token.
@@ -511,9 +510,9 @@ export interface paths {
      *
      * - the login token
      */
-    post: operations["exchange_token_login_auth_login_token_post"];
+    post: operations['exchange_token_login_auth_login_token_post'];
   };
-  "/auth/setPassword/{userId}": {
+  '/auth/setPassword/{userId}': {
     /**
      * Admin sets the password of the user to a new password
      * @description Set the password of the user to a new password
@@ -528,9 +527,9 @@ export interface paths {
      *
      * - the response from the api after the password change request
      */
-    put: operations["change_password_UserId_auth_setPassword__userId__put"];
+    put: operations['change_password_UserId_auth_setPassword__userId__put'];
   };
-  "/auth_keys/{userId}": {
+  '/auth_keys/{userId}': {
     /**
      * Add an AuthKey.
      * @description Create an AuthKey for a specific user and save it in the database.
@@ -549,9 +548,9 @@ export interface paths {
      *
      * - the added authkey
      */
-    post: operations["auth_keys_add_user_auth_keys__userId__post"];
+    post: operations['auth_keys_add_user_auth_keys__userId__post'];
   };
-  "/auth_keys/view/{AuthKeyId}": {
+  '/auth_keys/view/{AuthKeyId}': {
     /**
      * View an AuthKey
      * @description View an AuthKey by its ID.
@@ -568,9 +567,9 @@ export interface paths {
      *
      * - the authkey
      */
-    get: operations["auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get"];
+    get: operations['auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get'];
   };
-  "/auth_keys": {
+  '/auth_keys': {
     /**
      * Returns AuthKeys.
      * @description Returns all AuthKeys stored in the database as a List.
@@ -585,7 +584,7 @@ export interface paths {
      *
      * - all authkeys as a list
      */
-    get: operations["auth_keys_get_auth_keys_get"];
+    get: operations['auth_keys_get_auth_keys_get'];
     /**
      * Search for specific AuthKeys.
      * @description Search for specific AuthKeys by parameters.
@@ -602,9 +601,9 @@ export interface paths {
      *
      * - the authkeys
      */
-    post: operations["search_auth_keys_auth_keys_post"];
+    post: operations['search_auth_keys_auth_keys_post'];
   };
-  "/auth_keys/{AuthKeyId}": {
+  '/auth_keys/{AuthKeyId}': {
     /**
      * Edit an AuthKey.
      * @description Edit an AuthKey by its ID.
@@ -623,7 +622,7 @@ export interface paths {
      *
      * - the updated authkey
      */
-    put: operations["auth_keys_edit_auth_key_auth_keys__AuthKeyId__put"];
+    put: operations['auth_keys_edit_auth_key_auth_keys__AuthKeyId__put'];
     /**
      * Delete given AuthKey.
      * @description Delete AuthKey by AuthKeyId from the database.
@@ -640,9 +639,9 @@ export interface paths {
      *
      * - the response from the api after the deleting request
      */
-    delete: operations["auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete"];
+    delete: operations['auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete'];
   };
-  "/auth_keys/viewOwn": {
+  '/auth_keys/viewOwn': {
     /**
      * View own AuthKeys
      * @description View own Authkeys.
@@ -659,9 +658,9 @@ export interface paths {
      *
      * - the auth keys
      */
-    get: operations["auth_keys_view_own_auth_keys_auth_keys_viewOwn_get"];
+    get: operations['auth_keys_view_own_auth_keys_auth_keys_viewOwn_get'];
   };
-  "/auth_keys/index/{userId}": {
+  '/auth_keys/index/{userId}': {
     /**
      * View own AuthKeys
      * @deprecated
@@ -679,9 +678,9 @@ export interface paths {
      *
      * - the auth keys
      */
-    get: operations["auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get"];
+    get: operations['auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get'];
   };
-  "/auth_keys/add/{userId}": {
+  '/auth_keys/add/{userId}': {
     /**
      * Add an AuthKey.
      * @deprecated
@@ -701,9 +700,9 @@ export interface paths {
      *
      * - the added authkey
      */
-    post: operations["auth_keys_add_user_depr_auth_keys_add__userId__post"];
+    post: operations['auth_keys_add_user_depr_auth_keys_add__userId__post'];
   };
-  "/auth_keys/edit/{AuthKeyId}": {
+  '/auth_keys/edit/{AuthKeyId}': {
     /**
      * Edit AuthKey
      * @deprecated
@@ -723,9 +722,9 @@ export interface paths {
      *
      * - the updated authkey
      */
-    post: operations["auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post"];
+    post: operations['auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post'];
   };
-  "/auth_keys/delete/{AuthKeyId}": {
+  '/auth_keys/delete/{AuthKeyId}': {
     /**
      * Delete given AuthKey.
      * @deprecated
@@ -743,9 +742,9 @@ export interface paths {
      *
      * - the response from the api after the deleting request
      */
-    post: operations["auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post"];
+    post: operations['auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post'];
   };
-  "/events": {
+  '/events': {
     /**
      * Get all events
      * @description Retrieve a list of all events.
@@ -760,7 +759,7 @@ export interface paths {
      *
      * - all events as a list
      */
-    get: operations["get_all_events_events_get"];
+    get: operations['get_all_events_events_get'];
     /**
      * Add new event
      * @description Add a new event with the gi ven details.
@@ -777,9 +776,9 @@ export interface paths {
      *
      * - the new event
      */
-    post: operations["add_event_events_post"];
+    post: operations['add_event_events_post'];
   };
-  "/events/{eventId}": {
+  '/events/{eventId}': {
     /**
      * Get event details
      * @description Retrieve details of a specific event by ist ID.
@@ -796,7 +795,7 @@ export interface paths {
      *
      * - the event details
      */
-    get: operations["get_event_details_events__eventId__get"];
+    get: operations['get_event_details_events__eventId__get'];
     /**
      * Update an event
      * @description Update an existing event by its ID.
@@ -815,7 +814,7 @@ export interface paths {
      *
      * - the updated event
      */
-    put: operations["update_event_events__eventId__put"];
+    put: operations['update_event_events__eventId__put'];
     /**
      * Delete an event
      * @description Delete an attribute by its ID.
@@ -832,9 +831,9 @@ export interface paths {
      *
      * - the deleted event
      */
-    delete: operations["delete_event_events__eventId__delete"];
+    delete: operations['delete_event_events__eventId__delete'];
   };
-  "/events/restSearch": {
+  '/events/restSearch': {
     /**
      * Search events
      * @description Search for events based on various filters.
@@ -851,9 +850,9 @@ export interface paths {
      *
      * - the searched events
      */
-    post: operations["rest_search_events_events_restSearch_post"];
+    post: operations['rest_search_events_events_restSearch_post'];
   };
-  "/events/index": {
+  '/events/index': {
     /**
      * Search events
      * @description Search for events based on various filters, which are more general than the ones in 'rest search'.
@@ -870,9 +869,9 @@ export interface paths {
      *
      * - the searched events
      */
-    post: operations["index_events_events_index_post"];
+    post: operations['index_events_events_index_post'];
   };
-  "/events/publish/{eventId}": {
+  '/events/publish/{eventId}': {
     /**
      * Publish an event
      * @description Publish an event by ist ID.
@@ -891,9 +890,9 @@ export interface paths {
      *
      * - the published event
      */
-    post: operations["publish_event_events_publish__eventId__post"];
+    post: operations['publish_event_events_publish__eventId__post'];
   };
-  "/events/unpublish/{eventId}": {
+  '/events/unpublish/{eventId}': {
     /**
      * Unpublish an event
      * @description Unpublish an event by its ID.
@@ -912,9 +911,9 @@ export interface paths {
      *
      * - the unpublished event
      */
-    post: operations["unpublish_event_events_unpublish__eventId__post"];
+    post: operations['unpublish_event_events_unpublish__eventId__post'];
   };
-  "/events/addTag/{eventId}/{tagId}/local:{local}": {
+  '/events/addTag/{eventId}/{tagId}/local:{local}': {
     /**
      * Add tag to event
      * @description Add a tag to an attribute by their ids.
@@ -935,9 +934,9 @@ export interface paths {
      *
      * - the result of adding the tag to the event given by the api
      */
-    post: operations["add_tag_to_event_events_addTag__eventId___tagId__local__local__post"];
+    post: operations['add_tag_to_event_events_addTag__eventId___tagId__local__local__post'];
   };
-  "/events/removeTag/{eventId}/{tagId}": {
+  '/events/removeTag/{eventId}/{tagId}': {
     /**
      * Remove tag of event
      * @description Remove a tag to from an event by their id.
@@ -956,9 +955,9 @@ export interface paths {
      *
      * - the result of removing the tag from the event given by the api
      */
-    post: operations["remove_tag_from_event_events_removeTag__eventId___tagId__post"];
+    post: operations['remove_tag_from_event_events_removeTag__eventId___tagId__post'];
   };
-  "/events/freeTextImport": {
+  '/events/freeTextImport': {
     /**
      * start the freetext import process via worker
      * @description Starts the freetext import process by submitting the freetext to the worker.
@@ -973,9 +972,9 @@ export interface paths {
      *
      * - dict
      */
-    post: operations["start_freeTextImport_events_freeTextImport_post"];
+    post: operations['start_freeTextImport_events_freeTextImport_post'];
   };
-  "/events/freeTextImport/{eventID}": {
+  '/events/freeTextImport/{eventID}': {
     /**
      * Start the freetext import process via worker
      * @description Adds the Attributes the user has selected
@@ -992,9 +991,9 @@ export interface paths {
      *
      * - the processed data to be viewed and selected by the user
      */
-    post: operations["start_freetext_import_events_freeTextImport__eventID__post"];
+    post: operations['start_freetext_import_events_freeTextImport__eventID__post'];
   };
-  "/events/add": {
+  '/events/add': {
     /**
      * Add new event (Deprecated)
      * @deprecated
@@ -1012,9 +1011,9 @@ export interface paths {
      *
      * - the new event
      */
-    post: operations["add_event_depr_events_add_post"];
+    post: operations['add_event_depr_events_add_post'];
   };
-  "/events/view/{eventId}": {
+  '/events/view/{eventId}': {
     /**
      * Get event details (Deprecated)
      * @deprecated
@@ -1032,9 +1031,9 @@ export interface paths {
      *
      * - the event details
      */
-    get: operations["get_event_details_depr_events_view__eventId__get"];
+    get: operations['get_event_details_depr_events_view__eventId__get'];
   };
-  "/events/edit/{eventId}": {
+  '/events/edit/{eventId}': {
     /**
      * Update an event (Deprecated)
      * @deprecated
@@ -1054,9 +1053,9 @@ export interface paths {
      *
      * - the updated event
      */
-    put: operations["update_event_depr_events_edit__eventId__put"];
+    put: operations['update_event_depr_events_edit__eventId__put'];
   };
-  "/events/delete/{eventId}": {
+  '/events/delete/{eventId}': {
     /**
      * Delete an event (Deprecated)
      * @deprecated
@@ -1074,9 +1073,9 @@ export interface paths {
      *
      * - the deleted event
      */
-    delete: operations["delete_event_depr_events_delete__eventId__delete"];
+    delete: operations['delete_event_depr_events_delete__eventId__delete'];
   };
-  "/feeds": {
+  '/feeds': {
     /**
      * Get all feeds
      * @description Retrieve a list of all feeds.
@@ -1091,7 +1090,7 @@ export interface paths {
      *
      * - all feeds as a list
      */
-    get: operations["get_feeds_feeds_get"];
+    get: operations['get_feeds_feeds_get'];
     /**
      * Add new feed
      * @description Add a new feed with given details.
@@ -1108,9 +1107,9 @@ export interface paths {
      *
      * - the new feed
      */
-    post: operations["add_feed_feeds_post"];
+    post: operations['add_feed_feeds_post'];
   };
-  "/feeds/cache_feeds/{cacheFeedsScope}": {
+  '/feeds/cache_feeds/{cacheFeedsScope}': {
     /**
      * Cache feeds
      * @description Cache feeds based on a specific scope. NOT YET AVAILABLE!
@@ -1127,9 +1126,9 @@ export interface paths {
      *
      * - the cache feeds
      */
-    post: operations["cache_feeds_feeds_cache_feeds__cacheFeedsScope__post"];
+    post: operations['cache_feeds_feeds_cache_feeds__cacheFeedsScope__post'];
   };
-  "/feeds/fetch_from_feed/{feedId}": {
+  '/feeds/fetch_from_feed/{feedId}': {
     /**
      * Fetch from feed
      * @description Fetch data from a specific feed by its ID. NOT YET AVAILABLE!
@@ -1146,9 +1145,9 @@ export interface paths {
      *
      * - the fetched feed data
      */
-    get: operations["fetch_from_feed_feeds_fetch_from_feed__feedId__get"];
+    get: operations['fetch_from_feed_feeds_fetch_from_feed__feedId__get'];
   };
-  "/feeds/{feedId}": {
+  '/feeds/{feedId}': {
     /**
      * Get feed details
      * @description Retrieve details of a specific feed by its ID.
@@ -1165,7 +1164,7 @@ export interface paths {
      *
      * - the details of a feed
      */
-    get: operations["get_feed_details_feeds__feedId__get"];
+    get: operations['get_feed_details_feeds__feedId__get'];
     /**
      * Update feed
      * @description Update an existing feed by its ID.
@@ -1184,7 +1183,7 @@ export interface paths {
      *
      * - the updated feed
      */
-    put: operations["update_feed_feeds__feedId__put"];
+    put: operations['update_feed_feeds__feedId__put'];
     /**
      * Toggle feed status
      * @description Toggle the status of a feed between enabled and disabled.
@@ -1204,9 +1203,9 @@ export interface paths {
      *
      * - the new status of the feed
      */
-    patch: operations["toggle_feed_feeds__feedId__patch"];
+    patch: operations['toggle_feed_feeds__feedId__patch'];
   };
-  "/feeds/fetch_from_all_feeds": {
+  '/feeds/fetch_from_all_feeds': {
     /**
      * Fetch from all feeds
      * @description Fetch data from all available feeds. NOT YET AVAILABLE!
@@ -1221,9 +1220,9 @@ export interface paths {
      *
      * - the fetched data of all available feeds
      */
-    get: operations["fetch_data_from_all_feeds_feeds_fetch_from_all_feeds_get"];
+    get: operations['fetch_data_from_all_feeds_feeds_fetch_from_all_feeds_get'];
   };
-  "/feeds/add": {
+  '/feeds/add': {
     /**
      * Add new feed (Deprecated)
      * @deprecated
@@ -1241,9 +1240,9 @@ export interface paths {
      *
      * - the added feed
      */
-    post: operations["add_feed_depr_feeds_add_post"];
+    post: operations['add_feed_depr_feeds_add_post'];
   };
-  "/feeds/enable/{feedId}": {
+  '/feeds/enable/{feedId}': {
     /**
      * Enable feed (Deprecated)
      * @deprecated
@@ -1261,9 +1260,9 @@ export interface paths {
      *
      * - the the enabled feed
      */
-    post: operations["enable_feed_feeds_enable__feedId__post"];
+    post: operations['enable_feed_feeds_enable__feedId__post'];
   };
-  "/feeds/disable/{feedId}": {
+  '/feeds/disable/{feedId}': {
     /**
      * Disable feed (Deprecated)
      * @deprecated
@@ -1281,9 +1280,9 @@ export interface paths {
      *
      * - the disabled feed
      */
-    post: operations["disable_feed_feeds_disable__feedId__post"];
+    post: operations['disable_feed_feeds_disable__feedId__post'];
   };
-  "/feeds/cacheFeeds/{cacheFeedsScope}": {
+  '/feeds/cacheFeeds/{cacheFeedsScope}': {
     /**
      * Cache feeds
      * @deprecated
@@ -1301,9 +1300,9 @@ export interface paths {
      *
      * - the feed cache
      */
-    post: operations["cache_feeds_depr_feeds_cacheFeeds__cacheFeedsScope__post"];
+    post: operations['cache_feeds_depr_feeds_cacheFeeds__cacheFeedsScope__post'];
   };
-  "/feeds/fetchFromFeed/{feedId}": {
+  '/feeds/fetchFromFeed/{feedId}': {
     /**
      * Fetch from feed (Deprecated)
      * @deprecated
@@ -1321,9 +1320,9 @@ export interface paths {
      *
      * - the fetched feed data
      */
-    post: operations["fetch_from_feed_depr_feeds_fetchFromFeed__feedId__post"];
+    post: operations['fetch_from_feed_depr_feeds_fetchFromFeed__feedId__post'];
   };
-  "/feeds/fetchFromAllFeeds": {
+  '/feeds/fetchFromAllFeeds': {
     /**
      * Fetch from all feeds (Deprecated)
      * @deprecated
@@ -1340,9 +1339,9 @@ export interface paths {
      *
      * - the fetched data of all feeds
      */
-    post: operations["fetch_data_from_all_feeds_depr_feeds_fetchFromAllFeeds_post"];
+    post: operations['fetch_data_from_all_feeds_depr_feeds_fetchFromAllFeeds_post'];
   };
-  "/feeds/view/{feedId}": {
+  '/feeds/view/{feedId}': {
     /**
      * Get feed details (Deprecated)
      * @deprecated
@@ -1360,9 +1359,9 @@ export interface paths {
      *
      * - the details of the feed
      */
-    get: operations["get_feed_details_depr_feeds_view__feedId__get"];
+    get: operations['get_feed_details_depr_feeds_view__feedId__get'];
   };
-  "/feeds/edit/{feedId}": {
+  '/feeds/edit/{feedId}': {
     /**
      * Update feed (Deprecated)
      * @deprecated
@@ -1383,9 +1382,9 @@ export interface paths {
      *
      * - the updated feed
      */
-    put: operations["update_feed_depr_feeds_edit__feedId__put"];
+    put: operations['update_feed_depr_feeds_edit__feedId__put'];
   };
-  "/galaxies/{galaxyId}": {
+  '/galaxies/{galaxyId}': {
     /**
      * Get Galaxy Details
      * @description "Gets the details of a galaxy.
@@ -1402,7 +1401,7 @@ export interface paths {
      *
      * - the details of the galaxy
      */
-    get: operations["get_galaxy_details_galaxies__galaxyId__get"];
+    get: operations['get_galaxy_details_galaxies__galaxyId__get'];
     /**
      * Delete a galaxy
      * @description "Delete a specific galaxy by its Id.
@@ -1421,9 +1420,9 @@ export interface paths {
      *
      * - the deleted galaxy
      */
-    delete: operations["delete_galaxy_galaxies__galaxyId__delete"];
+    delete: operations['delete_galaxy_galaxies__galaxyId__delete'];
   };
-  "/galaxies/update": {
+  '/galaxies/update': {
     /**
      * Update galaxies
      * @description Force the galaxies to update with the JSON definitions, not yet implemented.
@@ -1438,9 +1437,9 @@ export interface paths {
      *
      * - the updated galaxies
      */
-    post: operations["update_galaxy_galaxies_update_post"];
+    post: operations['update_galaxy_galaxies_update_post'];
   };
-  "/galaxies": {
+  '/galaxies': {
     /**
      * Get all galaxies
      * @description Get a list with all existing galaxies.
@@ -1455,7 +1454,7 @@ export interface paths {
      *
      * - all galaxies
      */
-    get: operations["get_galaxies_galaxies_get"];
+    get: operations['get_galaxies_galaxies_get'];
     /**
      * Search galaxies
      * @description Search galaxies by search term which matches with galaxy name, namespace, description, kill_chain_order or uuid."
@@ -1472,9 +1471,9 @@ export interface paths {
      *
      * - the galaxies found by search
      */
-    post: operations["search_galaxies_galaxies_post"];
+    post: operations['search_galaxies_galaxies_post'];
   };
-  "/galaxies/view/{galaxyId}": {
+  '/galaxies/view/{galaxyId}': {
     /**
      * View Galaxy by ID.
      * @deprecated
@@ -1492,9 +1491,9 @@ export interface paths {
      *
      * - the details of the galaxy
      */
-    get: operations["get_galaxy_details_depr_galaxies_view__galaxyId__get"];
+    get: operations['get_galaxy_details_depr_galaxies_view__galaxyId__get'];
   };
-  "/galaxies/delete/{galaxyId}": {
+  '/galaxies/delete/{galaxyId}': {
     /**
      * Delete Galaxy by ID
      * @deprecated
@@ -1514,9 +1513,9 @@ export interface paths {
      *
      * - the deleted galaxy
      */
-    delete: operations["delete_galaxy_depr_galaxies_delete__galaxyId__delete"];
+    delete: operations['delete_galaxy_depr_galaxies_delete__galaxyId__delete'];
   };
-  "/galaxies/import": {
+  '/galaxies/import': {
     /**
      * Add new galaxy cluster
      * @description Add a new galaxy cluster to an existing galaxy.
@@ -1535,9 +1534,9 @@ export interface paths {
      *
      * - the new galaxy cluster
      */
-    post: operations["import_galaxy_cluster_galaxies_import_post"];
+    post: operations['import_galaxy_cluster_galaxies_import_post'];
   };
-  "/galaxies/clusters/{clusterID}": {
+  '/galaxies/clusters/{clusterID}': {
     /**
      * Gets information from a galaxy cluster
      * @description Returns information from a galaxy cluster selected by its id.
@@ -1554,9 +1553,9 @@ export interface paths {
      *
      * - the information of the galaxy cluster
      */
-    get: operations["get_galaxy_cluster_galaxies_clusters__clusterID__get"];
+    get: operations['get_galaxy_cluster_galaxies_clusters__clusterID__get'];
   };
-  "/galaxies/export/{galaxyId}": {
+  '/galaxies/export/{galaxyId}': {
     /**
      * Export galaxy cluster
      * @description Export galaxy cluster.
@@ -1575,9 +1574,9 @@ export interface paths {
      *
      * - the exported galaxy cluster
      */
-    post: operations["export_galaxy_galaxies_export__galaxyId__post"];
+    post: operations['export_galaxy_galaxies_export__galaxyId__post'];
   };
-  "/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}": {
+  '/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}': {
     /**
      * Attach Cluster to Galaxy.
      * @description Attach a Galaxy Cluster to given Galaxy.
@@ -1600,9 +1599,9 @@ export interface paths {
      *
      * - the attached galaxy cluster and the attach target
      */
-    post: operations["galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post"];
+    post: operations['galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post'];
   };
-  "/galaxy_clusters/view/{galaxyClusterId}": {
+  '/galaxy_clusters/view/{galaxyClusterId}': {
     /**
      * Gets information from a galaxy cluster
      * @deprecated
@@ -1621,9 +1620,9 @@ export interface paths {
      *
      * - the information of the galaxy cluster
      */
-    get: operations["get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get"];
+    get: operations['get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get'];
   };
-  "/jobs/{id}": {
+  '/jobs/{id}': {
     /**
      * Get Job
      * @description Gets a job.
@@ -1638,9 +1637,9 @@ export interface paths {
      *
      * - dict
      */
-    get: operations["get_job_jobs__id__get"];
+    get: operations['get_job_jobs__id__get'];
   };
-  "/noticelists/{noticelistId}": {
+  '/noticelists/{noticelistId}': {
     /**
      * Get noticelist details
      * @description Retrieve details of a specific noticelist by its ID.
@@ -1657,9 +1656,9 @@ export interface paths {
      *
      * - the details of the notice list
      */
-    get: operations["get_noticelist_noticelists__noticelistId__get"];
+    get: operations['get_noticelist_noticelists__noticelistId__get'];
   };
-  "/noticelists/toggleEnable/{noticelistId}": {
+  '/noticelists/toggleEnable/{noticelistId}': {
     /**
      * Post Toggleenable Noticelist
      * @description Disable/Enable a specific noticelist by its ID.
@@ -1676,9 +1675,9 @@ export interface paths {
      *
      * - the enabled/disabled notice list
      */
-    post: operations["post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post"];
+    post: operations['post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post'];
   };
-  "/noticelists": {
+  '/noticelists': {
     /**
      * Get all noticelists
      * @description Retrieve a list of all noticelists.
@@ -1693,7 +1692,7 @@ export interface paths {
      *
      * - all notice lists as a list
      */
-    get: operations["get_all_noticelists_noticelists_get"];
+    get: operations['get_all_noticelists_noticelists_get'];
     /**
      * Update noticelists
      * @description Update all noticelists.
@@ -1708,9 +1707,9 @@ export interface paths {
      *
      * - all updated notice lists
      */
-    put: operations["update_noticelists_noticelists_put"];
+    put: operations['update_noticelists_noticelists_put'];
   };
-  "/noticelists/view/{noticelistId}": {
+  '/noticelists/view/{noticelistId}': {
     /**
      * Get noticelist details (Deprecated)
      * @deprecated
@@ -1728,9 +1727,9 @@ export interface paths {
      *
      * - the details of the notice list
      */
-    get: operations["get_noticelist_depr_noticelists_view__noticelistId__get"];
+    get: operations['get_noticelist_depr_noticelists_view__noticelistId__get'];
   };
-  "/noticelists/update": {
+  '/noticelists/update': {
     /**
      * Update noticelists (Deprecated)
      * @deprecated
@@ -1746,9 +1745,9 @@ export interface paths {
      *
      * - all updated notice lists
      */
-    post: operations["update_noticelist_depr_noticelists_update_post"];
+    post: operations['update_noticelist_depr_noticelists_update_post'];
   };
-  "/objects/{eventId}/{objectTemplateId}": {
+  '/objects/{eventId}/{objectTemplateId}': {
     /**
      * Add object to event
      * @description Add a new object to a specific event using a template.
@@ -1769,9 +1768,9 @@ export interface paths {
      *
      * - the added object
      */
-    post: operations["add_object_objects__eventId___objectTemplateId__post"];
+    post: operations['add_object_objects__eventId___objectTemplateId__post'];
   };
-  "/objects/restsearch": {
+  '/objects/restsearch': {
     /**
      * Search objects
      * @description Search for objects based on various filters.
@@ -1788,9 +1787,9 @@ export interface paths {
      *
      * - the objects found by search
      */
-    post: operations["restsearch_objects_restsearch_post"];
+    post: operations['restsearch_objects_restsearch_post'];
   };
-  "/objects/{objectId}": {
+  '/objects/{objectId}': {
     /**
      * View object details
      * @description View details of a specific object including its attributes and related event.
@@ -1807,9 +1806,9 @@ export interface paths {
      *
      * - the details of the object
      */
-    get: operations["get_object_details_objects__objectId__get"];
+    get: operations['get_object_details_objects__objectId__get'];
   };
-  "/objects/{objectId}/{hardDelete}": {
+  '/objects/{objectId}/{hardDelete}': {
     /**
      * Delete object
      * @description Delete a specific object. The hardDelete parameter determines if it's a hard or soft delete.
@@ -1828,9 +1827,9 @@ export interface paths {
      *
      * - the deleted object
      */
-    delete: operations["delete_object_objects__objectId___hardDelete__delete"];
+    delete: operations['delete_object_objects__objectId___hardDelete__delete'];
   };
-  "/objects/add/{eventId}/{objectTemplateId}": {
+  '/objects/add/{eventId}/{objectTemplateId}': {
     /**
      * Add object to event (Deprecated)
      * @deprecated
@@ -1852,9 +1851,9 @@ export interface paths {
      *
      * - the added object
      */
-    post: operations["add_object_depr_objects_add__eventId___objectTemplateId__post"];
+    post: operations['add_object_depr_objects_add__eventId___objectTemplateId__post'];
   };
-  "/objects/view/{objectId}": {
+  '/objects/view/{objectId}': {
     /**
      * View object details (Deprecated)
      * @deprecated
@@ -1872,9 +1871,9 @@ export interface paths {
      *
      * - the details of the object
      */
-    get: operations["get_object_details_depr_objects_view__objectId__get"];
+    get: operations['get_object_details_depr_objects_view__objectId__get'];
   };
-  "/objects/delete/{objectId}/{hardDelete}": {
+  '/objects/delete/{objectId}/{hardDelete}': {
     /**
      * Delete object (Deprecated)
      * @deprecated
@@ -1895,9 +1894,9 @@ export interface paths {
      *
      * - the deleted object
      */
-    delete: operations["delete_object_depr_objects_delete__objectId___hardDelete__delete"];
+    delete: operations['delete_object_depr_objects_delete__objectId___hardDelete__delete'];
   };
-  "/organisations": {
+  '/organisations': {
     /**
      * Gets a list of all organisations
      * @deprecated
@@ -1911,7 +1910,7 @@ export interface paths {
      *
      * - List of all organisations
      */
-    get: operations["get_organisations_deprecated_organisations_get"];
+    get: operations['get_organisations_deprecated_organisations_get'];
     /**
      * Add a new organisation
      * @description Adds a new organisation.
@@ -1926,9 +1925,9 @@ export interface paths {
      *
      * - The added organisation data
      */
-    post: operations["add_organisation_organisations_post"];
+    post: operations['add_organisation_organisations_post'];
   };
-  "/organisations/all": {
+  '/organisations/all': {
     /**
      * Gets a list of all organisations
      * @description Gets all organisations as a list.
@@ -1941,9 +1940,9 @@ export interface paths {
      *
      * - List of all organisations
      */
-    get: operations["get_organisations_organisations_all_get"];
+    get: operations['get_organisations_organisations_all_get'];
   };
-  "/organisations/{orgId}": {
+  '/organisations/{orgId}': {
     /**
      * Gets an organisation by its ID
      * @description Gets an organisation by its ID.
@@ -1960,9 +1959,9 @@ export interface paths {
      *
      * - Data of the searched organisation
      */
-    get: operations["get_organisation_organisations__orgId__get"];
+    get: operations['get_organisation_organisations__orgId__get'];
   };
-  "/organisations/delete/{orgId}": {
+  '/organisations/delete/{orgId}': {
     /**
      * Deletes an organisation by its ID
      * @description Deletes an organisation by its ID.
@@ -1977,9 +1976,9 @@ export interface paths {
      *
      * - Response indicating success or failure
      */
-    delete: operations["delete_organisation_organisations_delete__orgId__delete"];
+    delete: operations['delete_organisation_organisations_delete__orgId__delete'];
   };
-  "/organisations/update/{orgId}": {
+  '/organisations/update/{orgId}': {
     /**
      * Updates an organisation by its ID
      * @description Updates an organisation by its ID.
@@ -1996,9 +1995,9 @@ export interface paths {
      *
      * - Updated organisation data
      */
-    post: operations["update_organisation_organisations_update__orgId__post"];
+    post: operations['update_organisation_organisations_update__orgId__post'];
   };
-  "/roles": {
+  '/roles': {
     /**
      * Get all roles
      * @description Get all roles and their details.
@@ -2011,9 +2010,9 @@ export interface paths {
      *
      * - Information about all roles.
      */
-    get: operations["get_all_roles_roles_get"];
+    get: operations['get_all_roles_roles_get'];
   };
-  "/servers/remote/getAll": {
+  '/servers/remote/getAll': {
     /**
      * Requests a list of all remote servers
      * @description Returns a list of all currently active remote servers.
@@ -2026,9 +2025,9 @@ export interface paths {
      *
      * - List of remote servers
      */
-    get: operations["get_remote_servers_servers_remote_getAll_get"];
+    get: operations['get_remote_servers_servers_remote_getAll_get'];
   };
-  "/servers/remote/{serverId}": {
+  '/servers/remote/{serverId}': {
     /**
      * Requests information regarding a remote server
      * @description Returns information for a specific remote server chosen by its id.
@@ -2043,9 +2042,9 @@ export interface paths {
      *
      * - server information regarding the chosen server
      */
-    get: operations["get_remote_server_by_id_servers_remote__serverId__get"];
+    get: operations['get_remote_server_by_id_servers_remote__serverId__get'];
   };
-  "/servers/remote/add": {
+  '/servers/remote/add': {
     /**
      * Adds a new remote server to the list
      * @description Adds a new remote server based on the input of an admin.
@@ -2060,9 +2059,9 @@ export interface paths {
      *
      * - Response indicating the result of the server addition operation
      */
-    post: operations["add_remote_server_servers_remote_add_post"];
+    post: operations['add_remote_server_servers_remote_add_post'];
   };
-  "/servers/remote/delete/{server_id}": {
+  '/servers/remote/delete/{server_id}': {
     /**
      * Deletes a remote server by id
      * @description Deletes a remote server if the given id is valid.
@@ -2077,9 +2076,9 @@ export interface paths {
      *
      * - Response indicating the result of the server deletion operation
      */
-    delete: operations["delete_remote_server_servers_remote_delete__server_id__delete"];
+    delete: operations['delete_remote_server_servers_remote_delete__server_id__delete'];
   };
-  "/servers/getVersion": {
+  '/servers/getVersion': {
     /**
      * Get Version
      * @description Gets the Version of the server.
@@ -2097,9 +2096,9 @@ export interface paths {
      * - Request encoding
      * - Filter sightings flag
      */
-    get: operations["get_version_servers_getVersion_get"];
+    get: operations['get_version_servers_getVersion_get'];
   };
-  "/servers/remote/edit/{org_Id}": {
+  '/servers/remote/edit/{org_Id}': {
     /**
      * Edits remote servers by org id
      * @description Edits servers given by org_id.
@@ -2116,9 +2115,9 @@ export interface paths {
      *
      * - Updated servers as a list
      */
-    post: operations["update_remote_server_servers_remote_edit__org_Id__post"];
+    post: operations['update_remote_server_servers_remote_edit__org_Id__post'];
   };
-  "/servers/": {
+  '/servers/': {
     /**
      * Requests a list of all remote servers
      * @deprecated
@@ -2133,9 +2132,9 @@ export interface paths {
      *
      * - List of remote servers
      */
-    get: operations["get_remote_servers_depr_servers__get"];
+    get: operations['get_remote_servers_depr_servers__get'];
   };
-  "/servers/add": {
+  '/servers/add': {
     /**
      * Adds a new remote server to the list
      * @deprecated
@@ -2151,9 +2150,9 @@ export interface paths {
      *
      * - Response indicating the result of the server addition operation
      */
-    post: operations["add_remote_server_depr_servers_add_post"];
+    post: operations['add_remote_server_depr_servers_add_post'];
   };
-  "/sharing_groups": {
+  '/sharing_groups': {
     /**
      * Get all sharing groups
      * @description Retrieve a list of all sharing groups.
@@ -2168,7 +2167,7 @@ export interface paths {
      *
      * - Representation of all sharing groups
      */
-    get: operations["get_all_sharing_groups_sharing_groups_get"];
+    get: operations['get_all_sharing_groups_sharing_groups_get'];
     /**
      * Add a new sharing group
      * @description Add a new sharing group with given details.
@@ -2185,9 +2184,9 @@ export interface paths {
      *
      * - Details of the created sharing group
      */
-    post: operations["create_sharing_group_sharing_groups_post"];
+    post: operations['create_sharing_group_sharing_groups_post'];
   };
-  "/sharing_groups/{id}": {
+  '/sharing_groups/{id}': {
     /**
      * Get sharing group details
      * @description Retrieve details of a specific sharing group.
@@ -2204,7 +2203,7 @@ export interface paths {
      *
      * - Representation of the sharing group details
      */
-    get: operations["get_sharing_group_sharing_groups__id__get"];
+    get: operations['get_sharing_group_sharing_groups__id__get'];
     /**
      * Update sharing group
      * @description Update an existing sharing group.
@@ -2223,7 +2222,7 @@ export interface paths {
      *
      * - Representation of the updated sharing group
      */
-    put: operations["update_sharing_group_sharing_groups__id__put"];
+    put: operations['update_sharing_group_sharing_groups__id__put'];
     /**
      * Delete sharing group
      * @description Delete a specific sharing group.
@@ -2240,9 +2239,9 @@ export interface paths {
      *
      * - Representation of the deleted sharing group
      */
-    delete: operations["delete_sharing_group_sharing_groups__id__delete"];
+    delete: operations['delete_sharing_group_sharing_groups__id__delete'];
   };
-  "/sharing_groups/{id}/info": {
+  '/sharing_groups/{id}/info': {
     /**
      * Additional infos from a sharing group
      * @description Details of a sharing group and org.count, user_count and created_by_email.
@@ -2259,9 +2258,9 @@ export interface paths {
      *
      * - Representation of the sharing group information
      */
-    get: operations["get_sharing_group_info_sharing_groups__id__info_get"];
+    get: operations['get_sharing_group_info_sharing_groups__id__info_get'];
   };
-  "/sharing_groups/{id}/organisations": {
+  '/sharing_groups/{id}/organisations': {
     /**
      * Add an organisation
      * @description Add an organisation to a sharing group.
@@ -2280,9 +2279,9 @@ export interface paths {
      *
      * - SharingGroupOrgSchema: Representation of the added organisation in the sharing group
      */
-    patch: operations["add_org_to_sharing_group_sharing_groups__id__organisations_patch"];
+    patch: operations['add_org_to_sharing_group_sharing_groups__id__organisations_patch'];
   };
-  "/sharing_groups/{id}/organisations/{organisationId}": {
+  '/sharing_groups/{id}/organisations/{organisationId}': {
     /**
      * Remove an organisation
      * @description Remove an organisation from a sharing group
@@ -2301,9 +2300,9 @@ export interface paths {
      *
      * - Representation of the removed organisation from the sharing group
      */
-    delete: operations["remove_org_from_sharing_group_sharing_groups__id__organisations__organisationId__delete"];
+    delete: operations['remove_org_from_sharing_group_sharing_groups__id__organisations__organisationId__delete'];
   };
-  "/sharing_groups/{id}/servers": {
+  '/sharing_groups/{id}/servers': {
     /**
      * Add a server
      * @description Add a server to a sharing group.
@@ -2322,9 +2321,9 @@ export interface paths {
      *
      * - Representation of the added server in the sharing group
      */
-    patch: operations["add_server_to_sharing_group_sharing_groups__id__servers_patch"];
+    patch: operations['add_server_to_sharing_group_sharing_groups__id__servers_patch'];
   };
-  "/sharing_groups/{id}/servers/{serverId}": {
+  '/sharing_groups/{id}/servers/{serverId}': {
     /**
      * Remove a server
      * @description Remove a server from a sharing group.
@@ -2343,9 +2342,9 @@ export interface paths {
      *
      * - Representation of the removed server from the sharing group
      */
-    delete: operations["remove_server_from_sharing_group_sharing_groups__id__servers__serverId__delete"];
+    delete: operations['remove_server_from_sharing_group_sharing_groups__id__servers__serverId__delete'];
   };
-  "/sharing_groups/add": {
+  '/sharing_groups/add': {
     /**
      * Add new sharing group
      * @deprecated
@@ -2363,9 +2362,9 @@ export interface paths {
      *
      * - Representation of the created sharing group
      */
-    post: operations["create_sharing_group_legacy_sharing_groups_add_post"];
+    post: operations['create_sharing_group_legacy_sharing_groups_add_post'];
   };
-  "/sharing_groups/view/{sharingGroupId}": {
+  '/sharing_groups/view/{sharingGroupId}': {
     /**
      * Get sharing groups details
      * @deprecated
@@ -2383,9 +2382,9 @@ export interface paths {
      *
      * - Representation of the sharing group details
      */
-    get: operations["view_sharing_group_legacy_sharing_groups_view__sharingGroupId__get"];
+    get: operations['view_sharing_group_legacy_sharing_groups_view__sharingGroupId__get'];
   };
-  "/sharing_groups/edit/{sharingGroupId}": {
+  '/sharing_groups/edit/{sharingGroupId}': {
     /**
      * Update sharing group
      * @deprecated
@@ -2405,9 +2404,9 @@ export interface paths {
      *
      * - ViewUpdateSharingGroupLegacyResponse: Representation of the updated sharing group.
      */
-    post: operations["update_sharing_group_legacy_sharing_groups_edit__sharingGroupId__post"];
+    post: operations['update_sharing_group_legacy_sharing_groups_edit__sharingGroupId__post'];
   };
-  "/sharing_groups/delete/{sharingGroupId}": {
+  '/sharing_groups/delete/{sharingGroupId}': {
     /**
      * Delete sharing group
      * @deprecated
@@ -2425,9 +2424,9 @@ export interface paths {
      *
      * - Representation of the deleted sharing group
      */
-    delete: operations["delete_sharing_group_legacy_sharing_groups_delete__sharingGroupId__delete"];
+    delete: operations['delete_sharing_group_legacy_sharing_groups_delete__sharingGroupId__delete'];
   };
-  "/sharing_groups/addOrg/{sharingGroupId}/{organisationId}": {
+  '/sharing_groups/addOrg/{sharingGroupId}/{organisationId}': {
     /**
      * Add an organisation
      * @deprecated
@@ -2449,9 +2448,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    post: operations["add_org_to_sharing_group_legacy_sharing_groups_addOrg__sharingGroupId___organisationId__post"];
+    post: operations['add_org_to_sharing_group_legacy_sharing_groups_addOrg__sharingGroupId___organisationId__post'];
   };
-  "/sharing_groups/removeOrg/{sharingGroupId}/{organisationId}": {
+  '/sharing_groups/removeOrg/{sharingGroupId}/{organisationId}': {
     /**
      * Remove an organisation
      * @deprecated
@@ -2471,9 +2470,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    post: operations["remove_org_from_sharing_group_legacy_sharing_groups_removeOrg__sharingGroupId___organisationId__post"];
+    post: operations['remove_org_from_sharing_group_legacy_sharing_groups_removeOrg__sharingGroupId___organisationId__post'];
   };
-  "/sharing_groups/addServer/{sharingGroupId}/{serverId}": {
+  '/sharing_groups/addServer/{sharingGroupId}/{serverId}': {
     /**
      * Add a server
      * @deprecated
@@ -2495,9 +2494,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    post: operations["add_server_to_sharing_group_legacy_sharing_groups_addServer__sharingGroupId___serverId__post"];
+    post: operations['add_server_to_sharing_group_legacy_sharing_groups_addServer__sharingGroupId___serverId__post'];
   };
-  "/sharing_groups/removeServer/{sharingGroupId}/{serverId}": {
+  '/sharing_groups/removeServer/{sharingGroupId}/{serverId}': {
     /**
      * Remove a server
      * @deprecated
@@ -2517,9 +2516,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    post: operations["remove_server_from_sharing_group_legacy_sharing_groups_removeServer__sharingGroupId___serverId__post"];
+    post: operations['remove_server_from_sharing_group_legacy_sharing_groups_removeServer__sharingGroupId___serverId__post'];
   };
-  "/sightings": {
+  '/sightings': {
     /**
      * Get all sightings
      * @description Retrieve a list of all sightings.
@@ -2534,7 +2533,7 @@ export interface paths {
      *
      * - Status response indicating success or failure
      */
-    get: operations["get_sightings_sightings_get"];
+    get: operations['get_sightings_sightings_get'];
     /**
      * Add sighting
      * @description Add a new sighting for each given value.
@@ -2551,9 +2550,9 @@ export interface paths {
      *
      * - Details of the new sighting
      */
-    post: operations["add_sighting_sightings_post"];
+    post: operations['add_sighting_sightings_post'];
   };
-  "/sightings/{attributeId}": {
+  '/sightings/{attributeId}': {
     /**
      * Add sighting at index
      * @description Add a new sighting for a specific attribute.
@@ -2570,9 +2569,9 @@ export interface paths {
      *
      * - Details of new sightings
      */
-    post: operations["add_sightings_at_index_sightings__attributeId__post"];
+    post: operations['add_sightings_at_index_sightings__attributeId__post'];
   };
-  "/sightings/{eventId}": {
+  '/sightings/{eventId}': {
     /**
      * Get sightings for event
      * @description Retrieve all sightings associated with a specific event ID.
@@ -2589,9 +2588,9 @@ export interface paths {
      *
      * - Details of the sightings at index
      */
-    get: operations["get_sightings_at_index_sightings__eventId__get"];
+    get: operations['get_sightings_at_index_sightings__eventId__get'];
   };
-  "/sightings/{sightingId}": {
+  '/sightings/{sightingId}': {
     /**
      * Delete sighting
      * @description Delete a specific sighting.
@@ -2608,9 +2607,9 @@ export interface paths {
      *
      * - Status response indicating success or failure
      */
-    delete: operations["delete_sighting_sightings__sightingId__delete"];
+    delete: operations['delete_sighting_sightings__sightingId__delete'];
   };
-  "/sightings/add": {
+  '/sightings/add': {
     /**
      * Add sighting (Deprecated)
      * @deprecated
@@ -2628,9 +2627,9 @@ export interface paths {
      *
      * - List of sighting attributes
      */
-    post: operations["add_sighting_depr_sightings_add_post"];
+    post: operations['add_sighting_depr_sightings_add_post'];
   };
-  "/sightings/add/{attributeId}": {
+  '/sightings/add/{attributeId}': {
     /**
      * Add sighting at index (Deprecated)
      * @deprecated
@@ -2648,9 +2647,9 @@ export interface paths {
      *
      * - Details of the new sightings
      */
-    post: operations["add_sightings_at_index_depr_sightings_add__attributeId__post"];
+    post: operations['add_sightings_at_index_depr_sightings_add__attributeId__post'];
   };
-  "/sightings/delete/{sightingId}": {
+  '/sightings/delete/{sightingId}': {
     /**
      * Delete sighting (Deprecated)
      * @deprecated
@@ -2668,9 +2667,9 @@ export interface paths {
      *
      * - Status response indicating success or failure
      */
-    post: operations["delete_sighting_depr_sightings_delete__sightingId__post"];
+    post: operations['delete_sighting_depr_sightings_delete__sightingId__post'];
   };
-  "/sightings/index/{eventId}": {
+  '/sightings/index/{eventId}': {
     /**
      * Get sightings for event (Deprecated)
      * @deprecated
@@ -2688,9 +2687,9 @@ export interface paths {
      *
      * - Details of the sightings at index
      */
-    get: operations["get_sightings_at_index_depr_sightings_index__eventId__get"];
+    get: operations['get_sightings_at_index_depr_sightings_index__eventId__get'];
   };
-  "/statistics/getUsageData": {
+  '/statistics/getUsageData': {
     /**
      * Gets a list of all usage-related statistics listed on the website
      * @description Gets all usage statistics as a list.
@@ -2703,9 +2702,9 @@ export interface paths {
      *
      * - List of all usage statistics
      */
-    get: operations["get_statistics_statistics_getUsageData_get"];
+    get: operations['get_statistics_statistics_getUsageData_get'];
   };
-  "/statistics/getAttributes/{orgId}": {
+  '/statistics/getAttributes/{orgId}': {
     /**
      * Gets a list of attributes related to an organisation
      * @description Gets all attrtibute-related statistics by organisation as a list.
@@ -2719,9 +2718,9 @@ export interface paths {
      *
      * - List of all statistics related to an organisation
      */
-    get: operations["get_statistics_by_org_statistics_getAttributes__orgId__get"];
+    get: operations['get_statistics_by_org_statistics_getAttributes__orgId__get'];
   };
-  "/statistics/logincount/{orgID}": {
+  '/statistics/logincount/{orgID}': {
     /**
      * Gets a count of all logins the past 4 months
      * @description Gets the login count of the past 4 months.
@@ -2734,9 +2733,9 @@ export interface paths {
      *
      * - Count of all logins in the past 4 months
      */
-    get: operations["get_logincount_statistics_logincount__orgID__get"];
+    get: operations['get_logincount_statistics_logincount__orgID__get'];
   };
-  "/tags": {
+  '/tags': {
     /**
      * Get all tags
      * @description Retrieve a list of all tags.
@@ -2751,7 +2750,7 @@ export interface paths {
      *
      * - TagGetResponse: List of all tags
      */
-    get: operations["get_tags_tags_get"];
+    get: operations['get_tags_tags_get'];
     /**
      * Add new tag
      * @description Add a new tag with given details.
@@ -2768,9 +2767,9 @@ export interface paths {
      *
      * - TagResponse: Details of the created tag
      */
-    post: operations["add_tag_tags_post"];
+    post: operations['add_tag_tags_post'];
   };
-  "/tags/{tagId}": {
+  '/tags/{tagId}': {
     /**
      * View tag details
      * @description View details of a specific tag.
@@ -2787,7 +2786,7 @@ export interface paths {
      *
      * - TagViewResponse: Detailed information of the specified tag
      */
-    get: operations["view_tag_tags__tagId__get"];
+    get: operations['view_tag_tags__tagId__get'];
     /**
      * Edit tag
      * @description Edit details of a specific tag.
@@ -2806,7 +2805,7 @@ export interface paths {
      *
      * - TagResponse: Details of the updated tag
      */
-    put: operations["update_tag_tags__tagId__put"];
+    put: operations['update_tag_tags__tagId__put'];
     /**
      * Delete tag
      * @description Delete a specific tag.
@@ -2823,9 +2822,9 @@ export interface paths {
      *
      * - TagDeleteResponse: Confirmation of the tag deletion
      */
-    delete: operations["delete_tag_tags__tagId__delete"];
+    delete: operations['delete_tag_tags__tagId__delete'];
   };
-  "/tags/search/{tagSearchTerm}": {
+  '/tags/search/{tagSearchTerm}': {
     /**
      * Search tags
      * @description Search for tags using a specific search term.
@@ -2842,9 +2841,9 @@ export interface paths {
      *
      * - dict: Dictionary containing search results
      */
-    get: operations["search_tags_tags_search__tagSearchTerm__get"];
+    get: operations['search_tags_tags_search__tagSearchTerm__get'];
   };
-  "/tags/add": {
+  '/tags/add': {
     /**
      * Add new tag (Deprecated)
      * @deprecated
@@ -2862,9 +2861,9 @@ export interface paths {
      *
      * - TagResponse: Details of the created tag
      */
-    post: operations["add_tag_depr_tags_add_post"];
+    post: operations['add_tag_depr_tags_add_post'];
   };
-  "/tags/view/{tagId}": {
+  '/tags/view/{tagId}': {
     /**
      * View tag details (Deprecated)
      * @deprecated
@@ -2882,9 +2881,9 @@ export interface paths {
      *
      * - TagViewResponse: Detailed information of the specified tag
      */
-    get: operations["view_tag_depr_tags_view__tagId__get"];
+    get: operations['view_tag_depr_tags_view__tagId__get'];
   };
-  "/tags/edit/{tagId}": {
+  '/tags/edit/{tagId}': {
     /**
      * Edit tag (Deprecated)
      * @deprecated
@@ -2904,9 +2903,9 @@ export interface paths {
      *
      * - TagResponse: Details of the updated tag
      */
-    post: operations["update_tag_depr_tags_edit__tagId__post"];
+    post: operations['update_tag_depr_tags_edit__tagId__post'];
   };
-  "/tags/delete/{tagId}": {
+  '/tags/delete/{tagId}': {
     /**
      * Delete tag (Deprecated)
      * @deprecated
@@ -2924,9 +2923,9 @@ export interface paths {
      *
      * - TagDeleteResponse: Confirmation of the tag deletion
      */
-    post: operations["delete_tag_depr_tags_delete__tagId__post"];
+    post: operations['delete_tag_depr_tags_delete__tagId__post'];
   };
-  "/taxonomies": {
+  '/taxonomies': {
     /**
      * Get all taxonomies
      * @description Retrieve a list of all taxonomies.
@@ -2941,7 +2940,7 @@ export interface paths {
      *
      * - list[ViewTaxonomyResponse]: List of taxonomies
      */
-    get: operations["get_taxonomies_taxonomies_get"];
+    get: operations['get_taxonomies_taxonomies_get'];
     /**
      * Update taxonomies
      * @description Update all taxonomies.
@@ -2956,9 +2955,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Status response indicating success or failure
      */
-    put: operations["update_taxonomies_taxonomies_put"];
+    put: operations['update_taxonomies_taxonomies_put'];
   };
-  "/taxonomies/{taxonomyId}": {
+  '/taxonomies/{taxonomyId}': {
     /**
      * Get taxonomy details
      * @description Retrieve details of a specific taxonomy by its ID.
@@ -2975,9 +2974,9 @@ export interface paths {
      *
      * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
      */
-    get: operations["get_taxonomy_details_taxonomies__taxonomyId__get"];
+    get: operations['get_taxonomy_details_taxonomies__taxonomyId__get'];
   };
-  "/taxonomies/taxonomy_tags/{taxonomyId}": {
+  '/taxonomies/taxonomy_tags/{taxonomyId}': {
     /**
      * Get taxonomy inclusive tags and attributes
      * @description Retrieve details of a specific taxonomy and its tags and attributes by its ID.
@@ -2994,9 +2993,9 @@ export interface paths {
      *
      * - GetTagTaxonomyResponse: Response containing taxonomy attributes
      */
-    get: operations["get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get"];
+    get: operations['get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get'];
   };
-  "/taxonomies/export/{taxonomyId}": {
+  '/taxonomies/export/{taxonomyId}': {
     /**
      * Export taxonomy
      * @description Export taxonomy.
@@ -3013,9 +3012,9 @@ export interface paths {
      *
      * - ExportTaxonomyResponse: Response containing exported taxonomy data
      */
-    get: operations["export_taxonomy_taxonomies_export__taxonomyId__get"];
+    get: operations['export_taxonomy_taxonomies_export__taxonomyId__get'];
   };
-  "/taxonomies/enable/{taxonomyId}": {
+  '/taxonomies/enable/{taxonomyId}': {
     /**
      * Enable taxonomy
      * @description Enable a specific taxonomy by its ID.
@@ -3032,9 +3031,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Status response indicating success or failure
      */
-    post: operations["enable_taxonomy_taxonomies_enable__taxonomyId__post"];
+    post: operations['enable_taxonomy_taxonomies_enable__taxonomyId__post'];
   };
-  "/taxonomies/disable/{taxonomyId}": {
+  '/taxonomies/disable/{taxonomyId}': {
     /**
      * Disable taxonomy
      * @description Disable a specific taxonomy by its ID.
@@ -3051,9 +3050,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Status response indicating success or failure
      */
-    post: operations["disable_taxonomies_taxonomies_disable__taxonomyId__post"];
+    post: operations['disable_taxonomies_taxonomies_disable__taxonomyId__post'];
   };
-  "/taxonomies/update": {
+  '/taxonomies/update': {
     /**
      * Update taxonomies
      * @deprecated
@@ -3069,9 +3068,9 @@ export interface paths {
      *
      * - StandardStatusResponse: Status response indicating success or failure
      */
-    post: operations["update_taxonomies_depr_taxonomies_update_post"];
+    post: operations['update_taxonomies_depr_taxonomies_update_post'];
   };
-  "/taxonomies/view/{taxonomyId}": {
+  '/taxonomies/view/{taxonomyId}': {
     /**
      * Get taxonomy details
      * @deprecated
@@ -3089,9 +3088,9 @@ export interface paths {
      *
      * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
      */
-    get: operations["get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get"];
+    get: operations['get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get'];
   };
-  "/users": {
+  '/users': {
     /**
      * Add new user
      * @description Adds a new user with the given details.
@@ -3106,9 +3105,9 @@ export interface paths {
      *
      * - Data representing the attributes of the new user
      */
-    post: operations["add_user_users_post"];
+    post: operations['add_user_users_post'];
   };
-  "/users/view/me": {
+  '/users/view/me': {
     /**
      * Get Logged In User Info
      * @description Retrieves information about the logged in user.
@@ -3121,9 +3120,9 @@ export interface paths {
      *
      * - Information about the logged in user
      */
-    get: operations["get_logged_in_user_info_users_view_me_get"];
+    get: operations['get_logged_in_user_info_users_view_me_get'];
   };
-  "/users/view/me.json": {
+  '/users/view/me.json': {
     /**
      * Get Logged In User Info
      * @description Retrieves information about the logged in user.
@@ -3136,9 +3135,9 @@ export interface paths {
      *
      * - Information about the logged in user
      */
-    get: operations["get_logged_in_user_info_users_view_me_json_get"];
+    get: operations['get_logged_in_user_info_users_view_me_json_get'];
   };
-  "/users/view/all": {
+  '/users/view/all': {
     /**
      * Get all users
      * @description Retrieves a list of all users.
@@ -3151,9 +3150,9 @@ export interface paths {
      *
      * - List containing all users
      */
-    get: operations["get_all_users_users_view_all_get"];
+    get: operations['get_all_users_users_view_all_get'];
   };
-  "/users/view/{userId}": {
+  '/users/view/{userId}': {
     /**
      * Get a user by id
      * @description Retrieves a user specified by id.
@@ -3168,9 +3167,9 @@ export interface paths {
      *
      * - Data representing the attributes of the searched user
      */
-    get: operations["get_user_by_id_users_view__userId__get"];
+    get: operations['get_user_by_id_users_view__userId__get'];
   };
-  "/users/{user_id}": {
+  '/users/{user_id}': {
     /**
      * Delete a user
      * @description Deletes a user by their ID.
@@ -3186,9 +3185,9 @@ export interface paths {
      * Output:
      * - StandardStatusIdentifiedResponse: Response indicating success or failure
      */
-    delete: operations["delete_user_users__user_id__delete"];
+    delete: operations['delete_user_users__user_id__delete'];
   };
-  "/users/tokens/{userId}": {
+  '/users/tokens/{userId}': {
     /**
      * Delete a users login token
      * @description Deletes a users login token by their ID.
@@ -3203,9 +3202,9 @@ export interface paths {
      *
      * - Response indicating success or failure
      */
-    delete: operations["delete_user_token_users_tokens__userId__delete"];
+    delete: operations['delete_user_token_users_tokens__userId__delete'];
   };
-  "/users/{userId}": {
+  '/users/{userId}': {
     /**
      * Update a user
      * @description Updates an existing user by their ID.
@@ -3222,9 +3221,9 @@ export interface paths {
      *
      * - Data representing the updated attributes of the user
      */
-    put: operations["update_user_users__userId__put"];
+    put: operations['update_user_users__userId__put'];
   };
-  "/admin/users/add": {
+  '/admin/users/add': {
     /**
      * Add new user
      * @deprecated
@@ -3240,9 +3239,9 @@ export interface paths {
      *
      * - Data representing the attributes of the new user
      */
-    post: operations["add_user_deprecated_admin_users_add_post"];
+    post: operations['add_user_deprecated_admin_users_add_post'];
   };
-  "/admin/users/edit/{userId}": {
+  '/admin/users/edit/{userId}': {
     /**
      * Update a user
      * @deprecated
@@ -3260,9 +3259,9 @@ export interface paths {
      *
      * - Data representing the updated attributes of the user
      */
-    put: operations["update_user_depr_admin_users_edit__userId__put"];
+    put: operations['update_user_depr_admin_users_edit__userId__put'];
   };
-  "/admin/users/view/{userId}": {
+  '/admin/users/view/{userId}': {
     /**
      * Get a user by id
      * @deprecated
@@ -3278,9 +3277,9 @@ export interface paths {
      *
      * - Data representing the attributes of the searched user
      */
-    get: operations["get_user_by_id_depr_admin_users_view__userId__get"];
+    get: operations['get_user_by_id_depr_admin_users_view__userId__get'];
   };
-  "/admin/users": {
+  '/admin/users': {
     /**
      * Get all users
      * @deprecated
@@ -3294,9 +3293,9 @@ export interface paths {
      *
      * - List containing all users
      */
-    get: operations["get_all_users_deprecated_admin_users_get"];
+    get: operations['get_all_users_deprecated_admin_users_get'];
   };
-  "/admin/users/delete/{userId}": {
+  '/admin/users/delete/{userId}': {
     /**
      * Delete a user
      * @deprecated
@@ -3313,9 +3312,9 @@ export interface paths {
      * Output:
      * - StandardStatusIdentifiedResponse: Response indicating success or failure
      */
-    delete: operations["delete_user_depr_admin_users_delete__userId__delete"];
+    delete: operations['delete_user_depr_admin_users_delete__userId__delete'];
   };
-  "/user_settings/setSetting/me/{userSettingName}": {
+  '/user_settings/setSetting/me/{userSettingName}': {
     /**
      * Set user setting.
      * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
@@ -3336,9 +3335,9 @@ export interface paths {
      *
      * - SetUserSettingResponse: Response indicating success or failure
      */
-    post: operations["set_user_settings_user_settings_setSetting_me__userSettingName__post"];
+    post: operations['set_user_settings_user_settings_setSetting_me__userSettingName__post'];
   };
-  "/user_settings/{userSettingId}": {
+  '/user_settings/{userSettingId}': {
     /**
      * View UserSetting by ID.
      * @description Displays a UserSetting by the UserSettingID.
@@ -3355,7 +3354,7 @@ export interface paths {
      *
      * - ViewUserSettingResponse: Response with details of the viewed user setting
      */
-    get: operations["view_user_settings_user_settings__userSettingId__get"];
+    get: operations['view_user_settings_user_settings__userSettingId__get'];
     /**
      * Deletes a UserSetting.
      * @description Deletes UserSetting by UserSetting ID.
@@ -3372,9 +3371,9 @@ export interface paths {
      *
      * - StandardStatusIdentifiedResponse: Response indicating success or failure
      */
-    delete: operations["delete_user_settings_user_settings__userSettingId__delete"];
+    delete: operations['delete_user_settings_user_settings__userSettingId__delete'];
   };
-  "/user_settings/me/{userSettingName}": {
+  '/user_settings/me/{userSettingName}': {
     /**
      * View UserSetting.
      * @description Displays a UserSetting by given userID and UserSetting name.
@@ -3393,9 +3392,9 @@ export interface paths {
      *
      * - ViewUserSettingResponse: Response with details of the viewed user setting
      */
-    get: operations["get_user_setting_by_id_user_settings_me__userSettingName__get"];
+    get: operations['get_user_setting_by_id_user_settings_me__userSettingName__get'];
   };
-  "/user_settings": {
+  '/user_settings': {
     /**
      * Displays all UserSettings.
      * @description Displays all UserSettings.
@@ -3410,7 +3409,7 @@ export interface paths {
      *
      * - list[UserSettingResponse]: List of UserSettingResponse objects
      */
-    get: operations["get_user_settings_user_settings_get"];
+    get: operations['get_user_settings_user_settings_get'];
     /**
      * Displays all UserSettings.
      * @description Displays all UserSettings by specified parameters.
@@ -3427,9 +3426,9 @@ export interface paths {
      *
      * - list[UserSettingResponse]: List of UserSettingResponse objects
      */
-    post: operations["search_user_settings_user_settings_post"];
+    post: operations['search_user_settings_user_settings_post'];
   };
-  "/user_settings/view/{userSettingId}": {
+  '/user_settings/view/{userSettingId}': {
     /**
      * View UserSetting by ID.
      * @deprecated
@@ -3447,9 +3446,9 @@ export interface paths {
      *
      * - ViewUserSettingResponse: Response with details of the viewed user setting
      */
-    get: operations["view_user_settings_depr_user_settings_view__userSettingId__get"];
+    get: operations['view_user_settings_depr_user_settings_view__userSettingId__get'];
   };
-  "/user_settings/getSetting/{userId}/{userSettingName}": {
+  '/user_settings/getSetting/{userId}/{userSettingName}': {
     /**
      * View a UserSetting.
      * @deprecated
@@ -3469,9 +3468,9 @@ export interface paths {
      *
      * - GetUserSettingResponse: Response with details of the viewed user setting
      */
-    get: operations["get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get"];
+    get: operations['get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get'];
   };
-  "/user_settings/delete/{userSettingId}": {
+  '/user_settings/delete/{userSettingId}': {
     /**
      * Delete UserSetting.
      * @deprecated
@@ -3489,9 +3488,9 @@ export interface paths {
      *
      * - StandardStatusIdentifiedResponse: Response indicating success or failure
      */
-    delete: operations["delete_user_settings_depr_user_settings_delete__userSettingId__delete"];
+    delete: operations['delete_user_settings_depr_user_settings_delete__userSettingId__delete'];
   };
-  "/warninglists/new": {
+  '/warninglists/new': {
     /**
      * Add a new warninglist
      * @description Add a new warninglist with given details.
@@ -3508,9 +3507,9 @@ export interface paths {
      *
      * - WarninglistResponse: Response with details of the new warninglist
      */
-    post: operations["add_warninglist_warninglists_new_post"];
+    post: operations['add_warninglist_warninglists_new_post'];
   };
-  "/warninglists/{warninglistId}": {
+  '/warninglists/{warninglistId}': {
     /**
      * Get warninglist details
      * @description Retrieve details of a specific warninglist by its ID.
@@ -3527,9 +3526,9 @@ export interface paths {
      *
      * - WarninglistResponse: Response with details of the searched warninglist
      */
-    get: operations["get_warninglist_details_warninglists__warninglistId__get"];
+    get: operations['get_warninglist_details_warninglists__warninglistId__get'];
   };
-  "/warninglists/toggleEnable": {
+  '/warninglists/toggleEnable': {
     /**
      * Disable/Enable warninglist
      * @description Disable/Enable a specific warninglist by its ID or name.
@@ -3546,9 +3545,9 @@ export interface paths {
      *
      * - ToggleEnableWarninglistsResponse: Response showing success or failure
      */
-    post: operations["post_toggleEnable_warninglists_toggleEnable_post"];
+    post: operations['post_toggleEnable_warninglists_toggleEnable_post'];
   };
-  "/warninglists/{id}": {
+  '/warninglists/{id}': {
     /**
      * Delete warninglist
      * @description Delete a specific warninglist.
@@ -3565,9 +3564,9 @@ export interface paths {
      *
      * - WarninglistResponse: Response showing success or failure
      */
-    delete: operations["delete_warninglist_warninglists__id__delete"];
+    delete: operations['delete_warninglist_warninglists__id__delete'];
   };
-  "/warninglists": {
+  '/warninglists': {
     /**
      * Get all warninglists, or selected ones by value and status
      * @description Receive a list of all warning lists, or when setting the path parameters value and enabled, receive a         list of warninglists for which the value matches either the name, description, or type and enabled matches         given parameter.
@@ -3586,7 +3585,7 @@ export interface paths {
      *
      * - GetSelectedAllWarninglistsResponse: Response containing filtered or all warninglists
      */
-    get: operations["get_all_or_selected_warninglists_warninglists_get"];
+    get: operations['get_all_or_selected_warninglists_warninglists_get'];
     /**
      * Update warninglists
      * @description Update all warninglists.
@@ -3601,7 +3600,7 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    put: operations["update_all_warninglists_warninglists_put"];
+    put: operations['update_all_warninglists_warninglists_put'];
     /**
      * Get selected warninglists (Deprecated)
      * @deprecated
@@ -3619,9 +3618,9 @@ export interface paths {
      *
      * - GetSelectedAllWarninglistsResponse: Response containing filtered warninglists
      */
-    post: operations["search_warninglists_warninglists_post"];
+    post: operations['search_warninglists_warninglists_post'];
   };
-  "/warninglists/checkValue": {
+  '/warninglists/checkValue': {
     /**
      * Get a list of ID and name of enabled warninglists
      * @description Retrieve a list of ID and name of enabled warninglists,         which match has the given search term as entry.
@@ -3638,9 +3637,9 @@ export interface paths {
      *
      * - CheckValueResponse | dict: Response with searched warninglists
      */
-    post: operations["get_warninglists_by_value_warninglists_checkValue_post"];
+    post: operations['get_warninglists_by_value_warninglists_checkValue_post'];
   };
-  "/warninglists/view/{warninglistId}": {
+  '/warninglists/view/{warninglistId}': {
     /**
      * Get warninglist details (Deprecated)
      * @deprecated
@@ -3658,9 +3657,9 @@ export interface paths {
      *
      * - WarninglistResponse: Response with details of the searched warninglist
      */
-    get: operations["get_warninglist_details_depr_warninglists_view__warninglistId__get"];
+    get: operations['get_warninglist_details_depr_warninglists_view__warninglistId__get'];
   };
-  "/warninglists/update": {
+  '/warninglists/update': {
     /**
      * Update warninglists (Deprecated)
      * @deprecated
@@ -3676,7 +3675,7 @@ export interface paths {
      *
      * - StandardStatusResponse: Response indicating success or failure
      */
-    post: operations["update_all_warninglists_depr_warninglists_update_post"];
+    post: operations['update_all_warninglists_depr_warninglists_update_post'];
   };
 }
 
@@ -3733,7 +3732,195 @@ export interface components {
        * Type
        * @enum {string}
        */
-      type: "md5" | "sha1" | "sha256" | "filename" | "pdb" | ("filename|sha1") | ("filename|sha256") | "ip-src" | "ip-dst" | "hostname" | "domain" | ("domain|ip") | "email" | "email-src" | "email-dst" | "email-subject" | "email-attachment" | "email-body" | "eppn" | "float" | "git-commit-id" | "url" | "http-method" | "user-agent" | "ja3-fingerprint-md5" | "jarm-fingerprint" | "favicon-mmh3" | "hassh-md5" | "hasshserver-md5" | "regkey" | ("regkey|value") | "AS" | "bro" | "zeek" | "community-id" | "pattern-in-file" | "aba-rtn" | "anonymised" | "attachment" | "authentihash" | "azure-application-id" | "bank-account-nr" | "bic" | "bin" | "boolean" | "btc" | "campaign-id" | "campaign-name" | "cc-number" | "cdhash" | "chrome-extension-id" | "comment" | "cookie" | "cortex" | "counter" | "country-of-residence" | "cpe" | "dash" | "datetime" | "date-of-birth" | "dkim" | "dkim-signature" | "dns-soa-email" | "email-dst-display-name" | "email-header" | "email-message-id" | "email-mime-boundary" | "email-reply-to" | "email-src-display-name" | "email-thread-index" | "email-x-mailer" | ("filename|authentihash") | ("filename|impfuzzy") | ("filename|imphash") | ("filename|md5") | "filename-pattern" | ("filename|pehash") | ("filename|sha224") | ("filename|sha384") | ("filename|sha3-224") | ("filename|sha3-256") | ("filename|sha3-384") | ("filename|sha3-512") | ("filename|sha512") | ("filename|sha512/224") | ("filename|sha512/256") | ("filename|ssdeep") | ("filename|tlsh") | ("filename|vhash") | "first-name" | "frequent-flyer-number" | "full-name" | "gender" | "gene" | "github-organisation" | "github-repository" | "github-username" | "hex" | ("hostname|port") | "iban" | "identity-card-number" | "impfuzzy" | "imphash" | ("ip-dst|port") | ("ip-src|port") | "issue-date-of-the-visa" | "jabber-id" | "kusto-query" | "last-name" | "link" | "mac-address" | "mac-eui-64" | "malware-sample" | "malware-type" | "middle-name" | "mime-type" | "mobile-application-id" | "mutex" | "named pipe" | "nationality" | "other" | "passenger-name-record-locator-number" | "passport-country" | "passport-expiration" | "passport-number" | "pattern-in-memory" | "pattern-in-traffic" | "payment-details" | "pehash" | "pgp-private-key" | "pgp-public-key" | "phone-number" | "place-of-birth" | "place-port-of-clearance" | "place-port-of-onward-foreign-destination" | "place-port-of-original-embarkation" | "port" | "primary-residence" | "process-state" | "prtn" | "redress-number" | "sha224" | "sha384" | "sha3-224" | "sha3-256" | "sha3-384" | "sha3-512" | "sha512" | "sha512/224" | "sha512/256" | "sigma" | "size-in-bytes" | "snort" | "special-service-request" | "ssdeep" | "ssh-fingerprint" | "stix2-pattern" | "target-email" | "target-external" | "target-location" | "target-machine" | "target-org" | "target-user" | "telfhash" | "text" | "threat-actor" | "tlsh" | "travel-details" | "twitter-id" | "uri" | "vhash" | "visa-number" | "vulnerability" | "weakness" | "whois-creation-date" | "whois-registrant-email" | "whois-registrant-name" | "whois-registrant-org" | "whois-registrant-phone" | "whois-registrar" | "windows-scheduled-task" | "windows-service-displayname" | "windows-service-name" | "x509-fingerprint-md5" | "x509-fingerprint-sha1" | "x509-fingerprint-sha256" | "xmr" | "yara";
+      type:
+        | 'md5'
+        | 'sha1'
+        | 'sha256'
+        | 'filename'
+        | 'pdb'
+        | 'filename|sha1'
+        | 'filename|sha256'
+        | 'ip-src'
+        | 'ip-dst'
+        | 'hostname'
+        | 'domain'
+        | 'domain|ip'
+        | 'email'
+        | 'email-src'
+        | 'email-dst'
+        | 'email-subject'
+        | 'email-attachment'
+        | 'email-body'
+        | 'eppn'
+        | 'float'
+        | 'git-commit-id'
+        | 'url'
+        | 'http-method'
+        | 'user-agent'
+        | 'ja3-fingerprint-md5'
+        | 'jarm-fingerprint'
+        | 'favicon-mmh3'
+        | 'hassh-md5'
+        | 'hasshserver-md5'
+        | 'regkey'
+        | 'regkey|value'
+        | 'AS'
+        | 'bro'
+        | 'zeek'
+        | 'community-id'
+        | 'pattern-in-file'
+        | 'aba-rtn'
+        | 'anonymised'
+        | 'attachment'
+        | 'authentihash'
+        | 'azure-application-id'
+        | 'bank-account-nr'
+        | 'bic'
+        | 'bin'
+        | 'boolean'
+        | 'btc'
+        | 'campaign-id'
+        | 'campaign-name'
+        | 'cc-number'
+        | 'cdhash'
+        | 'chrome-extension-id'
+        | 'comment'
+        | 'cookie'
+        | 'cortex'
+        | 'counter'
+        | 'country-of-residence'
+        | 'cpe'
+        | 'dash'
+        | 'datetime'
+        | 'date-of-birth'
+        | 'dkim'
+        | 'dkim-signature'
+        | 'dns-soa-email'
+        | 'email-dst-display-name'
+        | 'email-header'
+        | 'email-message-id'
+        | 'email-mime-boundary'
+        | 'email-reply-to'
+        | 'email-src-display-name'
+        | 'email-thread-index'
+        | 'email-x-mailer'
+        | 'filename|authentihash'
+        | 'filename|impfuzzy'
+        | 'filename|imphash'
+        | 'filename|md5'
+        | 'filename-pattern'
+        | 'filename|pehash'
+        | 'filename|sha224'
+        | 'filename|sha384'
+        | 'filename|sha3-224'
+        | 'filename|sha3-256'
+        | 'filename|sha3-384'
+        | 'filename|sha3-512'
+        | 'filename|sha512'
+        | 'filename|sha512/224'
+        | 'filename|sha512/256'
+        | 'filename|ssdeep'
+        | 'filename|tlsh'
+        | 'filename|vhash'
+        | 'first-name'
+        | 'frequent-flyer-number'
+        | 'full-name'
+        | 'gender'
+        | 'gene'
+        | 'github-organisation'
+        | 'github-repository'
+        | 'github-username'
+        | 'hex'
+        | 'hostname|port'
+        | 'iban'
+        | 'identity-card-number'
+        | 'impfuzzy'
+        | 'imphash'
+        | 'ip-dst|port'
+        | 'ip-src|port'
+        | 'issue-date-of-the-visa'
+        | 'jabber-id'
+        | 'kusto-query'
+        | 'last-name'
+        | 'link'
+        | 'mac-address'
+        | 'mac-eui-64'
+        | 'malware-sample'
+        | 'malware-type'
+        | 'middle-name'
+        | 'mime-type'
+        | 'mobile-application-id'
+        | 'mutex'
+        | 'named pipe'
+        | 'nationality'
+        | 'other'
+        | 'passenger-name-record-locator-number'
+        | 'passport-country'
+        | 'passport-expiration'
+        | 'passport-number'
+        | 'pattern-in-memory'
+        | 'pattern-in-traffic'
+        | 'payment-details'
+        | 'pehash'
+        | 'pgp-private-key'
+        | 'pgp-public-key'
+        | 'phone-number'
+        | 'place-of-birth'
+        | 'place-port-of-clearance'
+        | 'place-port-of-onward-foreign-destination'
+        | 'place-port-of-original-embarkation'
+        | 'port'
+        | 'primary-residence'
+        | 'process-state'
+        | 'prtn'
+        | 'redress-number'
+        | 'sha224'
+        | 'sha384'
+        | 'sha3-224'
+        | 'sha3-256'
+        | 'sha3-384'
+        | 'sha3-512'
+        | 'sha512'
+        | 'sha512/224'
+        | 'sha512/256'
+        | 'sigma'
+        | 'size-in-bytes'
+        | 'snort'
+        | 'special-service-request'
+        | 'ssdeep'
+        | 'ssh-fingerprint'
+        | 'stix2-pattern'
+        | 'target-email'
+        | 'target-external'
+        | 'target-location'
+        | 'target-machine'
+        | 'target-org'
+        | 'target-user'
+        | 'telfhash'
+        | 'text'
+        | 'threat-actor'
+        | 'tlsh'
+        | 'travel-details'
+        | 'twitter-id'
+        | 'uri'
+        | 'vhash'
+        | 'visa-number'
+        | 'vulnerability'
+        | 'weakness'
+        | 'whois-creation-date'
+        | 'whois-registrant-email'
+        | 'whois-registrant-name'
+        | 'whois-registrant-org'
+        | 'whois-registrant-phone'
+        | 'whois-registrar'
+        | 'windows-scheduled-task'
+        | 'windows-service-displayname'
+        | 'windows-service-name'
+        | 'x509-fingerprint-md5'
+        | 'x509-fingerprint-sha1'
+        | 'x509-fingerprint-sha256'
+        | 'xmr'
+        | 'yara';
       /** Value */
       value?: string;
       /** Value1 */
@@ -3771,7 +3958,7 @@ export interface components {
     };
     /** AddAttributeResponse */
     AddAttributeResponse: {
-      Attribute: components["schemas"]["AddAttributeAttributes"];
+      Attribute: components['schemas']['AddAttributeAttributes'];
     };
     /** AddAttributeViaFreeTextImportEventAttributes */
     AddAttributeViaFreeTextImportEventAttributes: {
@@ -3780,7 +3967,7 @@ export interface components {
     };
     /** AddAttributeViaFreeTextImportEventBody */
     AddAttributeViaFreeTextImportEventBody: {
-      Attribute: components["schemas"]["AddAttributeViaFreeTextImportEventAttributes"];
+      Attribute: components['schemas']['AddAttributeViaFreeTextImportEventAttributes'];
     };
     /** AddAttributeViaFreeTextImportEventResponse */
     AddAttributeViaFreeTextImportEventResponse: {
@@ -3819,7 +4006,7 @@ export interface components {
     };
     /** AddAuthKeyResponse */
     AddAuthKeyResponse: {
-      AuthKey: components["schemas"]["AddAuthKeyResponseAuthKey"];
+      AuthKey: components['schemas']['AddAuthKeyResponseAuthKey'];
     };
     /** AddAuthKeyResponseAuthKey */
     AddAuthKeyResponseAuthKey: {
@@ -3891,7 +4078,7 @@ export interface components {
        * Galaxy
        * @default []
        */
-      Galaxy?: components["schemas"]["AddEditGetEventGalaxy"][];
+      Galaxy?: components['schemas']['AddEditGetEventGalaxy'][];
       /**
        * Shadowattribute
        * @default []
@@ -3901,7 +4088,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["AddEditGetEventTag"][];
+      Tag?: components['schemas']['AddEditGetEventTag'][];
     };
     /** AddEditGetEventDetails */
     AddEditGetEventDetails: {
@@ -3945,38 +4132,38 @@ export interface components {
       protected?: boolean;
       /** Event Creator Email */
       event_creator_email: string;
-      Org: components["schemas"]["AddEditGetEventOrg"];
-      Orgc: components["schemas"]["AddEditGetEventOrg"];
+      Org: components['schemas']['AddEditGetEventOrg'];
+      Orgc: components['schemas']['AddEditGetEventOrg'];
       /**
        * Attribute
        * @default []
        */
-      Attribute?: components["schemas"]["AddEditGetEventAttribute"][];
+      Attribute?: components['schemas']['AddEditGetEventAttribute'][];
       /**
        * Shadowattribute
        * @default []
        */
-      ShadowAttribute?: components["schemas"]["AddEditGetEventShadowAttribute"][];
+      ShadowAttribute?: components['schemas']['AddEditGetEventShadowAttribute'][];
       /**
        * Relatedevent
        * @default []
        */
-      RelatedEvent?: components["schemas"]["AddEditGetEventEventReport"][];
+      RelatedEvent?: components['schemas']['AddEditGetEventEventReport'][];
       /**
        * Galaxy
        * @default []
        */
-      Galaxy?: components["schemas"]["AddEditGetEventGalaxy"][];
+      Galaxy?: components['schemas']['AddEditGetEventGalaxy'][];
       /**
        * Object
        * @default []
        */
-      Object?: components["schemas"]["AddEditGetEventObject"][];
+      Object?: components['schemas']['AddEditGetEventObject'][];
       /**
        * Eventreport
        * @default []
        */
-      EventReport?: components["schemas"]["AddEditGetEventEventReport"][];
+      EventReport?: components['schemas']['AddEditGetEventEventReport'][];
       /**
        * Cryptographickey
        * @default []
@@ -3986,7 +4173,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["AddEditGetEventTag"][];
+      Tag?: components['schemas']['AddEditGetEventTag'][];
     };
     /** AddEditGetEventEventReport */
     AddEditGetEventEventReport: {
@@ -4037,7 +4224,7 @@ export interface components {
        * Galaxycluster
        * @default []
        */
-      GalaxyCluster?: components["schemas"]["AddEditGetEventGalaxyCluster"][];
+      GalaxyCluster?: components['schemas']['AddEditGetEventGalaxyCluster'][];
     };
     /** AddEditGetEventGalaxyCluster */
     AddEditGetEventGalaxyCluster: {
@@ -4087,10 +4274,10 @@ export interface components {
        * Galaxyclusterrelation
        * @default []
        */
-      GalaxyClusterRelation?: components["schemas"]["AddEditGetEventGalaxyClusterRelation"][];
-      Org?: components["schemas"]["Organisation"];
-      Orgc?: components["schemas"]["Organisation"];
-      meta?: components["schemas"]["AddEditGetEventGalaxyClusterMeta"];
+      GalaxyClusterRelation?: components['schemas']['AddEditGetEventGalaxyClusterRelation'][];
+      Org?: components['schemas']['Organisation'];
+      Orgc?: components['schemas']['Organisation'];
+      meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
       tag_id: string;
       /** Attribute Tag Id */
@@ -4138,7 +4325,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["AddEditGetEventGalaxyClusterRelationTag"][];
+      Tag?: components['schemas']['AddEditGetEventGalaxyClusterRelationTag'][];
     };
     /** AddEditGetEventGalaxyClusterRelationTag */
     AddEditGetEventGalaxyClusterRelationTag: {
@@ -4206,7 +4393,7 @@ export interface components {
        * Attribute
        * @default []
        */
-      Attribute?: components["schemas"]["AddEditGetEventAttribute"][];
+      Attribute?: components['schemas']['AddEditGetEventAttribute'][];
     };
     /** AddEditGetEventOrg */
     AddEditGetEventOrg: {
@@ -4221,7 +4408,7 @@ export interface components {
     };
     /** AddEditGetEventResponse */
     AddEditGetEventResponse: {
-      Event: components["schemas"]["AddEditGetEventDetails"];
+      Event: components['schemas']['AddEditGetEventDetails'];
     };
     /** AddEditGetEventShadowAttribute */
     AddEditGetEventShadowAttribute: {
@@ -4446,7 +4633,7 @@ export interface components {
     };
     /** AddUserResponse */
     AddUserResponse: {
-      User: components["schemas"]["AddUserResponseData"];
+      User: components['schemas']['AddUserResponseData'];
     };
     /** AddUserResponseData */
     AddUserResponseData: {
@@ -4520,7 +4707,7 @@ export interface components {
     };
     /** AttachClusterGalaxyBody */
     AttachClusterGalaxyBody: {
-      Galaxy: components["schemas"]["AttachClusterGalaxyAttributes"];
+      Galaxy: components['schemas']['AttachClusterGalaxyAttributes'];
     };
     /** AttachClusterGalaxyResponse */
     AttachClusterGalaxyResponse: {
@@ -4557,7 +4744,7 @@ export interface components {
     /** CheckValueResponse */
     CheckValueResponse: {
       /** Value */
-      value: components["schemas"]["NameWarninglist"][];
+      value: components['schemas']['NameWarninglist'][];
     };
     /** CheckValueWarninglistsBody */
     CheckValueWarninglistsBody: {
@@ -4622,16 +4809,205 @@ export interface components {
     CreateWarninglistBody: {
       /** Name */
       name: string;
-      type: components["schemas"]["WarninglistListType"];
+      type: components['schemas']['WarninglistListType'];
       /** Description */
       description: string;
       /** Enabled */
       enabled: boolean;
       /** Default */
       default: boolean;
-      category: components["schemas"]["WarninglistCategory"];
+      category: components['schemas']['WarninglistCategory'];
       /** Valid Attributes */
-      valid_attributes: ("md5" | "sha1" | "sha256" | "filename" | "pdb" | ("filename|sha1") | ("filename|sha256") | "ip-src" | "ip-dst" | "hostname" | "domain" | ("domain|ip") | "email" | "email-src" | "email-dst" | "email-subject" | "email-attachment" | "email-body" | "eppn" | "float" | "git-commit-id" | "url" | "http-method" | "user-agent" | "ja3-fingerprint-md5" | "jarm-fingerprint" | "favicon-mmh3" | "hassh-md5" | "hasshserver-md5" | "regkey" | ("regkey|value") | "AS" | "bro" | "zeek" | "community-id" | "pattern-in-file" | "aba-rtn" | "anonymised" | "attachment" | "authentihash" | "azure-application-id" | "bank-account-nr" | "bic" | "bin" | "boolean" | "btc" | "campaign-id" | "campaign-name" | "cc-number" | "cdhash" | "chrome-extension-id" | "comment" | "cookie" | "cortex" | "counter" | "country-of-residence" | "cpe" | "dash" | "datetime" | "date-of-birth" | "dkim" | "dkim-signature" | "dns-soa-email" | "email-dst-display-name" | "email-header" | "email-message-id" | "email-mime-boundary" | "email-reply-to" | "email-src-display-name" | "email-thread-index" | "email-x-mailer" | ("filename|authentihash") | ("filename|impfuzzy") | ("filename|imphash") | ("filename|md5") | "filename-pattern" | ("filename|pehash") | ("filename|sha224") | ("filename|sha384") | ("filename|sha3-224") | ("filename|sha3-256") | ("filename|sha3-384") | ("filename|sha3-512") | ("filename|sha512") | ("filename|sha512/224") | ("filename|sha512/256") | ("filename|ssdeep") | ("filename|tlsh") | ("filename|vhash") | "first-name" | "frequent-flyer-number" | "full-name" | "gender" | "gene" | "github-organisation" | "github-repository" | "github-username" | "hex" | ("hostname|port") | "iban" | "identity-card-number" | "impfuzzy" | "imphash" | ("ip-dst|port") | ("ip-src|port") | "issue-date-of-the-visa" | "jabber-id" | "kusto-query" | "last-name" | "link" | "mac-address" | "mac-eui-64" | "malware-sample" | "malware-type" | "middle-name" | "mime-type" | "mobile-application-id" | "mutex" | "named pipe" | "nationality" | "other" | "passenger-name-record-locator-number" | "passport-country" | "passport-expiration" | "passport-number" | "pattern-in-memory" | "pattern-in-traffic" | "payment-details" | "pehash" | "pgp-private-key" | "pgp-public-key" | "phone-number" | "place-of-birth" | "place-port-of-clearance" | "place-port-of-onward-foreign-destination" | "place-port-of-original-embarkation" | "port" | "primary-residence" | "process-state" | "prtn" | "redress-number" | "sha224" | "sha384" | "sha3-224" | "sha3-256" | "sha3-384" | "sha3-512" | "sha512" | "sha512/224" | "sha512/256" | "sigma" | "size-in-bytes" | "snort" | "special-service-request" | "ssdeep" | "ssh-fingerprint" | "stix2-pattern" | "target-email" | "target-external" | "target-location" | "target-machine" | "target-org" | "target-user" | "telfhash" | "text" | "threat-actor" | "tlsh" | "travel-details" | "twitter-id" | "uri" | "vhash" | "visa-number" | "vulnerability" | "weakness" | "whois-creation-date" | "whois-registrant-email" | "whois-registrant-name" | "whois-registrant-org" | "whois-registrant-phone" | "whois-registrar" | "windows-scheduled-task" | "windows-service-displayname" | "windows-service-name" | "x509-fingerprint-md5" | "x509-fingerprint-sha1" | "x509-fingerprint-sha256" | "xmr" | "yara")[];
+      valid_attributes: (
+        | 'md5'
+        | 'sha1'
+        | 'sha256'
+        | 'filename'
+        | 'pdb'
+        | 'filename|sha1'
+        | 'filename|sha256'
+        | 'ip-src'
+        | 'ip-dst'
+        | 'hostname'
+        | 'domain'
+        | 'domain|ip'
+        | 'email'
+        | 'email-src'
+        | 'email-dst'
+        | 'email-subject'
+        | 'email-attachment'
+        | 'email-body'
+        | 'eppn'
+        | 'float'
+        | 'git-commit-id'
+        | 'url'
+        | 'http-method'
+        | 'user-agent'
+        | 'ja3-fingerprint-md5'
+        | 'jarm-fingerprint'
+        | 'favicon-mmh3'
+        | 'hassh-md5'
+        | 'hasshserver-md5'
+        | 'regkey'
+        | 'regkey|value'
+        | 'AS'
+        | 'bro'
+        | 'zeek'
+        | 'community-id'
+        | 'pattern-in-file'
+        | 'aba-rtn'
+        | 'anonymised'
+        | 'attachment'
+        | 'authentihash'
+        | 'azure-application-id'
+        | 'bank-account-nr'
+        | 'bic'
+        | 'bin'
+        | 'boolean'
+        | 'btc'
+        | 'campaign-id'
+        | 'campaign-name'
+        | 'cc-number'
+        | 'cdhash'
+        | 'chrome-extension-id'
+        | 'comment'
+        | 'cookie'
+        | 'cortex'
+        | 'counter'
+        | 'country-of-residence'
+        | 'cpe'
+        | 'dash'
+        | 'datetime'
+        | 'date-of-birth'
+        | 'dkim'
+        | 'dkim-signature'
+        | 'dns-soa-email'
+        | 'email-dst-display-name'
+        | 'email-header'
+        | 'email-message-id'
+        | 'email-mime-boundary'
+        | 'email-reply-to'
+        | 'email-src-display-name'
+        | 'email-thread-index'
+        | 'email-x-mailer'
+        | 'filename|authentihash'
+        | 'filename|impfuzzy'
+        | 'filename|imphash'
+        | 'filename|md5'
+        | 'filename-pattern'
+        | 'filename|pehash'
+        | 'filename|sha224'
+        | 'filename|sha384'
+        | 'filename|sha3-224'
+        | 'filename|sha3-256'
+        | 'filename|sha3-384'
+        | 'filename|sha3-512'
+        | 'filename|sha512'
+        | 'filename|sha512/224'
+        | 'filename|sha512/256'
+        | 'filename|ssdeep'
+        | 'filename|tlsh'
+        | 'filename|vhash'
+        | 'first-name'
+        | 'frequent-flyer-number'
+        | 'full-name'
+        | 'gender'
+        | 'gene'
+        | 'github-organisation'
+        | 'github-repository'
+        | 'github-username'
+        | 'hex'
+        | 'hostname|port'
+        | 'iban'
+        | 'identity-card-number'
+        | 'impfuzzy'
+        | 'imphash'
+        | 'ip-dst|port'
+        | 'ip-src|port'
+        | 'issue-date-of-the-visa'
+        | 'jabber-id'
+        | 'kusto-query'
+        | 'last-name'
+        | 'link'
+        | 'mac-address'
+        | 'mac-eui-64'
+        | 'malware-sample'
+        | 'malware-type'
+        | 'middle-name'
+        | 'mime-type'
+        | 'mobile-application-id'
+        | 'mutex'
+        | 'named pipe'
+        | 'nationality'
+        | 'other'
+        | 'passenger-name-record-locator-number'
+        | 'passport-country'
+        | 'passport-expiration'
+        | 'passport-number'
+        | 'pattern-in-memory'
+        | 'pattern-in-traffic'
+        | 'payment-details'
+        | 'pehash'
+        | 'pgp-private-key'
+        | 'pgp-public-key'
+        | 'phone-number'
+        | 'place-of-birth'
+        | 'place-port-of-clearance'
+        | 'place-port-of-onward-foreign-destination'
+        | 'place-port-of-original-embarkation'
+        | 'port'
+        | 'primary-residence'
+        | 'process-state'
+        | 'prtn'
+        | 'redress-number'
+        | 'sha224'
+        | 'sha384'
+        | 'sha3-224'
+        | 'sha3-256'
+        | 'sha3-384'
+        | 'sha3-512'
+        | 'sha512'
+        | 'sha512/224'
+        | 'sha512/256'
+        | 'sigma'
+        | 'size-in-bytes'
+        | 'snort'
+        | 'special-service-request'
+        | 'ssdeep'
+        | 'ssh-fingerprint'
+        | 'stix2-pattern'
+        | 'target-email'
+        | 'target-external'
+        | 'target-location'
+        | 'target-machine'
+        | 'target-org'
+        | 'target-user'
+        | 'telfhash'
+        | 'text'
+        | 'threat-actor'
+        | 'tlsh'
+        | 'travel-details'
+        | 'twitter-id'
+        | 'uri'
+        | 'vhash'
+        | 'visa-number'
+        | 'vulnerability'
+        | 'weakness'
+        | 'whois-creation-date'
+        | 'whois-registrant-email'
+        | 'whois-registrant-name'
+        | 'whois-registrant-org'
+        | 'whois-registrant-phone'
+        | 'whois-registrar'
+        | 'windows-scheduled-task'
+        | 'windows-service-displayname'
+        | 'windows-service-name'
+        | 'x509-fingerprint-md5'
+        | 'x509-fingerprint-sha1'
+        | 'x509-fingerprint-sha256'
+        | 'xmr'
+        | 'yara'
+      )[];
       /** Values */
       values: string;
     };
@@ -4755,7 +5131,7 @@ export interface components {
       /** Last Seen */
       last_seen?: string;
       /** Tag */
-      tag: components["schemas"]["EditAttributeTag"][];
+      tag: components['schemas']['EditAttributeTag'][];
     };
     /** EditAttributeBody */
     EditAttributeBody: {
@@ -4796,7 +5172,7 @@ export interface components {
     };
     /** EditAttributeResponse */
     EditAttributeResponse: {
-      Attribute: components["schemas"]["EditAttributeAttributes"];
+      Attribute: components['schemas']['EditAttributeAttributes'];
     };
     /** EditAttributeTag */
     EditAttributeTag: {
@@ -4834,8 +5210,8 @@ export interface components {
     };
     /** EditAuthKeyResponseCompl */
     EditAuthKeyResponseCompl: {
-      AuthKey: components["schemas"]["EditAuthKeyResponseCompleteAuthKey"];
-      User: components["schemas"]["EditAuthKeyResponseUser"];
+      AuthKey: components['schemas']['EditAuthKeyResponseCompleteAuthKey'];
+      User: components['schemas']['EditAuthKeyResponseUser'];
     };
     /** EditAuthKeyResponseCompleteAuthKey */
     EditAuthKeyResponseCompleteAuthKey: {
@@ -4990,7 +5366,7 @@ export interface components {
     };
     /** ExportGalaxyBody */
     ExportGalaxyBody: {
-      Galaxy: components["schemas"]["ExportGalaxyAttributes"];
+      Galaxy: components['schemas']['ExportGalaxyAttributes'];
     };
     /** ExportGalaxyClusterResponse */
     ExportGalaxyClusterResponse: {
@@ -5037,15 +5413,15 @@ export interface components {
       /** Deleted */
       deleted: boolean;
       /** Galaxyelement */
-      GalaxyElement: components["schemas"]["ExportGalaxyGalaxyElement"][];
-      Galaxy: components["schemas"]["GetAllEventsGalaxyClusterGalaxy"];
+      GalaxyElement: components['schemas']['ExportGalaxyGalaxyElement'][];
+      Galaxy: components['schemas']['GetAllEventsGalaxyClusterGalaxy'];
       /**
        * Galaxyclusterrelation
        * @default []
        */
-      GalaxyClusterRelation?: components["schemas"]["AddEditGetEventGalaxyClusterRelation"][];
-      Org: components["schemas"]["Organisation"];
-      Orgc: components["schemas"]["Organisation"];
+      GalaxyClusterRelation?: components['schemas']['AddEditGetEventGalaxyClusterRelation'][];
+      Org: components['schemas']['Organisation'];
+      Orgc: components['schemas']['Organisation'];
     };
     /** ExportGalaxyGalaxyElement */
     ExportGalaxyGalaxyElement: {
@@ -5078,9 +5454,9 @@ export interface components {
       /** Exclusive */
       exclusive: boolean;
       /** Predicates */
-      predicates: components["schemas"]["TaxonomyPredicateSchema"][];
+      predicates: components['schemas']['TaxonomyPredicateSchema'][];
       /** Values */
-      values: components["schemas"]["TaxonomyValueSchema"][];
+      values: components['schemas']['TaxonomyValueSchema'][];
     };
     /** FeedAttributesResponse */
     FeedAttributesResponse: {
@@ -5211,7 +5587,7 @@ export interface components {
     };
     /** FeedResponse */
     FeedResponse: {
-      Feed: components["schemas"]["FeedAttributesResponse"];
+      Feed: components['schemas']['FeedAttributesResponse'];
     };
     /** FeedToggleBody */
     FeedToggleBody: {
@@ -5325,7 +5701,7 @@ export interface components {
       local: boolean;
       /** Relationship Type */
       relationship_type: string;
-      Tag: components["schemas"]["GetAllEventsEventTagTag"];
+      Tag: components['schemas']['GetAllEventsEventTagTag'];
     };
     /** GetAllEventsEventTagTag */
     GetAllEventsEventTagTag: {
@@ -5382,8 +5758,8 @@ export interface components {
       published?: boolean;
       /** Deleted */
       deleted?: boolean;
-      Galaxy: components["schemas"]["GetAllEventsGalaxyClusterGalaxy"];
-      meta?: components["schemas"]["AddEditGetEventGalaxyClusterMeta"];
+      Galaxy: components['schemas']['GetAllEventsGalaxyClusterGalaxy'];
+      meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
       tag_id: string;
       /** Local */
@@ -5469,16 +5845,16 @@ export interface components {
       event_creator_email: string;
       /** Protected */
       protected?: string;
-      Org: components["schemas"]["GetAllEventsOrg"];
-      Orgc: components["schemas"]["GetAllEventsOrg"];
+      Org: components['schemas']['GetAllEventsOrg'];
+      Orgc: components['schemas']['GetAllEventsOrg'];
       /** Galaxycluster */
-      GalaxyCluster: components["schemas"]["GetAllEventsGalaxyCluster"][];
+      GalaxyCluster: components['schemas']['GetAllEventsGalaxyCluster'][];
       /** Eventtag */
-      EventTag: components["schemas"]["GetAllEventsEventTag"][];
+      EventTag: components['schemas']['GetAllEventsEventTag'][];
     };
     /** GetAllNoticelists */
     GetAllNoticelists: {
-      Noticelist: components["schemas"]["NoticelistAttributes"];
+      Noticelist: components['schemas']['NoticelistAttributes'];
     };
     /** GetAllOrganisationResponse */
     GetAllOrganisationResponse: {
@@ -5548,7 +5924,7 @@ export interface components {
     };
     /** GetAllSearchGalaxiesResponse */
     GetAllSearchGalaxiesResponse: {
-      Galaxy: components["schemas"]["GetAllSearchGalaxiesAttributes"];
+      Galaxy: components['schemas']['GetAllSearchGalaxiesAttributes'];
     };
     /** GetAttributeAttributes */
     GetAttributeAttributes: {
@@ -5589,46 +5965,46 @@ export interface components {
       /** Event Uuid */
       event_uuid: string;
       /** Tag */
-      tag?: components["schemas"]["GetAttributeTag"][];
+      tag?: components['schemas']['GetAttributeTag'][];
     };
     /** GetAttributeResponse */
     GetAttributeResponse: {
-      Attribute: components["schemas"]["GetAttributeAttributes"];
+      Attribute: components['schemas']['GetAttributeAttributes'];
     };
     /** GetAttributeStatisticsCategoriesResponse */
     GetAttributeStatisticsCategoriesResponse: {
       /** Antivirus Detection */
-      "Antivirus detection": string;
+      'Antivirus detection': string;
       /** Artifacts Dropped */
-      "Artifacts dropped": string;
+      'Artifacts dropped': string;
       /** Attribution */
       Attribution: string;
       /** External Analysis */
-      "External analysis": string;
+      'External analysis': string;
       /** Financial Fraud */
-      "Financial fraud": string;
+      'Financial fraud': string;
       /** Internal Reference */
-      "Internal reference": string;
+      'Internal reference': string;
       /** Network Activity */
-      "Network activity": string;
+      'Network activity': string;
       /** Other */
       Other: string;
       /** Payload Delivery */
-      "Payload delivery": string;
+      'Payload delivery': string;
       /** Payload Installation */
-      "Payload installation": string;
+      'Payload installation': string;
       /** Payload Type */
-      "Payload type": string;
+      'Payload type': string;
       /** Persistence Mechanism */
-      "Persistence mechanism": string;
+      'Persistence mechanism': string;
       /** Person */
       Person: string;
       /** Social Network */
-      "Social network": string;
+      'Social network': string;
       /** Support Tool */
-      "Support Tool": string;
+      'Support Tool': string;
       /** Targeting Data */
-      "Targeting data": string;
+      'Targeting data': string;
     };
     /** GetAttributeStatisticsTypesResponse */
     GetAttributeStatisticsTypesResponse: {
@@ -5643,57 +6019,57 @@ export interface components {
       /** Pdb */
       pdb?: string;
       /** Filename|Sha1 */
-      "filename|sha1"?: string;
+      'filename|sha1'?: string;
       /** Filename|Sha256 */
-      "filename|sha256"?: string;
+      'filename|sha256'?: string;
       /** Ip-Src */
-      "ip-src"?: string;
+      'ip-src'?: string;
       /** Ip-Dst */
-      "ip-dst"?: string;
+      'ip-dst'?: string;
       /** Hostname */
       hostname?: string;
       /** Domain */
       domain?: string;
       /** Domain|Ip */
-      "domain|ip"?: string;
+      'domain|ip'?: string;
       /** Email */
       email?: string;
       /** Email-Src */
-      "email-src"?: string;
+      'email-src'?: string;
       /** Email-Dst */
-      "email-dst"?: string;
+      'email-dst'?: string;
       /** Email-Subject */
-      "email-subject"?: string;
+      'email-subject'?: string;
       /** Email-Attachment */
-      "email-attachment"?: string;
+      'email-attachment'?: string;
       /** Email-Body */
-      "email-body"?: string;
+      'email-body'?: string;
       /** Eppn */
       eppn?: string;
       /** Float */
       float?: string;
       /** Git-Commit-Id */
-      "git-commit-id"?: string;
+      'git-commit-id'?: string;
       /** Url */
       url?: string;
       /** Http-Method */
-      "http-method"?: string;
+      'http-method'?: string;
       /** User-Agent */
-      "user-agent"?: string;
+      'user-agent'?: string;
       /** Ja3-Fingerprint-Md5 */
-      "ja3-fingerprint-md5"?: string;
+      'ja3-fingerprint-md5'?: string;
       /** Jarm-Fingerprint */
-      "jarm-fingerprint"?: string;
+      'jarm-fingerprint'?: string;
       /** Favicon-Mmh3 */
-      "favicon-mmh3"?: string;
+      'favicon-mmh3'?: string;
       /** Hassh-Md5 */
-      "hassh-md5"?: string;
+      'hassh-md5'?: string;
       /** Hasshserver-Md5 */
-      "hasshserver-md5"?: string;
+      'hasshserver-md5'?: string;
       /** Regkey */
       regkey?: string;
       /** Regkey|Value */
-      "regkey|value"?: string;
+      'regkey|value'?: string;
       /** As */
       AS?: string;
       /** Bro */
@@ -5701,11 +6077,11 @@ export interface components {
       /** Zeek */
       zeek?: string;
       /** Community-Id */
-      "community-id"?: string;
+      'community-id'?: string;
       /** Pattern-In-File */
-      "pattern-in-file"?: string;
+      'pattern-in-file'?: string;
       /** Aba-Rtn */
-      "aba-rtn"?: string;
+      'aba-rtn'?: string;
       /** Anonymised */
       anonymised?: string;
       /** Attachment */
@@ -5713,9 +6089,9 @@ export interface components {
       /** Authentihash */
       authentihash?: string;
       /** Azure-Application-Id */
-      "azure-application-id"?: string;
+      'azure-application-id'?: string;
       /** Bank-Account-Nr */
-      "bank-account-nr"?: string;
+      'bank-account-nr'?: string;
       /** Bic */
       bic?: string;
       /** Bin */
@@ -5725,15 +6101,15 @@ export interface components {
       /** Btc */
       btc?: string;
       /** Campaign-Id */
-      "campaign-id"?: string;
+      'campaign-id'?: string;
       /** Campaign-Name */
-      "campaign-name"?: string;
+      'campaign-name'?: string;
       /** Cc-Number */
-      "cc-number"?: string;
+      'cc-number'?: string;
       /** Cdhash */
       cdhash?: string;
       /** Chrome-Extension-Id */
-      "chrome-extension-id"?: string;
+      'chrome-extension-id'?: string;
       /** Comment */
       comment?: string;
       /** Cookie */
@@ -5743,7 +6119,7 @@ export interface components {
       /** Counter */
       counter?: string;
       /** Country-Of-Residence */
-      "country-of-residence"?: string;
+      'country-of-residence'?: string;
       /** Cpe */
       cpe?: string;
       /** Dash */
@@ -5751,259 +6127,259 @@ export interface components {
       /** Datetime */
       datetime?: string;
       /** Date-Of-Birth */
-      "date-of-birth"?: string;
+      'date-of-birth'?: string;
       /** Dkim */
       dkim?: string;
       /** Dkim-Signature */
-      "dkim-signature"?: string;
+      'dkim-signature'?: string;
       /** Dns-Soa-Email */
-      "dns-soa-email"?: string;
+      'dns-soa-email'?: string;
       /** Email-Dst-Display-Name */
-      "email-dst-display-name"?: string;
+      'email-dst-display-name'?: string;
       /** Email-Header */
-      "email-header"?: string;
+      'email-header'?: string;
       /** Email-Message-Id */
-      "email-message-id"?: string;
+      'email-message-id'?: string;
       /** Email-Mime-Boundary */
-      "email-mime-boundary"?: string;
+      'email-mime-boundary'?: string;
       /** Email-Reply-To */
-      "email-reply-to"?: string;
+      'email-reply-to'?: string;
       /** Email-Src-Display-Name */
-      "email-src-display-name"?: string;
+      'email-src-display-name'?: string;
       /** Email-Thread-Index */
-      "email-thread-index"?: string;
+      'email-thread-index'?: string;
       /** Email-X-Mailer */
-      "email-x-mailer"?: string;
+      'email-x-mailer'?: string;
       /** Filename|Authentihash */
-      "filename|authentihash"?: string;
+      'filename|authentihash'?: string;
       /** Filename|Impfuzzy */
-      "filename|impfuzzy"?: string;
+      'filename|impfuzzy'?: string;
       /** Filename|Imphash */
-      "filename|imphash"?: string;
+      'filename|imphash'?: string;
       /** Filename|Md5 */
-      "filename|md5"?: string;
+      'filename|md5'?: string;
       /** Filename-Pattern */
-      "filename-pattern"?: string;
+      'filename-pattern'?: string;
       /** Filename|Pehash */
-      "filename|pehash"?: string;
+      'filename|pehash'?: string;
       /** Filename|Sha224 */
-      "filename|sha224"?: string;
+      'filename|sha224'?: string;
       /** Filename|Sha384 */
-      "filename|sha384"?: string;
+      'filename|sha384'?: string;
       /** Filename|Sha3-224 */
-      "filename|sha3-224"?: string;
+      'filename|sha3-224'?: string;
       /** Filename|Sha3-256 */
-      "filename|sha3-256"?: string;
+      'filename|sha3-256'?: string;
       /** Filename|Sha3-384 */
-      "filename|sha3-384"?: string;
+      'filename|sha3-384'?: string;
       /** Filename|Sha3-512 */
-      "filename|sha3-512"?: string;
+      'filename|sha3-512'?: string;
       /** Filename|Sha512 */
-      "filename|sha512"?: string;
+      'filename|sha512'?: string;
       /** Filename|Sha512/224 */
-      "filename|sha512/224"?: string;
+      'filename|sha512/224'?: string;
       /** Filename|Sha512/256 */
-      "filename|sha512/256"?: string;
+      'filename|sha512/256'?: string;
       /** Filename|Ssdeep */
-      "filename|ssdeep"?: string;
+      'filename|ssdeep'?: string;
       /** Filename|Tlsh */
-      "filename|tlsh"?: string;
+      'filename|tlsh'?: string;
       /** Filename|Vhash */
-      "filename|vhash"?: string;
+      'filename|vhash'?: string;
       /** First-Name */
-      "first-name"?: string;
+      'first-name'?: string;
       /** Frequent-Flyer-Number */
-      "frequent-flyer-number"?: string;
+      'frequent-flyer-number'?: string;
       /** Full-Name */
-      "full-name"?: string;
+      'full-name'?: string;
       /** Gender */
       gender?: string;
       /** Gene */
       gene?: string;
       /** Github-Organisation */
-      "github-organisation"?: string;
+      'github-organisation'?: string;
       /** Github-Repository */
-      "github-repository"?: string;
+      'github-repository'?: string;
       /** Github-Username */
-      "github-username"?: string;
+      'github-username'?: string;
       /** Hex */
       hex?: string;
       /** Hostname|Port */
-      "hostname|port"?: string;
+      'hostname|port'?: string;
       /** Iban */
       iban?: string;
       /** Identity-Card-Number */
-      "identity-card-number"?: string;
+      'identity-card-number'?: string;
       /** Impfuzzy */
       impfuzzy?: string;
       /** Imphash */
       imphash?: string;
       /** Ip-Dst|Port */
-      "ip-dst|port"?: string;
+      'ip-dst|port'?: string;
       /** Ip-Src|Port */
-      "ip-src|port"?: string;
+      'ip-src|port'?: string;
       /** Issue-Date-Of-The-Visa */
-      "issue-date-of-the-visa"?: string;
+      'issue-date-of-the-visa'?: string;
       /** Jabber-Id */
-      "jabber-id"?: string;
+      'jabber-id'?: string;
       /** Kusto-Query */
-      "kusto-query"?: string;
+      'kusto-query'?: string;
       /** Last-Name */
-      "last-name"?: string;
+      'last-name'?: string;
       /** Link */
       link?: string;
       /** Mac-Address */
-      "mac-address"?: string;
+      'mac-address'?: string;
       /** Mac-Eui-64 */
-      "mac-eui-64"?: string;
+      'mac-eui-64'?: string;
       /** Malware-Sample */
-      "malware-sample"?: string;
+      'malware-sample'?: string;
       /** Malware-Type */
-      "malware-type"?: string;
+      'malware-type'?: string;
       /** Middle-Name */
-      "middle-name"?: string;
+      'middle-name'?: string;
       /** Mime-Type */
-      "mime-type"?: string;
+      'mime-type'?: string;
       /** Mobile-Application-Id */
-      "mobile-application-id"?: string;
+      'mobile-application-id'?: string;
       /** Mutex */
       mutex?: string;
       /** Named Pipe */
-      "named pipe"?: string;
+      'named pipe'?: string;
       /** Nationality */
       nationality?: string;
       /** Other */
       other?: string;
       /** Passenger-Name-Record-Locator-Number */
-      "passenger-name-record-locator-number"?: string;
+      'passenger-name-record-locator-number'?: string;
       /** Passport-Country */
-      "passport-country"?: string;
+      'passport-country'?: string;
       /** Passport-Expiration */
-      "passport-expiration"?: string;
+      'passport-expiration'?: string;
       /** Passport-Number */
-      "passport-number"?: string;
+      'passport-number'?: string;
       /** Pattern-In-Memory */
-      "pattern-in-memory"?: string;
+      'pattern-in-memory'?: string;
       /** Pattern-In-Traffic */
-      "pattern-in-traffic"?: string;
+      'pattern-in-traffic'?: string;
       /** Payment-Details */
-      "payment-details"?: string;
+      'payment-details'?: string;
       /** Pehash */
       pehash?: string;
       /** Pgp-Private-Key */
-      "pgp-private-key"?: string;
+      'pgp-private-key'?: string;
       /** Pgp-Public-Key */
-      "pgp-public-key"?: string;
+      'pgp-public-key'?: string;
       /** Phone-Number */
-      "phone-number"?: string;
+      'phone-number'?: string;
       /** Place-Of-Birth */
-      "place-of-birth"?: string;
+      'place-of-birth'?: string;
       /** Place-Port-Of-Clearance */
-      "place-port-of-clearance"?: string;
+      'place-port-of-clearance'?: string;
       /** Place-Port-Of-Onward-Foreign-Destination */
-      "place-port-of-onward-foreign-destination"?: string;
+      'place-port-of-onward-foreign-destination'?: string;
       /** Place-Port-Of-Original-Embarkation */
-      "place-port-of-original-embarkation"?: string;
+      'place-port-of-original-embarkation'?: string;
       /** Port */
       port?: string;
       /** Primary-Residence */
-      "primary-residence"?: string;
+      'primary-residence'?: string;
       /** Process-State */
-      "process-state"?: string;
+      'process-state'?: string;
       /** Prtn */
       prtn?: string;
       /** Redress-Number */
-      "redress-number"?: string;
+      'redress-number'?: string;
       /** Sha224 */
       sha224?: string;
       /** Sha384 */
       sha384?: string;
       /** Sha3-224 */
-      "sha3-224"?: string;
+      'sha3-224'?: string;
       /** Sha3-256 */
-      "sha3-256"?: string;
+      'sha3-256'?: string;
       /** Sha3-384 */
-      "sha3-384"?: string;
+      'sha3-384'?: string;
       /** Sha3-512 */
-      "sha3-512"?: string;
+      'sha3-512'?: string;
       /** Sha512 */
       sha512?: string;
       /** Sha512/224 */
-      "sha512/224"?: string;
+      'sha512/224'?: string;
       /** Sha512/256 */
-      "sha512/256"?: string;
+      'sha512/256'?: string;
       /** Sigma */
       sigma?: string;
       /** Size-In-Bytes */
-      "size-in-bytes"?: string;
+      'size-in-bytes'?: string;
       /** Snort */
       snort?: string;
       /** Special-Service-Request */
-      "special-service-request"?: string;
+      'special-service-request'?: string;
       /** Ssdeep */
       ssdeep?: string;
       /** Ssh-Fingerprint */
-      "ssh-fingerprint"?: string;
+      'ssh-fingerprint'?: string;
       /** Stix2-Pattern */
-      "stix2-pattern"?: string;
+      'stix2-pattern'?: string;
       /** Target-Email */
-      "target-email"?: string;
+      'target-email'?: string;
       /** Target-External */
-      "target-external"?: string;
+      'target-external'?: string;
       /** Target-Location */
-      "target-location"?: string;
+      'target-location'?: string;
       /** Target-Machine */
-      "target-machine"?: string;
+      'target-machine'?: string;
       /** Target-Org */
-      "target-org"?: string;
+      'target-org'?: string;
       /** Target-User */
-      "target-user"?: string;
+      'target-user'?: string;
       /** Telfhash */
       telfhash?: string;
       /** Text */
       text?: string;
       /** Threat-Actor */
-      "threat-actor"?: string;
+      'threat-actor'?: string;
       /** Tlsh */
       tlsh?: string;
       /** Travel-Details */
-      "travel-details"?: string;
+      'travel-details'?: string;
       /** Twitter-Id */
-      "twitter-id"?: string;
+      'twitter-id'?: string;
       /** Uri */
       uri?: string;
       /** Vhash */
       vhash?: string;
       /** Visa-Number */
-      "visa-number"?: string;
+      'visa-number'?: string;
       /** Vulnerability */
       vulnerability?: string;
       /** Weakness */
       weakness?: string;
       /** Whois-Creation-Date */
-      "whois-creation-date"?: string;
+      'whois-creation-date'?: string;
       /** Whois-Registrant-Email */
-      "whois-registrant-email"?: string;
+      'whois-registrant-email'?: string;
       /** Whois-Registrant-Name */
-      "whois-registrant-name"?: string;
+      'whois-registrant-name'?: string;
       /** Whois-Registrant-Org */
-      "whois-registrant-org"?: string;
+      'whois-registrant-org'?: string;
       /** Whois-Registrant-Phone */
-      "whois-registrant-phone"?: string;
+      'whois-registrant-phone'?: string;
       /** Whois-Registrar */
-      "whois-registrar"?: string;
+      'whois-registrar'?: string;
       /** Windows-Scheduled-Task */
-      "windows-scheduled-task"?: string;
+      'windows-scheduled-task'?: string;
       /** Windows-Service-Displayname */
-      "windows-service-displayname"?: string;
+      'windows-service-displayname'?: string;
       /** Windows-Service-Name */
-      "windows-service-name"?: string;
+      'windows-service-name'?: string;
       /** X509-Fingerprint-Md5 */
-      "x509-fingerprint-md5"?: string;
+      'x509-fingerprint-md5'?: string;
       /** X509-Fingerprint-Sha1 */
-      "x509-fingerprint-sha1"?: string;
+      'x509-fingerprint-sha1'?: string;
       /** X509-Fingerprint-Sha256 */
-      "x509-fingerprint-sha256"?: string;
+      'x509-fingerprint-sha256'?: string;
       /** Xmr */
       xmr?: string;
       /** Yara */
@@ -7524,7 +7900,7 @@ export interface components {
     };
     /** GetDescribeTypesResponse */
     GetDescribeTypesResponse: {
-      result: components["schemas"]["GetDescribeTypesAttributes"];
+      result: components['schemas']['GetDescribeTypesAttributes'];
     };
     /** GetGalaxyClusterResponse */
     GetGalaxyClusterResponse: {
@@ -7571,13 +7947,13 @@ export interface components {
       /** Deleted */
       deleted: boolean;
       /** Galaxyelement */
-      GalaxyElement: components["schemas"]["ExportGalaxyGalaxyElement"][];
+      GalaxyElement: components['schemas']['ExportGalaxyGalaxyElement'][];
     };
     /** GetGalaxyResponse */
     GetGalaxyResponse: {
-      Galaxy: components["schemas"]["GetAllSearchGalaxiesAttributes"];
+      Galaxy: components['schemas']['GetAllSearchGalaxiesAttributes'];
       /** Galaxycluster */
-      GalaxyCluster: components["schemas"]["GetGalaxyClusterResponse"][];
+      GalaxyCluster: components['schemas']['GetGalaxyClusterResponse'][];
     };
     /** GetIdTaxonomyResponse */
     GetIdTaxonomyResponse: {
@@ -7598,11 +7974,11 @@ export interface components {
       /** Highlighted */
       highlighted: boolean;
       /** Entries */
-      entries: components["schemas"]["TaxonomyEntrySchema"][];
+      entries: components['schemas']['TaxonomyEntrySchema'][];
     };
     /** GetIdTaxonomyResponseWrapper */
     GetIdTaxonomyResponseWrapper: {
-      Taxonomy: components["schemas"]["GetIdTaxonomyResponse"];
+      Taxonomy: components['schemas']['GetIdTaxonomyResponse'];
     };
     /** GetIdentityProviderResponse */
     GetIdentityProviderResponse: {
@@ -7702,7 +8078,7 @@ export interface components {
     /** GetSelectedAllWarninglistsResponse */
     GetSelectedAllWarninglistsResponse: {
       /** Warninglists */
-      Warninglists: components["schemas"]["WarninglistsResponse"][];
+      Warninglists: components['schemas']['WarninglistsResponse'][];
     };
     /** GetSelectedWarninglistsBody */
     GetSelectedWarninglistsBody: {
@@ -7730,7 +8106,7 @@ export interface components {
       /** Highlighted */
       highlighted: boolean;
       /** Entries */
-      entries: components["schemas"]["TaxonomyTagEntrySchema"][];
+      entries: components['schemas']['TaxonomyTagEntrySchema'][];
     };
     /** GetUserSettingResponse */
     GetUserSettingResponse: {
@@ -7747,9 +8123,9 @@ export interface components {
     };
     /** GetUsersElement */
     GetUsersElement: {
-      User: components["schemas"]["GetUsersUser"];
-      Role: components["schemas"]["RoleUsersResponse"];
-      Organisation: components["schemas"]["OrganisationUsersResponse"];
+      User: components['schemas']['GetUsersUser'];
+      Role: components['schemas']['RoleUsersResponse'];
+      Organisation: components['schemas']['OrganisationUsersResponse'];
       /** Usersetting */
       UserSetting?: Record<string, never>;
     };
@@ -7829,7 +8205,7 @@ export interface components {
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
+      detail?: components['schemas']['ValidationError'][];
     };
     /** IdentityProviderBody */
     IdentityProviderBody: {
@@ -7883,8 +8259,8 @@ export interface components {
     };
     /** ImportGalaxyBody */
     ImportGalaxyBody: {
-      GalaxyCluster: components["schemas"]["GetGalaxyClusterResponse"];
-      Galaxy: components["schemas"]["ImportGalaxyGalaxy"];
+      GalaxyCluster: components['schemas']['GetGalaxyClusterResponse'];
+      Galaxy: components['schemas']['ImportGalaxyGalaxy'];
     };
     /** ImportGalaxyGalaxy */
     ImportGalaxyGalaxy: {
@@ -7933,18 +8309,18 @@ export interface components {
       extends_uuid: string;
       /** Protected */
       protected?: boolean;
-      Org: components["schemas"]["GetAllEventsOrg"];
-      Orgc: components["schemas"]["GetAllEventsOrg"];
+      Org: components['schemas']['GetAllEventsOrg'];
+      Orgc: components['schemas']['GetAllEventsOrg'];
       /**
        * Galaxycluster
        * @default []
        */
-      GalaxyCluster?: components["schemas"]["GetAllEventsGalaxyCluster"][];
+      GalaxyCluster?: components['schemas']['GetAllEventsGalaxyCluster'][];
       /**
        * Eventtag
        * @default []
        */
-      EventTag?: components["schemas"]["IndexEventsEventTag"][];
+      EventTag?: components['schemas']['IndexEventsEventTag'][];
     };
     /** IndexEventsBody */
     IndexEventsBody: {
@@ -8011,7 +8387,7 @@ export interface components {
      * @description An enumeration.
      * @enum {unknown}
      */
-    LoginType: "password" | "idp";
+    LoginType: 'password' | 'idp';
     /** NameWarninglist */
     NameWarninglist: {
       /** Id */
@@ -8055,7 +8431,7 @@ export interface components {
       /** Enabled */
       enabled: boolean;
       /** Noticelistentry */
-      NoticelistEntry: components["schemas"]["NoticelistEntryResponse"][];
+      NoticelistEntry: components['schemas']['NoticelistEntryResponse'][];
     };
     /** NoticelistEntryResponse */
     NoticelistEntryResponse: {
@@ -8063,11 +8439,11 @@ export interface components {
       id: string;
       /** Noticelist Id */
       noticelist_id: string;
-      data: components["schemas"]["Data"];
+      data: components['schemas']['Data'];
     };
     /** NoticelistResponse */
     NoticelistResponse: {
-      Noticelist: components["schemas"]["NoticelistAttributesResponse"];
+      Noticelist: components['schemas']['NoticelistAttributesResponse'];
     };
     /** ObjectCreateBody */
     ObjectCreateBody: {
@@ -8090,7 +8466,7 @@ export interface components {
       /** Last Seen */
       last_seen?: string;
       /** Attribute */
-      Attribute?: components["schemas"]["AddAttributeBody"][];
+      Attribute?: components['schemas']['AddAttributeBody'][];
     };
     /** ObjectEventResponse */
     ObjectEventResponse: {
@@ -8105,7 +8481,7 @@ export interface components {
     };
     /** ObjectResponse */
     ObjectResponse: {
-      Object: components["schemas"]["ObjectWithAttributesResponse"];
+      Object: components['schemas']['ObjectWithAttributesResponse'];
     };
     /** ObjectSearchBody */
     ObjectSearchBody: {
@@ -8175,7 +8551,7 @@ export interface components {
     /** ObjectSearchResponse */
     ObjectSearchResponse: {
       /** Response */
-      response: components["schemas"]["ObjectResponse"][];
+      response: components['schemas']['ObjectResponse'][];
     };
     /** ObjectWithAttributesResponse */
     ObjectWithAttributesResponse: {
@@ -8210,8 +8586,8 @@ export interface components {
       /** Last Seen */
       last_seen?: string;
       /** Attribute */
-      Attribute?: components["schemas"]["GetAllAttributesResponse"][];
-      Event?: components["schemas"]["ObjectEventResponse"];
+      Attribute?: components['schemas']['GetAllAttributesResponse'][];
+      Event?: components['schemas']['ObjectEventResponse'];
     };
     /** OrgDataResponseModel */
     OrgDataResponseModel: {
@@ -8336,7 +8712,7 @@ export interface components {
        * Galaxy
        * @default []
        */
-      Galaxy?: components["schemas"]["PartialAddEditGetEventGalaxy"][];
+      Galaxy?: components['schemas']['PartialAddEditGetEventGalaxy'][];
       /**
        * Shadowattribute
        * @default []
@@ -8346,7 +8722,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["PartialAddEditGetEventTag"][];
+      Tag?: components['schemas']['PartialAddEditGetEventTag'][];
     };
     /** PartialAddEditGetEventDetails */
     PartialAddEditGetEventDetails: {
@@ -8390,38 +8766,38 @@ export interface components {
       protected?: boolean;
       /** Event Creator Email */
       event_creator_email?: string;
-      Org?: components["schemas"]["PartialAddEditGetEventOrg"];
-      Orgc?: components["schemas"]["PartialAddEditGetEventOrg"];
+      Org?: components['schemas']['PartialAddEditGetEventOrg'];
+      Orgc?: components['schemas']['PartialAddEditGetEventOrg'];
       /**
        * Attribute
        * @default []
        */
-      Attribute?: components["schemas"]["PartialAddEditGetEventAttribute"][];
+      Attribute?: components['schemas']['PartialAddEditGetEventAttribute'][];
       /**
        * Shadowattribute
        * @default []
        */
-      ShadowAttribute?: components["schemas"]["PartialAddEditGetEventShadowAttribute"][];
+      ShadowAttribute?: components['schemas']['PartialAddEditGetEventShadowAttribute'][];
       /**
        * Relatedevent
        * @default []
        */
-      RelatedEvent?: components["schemas"]["PartialAddEditGetEventEventReport"][];
+      RelatedEvent?: components['schemas']['PartialAddEditGetEventEventReport'][];
       /**
        * Galaxy
        * @default []
        */
-      Galaxy?: components["schemas"]["PartialAddEditGetEventGalaxy"][];
+      Galaxy?: components['schemas']['PartialAddEditGetEventGalaxy'][];
       /**
        * Object
        * @default []
        */
-      Object?: components["schemas"]["PartialAddEditGetEventObject"][];
+      Object?: components['schemas']['PartialAddEditGetEventObject'][];
       /**
        * Eventreport
        * @default []
        */
-      EventReport?: components["schemas"]["PartialAddEditGetEventEventReport"][];
+      EventReport?: components['schemas']['PartialAddEditGetEventEventReport'][];
       /**
        * Cryptographickey
        * @default []
@@ -8431,7 +8807,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["PartialAddEditGetEventTag"][];
+      Tag?: components['schemas']['PartialAddEditGetEventTag'][];
     };
     /** PartialAddEditGetEventEventReport */
     PartialAddEditGetEventEventReport: {
@@ -8482,7 +8858,7 @@ export interface components {
        * Galaxycluster
        * @default []
        */
-      GalaxyCluster?: components["schemas"]["PartialAddEditGetEventGalaxyCluster"][];
+      GalaxyCluster?: components['schemas']['PartialAddEditGetEventGalaxyCluster'][];
     };
     /** PartialAddEditGetEventGalaxyCluster */
     PartialAddEditGetEventGalaxyCluster: {
@@ -8532,10 +8908,10 @@ export interface components {
        * Galaxyclusterrelation
        * @default []
        */
-      GalaxyClusterRelation?: components["schemas"]["PartialAddEditGetEventGalaxyClusterRelation"][];
-      Org?: components["schemas"]["Organisation"];
-      Orgc?: components["schemas"]["Organisation"];
-      meta?: components["schemas"]["AddEditGetEventGalaxyClusterMeta"];
+      GalaxyClusterRelation?: components['schemas']['PartialAddEditGetEventGalaxyClusterRelation'][];
+      Org?: components['schemas']['Organisation'];
+      Orgc?: components['schemas']['Organisation'];
+      meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
       tag_id?: string;
       /** Attribute Tag Id */
@@ -8574,7 +8950,7 @@ export interface components {
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["PartialAddEditGetEventGalaxyClusterRelationTag"][];
+      Tag?: components['schemas']['PartialAddEditGetEventGalaxyClusterRelationTag'][];
     };
     /** PartialAddEditGetEventGalaxyClusterRelationTag */
     PartialAddEditGetEventGalaxyClusterRelationTag: {
@@ -8642,7 +9018,7 @@ export interface components {
        * Attribute
        * @default []
        */
-      Attribute?: components["schemas"]["PartialAddEditGetEventAttribute"][];
+      Attribute?: components['schemas']['PartialAddEditGetEventAttribute'][];
     };
     /** PartialAddEditGetEventOrg */
     PartialAddEditGetEventOrg: {
@@ -8657,7 +9033,7 @@ export interface components {
     };
     /** PartialAddEditGetEventResponse */
     PartialAddEditGetEventResponse: {
-      Event?: components["schemas"]["PartialAddEditGetEventDetails"];
+      Event?: components['schemas']['PartialAddEditGetEventDetails'];
     };
     /** PartialAddEditGetEventShadowAttribute */
     PartialAddEditGetEventShadowAttribute: {
@@ -8699,12 +9075,12 @@ export interface components {
     };
     /** PartialCreateSharingGroupLegacyResponse */
     PartialCreateSharingGroupLegacyResponse: {
-      SharingGroup?: components["schemas"]["PartialSharingGroup"];
-      Organisation?: components["schemas"]["PartialCreateSharingGroupLegacyResponseOrganisationInfo"];
+      SharingGroup?: components['schemas']['PartialSharingGroup'];
+      Organisation?: components['schemas']['PartialCreateSharingGroupLegacyResponseOrganisationInfo'];
       /** Sharinggrouporg */
-      SharingGroupOrg?: components["schemas"]["PartialSharingGroupOrg"][];
+      SharingGroupOrg?: components['schemas']['PartialSharingGroupOrg'][];
       /** Sharinggroupserver */
-      SharingGroupServer?: components["schemas"]["PartialSharingGroupServer"][];
+      SharingGroupServer?: components['schemas']['PartialSharingGroupServer'][];
     };
     /** PartialCreateSharingGroupLegacyResponseOrganisationInfo */
     PartialCreateSharingGroupLegacyResponseOrganisationInfo: {
@@ -8733,7 +9109,7 @@ export interface components {
     /** PartialGetAllSharingGroupsResponse */
     PartialGetAllSharingGroupsResponse: {
       /** Response */
-      response?: components["schemas"]["PartialGetAllSharingGroupsResponseResponseItem"][];
+      response?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItem'][];
     };
     /** PartialGetAllSharingGroupsResponseOrganisationInfo */
     PartialGetAllSharingGroupsResponseOrganisationInfo: {
@@ -8746,12 +9122,12 @@ export interface components {
     };
     /** PartialGetAllSharingGroupsResponseResponseItem */
     PartialGetAllSharingGroupsResponseResponseItem: {
-      SharingGroup?: components["schemas"]["PartialGetAllSharingGroupsResponseResponseItemSharingGroup"];
-      Organisation?: components["schemas"]["PartialGetAllSharingGroupsResponseOrganisationInfo"];
+      SharingGroup?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItemSharingGroup'];
+      Organisation?: components['schemas']['PartialGetAllSharingGroupsResponseOrganisationInfo'];
       /** Sharinggrouporg */
-      SharingGroupOrg?: components["schemas"]["PartialGetAllSharingGroupsResponseResponseItemSharingGroupOrgItem"][];
+      SharingGroupOrg?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItemSharingGroupOrgItem'][];
       /** Sharinggroupserver */
-      SharingGroupServer?: components["schemas"]["PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem"][];
+      SharingGroupServer?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem'][];
       /** Editable */
       editable?: boolean;
       /** Deletable */
@@ -8788,7 +9164,7 @@ export interface components {
       org_id?: string;
       /** Extend */
       extend?: boolean;
-      Organisation?: components["schemas"]["PartialGetAllSharingGroupsResponseOrganisationInfo"];
+      Organisation?: components['schemas']['PartialGetAllSharingGroupsResponseOrganisationInfo'];
     };
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem: {
@@ -8798,7 +9174,7 @@ export interface components {
       sharing_group_id?: string;
       /** All Orgs */
       all_orgs?: boolean;
-      Server?: components["schemas"]["PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer"];
+      Server?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer'];
     };
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer: {
@@ -8811,12 +9187,12 @@ export interface components {
     };
     /** PartialGetSharingGroupInfoResponse */
     PartialGetSharingGroupInfoResponse: {
-      SharingGroup?: components["schemas"]["PartialGetSharingGroupInfoResponseSharingGroupInfo"];
-      Organisation?: components["schemas"]["PartialOrganisation"];
+      SharingGroup?: components['schemas']['PartialGetSharingGroupInfoResponseSharingGroupInfo'];
+      Organisation?: components['schemas']['PartialOrganisation'];
       /** Sharinggrouporg */
-      SharingGroupOrg?: components["schemas"]["PartialGetSharingGroupInfoResponseSharingGroupOrgItem"][];
+      SharingGroupOrg?: components['schemas']['PartialGetSharingGroupInfoResponseSharingGroupOrgItem'][];
       /** Sharinggroupserver */
-      SharingGroupServer?: components["schemas"]["PartialGetSharingGroupInfoResponseSharingGroupServerItem"][];
+      SharingGroupServer?: components['schemas']['PartialGetSharingGroupInfoResponseSharingGroupServerItem'][];
     };
     /** PartialGetSharingGroupInfoResponseOrganisationInfo */
     PartialGetSharingGroupInfoResponseOrganisationInfo: {
@@ -8885,7 +9261,7 @@ export interface components {
       org_id?: string;
       /** Extend */
       extend?: boolean;
-      Organisation?: components["schemas"]["PartialGetSharingGroupInfoResponseOrganisationInfo"];
+      Organisation?: components['schemas']['PartialGetSharingGroupInfoResponseOrganisationInfo'];
     };
     /** PartialGetSharingGroupInfoResponseSharingGroupServerItem */
     PartialGetSharingGroupInfoResponseSharingGroupServerItem: {
@@ -8897,13 +9273,13 @@ export interface components {
       server_id?: string;
       /** All Orgs */
       all_orgs?: boolean;
-      Server?: components["schemas"]["PartialGetSharingGroupInfoResponseServerInfo"];
+      Server?: components['schemas']['PartialGetSharingGroupInfoResponseServerInfo'];
     };
     /** PartialGetUsersElement */
     PartialGetUsersElement: {
-      User?: components["schemas"]["PartialGetUsersUser"];
-      Role?: components["schemas"]["PartialRoleUsersResponse"];
-      Organisation?: components["schemas"]["PartialOrganisationUsersResponse"];
+      User?: components['schemas']['PartialGetUsersUser'];
+      Role?: components['schemas']['PartialRoleUsersResponse'];
+      Organisation?: components['schemas']['PartialOrganisationUsersResponse'];
       /** Usersetting */
       UserSetting?: Record<string, never>;
     };
@@ -9132,7 +9508,7 @@ export interface components {
     /** PartialSearchEventsResponse */
     PartialSearchEventsResponse: {
       /** Response */
-      response?: components["schemas"]["PartialAddEditGetEventResponse"][];
+      response?: components['schemas']['PartialAddEditGetEventResponse'][];
     };
     /** PartialSharingGroup */
     PartialSharingGroup: {
@@ -9231,14 +9607,14 @@ export interface components {
     };
     /** PartialTagCombinedModel */
     PartialTagCombinedModel: {
-      Tag?: components["schemas"]["PartialTagAttributesResponse"];
-      Taxonomy?: components["schemas"]["PartialTaxonomyView"];
-      TaxonomyPredicate?: components["schemas"]["PartialTaxonomyPredicateResponse"];
+      Tag?: components['schemas']['PartialTagAttributesResponse'];
+      Taxonomy?: components['schemas']['PartialTaxonomyView'];
+      TaxonomyPredicate?: components['schemas']['PartialTaxonomyPredicateResponse'];
     };
     /** PartialTagSearchResponse */
     PartialTagSearchResponse: {
       /** Response */
-      response?: components["schemas"]["PartialTagCombinedModel"][];
+      response?: components['schemas']['PartialTagCombinedModel'][];
     };
     /** PartialTaxonomyPredicateResponse */
     PartialTaxonomyPredicateResponse: {
@@ -9280,12 +9656,12 @@ export interface components {
     };
     /** PartialViewUpdateSharingGroupLegacyResponse */
     PartialViewUpdateSharingGroupLegacyResponse: {
-      SharingGroup?: components["schemas"]["PartialSharingGroup"];
-      Organisation?: components["schemas"]["PartialOrganisation"];
+      SharingGroup?: components['schemas']['PartialSharingGroup'];
+      Organisation?: components['schemas']['PartialOrganisation'];
       /** Sharinggrouporg */
-      SharingGroupOrg?: components["schemas"]["PartialViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem"][];
+      SharingGroupOrg?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem'][];
       /** Sharinggroupserver */
-      SharingGroupServer?: components["schemas"]["PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem"][];
+      SharingGroupServer?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem'][];
     };
     /** PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo */
     PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo: {
@@ -9317,7 +9693,7 @@ export interface components {
       org_id?: string;
       /** Extend */
       extend?: boolean;
-      Organisation?: components["schemas"]["PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo"];
+      Organisation?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo'];
     };
     /** PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem */
     PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem: {
@@ -9329,7 +9705,7 @@ export interface components {
       server_id?: string;
       /** All Orgs */
       all_orgs?: boolean;
-      Server?: components["schemas"]["PartialViewUpdateSharingGroupLegacyResponseServerInfo"];
+      Server?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseServerInfo'];
     };
     /** PasswordLoginBody */
     PasswordLoginBody: {
@@ -9341,7 +9717,7 @@ export interface components {
     /** ProcessFreeTextResponse */
     ProcessFreeTextResponse: {
       /** Attributes */
-      attributes: components["schemas"]["AttributeType"][];
+      attributes: components['schemas']['AttributeType'][];
     };
     /** PublishEventResponse */
     PublishEventResponse: {
@@ -9513,7 +9889,7 @@ export interface components {
     /** SearchAttributesAttributes */
     SearchAttributesAttributes: {
       /** Attribute */
-      Attribute: components["schemas"]["SearchAttributesAttributesDetails"][];
+      Attribute: components['schemas']['SearchAttributesAttributesDetails'][];
     };
     /** SearchAttributesAttributesDetails */
     SearchAttributesAttributesDetails: {
@@ -9551,13 +9927,13 @@ export interface components {
       first_seen?: string;
       /** Last Seen */
       last_seen?: string;
-      Event?: components["schemas"]["SearchAttributesEvent"];
-      Object?: components["schemas"]["SearchAttributesObject"];
+      Event?: components['schemas']['SearchAttributesEvent'];
+      Object?: components['schemas']['SearchAttributesObject'];
       /**
        * Tag
        * @default []
        */
-      Tag?: components["schemas"]["GetAttributeTag"][];
+      Tag?: components['schemas']['GetAttributeTag'][];
     };
     /** SearchAttributesBody */
     SearchAttributesBody: {
@@ -9648,7 +10024,7 @@ export interface components {
       includeSightings?: boolean;
       /** Includecorrelations */
       includeCorrelations?: boolean;
-      modelOverrides?: components["schemas"]["SearchAttributesModelOverrides"];
+      modelOverrides?: components['schemas']['SearchAttributesModelOverrides'];
       /** Includedecayscore */
       includeDecayScore?: boolean;
       /** Includefullmodel */
@@ -9681,18 +10057,18 @@ export interface components {
       threshold: number;
       /** Default Base Score */
       default_base_score: number;
-      base_score_config: components["schemas"]["SearchAttributesModelOverridesBaseScoreConfig"];
+      base_score_config: components['schemas']['SearchAttributesModelOverridesBaseScoreConfig'];
     };
     /** SearchAttributesModelOverridesBaseScoreConfig */
     SearchAttributesModelOverridesBaseScoreConfig: {
       /** Estimative-Language:Confidence-In-Analytic-Judgment */
-      "estimative-language:confidence-in-analytic-judgment": number;
+      'estimative-language:confidence-in-analytic-judgment': number;
       /** Estimative-Language:Likelihood-Probability */
-      "estimative-language:likelihood-probability": number;
+      'estimative-language:likelihood-probability': number;
       /** Phishing:Psychological-Acceptability */
-      "phishing:psychological-acceptability": number;
+      'phishing:psychological-acceptability': number;
       /** Phishing:State */
-      "phishing:state": number;
+      'phishing:state': number;
     };
     /** SearchAttributesObject */
     SearchAttributesObject: {
@@ -9705,7 +10081,7 @@ export interface components {
     };
     /** SearchAttributesResponse */
     SearchAttributesResponse: {
-      response: components["schemas"]["SearchAttributesAttributes"];
+      response: components['schemas']['SearchAttributesAttributes'];
     };
     /** SearchAuthKeyBody */
     SearchAuthKeyBody: {
@@ -9824,8 +10200,8 @@ export interface components {
     };
     /** SearchGetAuthKeysResponse */
     SearchGetAuthKeysResponse: {
-      AuthKey: components["schemas"]["SearchGetAuthKeysResponseAuthKey"];
-      User: components["schemas"]["SearchGetAuthKeysResponseItemUser"];
+      AuthKey: components['schemas']['SearchGetAuthKeysResponseAuthKey'];
+      User: components['schemas']['SearchGetAuthKeysResponseItemUser'];
     };
     /** SearchGetAuthKeysResponseAuthKey */
     SearchGetAuthKeysResponseAuthKey: {
@@ -9859,8 +10235,8 @@ export interface components {
     };
     /** SearchGetAuthKeysResponseItem */
     SearchGetAuthKeysResponseItem: {
-      AuthKey: components["schemas"]["SearchGetAuthKeysResponseItemAuthKey"];
-      User: components["schemas"]["SearchGetAuthKeysResponseItemUser"];
+      AuthKey: components['schemas']['SearchGetAuthKeysResponseItemAuthKey'];
+      User: components['schemas']['SearchGetAuthKeysResponseItemUser'];
     };
     /** SearchGetAuthKeysResponseItemAuthKey */
     SearchGetAuthKeysResponseItemAuthKey: {
@@ -9918,7 +10294,7 @@ export interface components {
     };
     /** SetUserSettingResponse */
     SetUserSettingResponse: {
-      UserSetting: components["schemas"]["SetUserSettingResponseUserSetting"];
+      UserSetting: components['schemas']['SetUserSettingResponseUserSetting'];
     };
     /** SetUserSettingResponseUserSetting */
     SetUserSettingResponseUserSetting: {
@@ -9999,7 +10375,7 @@ export interface components {
       source?: string;
       /** Type */
       type?: string;
-      Organisation?: components["schemas"]["SightingOrganisationResponse"];
+      Organisation?: components['schemas']['SightingOrganisationResponse'];
     };
     /** SightingCreateBody */
     SightingCreateBody: {
@@ -10009,7 +10385,7 @@ export interface components {
       source?: string;
       /** Timestamp */
       timestamp?: string;
-      filters?: components["schemas"]["SightingFiltersBody"];
+      filters?: components['schemas']['SightingFiltersBody'];
     };
     /** SightingFiltersBody */
     SightingFiltersBody: {
@@ -10074,7 +10450,7 @@ export interface components {
     /** SightingsGetResponse */
     SightingsGetResponse: {
       /** Sightings */
-      sightings: components["schemas"]["SightingAttributesResponse"][];
+      sightings: components['schemas']['SightingAttributesResponse'][];
     };
     /** StandardStatusIdentifiedResponse */
     StandardStatusIdentifiedResponse: {
@@ -10111,12 +10487,12 @@ export interface components {
     };
     /** StartLoginResponse */
     StartLoginResponse: {
-      loginType: components["schemas"]["LoginType"];
+      loginType: components['schemas']['LoginType'];
       /**
        * Identityproviders
        * @default []
        */
-      identityProviders?: components["schemas"]["IdentityProviderInfo"][];
+      identityProviders?: components['schemas']['IdentityProviderInfo'][];
     };
     /** TagAttributesResponse */
     TagAttributesResponse: {
@@ -10174,11 +10550,11 @@ export interface components {
     /** TagGetResponse */
     TagGetResponse: {
       /** Tag */
-      Tag: components["schemas"]["TagAttributesResponse"][];
+      Tag: components['schemas']['TagAttributesResponse'][];
     };
     /** TagResponse */
     TagResponse: {
-      Tag: components["schemas"]["TagAttributesResponse"];
+      Tag: components['schemas']['TagAttributesResponse'];
     };
     /** TagUpdateBody */
     TagUpdateBody: {
@@ -10239,7 +10615,7 @@ export interface components {
       /** Description */
       description: string;
       /** Existing Tag */
-      existing_tag: boolean | components["schemas"]["TagAttributesResponse"];
+      existing_tag: boolean | components['schemas']['TagAttributesResponse'];
     };
     /** TaxonomyPredicateSchema */
     TaxonomyPredicateSchema: {
@@ -10261,7 +10637,7 @@ export interface components {
       /** Description */
       description: string;
       /** Existing Tag */
-      existing_tag: boolean | components["schemas"]["TagAttributesResponse"];
+      existing_tag: boolean | components['schemas']['TagAttributesResponse'];
       /** Events */
       events: number;
       /** Attributes */
@@ -10272,7 +10648,7 @@ export interface components {
       /** Predicate */
       predicate: string;
       /** Entry */
-      entry: components["schemas"]["ExportTaxonomyEntry"][];
+      entry: components['schemas']['ExportTaxonomyEntry'][];
     };
     /** TaxonomyView */
     TaxonomyView: {
@@ -10516,7 +10892,7 @@ export interface components {
     };
     /** UserSettingResponse */
     UserSettingResponse: {
-      UserSetting: components["schemas"]["UserSettingSchema"];
+      UserSetting: components['schemas']['UserSettingSchema'];
     };
     /** UserSettingSchema */
     UserSettingSchema: {
@@ -10533,7 +10909,7 @@ export interface components {
     };
     /** UserWithName */
     UserWithName: {
-      user: components["schemas"]["User"];
+      user: components['schemas']['User'];
       /** Name */
       name: string;
     };
@@ -10579,12 +10955,12 @@ export interface components {
     };
     /** ViewAuthKeysResponse */
     ViewAuthKeysResponse: {
-      AuthKey: components["schemas"]["ViewAuthKeyResponseWrapper"];
-      User: components["schemas"]["SearchGetAuthKeysResponseItemUser"];
+      AuthKey: components['schemas']['ViewAuthKeyResponseWrapper'];
+      User: components['schemas']['SearchGetAuthKeysResponseItemUser'];
     };
     /** ViewTaxonomyResponse */
     ViewTaxonomyResponse: {
-      Taxonomy: components["schemas"]["TaxonomyView"];
+      Taxonomy: components['schemas']['TaxonomyView'];
       /** Total Count */
       total_count: number;
       /** Current Count */
@@ -10592,12 +10968,12 @@ export interface components {
     };
     /** ViewUpdateSharingGroupLegacyResponse */
     ViewUpdateSharingGroupLegacyResponse: {
-      SharingGroup: components["schemas"]["SharingGroup"];
-      Organisation: components["schemas"]["Organisation"];
+      SharingGroup: components['schemas']['SharingGroup'];
+      Organisation: components['schemas']['Organisation'];
       /** Sharinggrouporg */
-      SharingGroupOrg: components["schemas"]["ViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem"][];
+      SharingGroupOrg: components['schemas']['ViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem'][];
       /** Sharinggroupserver */
-      SharingGroupServer: components["schemas"]["ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem"][];
+      SharingGroupServer: components['schemas']['ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem'][];
     };
     /** ViewUpdateSharingGroupLegacyResponseOrganisationInfo */
     ViewUpdateSharingGroupLegacyResponseOrganisationInfo: {
@@ -10629,7 +11005,7 @@ export interface components {
       org_id: string;
       /** Extend */
       extend: boolean;
-      Organisation: components["schemas"]["ViewUpdateSharingGroupLegacyResponseOrganisationInfo"];
+      Organisation: components['schemas']['ViewUpdateSharingGroupLegacyResponseOrganisationInfo'];
     };
     /** ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem */
     ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem: {
@@ -10641,11 +11017,11 @@ export interface components {
       server_id: string;
       /** All Orgs */
       all_orgs: boolean;
-      Server: components["schemas"]["ViewUpdateSharingGroupLegacyResponseServerInfo"];
+      Server: components['schemas']['ViewUpdateSharingGroupLegacyResponseServerInfo'];
     };
     /** ViewUserSettingResponse */
     ViewUserSettingResponse: {
-      UserSetting: components["schemas"]["ViewUserSettingResponseUserSetting"];
+      UserSetting: components['schemas']['ViewUserSettingResponseUserSetting'];
     };
     /** ViewUserSettingResponseUserSetting */
     ViewUserSettingResponseUserSetting: {
@@ -10702,16 +11078,16 @@ export interface components {
       /** Category */
       category: string;
       /** Warninglistentry */
-      WarninglistEntry?: components["schemas"]["WarninglistEntryResponse"][];
+      WarninglistEntry?: components['schemas']['WarninglistEntryResponse'][];
       /** Warninglisttype */
-      WarninglistType?: components["schemas"]["WarninglistTypeResponse"][];
+      WarninglistType?: components['schemas']['WarninglistTypeResponse'][];
     };
     /**
      * WarninglistCategory
      * @description An enumeration.
      * @enum {string}
      */
-    WarninglistCategory: "False positive" | "Known identifier";
+    WarninglistCategory: 'False positive' | 'Known identifier';
     /** WarninglistEntryResponse */
     WarninglistEntryResponse: {
       /** Id */
@@ -10728,10 +11104,10 @@ export interface components {
      * @description An enumeration.
      * @enum {string}
      */
-    WarninglistListType: "cidr" | "hostname" | "string" | "substring" | "regex";
+    WarninglistListType: 'cidr' | 'hostname' | 'string' | 'substring' | 'regex';
     /** WarninglistResponse */
     WarninglistResponse: {
-      Warninglist: components["schemas"]["WarninglistAttributesResponse"];
+      Warninglist: components['schemas']['WarninglistAttributesResponse'];
     };
     /** WarninglistTypeResponse */
     WarninglistTypeResponse: {
@@ -10744,7 +11120,7 @@ export interface components {
     };
     /** WarninglistsResponse */
     WarninglistsResponse: {
-      Warninglist: components["schemas"]["WarninglistAttributes"];
+      Warninglist: components['schemas']['WarninglistAttributes'];
     };
   };
   responses: never;
@@ -10759,7 +11135,6 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /**
    * Search attributes
    * @description Search for attributes based on various filters.
@@ -10779,20 +11154,20 @@ export interface operations {
   rest_search_attributes_attributes_restSearch_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SearchAttributesBody"];
+        'application/json': components['schemas']['SearchAttributesBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchAttributesResponse"];
+          'application/json': components['schemas']['SearchAttributesResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -10823,20 +11198,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddAttributeBody"];
+        'application/json': components['schemas']['AddAttributeBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddAttributeResponse"];
+          'application/json': components['schemas']['AddAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -10858,7 +11233,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetDescribeTypesResponse"];
+          'application/json': components['schemas']['GetDescribeTypesResponse'];
         };
       };
     };
@@ -10889,13 +11264,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAttributeResponse"];
+          'application/json': components['schemas']['GetAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -10926,20 +11301,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditAttributeBody"];
+        'application/json': components['schemas']['EditAttributeBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAttributeResponse"];
+          'application/json': components['schemas']['EditAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -10970,13 +11345,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteAttributeResponse"];
+          'application/json': components['schemas']['DeleteAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -10998,7 +11373,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllAttributesResponse"][];
+          'application/json': components['schemas']['GetAllAttributesResponse'][];
         };
       };
     };
@@ -11031,20 +11406,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["DeleteSelectedAttributeBody"];
+        'application/json': components['schemas']['DeleteSelectedAttributeBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteSelectedAttributeResponse"];
+          'application/json': components['schemas']['DeleteSelectedAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11070,7 +11445,7 @@ export interface operations {
   get_attributes_statistics_attributes_attributeStatistics__context___percentage__get: {
     parameters: {
       path: {
-        context: "type" | "category";
+        context: 'type' | 'category';
         percentage: boolean;
       };
     };
@@ -11078,13 +11453,15 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAttributeStatisticsCategoriesResponse"] | components["schemas"]["GetAttributeStatisticsTypesResponse"];
+          'application/json':
+            | components['schemas']['GetAttributeStatisticsCategoriesResponse']
+            | components['schemas']['GetAttributeStatisticsTypesResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11115,13 +11492,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAttributeResponse"];
+          'application/json': components['schemas']['GetAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11158,13 +11535,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddRemoveTagAttributeResponse"];
+          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11198,13 +11575,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddRemoveTagAttributeResponse"];
+          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11236,20 +11613,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddAttributeBody"];
+        'application/json': components['schemas']['AddAttributeBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddAttributeResponse"];
+          'application/json': components['schemas']['AddAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11281,13 +11658,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAttributeResponse"];
+          'application/json': components['schemas']['GetAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11319,20 +11696,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditAttributeBody"];
+        'application/json': components['schemas']['EditAttributeBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAttributeResponse"];
+          'application/json': components['schemas']['EditAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11364,13 +11741,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteAttributeResponse"];
+          'application/json': components['schemas']['DeleteAttributeResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11391,7 +11768,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["IdentityProviderInfo"][];
+          'application/json': components['schemas']['IdentityProviderInfo'][];
         };
       };
     };
@@ -11412,7 +11789,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetIdentityProviderResponse"][];
+          'application/json': components['schemas']['GetIdentityProviderResponse'][];
         };
       };
     };
@@ -11439,13 +11816,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetIdentityProviderResponse"];
+          'application/json': components['schemas']['GetIdentityProviderResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11465,20 +11842,20 @@ export interface operations {
   add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["IdentityProviderBody"];
+        'application/json': components['schemas']['IdentityProviderBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["IdentityProviderInfo"];
+          'application/json': components['schemas']['IdentityProviderInfo'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11505,20 +11882,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["IdentityProviderEditBody"];
+        'application/json': components['schemas']['IdentityProviderEditBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ChangeLoginInfoResponse"];
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11547,13 +11924,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ChangeLoginInfoResponse"];
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11575,20 +11952,20 @@ export interface operations {
   start_login_auth_login_start_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["StartLoginBody"];
+        'application/json': components['schemas']['StartLoginBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StartLoginResponse"];
+          'application/json': components['schemas']['StartLoginResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11610,20 +11987,20 @@ export interface operations {
   password_login_auth_login_password_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["PasswordLoginBody"];
+        'application/json': components['schemas']['PasswordLoginBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TokenResponse"];
+          'application/json': components['schemas']['TokenResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11643,20 +12020,20 @@ export interface operations {
   set_password_auth_login_setOwnPassword_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ChangePasswordBody"];
+        'application/json': components['schemas']['ChangePasswordBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TokenResponse"];
+          'application/json': components['schemas']['TokenResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11685,20 +12062,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["IdentityProviderCallbackBody"];
+        'application/json': components['schemas']['IdentityProviderCallbackBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TokenResponse"];
+          'application/json': components['schemas']['TokenResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11727,20 +12104,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["IdentityProviderCallbackBody"];
+        'application/json': components['schemas']['IdentityProviderCallbackBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TokenResponse"];
+          'application/json': components['schemas']['TokenResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11760,20 +12137,20 @@ export interface operations {
   exchange_token_login_auth_login_token_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ExchangeTokenLoginBody"];
+        'application/json': components['schemas']['ExchangeTokenLoginBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TokenResponse"];
+          'application/json': components['schemas']['TokenResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11800,20 +12177,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SetPasswordBody"];
+        'application/json': components['schemas']['SetPasswordBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ChangeLoginInfoResponse"];
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11844,20 +12221,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddAuthKeyBody"];
+        'application/json': components['schemas']['AddAuthKeyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["AddAuthKeyResponse"];
+          'application/json': components['schemas']['AddAuthKeyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11888,13 +12265,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewAuthKeysResponse"];
+          'application/json': components['schemas']['ViewAuthKeysResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11918,7 +12295,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchGetAuthKeysResponse"][];
+          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
         };
       };
     };
@@ -11942,20 +12319,20 @@ export interface operations {
   search_auth_keys_auth_keys_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SearchAuthKeyBody"];
+        'application/json': components['schemas']['SearchAuthKeyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchGetAuthKeysResponseItem"][];
+          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -11986,20 +12363,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditAuthKeyBody"];
+        'application/json': components['schemas']['EditAuthKeyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAuthKeyResponseCompl"];
+          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12030,13 +12407,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12062,7 +12439,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchGetAuthKeysResponseItem"][];
+          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
         };
       };
     };
@@ -12089,7 +12466,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SearchGetAuthKeysResponse"][];
+          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
         };
       };
     };
@@ -12121,20 +12498,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddAuthKeyBody"];
+        'application/json': components['schemas']['AddAuthKeyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["AddAuthKeyResponse"];
+          'application/json': components['schemas']['AddAuthKeyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12166,20 +12543,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditAuthKeyBody"];
+        'application/json': components['schemas']['EditAuthKeyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["EditAuthKeyResponseCompl"];
+          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12211,13 +12588,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12241,7 +12618,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllEventsResponse"][];
+          'application/json': components['schemas']['GetAllEventsResponse'][];
         };
       };
     };
@@ -12265,20 +12642,20 @@ export interface operations {
   add_event_events_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddEventBody"];
+        'application/json': components['schemas']['AddEventBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12309,13 +12686,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12346,20 +12723,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditEventBody"];
+        'application/json': components['schemas']['EditEventBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12390,13 +12767,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteEventResponse"];
+          'application/json': components['schemas']['DeleteEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12420,20 +12797,20 @@ export interface operations {
   rest_search_events_events_restSearch_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SearchEventsBody"];
+        'application/json': components['schemas']['SearchEventsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSearchEventsResponse"];
+          'application/json': components['schemas']['PartialSearchEventsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12457,20 +12834,20 @@ export interface operations {
   index_events_events_index_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["IndexEventsBody"];
+        'application/json': components['schemas']['IndexEventsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["IndexEventsAttributes"][];
+          'application/json': components['schemas']['IndexEventsAttributes'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12503,13 +12880,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PublishEventResponse"];
+          'application/json': components['schemas']['PublishEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12542,13 +12919,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UnpublishEventResponse"];
+          'application/json': components['schemas']['UnpublishEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12585,13 +12962,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddRemoveTagEventsResponse"];
+          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12625,13 +13002,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddRemoveTagEventsResponse"];
+          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12653,20 +13030,20 @@ export interface operations {
   start_freeTextImport_events_freeTextImport_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddAttributeViaFreeTextImportEventBody"];
+        'application/json': components['schemas']['AddAttributeViaFreeTextImportEventBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FreeTextProcessID"];
+          'application/json': components['schemas']['FreeTextProcessID'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12695,20 +13072,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ProcessFreeTextResponse"];
+        'application/json': components['schemas']['ProcessFreeTextResponse'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddAttributeViaFreeTextImportEventResponse"][];
+          'application/json': components['schemas']['AddAttributeViaFreeTextImportEventResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12733,20 +13110,20 @@ export interface operations {
   add_event_depr_events_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddEventBody"];
+        'application/json': components['schemas']['AddEventBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12778,13 +13155,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12816,20 +13193,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditEventBody"];
+        'application/json': components['schemas']['EditEventBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddEditGetEventResponse"];
+          'application/json': components['schemas']['AddEditGetEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12861,13 +13238,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteEventResponse"];
+          'application/json': components['schemas']['DeleteEventResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12891,7 +13268,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"][];
+          'application/json': components['schemas']['FeedResponse'][];
         };
       };
     };
@@ -12915,20 +13292,20 @@ export interface operations {
   add_feed_feeds_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["FeedCreateBody"];
+        'application/json': components['schemas']['FeedCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -12959,13 +13336,13 @@ export interface operations {
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedCacheResponse"];
+          'application/json': components['schemas']['FeedCacheResponse'];
         };
       };
     };
@@ -12996,13 +13373,13 @@ export interface operations {
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedFetchResponse"];
+          'application/json': components['schemas']['FeedFetchResponse'];
         };
       };
     };
@@ -13033,13 +13410,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13070,20 +13447,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["FeedUpdateBody"];
+        'application/json': components['schemas']['FeedUpdateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13115,20 +13492,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["FeedToggleBody"];
+        'application/json': components['schemas']['FeedToggleBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedEnableDisableResponse"];
+          'application/json': components['schemas']['FeedEnableDisableResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13152,7 +13529,7 @@ export interface operations {
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedFetchResponse"];
+          'application/json': components['schemas']['FeedFetchResponse'];
         };
       };
     };
@@ -13177,20 +13554,20 @@ export interface operations {
   add_feed_depr_feeds_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["FeedCreateBody"];
+        'application/json': components['schemas']['FeedCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13222,13 +13599,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedEnableDisableResponse"];
+          'application/json': components['schemas']['FeedEnableDisableResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13260,13 +13637,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedEnableDisableResponse"];
+          'application/json': components['schemas']['FeedEnableDisableResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13298,13 +13675,13 @@ export interface operations {
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedCacheResponse"];
+          'application/json': components['schemas']['FeedCacheResponse'];
         };
       };
     };
@@ -13336,13 +13713,13 @@ export interface operations {
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedFetchResponse"];
+          'application/json': components['schemas']['FeedFetchResponse'];
         };
       };
     };
@@ -13368,7 +13745,7 @@ export interface operations {
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["FeedFetchResponse"];
+          'application/json': components['schemas']['FeedFetchResponse'];
         };
       };
     };
@@ -13400,13 +13777,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13439,20 +13816,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["FeedUpdateBody"];
+        'application/json': components['schemas']['FeedUpdateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["FeedResponse"];
+          'application/json': components['schemas']['FeedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13483,13 +13860,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetGalaxyResponse"];
+          'application/json': components['schemas']['GetGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13522,13 +13899,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteForceUpdateImportGalaxyResponse"];
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13552,7 +13929,7 @@ export interface operations {
       /** @description Successful Response */
       501: {
         content: {
-          "application/json": components["schemas"]["DeleteForceUpdateImportGalaxyResponse"];
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
         };
       };
     };
@@ -13576,7 +13953,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllSearchGalaxiesResponse"][];
+          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
         };
       };
     };
@@ -13600,20 +13977,20 @@ export interface operations {
   search_galaxies_galaxies_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SearchGalaxiesbyValue"];
+        'application/json': components['schemas']['SearchGalaxiesbyValue'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllSearchGalaxiesResponse"][];
+          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13645,13 +14022,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetGalaxyResponse"];
+          'application/json': components['schemas']['GetGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13685,13 +14062,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteForceUpdateImportGalaxyResponse"];
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13717,20 +14094,20 @@ export interface operations {
   import_galaxy_cluster_galaxies_import_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ImportGalaxyBody"][];
+        'application/json': components['schemas']['ImportGalaxyBody'][];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteForceUpdateImportGalaxyResponse"];
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13761,13 +14138,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetGalaxyClusterResponse"];
+          'application/json': components['schemas']['GetGalaxyClusterResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13798,20 +14175,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ExportGalaxyBody"];
+        'application/json': components['schemas']['ExportGalaxyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ExportGalaxyClusterResponse"][];
+          'application/json': components['schemas']['ExportGalaxyClusterResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13848,20 +14225,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AttachClusterGalaxyBody"];
+        'application/json': components['schemas']['AttachClusterGalaxyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AttachClusterGalaxyResponse"];
+          'application/json': components['schemas']['AttachClusterGalaxyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13894,13 +14271,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetGalaxyClusterResponse"];
+          'application/json': components['schemas']['GetGalaxyClusterResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13929,13 +14306,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -13966,13 +14343,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["NoticelistResponse"];
+          'application/json': components['schemas']['NoticelistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14003,13 +14380,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14033,7 +14410,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllNoticelists"][];
+          'application/json': components['schemas']['GetAllNoticelists'][];
         };
       };
     };
@@ -14057,7 +14434,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -14089,13 +14466,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["NoticelistResponse"];
+          'application/json': components['schemas']['NoticelistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14120,7 +14497,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -14154,20 +14531,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ObjectCreateBody"];
+        'application/json': components['schemas']['ObjectCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["ObjectResponse"];
+          'application/json': components['schemas']['ObjectResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14191,20 +14568,20 @@ export interface operations {
   restsearch_objects_restsearch_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ObjectSearchBody"];
+        'application/json': components['schemas']['ObjectSearchBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ObjectSearchResponse"];
+          'application/json': components['schemas']['ObjectSearchResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14235,13 +14612,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ObjectResponse"];
+          'application/json': components['schemas']['ObjectResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14275,13 +14652,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14316,20 +14693,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ObjectCreateBody"];
+        'application/json': components['schemas']['ObjectCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["ObjectResponse"];
+          'application/json': components['schemas']['ObjectResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14361,13 +14738,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ObjectResponse"];
+          'application/json': components['schemas']['ObjectResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14403,13 +14780,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14432,7 +14809,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllOrganisationResponse"][];
+          'application/json': components['schemas']['GetAllOrganisationResponse'][];
         };
       };
     };
@@ -14454,20 +14831,20 @@ export interface operations {
   add_organisation_organisations_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddOrganisation"];
+        'application/json': components['schemas']['AddOrganisation'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetOrganisationResponse"];
+          'application/json': components['schemas']['GetOrganisationResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14489,7 +14866,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetAllOrganisationResponse"][];
+          'application/json': components['schemas']['GetAllOrganisationResponse'][];
         };
       };
     };
@@ -14520,13 +14897,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetOrganisationResponse"];
+          'application/json': components['schemas']['GetOrganisationResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14555,13 +14932,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["DeleteForceUpdateOrganisationResponse"];
+          'application/json': components['schemas']['DeleteForceUpdateOrganisationResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14590,20 +14967,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditOrganisation"];
+        'application/json': components['schemas']['EditOrganisation'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetOrganisationResponse"];
+          'application/json': components['schemas']['GetOrganisationResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14625,7 +15002,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["RoleAttributeResponse"][];
+          'application/json': components['schemas']['RoleAttributeResponse'][];
         };
       };
     };
@@ -14647,7 +15024,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetRemoteServersResponse"][];
+          'application/json': components['schemas']['GetRemoteServersResponse'][];
         };
       };
     };
@@ -14676,13 +15053,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetRemoteServersResponse"];
+          'application/json': components['schemas']['GetRemoteServersResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14704,20 +15081,20 @@ export interface operations {
   add_remote_server_servers_remote_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddServer"];
+        'application/json': components['schemas']['AddServer'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddServerResponse"];
+          'application/json': components['schemas']['AddServerResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14746,13 +15123,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14779,7 +15156,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": Record<string, never>;
+          'application/json': Record<string, never>;
         };
       };
     };
@@ -14808,20 +15185,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["EditServer"];
+        'application/json': components['schemas']['EditServer'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetRemoteServersResponse"][];
+          'application/json': components['schemas']['GetRemoteServersResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14845,7 +15222,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetRemoteServersResponse"][];
+          'application/json': components['schemas']['GetRemoteServersResponse'][];
         };
       };
     };
@@ -14868,20 +15245,20 @@ export interface operations {
   add_remote_server_depr_servers_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddServer"];
+        'application/json': components['schemas']['AddServer'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddServerResponse"];
+          'application/json': components['schemas']['AddServerResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14905,7 +15282,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialGetAllSharingGroupsResponse"];
+          'application/json': components['schemas']['PartialGetAllSharingGroupsResponse'];
         };
       };
     };
@@ -14929,20 +15306,20 @@ export interface operations {
   create_sharing_group_sharing_groups_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateSharingGroupBody"];
+        'application/json': components['schemas']['CreateSharingGroupBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroup"];
+          'application/json': components['schemas']['PartialSharingGroup'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -14973,13 +15350,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroup"];
+          'application/json': components['schemas']['PartialSharingGroup'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15010,20 +15387,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["UpdateSharingGroupBody"];
+        'application/json': components['schemas']['UpdateSharingGroupBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroup"];
+          'application/json': components['schemas']['PartialSharingGroup'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15054,13 +15431,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroup"];
+          'application/json': components['schemas']['PartialSharingGroup'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15091,13 +15468,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialGetSharingGroupInfoResponse"];
+          'application/json': components['schemas']['PartialGetSharingGroupInfoResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15128,20 +15505,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddOrgToSharingGroupBody"];
+        'application/json': components['schemas']['AddOrgToSharingGroupBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SharingGroupOrg"];
+          'application/json': components['schemas']['SharingGroupOrg'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15175,13 +15552,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroupOrg"];
+          'application/json': components['schemas']['PartialSharingGroupOrg'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15212,20 +15589,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddServerToSharingGroupBody"];
+        'application/json': components['schemas']['AddServerToSharingGroupBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroupServer"];
+          'application/json': components['schemas']['PartialSharingGroupServer'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15259,13 +15636,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialSharingGroupServer"];
+          'application/json': components['schemas']['PartialSharingGroupServer'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15290,20 +15667,20 @@ export interface operations {
   create_sharing_group_legacy_sharing_groups_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateSharingGroupLegacyBody"];
+        'application/json': components['schemas']['CreateSharingGroupLegacyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["PartialCreateSharingGroupLegacyResponse"];
+          'application/json': components['schemas']['PartialCreateSharingGroupLegacyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15335,13 +15712,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialViewUpdateSharingGroupLegacyResponse"];
+          'application/json': components['schemas']['PartialViewUpdateSharingGroupLegacyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15373,20 +15750,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["UpdateSharingGroupLegacyBody"];
+        'application/json': components['schemas']['UpdateSharingGroupLegacyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewUpdateSharingGroupLegacyResponse"];
+          'application/json': components['schemas']['ViewUpdateSharingGroupLegacyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15418,13 +15795,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialDeleteSharingGroupLegacyResponse"];
+          'application/json': components['schemas']['PartialDeleteSharingGroupLegacyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15459,20 +15836,20 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["AddOrgToSharingGroupLegacyBody"];
+        'application/json': components['schemas']['AddOrgToSharingGroupLegacyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialStandardStatusResponse"];
+          'application/json': components['schemas']['PartialStandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15507,13 +15884,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15548,20 +15925,20 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["AddServerToSharingGroupLegacyBody"];
+        'application/json': components['schemas']['AddServerToSharingGroupLegacyBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15596,13 +15973,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialStandardStatusResponse"];
+          'application/json': components['schemas']['PartialStandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15626,7 +16003,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SightingsGetResponse"];
+          'application/json': components['schemas']['SightingsGetResponse'];
         };
       };
     };
@@ -15650,20 +16027,20 @@ export interface operations {
   add_sighting_sightings_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SightingCreateBody"];
+        'application/json': components['schemas']['SightingCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"][];
+          'application/json': components['schemas']['SightingAttributesResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15694,13 +16071,13 @@ export interface operations {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"];
+          'application/json': components['schemas']['SightingAttributesResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15731,13 +16108,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"][];
+          'application/json': components['schemas']['SightingAttributesResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15768,13 +16145,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15799,20 +16176,20 @@ export interface operations {
   add_sighting_depr_sightings_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SightingCreateBody"];
+        'application/json': components['schemas']['SightingCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"][];
+          'application/json': components['schemas']['SightingAttributesResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15844,13 +16221,13 @@ export interface operations {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"];
+          'application/json': components['schemas']['SightingAttributesResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15882,13 +16259,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15920,13 +16297,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SightingAttributesResponse"][];
+          'application/json': components['schemas']['SightingAttributesResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -15948,7 +16325,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UsageDataResponseModel"];
+          'application/json': components['schemas']['UsageDataResponseModel'];
         };
       };
     };
@@ -15976,13 +16353,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["OrgDataResponseModel"];
+          'application/json': components['schemas']['OrgDataResponseModel'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16009,13 +16386,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": number;
+          'application/json': number;
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16039,7 +16416,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagGetResponse"];
+          'application/json': components['schemas']['TagGetResponse'];
         };
       };
     };
@@ -16063,20 +16440,20 @@ export interface operations {
   add_tag_tags_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["TagCreateBody"];
+        'application/json': components['schemas']['TagCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["TagResponse"];
+          'application/json': components['schemas']['TagResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16107,13 +16484,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagViewResponse"];
+          'application/json': components['schemas']['TagViewResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16144,20 +16521,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["TagUpdateBody"];
+        'application/json': components['schemas']['TagUpdateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagResponse"];
+          'application/json': components['schemas']['TagResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16188,13 +16565,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagDeleteResponse"];
+          'application/json': components['schemas']['TagDeleteResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16225,13 +16602,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialTagSearchResponse"];
+          'application/json': components['schemas']['PartialTagSearchResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16256,20 +16633,20 @@ export interface operations {
   add_tag_depr_tags_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["TagCreateBody"];
+        'application/json': components['schemas']['TagCreateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["TagResponse"];
+          'application/json': components['schemas']['TagResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16301,13 +16678,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagViewResponse"];
+          'application/json': components['schemas']['TagViewResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16339,20 +16716,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["TagUpdateBody"];
+        'application/json': components['schemas']['TagUpdateBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagResponse"];
+          'application/json': components['schemas']['TagResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16384,13 +16761,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["TagDeleteResponse"];
+          'application/json': components['schemas']['TagDeleteResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16414,7 +16791,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewTaxonomyResponse"][];
+          'application/json': components['schemas']['ViewTaxonomyResponse'][];
         };
       };
     };
@@ -16438,7 +16815,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -16469,13 +16846,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetIdTaxonomyResponseWrapper"];
+          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16506,13 +16883,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetTagTaxonomyResponse"];
+          'application/json': components['schemas']['GetTagTaxonomyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16543,13 +16920,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ExportTaxonomyResponse"];
+          'application/json': components['schemas']['ExportTaxonomyResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16580,13 +16957,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16617,13 +16994,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16648,7 +17025,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -16680,13 +17057,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetIdTaxonomyResponseWrapper"];
+          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16708,20 +17085,20 @@ export interface operations {
   add_user_users_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddUserBody"];
+        'application/json': components['schemas']['AddUserBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddUserResponse"];
+          'application/json': components['schemas']['AddUserResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16743,7 +17120,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialGetUsersElement"];
+          'application/json': components['schemas']['PartialGetUsersElement'];
         };
       };
     };
@@ -16765,7 +17142,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PartialGetUsersElement"];
+          'application/json': components['schemas']['PartialGetUsersElement'];
         };
       };
     };
@@ -16787,7 +17164,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetUsersElement"][];
+          'application/json': components['schemas']['GetUsersElement'][];
         };
       };
     };
@@ -16816,13 +17193,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetUsersElement"];
+          'application/json': components['schemas']['GetUsersElement'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16852,13 +17229,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16887,13 +17264,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": unknown;
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16922,20 +17299,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["UserAttributesBody"];
+        'application/json': components['schemas']['UserAttributesBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserWithName"];
+          'application/json': components['schemas']['UserWithName'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -16958,20 +17335,20 @@ export interface operations {
   add_user_deprecated_admin_users_add_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["AddUserBody"];
+        'application/json': components['schemas']['AddUserBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["AddUserResponse"];
+          'application/json': components['schemas']['AddUserResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17001,20 +17378,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["UserAttributesBody"];
+        'application/json': components['schemas']['UserAttributesBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserWithName"];
+          'application/json': components['schemas']['UserWithName'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17044,13 +17421,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetUsersElement"];
+          'application/json': components['schemas']['GetUsersElement'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17073,7 +17450,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetUsersElement"][];
+          'application/json': components['schemas']['GetUsersElement'][];
         };
       };
     };
@@ -17104,13 +17481,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17143,20 +17520,20 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SetUserSettingBody"];
+        'application/json': components['schemas']['SetUserSettingBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["SetUserSettingResponse"];
+          'application/json': components['schemas']['SetUserSettingResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17187,13 +17564,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewUserSettingResponse"];
+          'application/json': components['schemas']['ViewUserSettingResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17224,13 +17601,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17263,13 +17640,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewUserSettingResponse"];
+          'application/json': components['schemas']['ViewUserSettingResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17293,7 +17670,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserSettingResponse"][];
+          'application/json': components['schemas']['UserSettingResponse'][];
         };
       };
     };
@@ -17317,20 +17694,20 @@ export interface operations {
   search_user_settings_user_settings_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SearchUserSettingBody"];
+        'application/json': components['schemas']['SearchUserSettingBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["UserSettingResponse"][];
+          'application/json': components['schemas']['UserSettingResponse'][];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17362,13 +17739,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ViewUserSettingResponse"];
+          'application/json': components['schemas']['ViewUserSettingResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17403,13 +17780,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetUserSettingResponse"];
+          'application/json': components['schemas']['GetUserSettingResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17441,13 +17818,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusIdentifiedResponse"];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17471,20 +17848,20 @@ export interface operations {
   add_warninglist_warninglists_new_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CreateWarninglistBody"];
+        'application/json': components['schemas']['CreateWarninglistBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       201: {
         content: {
-          "application/json": components["schemas"]["WarninglistResponse"];
+          'application/json': components['schemas']['WarninglistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17515,13 +17892,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["WarninglistResponse"];
+          'application/json': components['schemas']['WarninglistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17545,20 +17922,20 @@ export interface operations {
   post_toggleEnable_warninglists_toggleEnable_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["ToggleEnableWarninglistsBody"];
+        'application/json': components['schemas']['ToggleEnableWarninglistsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["ToggleEnableWarninglistsResponse"];
+          'application/json': components['schemas']['ToggleEnableWarninglistsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17589,13 +17966,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["WarninglistResponse"];
+          'application/json': components['schemas']['WarninglistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17629,13 +18006,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetSelectedAllWarninglistsResponse"];
+          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17659,7 +18036,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -17684,20 +18061,20 @@ export interface operations {
   search_warninglists_warninglists_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["GetSelectedWarninglistsBody"];
+        'application/json': components['schemas']['GetSelectedWarninglistsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["GetSelectedAllWarninglistsResponse"];
+          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17721,20 +18098,20 @@ export interface operations {
   get_warninglists_by_value_warninglists_checkValue_post: {
     requestBody: {
       content: {
-        "application/json": components["schemas"]["CheckValueWarninglistsBody"];
+        'application/json': components['schemas']['CheckValueWarninglistsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["CheckValueResponse"] | Record<string, never>;
+          'application/json': components['schemas']['CheckValueResponse'] | Record<string, never>;
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17766,13 +18143,13 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["WarninglistResponse"];
+          'application/json': components['schemas']['WarninglistResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -17797,7 +18174,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["StandardStatusResponse"];
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
