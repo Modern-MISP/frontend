@@ -54,9 +54,20 @@ describe('login password', () => {
     const stub = cy.stub();
     cy.on('window:alert', stub);
     cy.visit('/login');
-    cy.get('a[href="/login"]').click()
-    .then(() => {
-      expect(stub.getCall(0)).to.be.calledWith('Please Contact your Administrator to reset your password.');
-    });
+    cy.get('a[href="/login"]')
+      .click()
+      .then(() => {
+        expect(stub.getCall(0)).to.be.calledWith(
+          'Please Contact your Administrator to reset your password.'
+        );
+      });
+  });
+});
+
+describe('add tag to event', () => {
+  beforeEach(() => {
+    cy.defaultLogin();
+    cy.visit('/events/2/galaxies');
+    cy.toggleMode();
   });
 });
