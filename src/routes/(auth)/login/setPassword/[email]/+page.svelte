@@ -23,6 +23,7 @@
 
   $: {
     password;
+    retypedPassword;
     debouncedZxcvbn();
   }
 
@@ -33,7 +34,7 @@
         feedback = [result.feedback.warning];
       } else if (result.feedback.suggestions.length > 0) {
         feedback = result.feedback.suggestions;
-      } else if (password !== retypedPassword) {
+      } else if (password != retypedPassword) {
         feedback = ['New Password and Repeat Password do not match'];
       }
       passwordFeedback = feedback;
@@ -57,7 +58,7 @@
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
 
-    if (entries.password !== entries['password-repeat']) {
+    if (entries.password != entries['password-repeat']) {
       alert('Passwords do not match');
       return;
     }

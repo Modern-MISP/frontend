@@ -19,6 +19,7 @@
   $mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
+    console.log(formData);
     notifySave(
       get(api)
         .POST('/admin/users/add', {
