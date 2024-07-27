@@ -10,7 +10,7 @@ import Select from '$lib/components/form/Select.svelte';
 import Button from '$lib/components/button/Button.svelte';
 
 const col = createTableHeadGenerator<{
-  User: components['schemas']['GetUsersElement'] & { User?: { password: string } };
+  User: components['schemas']['GetUsersElement'] & { User?: { password: string, nids_sid: string } };
   Roles: components['schemas']['PartialRoleUsersResponse'][];
   Organisations: components['schemas']['Organisation'][];
 }>();
@@ -160,7 +160,7 @@ export default {
         display: HrefPill,
         props: {
           icon: 'mdi:lock-outline',
-          text: String(x.User?.User?.nids_sid) ?? 'unknown',
+          text: x.User?.User?.nids_sid ?? 'unknown',
           href: x.User?.User?.nids_sid ? 'idto:' + x.User?.User?.nids_sid : ''
         }
       })
@@ -168,7 +168,7 @@ export default {
     {
       value: (x) => ({
         display: Input,
-        props: { value: String(x.User?.User?.nids_sid) ?? '', name: 'nids_sid' }
+        props: { value: x.User?.User?.nids_sid ?? '0', name: 'nids_sid', placeholder: 'set new nids sid' }
       })
     }
   ),
