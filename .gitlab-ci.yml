@@ -182,6 +182,8 @@ integration_tests:
         PUBLIC_MISP_API_ENDPOINT: https://misp-core
         PUBLIC_DATE_FORMAT: yyyy-mm-DD
   script:
+    # Set Frontend Config
+    - cp $CONFIG_FILE config.yaml
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
