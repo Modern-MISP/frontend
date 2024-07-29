@@ -21,13 +21,14 @@ services:
   cypress:
     image: cypress/included:13.6.4 # https://github.com/cypress-io/github-action/issues/1136#issuecomment-1983439957
     command:
+      - --parallel
+      - --record
       - --browser
       - chrome
       - --reporter
       - junit
       - --reporter-options
       - mochaFile=reports/report-[hash].xml
-      - --record
     volumes:
       - .:/e2e
     working_dir: /e2e
@@ -35,6 +36,8 @@ services:
       CYPRESS_BASE_URL: http://frontend:80
       CYPRESS_VIDEO: 'true'
       ELECTRON_ENABLE_LOGGING: 'true'
-      CYPRESS_RECORD_KEY:
+      CYPRESS_RECORD_KEY: $CYPRESS_RECORD_KEY
+      CI_PIPELINE_ID: $CI_PIPELINE_ID
+      GITLAB_CI: true
     depends_on:
       - frontend

@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-  projectId: '9pats2',
+  projectId: 'k7wfye',
 
   experimentalMemoryManagement: true,
   defaultCommandTimeout: 10000,
@@ -44,6 +44,7 @@ export default defineConfig({
         if (browser.name === 'chrome' && browser.isHeadless) {
           launchOptions.args.push(`--window-size=${width},${height}`);
           launchOptions.args.push('--force-device-scale-factor=1');
+          launchOptions.args.push('--disable-gpu');
         }
 
         return launchOptions;
