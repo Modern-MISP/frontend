@@ -14,7 +14,7 @@
     console.log('formData', formData);
     notifySave(
       $api
-        .POST('/user_settings/setSetting/{userId}/{userSettingName}', {
+        .POST('/user_settings/setSetting/me/{userSettingName}', {
           params: { path: { userId: Number(data.userid), userSettingName: 'user_name' } },
           body: { value: { name: String(formData.name) } }
         })
