@@ -33,23 +33,62 @@ describe('login', () => {
   });
 });
 
+const password = 'password';
+const email2 = 'cypress-test@example.com';
+const user_name2 = 'Cypress Test';
+
+const cardRowRight2 = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
+
 describe('login password', () => {
+  before(() => {
+    cy.defaultLogin();
+    cy.visit('/admin/users/new');
+
+    cy.get(cardRowRight2('Name')).type(user_name2);
+    cy.get(cardRowRight2('Email')).type(email2);
+    cy.get(cardRowRight2('Password')).clear().type(password);
+    cy.get(cardRowRight2('Contact enables')).click();
+    cy.get(cardRowRight2('Weekly notifications')).click();
+    cy.get(cardRowRight2('Terms accepted')).click();
+
+    cy.get('button:has(span:contains("Save"))').click();
+
+    cy.url().should('match', /\/admin\/users\/\d+/);
+
+    cy.clearAllSessionStorage();
+  });
+
+  after(() => {
+    cy.clearAllSessionStorage();
+    cy.defaultLogin();
+    cy.visit('/admin/users');
+    cy.toggleMode();
+
+    cy.get('tbody > tr:last-child').click();
+    cy.url().should('match', /\/admin\/users\/\d+/);
+    cy.get('button:has(span:contains("Delete"))').click();
+  });
+
   it('should login with password', () => {
     cy.visit('/login');
-    cy.get('input[name="email"]').type(Cypress.env('adminEmail'));
-    cy.get('input[name="password"]').type(Cypress.env('adminPassword'));
+    cy.url().should('match', /login\/?$/);
+    cy.get('input[name="email"]').type(email2);
+    cy.get('input[name="password"]').type(password);
     cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/event');
+    cy.wait(100);
+    cy.url().should('not.match', /login\/?$/);
   });
 
   it('should fail login with wrong password', () => {
     cy.visit('/login');
-    cy.get('input[name="email"]').type(Cypress.env('adminEmail'));
-    cy.get('input[name="password"]').type('wrong-password');
+    cy.get('input[name="email"]').type(email2);
+    cy.get('input[name="password"]').type(password + 'wrong-password');
     cy.get('button[type="submit"]').click();
     cy.url().should('include', '/login');
   });
+});
 
+describe('reset password', () => {
   it('should alert "Please Contact your Administrator to reset your password."', () => {
     const stub = cy.stub();
     cy.on('window:alert', stub);
@@ -63,12 +102,6 @@ describe('login password', () => {
       });
   });
 });
-
-const password = 'password';
-const email2 = 'cypress-test@example.com';
-const user_name2 = 'Cypress Test';
-
-const cardRowRight2 = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
 describe('change password', () => {
   before(() => {
