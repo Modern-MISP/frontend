@@ -8,4 +8,12 @@ describe('Admin Tests', () => {
 
     cy.url().should('include', '/admin/keys');
   });
+
+  it('should block not logged in users from accessing the admin page', () => {
+    cy.logout();
+
+    cy.visit('/admin', { failOnStatusCode: false });
+
+    cy.url().should('include', '/login');
+  });
 });
