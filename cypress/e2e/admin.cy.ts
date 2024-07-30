@@ -10,7 +10,8 @@ describe('Admin Tests', () => {
   });
 
   it('should block not logged in users from accessing the admin page', () => {
-    cy.logout();
+    cy.clearCookies();
+    cy.clearLocalStorage();
 
     cy.visit('/admin', { failOnStatusCode: false });
 
