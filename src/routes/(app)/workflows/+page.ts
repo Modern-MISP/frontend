@@ -127,7 +127,7 @@ export const load = async ({ fetch }) => {
         Promise.all(
           x.map((workflow) =>
             // @ts-expect-error Not in the OpenAPI spec?
-            get(api).POST('/workflows/toggleDebugField/{workflowId}/{enabled}', {
+            get(api).POST('/workflows/debugToggleField/{workflowId}/{enabled}', {
               fetch,
               params: { path: { workflowId: workflow.id!, enabled: !workflow.debug_enabled } }
             })
