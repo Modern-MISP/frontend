@@ -4,8 +4,8 @@ export type Blueprint = {
     uuid?: string;
     name?: string;
     description?: string;
-    timestamp?: string; //datetime/number?
-    default?: boolean; //tinyint?
+    timestamp?: string;
+    default?: boolean;
     data?: string;
   };
 };

@@ -3,7 +3,6 @@
 
   export let data;
 
-  //TODO Filters?
 </script>
 
 <!--

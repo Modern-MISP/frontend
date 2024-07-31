@@ -4,7 +4,6 @@
   export let data;
 
   const { log, infoHeader } = data;
-  //TODO Filters?
 </script>
 
 <!--
@@ -21,6 +20,8 @@
   - Action
   - Title
   - Change
+  - Description
+  - User-ID
 
 -->
 

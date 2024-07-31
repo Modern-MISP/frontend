@@ -9,7 +9,6 @@ import type { Log } from '../log';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   // @ts-expect-error Not in OpenAPI spec
-  //TODO API Endpoint
   const getResult = await get(api).GET('/logs/index/{logId}', {
     fetch,
     params: { path: { logId: params.id } }

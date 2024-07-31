@@ -15,7 +15,7 @@ import { successPill } from '$lib/util/pill.util';
 import { invalidateAll } from '$app/navigation';
 
 export const load = async ({ fetch }) => {
-  /// @ts-expect-error Not in the OpenAPI spec. great.
+  // @ts-expect-error Not in the OpenAPI spec. great.
   const getResult = await get(api).GET('/workflows/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = (getResult.data! as { Workflow: Trigger['Workflow'] }[]).map((x) => x.Workflow!);

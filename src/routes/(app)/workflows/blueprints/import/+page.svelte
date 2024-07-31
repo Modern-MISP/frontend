@@ -45,6 +45,11 @@
   ];
 </script>
 
+<!--
+  @component
+  Page with an input form for importing a new workflow blueprint by typing in the JSON representation of the new one
+-->
+
 <svelte:window use:lockEditMode={true} />
 
 <Form callback={editCallback}>
