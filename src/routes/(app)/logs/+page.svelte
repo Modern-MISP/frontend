@@ -2,7 +2,6 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   export let data;
-
 </script>
 
 <!--
