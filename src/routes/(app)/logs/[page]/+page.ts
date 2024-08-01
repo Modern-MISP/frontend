@@ -8,9 +8,13 @@ import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch }) => {
+export const load: PageLoad = async ({ fetch, params }) => {
+  const page = Math.max(parseInt(params.page), 1);
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).POST('/logs/index', { fetch, body: { model: 'Workflow' } });
+  const getResult = await get(api).GET('/logs/index/', {
+    fetch,
+    params: { query: { /*model: 'Workflow',*/ page, limit: 50 } }
+  });
 
   const { error: mispError, response } = getResult;
   const data = (getResult.data as Log[]).map((x) => x.Log!);
@@ -90,6 +94,7 @@ export const load: PageLoad = async ({ fetch }) => {
     data,
     tableData: data,
     header,
-    editActions
+    editActions,
+    page
   };
 };

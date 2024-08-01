@@ -8,7 +8,7 @@ const user_name = 'Cypress Test';
 const cardRowRight = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
 describe('User tests', () => {
-  it('should be able to navigate to the "new user" page', () => {
+  it('should be able to navigate to the "new user" [page]', () => {
     cy.visit('/admin/users');
 
     cy.toggleMode();

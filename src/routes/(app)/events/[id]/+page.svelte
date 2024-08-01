@@ -32,7 +32,7 @@
   The EventGraph will be displayed with the {@link EventGraph} component.
   The Attributes are basically a {@link DynTable}
 
-  The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server. 
+  The update of the event will be handled by a form inside of this page, that is a wrapper around some DynCards. Therefore the "name" from from any inputted component will be used to calculate the final object we will send to the server.
  -->
 
 <EventInfo {data} bind:state>
