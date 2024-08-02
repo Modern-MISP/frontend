@@ -18,6 +18,7 @@ import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { goto } from '$app/navigation';
 import { compatibility } from '$lib/stores';
+import { writable } from 'svelte/store';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
@@ -32,6 +33,14 @@ export const load: PageLoad = async ({ fetch }) => {
   ];*/
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
+
+  const passwordStore = writable('');
+
+  function showPasswordPopup(password) {
+    passwordStore.set(password);
+    const popup = document.getElementById('password-popup');
+    if (popup) popup.style.display = 'block';
+  }
 
   const header = [
     col({
@@ -271,11 +280,7 @@ export const load: PageLoad = async ({ fetch }) => {
                     return;
                   }
                   navigator.clipboard.writeText(randomstring);
-                  notifications.add(
-                    successPill(
-                      'New password copied to clipbord ' + x.map((y) => y.User?.id).join(', ')
-                    )
-                  );
+                  showPasswordPopup(randomstring);
                   invalidateAll();
                 });
               } else {
@@ -456,6 +461,7 @@ export const load: PageLoad = async ({ fetch }) => {
     editActions,
     topMenuActions,
     filter,
-    maxCount: data.length
+    maxCount: data.length,
+    passwordStore
   };
 };

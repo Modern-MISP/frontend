@@ -14,6 +14,7 @@
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
   import { page } from '$app/stores';
   import { writable } from 'svelte/store';
+  import { successPill } from '$lib/util/pill.util.js';
 
   /** Page data */
   export let data;
@@ -31,9 +32,7 @@
   function closePopup() {
     const popup = document.getElementById('authkey-popup');
     if (popup) popup.style.display = 'none';
-    notifications.add({
-      text: `Key added successfully`
-    });
+    notifications.add(successPill('New Auth Key added successfully'));
     goto(`/admin/keys/`);
   }
 

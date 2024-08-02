@@ -86,7 +86,7 @@ describe('Settings Page Tests', () => {
     cy.url().should('include', '/settings');
   });
 
-  it('should add a new auth key and delete it afterward', () => {
+  it('should add a new auth key and verify it in the table', () => {
     cy.contains('Security Settings').click();
 
     cy.url().should('include', '/settings/security');
@@ -103,13 +103,76 @@ describe('Settings Page Tests', () => {
 
     cy.get('input[name="comment"]').type('cypress_test');
     cy.contains('Save').click();
-    cy.contains('I have noted down my key').click();
-    cy.contains('cypress_test').should('exist');
-    cy.contains('cypress_test').click();
-    cy.contains('Delete').click();
-    cy.contains('cypress_test').should('not.exist');
 
-    cy.get('button:contains(Cancel)').click();
-    cy.url().should('include', '/settings');
+    cy.get('#authkey-popup', { timeout: 10000 }).should('be.visible');
+
+    cy.get('#authkey-popup p strong')
+      .invoke('text')
+      .then((authKey) => {
+        const first4 = authKey.slice(0, 4);
+        const last4 = authKey.slice(-4);
+
+        cy.log(`Auth Key: ${authKey}`);
+        cy.log(`First 4 characters: ${first4}`);
+        cy.log(`Last 4 characters: ${last4}`);
+
+        cy.contains('I have noted down my key').click();
+
+        cy.contains('cypress_test');
+
+        cy.contains(first4).parent().contains(last4).click();
+
+        cy.contains('Delete').click();
+      });
+  });
+
+  it('should create a new auth key, edit the comment, verify, and delete', () => {
+    cy.contains('Security Settings').click();
+
+    cy.url().should('include', '/settings/security');
+    cy.contains('ID');
+    cy.contains('Key');
+    cy.contains('Comment');
+    cy.contains('Expiration');
+    cy.contains('Last used');
+    cy.contains('Last seen Ip');
+    cy.contains('Ip count');
+    cy.contains('Email');
+
+    cy.contains('Add Key').click();
+
+    cy.get('input[name="comment"]').type('initial_comment');
+    cy.contains('Save').click();
+
+    cy.get('#authkey-popup', { timeout: 10000 }).should('be.visible');
+
+    cy.get('#authkey-popup p strong')
+      .invoke('text')
+      .then((authKey) => {
+        const first4 = authKey.slice(0, 4);
+        const last4 = authKey.slice(-4);
+
+        cy.log(`Auth Key: ${authKey}`);
+        cy.log(`First 4 characters: ${first4}`);
+        cy.log(`Last 4 characters: ${last4}`);
+
+        cy.contains('I have noted down my key').click();
+
+        cy.contains(first4).parent().contains(last4).dblclick();
+
+        cy.get('input[name="comment"]').clear().type('Cypress_edit_comment');
+        cy.contains('Save').click();
+
+        cy.contains('Cypress_edit_comment')
+          .parents('tr')
+          .within(() => {
+            cy.contains(first4).scrollIntoView().should('be.visible');
+            cy.contains(last4).scrollIntoView().should('be.visible');
+            cy.contains('Cypress_edit_comment').scrollIntoView().should('be.visible');
+          })
+          .click();
+
+        cy.contains('Delete').click();
+      });
   });
 });
