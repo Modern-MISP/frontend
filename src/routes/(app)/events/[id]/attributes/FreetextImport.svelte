@@ -90,6 +90,7 @@
           })
           .then((resp) => {
             if (resp.error) throw new Error(resp.error.detail);
+            invalidateAll();
           });
         });
         invalidateAll();
