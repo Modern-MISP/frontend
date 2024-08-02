@@ -3,7 +3,6 @@
   import { notifications } from '$lib/stores';
   import type { PageData } from './$types';
   import { successPill } from '$lib/util/pill.util';
-  import { onMount } from 'svelte';
 
   /** Page data containing data of the users table.*/
   export let data: PageData;
