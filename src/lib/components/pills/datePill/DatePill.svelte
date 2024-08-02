@@ -37,7 +37,11 @@
 
 <Pill {icon} class={clazz} {label}>
   {#if date}
-    {format(date, DATE_FORMAT)}
+    {#if date.getTime() === new Date('1970-01-01').getTime()}
+      No Date
+    {:else}
+      {format(date, DATE_FORMAT)}
+    {/if}
   {:else}
     {onNullText}
   {/if}
