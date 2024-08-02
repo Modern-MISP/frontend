@@ -17,6 +17,7 @@
     types: string[];
     default_type: string;
     value: string;
+    to_ids: boolean;
   };
 
   let freetextData;
@@ -27,18 +28,25 @@
     await notifySave(
       $api
         // @ts-expect-error Not in the OpenAPI spec
-        .POST('/events/freeTextImport/', {
+        .POST('/events/freeTextImport/{eventId}', {
           params: { path: { eventId: $page.params.id } },
           body: {
-            Attribute: {
-              event_id: $page.params.id,
-              value: freetext
-            }
+            returnMetaAttributes: true,
+            value: freetext
           }
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.detail);
-          getResponseData(resp.data.id);
+          console.log(resp);
+          if (resp.error) {
+            if (resp.response.status == 307) {
+              getResponseData(resp.error.id);
+            } else {
+              throw new Error(resp.error.detail);
+            }
+          } else {
+            console.log(resp.data);
+            freetextData = resp.data;
+          }
         })
     );
   };
@@ -70,15 +78,21 @@
       label: 'Save',
       icon: 'mdi:content-save',
       action: (x) => {
-        get(api)
-          .POST('/events/freeTextImport/{eventId}', {
+        x.forEach((y) => {
+          get(api)
+          .POST('/attributes/add/{eventId}', {
             params: { path: { eventId: $page.params.id } },
-            body: { attributes: x }
+            body: { 
+              type: y.default_type,
+              value: y.value,
+              to_ids: y.to_ids
+             }
           })
           .then((resp) => {
             if (resp.error) throw new Error(resp.error.detail);
-            invalidateAll();
           });
+        });
+        invalidateAll();
       }
     }
   ];
