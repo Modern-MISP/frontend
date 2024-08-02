@@ -2,8 +2,8 @@ beforeEach(() => {
   cy.defaultLogin();
 });
 
-describe('Freetext import tool', () => {
-  it('should return as many attributes as were entered', () => {
+describe('Open freetext import tool', () => {
+  it('should open the freetext import tool', () => {
     cy.visit('/events/6/attributes');
 
     cy.url().should('include', 'attributes');
@@ -11,6 +11,22 @@ describe('Freetext import tool', () => {
     cy.toggleMode();
 
     cy.get('#freetext-import').should('not.exist');
+
+    cy.get('button:contains(Freetext Import Tool)').should('exist').click();
+
+    cy.get('#freetext-import').should('exist');
+
+    cy.get('button:contains(Close Freetext Import Tool)').click();
+
+    cy.get('#freetext-import').should('not.exist');
+  });
+});
+
+describe('Freetext import tool', () => {
+  it('should return as many attributes as were entered', () => {
+    cy.visit('/events/6/attributes');
+
+    cy.toggleMode();
 
     cy.get('button:contains(Freetext Import Tool)').should('exist').click();
 
