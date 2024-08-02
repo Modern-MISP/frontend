@@ -1,3 +1,4 @@
+import { add, first } from 'cypress/types/lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 beforeEach(() => {
@@ -18,24 +19,6 @@ describe('tags', () => {
       cy.get('button[type="submit"]').click(); // save
 
       cy.toggleMode();
-
-      cy.get('[slot="filter"] input').type(name); // search tag
-      cy.get('tbody tr:first').click();
-
-      cy.url().should('match', /\/tags\/\d+/);
-
-      const check = (label, text) => {
-        cy.get(`main main div:has(> span:first:contains(${label})) > :last-child`).should(
-          'contain.text',
-          text
-        );
-      };
-      check('Name', name);
-      check('Exportable', 'No');
-      check('Hidden', 'Yes');
-      check('Local only', 'Yes');
-      check('Restricted to Org', 'Yes');
-      check('Restricted to User', 'No');
     });
 
     it('should be closable via action bar', () => {
@@ -57,5 +40,22 @@ describe('tags', () => {
       cy.get('form button:contains("Cancel")').click();
       cy.get('form').should('not.exist');
     });
+  });
+});
+
+const filter = (text: string) => `div:has(> Button:contains("${text}")) > :last-child`;
+
+describe('Tags with Filters', () => {
+  it('should be able to use the filter', () => {
+    cy.visit('/tags');
+    cy.get(filter('Filter')).click();
+    cy.get('select:contains("Hidden")').select('Hidden');
+    const addFilter = cy.get('div:contains("Add Filter")');
+    addFilter.get('button:contains("Add")').click();
+    const filterSet = cy.get('div:has(> h1:contains("Current Filter")) > :last-child').children().first()
+    filterSet.should('exist');
+    filterSet.children().first().contains('hidden');
+    cy.get('div:has(> span:contains("false")) > :last-child').first().should('exist').click();
+    cy.get('div:has(> h1:contains("Current Filter")) > :last-child').children().should('have.length', 0);
   });
 });

@@ -70,7 +70,7 @@ describe('open Statistics pages', () => {
     cy.get(heatmapMonth('Jun')).should('exist');
     cy.get(heatmapMonth('Jun'))
       .children()
-      .should('have.length', 29 + 1);
+      .should('have.length', 30 + 1);
   });
   it('should be able to navigate to the Statistics Attribute Histogram page', () => {
     cy.visit('/statistics/attribute_histogram');
