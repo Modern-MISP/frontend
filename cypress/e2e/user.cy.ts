@@ -17,7 +17,7 @@ describe('User tests', () => {
 
     cy.url().should('include', '/admin/users/new');
   });
-  if(!Cypress.env('skip')) {
+  if(Cypress.env('skip') == false) {
     it('should create a new user', () => {
       cy.visit('/admin/users/new');
 
@@ -37,7 +37,7 @@ describe('User tests', () => {
       cy.get(cardRowRight('Name')).should('contain.text', user_name);
     });
   }
-  if(!Cypress.env('skip')) {
+  if(Cypress.env('skip') == false) {
     it('should edit an existing user', () => {
       cy.visit('/admin/users');
 
