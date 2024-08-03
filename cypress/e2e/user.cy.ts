@@ -17,45 +17,47 @@ describe('User tests', () => {
 
     cy.url().should('include', '/admin/users/new');
   });
+  if(!Cypress.env('skip')) {
+    it('should create a new user', () => {
+      cy.visit('/admin/users/new');
 
-  it('should create a new user', () => {
-    cy.visit('/admin/users/new');
+      cy.get(cardRowRight('Name')).type(user_name);
+      cy.get(cardRowRight('Email')).type(email);
+      cy.get(cardRowRight('Contact enables')).click();
+      cy.get(cardRowRight('Weekly notifications')).click();
+      cy.get(cardRowRight('Terms accepted')).click();
 
-    cy.get(cardRowRight('Name')).type(user_name);
-    cy.get(cardRowRight('Email')).type(email);
-    cy.get(cardRowRight('Contact enables')).click();
-    cy.get(cardRowRight('Weekly notifications')).click();
-    cy.get(cardRowRight('Terms accepted')).click();
+      cy.get('button:has(span:contains("Save"))').click();
 
-    cy.get('button:has(span:contains("Save"))').click();
+      cy.url().should('match', /\/admin\/users\/\d+/);
 
-    cy.url().should('match', /\/admin\/users\/\d+/);
+      cy.toggleMode();
 
-    cy.toggleMode();
+      cy.get(cardRowRight('Email')).should('contain.text', email);
+      cy.get(cardRowRight('Name')).should('contain.text', user_name);
+    });
+  }
+  if(!Cypress.env('skip')) {
+    it('should edit an existing user', () => {
+      cy.visit('/admin/users');
 
-    cy.get(cardRowRight('Email')).should('contain.text', email);
-    cy.get(cardRowRight('Name')).should('contain.text', user_name);
-  });
+      cy.get('tbody > tr:last-child').click();
 
-  it('should edit an existing user', () => {
-    cy.visit('/admin/users');
+      cy.url().should('match', /\/admin\/users\/\d+/);
 
-    cy.get('tbody > tr:last-child').click();
+      cy.toggleMode();
 
-    cy.url().should('match', /\/admin\/users\/\d+/);
+      const newEmail = 'new2@email.test';
 
-    cy.toggleMode();
+      cy.get(cardRowRight('Email')).should('not.be.disabled').clear().type(newEmail);
 
-    const newEmail = 'new2@email.test';
+      cy.get('button:has(span:contains("Save"))').click();
 
-    cy.get(cardRowRight('Email')).should('not.be.disabled').clear().type(newEmail);
+      cy.toggleMode();
 
-    cy.get('button:has(span:contains("Save"))').click();
-
-    cy.toggleMode();
-
-    cy.get(cardRowRight('Email')).should('contain.text', newEmail);
-  });
+      cy.get(cardRowRight('Email')).should('contain.text', newEmail);
+    });
+  }
 
   it('should be able to delete the created user', () => {
     cy.visit('/admin/users');

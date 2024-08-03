@@ -40,8 +40,8 @@ const user_name2 = 'Cypress Test';
 const cardRowRight2 = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
 if(!Cypress.env('skip')) {
-describe('login password', () => {
-  before(() => {
+  describe('login password', () => {
+   before(() => {
     cy.defaultLogin();
     cy.visit('/admin/users/new');
 
@@ -87,10 +87,10 @@ describe('login password', () => {
     cy.get('button[type="submit"]').click();
     cy.url().should('include', '/login');
   });
-});
+  });
 
-describe('reset password', () => {
-  it('should alert "Please Contact your Administrator to reset your password."', () => {
+  describe('reset password', () => {
+    it('should alert "Please Contact your Administrator to reset your password."', () => {
     const stub = cy.stub();
     cy.on('window:alert', stub);
     cy.visit('/login');
@@ -102,10 +102,10 @@ describe('reset password', () => {
         );
       });
   });
-});
+  });
 
-describe('change password', () => {
-  before(() => {
+  describe('change password', () => {
+    before(() => {
     cy.defaultLogin();
     cy.visit('/admin/users/new');
 
@@ -175,5 +175,5 @@ describe('change password', () => {
 
     cy.url().should('include', '/events');
   });
-});
+  });
 }
