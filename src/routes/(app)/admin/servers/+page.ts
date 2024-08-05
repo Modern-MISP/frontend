@@ -25,19 +25,19 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:id-card',
       key: 'id',
       label: 'ID',
-      value: (x: any) => x.Server?.id ?? 'unknown'
+      value: (x) => x.Server?.id ?? 'unknown'
     }),
     col({
       icon: 'mdi:circle',
       key: 'name',
       label: 'Name',
-      value: (x: any) => x.Server?.name ?? 'unknown'
+      value: (x) => x.Server?.name ?? 'unknown'
     }),
     col({
       icon: 'mdi:wifi',
       key: 'url',
       label: 'URL',
-      value: (x: any) => ({
+      value: (x) => ({
         display: HrefPill,
         props: {
           icon: 'ri:share-box-line',
@@ -51,13 +51,13 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:chevron-triple-up',
       key: 'priority',
       label: 'Priority',
-      value: (x: any) => x.Server?.priority ?? 'unknown'
+      value: (x) => x.Server?.priority ?? 'unknown'
     }),
     col({
       icon: 'material-symbols:work-outline',
       key: 'org_id',
       label: 'Organization',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Pill,
         props: {
           icon: 'material-symbols:work-outline',
@@ -70,7 +70,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'material-symbols:work-outline',
       key: 'remote_org_id',
       label: 'Remote Org',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Pill,
         props: {
           icon: 'material-symbols:work-outline',
@@ -83,25 +83,25 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:home-search-outline',
       key: 'internal',
       label: 'Internal',
-      value: (x: any) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.internal ?? false } })
     }),
     col({
       icon: 'mdi:upload',
       key: 'push',
       label: 'Push',
-      value: (x: any) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push ?? false } })
     }),
     col({
       icon: 'mdi:download',
       key: 'pull',
       label: 'Pull',
-      value: (x: any) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.pull ?? false } })
     }),
     col({
       icon: 'mdi:eye-outline',
       key: 'push_sightings',
       label: 'Push Sightings',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.push_sightings ?? false }
       })
@@ -110,7 +110,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'streamline:galaxy-2-solid',
       key: 'push_galaxy_cluster',
       label: 'Push Cluster',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.push_galaxy_clusters ?? false }
       })
@@ -119,7 +119,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:cached',
       key: 'caching_enabled',
       label: 'Cache',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.caching_enabled ?? false }
       })
@@ -128,7 +128,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: '',
       key: 'unpublish_event',
       label: 'Unpublish Event',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.unpublish_event ?? false }
       })
@@ -137,7 +137,7 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:email-outline',
       key: 'publish_without_email',
       label: 'Publish without email',
-      value: (x: any) => ({
+      value: (x) => ({
         display: Boolean,
         props: { isTrue: x.Server?.publish_without_email ?? false }
       })
@@ -146,13 +146,13 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: '',
       key: 'self_signed',
       label: 'Self Signed',
-      value: (x: any) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.self_signed ?? false } })
     }),
     col({
       icon: 'mdi:link',
       key: 'skip_proxy',
       label: 'Skip Proxy',
-      value: (x: any) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
+      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.skip_proxy ?? false } })
     })
   ];
 
@@ -169,7 +169,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Delete Server',
       icon: 'mdi:delete-outline',
       class: 'text-red',
-      action: (x: any[]) => {
+      action: (x) => {
         Promise.all(
           x
             .map((y) => y.Server?.id)
@@ -185,7 +185,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Sync with local events',
       icon: 'mdi:sync',
-      action: (x: any[]) => {
+      action: (x) => {
         // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Sync all: ' + x.map((y) => y.Server?.id).join())
@@ -195,7 +195,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Pull all',
       icon: 'mdi:download',
-      action: (x: any[]) => {
+      action: (x) => {
         // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. Pull all: ' + x.map((y) => y.Server?.id).join())
@@ -206,7 +206,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Push all',
       icon: 'mdi:upload',
       // TODO: add a endpoint if found.
-      action: (x: any[]) => {
+      action: (x) => {
         notifications.add(
           errorPill('Do not know the endpoint. Push all: ' + x.map((y) => y.Server?.id).join())
         );
@@ -215,7 +215,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Cache instance',
       icon: 'octicon:cache-16',
-      action: (x: any[]) => {
+      action: (x) => {
         Promise.all(
           x
             .map((y) => y.Server?.id)
@@ -235,7 +235,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Increase priority',
       icon: 'iconoir:priority-up',
-      action: (x: any[]) => {
+      action: (x) => {
         notifications.add(
           errorPill('Do not know the endpoint. increase prio:' + x.map((y) => y.Server?.id).join())
         );
@@ -244,7 +244,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Decrease priority',
       icon: 'iconoir:priority-down',
-      action: (x: any[]) => {
+      action: (x) => {
         notifications.add(
           errorPill('Do not know the endpoint. decrease prio: ' + x.map((y) => y.Server?.id).join())
         );
@@ -253,7 +253,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Test connection',
       icon: 'mdi:connection',
-      action: (x: any[]) => {
+      action: (x) => {
         notifications.add(
           errorPill(
             'Do not know the endpoint. test connection: ' + x.map((y) => y.Server?.id).join()
@@ -264,7 +264,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Reset api key',
       icon: 'fluent:key-reset-20-regular',
-      action: (x: any[]) => {
+      action: (x) => {
         notifications.add(
           errorPill('Do not know the endpoint. reset api key: ' + x.map((y) => y.Server?.id).join())
         );
@@ -273,7 +273,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Export',
       icon: 'mdi:download',
-      action: (x: any[]) => {
+      action: (x) => {
         console.log(x);
       }
     }

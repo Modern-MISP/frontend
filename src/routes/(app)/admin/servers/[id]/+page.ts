@@ -13,6 +13,43 @@ import Select from '$lib/components/form/Select.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 export const load = async ({ params, fetch }) => {
+  type Organisation = {
+    id: string;
+    name: string;
+  };
+
+  type RemoteOrg = {
+    id: string;
+    name: string;
+  };
+
+  type Server = {
+    id: string;
+    name: string;
+    url: string;
+    priority: number;
+    org_id: string;
+    remote_org_id: string;
+    internal: boolean;
+    push: boolean;
+    pull: boolean;
+    push_sightings: boolean;
+    caching_enabled: boolean;
+    push_galaxy_clusters: boolean;
+    pull_galaxy_clusters: boolean;
+    unpublish_event: boolean;
+    publish_without_email: boolean;
+    self_signed: boolean;
+    skip_proxy: boolean;
+    remove_missing_tags: boolean;
+  };
+
+  type ServerData = {
+    Server: Server;
+    Organisation: Organisation;
+    RemoteOrg: RemoteOrg;
+  };
+
   const {
     data: serverData,
     error: mispError,
@@ -21,12 +58,13 @@ export const load = async ({ params, fetch }) => {
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const server = (filter(serverData, (x) => x.Server.id === params.id).at(0) ?? {}) as any;
+  const server = (filter(serverData, (x: ServerData) => x.Server.id === params.id).at(0) ??
+    {}) as ServerData;
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
-  const orgOptions = orgs?.map((x: any) => x.Organisation);
+  const orgOptions = orgs?.map((x: { Organisation: Organisation }) => x.Organisation);
 
-  const col = createTableHeadGenerator<any>();
+  const col = createTableHeadGenerator<typeof server>();
 
   const left = [
     col({
@@ -296,7 +334,6 @@ export const load = async ({ params, fetch }) => {
       {
         value: (x) => ({
           display: Checkbox,
-
           props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }
