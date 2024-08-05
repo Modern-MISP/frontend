@@ -8,21 +8,25 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 export const load = async ({ params, fetch }) => {
-  const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
+  const {
+    data: serverData,
+    error: mispError,
+    response
+  } = await get(api).GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
-  const col = createTableHeadGenerator<typeof server>();
+  const server = (filter(serverData, (x) => x.Server.id === params.id).at(0) ?? {}) as any;
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
-  const orgOptions = orgs?.map((x) => x.Organisation);
+  const orgOptions = orgs?.map((x: any) => x.Organisation);
+
+  const col = createTableHeadGenerator<any>();
 
   const left = [
     col({
@@ -286,7 +290,6 @@ export const load = async ({ params, fetch }) => {
         label: 'Remove missing attribute tags',
         value: (x) => ({
           display: Boolean,
-          // @ts-expect-error Not in the OpenAPI spec.
           props: { isTrue: x.Server?.remove_missing_tags ?? false }
         })
       },
@@ -294,7 +297,6 @@ export const load = async ({ params, fetch }) => {
         value: (x) => ({
           display: Checkbox,
 
-          // @ts-expect-error Not in the OpenAPI spec.
           props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }

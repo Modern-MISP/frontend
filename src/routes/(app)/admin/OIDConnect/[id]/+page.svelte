@@ -21,9 +21,10 @@
         })
         .then((resp) => {
           if (resp.error) {
-            // @ts-expect-error MISP API return custom errors object
-            const mispErrors: string[] = Object.values(resp.error.errors ?? {});
-            throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
+            const mispErrors = resp.error.detail?.map((err) => err.msg) || [
+              'An unknown error occurred'
+            ];
+            throw new Error(mispErrors[0]);
           } else {
             goto(`/admin/OIDConnect/`);
           }

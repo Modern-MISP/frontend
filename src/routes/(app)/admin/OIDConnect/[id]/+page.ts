@@ -20,7 +20,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
   });
   const col = createTableHeadGenerator<typeof data>();
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  if (mispError) {
+    throw error(
+      response.status as NumericRange<400, 599>,
+      'An error occurred while fetching the provider data.'
+    );
+  }
 
   const left = [
     col(
@@ -30,7 +35,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Pill,
           props: {
             icon: 'mdi:watermark',
-            text: x.name ?? 'unknown'
+            text: x?.name ?? 'unknown'
           }
         })
       },
@@ -39,7 +44,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Name',
-            value: x.name ?? '',
+            value: x?.name ?? '',
             name: 'name',
             icon: 'mdi:watermark'
           }
@@ -53,8 +58,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: HrefPill,
           props: {
             icon: 'mdi:link-variant',
-            text: x.base_url ?? 'unknown',
-            href: x.base_url ?? ''
+            text: x?.base_url ?? 'unknown',
+            href: x?.base_url ?? ''
           }
         })
       },
@@ -63,7 +68,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Path',
-            value: x.base_url ?? '',
+            value: x?.base_url ?? '',
             name: 'base_url',
             icon: 'mdi:link-variant'
           }
@@ -77,8 +82,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: HrefPill,
           props: {
             icon: 'mdi:key-outline',
-            text: x.client_secret ?? 'unknown',
-            href: x.client_secret ?? ''
+            text: x?.client_secret ?? 'unknown',
+            href: x?.client_secret ?? ''
           }
         })
       },
@@ -87,7 +92,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Token',
-            value: x.client_secret ?? '',
+            value: x?.client_secret ?? '',
             name: 'client_secret',
             icon: 'mdi:key-outline'
           }
@@ -114,8 +119,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: HrefPill,
           props: {
             icon: 'mdi:account-group',
-            text: x.org_id ?? 'unknown',
-            href: x.org_id ?? ''
+            text: x?.org_id ?? 'unknown',
+            href: x?.org_id ?? ''
           }
         })
       },
@@ -124,7 +129,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Organization',
-            value: x.org_id ?? '',
+            value: x?.org_id ?? '',
             name: 'org_id',
             icon: 'mdi:account-group'
           }
@@ -138,7 +143,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Pill,
           props: {
             icon: 'mdi:clipboard-account-outline',
-            text: x.client_id ?? 'unknown'
+            text: x?.client_id ?? 'unknown'
           }
         })
       },
@@ -147,7 +152,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           display: Input,
           props: {
             placeholder: 'Client ID',
-            value: x.client_id ?? '',
+            value: x?.client_id ?? '',
             name: 'client_id',
             icon: 'mdi:clipboard-account-outline'
           }
