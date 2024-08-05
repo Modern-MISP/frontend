@@ -83,7 +83,9 @@
 >
   <div class="flex flex-col">
     <div class="flex flex-row items-center gap-1">
-      <span class="mb-2 mr-5 italic basis-full">{data.moduleData.module_type}</span>
+      <span class="mb-2 mr-5 italic basis-full"
+        >{data.moduleData.module_type} {data.unsupported ? '(Unsupported)' : ''}</span
+      >
       {#if data.moduleData.misp_core_format}
         <span
           class="text-2xl text-sky"
