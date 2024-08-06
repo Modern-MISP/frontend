@@ -139,50 +139,6 @@ export const load = async ({ fetch }) => {
           invalidateAll();
         });
       }
-    },
-    {
-      label: 'Enable',
-      icon: 'mdi:checkbox-outline',
-      action: (x) => {
-        if (!x) return;
-        if (
-          confirm(
-            `Are you sure you want to enable the following workflows?\n${x.map((x) => x.id).join(', ')}`
-          )
-        ) {
-          Promise.all(
-            x.map((workflow) =>
-              // @ts-expect-error Not in the OpenAPI spec
-              get(api).POST('/workflows/toggleModule/{workflowId}/1/1', {
-                fetch,
-                params: { path: { workflowId: workflow.id } }
-              })
-            )
-          ).then(invalidateAll);
-        }
-      }
-    },
-    {
-      label: 'Disable',
-      icon: 'mdi:close-box-outline',
-      action: (x) => {
-        if (!x) return;
-        if (
-          confirm(
-            `Are you sure you want to disable the following workflows?\n${x.map((x) => x.id).join(', ')}`
-          )
-        ) {
-          Promise.all(
-            x.map((workflow) =>
-              // @ts-expect-error Not in the OpenAPI spec
-              get(api).POST('/workflows/toggleModule/{workflowId}/0/1', {
-                fetch,
-                params: { path: { workflowId: workflow.id } }
-              })
-            )
-          ).then(invalidateAll);
-        }
-      }
     }
   ];
 
