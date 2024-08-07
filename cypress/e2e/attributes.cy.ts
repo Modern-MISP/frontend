@@ -25,9 +25,7 @@ describe('filter attributes', () => {
     cy.get('tbody')
       .find('tr')
       .each(($el) => {
-        cy.wrap($el)
-          .invoke('text')
-          .should('contain', 'domain');
-          });
-    });
+        cy.wrap($el).invoke('text').should('contain', 'domain');
+      });
+  });
 });

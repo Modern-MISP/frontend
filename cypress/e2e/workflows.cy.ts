@@ -1,9 +1,9 @@
 beforeEach(() => {
   cy.defaultLogin();
 });
-if(Cypress.env('skip') == false) {
+if (Cypress.env('skip') == false) {
   describe('workflows', () => {
-  // Enable "Attach warninglists" module
+    // Enable "Attach warninglists" module
     before(() => {
       cy.defaultLogin();
 
@@ -13,7 +13,7 @@ if(Cypress.env('skip') == false) {
 
       cy.toggleMode();
 
-     cy.get('tbody > tr:nth-child(5)').click();
+      cy.get('tbody > tr:nth-child(5)').click();
 
       cy.get('button:contains(Enable):not(:contains(Enabled))').should('be.enabled').click();
     });
@@ -24,7 +24,7 @@ if(Cypress.env('skip') == false) {
       cy.toggleMode();
       cy.get('#actionBar > button:contains("Save")').should('be.disabled');
       const card = cy.get(
-      'main .flex-col .flex-row > [draggable=true]:contains("Attach warninglist")'
+        'main .flex-col .flex-row > [draggable=true]:contains("Attach warninglist")'
       );
       card.drag('.svelte-flow__pane');
       cy.get('#actionBar > button:contains("Save")').should('not.be.disabled');

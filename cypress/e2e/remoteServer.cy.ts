@@ -3,7 +3,7 @@ beforeEach(() => {
 });
 
 describe('open Remote Server page', () => {
-  if(Cypress.env('skip') == false) {
+  if (Cypress.env('skip') == false) {
     it('should be able to navigate to the Remote Server page', () => {
       cy.visit('/admin');
       cy.get('a:contains("Remote Servers")').should('exist').click();
@@ -12,7 +12,7 @@ describe('open Remote Server page', () => {
 });
 
 describe('Remote Server add Server', () => {
-  if(Cypress.env('skip') == false) {
+  if (Cypress.env('skip') == false) {
     it('should be able to navigate to the "new server" page', () => {
       cy.toggleMode();
 

@@ -93,7 +93,7 @@ export const load: PageLoad = async ({ fetch }) => {
             label: y.relationship_type ? y.relationship_type : undefined,
             text: y.Tag?.name,
             style: `background-color: ${y.Tag?.colour}; color: ${
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
               shouldTextBeBlack(y.Tag?.colour! ?? 'white') ? 'black' : 'white'
             }`
           }))

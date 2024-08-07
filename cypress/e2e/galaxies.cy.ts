@@ -60,7 +60,7 @@ describe('galaxy cluster', () => {
 
   it('should have an detailed view', () => {
     cy.visit(`/galaxies/`);
-    
+
     cy.get('table tbody tr:first').click();
     cy.wait(300);
 

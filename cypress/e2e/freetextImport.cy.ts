@@ -4,7 +4,7 @@ beforeEach(() => {
   cy.get('tbody').children().first().click();
   cy.get('a:contains("Event Attributes")').click();
 });
-if(Cypress.env('skip') == false) {
+if (Cypress.env('skip') == false) {
   describe('Freetext import tool', () => {
     it('should return as many attributes as were entered', () => {
       cy.visit('/events/1/attributes');
@@ -20,8 +20,8 @@ if(Cypress.env('skip') == false) {
       cy.get('#freetext-import').should('exist');
 
       cy.get('textarea')
-      .focus()
-      .type('https://test.url{enter}3961eae797dbb7ff909385fc739be743{enter}file.type');
+        .focus()
+        .type('https://test.url{enter}3961eae797dbb7ff909385fc739be743{enter}file.type');
 
       cy.get('button:contains(Submit)').click();
 

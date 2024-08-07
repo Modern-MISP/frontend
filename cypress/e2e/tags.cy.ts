@@ -1,4 +1,3 @@
-import { add, first } from 'cypress/types/lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 beforeEach(() => {
@@ -10,6 +9,7 @@ describe('tags', () => {
     it('should save correctly', () => {
       const name = `test tag ${uuidv4()}`;
       cy.visit('/tags');
+      cy.wait(1000);
       cy.toggleMode();
       cy.get('#actionBar > :contains("Create Tag")').click();
       cy.get('input[name="name"]').type(name);
@@ -46,16 +46,27 @@ describe('tags', () => {
 const filter = (text: string) => `div:has(> Button:contains("${text}")) > :last-child`;
 
 describe('Tags with Filters', () => {
+  it('should be able to open the filter', () => {
+    cy.visit('/tags');
+    cy.get(filter('Filter')).click();
+    cy.get('h1:contains("Add Filter")').should('exist');
+  });
+
   it('should be able to use the filter', () => {
     cy.visit('/tags');
     cy.get(filter('Filter')).click();
     cy.get('select:contains("Hidden")').select('Hidden');
     const addFilter = cy.get('div:contains("Add Filter")');
     addFilter.get('button:contains("Add")').click();
-    const filterSet = cy.get('div:has(> h1:contains("Current Filter")) > :last-child').children().first()
+    const filterSet = cy
+      .get('div:has(> h1:contains("Current Filter")) > :last-child')
+      .children()
+      .first();
     filterSet.should('exist');
     filterSet.children().first().contains('hidden');
     cy.get('div:has(> span:contains("false")) > :last-child').first().should('exist').click();
-    cy.get('div:has(> h1:contains("Current Filter")) > :last-child').children().should('have.length', 0);
+    cy.get('div:has(> h1:contains("Current Filter")) > :last-child')
+      .children()
+      .should('have.length', 0);
   });
 });

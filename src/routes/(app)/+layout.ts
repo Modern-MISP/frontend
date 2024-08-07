@@ -4,12 +4,7 @@ import { get } from 'svelte/store';
 import config from '$lib/settings';
 
 export const load = async () => {
-  const {
-    data,
-    error: mispError,
-    response
-  } = await get(api)
-    .GET('/users/view/me');
+  const { data, error: mispError, response } = await get(api).GET('/users/view/me');
   const cfg = await config();
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);

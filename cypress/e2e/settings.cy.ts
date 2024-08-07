@@ -6,26 +6,25 @@ describe('Settings Page Tests', () => {
   beforeEach(() => {
     cy.visit('/settings');
   });
-  if(Cypress.env('skip') == false) {
+  if (Cypress.env('skip') == false) {
     it('should open the Information page when Information is clicked and display user information', () => {
       cy.contains('Information').click();
 
       cy.url().should('include', '/settings/information');
       cy.contains('User Information');
       cy.contains(
-      'Detailed information about your user account. Only the name can be changed by you. For other changes, please contact your administrator.'
-     );
+        'Detailed information about your user account. Only the name can be changed by you. For other changes, please contact your administrator.'
+      );
 
       cy.contains('Name');
       cy.contains('Role');
-     cy.contains('Organisation');
-     cy.contains('Created');
+      cy.contains('Organisation');
+      cy.contains('Created');
       cy.contains('Last Login');
 
       cy.get('button:contains(Cancel)').click();
       cy.url().should('include', '/settings');
     });
-  
 
     it('should open the Visual Settings page when Visual Settings is clicked and display visual settings', () => {
       cy.contains('Visual Settings').click();
@@ -45,31 +44,31 @@ describe('Settings Page Tests', () => {
       cy.get('select').select('Brightest Latte');
 
       cy.contains('Menu is open per default')
-      .parent()
-      .find('input[type="checkbox"]')
-      .uncheck({ force: true });
+        .parent()
+        .find('input[type="checkbox"]')
+        .uncheck({ force: true });
       cy.contains('Save').click();
       cy.reload();
       cy.contains('Menu is open per default')
-      .parent()
-      .find('input[type="checkbox"]')
-      .should('not.be.checked');
+        .parent()
+        .find('input[type="checkbox"]')
+        .should('not.be.checked');
 
       cy.contains('Menu is open per default')
-      .parent()
-      .find('input[type="checkbox"]')
-      .check({ force: true });
+        .parent()
+        .find('input[type="checkbox"]')
+        .check({ force: true });
       cy.contains('Save').click();
       cy.reload();
       cy.contains('Menu is open per default')
-      .parent()
-      .find('input[type="checkbox"]')
-      .should('be.checked');
+        .parent()
+        .find('input[type="checkbox"]')
+        .should('be.checked');
 
       cy.get('button:contains(Cancel)').click();
       cy.url().should('include', '/settings');
     });
-}
+  }
 
   it('should open the Security Settings page when Security Settings is clicked and display security settings', () => {
     cy.contains('Security Settings').click();

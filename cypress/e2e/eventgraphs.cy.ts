@@ -58,35 +58,35 @@ describe('eventgraphs', () => {
     check('Comment', attribute.comment, 'span');
     check('Distribution', attribute.distribution.name, 'span');
   });
-  if(Cypress.env('skip') == false) {
+  if (Cypress.env('skip') == false) {
     it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
       const referenceTypes = [
-      'Acquaintance',
-      'Child',
-      'Co-resident',
-      'Co-worker',
-      'Colleague',
-      'Contact',
-      'Crush',
-      'Date',
-      'Friend',
-      'Kin',
-      'Me',
-      'Met',
-      'Muse'
-     ];
+        'Acquaintance',
+        'Child',
+        'Co-resident',
+        'Co-worker',
+        'Colleague',
+        'Contact',
+        'Crush',
+        'Date',
+        'Friend',
+        'Kin',
+        'Me',
+        'Met',
+        'Muse'
+      ];
       const randomReferenceTypeIndex = Math.floor(Math.random() * referenceTypes.length);
 
       const eventId = 34;
 
       const reference = {
-      type: referenceTypes[randomReferenceTypeIndex]
+        type: referenceTypes[randomReferenceTypeIndex]
       };
 
       const object = {
-      name: 'object',
-      abbreviation: 'o',
-      id: '92'
+        name: 'object',
+        abbreviation: 'o',
+        id: '92'
       };
 
       cy.visit('events/' + eventId + '/graph');
@@ -98,21 +98,23 @@ describe('eventgraphs', () => {
 
       card.drag('.svelte-flow__pane'); // drop in graph
 
-     cy.get('button:contains("Unreferenced Attributes")').click(); // close
+      cy.get('button:contains("Unreferenced Attributes")').click(); // close
 
       cy.get(
-      'div:has(> span:first-child:contains("Reference Type for new references")) select'
+        'div:has(> span:first-child:contains("Reference Type for new references")) select'
       ).select(reference.type); // select reference type
 
-      const sourceHandle = cy.get(`div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`); // object's right handle
+      const sourceHandle = cy.get(
+        `div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`
+      ); // object's right handle
       const destinationHandleSelector = 'div[data-id^="unreferenced"] .svelte-flow__handle-left'; // unreferenced attribute's left handle
       sourceHandle.drag(destinationHandleSelector); // connect both nodes
 
       cy.reload();
 
       cy.get(
-      `.svelte-flow__edge[aria-label^="Edge from ${object.abbreviation}-${object.id} to"]`
+        `.svelte-flow__edge[aria-label^="Edge from ${object.abbreviation}-${object.id} to"]`
       ).should('exist');
     });
-}
+  }
 });
