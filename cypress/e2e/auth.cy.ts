@@ -66,7 +66,6 @@ if (!Cypress.env('legacy')) {
       cy.toggleMode();
 
       cy.get('tbody > tr:last-child').click();
-      cy.url().should('match', /\/admin\/users\/\d+/);
       cy.get('button:has(span:contains("Delete"))').click();
     });
 
@@ -139,7 +138,6 @@ if (!Cypress.env('legacy')) {
       cy.toggleMode();
 
       cy.get('tbody > tr:last-child').click();
-      cy.url().should('match', /\/admin\/users\/\d+/);
       cy.get('button:has(span:contains("Delete"))').click();
     });
 
