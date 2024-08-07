@@ -58,6 +58,22 @@ describe('galaxy cluster', () => {
     check('Distribution', 'All communities');
   });
 
+  it('should have an detailed view', () => {
+    cy.visit(`/galaxies/`);
+    
+    cy.get('table tbody tr:first').click();
+    cy.wait(300);
+
+    cy.get('table tbody tr:first').click();
+    cy.wait(200);
+
+    cy.url().should('include', `/galaxies/clusters/`);
+
+    cy.get('div:contains("Name")').should('exist');
+    cy.get('div:contains("Version")').should('exist');
+    cy.get('div:contains("Key")').should('exist');
+  });
+
   it('should be editable', () => {
     const newCluster = {
       name: 'new test name',
