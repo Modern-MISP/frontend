@@ -43,10 +43,12 @@ describe('Freetext import tool', () => {
 
     cy.get('span:contains(Freetext Import)').should('exist');
 
-    cy.get('tr:contains("https://test.url")').should('exist', { timeout: 10000 }).click({ force: true });
+    cy.get('tr:contains("https://test.url")')
+      .should('exist', { timeout: 10000 })
+      .click({ force: true });
     cy.get('tr:contains("3961eae797dbb7ff909385fc739be743")').should('exist');
     cy.get('tr:contains("file.type")').should('exist');
-    
+
     cy.wait(100);
     cy.get('label:contains("Save")').click();
     cy.wait(1000);
