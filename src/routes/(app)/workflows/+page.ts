@@ -16,8 +16,9 @@ export const load = async ({ fetch }) => {
   const getResult = await get(api).GET('/workflows/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = (getResult.data! as { Workflow: Trigger['Workflow'] }[]).map((x) => x.Workflow!);
-
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
 
   console.log(data);
 

@@ -16,8 +16,9 @@ import { errorPill, successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
-
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   const header = [
