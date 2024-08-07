@@ -5,6 +5,7 @@ import type { PageLoad } from './$types';
 import { themes } from '$lib/stores';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
+import { settings } from '$lib/stores';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {
@@ -17,17 +18,17 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       UserSetting: {
         menu_open_default: true,
-        theme: 0
+        theme: ''
       }
     }
   ];
 
-  if (mispError) {
-    data1[0].UserSetting.menu_open_default = true;
-    data1[0].UserSetting.theme = 0;
-  } else {
-    data1[0].UserSetting.theme = data.UserSetting.value[0];
+  if (!mispError) {
+    data1[0].UserSetting.theme = themes[data.UserSetting.value[0]].value;
     data1[0].UserSetting.menu_open_default = data.UserSetting.value[1];
+  } else {
+    data1[0].UserSetting.theme = get(settings).theme;
+    data1[0].UserSetting.menu_open_default = get(settings).openOnInit;
   }
 
   const col = createTableHeadGenerator();
@@ -53,7 +54,7 @@ export const load: PageLoad = async ({ fetch }) => {
             label: theme.label
           })),
           name: 'theme',
-          value: themes[data1[0].UserSetting.theme].value
+          value: data1[0].UserSetting.theme
         }
       })
     })

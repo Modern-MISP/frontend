@@ -7,6 +7,8 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { api } from '$lib/api';
   import { settings } from '$lib/stores';
+  import { compatibility } from '$lib/stores';
+    import { invalidate, invalidateAll } from '$app/navigation';
 
   $mode = 'edit';
 
@@ -52,7 +54,10 @@
         return 'mocha';
     }
   }
-  function makeBool(str: string) {
+  function makeBool(str: string | boolean) {
+    if (typeof str == 'boolean') {
+      return str;
+    }
     if (str == 'true') {
       return true;
     }
@@ -60,8 +65,10 @@
   }
   $: ({ header, title, description } = data);
   async function editCallback(formData: Record<string, string>) {
-    console.log(formData);
-    notifySave(
+    $settings.theme = mapNumberToTheme(mapThemeToNumber(formData.theme));
+    $settings.openOnInit = makeBool(formData.is_menu_open);
+    if(!compatibility) {
+      notifySave(
       $api
         .POST('/user_settings/setSetting/me/visual_setting', {
           body: { value: [mapThemeToNumber(formData.theme), formData.is_menu_open] }
@@ -72,12 +79,11 @@
             // @ts-expect-error MISP API return custom errors object
             const mispErrors: string[] = Object.values(resp.error.errors ?? {});
             throw new Error(mispErrors.length ? mispErrors[0] : resp.error.detail);
-          } else {
-            $settings.theme = mapNumberToTheme(mapThemeToNumber(formData.theme));
-            $settings.openOnInit = makeBool(formData.is_menu_open);
           }
         })
-    );
+      );
+    }
+    invalidateAll();
   }
 
   const Export: ActionBarEntryProps[] = [

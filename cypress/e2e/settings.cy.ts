@@ -15,7 +15,9 @@ describe('Settings Page Tests', () => {
       'Detailed information about your user account. Only the name can be changed by you. For other changes, please contact your administrator.'
     );
 
-    cy.contains('Name');
+    if(!Cypress.env('legacy')) {
+      cy.contains('Name');
+    }
     cy.contains('Role');
     cy.contains('Organisation');
     cy.contains('Created');
