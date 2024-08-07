@@ -24,7 +24,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and message are not set, therefor .status an .message default to never
-  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
   //const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
 

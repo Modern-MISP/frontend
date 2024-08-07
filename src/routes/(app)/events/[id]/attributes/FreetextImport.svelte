@@ -77,18 +77,18 @@
       action: (x) => {
         x.forEach((y) => {
           get(api)
-          .POST('/attributes/add/{eventId}', {
-            params: { path: { eventId: $page.params.id } },
-            body: { 
-              type: y.default_type,
-              value: y.value,
-              to_ids: y.to_ids
-             }
-          })
-          .then((resp) => {
-            if (resp.error) throw new Error(resp.error.detail);
-            invalidateAll();
-          });
+            .POST('/attributes/add/{eventId}', {
+              params: { path: { eventId: $page.params.id } },
+              body: {
+                type: y.default_type,
+                value: y.value,
+                to_ids: y.to_ids
+              }
+            })
+            .then((resp) => {
+              if (resp.error) throw new Error(resp.error.detail);
+              invalidateAll();
+            });
         });
         invalidateAll();
       }

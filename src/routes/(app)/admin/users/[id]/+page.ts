@@ -17,7 +17,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   });
   // eslint-disable-next-line no-warning-comments
   //TODO: type message not set, therefor .message default to never
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError["message"]);
+  if (mispError) error(response.status as NumericRange<400, 599>, mispError['message']);
 
   const {
     data: roles,
@@ -26,7 +26,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
   } = await get(api).GET('/roles', { fetch });
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and message are not set, therefor .status an .message default to never
-  if (mispErrorRoles) error(responseRoles["status"] as NumericRange<400, 599>, mispErrorRoles["message"]);
+  if (mispErrorRoles)
+    error(responseRoles['status'] as NumericRange<400, 599>, mispErrorRoles['message']);
 
   const {
     data: orgs,
@@ -35,7 +36,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
   } = await get(api).GET('/organisations', { fetch });
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and message are not set, therefor .status an .message default to never
-  if (mispErrorOrgs) error(responseOrgs["status"] as NumericRange<400, 599>, mispErrorOrgs["message"]);
+  if (mispErrorOrgs)
+    error(responseOrgs['status'] as NumericRange<400, 599>, mispErrorOrgs['message']);
 
   const left = [
     !compatibility ? idCardHeaders.name : undefined,
