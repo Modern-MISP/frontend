@@ -16,7 +16,7 @@
 
     if (mispError || !data.Tag || response.status !== 200) {
       const message =
-        mispError?["message"] ?? `Response Stats: ${response.statusText}` ?? 'unknown error';
+        mispError?.message ?? `Response Stats: ${response.statusText}` ?? 'unknown error';
       notifications.add(errorPill('Failed to fetch tags: ' + message));
       return;
     }
