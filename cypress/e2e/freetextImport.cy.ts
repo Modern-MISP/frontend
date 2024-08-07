@@ -1,11 +1,12 @@
 beforeEach(() => {
   cy.defaultLogin();
+  cy.visit('/events/');
+  cy.get('tbody').children().first().click();
+  cy.get('a:contains("Event Attributes")').click();
 });
 
 describe('Open freetext import tool', () => {
   it('should open the freetext import tool', () => {
-    cy.visit('/events/6/attributes');
-
     cy.url().should('include', 'attributes');
 
     cy.toggleMode();
@@ -24,7 +25,6 @@ describe('Open freetext import tool', () => {
 
 describe('Freetext import tool', () => {
   it('should return as many attributes as were entered', () => {
-    cy.visit('/events/6/attributes');
 
     cy.toggleMode();
 
