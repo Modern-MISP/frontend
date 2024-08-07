@@ -7,5 +7,5 @@ describe('settings for workflows', () => {
     cy.visit('/admin/workflowSettings');
     //cy.contains('checkbox').should('be.visible');
     cy.get('input[type="checkbox"]').click();
-  })
+  });
 });
