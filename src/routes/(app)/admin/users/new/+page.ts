@@ -8,16 +8,18 @@ import idCardHeaders from '../idCardHeaders';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data: roles, error: mispError, response } = await get(api).GET('/roles', { fetch });
-
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
 
   const {
     data: orgs,
     error: mispErrorOrgs,
     response: responseOrgs
   } = await get(api).GET('/organisations', { fetch });
-
-  if (mispErrorOrgs) error(responseOrgs.status as NumericRange<400, 599>, mispErrorOrgs.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispErrorOrgs) error(responseOrgs["status"] as NumericRange<400, 599>, mispErrorOrgs["message"]);
 
   const header = [
     !compatibility ? idCardHeaders.name : undefined,
