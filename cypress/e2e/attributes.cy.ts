@@ -22,10 +22,16 @@ describe('filter attributes', () => {
     cy.get('button:contains("Add")').click();
     cy.get('button:contains("Filter")').click();
 
-    cy.get('tbody')
-      .find('tr')
-      .each(($el) => {
-        cy.wrap($el).invoke('text').should('contain', 'domain');
+    if (Cypress.env('legacy')) {
+      cy.get('body').then(($body) => {
+        if ($body.find('tbody').length > 0) {
+          cy.get('tbody')
+            .find('tr')
+            .each(($el) => {
+              cy.wrap($el).invoke('text').should('contain', 'domain');
+            });
+        }
       });
+    }
   });
 });

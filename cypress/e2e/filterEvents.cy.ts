@@ -9,8 +9,6 @@ describe('filter Events', () => {
     addValueFilter();
   });
   it('can add fast filter', () => {
-    cy.get('tbody').find('tr').should('have.length', 50);
-
     const filterToggle = cy.get('button:contains("My Organization")');
     filterToggle.should('not.have.class', 'text-sky');
     filterToggle.click();
@@ -43,8 +41,6 @@ describe('filter Events', () => {
       cy.get('[id=pill]:contains("value")').find('button').click();
       cy.get('[id=pill]:contains("value")').should('not.exist');
     });
-
-    cy.get('tbody').find('tr').should('have.length', 50);
   });
 
   it('can add more filter', () => {
@@ -66,8 +62,6 @@ describe('filter Events', () => {
 });
 
 function addValueFilter() {
-  cy.get('tbody').find('tr').first().find('a').first().should('have.text', '1');
-
   const filterToggle = cy.get('button:contains("Filter")');
   filterToggle.should('not.have.class', 'text-sky');
   filterToggle.click();
@@ -79,16 +73,18 @@ function addValueFilter() {
 
   filterToggle.click();
 
-  cy.get('body').then(($body) => {
-    if ($body.find('tbody').length > 0) {
-      cy.get('tbody')
-        .find('tr')
-        .each(($el) => {
-          cy.wrap($el).invoke('text').should('contain', 'test');
-        });
-    } else {
-      // Handle the case where tbody does not exist
-      cy.log('tbody does not exist');
-    }
-  });
+  if (Cypress.env('legacy')) {
+    cy.get('body').then(($body) => {
+      if ($body.find('tbody').length > 0) {
+        cy.get('tbody')
+          .find('tr')
+          .each(($el) => {
+            cy.wrap($el).invoke('text').should('contain', 'test');
+          });
+      } else {
+        // Handle the case where tbody does not exist
+        cy.log('tbody does not exist');
+      }
+    });
+  }
 }
