@@ -2,6 +2,7 @@ import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
+import { compatibility } from '$lib/stores';
 
 import idCardHeaders from '../idCardHeaders';
 
@@ -19,7 +20,7 @@ export const load: PageLoad = async ({ fetch }) => {
   if (mispErrorOrgs) error(responseOrgs.status as NumericRange<400, 599>, mispErrorOrgs.message);
 
   const header = [
-    idCardHeaders.name,
+    !compatibility ? idCardHeaders.name : undefined,
     idCardHeaders.email,
     idCardHeaders.password,
     idCardHeaders.organisation,
@@ -32,7 +33,7 @@ export const load: PageLoad = async ({ fetch }) => {
     idCardHeaders.notification_weekly,
     idCardHeaders.notification_monthly,
     idCardHeaders.termsaccepted
-  ];
+  ].filter((x) => typeof x !== 'undefined');
 
   return {
     roles: { Roles: roles, Organisations: orgs },

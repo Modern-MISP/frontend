@@ -12,7 +12,7 @@ describe('open Remote Server page', () => {
 describe('Remote Server add Server', () => {
   it('should be able to navigate to the "new server" page', () => {
     cy.visit('/admin/servers');
-    
+
     cy.toggleMode();
 
     cy.get('a:contains("Add Server")').should('exist').click();

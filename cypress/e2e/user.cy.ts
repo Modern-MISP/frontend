@@ -20,8 +20,11 @@ describe('User tests', () => {
   it('should create a new user', () => {
     cy.visit('/admin/users/new');
 
-    cy.get(cardRowRight('Name')).type(user_name);
+    if (!Cypress.env('legacy')) {
+      cy.get(cardRowRight('Name')).type(user_name);
+    }
     cy.get(cardRowRight('Email')).type(email);
+    cy.get(cardRowRight('Password')).type('Password123!');
     cy.get(cardRowRight('Contact enables')).click();
     cy.get(cardRowRight('Weekly notifications')).click();
     cy.get(cardRowRight('Terms accepted')).click();
@@ -33,7 +36,9 @@ describe('User tests', () => {
     cy.toggleMode();
 
     cy.get(cardRowRight('Email')).should('contain.text', email);
-    cy.get(cardRowRight('Name')).should('contain.text', user_name);
+    if (!Cypress.env('legacy')) {
+      cy.get(cardRowRight('Name')).should('contain.text', user_name);
+    }
   });
 
   it('should edit an existing user', () => {

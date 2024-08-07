@@ -4,8 +4,9 @@ import { get } from 'svelte/store';
 
 export async function load() {
   const { error: mispError, data, response } = await get(api).GET('/attributes/describeTypes', {});
-
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
 
   return {
     // cast type to fix wrong MISP API spec
