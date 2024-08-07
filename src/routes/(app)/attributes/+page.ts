@@ -49,8 +49,8 @@ export const load = async ({ fetch }) => {
   const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(
-      describeTypesResponse.response.status as NumericRange<400, 599>,
-      describeTypesResponse.error.message
+      describeTypesResponse.response["status"] as NumericRange<400, 599>,
+      describeTypesResponse.error["message"]
     );
   const options: components['schemas']['DescribeAttributeTypesResponse'] = (
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
