@@ -19,7 +19,7 @@ export const load: PageLoad = async ({ fetch }) => {
   console.log(mispError);
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and detail are not set, therefor .status an .detail default to never
-  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["detail"]);
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['detail']);
   const tableData = data.map(
     (x) =>
       x.Galaxy as (typeof x)['Galaxy'] & {

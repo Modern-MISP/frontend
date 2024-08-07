@@ -18,7 +18,7 @@ export const load: PageLoad = async ({ fetch }) => {
     } = await get(api).GET('/auth/openID/getAllOpenIDConnectProvidersInfo', { fetch });
     // eslint-disable-next-line no-warning-comments
     //TODO: types of status and message are not set, therefor .status an .message default to never
-    if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
+    if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
     return {
       data
