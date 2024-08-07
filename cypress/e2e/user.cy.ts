@@ -37,7 +37,7 @@ describe('User tests', () => {
   });
 
   it('should edit an existing user', () => {
-   cy.visit('/admin/users');
+    cy.visit('/admin/users');
 
     cy.get('tbody > tr:last-child').click();
 

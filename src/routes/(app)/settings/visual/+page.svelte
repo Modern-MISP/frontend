@@ -8,7 +8,7 @@
   import { api } from '$lib/api';
   import { settings } from '$lib/stores';
   import { compatibility } from '$lib/stores';
-    import { invalidate, invalidateAll } from '$app/navigation';
+  import { invalidateAll } from '$app/navigation';
 
   $mode = 'edit';
 
@@ -67,20 +67,20 @@
   async function editCallback(formData: Record<string, string>) {
     $settings.theme = mapNumberToTheme(mapThemeToNumber(formData.theme));
     $settings.openOnInit = makeBool(formData.is_menu_open);
-    if(!compatibility) {
+    if (!compatibility) {
       notifySave(
-      $api
-        .POST('/user_settings/setSetting/me/visual_setting', {
-          body: { value: [mapThemeToNumber(formData.theme), formData.is_menu_open] }
-        })
-        .then((resp) => {
-          if (resp.error) {
-            // throw new Error(resp.error.message);
-            // @ts-expect-error MISP API return custom errors object
-            const mispErrors: string[] = Object.values(resp.error.errors ?? {});
-            throw new Error(mispErrors.length ? mispErrors[0] : resp.error.detail);
-          }
-        })
+        $api
+          .POST('/user_settings/setSetting/me/visual_setting', {
+            body: { value: [mapThemeToNumber(formData.theme), formData.is_menu_open] }
+          })
+          .then((resp) => {
+            if (resp.error) {
+              // throw new Error(resp.error.message);
+              // @ts-expect-error MISP API return custom errors object
+              const mispErrors: string[] = Object.values(resp.error.errors ?? {});
+              throw new Error(mispErrors.length ? mispErrors[0] : resp.error.detail);
+            }
+          })
       );
     }
     invalidateAll();

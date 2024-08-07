@@ -7,7 +7,7 @@ export const load = async () => {
   const { data, error: mispError, response } = await get(api).GET('/users/view/me');
   const cfg = await config();
 
-  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
   // .then((resp) => {
   //   // @ts-expect-error Not in the OpenAPI spec
   //   admin.set(resp.data?.Role?.perm_admin ?? false);

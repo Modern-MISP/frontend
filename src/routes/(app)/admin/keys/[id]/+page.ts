@@ -24,7 +24,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     fetch
   });
 
-  if (mispError) error(response["status"] as NumericRange<400, 599>, mispError["message"]);
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
   const col = createTableHeadGenerator<typeof data & { AuthKey?: { unique_ips?: string[] } }>();
 
