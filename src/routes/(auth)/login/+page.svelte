@@ -61,7 +61,6 @@
     if (!visible) oidc = false;
     if (!oidc) return;
     forEach(data.data, (item) => {
-      console.log(item.url);
       new OidcButton({
         target: document.querySelector('.oidc') ?? document,
         props: {
