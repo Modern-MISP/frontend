@@ -3,24 +3,20 @@ beforeEach(() => {
 });
 
 describe('open Remote Server page', () => {
-  if (Cypress.env('skip') == false) {
-    it('should be able to navigate to the Remote Server page', () => {
-      cy.visit('/admin');
-      cy.get('a:contains("Remote Servers")').should('exist').click();
-    });
-  }
+  it('should be able to navigate to the Remote Server page', () => {
+    cy.visit('/admin');
+    cy.get('a:contains("Remote Servers")').should('exist').click();
+  });
 });
 
 describe('Remote Server add Server', () => {
-  if (Cypress.env('skip') == false) {
-    it('should be able to navigate to the "new server" page', () => {
-      cy.toggleMode();
+  it('should be able to navigate to the "new server" page', () => {
+    cy.toggleMode();
 
-      cy.get('a:contains("Add Server")').should('exist').click();
+    cy.get('a:contains("Add Server")').should('exist').click();
 
-      cy.url().should('include', '/admin/servers/new');
-    });
-  }
+    cy.url().should('include', '/admin/servers/new');
+  });
 
   it('should be able to add a new server', () => {
     cy.visit('/admin/servers/new');

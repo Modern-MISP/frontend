@@ -39,7 +39,7 @@ const user_name2 = 'Cypress Test';
 
 const cardRowRight2 = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
-if (Cypress.env('skip') == false) {
+if (Cypress.env('legacy') == false) {
   describe('login password', () => {
     before(() => {
       cy.defaultLogin();

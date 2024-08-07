@@ -58,7 +58,7 @@ describe('eventgraphs', () => {
     check('Comment', attribute.comment, 'span');
     check('Distribution', attribute.distribution.name, 'span');
   });
-  if (Cypress.env('skip') == false) {
+  if (Cypress.env('legacy') == false) {
     it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
       const referenceTypes = [
         'Acquaintance',
