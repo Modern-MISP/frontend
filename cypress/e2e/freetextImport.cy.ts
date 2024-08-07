@@ -39,20 +39,26 @@ describe('Freetext import tool', () => {
 
     cy.get('button:contains(Submit)').click();
 
-    /*cy.wait('@getAttributes').then(interception => {
-      expect(interception.response.statusCode).to.eq(200);
-    });*/
-
     cy.wait(1000);
 
     cy.get('span:contains(Freetext Import)').should('exist');
 
-    cy.get('tr:contains("https://test.url")').should('exist', { timeout: 10000 });
+    cy.get('tr:contains("https://test.url")').should('exist', { timeout: 10000 }).click({ force: true });
     cy.get('tr:contains("3961eae797dbb7ff909385fc739be743")').should('exist');
     cy.get('tr:contains("file.type")').should('exist');
+    
+    cy.wait(100);
+    cy.get('label:contains("Save")').click();
+    cy.wait(1000);
 
-    cy.get('button:contains(Close Freetext Import Tool)').click();
+    cy.get('button:contains("Close Freetext Import Tool")').click();
 
     cy.get('#freetext-import').should('not.exist');
+
+    const imported = cy.get('tbody').children().last();
+    imported.should('exist');
+    imported.should('contain.text', 'https://test.url');
+    imported.click();
+    cy.get('button:contains("Delete Attribute")').click();
   });
 });

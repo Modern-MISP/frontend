@@ -44,7 +44,6 @@
               throw new Error(resp.error.detail);
             }
           } else {
-            console.log(resp.data);
             freetextData = resp.data;
           }
         })
@@ -64,10 +63,8 @@
           } else {
             throw new Error(resp.error.detail);
           }
-        }
-        if (resp.data.attributes) {
+        } else if (resp.data.attributes) {
           freetextData = resp.data.attributes;
-          console.log(freetextData);
         }
       });
   }
