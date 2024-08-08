@@ -181,11 +181,12 @@ integration_tests:
         PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
         PUBLIC_MISP_API_ENDPOINT: https://misp-core
         PUBLIC_DATE_FORMAT: yyyy-mm-DD
+        PUBLIC_COMPATIBILITY_MODE: 'true'
   script:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
+    - cat cypress.env.template.json | sed -e "s/<your admin token>/${MISP01_AUTH_TOKEN}/" -e "s/<true if legacy API, false if Modern API>/true/" > cypress.env.json
     - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_legacy --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
@@ -225,11 +226,7 @@ integration_tests_new_api:
     - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/api:QA_misc
       alias: new_api
       variables:
-        MYSQL_PASSWORD: misp
-        MYSQL_USER: root
-        DISABLE_SSL_REDIRECT: true
-        ENABLE_DB_SETTINGS: 'false'
-        DEBUG: 1
+        DATABASE_URL: "mysql+aiomysql://root:misp@db:3306/misp"
     - name: valkey/valkey:7.2
       alias: redis
       variables:
@@ -242,13 +239,14 @@ integration_tests_new_api:
         PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
         PUBLIC_REST_DISABLED: '{}'
         PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
-        PUBLIC_MISP_API_ENDPOINT: https://new_api
+        PUBLIC_MISP_API_ENDPOINT: http://new_api:5000
         PUBLIC_DATE_FORMAT: yyyy-mm-DD
+        PUBLIC_COMPATIBILITY_MODE: 'false'
   script:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
+    - cat cypress.env.template.json | sed -e "s/<your admin token>/${MISP01_AUTH_TOKEN}/" -e "s/<true if legacy API, false if Modern API>/false/" > cypress.env.json
     - sleep 900
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
