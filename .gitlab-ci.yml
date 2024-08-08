@@ -226,7 +226,7 @@ integration_tests_new_api:
     - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/api:QA_misc
       alias: new_api
       variables:
-        DATABASE_URL: "mysql+aiomysql://root:misp@db:3306/misp"
+        DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
     - name: valkey/valkey:7.2
       alias: redis
       variables:
