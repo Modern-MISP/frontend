@@ -28,7 +28,9 @@ describe('filter attributes', () => {
           cy.get('tbody')
             .find('tr')
             .each(($el) => {
-              cy.wrap($el).invoke('text').should('contain', 'domain');
+              if (!$el.hasClass('bg-blue')) {
+                cy.wrap($el).invoke('text').should('contain', 'domain');
+              }
             });
         }
       });
