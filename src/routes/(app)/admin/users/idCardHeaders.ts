@@ -150,7 +150,7 @@ export default {
         props: {
           options: x.Roles?.map((r) => ({ label: r.Role.name!, value: r.Role.id! })),
           value: x.User?.Role?.id,
-          name: 'role'
+          name: 'role_id'
         }
       })
     }
@@ -273,7 +273,7 @@ export default {
     {
       value: () => ({
         display: Input,
-        props: { name: 'pgpKey', placeholder: 'set new GPG key' }
+        props: { name: 'gpgkey', placeholder: 'set new GPG key' }
       })
     }
   ),
@@ -353,8 +353,8 @@ export default {
             label: o.Organisation.name!,
             value: o.Organisation.id!
           })),
-          value: x.Organisations[0].Organisation?.id,
-          name: 'org'
+          value: x.User?.Organisation?.id ?? x.Organisations[0].Organisation?.id,
+          name: 'org_id'
         }
       })
     }
