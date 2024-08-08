@@ -1,6 +1,3 @@
-variables:
-  CI_DEBUG_SERVICES: 'true'
-
 stages:
   - build_image
   - pre-build
@@ -170,7 +167,6 @@ integration_tests:
         MYSQL_USER: root
         DISABLE_SSL_REDIRECT: true
         ENABLE_DB_SETTINGS: 'false'
-        DEBUG: 1
     - name: valkey/valkey:7.2
       alias: redis
       variables:
