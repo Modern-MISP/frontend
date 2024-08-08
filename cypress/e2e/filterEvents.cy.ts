@@ -37,9 +37,9 @@ describe('filter Events', () => {
     addValueFilter();
 
     cy.get('#filterRow').within(() => {
-      cy.get('[id=pill]:contains("value")').should('exist');
-      cy.get('[id=pill]:contains("value")').find('button').click();
-      cy.get('[id=pill]:contains("value")').should('not.exist');
+      cy.get('[id=pill]:contains("eventinfo")').should('exist');
+      cy.get('[id=pill]:contains("eventinfo")').find('button').click();
+      cy.get('[id=pill]:contains("eventinfo")').should('not.exist');
     });
   });
 
@@ -67,7 +67,11 @@ function addValueFilter() {
   filterToggle.click();
   filterToggle.should('have.class', 'text-sky');
 
-  cy.get("input[placeholder='Value']").type('test');
+  cy.get('select:contains("Value")').first().select('Event Information');
+
+  cy.wait(100);
+
+  cy.get('input').last().type('test');
 
   cy.get("button:contains('Add')").click();
 
@@ -79,6 +83,7 @@ function addValueFilter() {
         cy.get('tbody')
           .find('tr')
           .each(($el) => {
+
             cy.wrap($el).invoke('text').should('contain', 'test');
           });
       } else {
