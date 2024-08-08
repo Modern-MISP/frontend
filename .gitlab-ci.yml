@@ -131,7 +131,6 @@ eslint:
   script:
     - cd /app
     - npx eslint --format gitlab .
-    - mv gl-code-quality-report.json $CI_PROJECT_DIR
   artifacts:
     expire_in: 1 day
     reports:
@@ -191,12 +190,13 @@ integration_tests:
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
     - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
-    - sleep 900
+    - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
     - npx cypress run --parallel --record --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
     CYPRESS_BASE_URL: http://frontend:81
     CYPRESS_VIDEO: 'true'
     ELECTRON_ENABLE_LOGGING: 'true'
+    MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
   artifacts:
     expire_in: 1 day
     reports:
