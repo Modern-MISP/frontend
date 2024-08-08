@@ -187,7 +187,70 @@ integration_tests:
     - npm ci
     - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
     - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
-    - npx cypress run --parallel --record --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
+    - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_legacy --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
+  variables:
+    CYPRESS_BASE_URL: http://frontend:81
+    CYPRESS_VIDEO: 'true'
+    ELECTRON_ENABLE_LOGGING: 'true'
+    MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
+  artifacts:
+    expire_in: 1 day
+    reports:
+      junit: reports/report-*.xml
+    expose_as: Cypress artifacts
+    when: always
+    paths:
+      - cypress/screenshots/
+      - cypress/videos/
+
+integration_tests_new_api:
+  tags:
+    - beefy
+    - any-image-allowed
+  parallel: 2
+  stage: test
+  image:
+    name: cypress/included:13.13.2
+    entrypoint: ['']
+  needs:
+    - build_image_node
+    - build_image_nginx
+  services:
+    - name: registry.cert.kit.edu/public-gitlab-ci/mysql-loader:latest
+      alias: db
+      variables:
+        MYSQL_ROOT_PASSWORD: misp
+        MYSQL_DUMP_FILE: /builds/${CI_PROJECT_PATH}/misp-docker-override/dump.sql
+        MYSQL_DATABASE: misp
+    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/api:QA_misc
+      alias: new_api
+      variables:
+        MYSQL_PASSWORD: misp
+        MYSQL_USER: root
+        DISABLE_SSL_REDIRECT: true
+        ENABLE_DB_SETTINGS: 'false'
+        DEBUG: 1
+    - name: valkey/valkey:7.2
+      alias: redis
+      variables:
+        HEALTHCHECK_TCP_PORT: 6379
+    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/frontend_nginx:${CI_COMMIT_SHA}
+      alias: frontend
+      variables:
+        NGINX_PORT: 81
+        PUBLIC_MAINTENANCE_MODE: 'false'
+        PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
+        PUBLIC_REST_DISABLED: '{}'
+        PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
+        PUBLIC_MISP_API_ENDPOINT: https://new_api
+        PUBLIC_DATE_FORMAT: yyyy-mm-DD
+  script:
+    # Create environment files
+    - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
+    - npm ci
+    - cat cypress.env.template.json | sed "s/<your admin token>/${MISP01_AUTH_TOKEN}/" > cypress.env.json
+    - sleep 900
+    - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
     CYPRESS_BASE_URL: http://frontend:81
     CYPRESS_VIDEO: 'true'
