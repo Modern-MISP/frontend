@@ -46,6 +46,8 @@ export const load = async ({ fetch }) => {
 
   const tableData = data.response?.Attribute ?? [];
 
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
   const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(

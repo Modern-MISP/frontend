@@ -7,6 +7,8 @@ export const load = async () => {
   const { data, error: mispError, response } = await get(api).GET('/users/view/me');
   const cfg = await config();
 
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
   if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
   // .then((resp) => {
   //   // @ts-expect-error Not in the OpenAPI spec
