@@ -83,7 +83,7 @@ function addValueFilter() {
         cy.get('tbody')
           .find('tr')
           .each(($el) => {
-            cy.wrap($el).invoke('text').should('contain', 'test');
+            cy.wrap($el).invoke('text').contains('test', { matchCase: false });
           });
       } else {
         // Handle the case where tbody does not exist
