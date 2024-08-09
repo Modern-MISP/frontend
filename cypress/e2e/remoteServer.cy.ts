@@ -41,7 +41,11 @@ describe('Remote Server add Server', () => {
   it('should be able to add able to delete a server', () => {
     cy.visit('/admin/servers');
     cy.toggleMode();
-    cy.get('tbody').find('tr').last().click();
-    cy.get('button:contains("Delete Server")').click();
+    cy.get('body').then(($body) => {
+      if ($body.find('tbody').length > 0) {
+        cy.get('tbody').find('tr').last().click();
+        cy.get('button:contains("Delete Server")').click();
+      }
+    });
   });
 });

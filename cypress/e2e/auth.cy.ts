@@ -67,6 +67,7 @@ if (!Cypress.env('legacy')) {
 
       cy.get('tbody > tr:last-child').click();
       cy.get('button:has(span:contains("Delete"))').click();
+      cy.wait(1000);
     });
 
     it('should login with password', () => {
@@ -139,6 +140,7 @@ if (!Cypress.env('legacy')) {
 
       cy.get('tbody > tr:last-child').click();
       cy.get('button:has(span:contains("Delete"))').click();
+      cy.wait(1000);
     });
 
     it('should not allow to set the unsafe password', () => {

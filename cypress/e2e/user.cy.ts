@@ -55,6 +55,7 @@ describe('User tests', () => {
     cy.get(cardRowRight('Email')).should('not.be.disabled').clear().type(newEmail);
 
     cy.get('button:has(span:contains("Save"))').click();
+    cy.wait(1000);
 
     cy.toggleMode();
 
