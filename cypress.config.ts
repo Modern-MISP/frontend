@@ -15,7 +15,6 @@ export default defineConfig({
     // Default is 0
     openMode: 0
   },
-  
 
   component: {
     devServer: {
@@ -32,7 +31,7 @@ export default defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://localhost:4173',
+    baseUrl: 'http://localhost:5173',
     viewportHeight: 1080,
     viewportWidth: 1920,
 
@@ -42,7 +41,7 @@ export default defineConfig({
       'cypress/e2e/addTagToEvent.cy.ts',
       'cypress/e2e/eventgraphs.cy.ts',
       'cypress/e2e/workflows.cy.ts',
-      'cypress/e2e/filterEvents.cy.ts',
+      'cypress/e2e/filterEvents.cy.ts'
     ],
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
