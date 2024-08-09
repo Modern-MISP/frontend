@@ -45,7 +45,7 @@
           if (resp.error) {
             throw new Error(resp['error']['message']);
           } else {
-            goto(`/galaxies/clusters/${resp.data['GalaxyCluster']['id']}`);
+            goto(`/galaxies/clusters/${resp.data.GalaxyCluster?.id}`);
           }
         })
     );
