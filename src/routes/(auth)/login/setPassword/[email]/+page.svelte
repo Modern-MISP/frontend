@@ -78,7 +78,7 @@
       })
       .then((resp) => {
         if (resp.error) {
-          // @ts-expect-error MISP API return custom errors object
+          // ts-expect-error MISP API return custom errors object
           if (typeof resp.error.detail === 'string') {
             if (resp.error.detail === 'Bad Request') {
               alert("New password can't contain old Password");

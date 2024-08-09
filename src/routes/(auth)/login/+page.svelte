@@ -64,13 +64,13 @@
       new OidcButton({
         target: document.querySelector('.oidc') ?? document,
         props: {
-          name: item.name,
+          name: item["name"],
           url:
-            item.url +
+            item["url"] +
             '&redirect_uri=' +
             window.location.origin +
             '/login/oidc/' +
-            item.name +
+            item["name"] +
             '/callback'
         }
       });

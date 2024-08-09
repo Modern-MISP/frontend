@@ -78,7 +78,7 @@
               // throw new Error(resp.error.message);
               // @ts-expect-error MISP API return custom errors object
               const mispErrors: string[] = Object.values(resp.error.errors ?? {});
-              throw new Error(mispErrors.length ? mispErrors[0] : resp.error.detail);
+              throw new Error(mispErrors.length ? mispErrors[0] : resp["error"]["detail"]);
             }
           })
       );

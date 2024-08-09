@@ -17,14 +17,14 @@
   $: ({ left, key } = data);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $: seenIps = (key.AuthKey as any)?.unique_ips ?? [];
-  $: allowedIps = key.AuthKey?.allowed_ips;
+  $: seenIps = (key["AuthKey"] as any)?.unique_ips ?? [];
+  $: allowedIps = key["AuthKey"]["allowed_ips"];
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .POST('/auth_keys/edit/{AuthKeyId}', {
-          params: { path: { AuthKeyId: key.AuthKey!.id! } },
+          params: { path: { AuthKeyId: key["AuthKey"]!["id"]! } },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any -- No expiration in api spec...
           body: { allowed_ips: [], expiration: '', ...formData } as any // Allow all ips if no override is given. Set to never expire by default if not overridden
         })
