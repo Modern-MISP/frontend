@@ -239,7 +239,7 @@ integration_tests_new_api:
         PUBLIC_MAINTENANCE_MESSAGE: Website is currently in maintenance mode. All editing is disabled.
         PUBLIC_REST_DISABLED: '{}'
         PUBLIC_REST_DISABLED_MESSAGE: The REST method you try to use is disabled
-        PUBLIC_MISP_API_ENDPOINT: http://new_api:5000
+        PUBLIC_MISP_API_ENDPOINT: http://new_api:4000
         PUBLIC_DATE_FORMAT: yyyy-mm-DD
         PUBLIC_COMPATIBILITY_MODE: 'false'
   script:
@@ -247,7 +247,7 @@ integration_tests_new_api:
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
     - cat cypress.env.template.json | sed -e "s/<your admin token>/${MISP01_AUTH_TOKEN}/" -e "s/<true if legacy API, false if Modern API>/false/" > cypress.env.json
-    - sleep 900
+    - until wget -q -t1 http://new_api:4000; do rc="$?"; if [ $rc -eq 0 ] || [ $rc -eq 8 ]; then echo "MMISP API is ready"; break; else sleep 1; fi; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
     CYPRESS_BASE_URL: http://frontend:81
