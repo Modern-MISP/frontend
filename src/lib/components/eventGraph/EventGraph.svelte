@@ -294,7 +294,7 @@
           }
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
+          if (resp.error) throw new Error(resp['error']['message']);
         })
     );
     layoutElements([source.id, target.id]);

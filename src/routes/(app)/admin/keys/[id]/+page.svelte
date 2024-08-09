@@ -19,28 +19,28 @@
   $: ({ left, key } = data);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $: seenIps = (key.AuthKey as any)?.unique_ips ?? [];
-  $: allowedIps = key.AuthKey?.allowed_ips;
+  $: seenIps = (key['AuthKey'] as any)?.unique_ips ?? [];
+  $: allowedIps = key['AuthKey']['allowed_ips'];
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .POST('/auth_keys/edit/{authKeyId}', {
-          params: { path: { authKeyId: key.AuthKey!.id! } },
+          params: { path: { authKeyId: key['AuthKey']!['id']! } },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any -- No expiration in api spec...
           body: { allowed_ips: [], expiration: '', ...formData } as any // Allow all ips if no override is given. Set to never expire by default if not overridden
         })
         .then((resp) => {
           if (
             resp.error &&
-            'errors' in resp.error &&
-            typeof resp.error.errors === 'object' &&
-            resp.error.errors
+            'errors' in resp['error'] &&
+            typeof resp['error']['errors'] === 'object' &&
+            resp['error']['errors']
           ) {
-            Object.values(resp.error.errors).forEach((error) => {
+            Object.values(resp['error']['errors']).forEach((error) => {
               notifications.add(errorPill(error));
             });
-            throw new Error(resp.error.message);
+            throw new Error(resp['error']['message']);
           }
         })
         .then(invalidateAll)

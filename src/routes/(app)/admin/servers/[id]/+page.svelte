@@ -19,7 +19,7 @@
           body: formData
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
+          if (resp.error) throw new Error(resp['error']['message']);
         })
     );
   }

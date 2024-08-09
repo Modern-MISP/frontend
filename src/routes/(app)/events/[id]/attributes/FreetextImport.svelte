@@ -38,8 +38,8 @@
         .then((resp) => {
           console.log(resp);
           if (resp.error) {
-            if (resp.response.status == 307) {
-              getResponseData(resp.error.id);
+            if (resp['response']['status'] == 307) {
+              getResponseData(resp['error']['id']);
             } else {
               throw new Error(resp.error.detail);
             }
@@ -57,14 +57,14 @@
       })
       .then(async (resp) => {
         if (resp.error) {
-          if (resp.response.status == 409) {
+          if (resp['response']['status'] == 409) {
             await new Promise((f) => setTimeout(f, 1000));
             getResponseData(job_id);
           } else {
-            throw new Error(resp.error.detail);
+            throw new Error(resp['error']['detail']);
           }
-        } else if (resp.data.attributes) {
-          freetextData = resp.data.attributes;
+        } else if (resp.data['attributes']) {
+          freetextData = resp.data['attributes'];
         }
       });
   }
