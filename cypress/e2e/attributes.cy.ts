@@ -29,7 +29,9 @@ describe('filter attributes', () => {
             .find('tr')
             .each(($el) => {
               if (!$el.hasClass('bg-blue')) {
-                cy.wrap($el).invoke('text').should('match', /(^$|^.*domain.*$)/);
+                cy.wrap($el)
+                  .invoke('text')
+                  .should('match', /(^$|^.*domain.*$)/);
               }
             });
         }
