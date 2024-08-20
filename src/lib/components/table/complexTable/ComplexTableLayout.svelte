@@ -103,7 +103,7 @@
 
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
     if (skipRequests < 0) {
-      skipRequests++
+      skipRequests++;
       return;
     }
     if (!endpoint) return;

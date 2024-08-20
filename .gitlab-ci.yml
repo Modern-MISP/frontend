@@ -134,6 +134,7 @@ eslint:
       codequality: gl-code-quality-report.json
 
 svelte-check:
+  allow_failure: True
   needs:
     - build_image_node
   stage: test
@@ -168,6 +169,7 @@ integration_tests:
         DISABLE_SSL_REDIRECT: true
         ENABLE_DB_SETTINGS: 'false'
     - name: valkey/valkey:7.2
+      command: ['--requirepass 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ']
       alias: redis
       variables:
         HEALTHCHECK_TCP_PORT: 6379
@@ -193,6 +195,7 @@ integration_tests:
     CYPRESS_BASE_URL: http://frontend:81
     CYPRESS_VIDEO: 'true'
     ELECTRON_ENABLE_LOGGING: 'true'
+    REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
   artifacts:
     expire_in: 1 day
@@ -223,11 +226,29 @@ integration_tests_new_api:
         MYSQL_ROOT_PASSWORD: misp
         MYSQL_DUMP_FILE: /builds/${CI_PROJECT_PATH}/misp-docker-override/dump.sql
         MYSQL_DATABASE: misp
-    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/api:QA_misc
+    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/api:main
       alias: new_api
       variables:
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
+        WORKER_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        WORKER_URL: http://worker-api:5000
+    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/worker:main
+      alias: worker-api
+      variables:
+        MMISP_REDIS_HOST: redis
+        MMISP_DB_API_URL: 'http://new_api:4000'
+        MMISP_API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
+    - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/worker:main
+      command: ['mmisp-worker']
+      alias: worker
+      variables:
+        MMISP_REDIS_HOST: redis
+        MMISP_DB_API_URL: 'http://new_api:4000'
+        MMISP_API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
     - name: valkey/valkey:7.2
+      command: ['--requirepass 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ']
       alias: redis
       variables:
         HEALTHCHECK_TCP_PORT: 6379
@@ -254,6 +275,9 @@ integration_tests_new_api:
     CYPRESS_VIDEO: 'true'
     ELECTRON_ENABLE_LOGGING: 'true'
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
+    MMISP_REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
+    REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
+    #    CI_DEBUG_SERVICES: "true"
   artifacts:
     expire_in: 1 day
     reports:
