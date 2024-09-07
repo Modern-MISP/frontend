@@ -6,7 +6,6 @@ describe('filter attributes', () => {
   beforeEach(() => {
     cy.intercept('POST', '**/attributes/restSearch').as('attributes_rest_search');
     cy.visit('/attributes');
-    cy.wait(['@events_index', '@events_index', '@users_view_me', '@users_view_me']);
     cy.wait('@attributes_rest_search');
   });
 

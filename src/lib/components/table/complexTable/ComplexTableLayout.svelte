@@ -97,7 +97,15 @@
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Can not know the type of the response here. Depends on endpoint. Fixing this with a generic would be too much work.
   export let dataAccess: (body: any) => T[] = (x) => x as T[];
 
+  // first loadMore is unnecessary, because we fetch Data in page.ts
+  // second loadMore is triggered by reactivity bug in svelte 4, change this in svelte 5!
+  let skipRequests = -2;
+
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
+    if (skipRequests < 0) {
+      skipRequests++
+      return;
+    }
     if (!endpoint) return;
     const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
 
