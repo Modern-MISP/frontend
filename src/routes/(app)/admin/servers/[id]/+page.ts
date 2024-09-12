@@ -58,7 +58,7 @@ export const load = async ({ params, fetch }) => {
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const server = (filter(serverData, (x: ServerData) => x.Server.id === params.id).at(0) ??
+  const server = (filter(serverData, (x: ServerData) => x.Server.id == params.id).at(0) ??
     {}) as ServerData;
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
