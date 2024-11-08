@@ -99,6 +99,7 @@ export const load = async ({ fetch }) => {
       icon: 'mdi:download',
       action(x) {
         console.log(x);
+      }
     },
     {
       label: 'Delete Workflow',
