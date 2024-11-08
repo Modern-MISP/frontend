@@ -11,13 +11,15 @@ const config: {
   REST_DISABLED: { [k in keyof ReturnType<typeof createClient<paths>>]?: boolean };
   MAINTENANCE_MODE: boolean;
   MAINTENANCE_MESSAGE: string;
+  COMPATIBILITY_MODE: boolean;
 } = {
   MISP_API_ENDPOINT: '',
   REST_DISABLED_MESSAGE: '',
   DATE_FORMAT: '',
   REST_DISABLED: {},
   MAINTENANCE_MODE: false,
-  MAINTENANCE_MESSAGE: ''
+  MAINTENANCE_MESSAGE: '',
+  COMPATIBILITY_MODE: false // Set to true to use the old API
 };
 
 function checkConfig() {
@@ -33,6 +35,8 @@ function checkConfig() {
   if (config.MAINTENANCE_MESSAGE == null || config.MAINTENANCE_MESSAGE == undefined)
     config.MAINTENANCE_MESSAGE =
       'Website is currently in maintenance mode. All editing is disabled.';
+  if (config.COMPATIBILITY_MODE == null || config.COMPATIBILITY_MODE == undefined)
+    config.COMPATIBILITY_MODE = false;
 }
 
 async function fetchConfig(): Promise<typeof config> {

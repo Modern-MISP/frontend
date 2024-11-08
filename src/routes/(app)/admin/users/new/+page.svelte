@@ -5,14 +5,21 @@
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import { get } from 'svelte/store';
-  import idCardHeaders from '../idCardHeaders';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute, mode } from '$lib/stores';
   import { lockEditMode } from '$lib/actions';
+  import { notifications } from '$lib/stores';
+  import { errorPill } from '$lib/util/pill.util';
+  import { invalidateAll } from '$app/navigation';
+
+  export let data;
+
+  $: ({ roles, header } = data);
 
   $mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
+    console.log(formData);
     notifySave(
       get(api)
         .POST('/admin/users/add', {
@@ -21,6 +28,12 @@
         .then((resp) => {
           if (resp.error) {
             // @ts-expect-error MISP API return custom errors object
+            console.log(resp);
+            if (resp.response.status == 406) {
+              console.log('User already exists');
+              notifications.add(errorPill('User already exists'));
+              invalidateAll();
+            }
             const mispErrors: string[] = Object.values(resp.error.errors ?? {});
             throw new Error(mispErrors.length ? mispErrors[0] : resp.error.message);
           } else {
@@ -33,26 +46,16 @@
 
   $: $currentRoute = [
     ...($currentRoute ?? []),
-    { name: 'New User', href: 'new', icon: 'mdi:account-plus-outline' }
+    { name: 'Create a new User', href: 'new', icon: 'mdi:account-plus-outline' }
   ];
 </script>
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+  @component 
+  Displays a form to add a new user.
+-->
 <Form callback={editCallback}>
-  <DynCard
-    header={[
-      idCardHeaders.email,
-      idCardHeaders.role,
-      idCardHeaders.nids_sid,
-      idCardHeaders.disabled,
-      idCardHeaders.authkey,
-      idCardHeaders.contactaltert,
-      idCardHeaders.notification_daily,
-      idCardHeaders.notification_weekly,
-      idCardHeaders.notification_monthly,
-      idCardHeaders.termsaccepted
-    ]}
-    data={{}}
-  ></DynCard>
+  <DynCard {header} data={roles}></DynCard>
 </Form>

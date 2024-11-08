@@ -93,7 +93,8 @@ export const load: PageLoad = async ({ fetch }) => {
             label: y.relationship_type ? y.relationship_type : undefined,
             text: y.Tag?.name,
             style: `background-color: ${y.Tag?.colour}; color: ${
-              shouldTextBeBlack(y.Tag!.colour!) ? 'black' : 'white'
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+              shouldTextBeBlack(y.Tag?.colour! ?? 'white') ? 'black' : 'white'
             }`
           }))
         }
@@ -322,6 +323,13 @@ export const load: PageLoad = async ({ fetch }) => {
           notifications.add(successPill('Deleted events ' + x.map((y) => y.id).join(', ')));
           invalidateAll();
         });
+      }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
       }
     }
   ];

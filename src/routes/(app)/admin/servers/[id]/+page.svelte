@@ -6,7 +6,7 @@
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
-  /** Data that is displayed on this page. */
+  /** Page data containing data of the servers with the 'id' in the url */
   export let data: PageData;
 
   const { left, right, server } = data;
@@ -19,7 +19,7 @@
           body: formData
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
+          if (resp.error) throw new Error(resp['error']['message']);
         })
     );
   }

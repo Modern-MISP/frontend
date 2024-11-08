@@ -20,6 +20,7 @@
   import AttributeReplacement from './AttributeReplacement.svelte';
   import FreetextImport from './FreetextImport.svelte';
 
+  /** Page data of the attribute for the specified event */
   export let data;
 
   $: tableData = [...data.event.Attribute!, ...data.event.Object!.flatMap((o) => o.Attribute!)];
@@ -198,6 +199,12 @@
     }
   ];
 </script>
+
+<!-- 
+    @component
+    Displays attributes for an 'id' specified event.
+    
+    -->
 
 <svelte:window use:lockEditMode={attributeReplacement || freetextImport} />
 <ComplexTableLayout

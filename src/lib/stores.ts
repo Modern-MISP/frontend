@@ -37,3 +37,5 @@ if (cfg.MAINTENANCE_MODE) {
 export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 
 export const notifications = createTimeoutStore<ComponentProps<Pill>>(8000);
+
+export const compatibility = <boolean>cfg.COMPATIBILITY_MODE;

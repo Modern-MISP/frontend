@@ -37,6 +37,10 @@
   let success = '';
 </script>
 
+<!-- 
+    @component
+    Displays a freetext import for importing galaxies.
+-->
 <form class="h-full" on:submit|preventDefault={submit}>
   <Card>
     <h1 class="text-xl">Import Galaxies</h1>

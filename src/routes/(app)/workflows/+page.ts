@@ -9,14 +9,18 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { Trigger } from './triggers/trigger.js';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 
 export const load = async ({ fetch }) => {
   /// @ts-expect-error Not in the OpenAPI spec.. great.
   const getResult = await get(api).GET('/workflows/index', { fetch });
   const { error: mispError, response } = getResult;
   const data = (getResult.data! as { Workflow: Trigger['Workflow'] }[]).map((x) => x.Workflow!);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  console.log(data);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
@@ -86,8 +90,19 @@ export const load = async ({ fetch }) => {
     })
   ];
 
+  const editActions: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
+    }
+  ];
+
   return {
     tableData: data,
-    header
+    header,
+    editActions
   };
 };

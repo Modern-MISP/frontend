@@ -9,7 +9,7 @@
   import { notifySave } from '$lib/util/notifications.util.js';
   import { get } from 'svelte/store';
 
-  /** Data that is provided +page.ts on page load. */
+  /** Page data containing the galaxy cluster to display with the 'id' in the url */
   export let data;
 
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
@@ -33,7 +33,7 @@
           }
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
+          if (resp.error) throw new Error(resp['error']['message']);
         })
     );
   }
@@ -41,8 +41,7 @@
 
 <!--
   @component
-
-  Show all information about a single galaxy cluster, including its elements.
+  Displays a galaxy cluster specified by 'id', including its elements.
 -->
 
 <svelte:window

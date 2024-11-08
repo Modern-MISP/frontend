@@ -16,8 +16,9 @@ import { errorPill, successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
-
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
   const header = [
@@ -101,7 +102,10 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:eye-outline',
       key: 'push_sightings',
       label: 'Push Sightings',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.push_sightings ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.push_sightings ?? false }
+      })
     }),
     col({
       icon: 'streamline:galaxy-2-solid',
@@ -116,13 +120,19 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:cached',
       key: 'caching_enabled',
       label: 'Cache',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.caching_enabled ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.caching_enabled ?? false }
+      })
     }),
     col({
       icon: '',
       key: 'unpublish_event',
       label: 'Unpublish Event',
-      value: (x) => ({ display: Boolean, props: { isTrue: x.Server?.unpublish_event ?? false } })
+      value: (x) => ({
+        display: Boolean,
+        props: { isTrue: x.Server?.unpublish_event ?? false }
+      })
     }),
     col({
       icon: 'mdi:email-outline',
@@ -227,7 +237,6 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Increase priority',
       icon: 'iconoir:priority-up',
       action: (x) => {
-        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. increase prio:' + x.map((y) => y.Server?.id).join())
         );
@@ -237,7 +246,6 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Decrease priority',
       icon: 'iconoir:priority-down',
       action: (x) => {
-        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. decrease prio: ' + x.map((y) => y.Server?.id).join())
         );
@@ -247,7 +255,6 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Test connection',
       icon: 'mdi:connection',
       action: (x) => {
-        // TODO: add a endpoint if found.
         notifications.add(
           errorPill(
             'Do not know the endpoint. test connection: ' + x.map((y) => y.Server?.id).join()
@@ -259,10 +266,16 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Reset api key',
       icon: 'fluent:key-reset-20-regular',
       action: (x) => {
-        // TODO: add a endpoint if found.
         notifications.add(
           errorPill('Do not know the endpoint. reset api key: ' + x.map((y) => y.Server?.id).join())
         );
+      }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action: (x) => {
+        console.log(x);
       }
     }
   ];

@@ -13,6 +13,28 @@ export const routes: SideMenuRoute[] = [
     userAccess: 'viewOnly'
   },
   {
+    name: 'Statistics',
+    icon: 'mdi:google-analytics',
+    href: '/statistics',
+    children: [
+      {
+        name: 'Organisations',
+        icon: 'mdi:account-group',
+        href: '/statistics/organisations'
+      },
+      {
+        name: 'Activity Heatmap',
+        icon: 'mdi:google-analytics',
+        href: '/statistics/activity_heatmap'
+      },
+      {
+        name: 'Attribute Histogram',
+        icon: 'mdi:google-analytics',
+        href: '/statistics/attribute_histogram'
+      }
+    ]
+  },
+  {
     name: 'Tags',
     icon: 'mdi:tag',
     href: '/tags',
@@ -70,6 +92,12 @@ export const routes: SideMenuRoute[] = [
         href: '/admin/users'
       },
       {
+        name: 'OpenID Connect',
+        icon: 'mdi:openid',
+        userAccess: 'none',
+        href: '/admin/OIDConnect'
+      },
+      {
         name: 'Keys',
         icon: 'mdi:key',
         userAccess: 'none',
@@ -87,6 +115,23 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Settings',
     icon: 'mdi-cog',
-    href: '/settings'
+    href: '/settings',
+    children: [
+      {
+        name: 'Information',
+        icon: 'mdi:information',
+        href: '/settings/information'
+      },
+      {
+        name: 'Visual Settings',
+        icon: 'mdi:palette',
+        href: '/settings/visual'
+      },
+      {
+        name: 'Security Settings',
+        icon: 'mdi:security',
+        href: '/settings/security'
+      }
+    ]
   }
 ];

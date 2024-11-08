@@ -1,5 +1,3 @@
-import { api } from '$lib/api';
-import { invalidateAll } from '$app/navigation';
 import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
@@ -12,35 +10,72 @@ import { notifications } from '$lib/stores';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
-import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Input from '$lib/components/input/Input.svelte';
+import { invalidateAll } from '$app/navigation';
+import { api } from '$lib/api';
+import { get } from 'svelte/store';
+import { goto } from '$app/navigation';
+import { compatibility } from '$lib/stores';
+import { writable } from 'svelte/store';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/admin/users', { fetch });
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  //const roleData = [{ Role: { id: '1', name: 'Admin' } }, { Role: { id: '2', name: 'User' } }];
+
+  /*const orgData = [
+    { Organisation: { id: '1', name: 'Org 1' } },
+    { Organisation: { id: '2', name: 'Org 2' } }
+  ];*/
 
   const col = createTableHeadGenerator<(typeof data)[number], DynTableHeadExtent>();
 
+  const passwordStore = writable('');
+
+  function showPasswordPopup(password) {
+    passwordStore.set(password);
+    const popup = document.getElementById('password-popup');
+    if (popup) popup.style.display = 'block';
+  }
+
   const header = [
-    col({ icon: 'mdi:id-card', key: 'id', label: 'ID', value: (x) => x.User?.id ?? 'unknown' }),
+    col({
+      icon: 'mdi:id-card',
+      key: 'id',
+      label: 'ID',
+      value: (x) => ({ display: Info, props: { text: x.User?.id ?? 'unknown' } })
+    }),
     col({
       icon: 'material-symbols:work-outline',
       key: 'org',
-      label: 'Organizations',
+      label: 'Organisation',
       value: (x) => ({ display: Info, props: { text: x.Organisation?.name ?? 'unknown' } })
     }),
     col({
-      icon: 'mdi:lock-outline',
+      icon: 'mdi:circle',
       key: 'role',
       label: 'Role',
       value: (x) => ({ display: Info, props: { text: x.Role?.name ?? 'unknown' } })
     }),
-
     col({
-      icon: 'mdi:email-outline',
+      icon: 'mdi:person-outline',
+      key: 'nids_sid',
+      label: 'NIDS',
+      value: (x) => ({ display: Info, props: { text: x.User?.nids_sid ?? 'unknown' } })
+    }),
+    col({
+      icon: 'mdi:person-outline',
+      key: 'name',
+      label: 'Name',
+      value: (x) => ({ display: Info, props: { text: x.User?.name ?? 'unknown' } })
+    }),
+    col({
+      icon: 'mdi:person-outline',
       key: 'email',
       label: 'Email',
       value: (x) => ({
@@ -52,26 +87,17 @@ export const load: PageLoad = async ({ fetch }) => {
         }
       })
     }),
-
-    col({
-      icon: 'mdi:id-card',
-      key: 'nids_sid',
-      label: 'NIDS SID',
-      // class: 'whitespace-nowrap',
-      value: (x) => ({ display: Info, props: { text: x.User?.nids_sid ?? 'unknown' } })
-    }),
     col({
       icon: 'mdi:clock-outline',
       key: 'last_login',
       label: 'Last Login',
-      // class: 'whitespace-nowrap',
       value: (x) => ({
         display: DatePill,
-        props: { date: new Date(+(x.User?.last_login || 0) * 1000) }
+        props: { date: new Date(+x.User?.last_login * 1000) ?? 'never logged in' }
       })
     }),
     col({
-      icon: 'mdi:clock-outline',
+      icon: 'mdi:eye-outline',
       key: 'created',
       label: 'Created',
       value: (x) => ({
@@ -100,8 +126,8 @@ export const load: PageLoad = async ({ fetch }) => {
     }),
     col({
       icon: 'mdi:key-outline',
-      key: 'pgp_key',
-      label: 'PGP',
+      key: 'gpg_key',
+      label: 'GPG',
       value: (x) => ({ display: Boolean, props: { isTrue: x.User?.gpgkey === 'true' } })
     }),
     col({
@@ -137,20 +163,26 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Disable User',
       icon: 'mdi:account-lock-outline',
       action: (x) => {
-        Promise.all(
-          x
-            .map((y) => y.User?.id)
-            .map((userId) =>
-              get(api).PUT('/admin/users/edit/{userId}', {
-                fetch,
-                params: { path: { userId: userId! } },
-                body: { disabled: true }
-              })
-            )
-        ).then(() => {
-          notifications.add(successPill('Disabled users ' + x.map((y) => y.User?.id).join(', ')));
-          invalidateAll();
-        });
+        if (
+          confirm(
+            `Are you sure you want to disable the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).PUT('/admin/users/edit/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } },
+                  body: { disabled: true }
+                })
+              )
+          ).then(() => {
+            notifications.add(successPill('Disabled users ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
+        }
       }
     },
     {
@@ -158,21 +190,107 @@ export const load: PageLoad = async ({ fetch }) => {
       icon: 'mdi:delete-outline',
       class: 'text-red',
       action: (x) => {
-        Promise.all(
-          x
-            .map((y) => y.User?.id)
-            .map((userId) =>
-              get(api).DELETE('/admin/users/delete/{userId}', {
-                fetch,
-                params: { path: { userId: userId! } }
-              })
-            )
-        ).then(() => {
-          notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
-          invalidateAll();
-        });
+        if (
+          confirm(
+            `Are you sure you want to delete the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).DELETE('/admin/users/delete/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } }
+                })
+              )
+          ).then(() => {
+            notifications.add(successPill('Deleted users ' + x.map((y) => y.User?.id).join(', ')));
+            invalidateAll();
+          });
+        }
       }
     },
+    {
+      label: 'End Session',
+      icon: 'mdi:delete-outline',
+      class: 'text-red',
+      action: (x) => {
+        if (
+          confirm(
+            `Are you sure you want to disable the token for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+          )
+        ) {
+          Promise.all(
+            x
+              .map((y) => y.User?.id)
+              .map((userId) =>
+                get(api).PUT('/admin/users/edit/{userId}', {
+                  fetch,
+                  params: { path: { userId: userId! } },
+                  body: { force_logout: true }
+                })
+              )
+          ).then(() => {
+            notifications.add(
+              successPill('Disabled token for user ' + x.map((y) => y.User?.id).join(', '))
+            );
+            invalidateAll();
+          });
+        }
+      }
+    },
+    {
+      label: 'New Authkey',
+      icon: 'mdi:lock-outline',
+      action: (x) => {
+        if (x.length === 1) {
+          goto(`/admin/keys/new?id=${x.map((x) => x.User?.id).join(', ')}`);
+        } else {
+          notifications.add(errorPill('Only one user can be selected'));
+        }
+      }
+    },
+    !compatibility
+      ? {
+          label: 'New Password',
+          icon: 'mdi:lock-outline',
+          action: (x) => {
+            if (
+              confirm(
+                `Are you sure you want to generate a new password for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+              )
+            ) {
+              const randomstring = Math.random().toString(36).slice(-12);
+              if (x.length === 1) {
+                Promise.all(
+                  x
+                    .map((y) => y.User?.id)
+                    .map((userId) =>
+                      get(api).PUT('/auth/setPassword/{userId}', {
+                        fetch,
+                        params: { path: { userId: userId! } },
+                        body: { password: randomstring }
+                      })
+                    )
+                ).then((resp) => {
+                  if (resp.error) {
+                    notifications.add(
+                      errorPill('Failed to set password ' + x.map((y) => y.User?.id).join(', '))
+                    );
+                    return;
+                  }
+                  navigator.clipboard.writeText(randomstring);
+                  showPasswordPopup(randomstring);
+                  invalidateAll();
+                });
+              } else {
+                notifications.add(errorPill('Only one user can be selected'));
+              }
+            }
+          }
+        }
+      : undefined,
     {
       label: 'Enable Email Publish',
       icon: 'icon-park-outline:send-email',
@@ -196,8 +314,15 @@ export const load: PageLoad = async ({ fetch }) => {
           )
         );
       }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
+      }
     }
-  ];
+  ].filter((x) => typeof x !== 'undefined');
 
   const topMenuActions: ActionBarEntryProps[] = [
     {
@@ -213,6 +338,7 @@ export const load: PageLoad = async ({ fetch }) => {
   const { data: orgData } = await get(api).GET('/organisations');
 
   const fil = createTableHeadGenerator<undefined>();
+
   const filter = [
     fil({
       label: 'ID',
@@ -308,12 +434,12 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     }),
     fil({
-      label: 'PGP-Key',
+      label: 'GPG-Key',
       value: () => ({
         display: Checkbox,
         props: {
           checked: false,
-          name: 'pgp_key'
+          name: 'gpg_key'
         }
       })
     }),
@@ -328,6 +454,7 @@ export const load: PageLoad = async ({ fetch }) => {
       })
     })
   ];
+
   return {
     data,
     tableData: data,
@@ -335,6 +462,7 @@ export const load: PageLoad = async ({ fetch }) => {
     editActions,
     topMenuActions,
     filter,
-    maxCount: +response.headers.get('X-result-count')!
+    maxCount: data.length,
+    passwordStore
   };
 };

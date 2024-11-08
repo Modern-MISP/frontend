@@ -25,7 +25,7 @@
 
   onMount(async () => {
     const { data, error: mispError, response } = await $api.GET('/attributes/describeTypes');
-    if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+    if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
     attributeTypes = (data as { result: ResponseType }).result;
   });
 

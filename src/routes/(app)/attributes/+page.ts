@@ -46,11 +46,13 @@ export const load = async ({ fetch }) => {
 
   const tableData = data.response?.Attribute ?? [];
 
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
   const describeTypesResponse = await get(api).GET('/attributes/describeTypes', {});
   if (describeTypesResponse.error)
     throw error(
-      describeTypesResponse.response.status as NumericRange<400, 599>,
-      describeTypesResponse.error.message
+      describeTypesResponse.response['status'] as NumericRange<400, 599>,
+      describeTypesResponse.error['message']
     );
   const options: components['schemas']['DescribeAttributeTypesResponse'] = (
     describeTypesResponse.data as unknown as { result: typeof describeTypesResponse.data }
@@ -526,6 +528,13 @@ export const load = async ({ fetch }) => {
           ),
           `Added sightings for attributes ${x.map(({ id }) => id).join(', ')}`
         );
+      }
+    },
+    {
+      label: 'Export',
+      icon: 'mdi:download',
+      action(x) {
+        console.log(x);
       }
     }
   ];

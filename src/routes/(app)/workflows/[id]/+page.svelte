@@ -29,7 +29,7 @@
   import type { ComponentProps } from 'svelte';
   import { invalidateAll } from '$app/navigation';
 
-  /** The data that will be displayed on this page. */
+  /** Page data containing the data of the workflow with the 'id' in the url.*/
   export let data;
 
   const svelteFlow = useSvelteFlow();
@@ -280,9 +280,8 @@
 
 <!--
   @component
+  Displays information of a workflow specified by 'id', including an interactive node-based diagram for visualization.
   
-  All the information about a specific workflow,
-  including an interactive node-based diagram for visualization.
 -->
 <svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} use:lockEditMode={isModified} />
 <div class="flex flex-row h-full">

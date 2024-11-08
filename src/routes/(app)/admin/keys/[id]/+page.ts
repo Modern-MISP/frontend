@@ -24,7 +24,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
     fetch
   });
 
-  if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
+  // eslint-disable-next-line no-warning-comments
+  //TODO: types of status and message are not set, therefor .status an .message default to never
+  if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
 
   const col = createTableHeadGenerator<typeof data & { AuthKey?: { unique_ips?: string[] } }>();
 

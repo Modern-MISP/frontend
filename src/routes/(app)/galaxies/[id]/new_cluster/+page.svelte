@@ -43,7 +43,7 @@
         })
         .then((resp) => {
           if (resp.error) {
-            throw new Error(resp.error.message);
+            throw new Error(resp['error']['message']);
           } else {
             goto(`/galaxies/clusters/${resp.data.GalaxyCluster?.id}`);
           }
@@ -159,6 +159,11 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+    @component
+    Displays the form for creating a new galaxy cluster.
+
+-->
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
 </Form>

@@ -6,7 +6,9 @@
 describe('add tag to event', () => {
   beforeEach(() => {
     cy.defaultLogin();
-    cy.visit('/events/2/galaxies');
+    cy.visit('/events/');
+    cy.get('tbody').find('tr').first().click();
+    cy.get('a:contains("Event Galaxies")').click();
     cy.toggleMode();
   });
 

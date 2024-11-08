@@ -4,7 +4,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   /**
-   * The data that will be displayed on this page
+   * Page data of the galaxy table.
    */
   export let data;
 

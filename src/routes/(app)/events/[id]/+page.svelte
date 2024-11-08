@@ -12,7 +12,7 @@
   import { addTags, deleteTags } from './_components/event.util';
 
   /**
-   * Page data containing the data of the event with the id in the url
+   * Page data containing the data of the event with the 'id' in the url
    */
   export let data: PageData;
 

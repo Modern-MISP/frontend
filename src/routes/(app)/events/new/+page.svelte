@@ -107,6 +107,12 @@
 
 <svelte:window use:lockEditMode={true} />
 
+<!-- 
+    @component 
+    Displays the form for creating a new event.
+ 
+-->
+
 <Form callback={editCallback}>
   <DynCard {header} data={{}}></DynCard>
 </Form>

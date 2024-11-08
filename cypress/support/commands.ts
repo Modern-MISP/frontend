@@ -16,10 +16,13 @@
 // -- This is a parent command --
 Cypress.Commands.add('login', (token: string) => {
   cy.session(token, () => {
+    cy.intercept('POST', '/events/index').as('events_index');
+    cy.intercept('GET', '**/users/view/me').as('users_view_me');
     cy.visit('/login');
     cy.get('input[name="token"]').type(token);
-    cy.get('button').click();
-    cy.wait(100);
+    cy.get('button[type="submit"]').click();
+    cy.wait('@events_index');
+    cy.wait('@users_view_me');
     cy.url().should('include', '/event');
   });
 });

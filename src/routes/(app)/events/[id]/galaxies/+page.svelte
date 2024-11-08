@@ -10,13 +10,18 @@
   import CardHeading from '$lib/components/card/CardHeading.svelte';
 
   /**
-   *
+   * Page data of the galaxy form.
    */
   export let data;
   let state: EventState = 'info';
 
   let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
 </script>
+
+<!--
+    @component
+    Displays the form for editing the galaxy cluster of an event.
+-->
 
 <EventInfo {data} bind:state>
   <svelte:fragment slot="add">

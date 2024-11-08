@@ -11,18 +11,16 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { invalidateAll } from '$app/navigation';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
+  import { get } from 'svelte/store';
 
   type ReturnData = {
+    types: string[];
+    default_type: string;
     value: string;
-    original_value: string;
-    to_ids: 0 | 1;
-    type: string;
-    category: string;
-    distribution: number;
-    event_id: string;
+    to_ids: boolean;
   };
 
-  let freetextData: ReturnData[];
+  let freetextData;
 
   const submit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -33,21 +31,69 @@
         .POST('/events/freeTextImport/{eventId}', {
           params: { path: { eventId: $page.params.id } },
           body: {
-            Attribute: {
-              event_id: $page.params.id,
-              value: freetext
-            }
+            returnMetaAttributes: true,
+            value: freetext
           }
         })
         .then((resp) => {
-          if (resp.error) throw new Error(resp.error.message);
-          freetextData = resp.data as ReturnData[];
-          invalidateAll();
+          console.log(resp);
+          if (resp.error) {
+            if (resp['response']['status'] == 307) {
+              getResponseData(resp['error']['id']);
+            } else {
+              throw new Error(resp.error.detail);
+            }
+          } else {
+            freetextData = resp.data;
+          }
         })
     );
   };
 
+  async function getResponseData(job_id: string) {
+    await $api
+      .GET('/jobs/{job_id}', {
+        params: { path: { job_id } }
+      })
+      .then(async (resp) => {
+        if (resp.error) {
+          if (resp['response']['status'] == 409) {
+            await new Promise((f) => setTimeout(f, 1000));
+            getResponseData(job_id);
+          } else {
+            throw new Error(resp['error']['detail']);
+          }
+        } else if (resp.data['attributes']) {
+          freetextData = resp.data['attributes'];
+        }
+      });
+  }
+
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
+  const actionBar: DynCardActionHeader<typeof data>[] = [
+    {
+      label: 'Save',
+      icon: 'mdi:content-save',
+      action: (x) => {
+        x.forEach((y) => {
+          get(api)
+            .POST('/attributes/add/{eventId}', {
+              params: { path: { eventId: $page.params.id } },
+              body: {
+                type: y.default_type,
+                value: y.value,
+                to_ids: y.to_ids
+              }
+            })
+            .then((resp) => {
+              if (resp.error) throw new Error(resp.error.detail);
+              invalidateAll();
+            });
+        });
+        invalidateAll();
+      }
+    }
+  ];
 </script>
 
 <div class="h-full" id="freetext-import">
@@ -78,24 +124,14 @@
           key: 'value'
         }),
         col({
-          icon: 'mdi:circle',
-          key: 'category',
-          label: 'Category',
-          value: (x) => ({
-            display: Pill,
-            props: {
-              text: x.category
-            }
-          })
-        }),
-        col({
           icon: '',
           key: 'type',
           label: 'Type',
-          value: (x) => ({ display: Info, props: { text: x.type ?? '' } })
+          value: (x) => ({ display: Info, props: { text: x.default_type ?? '' } })
         })
       ]}
       tableData={freetextData}
+      editActions={actionBar}
     ></ComplexTableLayout>
   {/if}
 </div>

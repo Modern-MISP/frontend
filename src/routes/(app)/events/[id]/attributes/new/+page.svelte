@@ -14,6 +14,7 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { currentRoute } from '$lib/stores';
 
+  /**Page data*/
   export let data;
 
   $mode = 'edit';
@@ -133,6 +134,11 @@
 </script>
 
 <svelte:window use:lockEditMode={true} />
+
+<!--
+@component
+Displays the form for creating a new attribute.
+-->
 
 <Form callback={editCallback}>
   <DynCard {header} data={{}} />

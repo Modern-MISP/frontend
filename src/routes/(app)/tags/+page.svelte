@@ -1,20 +1,27 @@
 <script lang="ts">
-  import FilterCard from '$lib/components/filter/FilterCard.svelte';
+  /* Imports for search options
+  import { api } from '$lib/api';
+  import { get } from 'svelte/store';
   import Input from '$lib/components/input/Input.svelte';
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
-  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import CreateTag from './CreateTag.svelte';
+  */
+  import FilterCard from '$lib/components/filter/FilterCard.svelte';
+  import CreateTag from './CreateTag.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
   /**
-   * Page data
+   * Page data containing the tags table.
    */
   export let data;
 
+  /* functions for search options
   $: ({ tableData } = data);
 
   let tagFilter = '';
 
   $: filtered = tableData.filter((x) => x.name?.toLowerCase()?.includes(tagFilter.toLowerCase()));
+  */
 
   let addTag = false;
 
@@ -40,14 +47,15 @@
   
 -->
 
-<ComplexTableLayout {...data} {topMenuActions} tableData={filtered}>
+<ComplexTableLayout {...data} {topMenuActions}>
+  <!-- search options
   <div slot="filter">
     <ActionCard class="h-20">
       <Input placeholder="Search tag" class="w-max" on:value={({ detail }) => (tagFilter = detail)}
       ></Input>
     </ActionCard>
   </div>
-
+-->
   <svelte:fragment slot="added">
     {#if addTag}
       <div

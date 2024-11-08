@@ -3,6 +3,7 @@ beforeEach(() => {
 });
 
 const email = 'cypress-test@example.com';
+const user_name = 'Cypress Test';
 
 const cardRowRight = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
@@ -16,11 +17,14 @@ describe('User tests', () => {
 
     cy.url().should('include', '/admin/users/new');
   });
-
   it('should create a new user', () => {
     cy.visit('/admin/users/new');
 
+    if (!Cypress.env('legacy')) {
+      cy.get(cardRowRight('Name')).type(user_name);
+    }
     cy.get(cardRowRight('Email')).type(email);
+    cy.get(cardRowRight('Password')).type('Password123!');
     cy.get(cardRowRight('Contact enables')).click();
     cy.get(cardRowRight('Weekly notifications')).click();
     cy.get(cardRowRight('Terms accepted')).click();
@@ -32,6 +36,9 @@ describe('User tests', () => {
     cy.toggleMode();
 
     cy.get(cardRowRight('Email')).should('contain.text', email);
+    if (!Cypress.env('legacy')) {
+      cy.get(cardRowRight('Name')).should('contain.text', user_name);
+    }
   });
 
   it('should edit an existing user', () => {
@@ -48,6 +55,7 @@ describe('User tests', () => {
     cy.get(cardRowRight('Email')).should('not.be.disabled').clear().type(newEmail);
 
     cy.get('button:has(span:contains("Save"))').click();
+    cy.wait(1000);
 
     cy.toggleMode();
 

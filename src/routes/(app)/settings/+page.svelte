@@ -1,32 +1,28 @@
 <script lang="ts">
-  import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
-  import Select from '$lib/components/form/Select.svelte';
-  import { currentRoute, settings, themes } from '$lib/stores';
-  import SettingsEntry from '$lib/components/settingsEntry/SettingsEntry.svelte';
-  $currentRoute = [
+  import { routes } from '../routes';
+  import SideMenuEntry from '$lib/components/menus/sidemenu/SideMenuEntry.svelte';
+  import { actionBar } from '$lib/actions';
+  import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
+
+  const childRoutes = routes.find(({ href }) => href === '/settings')?.children ?? [];
+
+  const topMenuActions: ActionBarEntryProps[] = [
     {
-      name: 'Admin',
-      icon: 'mdi:shield-account',
-      href: 'admin'
-    },
-    {
-      name: 'Settings',
-      icon: 'mdi:cog',
-      href: 'settings'
+      icon: 'mdi:download',
+      label: 'Export',
+      action: () => {
+        console.log('YAY');
+      }
     }
   ];
 </script>
 
-<!--
-  @component
-  Exposes various global settings of the application.
--->
+<svelte:window use:actionBar={topMenuActions} />
 
-<div class="flex flex-col rounded-lg">
-  <SettingsEntry label="Menu is open per default">
-    <Checkbox bind:checked={$settings.openOnInit} />
-  </SettingsEntry>
-  <SettingsEntry label="Theme">
-    <Select options={themes} bind:value={$settings.theme} />
-  </SettingsEntry>
-</div>
+<!-- 
+    @component
+    Displays the settings page with all subpages.
+-->
+{#each childRoutes as childRoute}
+  <SideMenuEntry {...childRoute} isMenuOpen={true}></SideMenuEntry>
+{/each}

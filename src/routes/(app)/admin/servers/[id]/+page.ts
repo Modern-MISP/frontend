@@ -8,21 +8,63 @@ import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Input from '$lib/components/input/Input.svelte';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import Select from '$lib/components/form/Select.svelte';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
 export const load = async ({ params, fetch }) => {
-  const { data, error: mispError, response } = await get(api).GET('/servers', { fetch });
+  type Organisation = {
+    id: string;
+    name: string;
+  };
+
+  type RemoteOrg = {
+    id: string;
+    name: string;
+  };
+
+  type Server = {
+    id: string;
+    name: string;
+    url: string;
+    priority: number;
+    org_id: string;
+    remote_org_id: string;
+    internal: boolean;
+    push: boolean;
+    pull: boolean;
+    push_sightings: boolean;
+    caching_enabled: boolean;
+    push_galaxy_clusters: boolean;
+    pull_galaxy_clusters: boolean;
+    unpublish_event: boolean;
+    publish_without_email: boolean;
+    self_signed: boolean;
+    skip_proxy: boolean;
+    remove_missing_tags: boolean;
+  };
+
+  type ServerData = {
+    Server: Server;
+    Organisation: Organisation;
+    RemoteOrg: RemoteOrg;
+  };
+
+  const {
+    data: serverData,
+    error: mispError,
+    response
+  } = await get(api).GET('/servers', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
-  const server = filter(data, (x) => x.Server!.id === params.id).at(0) ?? {};
-  const col = createTableHeadGenerator<typeof server>();
+  const server = (filter(serverData, (x: ServerData) => x.Server.id == params.id).at(0) ??
+    {}) as ServerData;
 
   const { data: orgs } = await get(api).GET('/organisations', { fetch });
-  const orgOptions = orgs?.map((x) => x.Organisation);
+  const orgOptions = orgs?.map((x: { Organisation: Organisation }) => x.Organisation);
+
+  const col = createTableHeadGenerator<typeof server>();
 
   const left = [
     col({
@@ -286,15 +328,12 @@ export const load = async ({ params, fetch }) => {
         label: 'Remove missing attribute tags',
         value: (x) => ({
           display: Boolean,
-          // @ts-expect-error Not in the OpenAPI spec.
           props: { isTrue: x.Server?.remove_missing_tags ?? false }
         })
       },
       {
         value: (x) => ({
           display: Checkbox,
-
-          // @ts-expect-error Not in the OpenAPI spec.
           props: { name: 'remove_missing_tags', checked: x.Server?.remove_missing_tags ?? false }
         })
       }

@@ -2,6 +2,7 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import EnableFilter from '../../galaxies/EnableFilter.svelte';
 
+  /** Page data containing the workflows table */
   export let data;
 
   $: filterableTableData = data.tableData.map((d) => ({ ...d, enabled: !d.disabled }));
@@ -11,8 +12,7 @@
 
 <!--
   @component
-  
-  A list of all workflow modules except triggers.
+  Displays a table of all workflow modules except triggers.
 -->
 <ComplexTableLayout {...data} tableData={filtered}>
   <div slot="filter">

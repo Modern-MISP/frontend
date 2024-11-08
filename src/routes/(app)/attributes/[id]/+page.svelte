@@ -19,7 +19,7 @@
   import { addTags, deleteTags } from './attribute.util';
 
   /**
-   * Page data containing the data of the attribute with the id in the url
+   * Page data containing the data of the attribute with the 'id' in the url.
    */
   export let data: PageData;
 
@@ -85,7 +85,7 @@
 />
 
 <!--
-@component Displays information about an attribute specified by ID, allows adding of tags.
+@component Displays information about an attribute specified by 'id', allows adding of tags.
 
 -->
 <div class="h-full overflow-auto">
