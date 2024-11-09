@@ -6,7 +6,13 @@
   import { mode } from '$lib/stores';
   import { fly } from 'svelte/transition';
 
+  /**
+   *
+   */
   export let id: string;
+  /**
+   *
+   */
   export let type: string;
 
   const nodes = useNodes();

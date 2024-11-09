@@ -40,7 +40,9 @@
   let modifiedWfData = wfData;
   let isModified = false;
 
-  const _generatedFlowContent = generateFlowContent(wfData, { onNodeUpdate });
+  let unsupportedModules = [] as string[];
+
+  const _generatedFlowContent = generateFlowContent(wfData, unsupportedModules, { onNodeUpdate });
   const nodes = writable(_generatedFlowContent.nodes);
   const edges = writable(_generatedFlowContent.edges);
 
@@ -50,7 +52,7 @@
     wfData = workflow.data!;
     originalWfData = cloneDeep(wfData);
     modifiedWfData = wfData;
-    const _generatedFlowContent = generateFlowContent(wfData, { onNodeUpdate });
+    const _generatedFlowContent = generateFlowContent(wfData, unsupportedModules, { onNodeUpdate });
     $nodes = _generatedFlowContent.nodes;
     $edges = _generatedFlowContent.edges;
     updateAllFrames();
@@ -167,6 +169,19 @@
           e.style = 'stroke: red; stroke-width: 4px;';
           e.animated = false;
         });
+      }
+    }
+    if (checkResult.unsupported_modules && checkResult.unsupported_modules?.length > 0) {
+      const newDisabled = $nodes
+        // @ts-expect-error unsupported_modules is not undefined if this condition is reached.
+        .filter(({ id }) => checkResult.unsupported_modules.includes(parseInt(id)))
+        .map(({ id }) => id);
+      // If we'd set it without the equality check we'd have an endless loop
+      // of reactive statements calling each other and freezing the UI 🤡
+      // Also, this is the mandatory reminder that JS is a language that got designed
+      // in 10 days and that's why this is the least shitty way to compare lists 🤡🤡
+      if (JSON.stringify(newDisabled) != JSON.stringify(unsupportedModules)) {
+        unsupportedModules = newDisabled;
       }
     }
   }, 500);

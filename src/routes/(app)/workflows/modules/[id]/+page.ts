@@ -8,7 +8,7 @@ import Info from '$lib/components/info/Info.svelte';
 import type { Module } from '../module';
 
 export const load: PageLoad = async ({ params, fetch }) => {
-  /// @ts-expect-error Not in OpenAPI spec
+  // @ts-expect-error Not in OpenAPI spec
   const getResult = await get(api).GET('/workflows/moduleView/{moduleId}', {
     fetch,
     params: { path: { moduleId: params.id } }

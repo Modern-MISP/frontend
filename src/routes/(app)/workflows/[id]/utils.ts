@@ -4,6 +4,7 @@ import type { ModuleNode, WorkflowData } from '../workflow';
 
 export function generateFlowContent(
   wfData: WorkflowData,
+  unsupported: string[],
   nodeCallbacks: { onNodeUpdate: (id: string) => void }
 ) {
   const nodes: Node[] = [];
@@ -17,7 +18,8 @@ export function generateFlowContent(
         inputs: Object.keys(module.inputs),
         outputs: Object.keys(module.outputs),
         moduleData: module.data,
-        onUpdate: nodeCallbacks.onNodeUpdate
+        onUpdate: nodeCallbacks.onNodeUpdate,
+        unsupported: unsupported.includes(module.id.toString())
       },
       position: { x: module.pos_x, y: module.pos_y }
     });

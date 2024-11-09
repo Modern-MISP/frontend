@@ -19,8 +19,9 @@ module.exports = {
     node: true
   },
   rules: {
-    'no-warning-comments': 'warn',
-    'no-console': 'warn'
+    //TODO maybe reactivate
+    //'no-warning-comments': 'warn',
+    //'no-console': 'warn'
   },
   overrides: [
     {

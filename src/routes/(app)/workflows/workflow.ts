@@ -89,4 +89,9 @@ export type CheckGraphResult = {
     has_path_warnings: boolean;
     edges: unknown[];
   };
+  misc_errors?: {
+    error_id: string;
+    message: string;
+  }[];
+  unsupported_modules?: number[];
 };

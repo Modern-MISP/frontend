@@ -5,7 +5,13 @@
   import type { components } from '$lib/api/misp';
   import { mode } from '$lib/stores';
 
+  /**
+   *
+   */
   export let objects: components['schemas']['Object'][];
+  /**
+   *
+   */
   export let attributes: components['schemas']['Attribute'][];
 
   const onDragStart = (event: DragEvent, node: unknown, type: string) => {

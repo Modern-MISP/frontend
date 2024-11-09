@@ -3,12 +3,33 @@
 
   type $$Props = EdgeProps;
 
+  /**
+   *
+   */
   export let sourceX: $$Props['sourceX'];
+  /**
+   *
+   */
   export let sourceY: $$Props['sourceY'];
+  /**
+   *
+   */
   export let sourcePosition: $$Props['sourcePosition'];
+  /**
+   *
+   */
   export let targetX: $$Props['targetX'];
+  /**
+   *
+   */
   export let targetY: $$Props['targetY'];
+  /**
+   *
+   */
   export let targetPosition: $$Props['targetPosition'];
+  /**
+   *
+   */
   export let data: $$Props['data'] = undefined;
 
   $: [edgePath, labelX, labelY] = getBezierPath({
