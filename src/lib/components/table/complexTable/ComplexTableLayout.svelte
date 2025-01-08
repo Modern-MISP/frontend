@@ -173,18 +173,21 @@
     {/if}
   </slot>
   <slot name="actionList">
-    {#if $mode === 'edit'}
-      <SelectionCard
-        numSelected={activeRows.length}
-        selectAll={() => (activeRows = tableData)}
-        unselectAll={() => (activeRows = [])}
-      />
-      <slot name="editActions">
-        <DynActionCard
-          header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
-          data={activeRows}
-        ></DynActionCard>
-      </slot>
+    {#if editActions.length > 0}
+      <!-- removes the selection when no action is defined to performe on the selectet rows-->
+      {#if $mode === 'edit'}
+        <SelectionCard
+          numSelected={activeRows.length}
+          selectAll={() => (activeRows = tableData)}
+          unselectAll={() => (activeRows = [])}
+        />
+        <slot name="editActions">
+          <DynActionCard
+            header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
+            data={activeRows}
+          ></DynActionCard>
+        </slot>
+      {/if}
     {/if}
   </slot>
   <slot name="moreActions" />

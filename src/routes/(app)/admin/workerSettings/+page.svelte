@@ -4,7 +4,7 @@
   import type { PageData } from './$types';
   import { successPill } from '$lib/util/pill.util';
 
-  /** Page data containing data of the workers table.*/
+  /** Page data containing data of the users table.*/
   export let data: PageData;
 
   let password = '';
@@ -23,7 +23,7 @@
   @component
   Displays a list of all workers of the instance.
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerSettings/${x.name}`}
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerSettings/${x.id}`}
 ></ComplexTableLayout>
 
 <!-- Password Popup -->

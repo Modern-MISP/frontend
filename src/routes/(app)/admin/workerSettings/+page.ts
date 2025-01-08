@@ -14,6 +14,7 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/worker/all', { fetch });
+  console.log(data);
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and message are not set, therefor .status an .message default to never
   if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
@@ -31,9 +32,9 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     col({
       icon: 'mdi:id-card',
-      key: 'name',
-      label: 'Worker Name',
-      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
+      key: 'id',
+      label: 'Worker ID',
+      value: (x) => ({ display: Info, props: { text: String(x?.id) ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:id-card',
@@ -49,6 +50,7 @@ export const load: PageLoad = async ({ fetch }) => {
         display: PillCollection,
         props: {
           pills: x?.queues.map((x) => {
+            console.log(x);
             return {
               text: x ?? 'unknown'
             };
@@ -71,29 +73,13 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
           get(api)
-            .POST('/worker/all/pause', { fetch })
+            .POST('/worker/all', { fetch })
             .then(() => {
               notifications.add(successPill('Paused all Workers'));
               invalidateAll();
             });
         } else {
           notifications.add(errorPill('Pause failed'));
-        }
-      }
-    },
-    {
-      label: 'Unpause Workers',
-      icon: 'mdi:play-circle',
-      action: (x) => {
-        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
-          get(api)
-            .POST('/worker/all/unpause', { fetch })
-            .then(() => {
-              notifications.add(successPill('Unpause all Workers'));
-              invalidateAll();
-            });
-        } else {
-          notifications.add(errorPill('Unpause failed'));
         }
       }
     },

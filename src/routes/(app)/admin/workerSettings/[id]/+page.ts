@@ -1,9 +1,14 @@
 import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
+import { page } from '$app/stores';
 import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
+import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+import { notifications } from '$lib/stores';
+import { errorPill, successPill } from '$lib/util/pill.util';
+import { invalidateAll } from '$app/navigation';
 import Info from '$lib/components/info/Info.svelte';
 
 export const load: PageLoad = async ({ params, fetch }) => {
@@ -42,68 +47,54 @@ export const load: PageLoad = async ({ params, fetch }) => {
       mispErrorReturningJobs['message']
     );
 
-  const job_col = createTableHeadGenerator<(typeof jobs)[number], DynTableHeadExtent>();
-  const ret_job_col = createTableHeadGenerator<
-    (typeof returningJobs)[number],
-    DynTableHeadExtent
-  >();
-  const job_queues_col = createTableHeadGenerator<(typeof jobqueues)[number], DynTableHeadExtent>();
+  const left = [].filter((x) => typeof x !== 'undefined');
 
-  const jobs_header = [
-    job_col({
-      icon: 'mdi:id-card',
-      key: 'name',
-      label: 'Job Name',
-      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
-    }),
-    job_col({
-      icon: 'mdi:id-card',
-      key: 'placeInQueue',
-      label: 'Queue Position',
-      value: (x) => ({ display: Info, props: { text: String(x?.placeInQueue) ?? 'unknown' } })
-    }),
-    job_col({
-      icon: 'mdi:queue-first-in-last-out',
-      key: 'queueName',
-      label: 'Queue Name',
-      value: (x) => ({ display: Info, props: { text: x?.queueName ?? 'unknown' } })
-    })
-  ];
+  const right = [];
 
-  const returningJobs_header = [
-    ret_job_col({
-      icon: 'mdi:id-card',
-      key: 'name',
-      label: 'Job Name',
-      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
-    }),
-    ret_job_col({
-      icon: 'mdi:id-card',
-      key: 'info',
-      label: 'Info',
-      value: (x) => ({ display: Info, props: { text: String(x?.info) ?? 'unknown' } })
-    }),
-    ret_job_col({
-      icon: 'mdi:queue-first-in-last-out',
-      key: 'nextExecution',
-      label: 'Next Execution',
-      value: (x) => ({ display: Info, props: { text: x?.nextExecution ?? 'unknown' } })
-    })
-  ];
-
-  const jobqueues_header = [
-    job_queues_col({
-      icon: 'mdi:id-card',
-      key: 'name',
-      label: 'Jobqueue Name',
-      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
-    }),
-    job_queues_col({
-      icon: 'mdi:id-card',
-      key: 'activ',
-      label: 'Queue activ',
-      value: (x) => ({ display: Info, props: { text: String(x?.activ) ?? 'unknown' } })
-    })
+  const queueEditActions: DynCardActionHeader<typeof jobqueues>[] = [
+    {
+      label: 'Add Queues',
+      icon: 'mdi:plus-circle',
+      action: (x) => {
+        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
+          Promise.all(
+            x.map((x) =>
+              get(api).POST('/worker/addQueue/{id}', {
+                params: { path: { id: get(page).params.id } },
+                body: { queue_name: x.name }
+              })
+            )
+          ).then(() => {
+            notifications.add(successPill('Queue added'));
+            invalidateAll();
+          });
+        } else {
+          notifications.add(errorPill('Failed to add Queue'));
+        }
+      }
+    },
+    {
+      label: 'Remove Queues',
+      icon: 'mdi:minus-circle',
+      action: (x) => {
+        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
+          get(api);
+          Promise.all(
+            x.map((x) =>
+              get(api).POST('/worker/removeQueue/{id}', {
+                params: { path: { id: get(page).params.id } },
+                body: { queue_name: x.name }
+              })
+            )
+          ).then(() => {
+            notifications.add(successPill('Queue removed'));
+            invalidateAll();
+          });
+        } else {
+          notifications.add(errorPill('Failed to remove Queue'));
+        }
+      }
+    }
   ];
 
   return {
@@ -112,6 +103,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     returningJobs,
     returningJobs_header,
     jobqueues,
-    jobqueues_header
+    jobqueues_header,
+    queueEditActions
   };
 };
