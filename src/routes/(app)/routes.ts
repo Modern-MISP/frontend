@@ -88,7 +88,7 @@ export const routes: SideMenuRoute[] = [
   {
     name: 'Logs',
     icon: 'mdi:tag',
-    href: '/logs/1',
+    href: '/logs',
     userAccess: 'none'
   },
   {

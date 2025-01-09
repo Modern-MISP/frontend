@@ -1,6 +1,5 @@
 import { get } from 'svelte/store';
 import { api } from '$lib/api';
-import type { Log } from './log';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
@@ -8,16 +7,14 @@ import Info from '$lib/components/info/Info.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params }) => {
-  const page = Math.max(parseInt(params.page), 1);
+export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).GET('/logs/index/', {
+  const getResult = await get(api).POST('/logs/index/', {
     fetch,
-    params: { query: { /*model: 'Workflow',*/ page, limit: 50 } }
+    body: { page: 1, limit: 50 }
   });
 
-  const { error: mispError, response } = getResult;
-  const data = (getResult.data as Log[]).map((x) => x.Log!);
+  const { data, error: mispError, response } = getResult;
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 
@@ -95,6 +92,6 @@ export const load: PageLoad = async ({ fetch, params }) => {
     tableData: data,
     header,
     editActions,
-    page
+    maxCount: +response.headers.get('X-result-count')!
   };
 };
