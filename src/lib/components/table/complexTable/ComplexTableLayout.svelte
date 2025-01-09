@@ -99,7 +99,7 @@
 
   // first loadMore is unnecessary, because we fetch Data in page.ts
   // second loadMore is triggered by reactivity bug in svelte 4, change this in svelte 5!
-  let skipRequests = -2;
+  let skipRequests = -1;
 
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
     if (skipRequests < 0) {
