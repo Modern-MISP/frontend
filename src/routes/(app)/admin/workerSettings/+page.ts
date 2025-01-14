@@ -84,16 +84,18 @@ export const load: PageLoad = async ({ fetch }) => {
       }
     },
     {
-      label: 'Clear Workerqueues',
-      icon: 'mdi:delete',
+      label: 'Unpause Workers',
+      icon: 'mdi:play-circle',
       action: (x) => {
-        if (confirm(`Are you sure you want to clear all Workerqueues? All jobs will be lost!`)) {
-          Promise.all(x).then(() => {
-            notifications.add(successPill('Not implemented'));
-            invalidateAll();
-          });
+        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
+          get(api)
+            .POST('/worker/all/unpause', { fetch })
+            .then(() => {
+              notifications.add(successPill('Unpause all Workers'));
+              invalidateAll();
+            });
         } else {
-          notifications.add(errorPill('Clear failed'));
+          notifications.add(errorPill('Unpause failed'));
         }
       }
     }

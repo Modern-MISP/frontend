@@ -94,6 +94,20 @@ export const load: PageLoad = async ({ params, fetch }) => {
           notifications.add(errorPill('Failed to remove Queue'));
         }
       }
+    },
+    {
+      label: 'Clear Queues',
+      icon: 'mdi:delete',
+      action: (x) => {
+        if (confirm(`Are you sure? All jobs in the queues will be lost!`)) {
+          Promise.all(x).then(() => {
+            notifications.add(successPill('Not implemented'));
+            invalidateAll();
+          });
+        } else {
+          notifications.add(errorPill('Clear failed'));
+        }
+      }
     }
   ];
 
