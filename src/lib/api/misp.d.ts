@@ -4,1301 +4,196 @@
  */
 
 export interface paths {
-  '/attributes/restSearch': {
-    /**
-     * Search attributes
-     * @description Search for attributes based on various filters.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the search body
-     *
-     * Output:
-     *
-     * - the attributes the search finds
-     */
-    post: operations['rest_search_attributes_attributes_restSearch_post'];
-  };
-  '/attributes/{eventId}': {
-    /**
-     * Add new attribute
-     * @description Add a new attribute with the given details.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the event
-     *
-     * - the body for adding an attribute
-     *
-     * Output:
-     *
-     * - the response of the added attribute from the api
-     */
-    post: operations['add_attribute_attributes__eventId__post'];
-  };
-  '/attributes/describeTypes': {
-    /**
-     * Get all attribute describe types
-     * @description Retrieve a list of all available attribute types and categories.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * Output:
-     *
-     * - the attributes describe types
-     */
-    get: operations['get_attributes_describe_types_attributes_describeTypes_get'];
-  };
-  '/attributes/{attributeId}': {
-    /**
-     * Get attribute details
-     * @description Retrieve details of a specific attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * Output:
-     *
-     * - the attribute details
-     */
-    get: operations['get_attribute_details_attributes__attributeId__get'];
-    /**
-     * Update an attribute
-     * @description Update an existing attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * - the body for editing the attribute
-     *
-     * Output:
-     *
-     * - the response from the api for the edit request
-     */
-    put: operations['update_attribute_attributes__attributeId__put'];
-    /**
-     * Delete an Attribute
-     * @description Delete an attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * Output:
-     *
-     * - the response from the api for the delete request
-     */
-    delete: operations['delete_attribute_attributes__attributeId__delete'];
-  };
-  '/attributes': {
-    /**
-     * Get all Attributes
-     * @description Retrieve a list of all attributes.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * Output:
-     *
-     * - the list of all attributes
-     */
-    get: operations['get_attributes_attributes_get'];
-  };
-  '/attributes/deleteSelected/{eventId}': {
-    /**
-     * Delete the selected attributes
-     * @description Deletes the attributes associated with the event from the list in the body.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the event
-     *
-     * - the body for deleting the selected attributes
-     *
-     * - the request
-     *
-     * Output:
-     *
-     * - the response from the api for the deleting of the selection
-     */
-    post: operations['delete_selected_attributes_attributes_deleteSelected__eventId__post'];
-  };
-  '/attributes/attributeStatistics/{context}/{percentage}': {
-    /**
-     * Get attribute statistics
-     * @description Get the count/percentage of attributes per category/type.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the context
-     *
-     * - percentage
-     *
-     * Output:
-     *
-     * - the attributes statistics for one category/type
-     */
-    get: operations['get_attributes_statistics_attributes_attributeStatistics__context___percentage__get'];
-  };
-  '/attributes/restore/{attributeId}': {
-    /**
-     * Restore an attribute
-     * @description Restore an attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * Output:
-     *
-     * - the restored attribute
-     */
-    post: operations['restore_attribute_attributes_restore__attributeId__post'];
-  };
-  '/attributes/addTag/{attributeId}/{tagId}/local:{local}': {
-    /**
-     * Add tag to attribute
-     * @description Add a tag to an attribute by there ids.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * - the id of the tag
-     *
-     * - local
-     *
-     * Output:
-     *
-     * - the response from the api for adding a tag to an attribute
-     */
-    post: operations['add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post'];
-  };
-  '/attributes/removeTag/{attributeId}/{tagId}': {
-    /**
-     * Remove tag from attribute
-     * @description Remove a tag from an attribute by there ids.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * - the id of the tag
-     *
-     * Output:
-     *
-     * - the response from the api for removing a tag to an attribute
-     */
-    post: operations['remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post'];
-  };
-  '/attributes/add/{eventId}': {
-    /**
-     * Add new attribute (Deprecated)
-     * @deprecated
-     * @description Deprecated. Add a new attribute with the given details using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the event
-     *
-     * - the body
-     *
-     * Output:
-     *
-     * - the attribute
-     */
-    post: operations['add_attribute_depr_attributes_add__eventId__post'];
-  };
-  '/attributes/view/{attributeId}': {
-    /**
-     * Get attribute details (Deprecated)
-     * @deprecated
-     * @description Deprecated. Retrieve details of a specific attribute by its ID using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * Output:
-     *
-     * - the details of an attribute
-     */
-    get: operations['get_attribute_details_depr_attributes_view__attributeId__get'];
-  };
-  '/attributes/edit/{attributeId}': {
-    /**
-     * Update an attribute (Deprecated)
-     * @deprecated
-     * @description Deprecated. Update an existing attribute by its ID using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * - the body
-     *
-     * Output:
-     *
-     * - the updated version af an attribute
-     */
-    put: operations['update_attribute_depr_attributes_edit__attributeId__put'];
-  };
-  '/attributes/delete/{attributeId}': {
-    /**
-     * Delete an Attribute (Deprecated)
-     * @deprecated
-     * @description Deprecated. Delete an attribute by its ID using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attribute
-     *
-     * Output:
-     *
-     * - the response from the api for the deleting request
-     */
-    delete: operations['delete_attribute_depr_attributes_delete__attributeId__delete'];
-  };
-  '/auth/openID/getAllOpenIDConnectProvidersInfo': {
-    /**
-     * Get All Open Id Connect Providers Info
-     * @description Fetches all OpenID Connect providers
-     *
-     * Input:
-     * - Authorization token
-     * - Database session
-     *
-     * Output:
-     * - List of OpenID Connect providers
-     */
-    get: operations['get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get'];
-  };
-  '/auth/openID/getAllOpenIDConnectProviders': {
-    /**
-     * Get All Open Id Connect Providers
-     * @description Fetches all OpenID Connect providers
-     *
-     * Input:
-     * - Authorization token
-     * - Database session
-     *
-     * Output:
-     * - List of OpenID Connect providers
-     */
-    get: operations['get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get'];
-  };
-  '/auth/openID/getOpenIDConnectProvider/{providerId}': {
-    /**
-     * Get Open Id Connect Provider By Id
-     * @description Fetches a single OpenID Connect provider by its ID
-     *
-     * Input:
-     * - Authorization token
-     * - Database session
-     * - Provider ID
-     *
-     * Output:
-     * - OpenID Connect provider details
-     */
-    get: operations['get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get'];
-  };
-  '/auth/openID/addOpenIDConnectProvider': {
-    /**
-     * Add Openid Connect Provider
-     * @description Adds a new OpenID Connect provider
-     *
-     * Input:
-     *
-     * - database
-     *
-     * Output:
-     *
-     * - openID Connect provider
-     */
-    post: operations['add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post'];
-  };
-  '/auth/openID/editOpenIDConnectProvider/{openIDConnectProvider}': {
-    /**
-     * Edit Openid Connect Provider
-     * @description Edits an OpenID Connect provider
-     *
-     * Input:
-     *
-     * - OpenID Connect provider
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - updated OpenID Connect provider
-     */
-    post: operations['edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post'];
-  };
-  '/auth/openID/delete/{openIDConnectProvider}': {
-    /**
-     * Deletes an OpenID Connect Provider by its ID
-     * @description Deletes an OpenID Connect provider
-     *
-     * Input:
-     *
-     * - OpenID Connect provider
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - database
-     */
-    delete: operations['delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete'];
-  };
-  '/auth/login/start': {
-    /**
-     * Start Login
-     * @description Starts the login process.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - dict
-     */
-    post: operations['start_login_auth_login_start_post'];
-  };
-  '/auth/login/password': {
-    /**
-     * Password Login
-     * @description Login with password.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the login token
-     */
-    post: operations['password_login_auth_login_password_post'];
-  };
-  '/auth/login/setOwnPassword': {
-    /**
-     * User sets their password to a new password
-     * @description Sets the password of the user to a new password.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * Output:
-     *
-     * - the response form the api after the password change request
-     */
-    post: operations['set_password_auth_login_setOwnPassword_post'];
-  };
-  '/auth/login/idp/{identityProviderName}/callback': {
-    /**
-     * Redirect To Frontend
-     * @description Redirects to the frontend.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * - the identity provider id
-     *
-     * - the code
-     *
-     * Output:
-     *
-     * - the redirection
-     */
-    get: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_get'];
-    /**
-     * Redirect To Frontend
-     * @description Redirects to the frontend.
-     *
-     * Input:
-     *
-     * - the database
-     *
-     * - the identity provider id
-     *
-     * - the code
-     *
-     * Output:
-     *
-     * - the redirection
-     */
-    post: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_post'];
-  };
-  '/auth/login/token': {
-    /**
-     * Exchange Token Login
-     * @description Login with exchange token.
-     *
-     * Inout:
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the login token
-     */
-    post: operations['exchange_token_login_auth_login_token_post'];
-  };
-  '/auth/setPassword/{userId}': {
-    /**
-     * Admin sets the password of the user to a new password
-     * @description Set the password of the user to a new password
-     *
-     * Input:
-     *
-     * - the request body
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - the response from the api after the password change request
-     */
-    put: operations['change_password_UserId_auth_setPassword__userId__put'];
-  };
-  '/auth_keys/{userId}': {
-    /**
-     * Add an AuthKey.
-     * @description Create an AuthKey for a specific user and save it in the database.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the user
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the added authkey
-     */
-    post: operations['auth_keys_add_user_auth_keys__userId__post'];
-  };
-  '/auth_keys/view/{AuthKeyId}': {
-    /**
-     * View an AuthKey
-     * @description View an AuthKey by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the authkey
-     *
-     * Output:
-     *
-     * - the authkey
-     */
-    get: operations['auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get'];
-  };
-  '/auth_keys': {
-    /**
-     * Returns AuthKeys.
-     * @description Returns all AuthKeys stored in the database as a List.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - all authkeys as a list
-     */
-    get: operations['auth_keys_get_auth_keys_get'];
-    /**
-     * Search for specific AuthKeys.
-     * @description Search for specific AuthKeys by parameters.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the authkeys
-     */
-    post: operations['search_auth_keys_auth_keys_post'];
-  };
-  '/auth_keys/{AuthKeyId}': {
-    /**
-     * Edit an AuthKey.
-     * @description Edit an AuthKey by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the authkey
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated authkey
-     */
-    put: operations['auth_keys_edit_auth_key_auth_keys__AuthKeyId__put'];
-    /**
-     * Delete given AuthKey.
-     * @description Delete AuthKey by AuthKeyId from the database.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the authkey
-     *
-     * Output:
-     *
-     * - the response from the api after the deleting request
-     */
-    delete: operations['auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete'];
-  };
-  '/auth_keys/viewOwn': {
-    /**
-     * View own AuthKeys
-     * @description View own Authkeys.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the user
-     *
-     * Output:
-     *
-     * - the auth keys
-     */
-    get: operations['auth_keys_view_own_auth_keys_auth_keys_viewOwn_get'];
-  };
-  '/auth_keys/index/{userId}': {
-    /**
-     * View own AuthKeys
-     * @deprecated
-     * @description Deprecated. View own Authkeys by the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the user
-     *
-     * Output:
-     *
-     * - the auth keys
-     */
-    get: operations['auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get'];
-  };
-  '/auth_keys/add/{userId}': {
-    /**
-     * Add an AuthKey.
-     * @deprecated
-     * @description Create an AuthKey for a specific user and write it to the database.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the user
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the added authkey
-     */
-    post: operations['auth_keys_add_user_depr_auth_keys_add__userId__post'];
-  };
-  '/auth_keys/edit/{AuthKeyId}': {
-    /**
-     * Edit AuthKey
-     * @deprecated
-     * @description Edit AuthKey by AuthKey ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the authkey
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated authkey
-     */
-    post: operations['auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post'];
-  };
-  '/auth_keys/delete/{AuthKeyId}': {
-    /**
-     * Delete given AuthKey.
-     * @deprecated
-     * @description Delete AuthKey by AuthKeyId from the database.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the authkey
-     *
-     * Output:
-     *
-     * - the response from the api after the deleting request
-     */
-    post: operations['auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post'];
-  };
-  '/events': {
-    /**
-     * Get all events
-     * @description Retrieve a list of all events.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - all events as a list
-     */
-    get: operations['get_all_events_events_get'];
-    /**
-     * Add new event
-     * @description Add a new event with the gi ven details.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the new event
-     */
-    post: operations['add_event_events_post'];
-  };
-  '/events/{eventId}': {
-    /**
-     * Get event details
-     * @description Retrieve details of a specific event by ist ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the event
-     *
-     * Output:
-     *
-     * - the event details
-     */
-    get: operations['get_event_details_events__eventId__get'];
-    /**
-     * Update an event
-     * @description Update an existing event by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the event
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated event
-     */
-    put: operations['update_event_events__eventId__put'];
-    /**
-     * Delete an event
-     * @description Delete an attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * Output:
-     *
-     * - the deleted event
-     */
-    delete: operations['delete_event_events__eventId__delete'];
-  };
-  '/events/restSearch': {
-    /**
-     * Search events
-     * @description Search for events based on various filters.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the searched events
-     */
-    post: operations['rest_search_events_events_restSearch_post'];
-  };
-  '/events/index': {
-    /**
-     * Search events
-     * @description Search for events based on various filters, which are more general than the ones in 'rest search'.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the searched events
-     */
-    post: operations['index_events_events_index_post'];
-  };
-  '/events/publish/{eventId}': {
-    /**
-     * Publish an event
-     * @description Publish an event by ist ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the request
-     *
-     * Output:
-     *
-     * - the published event
-     */
-    post: operations['publish_event_events_publish__eventId__post'];
-  };
-  '/events/unpublish/{eventId}': {
-    /**
-     * Unpublish an event
-     * @description Unpublish an event by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the request
-     *
-     * Output:
-     *
-     * - the unpublished event
-     */
-    post: operations['unpublish_event_events_unpublish__eventId__post'];
-  };
-  '/events/addTag/{eventId}/{tagId}/local:{local}': {
-    /**
-     * Add tag to event
-     * @description Add a tag to an attribute by their ids.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the tag id
-     *
-     * - local
-     *
-     * Output:
-     *
-     * - the result of adding the tag to the event given by the api
-     */
-    post: operations['add_tag_to_event_events_addTag__eventId___tagId__local__local__post'];
-  };
-  '/events/removeTag/{eventId}/{tagId}': {
-    /**
-     * Remove tag of event
-     * @description Remove a tag to from an event by their id.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the tag id
-     *
-     * Output:
-     *
-     * - the result of removing the tag from the event given by the api
-     */
-    post: operations['remove_tag_from_event_events_removeTag__eventId___tagId__post'];
-  };
-  '/events/freeTextImport': {
-    /**
-     * start the freetext import process via worker
-     * @description Starts the freetext import process by submitting the freetext to the worker.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the body of the freetext
-     *
-     * Output:
-     *
-     * - dict
-     */
-    post: operations['start_freeTextImport_events_freeTextImport_post'];
-  };
-  '/events/freeTextImport/{eventID}': {
-    /**
-     * Start the freetext import process via worker
-     * @description Adds the Attributes the user has selected
-     *
-     * Input:
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the selected Attributes
-     *
-     * Output:
-     *
-     * - the processed data to be viewed and selected by the user
-     */
-    post: operations['start_freetext_import_events_freeTextImport__eventID__post'];
-  };
-  '/events/add': {
-    /**
-     * Add new event (Deprecated)
-     * @deprecated
-     * @description Deprecated. Add a new event with the given details.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the new event
-     */
-    post: operations['add_event_depr_events_add_post'];
-  };
-  '/events/view/{eventId}': {
-    /**
-     * Get event details (Deprecated)
-     * @deprecated
-     * @description Deprecated. Retrieve details of a specific attribute by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * Output:
-     *
-     * - the event details
-     */
-    get: operations['get_event_details_depr_events_view__eventId__get'];
-  };
-  '/events/edit/{eventId}': {
-    /**
-     * Update an event (Deprecated)
-     * @deprecated
-     * @description Deprecated. Update an existing event by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated event
-     */
-    put: operations['update_event_depr_events_edit__eventId__put'];
-  };
-  '/events/delete/{eventId}': {
-    /**
-     * Delete an event (Deprecated)
-     * @deprecated
-     * @description Deprecated. Delete an existing event by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * Output:
-     *
-     * - the deleted event
-     */
-    delete: operations['delete_event_depr_events_delete__eventId__delete'];
-  };
   '/feeds': {
     /**
-     * Get all feeds
+     * Get Feeds
      * @description Retrieve a list of all feeds.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - all feeds as a list
+     * Returns:
+     *   all feeds as a list
      */
     get: operations['get_feeds_feeds_get'];
     /**
-     * Add new feed
+     * Add Feed
      * @description Add a new feed with given details.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   body: the request body
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the new feed
+     * Returns:
+     *   the new feed
      */
     post: operations['add_feed_feeds_post'];
   };
+  '/feeds/index': {
+    /**
+     * Get Feeds
+     * @description Retrieve a list of all feeds.
+     *
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *
+     * Returns:
+     *   all feeds as a list
+     */
+    get: operations['get_feeds_feeds_index_get'];
+  };
   '/feeds/cache_feeds/{cacheFeedsScope}': {
     /**
-     * Cache feeds
+     * Cache Feeds
      * @description Cache feeds based on a specific scope. NOT YET AVAILABLE!
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   cache_feeds_scope: the cache feeds scope
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the cache feeds scope
-     *
-     * Output:
-     *
-     * - the cache feeds
+     * Returns:
+     *   the cache feeds
      */
     post: operations['cache_feeds_feeds_cache_feeds__cacheFeedsScope__post'];
   };
   '/feeds/fetch_from_feed/{feedId}': {
     /**
-     * Fetch from feed
+     * Fetch From Feed
      * @description Fetch data from a specific feed by its ID. NOT YET AVAILABLE!
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the fetched feed data
+     * Returns:
+     *   the fetched feed data
      */
     get: operations['fetch_from_feed_feeds_fetch_from_feed__feedId__get'];
   };
   '/feeds/{feedId}': {
     /**
-     * Get feed details
+     * Get Feed Details
      * @description Retrieve details of a specific feed by its ID.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the details of a feed
+     * Returns:
+     *   the details of a feed
      */
     get: operations['get_feed_details_feeds__feedId__get'];
     /**
-     * Update feed
+     * Update Feed
      * @description Update an existing feed by its ID.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
+     *   body: the request body
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated feed
+     * Returns:
+     *   the updated feed
      */
     put: operations['update_feed_feeds__feedId__put'];
     /**
-     * Toggle feed status
+     * Toggle Feed
      * @description Toggle the status of a feed between enabled and disabled.
      *
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
+     *   body: the request body
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the new status of the feed
+     * Returns:
+     *   the new status of the feed
      */
     patch: operations['toggle_feed_feeds__feedId__patch'];
   };
   '/feeds/fetch_from_all_feeds': {
     /**
-     * Fetch from all feeds
+     * Fetch Data From All Feeds
      * @description Fetch data from all available feeds. NOT YET AVAILABLE!
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - the fetched data of all available feeds
+     * Returns:
+     *   the fetched data of all available feeds
      */
     get: operations['fetch_data_from_all_feeds_feeds_fetch_from_all_feeds_get'];
   };
   '/feeds/add': {
     /**
-     * Add new feed (Deprecated)
+     * Add Feed Depr
      * @deprecated
      * @description Deprecated. Add a new feed with given details using the old route.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   body: the request body
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the added feed
+     * Returns:
+     *   the added feed
      */
     post: operations['add_feed_depr_feeds_add_post'];
   };
   '/feeds/enable/{feedId}': {
     /**
-     * Enable feed (Deprecated)
+     * Enable Feed
      * @deprecated
      * @description Deprecated. Enable a specific feed by its ID using the old route.
      *
-     * Input:
+     * Args:
+     *   auth: user's authentification status
+     *   db: current database
+     *   feed_id: feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the the enabled feed
+     * Returns:
+     *   the the enabled feed
      */
     post: operations['enable_feed_feeds_enable__feedId__post'];
   };
   '/feeds/disable/{feedId}': {
     /**
-     * Disable feed (Deprecated)
+     * Disable Feed
      * @deprecated
      * @description Deprecated. Disable a specific feed by its ID using the old route.
      *
-     * Input:
+     * Args:
+     *   the user's authentification status
+     *   the current database
+     *   the feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the disabled feed
+     * Returns:
+     *   the disabled feed
      */
     post: operations['disable_feed_feeds_disable__feedId__post'];
   };
   '/feeds/cacheFeeds/{cacheFeedsScope}': {
     /**
-     * Cache feeds
+     * Cache Feeds Depr
      * @deprecated
      * @description Cache feeds based on a specific scope.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   cache_feeds_scope: the cache feeds scope
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the cache feeds scope
-     *
-     * Output:
-     *
-     * - the feed cache
+     * Returns:
+     *   the feed cache
      */
     post: operations['cache_feeds_depr_feeds_cacheFeeds__cacheFeedsScope__post'];
   };
@@ -1308,593 +203,288 @@ export interface paths {
      * @deprecated
      * @description Deprecated. Fetch data from a specific feed by its ID using the old route.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the fetched feed data
+     * Returns:
+     *  the fetched feed data
      */
     post: operations['fetch_from_feed_depr_feeds_fetchFromFeed__feedId__post'];
   };
   '/feeds/fetchFromAllFeeds': {
     /**
-     * Fetch from all feeds (Deprecated)
+     * Fetch Data From All Feeds Depr
      * @deprecated
      * @description Deprecated. Fetch data from all available feeds using the old route.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     *
-     * Output:
-     *
-     * - the fetched data of all feeds
+     * Returns:
+     *   the fetched data of all feeds
      */
     post: operations['fetch_data_from_all_feeds_depr_feeds_fetchFromAllFeeds_post'];
   };
   '/feeds/view/{feedId}': {
     /**
-     * Get feed details (Deprecated)
+     * Get Feed Details Depr
      * @deprecated
      * @description Deprecated. Retrieve details of a specific feed by its ID using the old route.
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * Output:
-     *
-     * - the details of the feed
+     * Returns:
+     *   the details of the feed
      */
     get: operations['get_feed_details_depr_feeds_view__feedId__get'];
   };
   '/feeds/edit/{feedId}': {
     /**
-     * Update feed (Deprecated)
+     * Update Feed Depr
      * @deprecated
      * @description Deprecated. Update an existing feed by its ID using the old route.
      *
      *
-     * Input:
+     * Args:
+     *   auth: the user's authentification status
+     *   db: the current database
+     *   feed_id: the feed id
+     *   body: the request body
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the feed id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the updated feed
+     * Returns:
+     *   the updated feed
      */
     put: operations['update_feed_depr_feeds_edit__feedId__put'];
   };
-  '/galaxies/{galaxyId}': {
+  '/users': {
     /**
-     * Get Galaxy Details
-     * @description "Gets the details of a galaxy.
+     * Add new user
+     * @description Adds a new user with the given details.
      *
      * Input:
      *
-     * - the user's authentification status
+     * - Data representing the new user to be added
      *
-     * - the current database
-     *
-     * - the galaxy id
+     * - The current database
      *
      * Output:
      *
-     * - the details of the galaxy
+     * - Data representing the attributes of the new user
      */
-    get: operations['get_galaxy_details_galaxies__galaxyId__get'];
-    /**
-     * Delete a galaxy
-     * @description "Delete a specific galaxy by its Id.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the galaxy id
-     *
-     * - the request
-     *
-     * Output:
-     *
-     * - the deleted galaxy
-     */
-    delete: operations['delete_galaxy_galaxies__galaxyId__delete'];
+    post: operations['add_user_users_post'];
   };
-  '/galaxies/update': {
+  '/users/view/me': {
     /**
-     * Update galaxies
-     * @description Force the galaxies to update with the JSON definitions, not yet implemented.
+     * Get Logged In User Info
+     * @description Retrieves information about the logged in user.
      *
      * Input:
      *
-     * - the user's authentification status
-     *
-     * - the current database
+     * - Authentication details of the logged in user
      *
      * Output:
      *
-     * - the updated galaxies
+     * - Information about the logged in user
      */
-    post: operations['update_galaxy_galaxies_update_post'];
+    get: operations['get_logged_in_user_info_users_view_me_get'];
   };
-  '/galaxies': {
+  '/users/view/me.json': {
     /**
-     * Get all galaxies
-     * @description Get a list with all existing galaxies.
+     * Get Logged In User Info
+     * @description Retrieves information about the logged in user.
      *
      * Input:
      *
-     * - the user's authentification status
-     *
-     * - the current database
+     * - Authentication details of the logged in user
      *
      * Output:
      *
-     * - all galaxies
+     * - Information about the logged in user
      */
-    get: operations['get_galaxies_galaxies_get'];
-    /**
-     * Search galaxies
-     * @description Search galaxies by search term which matches with galaxy name, namespace, description, kill_chain_order or uuid."
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the galaxies found by search
-     */
-    post: operations['search_galaxies_galaxies_post'];
+    get: operations['get_logged_in_user_info_users_view_me_json_get'];
   };
-  '/galaxies/view/{galaxyId}': {
+  '/users/view/all': {
     /**
-     * View Galaxy by ID.
+     * Get all users
+     * @description Retrieves a list of all users.
+     *
+     * Input:
+     *
+     * - None
+     *
+     * Output:
+     *
+     * - List containing all users
+     */
+    get: operations['get_all_users_users_view_all_get'];
+  };
+  '/users/view/{userId}': {
+    /**
+     * Get a user by id
+     * @description Retrieves a user specified by id.
+     *
+     * Input:
+     *
+     * - ID of the user to get
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Data representing the attributes of the searched user
+     */
+    get: operations['get_user_by_id_users_view__userId__get'];
+  };
+  '/users/{user_id}': {
+    /**
+     * Delete a user
+     * @description Deletes a user by their ID.
+     *
+     * Input:
+     *
+     * - ID of the user to delete
+     *
+     * - auth: Authentication details of the current user
+     *
+     * - The current database
+     *
+     * Output:
+     * - StandardStatusIdentifiedResponse: Response indicating success or failure
+     */
+    delete: operations['delete_user_users__user_id__delete'];
+  };
+  '/users/tokens/{userId}': {
+    /**
+     * Delete a users login token
+     * @description Deletes a users login token by their ID.
+     *
+     * Input:
+     *
+     * - ID of the user with the token to delete
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Response indicating success or failure
+     */
+    delete: operations['delete_user_token_users_tokens__userId__delete'];
+  };
+  '/users/{userId}': {
+    /**
+     * Update a user
+     * @description Updates an existing user by their ID.
+     *
+     * Input:
+     *
+     * - ID of the user to update
+     *
+     * - Updated data for the user
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Data representing the updated attributes of the user
+     */
+    put: operations['update_user_users__userId__put'];
+  };
+  '/admin/users/add': {
+    /**
+     * Add new user
      * @deprecated
-     * @description View Galaxy by given Galaxy ID.
+     * @description Adds a new user with the given details.
      *
      * Input:
      *
-     * - the user's authentification status
+     * - Data representing the new user to be added
      *
-     * - the current database
-     *
-     * - the galaxy id
+     * - The current database
      *
      * Output:
      *
-     * - the details of the galaxy
+     * - Data representing the attributes of the new user
      */
-    get: operations['get_galaxy_details_depr_galaxies_view__galaxyId__get'];
+    post: operations['add_user_deprecated_admin_users_add_post'];
   };
-  '/galaxies/delete/{galaxyId}': {
+  '/admin/users/edit/{userId}': {
     /**
-     * Delete Galaxy by ID
+     * Update a user
      * @deprecated
-     * @description Delete Galaxy by GalaxyID.
+     * @description Deprecated. Updates an existing user using the old route.
      *
      * Input:
      *
-     * - the user's authentification status
+     * - ID of the user to update
      *
-     * - the current database
+     * - Updated data for the user
      *
-     * - the galaxy id
-     *
-     * - the request
+     * - The current database
      *
      * Output:
      *
-     * - the deleted galaxy
+     * - Data representing the updated attributes of the user
      */
-    delete: operations['delete_galaxy_depr_galaxies_delete__galaxyId__delete'];
+    put: operations['update_user_depr_admin_users_edit__userId__put'];
   };
-  '/galaxies/import': {
+  '/admin/users/view/{userId}': {
     /**
-     * Add new galaxy cluster
-     * @description Add a new galaxy cluster to an existing galaxy.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * - the request
-     *
-     * Output:
-     *
-     * - the new galaxy cluster
-     */
-    post: operations['import_galaxy_cluster_galaxies_import_post'];
-  };
-  '/galaxies/clusters/{clusterID}': {
-    /**
-     * Gets information from a galaxy cluster
-     * @description Returns information from a galaxy cluster selected by its id.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the galaxy id
-     *
-     * Output:
-     *
-     * - the information of the galaxy cluster
-     */
-    get: operations['get_galaxy_cluster_galaxies_clusters__clusterID__get'];
-  };
-  '/galaxies/export/{galaxyId}': {
-    /**
-     * Export galaxy cluster
-     * @description Export galaxy cluster.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the galaxy id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the exported galaxy cluster
-     */
-    post: operations['export_galaxy_galaxies_export__galaxyId__post'];
-  };
-  '/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}': {
-    /**
-     * Attach Cluster to Galaxy.
-     * @description Attach a Galaxy Cluster to given Galaxy.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the attach target
-     *
-     * - the type of the attach target
-     *
-     * - the request body
-     *
-     * - local
-     *
-     * Output:
-     *
-     * - the attached galaxy cluster and the attach target
-     */
-    post: operations['galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post'];
-  };
-  '/galaxy_clusters/view/{galaxyClusterId}': {
-    /**
-     * Gets information from a galaxy cluster
+     * Get a user by id
      * @deprecated
-     * @description Deprecated
-     * Returns information from a galaxy cluster selected by its id.
+     * @description Deprecated. Retrieves a user specified by id with the old route.
      *
      * Input:
      *
-     * - the user's authentification status
+     * - ID of the user to get
      *
-     * - the current database
-     *
-     * - the galaxy id
+     * - The current database
      *
      * Output:
      *
-     * - the information of the galaxy cluster
+     * - Data representing the attributes of the searched user
      */
-    get: operations['get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get'];
+    get: operations['get_user_by_id_depr_admin_users_view__userId__get'];
   };
-  '/jobs/{id}': {
+  '/admin/users': {
     /**
-     * Get Job
-     * @description Gets a job.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the id
-     *
-     * Output:
-     *
-     * - dict
-     */
-    get: operations['get_job_jobs__id__get'];
-  };
-  '/noticelists/{noticelistId}': {
-    /**
-     * Get noticelist details
-     * @description Retrieve details of a specific noticelist by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the notice list id
-     *
-     * Output:
-     *
-     * - the details of the notice list
-     */
-    get: operations['get_noticelist_noticelists__noticelistId__get'];
-  };
-  '/noticelists/toggleEnable/{noticelistId}': {
-    /**
-     * Post Toggleenable Noticelist
-     * @description Disable/Enable a specific noticelist by its ID.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the notice list id
-     *
-     * Output:
-     *
-     * - the enabled/disabled notice list
-     */
-    post: operations['post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post'];
-  };
-  '/noticelists': {
-    /**
-     * Get all noticelists
-     * @description Retrieve a list of all noticelists.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - all notice lists as a list
-     */
-    get: operations['get_all_noticelists_noticelists_get'];
-    /**
-     * Update noticelists
-     * @description Update all noticelists.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * Output:
-     *
-     * - all updated notice lists
-     */
-    put: operations['update_noticelists_noticelists_put'];
-  };
-  '/noticelists/view/{noticelistId}': {
-    /**
-     * Get noticelist details (Deprecated)
+     * Get all users
      * @deprecated
-     * @description Deprecated. Retrieve details of a specific noticelist by its ID using the old route.
+     * @description Retrieves a list of all users.
      *
      * Input:
      *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the id of the notice list
+     * - None
      *
      * Output:
      *
-     * - the details of the notice list
+     * - List containing all users
      */
-    get: operations['get_noticelist_depr_noticelists_view__noticelistId__get'];
+    get: operations['get_all_users_deprecated_admin_users_get'];
   };
-  '/noticelists/update': {
+  '/admin/users/delete/{userId}': {
     /**
-     * Update noticelists (Deprecated)
+     * Delete a user
      * @deprecated
-     * @description Deprecated. Update all noticelists.
+     * @description Deprecated. Deletes a user by their ID with the old route.
      *
      * Input:
      *
-     * - the user's authentification status
+     * - ID of the user to delete
      *
-     * - the current database
+     * - auth: Authentication details of the current user
      *
-     * Output:
-     *
-     * - all updated notice lists
-     */
-    post: operations['update_noticelist_depr_noticelists_update_post'];
-  };
-  '/objects/{eventId}/{objectTemplateId}': {
-    /**
-     * Add object to event
-     * @description Add a new object to a specific event using a template.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the object template id
-     *
-     * - the request body
+     * - The current database
      *
      * Output:
-     *
-     * - the added object
+     * - StandardStatusIdentifiedResponse: Response indicating success or failure
      */
-    post: operations['add_object_objects__eventId___objectTemplateId__post'];
-  };
-  '/objects/restsearch': {
-    /**
-     * Search objects
-     * @description Search for objects based on various filters.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the objects found by search
-     */
-    post: operations['restsearch_objects_restsearch_post'];
-  };
-  '/objects/{objectId}': {
-    /**
-     * View object details
-     * @description View details of a specific object including its attributes and related event.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the object id
-     *
-     * Output:
-     *
-     * - the details of the object
-     */
-    get: operations['get_object_details_objects__objectId__get'];
-  };
-  '/objects/{objectId}/{hardDelete}': {
-    /**
-     * Delete object
-     * @description Delete a specific object. The hardDelete parameter determines if it's a hard or soft delete.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the object id
-     *
-     * - hard delete
-     *
-     * Output:
-     *
-     * - the deleted object
-     */
-    delete: operations['delete_object_objects__objectId___hardDelete__delete'];
-  };
-  '/objects/add/{eventId}/{objectTemplateId}': {
-    /**
-     * Add object to event (Deprecated)
-     * @deprecated
-     * @description Deprecated. Add an object to an event using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the event id
-     *
-     * - the object template id
-     *
-     * - the request body
-     *
-     * Output:
-     *
-     * - the added object
-     */
-    post: operations['add_object_depr_objects_add__eventId___objectTemplateId__post'];
-  };
-  '/objects/view/{objectId}': {
-    /**
-     * View object details (Deprecated)
-     * @deprecated
-     * @description Deprecated. View details of a specific object using the old route.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the object id
-     *
-     * Output:
-     *
-     * - the details of the object
-     */
-    get: operations['get_object_details_depr_objects_view__objectId__get'];
-  };
-  '/objects/delete/{objectId}/{hardDelete}': {
-    /**
-     * Delete object (Deprecated)
-     * @deprecated
-     * @description Deprecated. Delete a specific object using the old route.
-     * The hardDelete parameter determines if it's a hard or soft delete.
-     *
-     * Input:
-     *
-     * - the user's authentification status
-     *
-     * - the current database
-     *
-     * - the object id
-     *
-     * - hard delete
-     *
-     * Output:
-     *
-     * - the deleted object
-     */
-    delete: operations['delete_object_depr_objects_delete__objectId___hardDelete__delete'];
+    delete: operations['delete_user_depr_admin_users_delete__userId__delete'];
   };
   '/organisations': {
     /**
@@ -1997,91 +587,10 @@ export interface paths {
      */
     post: operations['update_organisation_organisations_update__orgId__post'];
   };
-  '/roles': {
+  '/warninglists/new': {
     /**
-     * Get all roles
-     * @description Get all roles and their details.
-     *
-     * Input:
-     *
-     * - Authentification details of the logged in user.
-     *
-     * Output:
-     *
-     * - Information about all roles.
-     */
-    get: operations['get_all_roles_roles_get'];
-  };
-  '/servers/remote/getAll': {
-    /**
-     * Requests a list of all remote servers
-     * @description Returns a list of all currently active remote servers.
-     *
-     * Input:
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - List of remote servers
-     */
-    get: operations['get_remote_servers_servers_remote_getAll_get'];
-  };
-  '/servers/remote/{serverId}': {
-    /**
-     * Requests information regarding a remote server
-     * @description Returns information for a specific remote server chosen by its id.
-     *
-     * Input:
-     *
-     * - serverId: the server's ID
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - server information regarding the chosen server
-     */
-    get: operations['get_remote_server_by_id_servers_remote__serverId__get'];
-  };
-  '/servers/remote/add': {
-    /**
-     * Adds a new remote server to the list
-     * @description Adds a new remote server based on the input of an admin.
-     *
-     * Input:
-     *
-     * - Data containing details of the remote server to be added
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Response indicating the result of the server addition operation
-     */
-    post: operations['add_remote_server_servers_remote_add_post'];
-  };
-  '/servers/remote/delete/{server_id}': {
-    /**
-     * Deletes a remote server by id
-     * @description Deletes a remote server if the given id is valid.
-     *
-     * Input:
-     *
-     * - Identifier of the remote server to be deleted
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Response indicating the result of the server deletion operation
-     */
-    delete: operations['delete_remote_server_servers_remote_delete__server_id__delete'];
-  };
-  '/servers/getVersion': {
-    /**
-     * Get Version
-     * @description Gets the Version of the server.
+     * Add a new warninglist
+     * @description Add a new warninglist with given details.
      *
      * Input:
      *
@@ -2089,68 +598,181 @@ export interface paths {
      *
      * - db: Database session
      *
-     *  Output:
+     * - body: CreateWarninglistBody, Data for creating the new warninglist
      *
-     * - Version of the server
-     * - Permissions for sync, sighting, and galaxy editor
-     * - Request encoding
-     * - Filter sightings flag
+     * Output:
+     *
+     * - WarninglistResponse: Response with details of the new warninglist
      */
-    get: operations['get_version_servers_getVersion_get'];
+    post: operations['add_warninglist_warninglists_new_post'];
   };
-  '/servers/remote/edit/{org_Id}': {
+  '/warninglists/{warninglistId}': {
     /**
-     * Edits remote servers by org id
-     * @description Edits servers given by org_id.
+     * Get warninglist details
+     * @description Retrieve details of a specific warninglist by its ID.
      *
      * Input:
-     *
-     * - org_id
-     *
-     * - The current database
      *
      * - auth: Authentication details
      *
+     * - db: Database session
+     *
+     * - warninglist_id: ID of the warninglist to fetch
+     *
      * Output:
      *
-     * - Updated servers as a list
+     * - WarninglistResponse: Response with details of the searched warninglist
      */
-    post: operations['update_remote_server_servers_remote_edit__org_Id__post'];
+    get: operations['get_warninglist_details_warninglists__warninglistId__get'];
   };
-  '/servers/': {
+  '/warninglists/toggleEnable': {
     /**
-     * Requests a list of all remote servers
-     * @deprecated
-     * @description Deprecated
-     * Returns a list of all currently active remote servers.
+     * Disable/Enable warninglist
+     * @description Disable/Enable a specific warninglist by its ID or name.
      *
      * Input:
      *
-     * - The current database
+     * - auth: Authentication details
+     *
+     * - db:Database session
+     *
+     * - body: ToggleEnableWarninglistsBody, Data to toggle enable status of the warninglist
      *
      * Output:
      *
-     * - List of remote servers
+     * - ToggleEnableWarninglistsResponse: Response showing success or failure
      */
-    get: operations['get_remote_servers_depr_servers__get'];
+    post: operations['post_toggleEnable_warninglists_toggleEnable_post'];
   };
-  '/servers/add': {
+  '/warninglists/{id}': {
     /**
-     * Adds a new remote server to the list
-     * @deprecated
-     * @description Adds a new remote server based on the input of an admin.
+     * Delete warninglist
+     * @description Delete a specific warninglist.
      *
      * Input:
      *
-     * - Data containing details of the remote server to be added
+     * - auth: Authentication details
      *
-     * - The current database
+     * - db: Database session
+     *
+     * - warninglist_id: ID of the warninglist to delete
      *
      * Output:
      *
-     * - Response indicating the result of the server addition operation
+     * - WarninglistResponse: Response showing success or failure
      */
-    post: operations['add_remote_server_depr_servers_add_post'];
+    delete: operations['delete_warninglist_warninglists__id__delete'];
+  };
+  '/warninglists': {
+    /**
+     * Get all warninglists, or selected ones by value and status
+     * @description Receive a list of all warning lists, or when setting the path parameters value and enabled, receive a         list of warninglists for which the value matches either the name, description, or type and enabled matches         given parameter.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - value: str | None, Search term for filtering by value
+     *
+     * - enabled: bool | None, Status filter (enabled or disabled)
+     *
+     * Output:
+     *
+     * - GetSelectedAllWarninglistsResponse: Response containing filtered or all warninglists
+     */
+    get: operations['get_all_or_selected_warninglists_warninglists_get'];
+    /**
+     * Update warninglists
+     * @description Update all warninglists.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Response indicating success or failure
+     */
+    put: operations['update_all_warninglists_warninglists_put'];
+    /**
+     * Get selected warninglists (Deprecated)
+     * @deprecated
+     * @description Retrieve a list of warninglists, which match given search terms using the old route.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - body: GetSelectedWarninglistsBody, Data for filtering warninglists
+     *
+     * Output:
+     *
+     * - GetSelectedAllWarninglistsResponse: Response containing filtered warninglists
+     */
+    post: operations['search_warninglists_warninglists_post'];
+  };
+  '/warninglists/checkValue': {
+    /**
+     * Get a list of ID and name of enabled warninglists
+     * @description Retrieve a list of ID and name of enabled warninglists,         which match has the given search term as entry.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - body: CheckValueWarninglistsBody, Data for searching warninglists by value
+     *
+     * Output:
+     *
+     * - CheckValueResponse | dict: Response with searched warninglists
+     */
+    post: operations['get_warninglists_by_value_warninglists_checkValue_post'];
+  };
+  '/warninglists/view/{warninglistId}': {
+    /**
+     * Get warninglist details (Deprecated)
+     * @deprecated
+     * @description Deprecated. Retrieve details of a specific warninglist by its ID using the old route.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - warninglist_id: ID of the warninglist to fetch
+     *
+     * Output:
+     *
+     * - WarninglistResponse: Response with details of the searched warninglist
+     */
+    get: operations['get_warninglist_details_depr_warninglists_view__warninglistId__get'];
+  };
+  '/warninglists/update': {
+    /**
+     * Update warninglists (Deprecated)
+     * @deprecated
+     * @description Deprecated. Update all warninglists.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Response indicating success or failure
+     */
+    post: operations['update_all_warninglists_depr_warninglists_update_post'];
   };
   '/sharing_groups': {
     /**
@@ -2518,6 +1140,1318 @@ export interface paths {
      */
     post: operations['remove_server_from_sharing_group_legacy_sharing_groups_removeServer__sharingGroupId___serverId__post'];
   };
+  '/roles': {
+    /**
+     * Get all roles
+     * @description Get all roles and their details.
+     *
+     * Input:
+     *
+     * - Authentification details of the logged in user.
+     *
+     * Output:
+     *
+     * - Information about all roles.
+     */
+    get: operations['get_all_roles_roles_get'];
+  };
+  '/objects/{eventId}/{objectTemplateId}': {
+    /**
+     * Add object to event
+     * @description Add a new object to a specific event using a template.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the object template id
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the added object
+     */
+    post: operations['add_object_objects__eventId___objectTemplateId__post'];
+  };
+  '/objects/restsearch': {
+    /**
+     * Search objects
+     * @description Search for objects based on various filters.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the objects found by search
+     */
+    post: operations['restsearch_objects_restsearch_post'];
+  };
+  '/objects/{objectId}': {
+    /**
+     * View object details
+     * @description View details of a specific object including its attributes and related event.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the object id
+     *
+     * Output:
+     *
+     * - the details of the object
+     */
+    get: operations['get_object_details_objects__objectId__get'];
+  };
+  '/objects/{objectId}/{hardDelete}': {
+    /**
+     * Delete object
+     * @description Delete a specific object. The hardDelete parameter determines if it's a hard or soft delete.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the object id
+     *
+     * - hard delete
+     *
+     * Output:
+     *
+     * - the deleted object
+     */
+    delete: operations['delete_object_objects__objectId___hardDelete__delete'];
+  };
+  '/objects/add/{eventId}/{objectTemplateId}': {
+    /**
+     * Add object to event (Deprecated)
+     * @deprecated
+     * @description Deprecated. Add an object to an event using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the object template id
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the added object
+     */
+    post: operations['add_object_depr_objects_add__eventId___objectTemplateId__post'];
+  };
+  '/objects/view/{objectId}': {
+    /**
+     * View object details (Deprecated)
+     * @deprecated
+     * @description Deprecated. View details of a specific object using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the object id
+     *
+     * Output:
+     *
+     * - the details of the object
+     */
+    get: operations['get_object_details_depr_objects_view__objectId__get'];
+  };
+  '/objects/delete/{objectId}/{hardDelete}': {
+    /**
+     * Delete object (Deprecated)
+     * @deprecated
+     * @description Deprecated. Delete a specific object using the old route.
+     * The hardDelete parameter determines if it's a hard or soft delete.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the object id
+     *
+     * - hard delete
+     *
+     * Output:
+     *
+     * - the deleted object
+     */
+    delete: operations['delete_object_depr_objects_delete__objectId___hardDelete__delete'];
+  };
+  '/servers/remote/getAll': {
+    /**
+     * Requests a list of all remote servers
+     * @description Returns a list of all currently active remote servers.
+     *
+     * Input:
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - List of remote servers
+     */
+    get: operations['get_remote_servers_servers_remote_getAll_get'];
+  };
+  '/servers/remote/{serverId}': {
+    /**
+     * Requests information regarding a remote server
+     * @description Returns information for a specific remote server chosen by its id.
+     *
+     * Input:
+     *
+     * - serverId: the server's ID
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - server information regarding the chosen server
+     */
+    get: operations['get_remote_server_by_id_servers_remote__serverId__get'];
+  };
+  '/servers/remote/add': {
+    /**
+     * Adds a new remote server to the list
+     * @description Adds a new remote server based on the input of an admin.
+     *
+     * Input:
+     *
+     * - Data containing details of the remote server to be added
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Response indicating the result of the server addition operation
+     */
+    post: operations['add_remote_server_servers_remote_add_post'];
+  };
+  '/servers/remote/delete/{server_id}': {
+    /**
+     * Deletes a remote server by id
+     * @description Deletes a remote server if the given id is valid.
+     *
+     * Input:
+     *
+     * - Identifier of the remote server to be deleted
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - Response indicating the result of the server deletion operation
+     */
+    delete: operations['delete_remote_server_servers_remote_delete__server_id__delete'];
+  };
+  '/servers/getVersion': {
+    /**
+     * Get Version
+     * @description Gets the Version of the server.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     *  Output:
+     *
+     * - Version of the server
+     * - Permissions for sync, sighting, and galaxy editor
+     * - Request encoding
+     * - Filter sightings flag
+     */
+    get: operations['get_version_servers_getVersion_get'];
+  };
+  '/servers/remote/edit/{server_id}': {
+    /**
+     * Edits remote servers
+     * @description Edits servers given by org_id.
+     *
+     * Input:
+     *
+     * - org_id
+     *
+     * - The current database
+     *
+     * - auth: Authentication details
+     *
+     * Output:
+     *
+     * - Updated servers as a list
+     */
+    post: operations['update_remote_server_servers_remote_edit__server_id__post'];
+  };
+  '/servers/': {
+    /**
+     * Requests a list of all remote servers
+     * @deprecated
+     * @description Deprecated
+     * Returns a list of all currently active remote servers.
+     *
+     * Input:
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - List of remote servers
+     */
+    get: operations['get_remote_servers_depr_servers__get'];
+  };
+  '/servers/add': {
+    /**
+     * Adds a new remote server to the list
+     * @deprecated
+     * @description Adds a new remote server based on the input of an admin.
+     *
+     * Input:
+     *
+     * - Data containing details of the remote server to be added
+     * - The current database
+     *
+     * Output:
+     *
+     * - Response indicating the result of the server addition operation
+     */
+    post: operations['add_remote_server_depr_servers_add_post'];
+  };
+  '/taxonomies': {
+    /**
+     * Get all taxonomies
+     * @description Retrieve a list of all taxonomies.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - list[ViewTaxonomyResponse]: List of taxonomies
+     */
+    get: operations['get_taxonomies_taxonomies_get'];
+    /**
+     * Update taxonomies
+     * @description Update all taxonomies.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Status response indicating success or failure
+     */
+    put: operations['update_taxonomies_taxonomies_put'];
+  };
+  '/taxonomies/{taxonomyId}': {
+    /**
+     * Get taxonomy details
+     * @description Retrieve details of a specific taxonomy by its ID.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - taxonomy_id: ID of the taxonomy to retrieve
+     *
+     * Output:
+     *
+     * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+     */
+    get: operations['get_taxonomy_details_taxonomies__taxonomyId__get'];
+  };
+  '/taxonomies/taxonomy_tags/{taxonomyId}': {
+    /**
+     * Get taxonomy inclusive tags and attributes
+     * @description Retrieve details of a specific taxonomy and its tags and attributes by its ID.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - taxonomy_id: ID of the taxonomy to retrieve extended details for
+     *
+     * Output:
+     *
+     * - GetTagTaxonomyResponse: Response containing taxonomy attributes
+     */
+    get: operations['get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get'];
+  };
+  '/taxonomies/export/{taxonomyId}': {
+    /**
+     * Export taxonomy
+     * @description Export taxonomy.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - taxonomy_id: ID of the taxonomy to export
+     *
+     * Output:
+     *
+     * - ExportTaxonomyResponse: Response containing exported taxonomy data
+     */
+    get: operations['export_taxonomy_taxonomies_export__taxonomyId__get'];
+  };
+  '/taxonomies/enable/{taxonomyId}': {
+    /**
+     * Enable taxonomy
+     * @description Enable a specific taxonomy by its ID.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - taxonomy_id: ID of the taxonomy to enable
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Status response indicating success or failure
+     */
+    post: operations['enable_taxonomy_taxonomies_enable__taxonomyId__post'];
+  };
+  '/taxonomies/disable/{taxonomyId}': {
+    /**
+     * Disable taxonomy
+     * @description Disable a specific taxonomy by its ID.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - taxonomy_id: ID of the taxonomy to disable
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Status response indicating success or failure
+     */
+    post: operations['disable_taxonomies_taxonomies_disable__taxonomyId__post'];
+  };
+  '/taxonomies/update': {
+    /**
+     * Update taxonomies
+     * @deprecated
+     * @description Update all taxonomies.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusResponse: Status response indicating success or failure
+     */
+    post: operations['update_taxonomies_depr_taxonomies_update_post'];
+  };
+  '/taxonomies/view/{taxonomyId}': {
+    /**
+     * Get taxonomy details
+     * @deprecated
+     * @description Retrieve details of a specific taxonomy by its ID.
+     *
+     * Input:
+     *
+     * - db: Database session
+     *
+     * - auth: Authentication details
+     *
+     * - taxonomy_id: ID of the taxonomy to get
+     *
+     * Output:
+     *
+     * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+     */
+    get: operations['get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get'];
+  };
+  '/events': {
+    /**
+     * Get all events
+     * @description Retrieve a list of all events.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all events as a list
+     */
+    get: operations['get_all_events_events_get'];
+    /**
+     * Add new event
+     * @description Add a new event with the gi ven details.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the new event
+     */
+    post: operations['add_event_events_post'];
+  };
+  '/events/{eventId}': {
+    /**
+     * Get event details
+     * @description Retrieve details of a specific event by ist ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the event
+     *
+     * Output:
+     *
+     * - the event details
+     */
+    get: operations['get_event_details_events__eventId__get'];
+    /**
+     * Update an event
+     * @description Update an existing event by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the event
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the updated event
+     */
+    put: operations['update_event_events__eventId__put'];
+    /**
+     * Delete an event
+     * @description Delete an attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * Output:
+     *
+     * - the deleted event
+     */
+    delete: operations['delete_event_events__eventId__delete'];
+  };
+  '/events/restSearch': {
+    /**
+     * Search events
+     * @description Search for events based on various filters.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the searched events
+     */
+    post: operations['rest_search_events_events_restSearch_post'];
+  };
+  '/events/index': {
+    /**
+     * Search events
+     * @description Search for events based on various filters, which are more general than the ones in 'rest search'.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the searched events
+     */
+    post: operations['index_events_events_index_post'];
+  };
+  '/events/publish/{eventId}': {
+    /**
+     * Publish an event
+     * @description Publish an event by ist ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the published event
+     */
+    post: operations['publish_event_events_publish__eventId__post'];
+  };
+  '/events/unpublish/{eventId}': {
+    /**
+     * Unpublish an event
+     * @description Unpublish an event by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the unpublished event
+     */
+    post: operations['unpublish_event_events_unpublish__eventId__post'];
+  };
+  '/events/addTag/{eventId}/{tagId}/local:{local}': {
+    /**
+     * Add tag to event
+     * @description Add a tag to an attribute by their ids.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the tag id
+     *
+     * - local
+     *
+     * Output:
+     *
+     * - the result of adding the tag to the event given by the api
+     */
+    post: operations['add_tag_to_event_events_addTag__eventId___tagId__local__local__post'];
+  };
+  '/events/removeTag/{eventId}/{tagId}': {
+    /**
+     * Remove tag of event
+     * @description Remove a tag to from an event by their id.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the tag id
+     *
+     * Output:
+     *
+     * - the result of removing the tag from the event given by the api
+     */
+    post: operations['remove_tag_from_event_events_removeTag__eventId___tagId__post'];
+  };
+  '/events/freeTextImport/{eventID}': {
+    /**
+     * start the freetext import process via worker
+     * @description Starts the freetext import process by submitting the freetext to the worker.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the body of the freetext
+     *
+     * Output:
+     *
+     * - dict
+     */
+    post: operations['start_freeTextImport_events_freeTextImport__eventID__post'];
+  };
+  '/events/add': {
+    /**
+     * Add new event (Deprecated)
+     * @deprecated
+     * @description Deprecated. Add a new event with the given details.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the new event
+     */
+    post: operations['add_event_depr_events_add_post'];
+  };
+  '/events/view/{eventId}': {
+    /**
+     * Get event details (Deprecated)
+     * @deprecated
+     * @description Deprecated. Retrieve details of a specific attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * Output:
+     *
+     * - the event details
+     */
+    get: operations['get_event_details_depr_events_view__eventId__get'];
+  };
+  '/events/edit/{eventId}': {
+    /**
+     * Update an event (Deprecated)
+     * @deprecated
+     * @description Deprecated. Update an existing event by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the updated event
+     */
+    put: operations['update_event_depr_events_edit__eventId__put'];
+  };
+  '/events/delete/{eventId}': {
+    /**
+     * Delete an event (Deprecated)
+     * @deprecated
+     * @description Deprecated. Delete an existing event by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the event id
+     *
+     * Output:
+     *
+     * - the deleted event
+     */
+    delete: operations['delete_event_depr_events_delete__eventId__delete'];
+  };
+  '/auth/openID/getAllOpenIDConnectProvidersInfo': {
+    /**
+     * Get All Open Id Connect Providers Info
+     * @description Fetches all OpenID Connect providers
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     *
+     * Output:
+     * - List of OpenID Connect providers
+     */
+    get: operations['get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get'];
+  };
+  '/auth/openID/getAllOpenIDConnectProviders': {
+    /**
+     * Get All Open Id Connect Providers
+     * @description Fetches all OpenID Connect providers
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     *
+     * Output:
+     * - List of OpenID Connect providers
+     */
+    get: operations['get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get'];
+  };
+  '/auth/openID/getOpenIDConnectProvider/{providerId}': {
+    /**
+     * Get Open Id Connect Provider By Id
+     * @description Fetches a single OpenID Connect provider by its ID
+     *
+     * Input:
+     * - Authorization token
+     * - Database session
+     * - Provider ID
+     *
+     * Output:
+     * - OpenID Connect provider details
+     */
+    get: operations['get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get'];
+  };
+  '/auth/openID/addOpenIDConnectProvider': {
+    /**
+     * Add Openid Connect Provider
+     * @description Adds a new OpenID Connect provider
+     *
+     * Input:
+     *
+     * - database
+     *
+     * Output:
+     *
+     * - openID Connect provider
+     */
+    post: operations['add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post'];
+  };
+  '/auth/openID/editOpenIDConnectProvider/{openIDConnectProvider}': {
+    /**
+     * Edit Openid Connect Provider
+     * @description Edits an OpenID Connect provider
+     *
+     * Input:
+     *
+     * - OpenID Connect provider
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - updated OpenID Connect provider
+     */
+    post: operations['edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post'];
+  };
+  '/auth/openID/delete/{openIDConnectProvider}': {
+    /**
+     * Deletes an OpenID Connect Provider by its ID
+     * @description Deletes an OpenID Connect provider
+     *
+     * Input:
+     *
+     * - OpenID Connect provider
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - database
+     */
+    delete: operations['delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete'];
+  };
+  '/auth/login/start': {
+    /**
+     * Start Login
+     * @description Starts the login process.
+     *
+     * Input:
+     *
+     * - the database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - dict
+     */
+    post: operations['start_login_auth_login_start_post'];
+  };
+  '/auth/login/password': {
+    /**
+     * Password Login
+     * @description Login with password.
+     *
+     * Input:
+     *
+     * - the database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the login token
+     */
+    post: operations['password_login_auth_login_password_post'];
+  };
+  '/auth/login/setOwnPassword': {
+    /**
+     * User sets their password to a new password
+     * @description Sets the password of the user to a new password.
+     *
+     * Input:
+     *
+     * - the database
+     *
+     * Output:
+     *
+     * - the response form the api after the password change request
+     */
+    post: operations['set_password_auth_login_setOwnPassword_post'];
+  };
+  '/auth/login/idp/{identityProviderName}/callback': {
+    /**
+     * Redirect To Frontend
+     * @description Redirects to the frontend.
+     *
+     * Input:
+     *
+     * - the database
+     *
+     * - the identity provider id
+     *
+     * - the code
+     *
+     * Output:
+     *
+     * - the redirection
+     */
+    get: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_get'];
+    /**
+     * Redirect To Frontend
+     * @description Redirects to the frontend.
+     *
+     * Input:
+     *
+     * - the database
+     *
+     * - the identity provider id
+     *
+     * - the code
+     *
+     * Output:
+     *
+     * - the redirection
+     */
+    post: operations['redirect_to_frontend_auth_login_idp__identityProviderName__callback_post'];
+  };
+  '/auth/login/token': {
+    /**
+     * Exchange Token Login
+     * @description Login with exchange token.
+     *
+     * Inout:
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the login token
+     */
+    post: operations['exchange_token_login_auth_login_token_post'];
+  };
+  '/auth/setPassword/{userId}': {
+    /**
+     * Admin sets the password of the user to a new password
+     * @description Set the password of the user to a new password
+     *
+     * Input:
+     *
+     * - the request body
+     *
+     * - The current database
+     *
+     * Output:
+     *
+     * - the response from the api after the password change request
+     */
+    put: operations['change_password_UserId_auth_setPassword__userId__put'];
+  };
+  '/noticelists/{noticelistId}': {
+    /**
+     * Get noticelist details
+     * @description Retrieve details of a specific noticelist by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the notice list id
+     *
+     * Output:
+     *
+     * - the details of the notice list
+     */
+    get: operations['get_noticelist_noticelists__noticelistId__get'];
+  };
+  '/noticelists/toggleEnable/{noticelistId}': {
+    /**
+     * Post Toggleenable Noticelist
+     * @description Disable/Enable a specific noticelist by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the notice list id
+     *
+     * Output:
+     *
+     * - the enabled/disabled notice list
+     */
+    post: operations['post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post'];
+  };
+  '/noticelists': {
+    /**
+     * Get all noticelists
+     * @description Retrieve a list of all noticelists.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all notice lists as a list
+     */
+    get: operations['get_all_noticelists_noticelists_get'];
+    /**
+     * Update noticelists
+     * @description Update all noticelists.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all updated notice lists
+     */
+    put: operations['update_noticelists_noticelists_put'];
+  };
+  '/noticelists/view/{noticelistId}': {
+    /**
+     * Get noticelist details (Deprecated)
+     * @deprecated
+     * @description Deprecated. Retrieve details of a specific noticelist by its ID using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the notice list
+     *
+     * Output:
+     *
+     * - the details of the notice list
+     */
+    get: operations['get_noticelist_depr_noticelists_view__noticelistId__get'];
+  };
+  '/noticelists/update': {
+    /**
+     * Update noticelists (Deprecated)
+     * @deprecated
+     * @description Deprecated. Update all noticelists.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all updated notice lists
+     */
+    post: operations['update_noticelist_depr_noticelists_update_post'];
+  };
+  '/auth_keys/{userId}': {
+    /**
+     * Add an AuthKey.
+     * @description Create an AuthKey for a specific user and save it in the database.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the user
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the added authkey
+     */
+    post: operations['auth_keys_add_user_auth_keys__userId__post'];
+  };
+  '/auth_keys/view/{AuthKeyId}': {
+    /**
+     * View an AuthKey
+     * @description View an AuthKey by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the authkey
+     *
+     * Output:
+     *
+     * - the authkey
+     */
+    get: operations['auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get'];
+  };
+  '/auth_keys': {
+    /**
+     * Returns AuthKeys.
+     * @description Returns all AuthKeys stored in the database as a List.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all authkeys as a list
+     */
+    get: operations['auth_keys_get_auth_keys_get'];
+    /**
+     * Search for specific AuthKeys.
+     * @description Search for specific AuthKeys by parameters.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the authkeys
+     */
+    post: operations['search_auth_keys_auth_keys_post'];
+  };
+  '/auth_keys/{AuthKeyId}': {
+    /**
+     * Edit an AuthKey.
+     * @description Edit an AuthKey by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the authkey
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the updated authkey
+     */
+    put: operations['auth_keys_edit_auth_key_auth_keys__AuthKeyId__put'];
+    /**
+     * Delete given AuthKey.
+     * @description Delete AuthKey by AuthKeyId from the database.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the authkey
+     *
+     * Output:
+     *
+     * - the response from the api after the deleting request
+     */
+    delete: operations['auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete'];
+  };
+  '/auth_keys/viewOwn': {
+    /**
+     * View own AuthKeys
+     * @description View own Authkeys.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the user
+     *
+     * Output:
+     *
+     * - the auth keys
+     */
+    get: operations['auth_keys_view_own_auth_keys_auth_keys_viewOwn_get'];
+  };
+  '/auth_keys/index/{userId}': {
+    /**
+     * View own AuthKeys
+     * @deprecated
+     * @description Deprecated. View own Authkeys by the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the user
+     *
+     * Output:
+     *
+     * - the auth keys
+     */
+    get: operations['auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get'];
+  };
+  '/auth_keys/add/{userId}': {
+    /**
+     * Add an AuthKey.
+     * @deprecated
+     * @description Create an AuthKey for a specific user and write it to the database.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the user
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the added authkey
+     */
+    post: operations['auth_keys_add_user_depr_auth_keys_add__userId__post'];
+  };
+  '/auth_keys/edit/{AuthKeyId}': {
+    /**
+     * Edit AuthKey
+     * @deprecated
+     * @description Edit AuthKey by AuthKey ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the authkey
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the updated authkey
+     */
+    post: operations['auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post'];
+  };
+  '/auth_keys/delete/{AuthKeyId}': {
+    /**
+     * Delete given AuthKey.
+     * @deprecated
+     * @description Delete AuthKey by AuthKeyId from the database.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the authkey
+     *
+     * Output:
+     *
+     * - the response from the api after the deleting request
+     */
+    post: operations['auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post'];
+  };
   '/sightings': {
     /**
      * Get all sightings
@@ -2689,6 +2623,339 @@ export interface paths {
      */
     get: operations['get_sightings_at_index_depr_sightings_index__eventId__get'];
   };
+  '/galaxies/import': {
+    /**
+     * Add new galaxy cluster
+     * @description Add a new galaxy cluster to an existing galaxy.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the new galaxy cluster
+     */
+    post: operations['import_galaxy_cluster_galaxies_import_post'];
+  };
+  '/galaxies/clusters/{clusterID}': {
+    /**
+     * Gets information from a galaxy cluster
+     * @description Returns information from a galaxy cluster selected by its id.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * Output:
+     *
+     * - the information of the galaxy cluster
+     */
+    get: operations['get_galaxy_cluster_galaxies_clusters__clusterID__get'];
+  };
+  '/galaxies/export/{galaxyId}': {
+    /**
+     * Export galaxy cluster
+     * @description Export galaxy cluster.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the exported galaxy cluster
+     */
+    post: operations['export_galaxy_galaxies_export__galaxyId__post'];
+  };
+  '/galaxies/attachCluster/{attachTargetId}/{attachTargetType}/local:{local}': {
+    /**
+     * Attach Cluster to Galaxy.
+     * @description Attach a Galaxy Cluster to given Galaxy.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attach target
+     *
+     * - the type of the attach target
+     *
+     * - the request body
+     *
+     * - local
+     *
+     * Output:
+     *
+     * - the attached galaxy cluster and the attach target
+     */
+    post: operations['galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post'];
+  };
+  '/galaxy_clusters/view/{galaxyClusterId}': {
+    /**
+     * Gets information from a galaxy cluster
+     * @deprecated
+     * @description Deprecated
+     * Returns information from a galaxy cluster selected by its id.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * Output:
+     *
+     * - the information of the galaxy cluster
+     */
+    get: operations['get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get'];
+  };
+  '/galaxy_clusters/edit/{galaxy_cluster_id}': {
+    /** Update galaxy cluster */
+    put: operations['put_galaxy_cluster_galaxy_clusters_edit__galaxy_cluster_id__put'];
+  };
+  '/galaxy_clusters/add/{galaxyId}': {
+    /** Add new galaxy cluster */
+    post: operations['add_galaxy_cluster_galaxy_clusters_add__galaxyId__post'];
+  };
+  '/user_settings/setSetting/me/{userSettingName}': {
+    /**
+     * Set user setting.
+     * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * - user_id: ID of the user for whom setting is to be set
+     *
+     * - user_setting_name: Name of the user setting to
+     *
+     * - body: SetUserSettingBody, Data for setting the user setting
+     *
+     * Output:
+     *
+     * - SetUserSettingResponse: Response indicating success or failure
+     */
+    post: operations['set_user_settings_user_settings_setSetting_me__userSettingName__post'];
+  };
+  '/user_settings/{userSettingId}': {
+    /**
+     * View UserSetting by ID.
+     * @description Displays a UserSetting by the UserSettingID.
+     *
+     * Input:
+     *
+     * - userSettingId: ID of the user setting to view
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - ViewUserSettingResponse: Response with details of the viewed user setting
+     */
+    get: operations['view_user_settings_user_settings__userSettingId__get'];
+    /**
+     * Deletes a UserSetting.
+     * @description Deletes UserSetting by UserSetting ID.
+     *
+     * Input:
+     *
+     * - userSettingId: ID of the user setting to delete
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusIdentifiedResponse: Response indicating success or failure
+     */
+    delete: operations['delete_user_settings_user_settings__userSettingId__delete'];
+  };
+  '/user_settings/me/{userSettingName}': {
+    /**
+     * View UserSetting.
+     * @description Displays a UserSetting by given userID and UserSetting name.
+     *
+     * Input:
+     *
+     * - userId: ID of the user for whom setting is to be viewed
+     *
+     * - userSettingName: Name of the user setting to view
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - ViewUserSettingResponse: Response with details of the viewed user setting
+     */
+    get: operations['get_user_setting_by_id_user_settings_me__userSettingName__get'];
+  };
+  '/user_settings': {
+    /**
+     * Displays all UserSettings.
+     * @description Displays all UserSettings.
+     *
+     * Input:
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - list[UserSettingResponse]: List of UserSettingResponse objects
+     */
+    get: operations['get_user_settings_user_settings_get'];
+    /**
+     * Displays all UserSettings.
+     * @description Displays all UserSettings by specified parameters.
+     *
+     * Input:
+     *
+     * - body: SearchUserSettingBody, Data for searching user settings
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - list[UserSettingResponse]: List of UserSettingResponse objects
+     */
+    post: operations['search_user_settings_user_settings_post'];
+  };
+  '/user_settings/view/{userSettingId}': {
+    /**
+     * View UserSetting by ID.
+     * @deprecated
+     * @description Deprecated. View UserSetting by UserSettingID.
+     *
+     * Input:
+     *
+     * - userSettingId: ID of the user setting to view
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - ViewUserSettingResponse: Response with details of the viewed user setting
+     */
+    get: operations['view_user_settings_depr_user_settings_view__userSettingId__get'];
+  };
+  '/user_settings/getSetting/{userId}/{userSettingName}': {
+    /**
+     * View a UserSetting.
+     * @deprecated
+     * @description Deprecated. View a UserSetting by its userID and UserSetting name.
+     *
+     * Input:
+     *
+     * - userId: ID of the user for whom setting is to be viewed
+     *
+     * - userSettingName: Name of the user setting to view
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - GetUserSettingResponse: Response with details of the viewed user setting
+     */
+    get: operations['get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get'];
+  };
+  '/user_settings/delete/{userSettingId}': {
+    /**
+     * Delete UserSetting.
+     * @deprecated
+     * @description Deprecated. Delete a UserSetting by specified UserSettingID.
+     *
+     * Input:
+     *
+     * - userSettingId: ID of the user setting to delete
+     *
+     * - auth: Authentication details
+     *
+     * - db: Database session
+     *
+     * Output:
+     *
+     * - StandardStatusIdentifiedResponse: Response indicating success or failure
+     */
+    delete: operations['delete_user_settings_depr_user_settings_delete__userSettingId__delete'];
+  };
+  '/logs/index': {
+    /**
+     * List logs
+     * @description List logs, filter can be applied.
+     *
+     * - **page** the page for pagination
+     * - **limit** the limit for pagination
+     */
+    get: operations['logs_index_get_logs_index_get'];
+    /**
+     * List logs
+     * @description List logs, filter can be applied.
+     *
+     * - **model** the source for the log creation (f.e. 'User', 'Workflow', 'AuthKey', ...)
+     * - **action** the action in which the log was created
+     * - **model_id** the id of the model
+     * - **page** the page for pagination
+     * - **limit** the limit for pagination
+     */
+    post: operations['logs_index_post_logs_index_post'];
+  };
+  '/logs/index/{logId}': {
+    /** Get single log */
+    get: operations['log_by_id_logs_index__logId__get'];
+  };
+  '/jobs/{id}': {
+    /**
+     * Get Job
+     * @description Gets a job.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the id
+     *
+     * Output:
+     *
+     * - dict
+     */
+    get: operations['get_job_jobs__id__get'];
+  };
   '/statistics/getUsageData': {
     /**
      * Gets a list of all usage-related statistics listed on the website
@@ -2734,6 +3001,466 @@ export interface paths {
      * - Count of all logins in the past 4 months
      */
     get: operations['get_logincount_statistics_logincount__orgID__get'];
+  };
+  '/galaxies/{galaxyId}': {
+    /**
+     * Get Galaxy Details
+     * @description "Gets the details of a galaxy.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * Output:
+     *
+     * - the details of the galaxy
+     */
+    get: operations['get_galaxy_details_galaxies__galaxyId__get'];
+    /**
+     * Delete a galaxy
+     * @description "Delete a specific galaxy by its Id.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the deleted galaxy
+     */
+    delete: operations['delete_galaxy_galaxies__galaxyId__delete'];
+  };
+  '/galaxies/update': {
+    /**
+     * Update galaxies
+     * @description Force the galaxies to update with the JSON definitions, not yet implemented.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - the updated galaxies
+     */
+    post: operations['update_galaxy_galaxies_update_post'];
+  };
+  '/galaxies': {
+    /**
+     * Get all galaxies
+     * @description Get a list with all existing galaxies.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * Output:
+     *
+     * - all galaxies
+     */
+    get: operations['get_galaxies_galaxies_get'];
+    /**
+     * Search galaxies
+     * @description Search galaxies by search term which matches with galaxy name, namespace, description, kill_chain_order or uuid."
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the request body
+     *
+     * Output:
+     *
+     * - the galaxies found by search
+     */
+    post: operations['search_galaxies_galaxies_post'];
+  };
+  '/galaxies/view/{galaxyId}': {
+    /**
+     * View Galaxy by ID.
+     * @deprecated
+     * @description View Galaxy by given Galaxy ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * Output:
+     *
+     * - the details of the galaxy
+     */
+    get: operations['get_galaxy_details_depr_galaxies_view__galaxyId__get'];
+  };
+  '/galaxies/delete/{galaxyId}': {
+    /**
+     * Delete Galaxy by ID
+     * @deprecated
+     * @description Delete Galaxy by GalaxyID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the galaxy id
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the deleted galaxy
+     */
+    delete: operations['delete_galaxy_depr_galaxies_delete__galaxyId__delete'];
+  };
+  '/attributes/restSearch': {
+    /**
+     * Search attributes
+     * @description Search for attributes based on various filters.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the search body
+     *
+     * Output:
+     *
+     * - the attributes the search finds
+     */
+    post: operations['rest_search_attributes_attributes_restSearch_post'];
+  };
+  '/attributes/{eventId}': {
+    /**
+     * Add new attribute
+     * @description Add a new attribute with the given details.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the event
+     *
+     * - the body for adding an attribute
+     *
+     * Output:
+     *
+     * - the response of the added attribute from the api
+     */
+    post: operations['add_attribute_attributes__eventId__post'];
+  };
+  '/attributes/describeTypes': {
+    /**
+     * Get all attribute describe types
+     * @description Retrieve a list of all available attribute types and categories.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * Output:
+     *
+     * - the attributes describe types
+     */
+    get: operations['get_attributes_describe_types_attributes_describeTypes_get'];
+  };
+  '/attributes/{attributeId}': {
+    /**
+     * Get attribute details
+     * @description Retrieve details of a specific attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * Output:
+     *
+     * - the attribute details
+     */
+    get: operations['get_attribute_details_attributes__attributeId__get'];
+    /**
+     * Update an attribute
+     * @description Update an existing attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * - the body for editing the attribute
+     *
+     * Output:
+     *
+     * - the response from the api for the edit request
+     */
+    put: operations['update_attribute_attributes__attributeId__put'];
+    /**
+     * Delete an Attribute
+     * @description Delete an attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * Output:
+     *
+     * - the response from the api for the delete request
+     */
+    delete: operations['delete_attribute_attributes__attributeId__delete'];
+  };
+  '/attributes': {
+    /**
+     * Get all Attributes
+     * @description Retrieve a list of all attributes.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * Output:
+     *
+     * - the list of all attributes
+     */
+    get: operations['get_attributes_attributes_get'];
+  };
+  '/attributes/deleteSelected/{eventId}': {
+    /**
+     * Delete the selected attributes
+     * @description Deletes the attributes associated with the event from the list in the body.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the event
+     *
+     * - the body for deleting the selected attributes
+     *
+     * - the request
+     *
+     * Output:
+     *
+     * - the response from the api for the deleting of the selection
+     */
+    post: operations['delete_selected_attributes_attributes_deleteSelected__eventId__post'];
+  };
+  '/attributes/attributeStatistics/type/{percentage}': {
+    /**
+     * Get attribute statistics
+     * @description Get the count/percentage of attributes per category/type.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     * - the current database
+     * - percentage
+     *
+     * Output:
+     *
+     * - the attributes statistics for one category/type
+     */
+    get: operations['get_attributes_type_statistics_attributes_attributeStatistics_type__percentage__get'];
+  };
+  '/attributes/attributeStatistics/category/{percentage}': {
+    /**
+     * Get attribute statistics
+     * @description Get the count/percentage of attributes per category/type.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     * - the current database
+     * - percentage
+     *
+     * Output:
+     *
+     * - the attributes statistics for one category/type
+     */
+    get: operations['get_attributes_category_statistics_attributes_attributeStatistics_category__percentage__get'];
+  };
+  '/attributes/restore/{attributeId}': {
+    /**
+     * Restore an attribute
+     * @description Restore an attribute by its ID.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * Output:
+     *
+     * - the restored attribute
+     */
+    post: operations['restore_attribute_attributes_restore__attributeId__post'];
+  };
+  '/attributes/addTag/{attributeId}/{tagId}/local:{local}': {
+    /**
+     * Add tag to attribute
+     * @description Add a tag to an attribute by there ids.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * - the id of the tag
+     *
+     * - local
+     *
+     * Output:
+     *
+     * - the response from the api for adding a tag to an attribute
+     */
+    post: operations['add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post'];
+  };
+  '/attributes/removeTag/{attributeId}/{tagId}': {
+    /**
+     * Remove tag from attribute
+     * @description Remove a tag from an attribute by there ids.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * - the id of the tag
+     *
+     * Output:
+     *
+     * - the response from the api for removing a tag to an attribute
+     */
+    post: operations['remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post'];
+  };
+  '/attributes/add/{eventId}': {
+    /**
+     * Add new attribute (Deprecated)
+     * @deprecated
+     * @description Deprecated. Add a new attribute with the given details using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the event
+     *
+     * - the body
+     *
+     * Output:
+     *
+     * - the attribute
+     */
+    post: operations['add_attribute_depr_attributes_add__eventId__post'];
+  };
+  '/attributes/view/{attributeId}': {
+    /**
+     * Get attribute details (Deprecated)
+     * @deprecated
+     * @description Deprecated. Retrieve details of a specific attribute by its ID using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * Output:
+     *
+     * - the details of an attribute
+     */
+    get: operations['get_attribute_details_depr_attributes_view__attributeId__get'];
+  };
+  '/attributes/edit/{attributeId}': {
+    /**
+     * Update an attribute (Deprecated)
+     * @deprecated
+     * @description Deprecated. Update an existing attribute by its ID using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * - the body
+     *
+     * Output:
+     *
+     * - the updated version af an attribute
+     */
+    put: operations['update_attribute_depr_attributes_edit__attributeId__put'];
+  };
+  '/attributes/delete/{attributeId}': {
+    /**
+     * Delete an Attribute (Deprecated)
+     * @deprecated
+     * @description Deprecated. Delete an attribute by its ID using the old route.
+     *
+     * Input:
+     *
+     * - the user's authentification status
+     *
+     * - the current database
+     *
+     * - the id of the attribute
+     *
+     * Output:
+     *
+     * - the response from the api for the deleting request
+     */
+    delete: operations['delete_attribute_depr_attributes_delete__attributeId__delete'];
   };
   '/tags': {
     /**
@@ -2925,757 +3652,159 @@ export interface paths {
      */
     post: operations['delete_tag_depr_tags_delete__tagId__post'];
   };
-  '/taxonomies': {
+  '/workflows/index': {
     /**
-     * Get all taxonomies
-     * @description Retrieve a list of all taxonomies.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - list[ViewTaxonomyResponse]: List of taxonomies
+     * Returns a list of all workflows
+     * @description Returns a list of all workflows in the JSON format.
      */
-    get: operations['get_taxonomies_taxonomies_get'];
-    /**
-     * Update taxonomies
-     * @description Update all taxonomies.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Status response indicating success or failure
-     */
-    put: operations['update_taxonomies_taxonomies_put'];
+    get: operations['index_workflows_index_get'];
   };
-  '/taxonomies/{taxonomyId}': {
+  '/workflows/edit/{workflowId}': {
     /**
-     * Get taxonomy details
-     * @description Retrieve details of a specific taxonomy by its ID.
+     * Edits a workflow
+     * @description Edits a workflow.
      *
-     * Input:
+     * When a change it made this endpoints overrwrites the outdated workflow in the database.
+     * It is also used to add new workflows. The response is the edited workflow.
      *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - taxonomy_id: ID of the taxonomy to retrieve
-     *
-     * Output:
-     *
-     * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+     * - **workflow_id** The ID of the workflow to edit.
+     * - **workflow_name** The new name.
+     * - **workflow_description** The new description.
+     * - **workflow_graph** The new workflow graph.
      */
-    get: operations['get_taxonomy_details_taxonomies__taxonomyId__get'];
+    post: operations['edit_workflows_edit__workflowId__post'];
   };
-  '/taxonomies/taxonomy_tags/{taxonomyId}': {
+  '/workflows/delete/{workflowId}': {
     /**
-     * Get taxonomy inclusive tags and attributes
-     * @description Retrieve details of a specific taxonomy and its tags and attributes by its ID.
+     * Deletes a workflow
+     * @description Deletes a workflow. It will be removed from the database.
      *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - taxonomy_id: ID of the taxonomy to retrieve extended details for
-     *
-     * Output:
-     *
-     * - GetTagTaxonomyResponse: Response containing taxonomy attributes
+     * - **workflow_id** The ID of the workflow to delete.
      */
-    get: operations['get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get'];
+    delete: operations['delete_workflows_delete__workflowId__delete'];
   };
-  '/taxonomies/export/{taxonomyId}': {
+  '/workflows/view/{workflowId}': {
     /**
-     * Export taxonomy
-     * @description Export taxonomy.
+     * Get a workflow
+     * @description Gets a workflow.
      *
-     * Input:
+     * Is called view because it is used to display the workflow in the visual editor
+     * but it just returns the data of a workflow.
      *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - taxonomy_id: ID of the taxonomy to export
-     *
-     * Output:
-     *
-     * - ExportTaxonomyResponse: Response containing exported taxonomy data
+     * - **workflow_id** The ID of the workflow to view.
      */
-    get: operations['export_taxonomy_taxonomies_export__taxonomyId__get'];
+    get: operations['view_workflows_view__workflowId__get'];
   };
-  '/taxonomies/enable/{taxonomyId}': {
+  '/workflows/editor/{triggerId}': {
     /**
-     * Enable taxonomy
-     * @description Enable a specific taxonomy by its ID.
+     * Creates a new workflow
+     * @description Creates a new workflow.
+     * In MISP this loaded the editor and send the editor HTML.
+     * But it also created a workflow if you tried to edit a not-existing workflow.
+     * We use is ONLY for creating, because we don't need the rest.
      *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - taxonomy_id: ID of the taxonomy to enable
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Status response indicating success or failure
+     * - **workflow_id** The ID of the workflow to create.
      */
-    post: operations['enable_taxonomy_taxonomies_enable__taxonomyId__post'];
+    post: operations['editor_workflows_editor__triggerId__post'];
   };
-  '/taxonomies/disable/{taxonomyId}': {
+  '/workflows/executeWorkflow/{workflowId}': {
     /**
-     * Disable taxonomy
-     * @description Disable a specific taxonomy by its ID.
+     * Executes a workflow
+     * @description Executes a workflow.
      *
-     * Input:
+     * Is used for debugging.
      *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - taxonomy_id: ID of the taxonomy to disable
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Status response indicating success or failure
+     * - **workflow_id** The ID of the workflow to execute.
      */
-    post: operations['disable_taxonomies_taxonomies_disable__taxonomyId__post'];
+    post: operations['executeWorkflow_workflows_executeWorkflow__workflowId__post'];
   };
-  '/taxonomies/update': {
+  '/workflows/triggers': {
     /**
-     * Update taxonomies
-     * @deprecated
-     * @description Update all taxonomies.
+     * Returns a list with all triggers
+     * @description Returns a list with triggers.
      *
-     * Input:
+     * A trigger starts a workflow. It is used for the trigger overview page.
      *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Status response indicating success or failure
+     * - **scope** Filters for the scope of the triggers (attribute, event, log etc.)
+     * - **enabled** Filters whether the trigger is enabled/ disabled
+     * - **blocking** Filters for blocking/ non-blocking triggers
+     * - **limit**: The number of items to display per page (for pagination).
+     * - **page**: The page number to display (for pagination).
      */
-    post: operations['update_taxonomies_depr_taxonomies_update_post'];
+    get: operations['triggers_workflows_triggers_get'];
   };
-  '/taxonomies/view/{taxonomyId}': {
+  '/workflows/moduleIndex/type:{type}': {
     /**
-     * Get taxonomy details
-     * @deprecated
-     * @description Retrieve details of a specific taxonomy by its ID.
+     * Returns modules
+     * @description Retrieve modules with optional filtering.
      *
-     * Input:
+     * All filter parameters are optional. If no parameters are provided, no filtering will be applied.
      *
-     * - db: Database session
-     *
-     * - auth: Authentication details
-     *
-     * - taxonomy_id: ID of the taxonomy to get
-     *
-     * Output:
-     *
-     * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+     * - **type**: Filter by type. Valid values are 'action', 'logic', 'custom', and 'all'.
+     * - **actiontype**: Filter by action type. Valid values are 'all', 'mispmodule', and 'blocking'.
+     * - **enabled**: If true, returns only enabled modules. If false, returns only disabled modules.
+     * - **limit**: The number of items to display per page (for pagination).
+     * - **page**: The page number to display (for pagination).
      */
-    get: operations['get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get'];
+    get: operations['moduleIndex_workflows_moduleIndex_type__type__get'];
   };
-  '/users': {
+  '/workflows/moduleView/{moduleId}': {
     /**
-     * Add new user
-     * @description Adds a new user with the given details.
+     * Returns a singular module
+     * @description Returns a singular module.
      *
-     * Input:
-     *
-     * - Data representing the new user to be added
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the attributes of the new user
+     * - **module_id** The ID of the module.
      */
-    post: operations['add_user_users_post'];
+    get: operations['moduleView_workflows_moduleView__moduleId__get'];
   };
-  '/users/view/me': {
+  '/workflows/toggleModule/{nodeId}/{enable}/{isTrigger}': {
     /**
-     * Get Logged In User Info
-     * @description Retrieves information about the logged in user.
+     * Enables/ disables a module
+     * @description Enables/ disables a module. Respons with a success status.
      *
-     * Input:
+     * Disabled modules can't be used in the visual editor.
      *
-     * - Authentication details of the logged in user
+     * Note that the legacy misp accepted all node ID's and never threw an error.
      *
-     * Output:
-     *
-     * - Information about the logged in user
+     * - **module_id**: The ID of the module.
+     * - **enable**: Whether the module should be enabled or not.
+     * - **is_trigger**: Indicates if the module is a trigger module.
+     * Trigger modules have specific behaviors and usage within the system.
      */
-    get: operations['get_logged_in_user_info_users_view_me_get'];
+    post: operations['toggleModule_workflows_toggleModule__nodeId___enable___isTrigger__post'];
   };
-  '/users/view/me.json': {
+  '/workflows/checkGraph': {
     /**
-     * Get Logged In User Info
-     * @description Retrieves information about the logged in user.
+     * Checks if the given graph is correct
+     * @description Checks if the given graph is correct.
      *
-     * Input:
+     * This will check if the graph is acyclic, if any node has multiple output connections
+     * and if there are path warnings.
      *
-     * - Authentication details of the logged in user
-     *
-     * Output:
-     *
-     * - Information about the logged in user
+     * - **graph** The workflow graph to check.
      */
-    get: operations['get_logged_in_user_info_users_view_me_json_get'];
+    post: operations['checkGraph_workflows_checkGraph_post'];
   };
-  '/users/view/all': {
+  '/workflows/toggleWorkflows/{enabled}': {
     /**
-     * Get all users
-     * @description Retrieves a list of all users.
+     * Enable/ disable the workflow feature
+     * @description Enable/ disable the workflow feature. Respons with a success status.
      *
-     * Input:
-     *
-     * - None
-     *
-     * Output:
-     *
-     * - List containing all users
+     * Globally enables/ disables the workflow feature in your MISP instance, not a single workflow.
+     * A single workflow is enabled through it's corresponding trigger.
      */
-    get: operations['get_all_users_users_view_all_get'];
+    post: operations['toggleWorkflows_workflows_toggleWorkflows__enabled__post'];
   };
-  '/users/view/{userId}': {
+  '/workflows/workflowsSetting': {
     /**
-     * Get a user by id
-     * @description Retrieves a user specified by id.
-     *
-     * Input:
-     *
-     * - ID of the user to get
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the attributes of the searched user
+     * Status whether the workflow setting is globally enabled/ disabled
+     * @description Returns whether the workflows are globally enabled/ disabled.
      */
-    get: operations['get_user_by_id_users_view__userId__get'];
+    get: operations['workflowsSetting_workflows_workflowsSetting_get'];
   };
-  '/users/{user_id}': {
-    /**
-     * Delete a user
-     * @description Deletes a user by their ID.
-     *
-     * Input:
-     *
-     * - ID of the user to delete
-     *
-     * - auth: Authentication details of the current user
-     *
-     * - The current database
-     *
-     * Output:
-     * - StandardStatusIdentifiedResponse: Response indicating success or failure
-     */
-    delete: operations['delete_user_users__user_id__delete'];
-  };
-  '/users/tokens/{userId}': {
-    /**
-     * Delete a users login token
-     * @description Deletes a users login token by their ID.
-     *
-     * Input:
-     *
-     * - ID of the user with the token to delete
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Response indicating success or failure
-     */
-    delete: operations['delete_user_token_users_tokens__userId__delete'];
-  };
-  '/users/{userId}': {
-    /**
-     * Update a user
-     * @description Updates an existing user by their ID.
-     *
-     * Input:
-     *
-     * - ID of the user to update
-     *
-     * - Updated data for the user
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the updated attributes of the user
-     */
-    put: operations['update_user_users__userId__put'];
-  };
-  '/admin/users/add': {
-    /**
-     * Add new user
-     * @deprecated
-     * @description Adds a new user with the given details.
-     *
-     * Input:
-     *
-     * - Data representing the new user to be added
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the attributes of the new user
-     */
-    post: operations['add_user_deprecated_admin_users_add_post'];
-  };
-  '/admin/users/edit/{userId}': {
-    /**
-     * Update a user
-     * @deprecated
-     * @description Deprecated. Updates an existing user using the old route.
-     *
-     * Input:
-     *
-     * - ID of the user to update
-     *
-     * - Updated data for the user
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the updated attributes of the user
-     */
-    put: operations['update_user_depr_admin_users_edit__userId__put'];
-  };
-  '/admin/users/view/{userId}': {
-    /**
-     * Get a user by id
-     * @deprecated
-     * @description Deprecated. Retrieves a user specified by id with the old route.
-     *
-     * Input:
-     *
-     * - ID of the user to get
-     *
-     * - The current database
-     *
-     * Output:
-     *
-     * - Data representing the attributes of the searched user
-     */
-    get: operations['get_user_by_id_depr_admin_users_view__userId__get'];
-  };
-  '/admin/users': {
-    /**
-     * Get all users
-     * @deprecated
-     * @description Retrieves a list of all users.
-     *
-     * Input:
-     *
-     * - None
-     *
-     * Output:
-     *
-     * - List containing all users
-     */
-    get: operations['get_all_users_deprecated_admin_users_get'];
-  };
-  '/admin/users/delete/{userId}': {
-    /**
-     * Delete a user
-     * @deprecated
-     * @description Deprecated. Deletes a user by their ID with the old route.
-     *
-     * Input:
-     *
-     * - ID of the user to delete
-     *
-     * - auth: Authentication details of the current user
-     *
-     * - The current database
-     *
-     * Output:
-     * - StandardStatusIdentifiedResponse: Response indicating success or failure
-     */
-    delete: operations['delete_user_depr_admin_users_delete__userId__delete'];
-  };
-  '/user_settings/setSetting/me/{userSettingName}': {
-    /**
-     * Set user setting.
-     * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - user_id: ID of the user for whom setting is to be set
-     *
-     * - user_setting_name: Name of the user setting to
-     *
-     * - body: SetUserSettingBody, Data for setting the user setting
-     *
-     * Output:
-     *
-     * - SetUserSettingResponse: Response indicating success or failure
-     */
-    post: operations['set_user_settings_user_settings_setSetting_me__userSettingName__post'];
-  };
-  '/user_settings/{userSettingId}': {
-    /**
-     * View UserSetting by ID.
-     * @description Displays a UserSetting by the UserSettingID.
-     *
-     * Input:
-     *
-     * - userSettingId: ID of the user setting to view
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - ViewUserSettingResponse: Response with details of the viewed user setting
-     */
-    get: operations['view_user_settings_user_settings__userSettingId__get'];
-    /**
-     * Deletes a UserSetting.
-     * @description Deletes UserSetting by UserSetting ID.
-     *
-     * Input:
-     *
-     * - userSettingId: ID of the user setting to delete
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusIdentifiedResponse: Response indicating success or failure
-     */
-    delete: operations['delete_user_settings_user_settings__userSettingId__delete'];
-  };
-  '/user_settings/me/{userSettingName}': {
-    /**
-     * View UserSetting.
-     * @description Displays a UserSetting by given userID and UserSetting name.
-     *
-     * Input:
-     *
-     * - userId: ID of the user for whom setting is to be viewed
-     *
-     * - userSettingName: Name of the user setting to view
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - ViewUserSettingResponse: Response with details of the viewed user setting
-     */
-    get: operations['get_user_setting_by_id_user_settings_me__userSettingName__get'];
-  };
-  '/user_settings': {
-    /**
-     * Displays all UserSettings.
-     * @description Displays all UserSettings.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - list[UserSettingResponse]: List of UserSettingResponse objects
-     */
-    get: operations['get_user_settings_user_settings_get'];
-    /**
-     * Displays all UserSettings.
-     * @description Displays all UserSettings by specified parameters.
-     *
-     * Input:
-     *
-     * - body: SearchUserSettingBody, Data for searching user settings
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - list[UserSettingResponse]: List of UserSettingResponse objects
-     */
-    post: operations['search_user_settings_user_settings_post'];
-  };
-  '/user_settings/view/{userSettingId}': {
-    /**
-     * View UserSetting by ID.
-     * @deprecated
-     * @description Deprecated. View UserSetting by UserSettingID.
-     *
-     * Input:
-     *
-     * - userSettingId: ID of the user setting to view
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - ViewUserSettingResponse: Response with details of the viewed user setting
-     */
-    get: operations['view_user_settings_depr_user_settings_view__userSettingId__get'];
-  };
-  '/user_settings/getSetting/{userId}/{userSettingName}': {
-    /**
-     * View a UserSetting.
-     * @deprecated
-     * @description Deprecated. View a UserSetting by its userID and UserSetting name.
-     *
-     * Input:
-     *
-     * - userId: ID of the user for whom setting is to be viewed
-     *
-     * - userSettingName: Name of the user setting to view
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - GetUserSettingResponse: Response with details of the viewed user setting
-     */
-    get: operations['get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get'];
-  };
-  '/user_settings/delete/{userSettingId}': {
-    /**
-     * Delete UserSetting.
-     * @deprecated
-     * @description Deprecated. Delete a UserSetting by specified UserSettingID.
-     *
-     * Input:
-     *
-     * - userSettingId: ID of the user setting to delete
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusIdentifiedResponse: Response indicating success or failure
-     */
-    delete: operations['delete_user_settings_depr_user_settings_delete__userSettingId__delete'];
-  };
-  '/warninglists/new': {
-    /**
-     * Add a new warninglist
-     * @description Add a new warninglist with given details.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - body: CreateWarninglistBody, Data for creating the new warninglist
-     *
-     * Output:
-     *
-     * - WarninglistResponse: Response with details of the new warninglist
-     */
-    post: operations['add_warninglist_warninglists_new_post'];
-  };
-  '/warninglists/{warninglistId}': {
-    /**
-     * Get warninglist details
-     * @description Retrieve details of a specific warninglist by its ID.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - warninglist_id: ID of the warninglist to fetch
-     *
-     * Output:
-     *
-     * - WarninglistResponse: Response with details of the searched warninglist
-     */
-    get: operations['get_warninglist_details_warninglists__warninglistId__get'];
-  };
-  '/warninglists/toggleEnable': {
-    /**
-     * Disable/Enable warninglist
-     * @description Disable/Enable a specific warninglist by its ID or name.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db:Database session
-     *
-     * - body: ToggleEnableWarninglistsBody, Data to toggle enable status of the warninglist
-     *
-     * Output:
-     *
-     * - ToggleEnableWarninglistsResponse: Response showing success or failure
-     */
-    post: operations['post_toggleEnable_warninglists_toggleEnable_post'];
-  };
-  '/warninglists/{id}': {
-    /**
-     * Delete warninglist
-     * @description Delete a specific warninglist.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - warninglist_id: ID of the warninglist to delete
-     *
-     * Output:
-     *
-     * - WarninglistResponse: Response showing success or failure
-     */
-    delete: operations['delete_warninglist_warninglists__id__delete'];
-  };
-  '/warninglists': {
-    /**
-     * Get all warninglists, or selected ones by value and status
-     * @description Receive a list of all warning lists, or when setting the path parameters value and enabled, receive a         list of warninglists for which the value matches either the name, description, or type and enabled matches         given parameter.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - value: str | None, Search term for filtering by value
-     *
-     * - enabled: bool | None, Status filter (enabled or disabled)
-     *
-     * Output:
-     *
-     * - GetSelectedAllWarninglistsResponse: Response containing filtered or all warninglists
-     */
-    get: operations['get_all_or_selected_warninglists_warninglists_get'];
-    /**
-     * Update warninglists
-     * @description Update all warninglists.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Response indicating success or failure
-     */
-    put: operations['update_all_warninglists_warninglists_put'];
-    /**
-     * Get selected warninglists (Deprecated)
-     * @deprecated
-     * @description Retrieve a list of warninglists, which match given search terms using the old route.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - body: GetSelectedWarninglistsBody, Data for filtering warninglists
-     *
-     * Output:
-     *
-     * - GetSelectedAllWarninglistsResponse: Response containing filtered warninglists
-     */
-    post: operations['search_warninglists_warninglists_post'];
-  };
-  '/warninglists/checkValue': {
-    /**
-     * Get a list of ID and name of enabled warninglists
-     * @description Retrieve a list of ID and name of enabled warninglists,         which match has the given search term as entry.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - body: CheckValueWarninglistsBody, Data for searching warninglists by value
-     *
-     * Output:
-     *
-     * - CheckValueResponse | dict: Response with searched warninglists
-     */
-    post: operations['get_warninglists_by_value_warninglists_checkValue_post'];
-  };
-  '/warninglists/view/{warninglistId}': {
-    /**
-     * Get warninglist details (Deprecated)
-     * @deprecated
-     * @description Deprecated. Retrieve details of a specific warninglist by its ID using the old route.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * - warninglist_id: ID of the warninglist to fetch
-     *
-     * Output:
-     *
-     * - WarninglistResponse: Response with details of the searched warninglist
-     */
-    get: operations['get_warninglist_details_depr_warninglists_view__warninglistId__get'];
-  };
-  '/warninglists/update': {
-    /**
-     * Update warninglists (Deprecated)
-     * @deprecated
-     * @description Deprecated. Update all warninglists.
-     *
-     * Input:
-     *
-     * - auth: Authentication details
-     *
-     * - db: Database session
-     *
-     * Output:
-     *
-     * - StandardStatusResponse: Response indicating success or failure
-     */
-    post: operations['update_all_warninglists_depr_warninglists_update_post'];
+  '/workflows/debugToggleField/{workflowId}/{enabled}': {
+    /** Status whether the workflow setting is globally enabled/ disabled */
+    post: operations['debugToggleField_workflows_debugToggleField__workflowId___enabled__post'];
   };
 }
 
@@ -3686,11 +3815,11 @@ export interface components {
     /** AddAttributeAttributes */
     AddAttributeAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Object Id */
-      object_id: string;
+      object_id: number;
       /** Object Relation */
       object_relation: string | null;
       /** Category */
@@ -3712,7 +3841,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -3836,6 +3965,7 @@ export interface components {
         | 'identity-card-number'
         | 'impfuzzy'
         | 'imphash'
+        | 'integer'
         | 'ip-dst|port'
         | 'ip-src|port'
         | 'issue-date-of-the-visa'
@@ -3920,7 +4050,9 @@ export interface components {
         | 'x509-fingerprint-sha1'
         | 'x509-fingerprint-sha256'
         | 'xmr'
-        | 'yara';
+        | 'yara'
+        | 'dom-hash'
+        | 'onion-address';
       /** Value */
       value?: string;
       /** Value1 */
@@ -3928,9 +4060,9 @@ export interface components {
       /** Value2 */
       value2?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Object Id */
-      object_id?: string;
+      object_id?: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -3944,7 +4076,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -3960,31 +4092,12 @@ export interface components {
     AddAttributeResponse: {
       Attribute: components['schemas']['AddAttributeAttributes'];
     };
-    /** AddAttributeViaFreeTextImportEventAttributes */
-    AddAttributeViaFreeTextImportEventAttributes: {
-      /** Value */
-      value: string;
-    };
     /** AddAttributeViaFreeTextImportEventBody */
     AddAttributeViaFreeTextImportEventBody: {
-      Attribute: components['schemas']['AddAttributeViaFreeTextImportEventAttributes'];
-    };
-    /** AddAttributeViaFreeTextImportEventResponse */
-    AddAttributeViaFreeTextImportEventResponse: {
-      /** Event Id */
-      event_id: string;
       /** Value */
       value: string;
-      /** Original Value */
-      original_value: string;
-      /** To Ids */
-      to_ids: string;
-      /** Type */
-      type: string;
-      /** Category */
-      category: string;
-      /** Distribution */
-      distribution: string;
+      /** Returnmetaattributes */
+      returnMetaAttributes: boolean;
     };
     /** AddAuthKeyBody */
     AddAuthKeyBody: {
@@ -4011,7 +4124,7 @@ export interface components {
     /** AddAuthKeyResponseAuthKey */
     AddAuthKeyResponseAuthKey: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Authkey Start */
@@ -4028,7 +4141,7 @@ export interface components {
       /** Read Only */
       read_only: boolean;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Comment */
       comment?: string;
       /** Allowed Ips */
@@ -4041,11 +4154,11 @@ export interface components {
     /** AddEditGetEventAttribute */
     AddEditGetEventAttribute: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Object Id */
-      object_id: string;
+      object_id: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -4063,7 +4176,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -4093,15 +4206,15 @@ export interface components {
     /** AddEditGetEventDetails */
     AddEditGetEventDetails: {
       /** Id */
-      id: string;
+      id: number;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Date */
       date: string;
       /** Threat Level Id */
-      threat_level_id: string;
+      threat_level_id: number;
       /** Info */
       info: string;
       /** Published */
@@ -4115,7 +4228,7 @@ export interface components {
       /** Timestamp */
       timestamp: string;
       /** Distribution */
-      distribution: string;
+      distribution: number;
       /** Proposal Email Lock */
       proposal_email_lock: boolean;
       /** Locked */
@@ -4123,7 +4236,7 @@ export interface components {
       /** Publish Timestamp */
       publish_timestamp: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id?: number;
       /** Disable Correlation */
       disable_correlation: boolean;
       /** Extends Uuid */
@@ -4148,7 +4261,7 @@ export interface components {
        * Relatedevent
        * @default []
        */
-      RelatedEvent?: components['schemas']['AddEditGetEventEventReport'][];
+      RelatedEvent?: components['schemas']['AddEditGetEventRelatedEvent'][];
       /**
        * Galaxy
        * @default []
@@ -4178,11 +4291,11 @@ export interface components {
     /** AddEditGetEventEventReport */
     AddEditGetEventEventReport: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Name */
       name: string;
       /** Content */
@@ -4190,7 +4303,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Timestamp */
       timestamp: string;
       /** Deleted */
@@ -4199,7 +4312,7 @@ export interface components {
     /** AddEditGetEventGalaxy */
     AddEditGetEventGalaxy: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -4220,6 +4333,17 @@ export interface components {
       local_only: boolean;
       /** Kill Chain Order */
       kill_chain_order?: string;
+      /** Created */
+      created: string;
+      /** Modified */
+      modified: string;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      /** Default */
+      default: boolean;
+      distribution: components['schemas']['DistributionLevels'];
       /**
        * Galaxycluster
        * @default []
@@ -4229,7 +4353,7 @@ export interface components {
     /** AddEditGetEventGalaxyCluster */
     AddEditGetEventGalaxyCluster: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Collection Uuid */
@@ -4243,7 +4367,7 @@ export interface components {
       /** Description */
       description: string;
       /** Galaxy Id */
-      galaxy_id: string;
+      galaxy_id: number;
       /** Source */
       source: string;
       /** Authors */
@@ -4253,11 +4377,11 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Default */
       default?: boolean;
       /** Locked */
@@ -4279,23 +4403,23 @@ export interface components {
       Orgc?: components['schemas']['Organisation'];
       meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
-      tag_id: string;
+      tag_id: number;
       /** Attribute Tag Id */
-      attribute_tag_id?: string;
+      attribute_tag_id?: number;
       /** Event Tag Id */
-      event_tag_id?: string;
+      event_tag_id?: number;
       /** Local */
       local?: boolean;
       /**
        * Relationship Type
        * @default
        */
-      relationship_type?: string;
+      relationship_type?: boolean | string;
     };
     /** AddEditGetEventGalaxyClusterMeta */
     AddEditGetEventGalaxyClusterMeta: {
       /** External Id */
-      external_id?: string;
+      external_id?: number;
       /** Refs */
       refs?: string[];
       /** Kill Chain */
@@ -4304,11 +4428,11 @@ export interface components {
     /** AddEditGetEventGalaxyClusterRelation */
     AddEditGetEventGalaxyClusterRelation: {
       /** Id */
-      id: string;
+      id: number;
       /** Galaxy Cluster Id */
-      galaxy_cluster_id: string;
+      galaxy_cluster_id: number;
       /** Referenced Galaxy Cluster Id */
-      referenced_galaxy_cluster_id: string;
+      referenced_galaxy_cluster_id: number;
       /** Referenced Galaxy Cluster Uuid */
       referenced_galaxy_cluster_uuid: string;
       /** Referenced Galaxy Cluster Type */
@@ -4318,7 +4442,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Default */
       default: boolean;
       /**
@@ -4330,7 +4454,7 @@ export interface components {
     /** AddEditGetEventGalaxyClusterRelationTag */
     AddEditGetEventGalaxyClusterRelationTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -4338,9 +4462,9 @@ export interface components {
       /** Exportable */
       exportable: boolean;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Hide Tag */
       hide_tag: boolean;
       /** Numerical Value */
@@ -4355,7 +4479,7 @@ export interface components {
     /** AddEditGetEventObject */
     AddEditGetEventObject: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Meta Category */
@@ -4367,7 +4491,7 @@ export interface components {
       /** Template Version */
       template_version: string;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Uuid */
       uuid: string;
       /** Timestamp */
@@ -4375,7 +4499,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment: string;
       /** Deleted */
@@ -4398,13 +4522,55 @@ export interface components {
     /** AddEditGetEventOrg */
     AddEditGetEventOrg: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Uuid */
       uuid?: string;
       /** Local */
       local?: boolean;
+    };
+    /** AddEditGetEventRelatedEvent */
+    AddEditGetEventRelatedEvent: {
+      Event: components['schemas']['AddEditGetEventRelatedEventAttributes'];
+      /** Relationshipinbound */
+      RelationshipInbound: unknown[];
+    };
+    /** AddEditGetEventRelatedEventAttributes */
+    AddEditGetEventRelatedEventAttributes: {
+      /** Id */
+      id: number;
+      /** Date */
+      date: string;
+      /** Threat Level Id */
+      threat_level_id: number;
+      /** Info */
+      info: string;
+      /** Published */
+      published: string;
+      /** Uuid */
+      uuid: string;
+      /** Analysis */
+      analysis: string;
+      /** Timestamp */
+      timestamp: string;
+      /** Distribution */
+      distribution: string;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      Org: components['schemas']['AddEditGetEventRelatedEventAttributesOrg'];
+      Orgc: components['schemas']['AddEditGetEventRelatedEventAttributesOrg'];
+    };
+    /** AddEditGetEventRelatedEventAttributesOrg */
+    AddEditGetEventRelatedEventAttributesOrg: {
+      /** Id */
+      id: number;
+      /** Name */
+      name: string;
+      /** Uuid */
+      uuid: string;
     };
     /** AddEditGetEventResponse */
     AddEditGetEventResponse: {
@@ -4424,7 +4590,7 @@ export interface components {
     /** AddEditGetEventTag */
     AddEditGetEventTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -4432,7 +4598,7 @@ export interface components {
       /** Exportable */
       exportable: boolean;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Hide Tag */
       hide_tag: boolean;
       /** Numerical Value */
@@ -4446,18 +4612,18 @@ export interface components {
       /** Local */
       local: boolean;
       /** Relationship Type */
-      relationship_type?: string;
+      relationship_type?: boolean | string;
     };
     /** AddEventBody */
     AddEventBody: {
       /** Info */
       info: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Distribution */
       distribution?: string;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
       /** Uuid */
       uuid?: string;
       /** Date */
@@ -4471,13 +4637,13 @@ export interface components {
       /** Timestamp */
       timestamp?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Proposal Email Lock */
       proposal_email_lock?: boolean;
       /** Locked */
       locked?: boolean;
       /** Threat Level Id */
-      threat_level_id?: string;
+      threat_level_id?: number;
       /** Publish Timestamp */
       publish_timestamp?: string;
       /** Sighting Timestamp */
@@ -4489,10 +4655,31 @@ export interface components {
       /** Protected */
       protected?: string;
     };
+    /** AddGalaxyClusterRequest */
+    AddGalaxyClusterRequest: {
+      /** Value */
+      value: string;
+      /** Description */
+      description: string;
+      /** Source */
+      source: string;
+      /** Authors */
+      authors: string[];
+      distribution: components['schemas']['DistributionLevels'];
+      /** Galaxyelement */
+      GalaxyElement: components['schemas']['AddGalaxyElement'][];
+    };
+    /** AddGalaxyElement */
+    AddGalaxyElement: {
+      /** Key */
+      key: string;
+      /** Value */
+      value: string;
+    };
     /** AddOrgToSharingGroupBody */
     AddOrgToSharingGroupBody: {
       /** Organisationid */
-      organisationId: string;
+      organisationId: number;
       /** Extend */
       extend?: boolean;
     };
@@ -4504,7 +4691,7 @@ export interface components {
     /** AddOrganisation */
     AddOrganisation: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Description */
@@ -4550,50 +4737,169 @@ export interface components {
     };
     /** AddServer */
     AddServer: {
+      /** Url */
+      url: string;
+      /** Name */
+      name: string;
+      /** Remote Org Id */
+      remote_org_id: number;
+      /** Authkey */
+      authkey: string;
+      /** Org Id */
+      org_id?: number;
+      /**
+       * Priority
+       * @default 5
+       */
+      priority?: number;
+      /**
+       * Internal
+       * @default false
+       */
+      internal?: boolean;
+      /**
+       * Push
+       * @default false
+       */
+      push?: boolean;
+      /**
+       * Pull
+       * @default false
+       */
+      pull?: boolean;
+      /**
+       * Pull Rules
+       * @default {
+       *   "tags": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "orgs": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "type_attributes": {
+       *     "NOT": []
+       *   },
+       *   "type_objects": {
+       *     "NOT": []
+       *   },
+       *   "url_params": ""
+       * }
+       */
+      pull_rules?: components['schemas']['PullRulesFilter'];
+      /**
+       * Push Rules
+       * @default {
+       *   "tags": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "orgs": {
+       *     "OR": [],
+       *     "NOT": []
+       *   }
+       * }
+       */
+      push_rules?: components['schemas']['PushRulesFilter'];
+      /**
+       * Push Galaxy Clusters
+       * @default false
+       */
+      push_galaxy_clusters?: boolean;
+      /**
+       * Caching Enabled
+       * @default false
+       */
+      caching_enabled?: boolean;
+      /**
+       * Unpublish Event
+       * @default false
+       */
+      unpublish_event?: boolean;
+      /**
+       * Publish Without Email
+       * @default false
+       */
+      publish_without_email?: boolean;
+      /**
+       * Self Signed
+       * @default false
+       */
+      self_signed?: boolean;
+      /**
+       * Skip Proxy
+       * @default false
+       */
+      skip_proxy?: boolean;
+    };
+    /** AddServerResponse */
+    AddServerResponse: {
+      Server: components['schemas']['AddServerServer'];
+    };
+    /** AddServerServer */
+    AddServerServer: {
+      /** Id */
+      id: number;
       /** Name */
       name: string;
       /** Url */
       url: string;
-      /** Priority */
-      priority: number;
-      /** Authkey */
-      authkey: string;
       /** Org Id */
-      org_id: number;
-      /** Remote Org Id */
-      remote_org_id: number;
-      /** Internal */
-      internal: boolean;
+      org_id?: number;
       /** Push */
       push: boolean;
       /** Pull */
       pull: boolean;
+      /** Cert File */
+      cert_file?: string;
+      /** Client Cert File */
+      client_cert_file?: string;
+      /** Lastpulledid */
+      lastpulledid?: number;
+      /** Lastpushedid */
+      lastpushedid?: number;
+      /** Organization */
+      organization: null;
+      /** Pull Analyst Data */
+      pull_analyst_data: boolean;
       /** Pull Rules */
       pull_rules: string;
+      /** Push Analyst Data */
+      push_analyst_data: boolean;
       /** Push Rules */
       push_rules: string;
+      /** Remove Missing Tags */
+      remove_missing_tags: boolean;
+      /** Push Sightings */
+      push_sightings?: boolean;
       /** Push Galaxy Clusters */
-      push_galaxy_clusters: boolean;
-      /** Caching Enabled */
-      caching_enabled: boolean;
-      /** Unpublish Event */
-      unpublish_event: boolean;
+      push_galaxy_clusters?: boolean;
+      /** Pull Galaxy Clusters */
+      pull_galaxy_clusters?: boolean;
+      /** Remote Org Id */
+      remote_org_id: number;
       /** Publish Without Email */
-      publish_without_email: boolean;
+      publish_without_email?: boolean;
+      /** Unpublish Event */
+      unpublish_event?: boolean;
       /** Self Signed */
       self_signed: boolean;
+      /** Internal */
+      internal?: boolean;
       /** Skip Proxy */
-      skip_proxy: boolean;
-    };
-    /** AddServerResponse */
-    AddServerResponse: {
-      /** Id */
-      id: string;
+      skip_proxy?: boolean;
+      /** Caching Enabled */
+      caching_enabled?: boolean;
+      /** Priority */
+      priority?: number;
+      /** Authkey */
+      authkey: string;
     };
     /** AddServerToSharingGroupBody */
     AddServerToSharingGroupBody: {
       /** Serverid */
-      serverId: string;
+      serverId: number;
       /** All Orgs */
       all_orgs?: boolean;
     };
@@ -4601,6 +4907,15 @@ export interface components {
     AddServerToSharingGroupLegacyBody: {
       /** All Orgs */
       all_orgs?: boolean;
+    };
+    /** AddUpdateGalaxyElement */
+    AddUpdateGalaxyElement: {
+      /** Id */
+      id?: number;
+      /** Key */
+      key: string;
+      /** Value */
+      value: string;
     };
     /** AddUserBody */
     AddUserBody: {
@@ -4610,8 +4925,8 @@ export interface components {
       contactalert: boolean;
       /** Nids Sid */
       nids_sid: number;
-      /** Org */
-      org: string;
+      /** Org Id */
+      org_id: number;
       /** Email */
       email: string;
       /** Termsaccepted */
@@ -4628,8 +4943,8 @@ export interface components {
       password: string;
       /** Name */
       name: string;
-      /** Role */
-      role: string;
+      /** Role Id */
+      role_id: string;
     };
     /** AddUserResponse */
     AddUserResponse: {
@@ -4638,7 +4953,7 @@ export interface components {
     /** AddUserResponseData */
     AddUserResponseData: {
       /** Id */
-      id: string;
+      id: number;
       /** Org Id */
       org_id: number;
       /** Server Id */
@@ -4694,7 +5009,7 @@ export interface components {
       /** Notification Monthly */
       notification_monthly: boolean;
       /** Totp */
-      totp?: boolean;
+      totp?: string;
       /** Hotp Counter */
       hotp_counter?: number;
       /** Last Pw Change */
@@ -4718,14 +5033,20 @@ export interface components {
       /** Check Publish */
       check_publish: boolean;
     };
-    /** AttributeType */
-    AttributeType: {
-      /** Types */
-      types: string[];
-      /** Default Type */
-      default_type: string;
-      /** Value */
-      value: string;
+    /** BaseOrganisation */
+    BaseOrganisation: {
+      /** Id */
+      id?: number;
+      /** Name */
+      name?: string;
+      /** Nationality */
+      nationality?: string;
+      /** Sector */
+      sector?: string;
+      /** Type */
+      type?: string;
+      /** Uuid */
+      uuid?: string;
     };
     /** ChangeLoginInfoResponse */
     ChangeLoginInfoResponse: {
@@ -4736,10 +5057,65 @@ export interface components {
     ChangePasswordBody: {
       /** Email */
       email: string;
-      /** Password */
+      /**
+       * Password
+       * Format: password
+       */
       password: string;
-      /** Oldpassword */
+      /**
+       * Oldpassword
+       * Format: password
+       */
       oldPassword?: string;
+    };
+    /**
+     * CheckGraphResponse
+     * @description Response schema from the API for checking a graph.
+     *
+     * - **is_acyclic**: Indicates whether the graph is acyclic and provides information
+     *   about the first detected cycle, if any.
+     * - **multiple_output_connection**: Indicates whether the graph has illegal multiple output connections,
+     * detailing the nodes involved.
+     * - **path_warnings**: Records warnings if a path leads to a blocking node from a
+     *   'Concurrent Task' node, providing relevant details. Not used in Modern MISP, and will be returned empty.
+     * - **unsupported_modules"" List of the modules (identified with their graph_id) that are currently unsupported in
+     *   Modern MISP (not yet implemented) causing the workflow to be invalid.
+     * - **misc_errors** Other miscellaneous errors indicating that the workflow graph is broken or etc. (edges registered
+     * at ports outside the valid range, inconsistencies between the incoming and outgoing adjacency lists etc.)
+     *
+     * Example JSON structure:
+     * ```json
+     * {
+     *     "is_acyclic": {
+     *         "is_acyclic": false,
+     *         "cycles": [
+     *             [4, 3, "Cycle"],
+     *             [3, 4, "Cycle"]
+     *         ]
+     *     },
+     *     "multiple_output_connection": {
+     *         "has_multiple_output_connection": true,
+     *         "edges": {
+     *             "1": [5, 3]
+     *         }
+     *     },
+     *     "path_warnings": {
+     *         "has_path_warnings": true,
+     *         "edges": [
+     *             [5, 2, "This path leads to a blocking node from a non-blocking context", true, "stop-execution", 2]
+     *         ]
+     *     }
+     * }
+     * ```
+     */
+    CheckGraphResponse: {
+      is_acyclic: components['schemas']['IsAcyclic'];
+      multiple_output_connection: components['schemas']['MultipleOutputConnection'];
+      path_warnings: components['schemas']['PathWarnings'];
+      /** Unsupported Modules */
+      unsupported_modules: number[];
+      /** Misc Errors */
+      misc_errors: components['schemas']['MiscellaneousGraphValidationError'][];
     };
     /** CheckValueResponse */
     CheckValueResponse: {
@@ -4789,18 +5165,12 @@ export interface components {
       /** Organisation Uuid */
       organisation_uuid?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Sync User Id */
-      sync_user_id?: string;
-      /**
-       * Created
-       * Format: date-time
-       */
+      sync_user_id?: number;
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Roaming */
       roaming?: boolean;
@@ -4922,6 +5292,7 @@ export interface components {
         | 'identity-card-number'
         | 'impfuzzy'
         | 'imphash'
+        | 'integer'
         | 'ip-dst|port'
         | 'ip-src|port'
         | 'issue-date-of-the-visa'
@@ -5007,6 +5378,8 @@ export interface components {
         | 'x509-fingerprint-sha256'
         | 'xmr'
         | 'yara'
+        | 'dom-hash'
+        | 'onion-address'
       )[];
       /** Values */
       values: string;
@@ -5042,7 +5415,7 @@ export interface components {
       /** Url */
       url: string;
       /** Id */
-      id: string;
+      id: number;
       /** Errors */
       errors?: string;
     };
@@ -5092,16 +5465,22 @@ export interface components {
       /** Url */
       url: string;
       /** Id */
-      id: string;
+      id: number;
     };
+    /**
+     * DistributionLevels
+     * @description An enumeration.
+     * @enum {integer}
+     */
+    DistributionLevels: 0 | 1 | 2 | 3;
     /** EditAttributeAttributes */
     EditAttributeAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Object Id */
-      object_id: string;
+      object_id: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -5119,7 +5498,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -5131,7 +5510,7 @@ export interface components {
       /** Last Seen */
       last_seen?: string;
       /** Tag */
-      tag: components['schemas']['EditAttributeTag'][];
+      Tag: components['schemas']['EditAttributeTag'][];
     };
     /** EditAttributeBody */
     EditAttributeBody: {
@@ -5144,7 +5523,7 @@ export interface components {
       /** Value2 */
       value2?: string;
       /** Object Id */
-      object_id?: string;
+      object_id?: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -5158,7 +5537,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -5177,7 +5556,7 @@ export interface components {
     /** EditAttributeTag */
     EditAttributeTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -5185,7 +5564,7 @@ export interface components {
       /** Exportable */
       exportable: string;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Hide Tag */
       hide_tag: boolean;
       /** Numerical Value */
@@ -5204,7 +5583,7 @@ export interface components {
       /** Comment */
       comment?: string;
       /** Allowed Ips */
-      allowed_ips?: string[];
+      allowed_ips?: string | string[];
       /** Expiration */
       expiration?: string;
     };
@@ -5216,7 +5595,7 @@ export interface components {
     /** EditAuthKeyResponseCompleteAuthKey */
     EditAuthKeyResponseCompleteAuthKey: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Authkey Start */
@@ -5241,20 +5620,20 @@ export interface components {
     /** EditAuthKeyResponseUser */
     EditAuthKeyResponseUser: {
       /** Id */
-      id: string;
+      id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
     };
     /** EditEventBody */
     EditEventBody: {
       /** Info */
       info?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Distribution */
       distribution?: string;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
       /** Uuid */
       uuid?: string;
       /** Date */
@@ -5268,13 +5647,13 @@ export interface components {
       /** Timestamp */
       timestamp?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Proposal Email Lock */
       proposal_email_lock?: boolean;
       /** Locked */
       locked?: boolean;
       /** Threat Level Id */
-      threat_level_id?: string;
+      threat_level_id?: number;
       /** Publish Timestamp */
       publish_timestamp?: string;
       /** Sighting Timestamp */
@@ -5329,10 +5708,41 @@ export interface components {
       push: boolean;
       /** Pull */
       pull: boolean;
-      /** Pull Rules */
-      pull_rules: string;
-      /** Push Rules */
-      push_rules: string;
+      /**
+       * Pull Rules
+       * @default {
+       *   "tags": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "orgs": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "type_attributes": {
+       *     "NOT": []
+       *   },
+       *   "type_objects": {
+       *     "NOT": []
+       *   },
+       *   "url_params": ""
+       * }
+       */
+      pull_rules?: components['schemas']['PullRulesFilter'];
+      /**
+       * Push Rules
+       * @default {
+       *   "tags": {
+       *     "OR": [],
+       *     "NOT": []
+       *   },
+       *   "orgs": {
+       *     "OR": [],
+       *     "NOT": []
+       *   }
+       * }
+       */
+      push_rules?: components['schemas']['PushRulesFilter'];
       /** Push Galaxy Clusters */
       push_galaxy_clusters: boolean;
       /** Caching Enabled */
@@ -5371,7 +5781,7 @@ export interface components {
     /** ExportGalaxyClusterResponse */
     ExportGalaxyClusterResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Collection Uuid */
@@ -5385,7 +5795,7 @@ export interface components {
       /** Description */
       description: string;
       /** Galaxy Id */
-      galaxy_id: string;
+      galaxy_id: number;
       /** Source */
       source: string;
       /** Authors */
@@ -5397,9 +5807,9 @@ export interface components {
       /** Sharing Group Id */
       sharing_group_id: string;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Default */
       default: boolean;
       /** Locked */
@@ -5413,7 +5823,7 @@ export interface components {
       /** Deleted */
       deleted: boolean;
       /** Galaxyelement */
-      GalaxyElement: components['schemas']['ExportGalaxyGalaxyElement'][];
+      GalaxyElement: components['schemas']['mmisp__api_schemas__galaxy_clusters__ExportGalaxyGalaxyElement'][];
       Galaxy: components['schemas']['GetAllEventsGalaxyClusterGalaxy'];
       /**
        * Galaxyclusterrelation
@@ -5422,17 +5832,6 @@ export interface components {
       GalaxyClusterRelation?: components['schemas']['AddEditGetEventGalaxyClusterRelation'][];
       Org: components['schemas']['Organisation'];
       Orgc: components['schemas']['Organisation'];
-    };
-    /** ExportGalaxyGalaxyElement */
-    ExportGalaxyGalaxyElement: {
-      /** Id */
-      id?: string;
-      /** Galaxy Cluster Id */
-      galaxy_cluster_id?: string;
-      /** Key */
-      key: string;
-      /** Value */
-      value: string;
     };
     /** ExportTaxonomyEntry */
     ExportTaxonomyEntry: {
@@ -5461,7 +5860,7 @@ export interface components {
     /** FeedAttributesResponse */
     FeedAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Provider */
@@ -5475,9 +5874,9 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Tag Id */
-      tag_id: string;
+      tag_id: number;
       /** Default */
       default?: boolean;
       /** Source Format */
@@ -5487,7 +5886,7 @@ export interface components {
       /** Delta Merge */
       delta_merge: boolean;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Publish */
       publish: boolean;
       /** Override Ids */
@@ -5507,7 +5906,7 @@ export interface components {
       /** Force To Ids */
       force_to_ids: boolean;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
     };
     /** FeedCacheResponse */
     FeedCacheResponse: {
@@ -5539,7 +5938,7 @@ export interface components {
       /** Sharing Group Id */
       sharing_group_id?: string;
       /** Tag Id */
-      tag_id?: string;
+      tag_id?: number;
       /** Default */
       default?: boolean;
       /** Source Format */
@@ -5549,7 +5948,7 @@ export interface components {
       /** Delta Merge */
       delta_merge?: boolean;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Publish */
       publish?: boolean;
       /** Override Ids */
@@ -5569,7 +5968,7 @@ export interface components {
       /** Force To Ids */
       force_to_ids?: boolean;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
     };
     /** FeedEnableDisableResponse */
     FeedEnableDisableResponse: {
@@ -5609,9 +6008,9 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Tag Id */
-      tag_id?: string;
+      tag_id?: number;
       /** Default */
       default?: boolean;
       /** Source Format */
@@ -5621,7 +6020,7 @@ export interface components {
       /** Delta Merge */
       delta_merge?: boolean;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Publish */
       publish?: boolean;
       /** Override Ids */
@@ -5641,21 +6040,25 @@ export interface components {
       /** Force To Ids */
       force_to_ids?: boolean;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
     };
     /** FreeTextProcessID */
     FreeTextProcessID: {
       /** Id */
       id: string;
     };
+    /** GalaxyClusterResponse */
+    GalaxyClusterResponse: {
+      GalaxyCluster: components['schemas']['mmisp__api_schemas__galaxy_clusters__GetGalaxyClusterResponse'];
+    };
     /** GetAllAttributesResponse */
     GetAllAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Object Id */
-      object_id?: string;
+      object_id?: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -5675,7 +6078,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -5692,21 +6095,21 @@ export interface components {
     /** GetAllEventsEventTag */
     GetAllEventsEventTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Tag Id */
-      tag_id: string;
+      tag_id: number;
       /** Local */
       local: boolean;
       /** Relationship Type */
-      relationship_type: string;
-      Tag: components['schemas']['GetAllEventsEventTagTag'];
+      relationship_type?: boolean | string;
+      Tag?: components['schemas']['GetAllEventsEventTagTag'];
     };
     /** GetAllEventsEventTagTag */
     GetAllEventsEventTagTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -5717,7 +6120,7 @@ export interface components {
     /** GetAllEventsGalaxyCluster */
     GetAllEventsGalaxyCluster: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Collection Uuid */
@@ -5731,7 +6134,7 @@ export interface components {
       /** Description */
       description: string;
       /** Galaxy Id */
-      galaxy_id: string;
+      galaxy_id: number;
       /** Source */
       source: string;
       /** Authors */
@@ -5741,11 +6144,11 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Default */
       default?: string;
       /** Locked */
@@ -5761,16 +6164,16 @@ export interface components {
       Galaxy: components['schemas']['GetAllEventsGalaxyClusterGalaxy'];
       meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
-      tag_id: string;
+      tag_id: number;
       /** Local */
       local?: boolean;
       /** Relationship Type */
-      relationship_type?: string;
+      relationship_type?: boolean | string;
     };
     /** GetAllEventsGalaxyClusterGalaxy */
     GetAllEventsGalaxyClusterGalaxy: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -5791,11 +6194,22 @@ export interface components {
       local_only: boolean;
       /** Kill Chain Order */
       kill_chain_order?: string;
+      /** Created */
+      created: string;
+      /** Modified */
+      modified: string;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      /** Default */
+      default: boolean;
+      distribution: components['schemas']['DistributionLevels'];
     };
     /** GetAllEventsOrg */
     GetAllEventsOrg: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Uuid */
@@ -5804,15 +6218,15 @@ export interface components {
     /** GetAllEventsResponse */
     GetAllEventsResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Distribution */
       distribution: string;
       /** Info */
       info: string;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Uuid */
       uuid: string;
       /** Date */
@@ -5826,13 +6240,13 @@ export interface components {
       /** Timestamp */
       timestamp: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Proposal Email Lock */
       proposal_email_lock: boolean;
       /** Locked */
       locked: boolean;
       /** Threat Level Id */
-      threat_level_id: string;
+      threat_level_id: number;
       /** Publish Timestamp */
       publish_timestamp: string;
       /** Sighting Timestamp */
@@ -5842,7 +6256,7 @@ export interface components {
       /** Extends Uuid */
       extends_uuid: string;
       /** Event Creator Email */
-      event_creator_email: string;
+      event_creator_email?: string;
       /** Protected */
       protected?: string;
       Org: components['schemas']['GetAllEventsOrg'];
@@ -5858,38 +6272,36 @@ export interface components {
     };
     /** GetAllOrganisationResponse */
     GetAllOrganisationResponse: {
+      Organisation: components['schemas']['GetAllOrganisationsOrganisation'];
+    };
+    /** GetAllOrganisationsOrganisation */
+    GetAllOrganisationsOrganisation: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
-      date_created: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
-      date_modified: string;
-      /** Description */
-      description?: string;
-      /** Type */
-      type?: string;
       /** Nationality */
       nationality?: string;
       /** Sector */
       sector?: string;
-      /** Created By */
-      created_by: string;
+      /** Type */
+      type?: string;
       /** Uuid */
       uuid?: string;
+      /** Date Created */
+      date_created?: string;
+      /** Date Modified */
+      date_modified?: string;
+      /** Description */
+      description?: string;
+      /** Created By */
+      created_by: string;
       /** Contacts */
       contacts?: string;
       /** Local */
       local: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
       /** User Count */
@@ -5900,7 +6312,7 @@ export interface components {
     /** GetAllSearchGalaxiesAttributes */
     GetAllSearchGalaxiesAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -5921,6 +6333,17 @@ export interface components {
       enabled: boolean;
       /** Local Only */
       local_only: boolean;
+      /** Created */
+      created: string;
+      /** Modified */
+      modified: string;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      /** Default */
+      default: boolean;
+      distribution: components['schemas']['DistributionLevels'];
     };
     /** GetAllSearchGalaxiesResponse */
     GetAllSearchGalaxiesResponse: {
@@ -5929,11 +6352,11 @@ export interface components {
     /** GetAttributeAttributes */
     GetAttributeAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id: string;
+      event_id: number;
       /** Object Id */
-      object_id: string;
+      object_id: number;
       /** Object Relation */
       object_relation: string | null;
       /** Category */
@@ -5951,21 +6374,29 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment?: string;
-      /** Deleted */
-      deleted: boolean;
-      /** Disable Correlation */
-      disable_correlation: boolean;
+      /**
+       * Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * Disable Correlation
+       * @default false
+       */
+      disable_correlation?: boolean;
       /** First Seen */
       first_seen: string | null;
       /** Last Seen */
       last_seen: string | null;
       /** Event Uuid */
       event_uuid: string;
+      /** Data */
+      data?: string;
       /** Tag */
-      tag?: components['schemas']['GetAttributeTag'][];
+      Tag?: components['schemas']['GetAttributeTag'][];
     };
     /** GetAttributeResponse */
     GetAttributeResponse: {
@@ -5973,38 +6404,38 @@ export interface components {
     };
     /** GetAttributeStatisticsCategoriesResponse */
     GetAttributeStatisticsCategoriesResponse: {
-      /** Antivirus Detection */
-      'Antivirus detection': string;
-      /** Artifacts Dropped */
-      'Artifacts dropped': string;
-      /** Attribution */
-      Attribution: string;
-      /** External Analysis */
-      'External analysis': string;
-      /** Financial Fraud */
-      'Financial fraud': string;
-      /** Internal Reference */
-      'Internal reference': string;
-      /** Network Activity */
-      'Network activity': string;
-      /** Other */
-      Other: string;
       /** Payload Delivery */
-      'Payload delivery': string;
+      'Payload delivery'?: string;
+      /** Artifacts Dropped */
+      'Artifacts dropped'?: string;
       /** Payload Installation */
-      'Payload installation': string;
-      /** Payload Type */
-      'Payload type': string;
+      'Payload installation'?: string;
+      /** External Analysis */
+      'External analysis'?: string;
       /** Persistence Mechanism */
-      'Persistence mechanism': string;
-      /** Person */
-      Person: string;
+      'Persistence mechanism'?: string;
+      /** Network Activity */
+      'Network activity'?: string;
+      /** Attribution */
+      Attribution?: string;
       /** Social Network */
-      'Social network': string;
+      'Social network'?: string;
+      /** Person */
+      Person?: string;
+      /** Other */
+      Other?: string;
+      /** Internal Reference */
+      'Internal reference'?: string;
+      /** Antivirus Detection */
+      'Antivirus detection'?: string;
       /** Support Tool */
-      'Support Tool': string;
+      'Support Tool'?: string;
       /** Targeting Data */
-      'Targeting data': string;
+      'Targeting data'?: string;
+      /** Payload Type */
+      'Payload type'?: string;
+      /** Financial Fraud */
+      'Financial fraud'?: string;
     };
     /** GetAttributeStatisticsTypesResponse */
     GetAttributeStatisticsTypesResponse: {
@@ -6214,6 +6645,8 @@ export interface components {
       impfuzzy?: string;
       /** Imphash */
       imphash?: string;
+      /** Integer */
+      integer?: string;
       /** Ip-Dst|Port */
       'ip-dst|port'?: string;
       /** Ip-Src|Port */
@@ -6384,11 +6817,15 @@ export interface components {
       xmr?: string;
       /** Yara */
       yara?: string;
+      /** Dom-Hash */
+      'dom-hash'?: string;
+      /** Onion-Address */
+      'onion-address'?: string;
     };
     /** GetAttributeTag */
     GetAttributeTag: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -6405,757 +6842,769 @@ export interface components {
       /**
        * Sane Defaults
        * @default {
-       *   "aba-rtn": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "anonymised": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "AS": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "attachment": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "authentihash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "azure-application-id": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "bank-account-nr": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "bic": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "bin": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "boolean": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "bro": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "btc": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "campaign-id": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "campaign-name": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "cc-number": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "cdhash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "chrome-extension-id": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "comment": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "community-id": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "cookie": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "cortex": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "counter": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "country-of-residence": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "cpe": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "dash": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "datetime": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "date-of-birth": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "dkim": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "dkim-signature": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "dns-soa-email": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "domain": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "domain|ip": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "email": {
-       *     "default_category": "Social network",
-       *     "to_ids": true
-       *   },
-       *   "email-attachment": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "email-body": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-dst": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "email-dst-display-name": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-header": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-message-id": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-mime-boundary": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-reply-to": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-src": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "email-src-display-name": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-subject": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-thread-index": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "email-x-mailer": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
-       *   "eppn": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "favicon-mmh3": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "filename": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|authentihash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|impfuzzy": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|imphash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|md5": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename-pattern": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
-       *   },
-       *   "filename|pehash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha1": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha224": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha256": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha384": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha3-224": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha3-256": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha3-384": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha3-512": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha512": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha512/224": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|sha512/256": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|ssdeep": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|tlsh": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "filename|vhash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "first-name": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "float": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "frequent-flyer-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "full-name": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "gender": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "gene": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "github-organisation": {
-       *     "default_category": "Social network",
-       *     "to_ids": false
-       *   },
-       *   "github-repository": {
-       *     "default_category": "Social network",
-       *     "to_ids": false
-       *   },
-       *   "github-username": {
-       *     "default_category": "Social network",
-       *     "to_ids": false
-       *   },
-       *   "git-commit-id": {
-       *     "default_category": "Internal reference",
-       *     "to_ids": false
-       *   },
-       *   "hasshserver-md5": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "hassh-md5": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "hex": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "hostname": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "hostname|port": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "http-method": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "iban": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "identity-card-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "impfuzzy": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "imphash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "ip-dst": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "ip-dst|port": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "ip-src": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "ip-src|port": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "issue-date-of-the-visa": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "ja3-fingerprint-md5": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "jabber-id": {
-       *     "default_category": "Social network",
-       *     "to_ids": false
-       *   },
-       *   "jarm-fingerprint": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "kusto-query": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "last-name": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "link": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "mac-address": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "mac-eui-64": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "malware-sample": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "malware-type": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": false
-       *   },
        *   "md5": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "middle-name": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "mime-type": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "mobile-application-id": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "mutex": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": true
-       *   },
-       *   "named pipe": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "nationality": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "other": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "passenger-name-record-locator-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "passport-country": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "passport-expiration": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "passport-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "pattern-in-file": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
-       *   },
-       *   "pattern-in-memory": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
-       *   },
-       *   "pattern-in-traffic": {
-       *     "default_category": "Network activity",
-       *     "to_ids": true
-       *   },
-       *   "payment-details": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "pdb": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "pehash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "pgp-private-key": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "pgp-public-key": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "phone-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "place-of-birth": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "place-port-of-clearance": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "place-port-of-onward-foreign-destination": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "place-port-of-original-embarkation": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "port": {
-       *     "default_category": "Network activity",
-       *     "to_ids": false
-       *   },
-       *   "primary-residence": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "process-state": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "prtn": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
-       *   },
-       *   "redress-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "regkey": {
-       *     "default_category": "Persistence mechanism",
-       *     "to_ids": true
-       *   },
-       *   "regkey|value": {
-       *     "default_category": "Persistence mechanism",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
        *   "sha1": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sha224": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
        *   "sha256": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "sha384": {
+       *   "filename": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "sha3-224": {
+       *   "pdb": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "filename|sha1": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "sha3-256": {
+       *   "filename|sha256": {
        *     "default_category": "Payload delivery",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "sha3-384": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sha3-512": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sha512": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sha512/224": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sha512/256": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "sigma": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
-       *   },
-       *   "size-in-bytes": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "snort": {
+       *   "ip-src": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "special-service-request": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "ssdeep": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "ssh-fingerprint": {
+       *   "ip-dst": {
        *     "default_category": "Network activity",
-       *     "to_ids": false
+       *     "to_ids": "1"
        *   },
-       *   "stix2-pattern": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
+       *   "hostname": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   },
-       *   "target-email": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
+       *   "domain": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   },
-       *   "target-external": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
+       *   "domain|ip": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   },
-       *   "target-location": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
-       *   },
-       *   "target-machine": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
-       *   },
-       *   "target-org": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
-       *   },
-       *   "target-user": {
-       *     "default_category": "Targeting data",
-       *     "to_ids": false
-       *   },
-       *   "telfhash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "text": {
-       *     "default_category": "Other",
-       *     "to_ids": false
-       *   },
-       *   "threat-actor": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "tlsh": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "travel-details": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "twitter-id": {
+       *   "email": {
        *     "default_category": "Social network",
-       *     "to_ids": false
+       *     "to_ids": "1"
        *   },
-       *   "uri": {
+       *   "email-src": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "email-dst": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
+       *   },
+       *   "email-subject": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-attachment": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "email-body": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "eppn": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "float": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "git-commit-id": {
+       *     "default_category": "Internal reference",
+       *     "to_ids": "0"
        *   },
        *   "url": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
+       *   },
+       *   "http-method": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
        *   },
        *   "user-agent": {
        *     "default_category": "Network activity",
-       *     "to_ids": false
+       *     "to_ids": "0"
        *   },
-       *   "vhash": {
-       *     "default_category": "Payload delivery",
-       *     "to_ids": true
-       *   },
-       *   "visa-number": {
-       *     "default_category": "Person",
-       *     "to_ids": false
-       *   },
-       *   "vulnerability": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "weakness": {
-       *     "default_category": "External analysis",
-       *     "to_ids": false
-       *   },
-       *   "whois-creation-date": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "whois-registrant-email": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "whois-registrant-name": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "whois-registrant-org": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "whois-registrant-phone": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "whois-registrar": {
-       *     "default_category": "Attribution",
-       *     "to_ids": false
-       *   },
-       *   "windows-scheduled-task": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "windows-service-displayname": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "windows-service-name": {
-       *     "default_category": "Artifacts dropped",
-       *     "to_ids": false
-       *   },
-       *   "x509-fingerprint-md5": {
+       *   "ja3-fingerprint-md5": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "x509-fingerprint-sha1": {
+       *   "jarm-fingerprint": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "x509-fingerprint-sha256": {
+       *   "favicon-mmh3": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
        *   },
-       *   "xmr": {
-       *     "default_category": "Financial fraud",
-       *     "to_ids": true
+       *   "hassh-md5": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   },
-       *   "yara": {
-       *     "default_category": "Payload installation",
-       *     "to_ids": true
+       *   "hasshserver-md5": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "regkey": {
+       *     "default_category": "Persistence mechanism",
+       *     "to_ids": "1"
+       *   },
+       *   "regkey|value": {
+       *     "default_category": "Persistence mechanism",
+       *     "to_ids": "1"
+       *   },
+       *   "AS": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "bro": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   },
        *   "zeek": {
        *     "default_category": "Network activity",
-       *     "to_ids": true
+       *     "to_ids": "1"
+       *   },
+       *   "community-id": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "pattern-in-file": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "aba-rtn": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "anonymised": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "attachment": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "authentihash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "azure-application-id": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "bank-account-nr": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "bic": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "bin": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "boolean": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "btc": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "campaign-id": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "campaign-name": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "cc-number": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "cdhash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "chrome-extension-id": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "comment": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "cookie": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "cortex": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "counter": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "country-of-residence": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "cpe": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "dash": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "datetime": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "date-of-birth": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "dkim": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "dkim-signature": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "dns-soa-email": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "email-dst-display-name": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-header": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-message-id": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-mime-boundary": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-reply-to": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-src-display-name": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-thread-index": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "email-x-mailer": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "filename|authentihash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|impfuzzy": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|imphash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|md5": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename-pattern": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|pehash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha384": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha3-224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha3-256": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha3-384": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha3-512": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha512": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha512/224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|sha512/256": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|ssdeep": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|tlsh": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "filename|vhash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "first-name": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "frequent-flyer-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "full-name": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "gender": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "gene": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "github-organisation": {
+       *     "default_category": "Social network",
+       *     "to_ids": "0"
+       *   },
+       *   "github-repository": {
+       *     "default_category": "Social network",
+       *     "to_ids": "0"
+       *   },
+       *   "github-username": {
+       *     "default_category": "Social network",
+       *     "to_ids": "0"
+       *   },
+       *   "hex": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "hostname|port": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "iban": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "identity-card-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "impfuzzy": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "imphash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "integer": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "ip-dst|port": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "ip-src|port": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "issue-date-of-the-visa": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "jabber-id": {
+       *     "default_category": "Social network",
+       *     "to_ids": "0"
+       *   },
+       *   "kusto-query": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "last-name": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "link": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "mac-address": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "mac-eui-64": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "malware-sample": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "malware-type": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "0"
+       *   },
+       *   "middle-name": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "mime-type": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "mobile-application-id": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "mutex": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "1"
+       *   },
+       *   "named pipe": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "nationality": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "other": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "passenger-name-record-locator-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "passport-country": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "passport-expiration": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "passport-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "pattern-in-memory": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "pattern-in-traffic": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "payment-details": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "pehash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "pgp-private-key": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "pgp-public-key": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "phone-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "place-of-birth": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "place-port-of-clearance": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "place-port-of-onward-foreign-destination": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "place-port-of-original-embarkation": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "port": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "primary-residence": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "process-state": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "prtn": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "redress-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "sha224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha384": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha3-224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha3-256": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha3-384": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha3-512": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha512": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha512/224": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sha512/256": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "sigma": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "size-in-bytes": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "snort": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "special-service-request": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "ssdeep": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "ssh-fingerprint": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "0"
+       *   },
+       *   "stix2-pattern": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "target-email": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "target-external": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "target-location": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "target-machine": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "target-org": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "target-user": {
+       *     "default_category": "Targeting data",
+       *     "to_ids": "0"
+       *   },
+       *   "telfhash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "text": {
+       *     "default_category": "Other",
+       *     "to_ids": "0"
+       *   },
+       *   "threat-actor": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "tlsh": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "travel-details": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "twitter-id": {
+       *     "default_category": "Social network",
+       *     "to_ids": "0"
+       *   },
+       *   "uri": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "vhash": {
+       *     "default_category": "Payload delivery",
+       *     "to_ids": "1"
+       *   },
+       *   "visa-number": {
+       *     "default_category": "Person",
+       *     "to_ids": "0"
+       *   },
+       *   "vulnerability": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "weakness": {
+       *     "default_category": "External analysis",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-creation-date": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-registrant-email": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-registrant-name": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-registrant-org": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-registrant-phone": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "whois-registrar": {
+       *     "default_category": "Attribution",
+       *     "to_ids": "0"
+       *   },
+       *   "windows-scheduled-task": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "windows-service-displayname": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "windows-service-name": {
+       *     "default_category": "Artifacts dropped",
+       *     "to_ids": "0"
+       *   },
+       *   "x509-fingerprint-md5": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "x509-fingerprint-sha1": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "x509-fingerprint-sha256": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "xmr": {
+       *     "default_category": "Financial fraud",
+       *     "to_ids": "1"
+       *   },
+       *   "yara": {
+       *     "default_category": "Payload installation",
+       *     "to_ids": "1"
+       *   },
+       *   "dom-hash": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
+       *   },
+       *   "onion-address": {
+       *     "default_category": "Network activity",
+       *     "to_ids": "1"
        *   }
        * }
        */
@@ -7266,6 +7715,7 @@ export interface components {
        *   "identity-card-number",
        *   "impfuzzy",
        *   "imphash",
+       *   "integer",
        *   "ip-dst|port",
        *   "ip-src|port",
        *   "issue-date-of-the-visa",
@@ -7350,7 +7800,9 @@ export interface components {
        *   "x509-fingerprint-sha1",
        *   "x509-fingerprint-sha256",
        *   "xmr",
-       *   "yara"
+       *   "yara",
+       *   "dom-hash",
+       *   "onion-address"
        * ]
        */
       types?: string[];
@@ -7379,51 +7831,198 @@ export interface components {
       /**
        * Category Type Mappings
        * @default {
-       *   "Financial fraud": [
-       *     "aba-rtn",
-       *     "anonymised",
-       *     "bank-account-nr",
-       *     "bic",
-       *     "bin",
-       *     "btc",
-       *     "cc-number",
-       *     "comment",
-       *     "dash",
-       *     "hex",
-       *     "iban",
-       *     "other",
-       *     "phone-number",
-       *     "prtn",
-       *     "text",
-       *     "xmr"
-       *   ],
-       *   "Persistence mechanism": [
-       *     "anonymised",
-       *     "comment",
+       *   "Payload installation": [
+       *     "md5",
+       *     "sha1",
+       *     "sha256",
        *     "filename",
-       *     "hex",
-       *     "other",
-       *     "regkey",
-       *     "regkey|value",
-       *     "text"
-       *   ],
-       *   "Artifacts dropped": [
+       *     "filename|sha1",
+       *     "filename|sha256",
+       *     "pattern-in-file",
        *     "anonymised",
        *     "attachment",
        *     "authentihash",
+       *     "azure-application-id",
        *     "cdhash",
+       *     "chrome-extension-id",
        *     "comment",
-       *     "cookie",
-       *     "filename",
+       *     "cpe",
        *     "filename|authentihash",
        *     "filename|impfuzzy",
        *     "filename|imphash",
        *     "filename|md5",
        *     "filename-pattern",
        *     "filename|pehash",
-       *     "filename|sha1",
        *     "filename|sha224",
+       *     "filename|sha384",
+       *     "filename|sha3-224",
+       *     "filename|sha3-256",
+       *     "filename|sha3-384",
+       *     "filename|sha3-512",
+       *     "filename|sha512",
+       *     "filename|sha512/224",
+       *     "filename|sha512/256",
+       *     "filename|ssdeep",
+       *     "filename|tlsh",
+       *     "filename|vhash",
+       *     "hex",
+       *     "impfuzzy",
+       *     "imphash",
+       *     "malware-sample",
+       *     "malware-type",
+       *     "mime-type",
+       *     "mobile-application-id",
+       *     "other",
+       *     "pattern-in-memory",
+       *     "pattern-in-traffic",
+       *     "pehash",
+       *     "sha224",
+       *     "sha384",
+       *     "sha3-224",
+       *     "sha3-256",
+       *     "sha3-384",
+       *     "sha3-512",
+       *     "sha512",
+       *     "sha512/224",
+       *     "sha512/256",
+       *     "sigma",
+       *     "ssdeep",
+       *     "stix2-pattern",
+       *     "telfhash",
+       *     "text",
+       *     "tlsh",
+       *     "vhash",
+       *     "vulnerability",
+       *     "weakness",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "yara"
+       *   ],
+       *   "Payload delivery": [
+       *     "md5",
+       *     "sha1",
+       *     "sha256",
+       *     "filename",
+       *     "filename|sha1",
        *     "filename|sha256",
+       *     "ip-src",
+       *     "ip-dst",
+       *     "hostname",
+       *     "domain",
+       *     "email",
+       *     "email-src",
+       *     "email-dst",
+       *     "email-subject",
+       *     "email-attachment",
+       *     "email-body",
+       *     "url",
+       *     "user-agent",
+       *     "ja3-fingerprint-md5",
+       *     "jarm-fingerprint",
+       *     "hassh-md5",
+       *     "hasshserver-md5",
+       *     "AS",
+       *     "pattern-in-file",
+       *     "anonymised",
+       *     "attachment",
+       *     "authentihash",
+       *     "azure-application-id",
+       *     "cdhash",
+       *     "chrome-extension-id",
+       *     "comment",
+       *     "cpe",
+       *     "email-dst-display-name",
+       *     "email-header",
+       *     "email-message-id",
+       *     "email-mime-boundary",
+       *     "email-reply-to",
+       *     "email-src-display-name",
+       *     "email-thread-index",
+       *     "email-x-mailer",
+       *     "filename|authentihash",
+       *     "filename|impfuzzy",
+       *     "filename|imphash",
+       *     "filename|md5",
+       *     "filename-pattern",
+       *     "filename|pehash",
+       *     "filename|sha224",
+       *     "filename|sha384",
+       *     "filename|sha3-224",
+       *     "filename|sha3-256",
+       *     "filename|sha3-384",
+       *     "filename|sha3-512",
+       *     "filename|sha512",
+       *     "filename|sha512/224",
+       *     "filename|sha512/256",
+       *     "filename|ssdeep",
+       *     "filename|tlsh",
+       *     "filename|vhash",
+       *     "hex",
+       *     "hostname|port",
+       *     "impfuzzy",
+       *     "imphash",
+       *     "ip-dst|port",
+       *     "ip-src|port",
+       *     "link",
+       *     "mac-address",
+       *     "mac-eui-64",
+       *     "malware-sample",
+       *     "malware-type",
+       *     "mime-type",
+       *     "mobile-application-id",
+       *     "other",
+       *     "pattern-in-traffic",
+       *     "pehash",
+       *     "sha224",
+       *     "sha384",
+       *     "sha3-224",
+       *     "sha3-256",
+       *     "sha3-384",
+       *     "sha3-512",
+       *     "sha512",
+       *     "sha512/224",
+       *     "sha512/256",
+       *     "sigma",
+       *     "ssdeep",
+       *     "stix2-pattern",
+       *     "telfhash",
+       *     "text",
+       *     "tlsh",
+       *     "vhash",
+       *     "vulnerability",
+       *     "weakness",
+       *     "whois-registrant-email",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "yara",
+       *     "onion-address"
+       *   ],
+       *   "Artifacts dropped": [
+       *     "md5",
+       *     "sha1",
+       *     "sha256",
+       *     "filename",
+       *     "pdb",
+       *     "filename|sha1",
+       *     "filename|sha256",
+       *     "regkey",
+       *     "regkey|value",
+       *     "pattern-in-file",
+       *     "anonymised",
+       *     "attachment",
+       *     "authentihash",
+       *     "cdhash",
+       *     "comment",
+       *     "cookie",
+       *     "filename|authentihash",
+       *     "filename|impfuzzy",
+       *     "filename|imphash",
+       *     "filename|md5",
+       *     "filename-pattern",
+       *     "filename|pehash",
+       *     "filename|sha224",
        *     "filename|sha384",
        *     "filename|sha3-224",
        *     "filename|sha3-256",
@@ -7441,21 +8040,15 @@ export interface components {
        *     "imphash",
        *     "kusto-query",
        *     "malware-sample",
-       *     "md5",
        *     "mime-type",
        *     "mutex",
        *     "named pipe",
        *     "other",
-       *     "pattern-in-file",
        *     "pattern-in-memory",
-       *     "pdb",
        *     "pgp-private-key",
        *     "pgp-public-key",
        *     "process-state",
-       *     "regkey",
-       *     "regkey|value",
-       *     "sha1",
-       *     "sha256",
+       *     "sha224",
        *     "sha384",
        *     "sha3-224",
        *     "sha3-256",
@@ -7478,22 +8071,151 @@ export interface components {
        *     "x509-fingerprint-sha256",
        *     "yara"
        *   ],
-       *   "Targeting data": [
+       *   "External analysis": [
+       *     "md5",
+       *     "sha1",
+       *     "sha256",
+       *     "filename",
+       *     "filename|sha1",
+       *     "filename|sha256",
+       *     "ip-src",
+       *     "ip-dst",
+       *     "hostname",
+       *     "domain",
+       *     "domain|ip",
+       *     "url",
+       *     "user-agent",
+       *     "ja3-fingerprint-md5",
+       *     "jarm-fingerprint",
+       *     "hassh-md5",
+       *     "hasshserver-md5",
+       *     "regkey",
+       *     "regkey|value",
+       *     "AS",
+       *     "bro",
+       *     "zeek",
+       *     "community-id",
+       *     "pattern-in-file",
+       *     "anonymised",
+       *     "attachment",
+       *     "comment",
+       *     "cortex",
+       *     "cpe",
+       *     "filename|md5",
+       *     "filename-pattern",
+       *     "filename|sha3-224",
+       *     "filename|sha3-256",
+       *     "filename|sha3-384",
+       *     "filename|sha3-512",
+       *     "github-repository",
+       *     "ip-dst|port",
+       *     "ip-src|port",
+       *     "link",
+       *     "mac-address",
+       *     "mac-eui-64",
+       *     "malware-sample",
+       *     "other",
+       *     "pattern-in-memory",
+       *     "pattern-in-traffic",
+       *     "sha3-224",
+       *     "sha3-256",
+       *     "sha3-384",
+       *     "sha3-512",
+       *     "snort",
+       *     "text",
+       *     "vulnerability",
+       *     "weakness",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "dom-hash",
+       *     "onion-address"
+       *   ],
+       *   "Persistence mechanism": [
+       *     "filename",
+       *     "regkey",
+       *     "regkey|value",
        *     "anonymised",
        *     "comment",
-       *     "target-email",
-       *     "target-external",
-       *     "target-location",
-       *     "target-machine",
-       *     "target-org",
-       *     "target-user"
+       *     "hex",
+       *     "other",
+       *     "text"
+       *   ],
+       *   "Network activity": [
+       *     "ip-src",
+       *     "ip-dst",
+       *     "hostname",
+       *     "domain",
+       *     "domain|ip",
+       *     "email",
+       *     "email-src",
+       *     "email-dst",
+       *     "email-subject",
+       *     "eppn",
+       *     "url",
+       *     "http-method",
+       *     "user-agent",
+       *     "ja3-fingerprint-md5",
+       *     "jarm-fingerprint",
+       *     "favicon-mmh3",
+       *     "hassh-md5",
+       *     "hasshserver-md5",
+       *     "AS",
+       *     "bro",
+       *     "zeek",
+       *     "community-id",
+       *     "pattern-in-file",
+       *     "anonymised",
+       *     "attachment",
+       *     "comment",
+       *     "cookie",
+       *     "dkim",
+       *     "dkim-signature",
+       *     "filename-pattern",
+       *     "hex",
+       *     "hostname|port",
+       *     "ip-dst|port",
+       *     "ip-src|port",
+       *     "mac-address",
+       *     "mac-eui-64",
+       *     "other",
+       *     "pattern-in-traffic",
+       *     "port",
+       *     "snort",
+       *     "ssh-fingerprint",
+       *     "stix2-pattern",
+       *     "text",
+       *     "uri",
+       *     "x509-fingerprint-md5",
+       *     "x509-fingerprint-sha1",
+       *     "x509-fingerprint-sha256",
+       *     "dom-hash",
+       *     "onion-address"
+       *   ],
+       *   "Social network": [
+       *     "email",
+       *     "email-src",
+       *     "email-dst",
+       *     "eppn",
+       *     "anonymised",
+       *     "comment",
+       *     "github-organisation",
+       *     "github-repository",
+       *     "github-username",
+       *     "jabber-id",
+       *     "other",
+       *     "pgp-private-key",
+       *     "pgp-public-key",
+       *     "text",
+       *     "twitter-id",
+       *     "whois-registrant-email"
        *   ],
        *   "Person": [
+       *     "email",
        *     "anonymised",
        *     "comment",
        *     "country-of-residence",
        *     "date-of-birth",
-       *     "email",
        *     "first-name",
        *     "frequent-flyer-number",
        *     "full-name",
@@ -7523,22 +8245,13 @@ export interface components {
        *     "travel-details",
        *     "visa-number"
        *   ],
-       *   "Support Tool": [
-       *     "anonymised",
-       *     "attachment",
-       *     "comment",
-       *     "hex",
-       *     "link",
-       *     "other",
-       *     "text"
-       *   ],
        *   "Attribution": [
+       *     "email",
        *     "anonymised",
        *     "campaign-id",
        *     "campaign-name",
        *     "comment",
        *     "dns-soa-email",
-       *     "email",
        *     "other",
        *     "text",
        *     "threat-actor",
@@ -7552,100 +8265,16 @@ export interface components {
        *     "x509-fingerprint-sha1",
        *     "x509-fingerprint-sha256"
        *   ],
-       *   "External analysis": [
-       *     "anonymised",
-       *     "AS",
-       *     "attachment",
-       *     "bro",
-       *     "comment",
-       *     "community-id",
-       *     "cortex",
-       *     "cpe",
-       *     "domain",
-       *     "domain|ip",
-       *     "filename",
-       *     "filename|md5",
-       *     "filename-pattern",
-       *     "filename|sha1",
-       *     "filename|sha256",
-       *     "filename|sha3-224",
-       *     "filename|sha3-256",
-       *     "filename|sha3-384",
-       *     "filename|sha3-512",
-       *     "github-repository",
-       *     "hasshserver-md5",
-       *     "hassh-md5",
-       *     "hostname",
-       *     "ip-dst",
-       *     "ip-dst|port",
-       *     "ip-src",
-       *     "ip-src|port",
-       *     "ja3-fingerprint-md5",
-       *     "jarm-fingerprint",
-       *     "link",
-       *     "mac-address",
-       *     "mac-eui-64",
-       *     "malware-sample",
-       *     "md5",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-memory",
-       *     "pattern-in-traffic",
-       *     "regkey",
-       *     "regkey|value",
-       *     "sha1",
-       *     "sha256",
-       *     "sha3-224",
-       *     "sha3-256",
-       *     "sha3-384",
-       *     "sha3-512",
-       *     "snort",
-       *     "text",
-       *     "url",
-       *     "user-agent",
-       *     "vulnerability",
-       *     "weakness",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "zeek"
-       *   ],
-       *   "Internal reference": [
-       *     "anonymised",
-       *     "comment",
-       *     "git-commit-id",
-       *     "hex",
-       *     "link",
-       *     "other",
-       *     "text"
-       *   ],
-       *   "Social network": [
-       *     "anonymised",
-       *     "comment",
-       *     "email",
-       *     "email-dst",
-       *     "email-src",
-       *     "eppn",
-       *     "github-organisation",
-       *     "github-repository",
-       *     "github-username",
-       *     "jabber-id",
-       *     "other",
-       *     "pgp-private-key",
-       *     "pgp-public-key",
-       *     "text",
-       *     "twitter-id",
-       *     "whois-registrant-email"
-       *   ],
        *   "Other": [
+       *     "float",
        *     "anonymised",
        *     "boolean",
        *     "comment",
        *     "counter",
        *     "cpe",
        *     "datetime",
-       *     "float",
        *     "hex",
+       *     "integer",
        *     "other",
        *     "pgp-private-key",
        *     "pgp-public-key",
@@ -7654,226 +8283,42 @@ export interface components {
        *     "size-in-bytes",
        *     "text"
        *   ],
-       *   "Network activity": [
+       *   "Internal reference": [
+       *     "git-commit-id",
        *     "anonymised",
-       *     "AS",
-       *     "attachment",
-       *     "bro",
        *     "comment",
-       *     "community-id",
-       *     "cookie",
-       *     "dkim",
-       *     "dkim-signature",
-       *     "domain",
-       *     "domain|ip",
-       *     "email",
-       *     "email-dst",
-       *     "email-src",
-       *     "email-subject",
-       *     "eppn",
-       *     "favicon-mmh3",
-       *     "filename-pattern",
-       *     "hasshserver-md5",
-       *     "hassh-md5",
        *     "hex",
-       *     "hostname",
-       *     "hostname|port",
-       *     "http-method",
-       *     "ip-dst",
-       *     "ip-dst|port",
-       *     "ip-src",
-       *     "ip-src|port",
-       *     "ja3-fingerprint-md5",
-       *     "jarm-fingerprint",
-       *     "mac-address",
-       *     "mac-eui-64",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-traffic",
-       *     "port",
-       *     "snort",
-       *     "ssh-fingerprint",
-       *     "stix2-pattern",
-       *     "text",
-       *     "uri",
-       *     "url",
-       *     "user-agent",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "zeek"
-       *   ],
-       *   "Payload type": [
-       *     "anonymised",
-       *     "comment",
+       *     "link",
        *     "other",
        *     "text"
        *   ],
-       *   "Payload delivery": [
+       *   "Financial fraud": [
+       *     "aba-rtn",
        *     "anonymised",
-       *     "AS",
-       *     "attachment",
-       *     "authentihash",
-       *     "azure-application-id",
-       *     "cdhash",
-       *     "chrome-extension-id",
+       *     "bank-account-nr",
+       *     "bic",
+       *     "bin",
+       *     "btc",
+       *     "cc-number",
        *     "comment",
-       *     "cpe",
-       *     "domain",
-       *     "email",
-       *     "email-attachment",
-       *     "email-body",
-       *     "email-dst",
-       *     "email-dst-display-name",
-       *     "email-header",
-       *     "email-message-id",
-       *     "email-mime-boundary",
-       *     "email-reply-to",
-       *     "email-src",
-       *     "email-src-display-name",
-       *     "email-subject",
-       *     "email-thread-index",
-       *     "email-x-mailer",
-       *     "filename",
-       *     "filename|authentihash",
-       *     "filename|impfuzzy",
-       *     "filename|imphash",
-       *     "filename|md5",
-       *     "filename-pattern",
-       *     "filename|pehash",
-       *     "filename|sha1",
-       *     "filename|sha224",
-       *     "filename|sha256",
-       *     "filename|sha384",
-       *     "filename|sha3-224",
-       *     "filename|sha3-256",
-       *     "filename|sha3-384",
-       *     "filename|sha3-512",
-       *     "filename|sha512",
-       *     "filename|sha512/224",
-       *     "filename|sha512/256",
-       *     "filename|ssdeep",
-       *     "filename|tlsh",
-       *     "filename|vhash",
-       *     "hasshserver-md5",
-       *     "hassh-md5",
+       *     "dash",
        *     "hex",
-       *     "hostname",
-       *     "hostname|port",
-       *     "impfuzzy",
-       *     "imphash",
-       *     "ip-dst",
-       *     "ip-dst|port",
-       *     "ip-src",
-       *     "ip-src|port",
-       *     "ja3-fingerprint-md5",
-       *     "jarm-fingerprint",
-       *     "link",
-       *     "mac-address",
-       *     "mac-eui-64",
-       *     "malware-sample",
-       *     "malware-type",
-       *     "md5",
-       *     "mime-type",
-       *     "mobile-application-id",
+       *     "iban",
        *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-traffic",
-       *     "pehash",
-       *     "sha1",
-       *     "sha224",
-       *     "sha256",
-       *     "sha384",
-       *     "sha3-224",
-       *     "sha3-256",
-       *     "sha3-384",
-       *     "sha3-512",
-       *     "sha512",
-       *     "sha512/224",
-       *     "sha512/256",
-       *     "sigma",
-       *     "ssdeep",
-       *     "stix2-pattern",
-       *     "telfhash",
+       *     "phone-number",
+       *     "prtn",
        *     "text",
-       *     "tlsh",
-       *     "url",
-       *     "user-agent",
-       *     "vhash",
-       *     "vulnerability",
-       *     "weakness",
-       *     "whois-registrant-email",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "yara"
+       *     "xmr"
        *   ],
-       *   "Payload installation": [
+       *   "Targeting data": [
        *     "anonymised",
-       *     "attachment",
-       *     "authentihash",
-       *     "azure-application-id",
-       *     "cdhash",
-       *     "chrome-extension-id",
        *     "comment",
-       *     "cpe",
-       *     "filename",
-       *     "filename|authentihash",
-       *     "filename|impfuzzy",
-       *     "filename|imphash",
-       *     "filename|md5",
-       *     "filename-pattern",
-       *     "filename|pehash",
-       *     "filename|sha1",
-       *     "filename|sha224",
-       *     "filename|sha256",
-       *     "filename|sha384",
-       *     "filename|sha3-224",
-       *     "filename|sha3-256",
-       *     "filename|sha3-384",
-       *     "filename|sha3-512",
-       *     "filename|sha512",
-       *     "filename|sha512/224",
-       *     "filename|sha512/256",
-       *     "filename|ssdeep",
-       *     "filename|tlsh",
-       *     "filename|vhash",
-       *     "hex",
-       *     "impfuzzy",
-       *     "imphash",
-       *     "malware-sample",
-       *     "malware-type",
-       *     "md5",
-       *     "mime-type",
-       *     "mobile-application-id",
-       *     "other",
-       *     "pattern-in-file",
-       *     "pattern-in-memory",
-       *     "pattern-in-traffic",
-       *     "pehash",
-       *     "sha1",
-       *     "sha256",
-       *     "sha384",
-       *     "sha3-224",
-       *     "sha3-256",
-       *     "sha3-384",
-       *     "sha3-512",
-       *     "sha512",
-       *     "sha512/224",
-       *     "sha512/256",
-       *     "sigma",
-       *     "ssdeep",
-       *     "stix2-pattern",
-       *     "telfhash",
-       *     "text",
-       *     "tlsh",
-       *     "vhash",
-       *     "vulnerability",
-       *     "weakness",
-       *     "x509-fingerprint-md5",
-       *     "x509-fingerprint-sha1",
-       *     "x509-fingerprint-sha256",
-       *     "yara"
+       *     "target-email",
+       *     "target-external",
+       *     "target-location",
+       *     "target-machine",
+       *     "target-org",
+       *     "target-user"
        *   ],
        *   "Antivirus detection": [
        *     "anonymised",
@@ -7883,82 +8328,40 @@ export interface components {
        *     "link",
        *     "other",
        *     "text"
+       *   ],
+       *   "Support Tool": [
+       *     "anonymised",
+       *     "attachment",
+       *     "comment",
+       *     "hex",
+       *     "link",
+       *     "other",
+       *     "text"
+       *   ],
+       *   "Payload type": [
+       *     "anonymised",
+       *     "comment",
+       *     "other",
+       *     "text"
        *   ]
        * }
        */
       category_type_mappings?: Record<string, never>;
-      /**
-       * K
-       * @default zeek
-       */
-      k?: string;
-      /**
-       * V
-       * @default true
-       */
-      v?: boolean;
     };
     /** GetDescribeTypesResponse */
     GetDescribeTypesResponse: {
       result: components['schemas']['GetDescribeTypesAttributes'];
     };
-    /** GetGalaxyClusterResponse */
-    GetGalaxyClusterResponse: {
-      /** Id */
-      id?: string;
-      /** Uuid */
-      uuid?: string;
-      /** Collection Uuid */
-      collection_uuid: string;
-      /** Type */
-      type: string;
-      /** Value */
-      value: string;
-      /** Tag Name */
-      tag_name: string;
-      /** Description */
-      description: string;
-      /** Galaxy Id */
-      galaxy_id: string;
-      /** Source */
-      source: string;
-      /** Authors */
-      authors: string[];
-      /** Version */
-      version: string;
-      /** Distribution */
-      distribution: string;
-      /** Sharing Group Id */
-      sharing_group_id: string;
-      /** Org Id */
-      org_id: string;
-      /** Orgc Id */
-      orgc_id: string;
-      /** Default */
-      default: boolean;
-      /** Locked */
-      locked: boolean;
-      /** Extends Uuid */
-      extends_uuid: string;
-      /** Extends Version */
-      extends_version: string;
-      /** Published */
-      published: boolean;
-      /** Deleted */
-      deleted: boolean;
-      /** Galaxyelement */
-      GalaxyElement: components['schemas']['ExportGalaxyGalaxyElement'][];
-    };
     /** GetGalaxyResponse */
     GetGalaxyResponse: {
       Galaxy: components['schemas']['GetAllSearchGalaxiesAttributes'];
       /** Galaxycluster */
-      GalaxyCluster: components['schemas']['GetGalaxyClusterResponse'][];
+      GalaxyCluster: components['schemas']['mmisp__api_schemas__galaxies__GetGalaxyClusterResponse'][];
     };
     /** GetIdTaxonomyResponse */
     GetIdTaxonomyResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Namespace */
       namespace: string;
       /** Description */
@@ -7983,97 +8386,62 @@ export interface components {
     /** GetIdentityProviderResponse */
     GetIdentityProviderResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Active */
       active: boolean;
       /** Base Url */
       base_url: string;
       /** Client Id */
       client_id: string;
-      /** Client Secret */
-      client_secret: string;
       /** Scope */
       scope?: string;
     };
     /** GetOrganisationResponse */
     GetOrganisationResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
-      date_created: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
-      date_modified: string;
-      /** Description */
-      description?: string;
-      /** Type */
-      type?: string;
       /** Nationality */
       nationality?: string;
       /** Sector */
       sector?: string;
-      /** Created By */
-      created_by: string;
+      /** Type */
+      type?: string;
       /** Uuid */
       uuid?: string;
+      /** Date Created */
+      date_created?: string;
+      /** Date Modified */
+      date_modified?: string;
+      /** Description */
+      description?: string;
+      /** Created By */
+      created_by: string;
       /** Contacts */
       contacts?: string;
       /** Local */
       local: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
     };
-    /** GetRemoteServersResponse */
-    GetRemoteServersResponse: {
-      /** Id */
-      id: number;
-      /** Name */
-      name: string;
-      /** Url */
-      url: string;
-      /** Authkey */
-      authkey: string;
-      /** Org Id */
-      org_id?: number;
-      /** Push */
-      push: boolean;
-      /** Pull */
-      pull: boolean;
-      /** Push Sightings */
-      push_sightings?: boolean;
-      /** Push Galaxy Clusters */
-      push_galaxy_clusters?: boolean;
-      /** Pull Galaxy Clusters */
-      pull_galaxy_clusters?: boolean;
-      /** Remote Org Id */
-      remote_org_id: number;
-      /** Publish Without Email */
-      publish_without_email?: boolean;
-      /** Unpublish Event */
-      unpublish_event?: boolean;
-      /** Self Signed */
-      self_signed: boolean;
-      /** Internal */
-      internal?: boolean;
-      /** Skip Proxy */
-      skip_proxy?: boolean;
-      /** Caching Enabled */
-      caching_enabled?: boolean;
-      /** Priority */
-      priority?: number;
+    /** GetRemoteServer */
+    GetRemoteServer: {
+      Server: components['schemas']['ServerResponse'];
+      Organisation: components['schemas']['BaseOrganisation'];
+      RemoteOrg: components['schemas']['BaseOrganisation'];
+      /** User */
+      User: unknown[];
+    };
+    /** GetRolesResponse */
+    GetRolesResponse: {
+      Role: components['schemas']['RoleAttributeResponse'];
     };
     /** GetSelectedAllWarninglistsResponse */
     GetSelectedAllWarninglistsResponse: {
@@ -8090,7 +8458,7 @@ export interface components {
     /** GetTagTaxonomyResponse */
     GetTagTaxonomyResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Namespace */
       namespace: string;
       /** Description */
@@ -8111,13 +8479,13 @@ export interface components {
     /** GetUserSettingResponse */
     GetUserSettingResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Setting */
       setting: string;
       /** Value */
       value: string;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Timestamp */
       timestamp: string;
     };
@@ -8135,8 +8503,11 @@ export interface components {
       id: number;
       /** Org Id */
       org_id: number;
-      /** Server Id */
-      server_id: number;
+      /**
+       * Server Id
+       * @default 0
+       */
+      server_id?: number;
       /** Email */
       email: string;
       /** Autoalert */
@@ -8174,13 +8545,13 @@ export interface components {
       /** Force Logout */
       force_logout: boolean;
       /** Date Created */
-      date_created: number;
+      date_created?: number;
       /** Date Modified */
       date_modified?: number;
       /** Last Pw Change */
       last_pw_change?: number;
       /** Totp */
-      totp?: boolean;
+      totp?: string;
       /** Hotp Counter */
       hotp_counter?: number;
       /** Notification Daily */
@@ -8196,11 +8567,11 @@ export interface components {
       /** Sub */
       sub?: string;
       /** Name */
-      name: string;
+      name?: string;
       /** Contact */
-      contact: boolean;
+      contact?: boolean;
       /** Notification */
-      notification: boolean;
+      notification?: boolean;
     };
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -8212,14 +8583,17 @@ export interface components {
       /** Name */
       name: string;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Active */
       active: boolean;
       /** Base Url */
       base_url: string;
       /** Client Id */
       client_id: string;
-      /** Client Secret */
+      /**
+       * Client Secret
+       * Format: password
+       */
       client_secret: string;
       /** Scope */
       scope?: string;
@@ -8236,14 +8610,17 @@ export interface components {
       /** Name */
       name?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Active */
       active?: boolean;
       /** Base Url */
       base_url?: string;
       /** Client Id */
       client_id?: string;
-      /** Client Secret */
+      /**
+       * Client Secret
+       * Format: password
+       */
       client_secret?: string;
       /** Scope */
       scope?: string;
@@ -8251,7 +8628,7 @@ export interface components {
     /** IdentityProviderInfo */
     IdentityProviderInfo: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Url */
@@ -8259,68 +8636,13 @@ export interface components {
     };
     /** ImportGalaxyBody */
     ImportGalaxyBody: {
-      GalaxyCluster: components['schemas']['GetGalaxyClusterResponse'];
+      GalaxyCluster: components['schemas']['mmisp__api_schemas__galaxies__GetGalaxyClusterResponse'];
       Galaxy: components['schemas']['ImportGalaxyGalaxy'];
     };
     /** ImportGalaxyGalaxy */
     ImportGalaxyGalaxy: {
       /** Uuid */
       uuid: string;
-    };
-    /** IndexEventsAttributes */
-    IndexEventsAttributes: {
-      /** Id */
-      id: string;
-      /** Org Id */
-      org_id: string;
-      /** Date */
-      date: string;
-      /** Info */
-      info: string;
-      /** Uuid */
-      uuid: string;
-      /** Published */
-      published: boolean;
-      /** Analysis */
-      analysis: string;
-      /** Attribute Count */
-      attribute_count: string;
-      /** Orgc Id */
-      orgc_id: string;
-      /** Timestamp */
-      timestamp: string;
-      /** Distribution */
-      distribution: string;
-      /** Sharing Group Id */
-      sharing_group_id: string;
-      /** Proposal Email Lock */
-      proposal_email_lock: boolean;
-      /** Locked */
-      locked: boolean;
-      /** Threat Level Id */
-      threat_level_id: string;
-      /** Publish Timestamp */
-      publish_timestamp: string;
-      /** Sighting Timestamp */
-      sighting_timestamp: string;
-      /** Disable Correlation */
-      disable_correlation: boolean;
-      /** Extends Uuid */
-      extends_uuid: string;
-      /** Protected */
-      protected?: boolean;
-      Org: components['schemas']['GetAllEventsOrg'];
-      Orgc: components['schemas']['GetAllEventsOrg'];
-      /**
-       * Galaxycluster
-       * @default []
-       */
-      GalaxyCluster?: components['schemas']['GetAllEventsGalaxyCluster'][];
-      /**
-       * Eventtag
-       * @default []
-       */
-      EventTag?: components['schemas']['IndexEventsEventTag'][];
     };
     /** IndexEventsBody */
     IndexEventsBody: {
@@ -8337,7 +8659,7 @@ export interface components {
       /** Attribute */
       attribute?: string;
       /** Eventid */
-      eventid?: string;
+      eventid?: number;
       /** Datefrom */
       datefrom?: string;
       /** Dateuntil */
@@ -8371,16 +8693,50 @@ export interface components {
       /** Searchdateuntil */
       searchDateuntil?: string;
     };
-    /** IndexEventsEventTag */
-    IndexEventsEventTag: {
-      /** Id */
-      id: string;
-      /** Event Id */
-      event_id: string;
-      /** Tag Id */
-      tag_id: string;
-      /** Local */
-      local: boolean;
+    /**
+     * IsAcyclic
+     * @description Represents the whether graph is acyclic and details of the first detected cycle.
+     *
+     * - **is_acyclic**: False if the graph contains at least one cycle.
+     * - **cycles**: A list of entries, each containing two node IDs and a "Cycle" string.
+     * Conbined they result in the cycle.
+     *
+     * Example:
+     * ```json
+     * "is_acyclic": {
+     *     "is_acyclic": false,
+     *     "cycles": [
+     *         [
+     *             4,
+     *             3,
+     *             "Cycle"
+     *         ],
+     *         [
+     *             3,
+     *             4,
+     *             "Cycle"
+     *         ]
+     *     ]
+     * }
+     * ```
+     */
+    IsAcyclic: {
+      /** Is Acyclic */
+      is_acyclic: boolean;
+      /** Cycles */
+      cycles: components['schemas']['IsAcyclicInfo'][];
+    };
+    /** IsAcyclicInfo */
+    IsAcyclicInfo: {
+      /** Nodeid1 */
+      nodeID1: number;
+      /** Nodeid2 */
+      nodeID2: number;
+      /**
+       * Cycle
+       * @default Cycle
+       */
+      cycle?: string;
     };
     /**
      * LoginType
@@ -8388,10 +8744,76 @@ export interface components {
      * @enum {unknown}
      */
     LoginType: 'password' | 'idp';
+    /** LogsRequest */
+    LogsRequest: {
+      /** Model */
+      model?: string;
+      /** Action */
+      action?: string;
+      /** Model Id */
+      model_id?: number;
+      /**
+       * Page
+       * @default 1
+       */
+      page?: number;
+      /**
+       * Limit
+       * @default 50
+       */
+      limit?: number;
+    };
+    /**
+     * MiscellaneousGraphValidationError
+     * @description Validation errors that do no fit in the legacy MISP json response format for Graph Validation will be returned as
+     * errors in this format.
+     */
+    MiscellaneousGraphValidationError: {
+      /** Error Id */
+      error_id: string;
+      /** Message */
+      message: string;
+    };
+    /**
+     * MultipleOutputConnection
+     * @description Represents the status and details of nodes with illegal multiple output connections in a graph.
+     *
+     * - **has_multiple_output_connection**: True if at least one node has multiple output
+     *   connections that are not allowed.
+     *   For example, the 'Concurrent Task' node can have multiple output connections while the value here is `False`.
+     * - **edges**: A dictionary where the key is the ID of a node with multiple illegal connections,
+     *   and the value is a list of node IDs to which these illegal connections are made.
+     *
+     * Example:
+     * ```json
+     * "multiple_output_connection": {
+     *     "has_multiple_output_connection": true,
+     *     "edges": {
+     *         "1": [
+     *             5,
+     *             3
+     *         ]
+     *     }
+     * }
+     * ```
+     */
+    MultipleOutputConnection: {
+      /** Has Multiple Output Connection */
+      has_multiple_output_connection: boolean;
+      /** Edges */
+      edges: {
+        [key: string]: number[];
+      };
+    };
+    /** NOT_Filter */
+    NOT_Filter: {
+      /** Not */
+      NOT: unknown[];
+    };
     /** NameWarninglist */
     NameWarninglist: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Matched */
@@ -8400,7 +8822,7 @@ export interface components {
     /** NoticelistAttributes */
     NoticelistAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Expanded Name */
@@ -8417,7 +8839,7 @@ export interface components {
     /** NoticelistAttributesResponse */
     NoticelistAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Expanded Name */
@@ -8436,14 +8858,21 @@ export interface components {
     /** NoticelistEntryResponse */
     NoticelistEntryResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Noticelist Id */
-      noticelist_id: string;
+      noticelist_id: number;
       data: components['schemas']['Data'];
     };
     /** NoticelistResponse */
     NoticelistResponse: {
       Noticelist: components['schemas']['NoticelistAttributesResponse'];
+    };
+    /** OR_NOT_Filter */
+    OR_NOT_Filter: {
+      /** Or */
+      OR: unknown[];
+      /** Not */
+      NOT: unknown[];
     };
     /** ObjectCreateBody */
     ObjectCreateBody: {
@@ -8456,7 +8885,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Comment */
       comment: string;
       /** Deleted */
@@ -8471,13 +8900,13 @@ export interface components {
     /** ObjectEventResponse */
     ObjectEventResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Info */
       info: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
     };
     /** ObjectResponse */
     ObjectResponse: {
@@ -8492,7 +8921,7 @@ export interface components {
       /** Object Template Version */
       object_template_version?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Category */
       category?: string;
       /** Comment */
@@ -8518,7 +8947,7 @@ export interface components {
       /** Event Timestamp */
       event_timestamp?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Uuid */
       uuid?: string;
       /** Value1 */
@@ -8556,7 +8985,7 @@ export interface components {
     /** ObjectWithAttributesResponse */
     ObjectWithAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -8570,13 +8999,13 @@ export interface components {
       /** Template Version */
       template_version?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Timestamp */
       timestamp?: string;
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -8601,37 +9030,31 @@ export interface components {
     /** Organisation */
     Organisation: {
       /** Id */
-      id: string;
+      id?: number;
       /** Name */
-      name: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
-      date_created: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
-      date_modified: string;
-      /** Description */
-      description?: string;
-      /** Type */
-      type: string;
+      name?: string;
       /** Nationality */
       nationality?: string;
       /** Sector */
       sector?: string;
+      /** Type */
+      type?: string;
+      /** Uuid */
+      uuid?: string;
+      /** Date Created */
+      date_created: string;
+      /** Date Modified */
+      date_modified: string;
+      /** Description */
+      description?: string;
       /** Created By */
       created_by: string;
-      /** Uuid */
-      uuid: string;
       /** Contacts */
       contacts?: string;
       /** Local */
       local: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
     };
@@ -8641,15 +9064,9 @@ export interface components {
       id: number;
       /** Name */
       name: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
+      /** Date Created */
       date_created?: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
+      /** Date Modified */
       date_modified?: string;
       /** Description */
       description?: string;
@@ -8668,18 +9085,18 @@ export interface components {
       /** Local */
       local?: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
     };
     /** PartialAddEditGetEventAttribute */
     PartialAddEditGetEventAttribute: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Object Id */
-      object_id?: string;
+      object_id?: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -8697,7 +9114,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -8727,15 +9144,15 @@ export interface components {
     /** PartialAddEditGetEventDetails */
     PartialAddEditGetEventDetails: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Date */
       date?: string;
       /** Threat Level Id */
-      threat_level_id?: string;
+      threat_level_id?: number;
       /** Info */
       info?: string;
       /** Published */
@@ -8749,7 +9166,7 @@ export interface components {
       /** Timestamp */
       timestamp?: string;
       /** Distribution */
-      distribution?: string;
+      distribution?: number;
       /** Proposal Email Lock */
       proposal_email_lock?: boolean;
       /** Locked */
@@ -8757,7 +9174,7 @@ export interface components {
       /** Publish Timestamp */
       publish_timestamp?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Disable Correlation */
       disable_correlation?: boolean;
       /** Extends Uuid */
@@ -8782,7 +9199,7 @@ export interface components {
        * Relatedevent
        * @default []
        */
-      RelatedEvent?: components['schemas']['PartialAddEditGetEventEventReport'][];
+      RelatedEvent?: components['schemas']['PartialAddEditGetEventRelatedEvent'][];
       /**
        * Galaxy
        * @default []
@@ -8812,11 +9229,11 @@ export interface components {
     /** PartialAddEditGetEventEventReport */
     PartialAddEditGetEventEventReport: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Name */
       name?: string;
       /** Content */
@@ -8824,7 +9241,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Timestamp */
       timestamp?: string;
       /** Deleted */
@@ -8833,7 +9250,7 @@ export interface components {
     /** PartialAddEditGetEventGalaxy */
     PartialAddEditGetEventGalaxy: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -8854,6 +9271,17 @@ export interface components {
       local_only?: boolean;
       /** Kill Chain Order */
       kill_chain_order?: string;
+      /** Created */
+      created?: string;
+      /** Modified */
+      modified?: string;
+      /** Org Id */
+      org_id?: number;
+      /** Orgc Id */
+      orgc_id?: number;
+      /** Default */
+      default?: boolean;
+      distribution?: components['schemas']['DistributionLevels'];
       /**
        * Galaxycluster
        * @default []
@@ -8863,7 +9291,7 @@ export interface components {
     /** PartialAddEditGetEventGalaxyCluster */
     PartialAddEditGetEventGalaxyCluster: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Collection Uuid */
@@ -8877,7 +9305,7 @@ export interface components {
       /** Description */
       description?: string;
       /** Galaxy Id */
-      galaxy_id?: string;
+      galaxy_id?: number;
       /** Source */
       source?: string;
       /** Authors */
@@ -8887,11 +9315,11 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Orgc Id */
-      orgc_id?: string;
+      orgc_id?: number;
       /** Default */
       default?: boolean;
       /** Locked */
@@ -8913,27 +9341,27 @@ export interface components {
       Orgc?: components['schemas']['Organisation'];
       meta?: components['schemas']['AddEditGetEventGalaxyClusterMeta'];
       /** Tag Id */
-      tag_id?: string;
+      tag_id?: number;
       /** Attribute Tag Id */
-      attribute_tag_id?: string;
+      attribute_tag_id?: number;
       /** Event Tag Id */
-      event_tag_id?: string;
+      event_tag_id?: number;
       /** Local */
       local?: boolean;
       /**
        * Relationship Type
        * @default
        */
-      relationship_type?: string;
+      relationship_type?: boolean | string;
     };
     /** PartialAddEditGetEventGalaxyClusterRelation */
     PartialAddEditGetEventGalaxyClusterRelation: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Galaxy Cluster Id */
-      galaxy_cluster_id?: string;
+      galaxy_cluster_id?: number;
       /** Referenced Galaxy Cluster Id */
-      referenced_galaxy_cluster_id?: string;
+      referenced_galaxy_cluster_id?: number;
       /** Referenced Galaxy Cluster Uuid */
       referenced_galaxy_cluster_uuid?: string;
       /** Referenced Galaxy Cluster Type */
@@ -8943,7 +9371,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Default */
       default?: boolean;
       /**
@@ -8955,7 +9383,7 @@ export interface components {
     /** PartialAddEditGetEventGalaxyClusterRelationTag */
     PartialAddEditGetEventGalaxyClusterRelationTag: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Colour */
@@ -8963,9 +9391,9 @@ export interface components {
       /** Exportable */
       exportable?: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -8980,7 +9408,7 @@ export interface components {
     /** PartialAddEditGetEventObject */
     PartialAddEditGetEventObject: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Meta Category */
@@ -8992,7 +9420,7 @@ export interface components {
       /** Template Version */
       template_version?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Uuid */
       uuid?: string;
       /** Timestamp */
@@ -9000,7 +9428,7 @@ export interface components {
       /** Distribution */
       distribution?: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -9023,13 +9451,55 @@ export interface components {
     /** PartialAddEditGetEventOrg */
     PartialAddEditGetEventOrg: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Uuid */
       uuid?: string;
       /** Local */
       local?: boolean;
+    };
+    /** PartialAddEditGetEventRelatedEvent */
+    PartialAddEditGetEventRelatedEvent: {
+      Event?: components['schemas']['PartialAddEditGetEventRelatedEventAttributes'];
+      /** Relationshipinbound */
+      RelationshipInbound?: unknown[];
+    };
+    /** PartialAddEditGetEventRelatedEventAttributes */
+    PartialAddEditGetEventRelatedEventAttributes: {
+      /** Id */
+      id?: number;
+      /** Date */
+      date?: string;
+      /** Threat Level Id */
+      threat_level_id?: number;
+      /** Info */
+      info?: string;
+      /** Published */
+      published?: string;
+      /** Uuid */
+      uuid?: string;
+      /** Analysis */
+      analysis?: string;
+      /** Timestamp */
+      timestamp?: string;
+      /** Distribution */
+      distribution?: string;
+      /** Org Id */
+      org_id?: number;
+      /** Orgc Id */
+      orgc_id?: number;
+      Org?: components['schemas']['PartialAddEditGetEventRelatedEventAttributesOrg'];
+      Orgc?: components['schemas']['PartialAddEditGetEventRelatedEventAttributesOrg'];
+    };
+    /** PartialAddEditGetEventRelatedEventAttributesOrg */
+    PartialAddEditGetEventRelatedEventAttributesOrg: {
+      /** Id */
+      id?: number;
+      /** Name */
+      name?: string;
+      /** Uuid */
+      uuid?: string;
     };
     /** PartialAddEditGetEventResponse */
     PartialAddEditGetEventResponse: {
@@ -9049,7 +9519,7 @@ export interface components {
     /** PartialAddEditGetEventTag */
     PartialAddEditGetEventTag: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Colour */
@@ -9057,7 +9527,7 @@ export interface components {
       /** Exportable */
       exportable?: boolean;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -9071,7 +9541,7 @@ export interface components {
       /** Local */
       local?: boolean;
       /** Relationship Type */
-      relationship_type?: string;
+      relationship_type?: boolean | string;
     };
     /** PartialCreateSharingGroupLegacyResponse */
     PartialCreateSharingGroupLegacyResponse: {
@@ -9085,7 +9555,7 @@ export interface components {
     /** PartialCreateSharingGroupLegacyResponseOrganisationInfo */
     PartialCreateSharingGroupLegacyResponseOrganisationInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Uuid */
@@ -9093,18 +9563,18 @@ export interface components {
     };
     /** PartialDeleteSharingGroupLegacyResponse */
     PartialDeleteSharingGroupLegacyResponse: {
-      /** Saved */
-      saved?: boolean;
-      /** Success */
-      success?: boolean;
       /** Name */
       name?: string;
       /** Message */
       message?: string;
       /** Url */
       url?: string;
+      /** Saved */
+      saved?: boolean;
+      /** Success */
+      success?: boolean;
       /** Id */
-      id?: string;
+      id?: number;
     };
     /** PartialGetAllSharingGroupsResponse */
     PartialGetAllSharingGroupsResponse: {
@@ -9114,7 +9584,7 @@ export interface components {
     /** PartialGetAllSharingGroupsResponseOrganisationInfo */
     PartialGetAllSharingGroupsResponseOrganisationInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -9136,7 +9606,7 @@ export interface components {
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroup */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroup: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -9157,11 +9627,11 @@ export interface components {
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroupOrgItem */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroupOrgItem: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Extend */
       extend?: boolean;
       Organisation?: components['schemas']['PartialGetAllSharingGroupsResponseOrganisationInfo'];
@@ -9169,9 +9639,9 @@ export interface components {
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItem: {
       /** Server Id */
-      server_id?: string;
+      server_id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** All Orgs */
       all_orgs?: boolean;
       Server?: components['schemas']['PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer'];
@@ -9179,7 +9649,7 @@ export interface components {
     /** PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer */
     PartialGetAllSharingGroupsResponseResponseItemSharingGroupServerItemServer: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Url */
@@ -9197,7 +9667,7 @@ export interface components {
     /** PartialGetSharingGroupInfoResponseOrganisationInfo */
     PartialGetSharingGroupInfoResponseOrganisationInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -9208,7 +9678,7 @@ export interface components {
     /** PartialGetSharingGroupInfoResponseServerInfo */
     PartialGetSharingGroupInfoResponseServerInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Url */
@@ -9217,7 +9687,7 @@ export interface components {
     /** PartialGetSharingGroupInfoResponseSharingGroupInfo */
     PartialGetSharingGroupInfoResponseSharingGroupInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Releasability */
@@ -9229,20 +9699,14 @@ export interface components {
       /** Organisation Uuid */
       organisation_uuid?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Sync User Id */
-      sync_user_id?: string;
+      sync_user_id?: number;
       /** Active */
       active?: boolean;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Local */
       local?: boolean;
@@ -9254,11 +9718,11 @@ export interface components {
     /** PartialGetSharingGroupInfoResponseSharingGroupOrgItem */
     PartialGetSharingGroupInfoResponseSharingGroupOrgItem: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Extend */
       extend?: boolean;
       Organisation?: components['schemas']['PartialGetSharingGroupInfoResponseOrganisationInfo'];
@@ -9266,11 +9730,11 @@ export interface components {
     /** PartialGetSharingGroupInfoResponseSharingGroupServerItem */
     PartialGetSharingGroupInfoResponseSharingGroupServerItem: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Server Id */
-      server_id?: string;
+      server_id?: number;
       /** All Orgs */
       all_orgs?: boolean;
       Server?: components['schemas']['PartialGetSharingGroupInfoResponseServerInfo'];
@@ -9289,7 +9753,10 @@ export interface components {
       id?: number;
       /** Org Id */
       org_id?: number;
-      /** Server Id */
+      /**
+       * Server Id
+       * @default 0
+       */
       server_id?: number;
       /** Email */
       email?: string;
@@ -9334,7 +9801,7 @@ export interface components {
       /** Last Pw Change */
       last_pw_change?: number;
       /** Totp */
-      totp?: boolean;
+      totp?: string;
       /** Hotp Counter */
       hotp_counter?: number;
       /** Notification Daily */
@@ -9359,37 +9826,31 @@ export interface components {
     /** PartialOrganisation */
     PartialOrganisation: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
-      date_created?: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
-      date_modified?: string;
-      /** Description */
-      description?: string;
-      /** Type */
-      type?: string;
       /** Nationality */
       nationality?: string;
       /** Sector */
       sector?: string;
-      /** Created By */
-      created_by?: string;
+      /** Type */
+      type?: string;
       /** Uuid */
       uuid?: string;
+      /** Date Created */
+      date_created?: string;
+      /** Date Modified */
+      date_modified?: string;
+      /** Description */
+      description?: string;
+      /** Created By */
+      created_by?: string;
       /** Contacts */
       contacts?: string;
       /** Local */
       local?: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
     };
@@ -9399,15 +9860,9 @@ export interface components {
       id?: number;
       /** Name */
       name?: string;
-      /**
-       * Date Created
-       * Format: date-time
-       */
+      /** Date Created */
       date_created?: string;
-      /**
-       * Date Modified
-       * Format: date-time
-       */
+      /** Date Modified */
       date_modified?: string;
       /** Description */
       description?: string;
@@ -9426,7 +9881,7 @@ export interface components {
       /** Local */
       local?: boolean;
       /** Restricted To Domain */
-      restricted_to_domain?: string;
+      restricted_to_domain?: string | unknown[];
       /** Landingpage */
       landingpage?: string;
     };
@@ -9436,15 +9891,9 @@ export interface components {
       id?: number;
       /** Name */
       name?: string;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Perm Add */
       perm_add?: boolean;
@@ -9513,7 +9962,7 @@ export interface components {
     /** PartialSharingGroup */
     PartialSharingGroup: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Releasability */
@@ -9525,20 +9974,14 @@ export interface components {
       /** Organisation Uuid */
       organisation_uuid?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Sync User Id */
-      sync_user_id?: string;
+      sync_user_id?: number;
       /** Active */
       active?: boolean;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Local */
       local?: boolean;
@@ -9548,42 +9991,42 @@ export interface components {
     /** PartialSharingGroupOrg */
     PartialSharingGroupOrg: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Extend */
       extend?: boolean;
     };
     /** PartialSharingGroupServer */
     PartialSharingGroupServer: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Server Id */
-      server_id?: string;
+      server_id?: number;
       /** All Orgs */
       all_orgs?: boolean;
     };
     /** PartialStandardStatusResponse */
     PartialStandardStatusResponse: {
-      /** Saved */
-      saved?: boolean;
-      /** Success */
-      success?: boolean;
       /** Name */
       name?: string;
       /** Message */
       message?: string;
       /** Url */
       url?: string;
+      /** Saved */
+      saved?: boolean;
+      /** Success */
+      success?: boolean;
     };
     /** PartialTagAttributesResponse */
     PartialTagAttributesResponse: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Colour */
@@ -9591,9 +10034,9 @@ export interface components {
       /** Exportable */
       exportable?: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -9625,9 +10068,9 @@ export interface components {
       /** Description */
       description?: string;
       /** Id */
-      id?: string;
+      id?: number;
       /** Taxonomy Id */
-      taxonomy_id?: string;
+      taxonomy_id?: number;
       /** Colour */
       colour?: string;
       /** Exclusive */
@@ -9638,7 +10081,7 @@ export interface components {
     /** PartialTaxonomyView */
     PartialTaxonomyView: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Namespace */
       namespace?: string;
       /** Description */
@@ -9666,7 +10109,7 @@ export interface components {
     /** PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo */
     PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -9677,7 +10120,7 @@ export interface components {
     /** PartialViewUpdateSharingGroupLegacyResponseServerInfo */
     PartialViewUpdateSharingGroupLegacyResponseServerInfo: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Name */
       name?: string;
       /** Url */
@@ -9686,11 +10129,11 @@ export interface components {
     /** PartialViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem */
     PartialViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Extend */
       extend?: boolean;
       Organisation?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseOrganisationInfo'];
@@ -9698,11 +10141,11 @@ export interface components {
     /** PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem */
     PartialViewUpdateSharingGroupLegacyResponseSharingGroupServerItem: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Server Id */
-      server_id?: string;
+      server_id?: number;
       /** All Orgs */
       all_orgs?: boolean;
       Server?: components['schemas']['PartialViewUpdateSharingGroupLegacyResponseServerInfo'];
@@ -9711,13 +10154,56 @@ export interface components {
     PasswordLoginBody: {
       /** Email */
       email: string;
-      /** Password */
+      /**
+       * Password
+       * Format: password
+       */
       password: string;
     };
-    /** ProcessFreeTextResponse */
-    ProcessFreeTextResponse: {
-      /** Attributes */
-      attributes: components['schemas']['AttributeType'][];
+    /**
+     * PathWarnings
+     * @description Represents warnings for paths in a graph.
+     *
+     * - **has_path_warnings**: True if the graph contains at least one warning.
+     * - **edges**: A list containing all connections which are flagged as warnings.
+     *
+     * Example:
+     * ```json
+     * "path_warnings": {
+     *     "has_path_warnings": true,
+     *     "edges": [
+     *         [
+     *             5,
+     *             2,
+     *             "This path leads to a blocking node from a non-blocking context",
+     *             true,
+     *             "stop-execution",
+     *             2
+     *         ]
+     *     ]
+     * }
+     * ```
+     */
+    PathWarnings: {
+      /** Has Path Warnings */
+      has_path_warnings: boolean;
+      /** Edges */
+      edges: components['schemas']['PathWarningsInfo'][];
+    };
+    /** PathWarningsInfo */
+    PathWarningsInfo: {
+      /** Source Id */
+      source_id: number;
+      /** Next Node Id */
+      next_node_id: number;
+      /** Warning */
+      warning: string;
+      /** Blocking */
+      blocking: boolean;
+      /** Module Name */
+      module_name: string;
+      /** Module Id */
+      module_id: number;
     };
     /** PublishEventResponse */
     PublishEventResponse: {
@@ -9732,7 +10218,46 @@ export interface components {
       /** Url */
       url: string;
       /** Id */
-      id?: string;
+      id?: number;
+    };
+    /** PullRulesFilter */
+    PullRulesFilter: {
+      tags: components['schemas']['OR_NOT_Filter'];
+      orgs: components['schemas']['OR_NOT_Filter'];
+      type_attributes: components['schemas']['NOT_Filter'];
+      type_objects: components['schemas']['NOT_Filter'];
+      /** Url Params */
+      url_params: string;
+    };
+    /** PushRulesFilter */
+    PushRulesFilter: {
+      tags: components['schemas']['OR_NOT_Filter'];
+      orgs: components['schemas']['OR_NOT_Filter'];
+    };
+    /** PutGalaxyClusterRequest */
+    PutGalaxyClusterRequest: {
+      /** Id */
+      id: number;
+      /** Value */
+      value: string;
+      /** Description */
+      description: string;
+      /** Source */
+      source: string;
+      /** Type */
+      type: string;
+      /**
+       * Uuid
+       * Format: uuid
+       */
+      uuid: string;
+      /** Version */
+      version: number;
+      /** Authors */
+      authors: string[];
+      distribution: components['schemas']['DistributionLevels'];
+      /** Galaxyelement */
+      GalaxyElement: components['schemas']['AddUpdateGalaxyElement'][];
     };
     /** RoleAttributeResponse */
     RoleAttributeResponse: {
@@ -9817,15 +10342,9 @@ export interface components {
       id: number;
       /** Name */
       name: string;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Perm Add */
       perm_add?: boolean;
@@ -9894,11 +10413,11 @@ export interface components {
     /** SearchAttributesAttributesDetails */
     SearchAttributesAttributesDetails: {
       /** Id */
-      id: string;
+      id: number;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Object Id */
-      object_id?: string;
+      object_id?: number;
       /** Object Relation */
       object_relation?: string;
       /** Category */
@@ -9916,7 +10435,7 @@ export interface components {
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id?: string;
+      sharing_group_id?: number;
       /** Comment */
       comment?: string;
       /** Deleted */
@@ -9927,25 +10446,17 @@ export interface components {
       first_seen?: string;
       /** Last Seen */
       last_seen?: string;
+      /** Event Uuid */
+      event_uuid?: string;
+      /** Data */
+      data?: string;
       Event?: components['schemas']['SearchAttributesEvent'];
       Object?: components['schemas']['SearchAttributesObject'];
-      /**
-       * Tag
-       * @default []
-       */
+      /** Tag */
       Tag?: components['schemas']['GetAttributeTag'][];
     };
     /** SearchAttributesBody */
     SearchAttributesBody: {
-      /**
-       * Returnformat
-       * @default json
-       */
-      returnFormat?: string;
-      /** Page */
-      page?: number;
-      /** Limit */
-      limit?: number;
       /** Value */
       value?: string;
       /** Value1 */
@@ -9968,28 +10479,37 @@ export interface components {
       last?: number;
       /** Eventid */
       eventid?: string;
+      /** Published */
+      published?: boolean;
+      /** To Ids */
+      to_ids?: boolean;
+      /** Deleted */
+      deleted?: boolean;
+      /**
+       * Returnformat
+       * @default json
+       */
+      returnFormat?: string;
+      /** Page */
+      page?: number;
+      /** Limit */
+      limit?: number;
       /** Withattachments */
       withAttachments?: boolean;
       /** Uuid */
       uuid?: string;
       /** Publish Timestamp */
       publish_timestamp?: string;
-      /** Published */
-      published?: boolean;
       /** Timestamp */
       timestamp?: string;
       /** Attribute Timestamp */
       attribute_timestamp?: string;
       /** Enforcewarninglist */
       enforceWarninglist?: boolean;
-      /** To Ids */
-      to_ids?: boolean;
-      /** Deleted */
-      deleted?: boolean;
       /** Event Timestamp */
       event_timestamp?: string;
       /** Threat Level Id */
-      threat_level_id?: string;
+      threat_level_id?: number;
       /** Eventinfo */
       eventinfo?: string;
       /** Sharinggroup */
@@ -10035,17 +10555,19 @@ export interface components {
     /** SearchAttributesEvent */
     SearchAttributesEvent: {
       /** Id */
-      id: string;
+      id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Distribution */
       distribution: string;
       /** Info */
       info: string;
       /** Orgc Id */
-      orgc_id: string;
+      orgc_id: number;
       /** Uuid */
       uuid: string;
+      /** Publish Timestamp */
+      publish_timestamp: number;
     };
     /** SearchAttributesModelOverrides */
     SearchAttributesModelOverrides: {
@@ -10073,11 +10595,11 @@ export interface components {
     /** SearchAttributesObject */
     SearchAttributesObject: {
       /** Id */
-      id: string;
+      id: number;
       /** Distribution */
       distribution: string;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
     };
     /** SearchAttributesResponse */
     SearchAttributesResponse: {
@@ -10096,7 +10618,7 @@ export interface components {
        */
       limit?: number;
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Authkey Start */
@@ -10110,7 +10632,7 @@ export interface components {
       /** Read Only */
       read_only?: boolean;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Comment */
       comment?: string;
       /** Allowed Ips */
@@ -10147,7 +10669,7 @@ export interface components {
       /** Last */
       last?: number;
       /** Eventid */
-      eventid?: string;
+      eventid?: number;
       /** Withattachments */
       withAttachments?: boolean;
       /** Sharinggroup */
@@ -10191,7 +10713,7 @@ export interface components {
       /** Object Relation */
       object_relation?: string;
       /** Threat Level Id */
-      threat_level_id?: string;
+      threat_level_id?: number;
     };
     /** SearchGalaxiesbyValue */
     SearchGalaxiesbyValue: {
@@ -10206,7 +10728,7 @@ export interface components {
     /** SearchGetAuthKeysResponseAuthKey */
     SearchGetAuthKeysResponseAuthKey: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Authkey Start */
@@ -10241,7 +10763,7 @@ export interface components {
     /** SearchGetAuthKeysResponseItemAuthKey */
     SearchGetAuthKeysResponseItemAuthKey: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Authkey Start */
@@ -10255,7 +10777,7 @@ export interface components {
       /** Read Only */
       read_only: boolean;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Comment */
       comment?: string;
       /** Allowed Ips */
@@ -10269,22 +10791,87 @@ export interface components {
     /** SearchGetAuthKeysResponseItemUser */
     SearchGetAuthKeysResponseItemUser: {
       /** Id */
-      id: string;
+      id: number;
       /** Email */
       email: string;
     };
     /** SearchUserSettingBody */
     SearchUserSettingBody: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Setting */
       setting?: string;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
+    };
+    /** ServerResponse */
+    ServerResponse: {
+      /** Id */
+      id: number;
+      /** Name */
+      name: string;
+      /** Url */
+      url: string;
+      /** Org Id */
+      org_id?: number;
+      /** Push */
+      push: boolean;
+      /** Pull */
+      pull: boolean;
+      /** Cert File */
+      cert_file?: string;
+      /** Client Cert File */
+      client_cert_file?: string;
+      /** Lastpulledid */
+      lastpulledid?: number;
+      /** Lastpushedid */
+      lastpushedid?: number;
+      /** Organization */
+      organization: null;
+      /** Pull Analyst Data */
+      pull_analyst_data: boolean;
+      /** Pull Rules */
+      pull_rules: string;
+      /** Push Analyst Data */
+      push_analyst_data: boolean;
+      /** Push Rules */
+      push_rules: string;
+      /** Remove Missing Tags */
+      remove_missing_tags: boolean;
+      /** Push Sightings */
+      push_sightings?: boolean;
+      /** Push Galaxy Clusters */
+      push_galaxy_clusters?: boolean;
+      /** Pull Galaxy Clusters */
+      pull_galaxy_clusters?: boolean;
+      /** Remote Org Id */
+      remote_org_id: number;
+      /** Publish Without Email */
+      publish_without_email?: boolean;
+      /** Unpublish Event */
+      unpublish_event?: boolean;
+      /** Self Signed */
+      self_signed: boolean;
+      /** Internal */
+      internal?: boolean;
+      /** Skip Proxy */
+      skip_proxy?: boolean;
+      /** Caching Enabled */
+      caching_enabled?: boolean;
+      /** Priority */
+      priority?: number;
+      /**
+       * Cache Timestamp
+       * @default false
+       */
+      cache_timestamp?: boolean;
     };
     /** SetPasswordBody */
     SetPasswordBody: {
-      /** Password */
+      /**
+       * Password
+       * Format: password
+       */
       password: string;
     };
     /** SetUserSettingBody */
@@ -10299,20 +10886,20 @@ export interface components {
     /** SetUserSettingResponseUserSetting */
     SetUserSettingResponseUserSetting: {
       /** Id */
-      id: string;
+      id: number;
       /** Setting */
       setting: string;
       /** Value */
       value: Record<string, never> | unknown[];
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Timestamp */
       timestamp: string;
     };
     /** SharingGroup */
     SharingGroup: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Releasability */
@@ -10324,20 +10911,14 @@ export interface components {
       /** Organisation Uuid */
       organisation_uuid: string;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Sync User Id */
-      sync_user_id: string;
+      sync_user_id: number;
       /** Active */
       active: boolean;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified: string;
       /** Local */
       local: boolean;
@@ -10347,28 +10928,28 @@ export interface components {
     /** SharingGroupOrg */
     SharingGroupOrg: {
       /** Id */
-      id: string;
+      id: number;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Extend */
       extend: boolean;
     };
     /** SightingAttributesResponse */
     SightingAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Attribute Id */
-      attribute_id: string;
+      attribute_id: number;
       /** Attribute Uuid */
       attribute_uuid: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Date Sighting */
       date_sighting?: string;
       /** Source */
@@ -10406,7 +10987,7 @@ export interface components {
       /** Timestamp */
       timestamp?: string;
       /** Event Id */
-      event_id?: string;
+      event_id?: number;
       /** Uuid */
       uuid?: string;
       /** Attribute Timestamp */
@@ -10441,7 +11022,7 @@ export interface components {
     /** SightingOrganisationResponse */
     SightingOrganisationResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -10454,25 +11035,34 @@ export interface components {
     };
     /** StandardStatusIdentifiedResponse */
     StandardStatusIdentifiedResponse: {
-      /** Saved */
-      saved: boolean;
-      /** Success */
-      success: boolean;
       /** Name */
       name: string;
       /** Message */
       message: string;
       /** Url */
       url: string;
-      /** Id */
-      id: string;
-    };
-    /** StandardStatusResponse */
-    StandardStatusResponse: {
       /** Saved */
       saved: boolean;
       /** Success */
       success: boolean;
+      /** Id */
+      id: number;
+    };
+    /** StandardStatusResponse */
+    StandardStatusResponse: {
+      /** Name */
+      name: string;
+      /** Message */
+      message: string;
+      /** Url */
+      url: string;
+      /** Saved */
+      saved: boolean;
+      /** Success */
+      success: boolean;
+    };
+    /** StandartResponse */
+    StandartResponse: {
       /** Name */
       name: string;
       /** Message */
@@ -10497,7 +11087,7 @@ export interface components {
     /** TagAttributesResponse */
     TagAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -10505,9 +11095,9 @@ export interface components {
       /** Exportable */
       exportable: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -10528,9 +11118,9 @@ export interface components {
       /** Exportable */
       exportable: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -10565,9 +11155,9 @@ export interface components {
       /** Exportable */
       exportable?: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -10578,7 +11168,7 @@ export interface components {
     /** TagViewResponse */
     TagViewResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Colour */
@@ -10586,9 +11176,9 @@ export interface components {
       /** Exportable */
       exportable: boolean;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** User Id */
-      user_id?: string;
+      user_id?: number;
       /** Hide Tag */
       hide_tag?: boolean;
       /** Numerical Value */
@@ -10653,7 +11243,7 @@ export interface components {
     /** TaxonomyView */
     TaxonomyView: {
       /** Id */
-      id: string;
+      id: number;
       /** Namespace */
       namespace: string;
       /** Description */
@@ -10672,7 +11262,7 @@ export interface components {
     /** ToggleEnableWarninglistsBody */
     ToggleEnableWarninglistsBody: {
       /** Id */
-      id: string | string[];
+      id: number | number[];
       /** Name */
       name: string | string[];
       /** Enabled */
@@ -10705,7 +11295,7 @@ export interface components {
       /** Url */
       url: string;
       /** Id */
-      id?: string;
+      id?: number;
     };
     /** UpdateSharingGroupBody */
     UpdateSharingGroupBody: {
@@ -10725,7 +11315,7 @@ export interface components {
     /** UpdateSharingGroupLegacyBody */
     UpdateSharingGroupLegacyBody: {
       /** Id */
-      id?: string;
+      id?: number;
       /** Uuid */
       uuid?: string;
       /** Name */
@@ -10743,18 +11333,12 @@ export interface components {
       /** Organisation Uuid */
       organisation_uuid?: string;
       /** Org Id */
-      org_id?: string;
+      org_id?: number;
       /** Sync User Id */
-      sync_user_id?: string;
-      /**
-       * Created
-       * Format: date-time
-       */
+      sync_user_id?: number;
+      /** Created */
       created?: string;
-      /**
-       * Modified
-       * Format: date-time
-       */
+      /** Modified */
       modified?: string;
       /** Roaming */
       roaming?: boolean;
@@ -10783,15 +11367,15 @@ export interface components {
     /** User */
     User: {
       /** Id */
-      id: string;
+      id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Email */
       email: string;
       /** Autoalert */
       autoalert: boolean;
       /** Invited By */
-      invited_by: string;
+      invited_by: number;
       /** Gpgkey */
       gpgkey?: string;
       /** Certif Public */
@@ -10799,34 +11383,31 @@ export interface components {
       /** Termsaccepted */
       termsaccepted: boolean;
       /** Role Id */
-      role_id: string;
+      role_id: number;
       /** Change Pw */
       change_pw: boolean;
       /** Contactalert */
       contactalert: boolean;
       /** Disabled */
       disabled: boolean;
-      /**
-       * Expiration
-       * Format: date-time
-       */
-      expiration?: string;
+      /** Expiration */
+      expiration?: string | number;
       /** Current Login */
-      current_login: string;
+      current_login: number;
       /** Last Login */
-      last_login: string;
+      last_login: number;
       /** Force Logout */
       force_logout: boolean;
       /** Date Created */
-      date_created: string;
+      date_created: number;
       /** Date Modified */
-      date_modified: string;
+      date_modified: number;
       /** External Auth Required */
       external_auth_required: boolean;
       /** External Auth Key */
       external_auth_key?: string;
       /** Last Api Access */
-      last_api_access: string;
+      last_api_access: number;
       /** Notification Daily */
       notification_daily: boolean;
       /** Notification Weekly */
@@ -10836,38 +11417,35 @@ export interface components {
       /** Totp */
       totp?: string;
       /** Hotp Counter */
-      hotp_counter?: string;
+      hotp_counter?: number;
       /** Last Pw Change */
-      last_pw_change?: string;
+      last_pw_change?: number;
     };
     /** UserAttributesBody */
     UserAttributesBody: {
-      /** Org */
-      org?: string;
+      /** Org Id */
+      org_id?: number;
       /** Authkey */
       authkey?: string;
       /** Email */
       email?: string;
       /** Autoalert */
       autoalert?: boolean;
-      /** Pgpkey */
-      pgpkey?: string;
+      /** Gpgkey */
+      gpgkey?: string;
       /** Certif Public */
       certif_public?: string;
       /** Termsaccepted */
       termsaccepted?: boolean;
-      /** Role */
-      role?: string;
+      /** Role Id */
+      role_id?: string;
       /** Change Pw */
       change_pw?: boolean;
       /** Contactalert */
       contactalert?: boolean;
       /** Disabled */
       disabled?: boolean;
-      /**
-       * Expiration
-       * Format: date-time
-       */
+      /** Expiration */
       expiration?: string;
       /** Force Logout */
       force_logout?: boolean;
@@ -10897,13 +11475,13 @@ export interface components {
     /** UserSettingSchema */
     UserSettingSchema: {
       /** Id */
-      id: string;
+      id: number;
       /** Setting */
       setting: string;
       /** Value */
       value: Record<string, never> | unknown[];
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Timestamp */
       timestamp: string;
     };
@@ -10925,24 +11503,21 @@ export interface components {
     /** ViewAuthKeyResponseWrapper */
     ViewAuthKeyResponseWrapper: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Authkey Start */
       authkey_start: string;
       /** Authkey End */
       authkey_end: string;
-      /**
-       * Created
-       * Format: date-time
-       */
+      /** Created */
       created: string;
       /** Expiration */
       expiration: number;
       /** Read Only */
       read_only: boolean;
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Comment */
       comment: string;
       /** Allowed Ips */
@@ -10978,7 +11553,7 @@ export interface components {
     /** ViewUpdateSharingGroupLegacyResponseOrganisationInfo */
     ViewUpdateSharingGroupLegacyResponseOrganisationInfo: {
       /** Id */
-      id: string;
+      id: number;
       /** Uuid */
       uuid: string;
       /** Name */
@@ -10989,7 +11564,7 @@ export interface components {
     /** ViewUpdateSharingGroupLegacyResponseServerInfo */
     ViewUpdateSharingGroupLegacyResponseServerInfo: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Url */
@@ -10998,11 +11573,11 @@ export interface components {
     /** ViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem */
     ViewUpdateSharingGroupLegacyResponseSharingGroupOrgItem: {
       /** Id */
-      id: string;
+      id: number;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Org Id */
-      org_id: string;
+      org_id: number;
       /** Extend */
       extend: boolean;
       Organisation: components['schemas']['ViewUpdateSharingGroupLegacyResponseOrganisationInfo'];
@@ -11010,11 +11585,11 @@ export interface components {
     /** ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem */
     ViewUpdateSharingGroupLegacyResponseSharingGroupServerItem: {
       /** Id */
-      id: string;
+      id: number;
       /** Sharing Group Id */
-      sharing_group_id: string;
+      sharing_group_id: number;
       /** Server Id */
-      server_id: string;
+      server_id: number;
       /** All Orgs */
       all_orgs: boolean;
       Server: components['schemas']['ViewUpdateSharingGroupLegacyResponseServerInfo'];
@@ -11026,20 +11601,20 @@ export interface components {
     /** ViewUserSettingResponseUserSetting */
     ViewUserSettingResponseUserSetting: {
       /** Id */
-      id: string;
+      id: number;
       /** Setting */
       setting: string;
       /** Value */
       value: Record<string, never> | unknown[];
       /** User Id */
-      user_id: string;
+      user_id: number;
       /** Timestamp */
       timestamp: string;
     };
     /** WarninglistAttributes */
     WarninglistAttributes: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Type */
@@ -11062,7 +11637,7 @@ export interface components {
     /** WarninglistAttributesResponse */
     WarninglistAttributesResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Name */
       name: string;
       /** Type */
@@ -11091,11 +11666,11 @@ export interface components {
     /** WarninglistEntryResponse */
     WarninglistEntryResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Value */
       value: string;
       /** Warninglist Id */
-      warninglist_id: string;
+      warninglist_id: number;
       /** Comment */
       comment?: string;
     };
@@ -11112,15 +11687,147 @@ export interface components {
     /** WarninglistTypeResponse */
     WarninglistTypeResponse: {
       /** Id */
-      id: string;
+      id: number;
       /** Type */
       type: string;
       /** Warninglist Id */
-      warninglist_id: string;
+      warninglist_id: number;
     };
     /** WarninglistsResponse */
     WarninglistsResponse: {
       Warninglist: components['schemas']['WarninglistAttributes'];
+    };
+    /** ExportGalaxyGalaxyElement */
+    mmisp__api_schemas__galaxies__ExportGalaxyGalaxyElement: {
+      /** Id */
+      id?: number;
+      /** Galaxy Cluster Id */
+      galaxy_cluster_id?: number;
+      /** Key */
+      key: string;
+      /** Value */
+      value: string;
+    };
+    /** GetGalaxyClusterResponse */
+    mmisp__api_schemas__galaxies__GetGalaxyClusterResponse: {
+      /** Id */
+      id: number;
+      /** Uuid */
+      uuid: string;
+      /** Collection Uuid */
+      collection_uuid: string;
+      /** Type */
+      type: string;
+      /** Value */
+      value: string;
+      /** Tag Name */
+      tag_name: string;
+      /** Description */
+      description: string;
+      /** Galaxy Id */
+      galaxy_id: number;
+      /** Source */
+      source: string;
+      /** Authors */
+      authors: string[];
+      /** Version */
+      version: string;
+      /** Distribution */
+      distribution: string;
+      /** Sharing Group Id */
+      sharing_group_id: number;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      /** Default */
+      default: boolean;
+      /** Locked */
+      locked: boolean;
+      /** Extends Uuid */
+      extends_uuid: string;
+      /** Extends Version */
+      extends_version: string;
+      /** Published */
+      published: boolean;
+      /** Deleted */
+      deleted: boolean;
+      /** Galaxyelement */
+      GalaxyElement: components['schemas']['mmisp__api_schemas__galaxies__ExportGalaxyGalaxyElement'][];
+    };
+    /** ExportGalaxyGalaxyElement */
+    mmisp__api_schemas__galaxy_clusters__ExportGalaxyGalaxyElement: {
+      /** Id */
+      id?: number;
+      /** Galaxy Cluster Id */
+      galaxy_cluster_id?: string;
+      /** Key */
+      key: string;
+      /** Value */
+      value: string;
+    };
+    /** GetGalaxyClusterResponse */
+    mmisp__api_schemas__galaxy_clusters__GetGalaxyClusterResponse: {
+      /** Id */
+      id?: number;
+      /**
+       * Uuid
+       * Format: uuid
+       */
+      uuid?: string;
+      /** Collection Uuid */
+      collection_uuid: string;
+      /** Type */
+      type: string;
+      /** Value */
+      value: string;
+      /** Tag Name */
+      tag_name: string;
+      /** Description */
+      description: string;
+      /** Galaxy Id */
+      galaxy_id: number;
+      /** Source */
+      source: string;
+      /** Authors */
+      authors: string[];
+      /** Version */
+      version: string;
+      /** Distribution */
+      distribution: string;
+      /** Sharing Group Id */
+      sharing_group_id?: string;
+      /** Org Id */
+      org_id: number;
+      /** Orgc Id */
+      orgc_id: number;
+      /** Default */
+      default: boolean;
+      /** Locked */
+      locked: boolean;
+      /** Extends Uuid */
+      extends_uuid?: string;
+      /** Extends Version */
+      extends_version?: string;
+      /** Published */
+      published: boolean;
+      /** Deleted */
+      deleted: boolean;
+      Galaxy?: components['schemas']['GetAllSearchGalaxiesAttributes'];
+      /** Galaxyelement */
+      GalaxyElement: components['schemas']['mmisp__api_schemas__galaxy_clusters__ExportGalaxyGalaxyElement'][];
+      /**
+       * Galaxyclusterrelation
+       * @default []
+       */
+      GalaxyClusterRelation?: unknown[];
+      /**
+       * Relationshipinbound
+       * @default []
+       */
+      RelationshipInbound?: unknown[];
+      Org?: components['schemas']['GetOrganisationResponse'];
+      Orgc?: components['schemas']['GetOrganisationResponse'];
     };
   };
   responses: never;
@@ -11136,2132 +11843,15 @@ export type external = Record<string, never>;
 
 export interface operations {
   /**
-   * Search attributes
-   * @description Search for attributes based on various filters.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the search body
-   *
-   * Output:
-   *
-   * - the attributes the search finds
-   */
-  rest_search_attributes_attributes_restSearch_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SearchAttributesBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SearchAttributesResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add new attribute
-   * @description Add a new attribute with the given details.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the event
-   *
-   * - the body for adding an attribute
-   *
-   * Output:
-   *
-   * - the response of the added attribute from the api
-   */
-  add_attribute_attributes__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddAttributeBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all attribute describe types
-   * @description Retrieve a list of all available attribute types and categories.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * Output:
-   *
-   * - the attributes describe types
-   */
-  get_attributes_describe_types_attributes_describeTypes_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetDescribeTypesResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Get attribute details
-   * @description Retrieve details of a specific attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * Output:
-   *
-   * - the attribute details
-   */
-  get_attribute_details_attributes__attributeId__get: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update an attribute
-   * @description Update an existing attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * - the body for editing the attribute
-   *
-   * Output:
-   *
-   * - the response from the api for the edit request
-   */
-  update_attribute_attributes__attributeId__put: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditAttributeBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['EditAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete an Attribute
-   * @description Delete an attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * Output:
-   *
-   * - the response from the api for the delete request
-   */
-  delete_attribute_attributes__attributeId__delete: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all Attributes
-   * @description Retrieve a list of all attributes.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * Output:
-   *
-   * - the list of all attributes
-   */
-  get_attributes_attributes_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAllAttributesResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Delete the selected attributes
-   * @description Deletes the attributes associated with the event from the list in the body.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the event
-   *
-   * - the body for deleting the selected attributes
-   *
-   * - the request
-   *
-   * Output:
-   *
-   * - the response from the api for the deleting of the selection
-   */
-  delete_selected_attributes_attributes_deleteSelected__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['DeleteSelectedAttributeBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteSelectedAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get attribute statistics
-   * @description Get the count/percentage of attributes per category/type.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the context
-   *
-   * - percentage
-   *
-   * Output:
-   *
-   * - the attributes statistics for one category/type
-   */
-  get_attributes_statistics_attributes_attributeStatistics__context___percentage__get: {
-    parameters: {
-      path: {
-        context: 'type' | 'category';
-        percentage: boolean;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json':
-            | components['schemas']['GetAttributeStatisticsCategoriesResponse']
-            | components['schemas']['GetAttributeStatisticsTypesResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Restore an attribute
-   * @description Restore an attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * Output:
-   *
-   * - the restored attribute
-   */
-  restore_attribute_attributes_restore__attributeId__post: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add tag to attribute
-   * @description Add a tag to an attribute by there ids.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * - the id of the tag
-   *
-   * - local
-   *
-   * Output:
-   *
-   * - the response from the api for adding a tag to an attribute
-   */
-  add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post: {
-    parameters: {
-      path: {
-        attributeId: string;
-        tagId: string;
-        local: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Remove tag from attribute
-   * @description Remove a tag from an attribute by there ids.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * - the id of the tag
-   *
-   * Output:
-   *
-   * - the response from the api for removing a tag to an attribute
-   */
-  remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post: {
-    parameters: {
-      path: {
-        attributeId: string;
-        tagId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add new attribute (Deprecated)
-   * @deprecated
-   * @description Deprecated. Add a new attribute with the given details using the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the event
-   *
-   * - the body
-   *
-   * Output:
-   *
-   * - the attribute
-   */
-  add_attribute_depr_attributes_add__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddAttributeBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get attribute details (Deprecated)
-   * @deprecated
-   * @description Deprecated. Retrieve details of a specific attribute by its ID using the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * Output:
-   *
-   * - the details of an attribute
-   */
-  get_attribute_details_depr_attributes_view__attributeId__get: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update an attribute (Deprecated)
-   * @deprecated
-   * @description Deprecated. Update an existing attribute by its ID using the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * - the body
-   *
-   * Output:
-   *
-   * - the updated version af an attribute
-   */
-  update_attribute_depr_attributes_edit__attributeId__put: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditAttributeBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['EditAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete an Attribute (Deprecated)
-   * @deprecated
-   * @description Deprecated. Delete an attribute by its ID using the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attribute
-   *
-   * Output:
-   *
-   * - the response from the api for the deleting request
-   */
-  delete_attribute_depr_attributes_delete__attributeId__delete: {
-    parameters: {
-      path: {
-        attributeId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteAttributeResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get All Open Id Connect Providers Info
-   * @description Fetches all OpenID Connect providers
-   *
-   * Input:
-   * - Authorization token
-   * - Database session
-   *
-   * Output:
-   * - List of OpenID Connect providers
-   */
-  get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['IdentityProviderInfo'][];
-        };
-      };
-    };
-  };
-  /**
-   * Get All Open Id Connect Providers
-   * @description Fetches all OpenID Connect providers
-   *
-   * Input:
-   * - Authorization token
-   * - Database session
-   *
-   * Output:
-   * - List of OpenID Connect providers
-   */
-  get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetIdentityProviderResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Get Open Id Connect Provider By Id
-   * @description Fetches a single OpenID Connect provider by its ID
-   *
-   * Input:
-   * - Authorization token
-   * - Database session
-   * - Provider ID
-   *
-   * Output:
-   * - OpenID Connect provider details
-   */
-  get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get: {
-    parameters: {
-      path: {
-        providerId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetIdentityProviderResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add Openid Connect Provider
-   * @description Adds a new OpenID Connect provider
-   *
-   * Input:
-   *
-   * - database
-   *
-   * Output:
-   *
-   * - openID Connect provider
-   */
-  add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['IdentityProviderBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['IdentityProviderInfo'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Edit Openid Connect Provider
-   * @description Edits an OpenID Connect provider
-   *
-   * Input:
-   *
-   * - OpenID Connect provider
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - updated OpenID Connect provider
-   */
-  edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post: {
-    parameters: {
-      path: {
-        openIDConnectProvider: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['IdentityProviderEditBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ChangeLoginInfoResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Deletes an OpenID Connect Provider by its ID
-   * @description Deletes an OpenID Connect provider
-   *
-   * Input:
-   *
-   * - OpenID Connect provider
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - database
-   */
-  delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete: {
-    parameters: {
-      path: {
-        openIDConnectProvider: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ChangeLoginInfoResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Start Login
-   * @description Starts the login process.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - dict
-   */
-  start_login_auth_login_start_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['StartLoginBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StartLoginResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Password Login
-   * @description Login with password.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the login token
-   */
-  password_login_auth_login_password_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PasswordLoginBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['TokenResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * User sets their password to a new password
-   * @description Sets the password of the user to a new password.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * Output:
-   *
-   * - the response form the api after the password change request
-   */
-  set_password_auth_login_setOwnPassword_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ChangePasswordBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['TokenResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Redirect To Frontend
-   * @description Redirects to the frontend.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * - the identity provider id
-   *
-   * - the code
-   *
-   * Output:
-   *
-   * - the redirection
-   */
-  redirect_to_frontend_auth_login_idp__identityProviderName__callback_get: {
-    parameters: {
-      path: {
-        identityProviderName: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['IdentityProviderCallbackBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['TokenResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Redirect To Frontend
-   * @description Redirects to the frontend.
-   *
-   * Input:
-   *
-   * - the database
-   *
-   * - the identity provider id
-   *
-   * - the code
-   *
-   * Output:
-   *
-   * - the redirection
-   */
-  redirect_to_frontend_auth_login_idp__identityProviderName__callback_post: {
-    parameters: {
-      path: {
-        identityProviderName: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['IdentityProviderCallbackBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['TokenResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Exchange Token Login
-   * @description Login with exchange token.
-   *
-   * Inout:
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the login token
-   */
-  exchange_token_login_auth_login_token_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ExchangeTokenLoginBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['TokenResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Admin sets the password of the user to a new password
-   * @description Set the password of the user to a new password
-   *
-   * Input:
-   *
-   * - the request body
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - the response from the api after the password change request
-   */
-  change_password_UserId_auth_setPassword__userId__put: {
-    parameters: {
-      path: {
-        userId: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SetPasswordBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ChangeLoginInfoResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add an AuthKey.
-   * @description Create an AuthKey for a specific user and save it in the database.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the user
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the added authkey
-   */
-  auth_keys_add_user_auth_keys__userId__post: {
-    parameters: {
-      path: {
-        userId: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddAuthKeyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        content: {
-          'application/json': components['schemas']['AddAuthKeyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View an AuthKey
-   * @description View an AuthKey by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the authkey
-   *
-   * Output:
-   *
-   * - the authkey
-   */
-  auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get: {
-    parameters: {
-      path: {
-        AuthKeyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ViewAuthKeysResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Returns AuthKeys.
-   * @description Returns all AuthKeys stored in the database as a List.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - all authkeys as a list
-   */
-  auth_keys_get_auth_keys_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Search for specific AuthKeys.
-   * @description Search for specific AuthKeys by parameters.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the authkeys
-   */
-  search_auth_keys_auth_keys_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SearchAuthKeyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Edit an AuthKey.
-   * @description Edit an AuthKey by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the authkey
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated authkey
-   */
-  auth_keys_edit_auth_key_auth_keys__AuthKeyId__put: {
-    parameters: {
-      path: {
-        AuthKeyId: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditAuthKeyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete given AuthKey.
-   * @description Delete AuthKey by AuthKeyId from the database.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the authkey
-   *
-   * Output:
-   *
-   * - the response from the api after the deleting request
-   */
-  auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete: {
-    parameters: {
-      path: {
-        AuthKeyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View own AuthKeys
-   * @description View own Authkeys.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the user
-   *
-   * Output:
-   *
-   * - the auth keys
-   */
-  auth_keys_view_own_auth_keys_auth_keys_viewOwn_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
-        };
-      };
-    };
-  };
-  /**
-   * View own AuthKeys
-   * @deprecated
-   * @description Deprecated. View own Authkeys by the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the user
-   *
-   * Output:
-   *
-   * - the auth keys
-   */
-  auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Add an AuthKey.
-   * @deprecated
-   * @description Create an AuthKey for a specific user and write it to the database.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the user
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the added authkey
-   */
-  auth_keys_add_user_depr_auth_keys_add__userId__post: {
-    parameters: {
-      path: {
-        userId: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddAuthKeyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        content: {
-          'application/json': components['schemas']['AddAuthKeyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Edit AuthKey
-   * @deprecated
-   * @description Edit AuthKey by AuthKey ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the authkey
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated authkey
-   */
-  auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post: {
-    parameters: {
-      path: {
-        AuthKeyId: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditAuthKeyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete given AuthKey.
-   * @deprecated
-   * @description Delete AuthKey by AuthKeyId from the database.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the authkey
-   *
-   * Output:
-   *
-   * - the response from the api after the deleting request
-   */
-  auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post: {
-    parameters: {
-      path: {
-        AuthKeyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all events
-   * @description Retrieve a list of all events.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - all events as a list
-   */
-  get_all_events_events_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAllEventsResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Add new event
-   * @description Add a new event with the gi ven details.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the new event
-   */
-  add_event_events_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddEventBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get event details
-   * @description Retrieve details of a specific event by ist ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the event
-   *
-   * Output:
-   *
-   * - the event details
-   */
-  get_event_details_events__eventId__get: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update an event
-   * @description Update an existing event by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the event
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated event
-   */
-  update_event_events__eventId__put: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditEventBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete an event
-   * @description Delete an attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * Output:
-   *
-   * - the deleted event
-   */
-  delete_event_events__eventId__delete: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Search events
-   * @description Search for events based on various filters.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the searched events
-   */
-  rest_search_events_events_restSearch_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SearchEventsBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['PartialSearchEventsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Search events
-   * @description Search for events based on various filters, which are more general than the ones in 'rest search'.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the searched events
-   */
-  index_events_events_index_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['IndexEventsBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['IndexEventsAttributes'][];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Publish an event
-   * @description Publish an event by ist ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the request
-   *
-   * Output:
-   *
-   * - the published event
-   */
-  publish_event_events_publish__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['PublishEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Unpublish an event
-   * @description Unpublish an event by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the request
-   *
-   * Output:
-   *
-   * - the unpublished event
-   */
-  unpublish_event_events_unpublish__eventId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UnpublishEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add tag to event
-   * @description Add a tag to an attribute by their ids.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the tag id
-   *
-   * - local
-   *
-   * Output:
-   *
-   * - the result of adding the tag to the event given by the api
-   */
-  add_tag_to_event_events_addTag__eventId___tagId__local__local__post: {
-    parameters: {
-      path: {
-        eventId: string;
-        tagId: string;
-        local: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Remove tag of event
-   * @description Remove a tag to from an event by their id.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the tag id
-   *
-   * Output:
-   *
-   * - the result of removing the tag from the event given by the api
-   */
-  remove_tag_from_event_events_removeTag__eventId___tagId__post: {
-    parameters: {
-      path: {
-        eventId: string;
-        tagId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * start the freetext import process via worker
-   * @description Starts the freetext import process by submitting the freetext to the worker.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the body of the freetext
-   *
-   * Output:
-   *
-   * - dict
-   */
-  start_freeTextImport_events_freeTextImport_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddAttributeViaFreeTextImportEventBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['FreeTextProcessID'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Start the freetext import process via worker
-   * @description Adds the Attributes the user has selected
-   *
-   * Input:
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the selected Attributes
-   *
-   * Output:
-   *
-   * - the processed data to be viewed and selected by the user
-   */
-  start_freetext_import_events_freeTextImport__eventID__post: {
-    parameters: {
-      path: {
-        eventID: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ProcessFreeTextResponse'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddAttributeViaFreeTextImportEventResponse'][];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add new event (Deprecated)
-   * @deprecated
-   * @description Deprecated. Add a new event with the given details.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the new event
-   */
-  add_event_depr_events_add_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddEventBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get event details (Deprecated)
-   * @deprecated
-   * @description Deprecated. Retrieve details of a specific attribute by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * Output:
-   *
-   * - the event details
-   */
-  get_event_details_depr_events_view__eventId__get: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update an event (Deprecated)
-   * @deprecated
-   * @description Deprecated. Update an existing event by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated event
-   */
-  update_event_depr_events_edit__eventId__put: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditEventBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddEditGetEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete an event (Deprecated)
-   * @deprecated
-   * @description Deprecated. Delete an existing event by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * Output:
-   *
-   * - the deleted event
-   */
-  delete_event_depr_events_delete__eventId__delete: {
-    parameters: {
-      path: {
-        eventId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteEventResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all feeds
+   * Get Feeds
    * @description Retrieve a list of all feeds.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - all feeds as a list
+   * Returns:
+   *   all feeds as a list
    */
   get_feeds_feeds_get: {
     responses: {
@@ -13274,20 +11864,16 @@ export interface operations {
     };
   };
   /**
-   * Add new feed
+   * Add Feed
    * @description Add a new feed with given details.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   body: the request body
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the new feed
+   * Returns:
+   *   the new feed
    */
   add_feed_feeds_post: {
     requestBody: {
@@ -13311,20 +11897,37 @@ export interface operations {
     };
   };
   /**
-   * Cache feeds
+   * Get Feeds
+   * @description Retrieve a list of all feeds.
+   *
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *
+   * Returns:
+   *   all feeds as a list
+   */
+  get_feeds_feeds_index_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['FeedResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Cache Feeds
    * @description Cache feeds based on a specific scope. NOT YET AVAILABLE!
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   cache_feeds_scope: the cache feeds scope
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the cache feeds scope
-   *
-   * Output:
-   *
-   * - the cache feeds
+   * Returns:
+   *   the cache feeds
    */
   cache_feeds_feeds_cache_feeds__cacheFeedsScope__post: {
     parameters: {
@@ -13348,20 +11951,16 @@ export interface operations {
     };
   };
   /**
-   * Fetch from feed
+   * Fetch From Feed
    * @description Fetch data from a specific feed by its ID. NOT YET AVAILABLE!
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the fetched feed data
+   * Returns:
+   *   the fetched feed data
    */
   fetch_from_feed_feeds_fetch_from_feed__feedId__get: {
     parameters: {
@@ -13385,20 +11984,16 @@ export interface operations {
     };
   };
   /**
-   * Get feed details
+   * Get Feed Details
    * @description Retrieve details of a specific feed by its ID.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the details of a feed
+   * Returns:
+   *   the details of a feed
    */
   get_feed_details_feeds__feedId__get: {
     parameters: {
@@ -13422,22 +12017,17 @@ export interface operations {
     };
   };
   /**
-   * Update feed
+   * Update Feed
    * @description Update an existing feed by its ID.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
+   *   body: the request body
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated feed
+   * Returns:
+   *   the updated feed
    */
   update_feed_feeds__feedId__put: {
     parameters: {
@@ -13466,23 +12056,18 @@ export interface operations {
     };
   };
   /**
-   * Toggle feed status
+   * Toggle Feed
    * @description Toggle the status of a feed between enabled and disabled.
    *
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
+   *   body: the request body
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the new status of the feed
+   * Returns:
+   *   the new status of the feed
    */
   toggle_feed_feeds__feedId__patch: {
     parameters: {
@@ -13511,18 +12096,15 @@ export interface operations {
     };
   };
   /**
-   * Fetch from all feeds
+   * Fetch Data From All Feeds
    * @description Fetch data from all available feeds. NOT YET AVAILABLE!
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - the fetched data of all available feeds
+   * Returns:
+   *   the fetched data of all available feeds
    */
   fetch_data_from_all_feeds_feeds_fetch_from_all_feeds_get: {
     responses: {
@@ -13535,21 +12117,17 @@ export interface operations {
     };
   };
   /**
-   * Add new feed (Deprecated)
+   * Add Feed Depr
    * @deprecated
    * @description Deprecated. Add a new feed with given details using the old route.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   body: the request body
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the added feed
+   * Returns:
+   *   the added feed
    */
   add_feed_depr_feeds_add_post: {
     requestBody: {
@@ -13573,21 +12151,17 @@ export interface operations {
     };
   };
   /**
-   * Enable feed (Deprecated)
+   * Enable Feed
    * @deprecated
    * @description Deprecated. Enable a specific feed by its ID using the old route.
    *
-   * Input:
+   * Args:
+   *   auth: user's authentification status
+   *   db: current database
+   *   feed_id: feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the the enabled feed
+   * Returns:
+   *   the the enabled feed
    */
   enable_feed_feeds_enable__feedId__post: {
     parameters: {
@@ -13611,21 +12185,17 @@ export interface operations {
     };
   };
   /**
-   * Disable feed (Deprecated)
+   * Disable Feed
    * @deprecated
    * @description Deprecated. Disable a specific feed by its ID using the old route.
    *
-   * Input:
+   * Args:
+   *   the user's authentification status
+   *   the current database
+   *   the feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the disabled feed
+   * Returns:
+   *   the disabled feed
    */
   disable_feed_feeds_disable__feedId__post: {
     parameters: {
@@ -13649,21 +12219,17 @@ export interface operations {
     };
   };
   /**
-   * Cache feeds
+   * Cache Feeds Depr
    * @deprecated
    * @description Cache feeds based on a specific scope.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   cache_feeds_scope: the cache feeds scope
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the cache feeds scope
-   *
-   * Output:
-   *
-   * - the feed cache
+   * Returns:
+   *   the feed cache
    */
   cache_feeds_depr_feeds_cacheFeeds__cacheFeedsScope__post: {
     parameters: {
@@ -13691,17 +12257,13 @@ export interface operations {
    * @deprecated
    * @description Deprecated. Fetch data from a specific feed by its ID using the old route.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the fetched feed data
+   * Returns:
+   *  the fetched feed data
    */
   fetch_from_feed_depr_feeds_fetchFromFeed__feedId__post: {
     parameters: {
@@ -13725,20 +12287,16 @@ export interface operations {
     };
   };
   /**
-   * Fetch from all feeds (Deprecated)
+   * Fetch Data From All Feeds Depr
    * @deprecated
    * @description Deprecated. Fetch data from all available feeds using the old route.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   *
-   * Output:
-   *
-   * - the fetched data of all feeds
+   * Returns:
+   *   the fetched data of all feeds
    */
   fetch_data_from_all_feeds_depr_feeds_fetchFromAllFeeds_post: {
     responses: {
@@ -13751,21 +12309,17 @@ export interface operations {
     };
   };
   /**
-   * Get feed details (Deprecated)
+   * Get Feed Details Depr
    * @deprecated
    * @description Deprecated. Retrieve details of a specific feed by its ID using the old route.
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * Output:
-   *
-   * - the details of the feed
+   * Returns:
+   *   the details of the feed
    */
   get_feed_details_depr_feeds_view__feedId__get: {
     parameters: {
@@ -13789,24 +12343,19 @@ export interface operations {
     };
   };
   /**
-   * Update feed (Deprecated)
+   * Update Feed Depr
    * @deprecated
    * @description Deprecated. Update an existing feed by its ID using the old route.
    *
    *
-   * Input:
+   * Args:
+   *   auth: the user's authentification status
+   *   db: the current database
+   *   feed_id: the feed id
+   *   body: the request body
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the feed id
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the updated feed
+   * Returns:
+   *   the updated feed
    */
   update_feed_depr_feeds_edit__feedId__put: {
     parameters: {
@@ -13835,156 +12384,30 @@ export interface operations {
     };
   };
   /**
-   * Get Galaxy Details
-   * @description "Gets the details of a galaxy.
+   * Add new user
+   * @description Adds a new user with the given details.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - Data representing the new user to be added
    *
-   * - the current database
-   *
-   * - the galaxy id
+   * - The current database
    *
    * Output:
    *
-   * - the details of the galaxy
+   * - Data representing the attributes of the new user
    */
-  get_galaxy_details_galaxies__galaxyId__get: {
-    parameters: {
-      path: {
-        galaxyId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetGalaxyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete a galaxy
-   * @description "Delete a specific galaxy by its Id.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the galaxy id
-   *
-   * - the request
-   *
-   * Output:
-   *
-   * - the deleted galaxy
-   */
-  delete_galaxy_galaxies__galaxyId__delete: {
-    parameters: {
-      path: {
-        galaxyId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update galaxies
-   * @description Force the galaxies to update with the JSON definitions, not yet implemented.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - the updated galaxies
-   */
-  update_galaxy_galaxies_update_post: {
-    responses: {
-      /** @description Successful Response */
-      501: {
-        content: {
-          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all galaxies
-   * @description Get a list with all existing galaxies.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * Output:
-   *
-   * - all galaxies
-   */
-  get_galaxies_galaxies_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Search galaxies
-   * @description Search galaxies by search term which matches with galaxy name, namespace, description, kill_chain_order or uuid."
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the galaxies found by search
-   */
-  search_galaxies_galaxies_post: {
+  add_user_users_post: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['SearchGalaxiesbyValue'];
+        'application/json': components['schemas']['AddUserBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
+          'application/json': components['schemas']['AddUserResponse'];
         };
       };
       /** @description Validation Error */
@@ -13996,33 +12419,96 @@ export interface operations {
     };
   };
   /**
-   * View Galaxy by ID.
-   * @deprecated
-   * @description View Galaxy by given Galaxy ID.
+   * Get Logged In User Info
+   * @description Retrieves information about the logged in user.
    *
    * Input:
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the galaxy id
+   * - Authentication details of the logged in user
    *
    * Output:
    *
-   * - the details of the galaxy
+   * - Information about the logged in user
    */
-  get_galaxy_details_depr_galaxies_view__galaxyId__get: {
+  get_logged_in_user_info_users_view_me_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PartialGetUsersElement'];
+        };
+      };
+    };
+  };
+  /**
+   * Get Logged In User Info
+   * @description Retrieves information about the logged in user.
+   *
+   * Input:
+   *
+   * - Authentication details of the logged in user
+   *
+   * Output:
+   *
+   * - Information about the logged in user
+   */
+  get_logged_in_user_info_users_view_me_json_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PartialGetUsersElement'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all users
+   * @description Retrieves a list of all users.
+   *
+   * Input:
+   *
+   * - None
+   *
+   * Output:
+   *
+   * - List containing all users
+   */
+  get_all_users_users_view_all_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetUsersElement'][];
+        };
+      };
+    };
+  };
+  /**
+   * Get a user by id
+   * @description Retrieves a user specified by id.
+   *
+   * Input:
+   *
+   * - ID of the user to get
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Data representing the attributes of the searched user
+   */
+  get_user_by_id_users_view__userId__get: {
     parameters: {
       path: {
-        galaxyId: string;
+        userId: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['GetGalaxyResponse'];
+          'application/json': components['schemas']['GetUsersElement'];
         };
       };
       /** @description Validation Error */
@@ -14034,346 +12520,24 @@ export interface operations {
     };
   };
   /**
-   * Delete Galaxy by ID
-   * @deprecated
-   * @description Delete Galaxy by GalaxyID.
+   * Delete a user
+   * @description Deletes a user by their ID.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - ID of the user to delete
    *
-   * - the current database
+   * - auth: Authentication details of the current user
    *
-   * - the galaxy id
-   *
-   * - the request
+   * - The current database
    *
    * Output:
-   *
-   * - the deleted galaxy
+   * - StandardStatusIdentifiedResponse: Response indicating success or failure
    */
-  delete_galaxy_depr_galaxies_delete__galaxyId__delete: {
+  delete_user_users__user_id__delete: {
     parameters: {
       path: {
-        galaxyId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add new galaxy cluster
-   * @description Add a new galaxy cluster to an existing galaxy.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the request body
-   *
-   * - the request
-   *
-   * Output:
-   *
-   * - the new galaxy cluster
-   */
-  import_galaxy_cluster_galaxies_import_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ImportGalaxyBody'][];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Gets information from a galaxy cluster
-   * @description Returns information from a galaxy cluster selected by its id.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the galaxy id
-   *
-   * Output:
-   *
-   * - the information of the galaxy cluster
-   */
-  get_galaxy_cluster_galaxies_clusters__clusterID__get: {
-    parameters: {
-      path: {
-        clusterID: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetGalaxyClusterResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Export galaxy cluster
-   * @description Export galaxy cluster.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the galaxy id
-   *
-   * - the request body
-   *
-   * Output:
-   *
-   * - the exported galaxy cluster
-   */
-  export_galaxy_galaxies_export__galaxyId__post: {
-    parameters: {
-      path: {
-        galaxyId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ExportGalaxyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ExportGalaxyClusterResponse'][];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Attach Cluster to Galaxy.
-   * @description Attach a Galaxy Cluster to given Galaxy.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the attach target
-   *
-   * - the type of the attach target
-   *
-   * - the request body
-   *
-   * - local
-   *
-   * Output:
-   *
-   * - the attached galaxy cluster and the attach target
-   */
-  galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post: {
-    parameters: {
-      path: {
-        attachTargetId: string;
-        attachTargetType: string;
-        local: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AttachClusterGalaxyBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AttachClusterGalaxyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Gets information from a galaxy cluster
-   * @deprecated
-   * @description Deprecated
-   * Returns information from a galaxy cluster selected by its id.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the galaxy id
-   *
-   * Output:
-   *
-   * - the information of the galaxy cluster
-   */
-  get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get: {
-    parameters: {
-      path: {
-        galaxyClusterId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetGalaxyClusterResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get Job
-   * @description Gets a job.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the id
-   *
-   * Output:
-   *
-   * - dict
-   */
-  get_job_jobs__id__get: {
-    parameters: {
-      path: {
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': Record<string, never>;
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get noticelist details
-   * @description Retrieve details of a specific noticelist by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the notice list id
-   *
-   * Output:
-   *
-   * - the details of the notice list
-   */
-  get_noticelist_noticelists__noticelistId__get: {
-    parameters: {
-      path: {
-        noticelistId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['NoticelistResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Post Toggleenable Noticelist
-   * @description Disable/Enable a specific noticelist by its ID.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the notice list id
-   *
-   * Output:
-   *
-   * - the enabled/disabled notice list
-   */
-  post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post: {
-    parameters: {
-      path: {
-        noticelistId: number;
+        user_id: string;
       };
     };
     responses: {
@@ -14392,81 +12556,30 @@ export interface operations {
     };
   };
   /**
-   * Get all noticelists
-   * @description Retrieve a list of all noticelists.
+   * Delete a users login token
+   * @description Deletes a users login token by their ID.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - ID of the user with the token to delete
    *
-   * - the current database
-   *
-   * Output:
-   *
-   * - all notice lists as a list
-   */
-  get_all_noticelists_noticelists_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetAllNoticelists'][];
-        };
-      };
-    };
-  };
-  /**
-   * Update noticelists
-   * @description Update all noticelists.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
+   * - The current database
    *
    * Output:
    *
-   * - all updated notice lists
+   * - Response indicating success or failure
    */
-  update_noticelists_noticelists_put: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Get noticelist details (Deprecated)
-   * @deprecated
-   * @description Deprecated. Retrieve details of a specific noticelist by its ID using the old route.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the id of the notice list
-   *
-   * Output:
-   *
-   * - the details of the notice list
-   */
-  get_noticelist_depr_noticelists_view__noticelistId__get: {
+  delete_user_token_users_tokens__userId__delete: {
     parameters: {
       path: {
-        noticelistId: number;
+        userId: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['NoticelistResponse'];
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */
@@ -14478,67 +12591,37 @@ export interface operations {
     };
   };
   /**
-   * Update noticelists (Deprecated)
-   * @deprecated
-   * @description Deprecated. Update all noticelists.
+   * Update a user
+   * @description Updates an existing user by their ID.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - ID of the user to update
    *
-   * - the current database
+   * - Updated data for the user
    *
-   * Output:
-   *
-   * - all updated notice lists
-   */
-  update_noticelist_depr_noticelists_update_post: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Add object to event
-   * @description Add a new object to a specific event using a template.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the event id
-   *
-   * - the object template id
-   *
-   * - the request body
+   * - The current database
    *
    * Output:
    *
-   * - the added object
+   * - Data representing the updated attributes of the user
    */
-  add_object_objects__eventId___objectTemplateId__post: {
+  update_user_users__userId__put: {
     parameters: {
       path: {
-        eventId: number;
-        objectTemplateId: number;
+        userId: string;
       };
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['ObjectCreateBody'];
+        'application/json': components['schemas']['UserAttributesBody'];
       };
     };
     responses: {
       /** @description Successful Response */
-      201: {
+      200: {
         content: {
-          'application/json': components['schemas']['ObjectResponse'];
+          'application/json': components['schemas']['UserWithName'];
         };
       };
       /** @description Validation Error */
@@ -14550,32 +12633,31 @@ export interface operations {
     };
   };
   /**
-   * Search objects
-   * @description Search for objects based on various filters.
+   * Add new user
+   * @deprecated
+   * @description Adds a new user with the given details.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - Data representing the new user to be added
    *
-   * - the current database
-   *
-   * - the request body
+   * - The current database
    *
    * Output:
    *
-   * - the objects found by search
+   * - Data representing the attributes of the new user
    */
-  restsearch_objects_restsearch_post: {
+  add_user_deprecated_admin_users_add_post: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['ObjectSearchBody'];
+        'application/json': components['schemas']['AddUserBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ObjectSearchResponse'];
+          'application/json': components['schemas']['AddUserResponse'];
         };
       };
       /** @description Validation Error */
@@ -14587,120 +12669,38 @@ export interface operations {
     };
   };
   /**
-   * View object details
-   * @description View details of a specific object including its attributes and related event.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the object id
-   *
-   * Output:
-   *
-   * - the details of the object
-   */
-  get_object_details_objects__objectId__get: {
-    parameters: {
-      path: {
-        objectId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ObjectResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete object
-   * @description Delete a specific object. The hardDelete parameter determines if it's a hard or soft delete.
-   *
-   * Input:
-   *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the object id
-   *
-   * - hard delete
-   *
-   * Output:
-   *
-   * - the deleted object
-   */
-  delete_object_objects__objectId___hardDelete__delete: {
-    parameters: {
-      path: {
-        objectId: number;
-        hardDelete: boolean;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add object to event (Deprecated)
+   * Update a user
    * @deprecated
-   * @description Deprecated. Add an object to an event using the old route.
+   * @description Deprecated. Updates an existing user using the old route.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - ID of the user to update
    *
-   * - the current database
+   * - Updated data for the user
    *
-   * - the event id
-   *
-   * - the object template id
-   *
-   * - the request body
+   * - The current database
    *
    * Output:
    *
-   * - the added object
+   * - Data representing the updated attributes of the user
    */
-  add_object_depr_objects_add__eventId___objectTemplateId__post: {
+  update_user_depr_admin_users_edit__userId__put: {
     parameters: {
       path: {
-        eventId: number;
-        objectTemplateId: number;
+        userId: string;
       };
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['ObjectCreateBody'];
+        'application/json': components['schemas']['UserAttributesBody'];
       };
     };
     responses: {
       /** @description Successful Response */
-      201: {
+      200: {
         content: {
-          'application/json': components['schemas']['ObjectResponse'];
+          'application/json': components['schemas']['UserWithName'];
         };
       };
       /** @description Validation Error */
@@ -14712,33 +12712,31 @@ export interface operations {
     };
   };
   /**
-   * View object details (Deprecated)
+   * Get a user by id
    * @deprecated
-   * @description Deprecated. View details of a specific object using the old route.
+   * @description Deprecated. Retrieves a user specified by id with the old route.
    *
    * Input:
    *
-   * - the user's authentification status
+   * - ID of the user to get
    *
-   * - the current database
-   *
-   * - the object id
+   * - The current database
    *
    * Output:
    *
-   * - the details of the object
+   * - Data representing the attributes of the searched user
    */
-  get_object_details_depr_objects_view__objectId__get: {
+  get_user_by_id_depr_admin_users_view__userId__get: {
     parameters: {
       path: {
-        objectId: number;
+        userId: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ObjectResponse'];
+          'application/json': components['schemas']['GetUsersElement'];
         };
       };
       /** @description Validation Error */
@@ -14750,37 +12748,55 @@ export interface operations {
     };
   };
   /**
-   * Delete object (Deprecated)
+   * Get all users
    * @deprecated
-   * @description Deprecated. Delete a specific object using the old route.
-   * The hardDelete parameter determines if it's a hard or soft delete.
+   * @description Retrieves a list of all users.
    *
    * Input:
    *
-   * - the user's authentification status
-   *
-   * - the current database
-   *
-   * - the object id
-   *
-   * - hard delete
+   * - None
    *
    * Output:
    *
-   * - the deleted object
+   * - List containing all users
    */
-  delete_object_depr_objects_delete__objectId___hardDelete__delete: {
+  get_all_users_deprecated_admin_users_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetUsersElement'][];
+        };
+      };
+    };
+  };
+  /**
+   * Delete a user
+   * @deprecated
+   * @description Deprecated. Deletes a user by their ID with the old route.
+   *
+   * Input:
+   *
+   * - ID of the user to delete
+   *
+   * - auth: Authentication details of the current user
+   *
+   * - The current database
+   *
+   * Output:
+   * - StandardStatusIdentifiedResponse: Response indicating success or failure
+   */
+  delete_user_depr_admin_users_delete__userId__delete: {
     parameters: {
       path: {
-        objectId: number;
-        hardDelete: boolean;
+        userId: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
         };
       };
       /** @description Validation Error */
@@ -14986,157 +13002,8 @@ export interface operations {
     };
   };
   /**
-   * Get all roles
-   * @description Get all roles and their details.
-   *
-   * Input:
-   *
-   * - Authentification details of the logged in user.
-   *
-   * Output:
-   *
-   * - Information about all roles.
-   */
-  get_all_roles_roles_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['RoleAttributeResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Requests a list of all remote servers
-   * @description Returns a list of all currently active remote servers.
-   *
-   * Input:
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - List of remote servers
-   */
-  get_remote_servers_servers_remote_getAll_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetRemoteServersResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Requests information regarding a remote server
-   * @description Returns information for a specific remote server chosen by its id.
-   *
-   * Input:
-   *
-   * - serverId: the server's ID
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - server information regarding the chosen server
-   */
-  get_remote_server_by_id_servers_remote__serverId__get: {
-    parameters: {
-      path: {
-        serverId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetRemoteServersResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Adds a new remote server to the list
-   * @description Adds a new remote server based on the input of an admin.
-   *
-   * Input:
-   *
-   * - Data containing details of the remote server to be added
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Response indicating the result of the server addition operation
-   */
-  add_remote_server_servers_remote_add_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddServer'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddServerResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Deletes a remote server by id
-   * @description Deletes a remote server if the given id is valid.
-   *
-   * Input:
-   *
-   * - Identifier of the remote server to be deleted
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Response indicating the result of the server deletion operation
-   */
-  delete_remote_server_servers_remote_delete__server_id__delete: {
-    parameters: {
-      path: {
-        server_id: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get Version
-   * @description Gets the Version of the server.
+   * Add a new warninglist
+   * @description Add a new warninglist with given details.
    *
    * Input:
    *
@@ -15144,55 +13011,60 @@ export interface operations {
    *
    * - db: Database session
    *
-   *  Output:
+   * - body: CreateWarninglistBody, Data for creating the new warninglist
    *
-   * - Version of the server
-   * - Permissions for sync, sighting, and galaxy editor
-   * - Request encoding
-   * - Filter sightings flag
+   * Output:
+   *
+   * - WarninglistResponse: Response with details of the new warninglist
    */
-  get_version_servers_getVersion_get: {
+  add_warninglist_warninglists_new_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateWarninglistBody'];
+      };
+    };
     responses: {
       /** @description Successful Response */
-      200: {
+      201: {
         content: {
-          'application/json': Record<string, never>;
+          'application/json': components['schemas']['WarninglistResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
   };
   /**
-   * Edits remote servers by org id
-   * @description Edits servers given by org_id.
+   * Get warninglist details
+   * @description Retrieve details of a specific warninglist by its ID.
    *
    * Input:
-   *
-   * - org_id
-   *
-   * - The current database
    *
    * - auth: Authentication details
    *
+   * - db: Database session
+   *
+   * - warninglist_id: ID of the warninglist to fetch
+   *
    * Output:
    *
-   * - Updated servers as a list
+   * - WarninglistResponse: Response with details of the searched warninglist
    */
-  update_remote_server_servers_remote_edit__org_Id__post: {
+  get_warninglist_details_warninglists__warninglistId__get: {
     parameters: {
       path: {
-        org_Id: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['EditServer'];
+        warninglistId: number;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['GetRemoteServersResponse'][];
+          'application/json': components['schemas']['WarninglistResponse'];
         };
       };
       /** @description Validation Error */
@@ -15204,61 +13076,277 @@ export interface operations {
     };
   };
   /**
-   * Requests a list of all remote servers
-   * @deprecated
-   * @description Deprecated
-   * Returns a list of all currently active remote servers.
+   * Disable/Enable warninglist
+   * @description Disable/Enable a specific warninglist by its ID or name.
    *
    * Input:
    *
-   * - The current database
+   * - auth: Authentication details
+   *
+   * - db:Database session
+   *
+   * - body: ToggleEnableWarninglistsBody, Data to toggle enable status of the warninglist
    *
    * Output:
    *
-   * - List of remote servers
+   * - ToggleEnableWarninglistsResponse: Response showing success or failure
    */
-  get_remote_servers_depr_servers__get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetRemoteServersResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Adds a new remote server to the list
-   * @deprecated
-   * @description Adds a new remote server based on the input of an admin.
-   *
-   * Input:
-   *
-   * - Data containing details of the remote server to be added
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Response indicating the result of the server addition operation
-   */
-  add_remote_server_depr_servers_add_post: {
+  post_toggleEnable_warninglists_toggleEnable_post: {
     requestBody: {
       content: {
-        'application/json': components['schemas']['AddServer'];
+        'application/json': components['schemas']['ToggleEnableWarninglistsBody'];
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['AddServerResponse'];
+          'application/json': components['schemas']['ToggleEnableWarninglistsResponse'];
         };
       };
       /** @description Validation Error */
       422: {
         content: {
           'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete warninglist
+   * @description Delete a specific warninglist.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - warninglist_id: ID of the warninglist to delete
+   *
+   * Output:
+   *
+   * - WarninglistResponse: Response showing success or failure
+   */
+  delete_warninglist_warninglists__id__delete: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['WarninglistResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all warninglists, or selected ones by value and status
+   * @description Receive a list of all warning lists, or when setting the path parameters value and enabled, receive a         list of warninglists for which the value matches either the name, description, or type and enabled matches         given parameter.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - value: str | None, Search term for filtering by value
+   *
+   * - enabled: bool | None, Status filter (enabled or disabled)
+   *
+   * Output:
+   *
+   * - GetSelectedAllWarninglistsResponse: Response containing filtered or all warninglists
+   */
+  get_all_or_selected_warninglists_warninglists_get: {
+    parameters: {
+      query?: {
+        value?: string;
+        enabled?: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update warninglists
+   * @description Update all warninglists.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Response indicating success or failure
+   */
+  update_all_warninglists_warninglists_put: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get selected warninglists (Deprecated)
+   * @deprecated
+   * @description Retrieve a list of warninglists, which match given search terms using the old route.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - body: GetSelectedWarninglistsBody, Data for filtering warninglists
+   *
+   * Output:
+   *
+   * - GetSelectedAllWarninglistsResponse: Response containing filtered warninglists
+   */
+  search_warninglists_warninglists_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GetSelectedWarninglistsBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get a list of ID and name of enabled warninglists
+   * @description Retrieve a list of ID and name of enabled warninglists,         which match has the given search term as entry.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - body: CheckValueWarninglistsBody, Data for searching warninglists by value
+   *
+   * Output:
+   *
+   * - CheckValueResponse | dict: Response with searched warninglists
+   */
+  get_warninglists_by_value_warninglists_checkValue_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CheckValueWarninglistsBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['CheckValueResponse'] | Record<string, never>;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get warninglist details (Deprecated)
+   * @deprecated
+   * @description Deprecated. Retrieve details of a specific warninglist by its ID using the old route.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - warninglist_id: ID of the warninglist to fetch
+   *
+   * Output:
+   *
+   * - WarninglistResponse: Response with details of the searched warninglist
+   */
+  get_warninglist_details_depr_warninglists_view__warninglistId__get: {
+    parameters: {
+      path: {
+        warninglistId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['WarninglistResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update warninglists (Deprecated)
+   * @deprecated
+   * @description Deprecated. Update all warninglists.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Response indicating success or failure
+   */
+  update_all_warninglists_depr_warninglists_update_post: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
     };
@@ -15985,6 +14073,2513 @@ export interface operations {
     };
   };
   /**
+   * Get all roles
+   * @description Get all roles and their details.
+   *
+   * Input:
+   *
+   * - Authentification details of the logged in user.
+   *
+   * Output:
+   *
+   * - Information about all roles.
+   */
+  get_all_roles_roles_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetRolesResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Add object to event
+   * @description Add a new object to a specific event using a template.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the object template id
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the added object
+   */
+  add_object_objects__eventId___objectTemplateId__post: {
+    parameters: {
+      path: {
+        eventId: number;
+        objectTemplateId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ObjectCreateBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        content: {
+          'application/json': components['schemas']['ObjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Search objects
+   * @description Search for objects based on various filters.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the objects found by search
+   */
+  restsearch_objects_restsearch_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ObjectSearchBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ObjectSearchResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View object details
+   * @description View details of a specific object including its attributes and related event.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the object id
+   *
+   * Output:
+   *
+   * - the details of the object
+   */
+  get_object_details_objects__objectId__get: {
+    parameters: {
+      path: {
+        objectId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ObjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete object
+   * @description Delete a specific object. The hardDelete parameter determines if it's a hard or soft delete.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the object id
+   *
+   * - hard delete
+   *
+   * Output:
+   *
+   * - the deleted object
+   */
+  delete_object_objects__objectId___hardDelete__delete: {
+    parameters: {
+      path: {
+        objectId: number;
+        hardDelete: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add object to event (Deprecated)
+   * @deprecated
+   * @description Deprecated. Add an object to an event using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the object template id
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the added object
+   */
+  add_object_depr_objects_add__eventId___objectTemplateId__post: {
+    parameters: {
+      path: {
+        eventId: number;
+        objectTemplateId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ObjectCreateBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        content: {
+          'application/json': components['schemas']['ObjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View object details (Deprecated)
+   * @deprecated
+   * @description Deprecated. View details of a specific object using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the object id
+   *
+   * Output:
+   *
+   * - the details of the object
+   */
+  get_object_details_depr_objects_view__objectId__get: {
+    parameters: {
+      path: {
+        objectId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ObjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete object (Deprecated)
+   * @deprecated
+   * @description Deprecated. Delete a specific object using the old route.
+   * The hardDelete parameter determines if it's a hard or soft delete.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the object id
+   *
+   * - hard delete
+   *
+   * Output:
+   *
+   * - the deleted object
+   */
+  delete_object_depr_objects_delete__objectId___hardDelete__delete: {
+    parameters: {
+      path: {
+        objectId: number;
+        hardDelete: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Requests a list of all remote servers
+   * @description Returns a list of all currently active remote servers.
+   *
+   * Input:
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - List of remote servers
+   */
+  get_remote_servers_servers_remote_getAll_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetRemoteServer'][];
+        };
+      };
+    };
+  };
+  /**
+   * Requests information regarding a remote server
+   * @description Returns information for a specific remote server chosen by its id.
+   *
+   * Input:
+   *
+   * - serverId: the server's ID
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - server information regarding the chosen server
+   */
+  get_remote_server_by_id_servers_remote__serverId__get: {
+    parameters: {
+      path: {
+        serverId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetRemoteServer'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Adds a new remote server to the list
+   * @description Adds a new remote server based on the input of an admin.
+   *
+   * Input:
+   *
+   * - Data containing details of the remote server to be added
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Response indicating the result of the server addition operation
+   */
+  add_remote_server_servers_remote_add_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddServer'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddServerResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Deletes a remote server by id
+   * @description Deletes a remote server if the given id is valid.
+   *
+   * Input:
+   *
+   * - Identifier of the remote server to be deleted
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - Response indicating the result of the server deletion operation
+   */
+  delete_remote_server_servers_remote_delete__server_id__delete: {
+    parameters: {
+      path: {
+        server_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get Version
+   * @description Gets the Version of the server.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   *  Output:
+   *
+   * - Version of the server
+   * - Permissions for sync, sighting, and galaxy editor
+   * - Request encoding
+   * - Filter sightings flag
+   */
+  get_version_servers_getVersion_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+    };
+  };
+  /**
+   * Edits remote servers
+   * @description Edits servers given by org_id.
+   *
+   * Input:
+   *
+   * - org_id
+   *
+   * - The current database
+   *
+   * - auth: Authentication details
+   *
+   * Output:
+   *
+   * - Updated servers as a list
+   */
+  update_remote_server_servers_remote_edit__server_id__post: {
+    parameters: {
+      path: {
+        server_id: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditServer'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddServerResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Requests a list of all remote servers
+   * @deprecated
+   * @description Deprecated
+   * Returns a list of all currently active remote servers.
+   *
+   * Input:
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - List of remote servers
+   */
+  get_remote_servers_depr_servers__get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetRemoteServer'][];
+        };
+      };
+    };
+  };
+  /**
+   * Adds a new remote server to the list
+   * @deprecated
+   * @description Adds a new remote server based on the input of an admin.
+   *
+   * Input:
+   *
+   * - Data containing details of the remote server to be added
+   * - The current database
+   *
+   * Output:
+   *
+   * - Response indicating the result of the server addition operation
+   */
+  add_remote_server_depr_servers_add_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddServer'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddServerResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all taxonomies
+   * @description Retrieve a list of all taxonomies.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - list[ViewTaxonomyResponse]: List of taxonomies
+   */
+  get_taxonomies_taxonomies_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ViewTaxonomyResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Update taxonomies
+   * @description Update all taxonomies.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Status response indicating success or failure
+   */
+  update_taxonomies_taxonomies_put: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get taxonomy details
+   * @description Retrieve details of a specific taxonomy by its ID.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - taxonomy_id: ID of the taxonomy to retrieve
+   *
+   * Output:
+   *
+   * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+   */
+  get_taxonomy_details_taxonomies__taxonomyId__get: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get taxonomy inclusive tags and attributes
+   * @description Retrieve details of a specific taxonomy and its tags and attributes by its ID.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - taxonomy_id: ID of the taxonomy to retrieve extended details for
+   *
+   * Output:
+   *
+   * - GetTagTaxonomyResponse: Response containing taxonomy attributes
+   */
+  get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetTagTaxonomyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Export taxonomy
+   * @description Export taxonomy.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - taxonomy_id: ID of the taxonomy to export
+   *
+   * Output:
+   *
+   * - ExportTaxonomyResponse: Response containing exported taxonomy data
+   */
+  export_taxonomy_taxonomies_export__taxonomyId__get: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ExportTaxonomyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Enable taxonomy
+   * @description Enable a specific taxonomy by its ID.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - taxonomy_id: ID of the taxonomy to enable
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Status response indicating success or failure
+   */
+  enable_taxonomy_taxonomies_enable__taxonomyId__post: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Disable taxonomy
+   * @description Disable a specific taxonomy by its ID.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - taxonomy_id: ID of the taxonomy to disable
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Status response indicating success or failure
+   */
+  disable_taxonomies_taxonomies_disable__taxonomyId__post: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update taxonomies
+   * @deprecated
+   * @description Update all taxonomies.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusResponse: Status response indicating success or failure
+   */
+  update_taxonomies_depr_taxonomies_update_post: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get taxonomy details
+   * @deprecated
+   * @description Retrieve details of a specific taxonomy by its ID.
+   *
+   * Input:
+   *
+   * - db: Database session
+   *
+   * - auth: Authentication details
+   *
+   * - taxonomy_id: ID of the taxonomy to get
+   *
+   * Output:
+   *
+   * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
+   */
+  get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get: {
+    parameters: {
+      path: {
+        taxonomyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all events
+   * @description Retrieve a list of all events.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all events as a list
+   */
+  get_all_events_events_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllEventsResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Add new event
+   * @description Add a new event with the gi ven details.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the new event
+   */
+  add_event_events_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddEventBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get event details
+   * @description Retrieve details of a specific event by ist ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the event
+   *
+   * Output:
+   *
+   * - the event details
+   */
+  get_event_details_events__eventId__get: {
+    parameters: {
+      path: {
+        eventId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update an event
+   * @description Update an existing event by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the event
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the updated event
+   */
+  update_event_events__eventId__put: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditEventBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete an event
+   * @description Delete an attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * Output:
+   *
+   * - the deleted event
+   */
+  delete_event_events__eventId__delete: {
+    parameters: {
+      path: {
+        eventId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Search events
+   * @description Search for events based on various filters.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the searched events
+   */
+  rest_search_events_events_restSearch_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchEventsBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PartialSearchEventsResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Search events
+   * @description Search for events based on various filters, which are more general than the ones in 'rest search'.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the searched events
+   */
+  index_events_events_index_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['IndexEventsBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllEventsResponse'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Publish an event
+   * @description Publish an event by ist ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the published event
+   */
+  publish_event_events_publish__eventId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PublishEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Unpublish an event
+   * @description Unpublish an event by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the unpublished event
+   */
+  unpublish_event_events_unpublish__eventId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['UnpublishEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add tag to event
+   * @description Add a tag to an attribute by their ids.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the tag id
+   *
+   * - local
+   *
+   * Output:
+   *
+   * - the result of adding the tag to the event given by the api
+   */
+  add_tag_to_event_events_addTag__eventId___tagId__local__local__post: {
+    parameters: {
+      path: {
+        eventId: string;
+        tagId: string;
+        local: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Remove tag of event
+   * @description Remove a tag to from an event by their id.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the tag id
+   *
+   * Output:
+   *
+   * - the result of removing the tag from the event given by the api
+   */
+  remove_tag_from_event_events_removeTag__eventId___tagId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+        tagId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddRemoveTagEventsResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * start the freetext import process via worker
+   * @description Starts the freetext import process by submitting the freetext to the worker.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the body of the freetext
+   *
+   * Output:
+   *
+   * - dict
+   */
+  start_freeTextImport_events_freeTextImport__eventID__post: {
+    parameters: {
+      path: {
+        eventID: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddAttributeViaFreeTextImportEventBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      307: {
+        content: {
+          'application/json': components['schemas']['FreeTextProcessID'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add new event (Deprecated)
+   * @deprecated
+   * @description Deprecated. Add a new event with the given details.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the new event
+   */
+  add_event_depr_events_add_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddEventBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get event details (Deprecated)
+   * @deprecated
+   * @description Deprecated. Retrieve details of a specific attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * Output:
+   *
+   * - the event details
+   */
+  get_event_details_depr_events_view__eventId__get: {
+    parameters: {
+      path: {
+        eventId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update an event (Deprecated)
+   * @deprecated
+   * @description Deprecated. Update an existing event by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the updated event
+   */
+  update_event_depr_events_edit__eventId__put: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditEventBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddEditGetEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete an event (Deprecated)
+   * @deprecated
+   * @description Deprecated. Delete an existing event by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the event id
+   *
+   * Output:
+   *
+   * - the deleted event
+   */
+  delete_event_depr_events_delete__eventId__delete: {
+    parameters: {
+      path: {
+        eventId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteEventResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get All Open Id Connect Providers Info
+   * @description Fetches all OpenID Connect providers
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   *
+   * Output:
+   * - List of OpenID Connect providers
+   */
+  get_all_open_id_connect_providers_info_auth_openID_getAllOpenIDConnectProvidersInfo_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['IdentityProviderInfo'][];
+        };
+      };
+    };
+  };
+  /**
+   * Get All Open Id Connect Providers
+   * @description Fetches all OpenID Connect providers
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   *
+   * Output:
+   * - List of OpenID Connect providers
+   */
+  get_all_open_id_connect_providers_auth_openID_getAllOpenIDConnectProviders_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetIdentityProviderResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Get Open Id Connect Provider By Id
+   * @description Fetches a single OpenID Connect provider by its ID
+   *
+   * Input:
+   * - Authorization token
+   * - Database session
+   * - Provider ID
+   *
+   * Output:
+   * - OpenID Connect provider details
+   */
+  get_open_id_connect_provider_by_id_auth_openID_getOpenIDConnectProvider__providerId__get: {
+    parameters: {
+      path: {
+        providerId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetIdentityProviderResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add Openid Connect Provider
+   * @description Adds a new OpenID Connect provider
+   *
+   * Input:
+   *
+   * - database
+   *
+   * Output:
+   *
+   * - openID Connect provider
+   */
+  add_openID_Connect_provider_auth_openID_addOpenIDConnectProvider_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['IdentityProviderBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['IdentityProviderInfo'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Edit Openid Connect Provider
+   * @description Edits an OpenID Connect provider
+   *
+   * Input:
+   *
+   * - OpenID Connect provider
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - updated OpenID Connect provider
+   */
+  edit_openID_Connect_provider_auth_openID_editOpenIDConnectProvider__openIDConnectProvider__post: {
+    parameters: {
+      path: {
+        openIDConnectProvider: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['IdentityProviderEditBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Deletes an OpenID Connect Provider by its ID
+   * @description Deletes an OpenID Connect provider
+   *
+   * Input:
+   *
+   * - OpenID Connect provider
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - database
+   */
+  delete_openID_Connect_provider_auth_openID_delete__openIDConnectProvider__delete: {
+    parameters: {
+      path: {
+        openIDConnectProvider: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Start Login
+   * @description Starts the login process.
+   *
+   * Input:
+   *
+   * - the database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - dict
+   */
+  start_login_auth_login_start_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['StartLoginBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StartLoginResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Password Login
+   * @description Login with password.
+   *
+   * Input:
+   *
+   * - the database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the login token
+   */
+  password_login_auth_login_password_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PasswordLoginBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['TokenResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * User sets their password to a new password
+   * @description Sets the password of the user to a new password.
+   *
+   * Input:
+   *
+   * - the database
+   *
+   * Output:
+   *
+   * - the response form the api after the password change request
+   */
+  set_password_auth_login_setOwnPassword_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ChangePasswordBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['TokenResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Redirect To Frontend
+   * @description Redirects to the frontend.
+   *
+   * Input:
+   *
+   * - the database
+   *
+   * - the identity provider id
+   *
+   * - the code
+   *
+   * Output:
+   *
+   * - the redirection
+   */
+  redirect_to_frontend_auth_login_idp__identityProviderName__callback_get: {
+    parameters: {
+      path: {
+        identityProviderName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['IdentityProviderCallbackBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['TokenResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Redirect To Frontend
+   * @description Redirects to the frontend.
+   *
+   * Input:
+   *
+   * - the database
+   *
+   * - the identity provider id
+   *
+   * - the code
+   *
+   * Output:
+   *
+   * - the redirection
+   */
+  redirect_to_frontend_auth_login_idp__identityProviderName__callback_post: {
+    parameters: {
+      path: {
+        identityProviderName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['IdentityProviderCallbackBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['TokenResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Exchange Token Login
+   * @description Login with exchange token.
+   *
+   * Inout:
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the login token
+   */
+  exchange_token_login_auth_login_token_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ExchangeTokenLoginBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['TokenResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Admin sets the password of the user to a new password
+   * @description Set the password of the user to a new password
+   *
+   * Input:
+   *
+   * - the request body
+   *
+   * - The current database
+   *
+   * Output:
+   *
+   * - the response from the api after the password change request
+   */
+  change_password_UserId_auth_setPassword__userId__put: {
+    parameters: {
+      path: {
+        userId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SetPasswordBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ChangeLoginInfoResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get noticelist details
+   * @description Retrieve details of a specific noticelist by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the notice list id
+   *
+   * Output:
+   *
+   * - the details of the notice list
+   */
+  get_noticelist_noticelists__noticelistId__get: {
+    parameters: {
+      path: {
+        noticelistId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['NoticelistResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Post Toggleenable Noticelist
+   * @description Disable/Enable a specific noticelist by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the notice list id
+   *
+   * Output:
+   *
+   * - the enabled/disabled notice list
+   */
+  post_toggleEnable_noticelist_noticelists_toggleEnable__noticelistId__post: {
+    parameters: {
+      path: {
+        noticelistId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all noticelists
+   * @description Retrieve a list of all noticelists.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all notice lists as a list
+   */
+  get_all_noticelists_noticelists_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllNoticelists'][];
+        };
+      };
+    };
+  };
+  /**
+   * Update noticelists
+   * @description Update all noticelists.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all updated notice lists
+   */
+  update_noticelists_noticelists_put: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get noticelist details (Deprecated)
+   * @deprecated
+   * @description Deprecated. Retrieve details of a specific noticelist by its ID using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the notice list
+   *
+   * Output:
+   *
+   * - the details of the notice list
+   */
+  get_noticelist_depr_noticelists_view__noticelistId__get: {
+    parameters: {
+      path: {
+        noticelistId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['NoticelistResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update noticelists (Deprecated)
+   * @deprecated
+   * @description Deprecated. Update all noticelists.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all updated notice lists
+   */
+  update_noticelist_depr_noticelists_update_post: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Add an AuthKey.
+   * @description Create an AuthKey for a specific user and save it in the database.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the user
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the added authkey
+   */
+  auth_keys_add_user_auth_keys__userId__post: {
+    parameters: {
+      path: {
+        userId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddAuthKeyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        content: {
+          'application/json': components['schemas']['AddAuthKeyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View an AuthKey
+   * @description View an AuthKey by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the authkey
+   *
+   * Output:
+   *
+   * - the authkey
+   */
+  auth_keys_view_auth_key_auth_keys_view__AuthKeyId__get: {
+    parameters: {
+      path: {
+        AuthKeyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ViewAuthKeysResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Returns AuthKeys.
+   * @description Returns all AuthKeys stored in the database as a List.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all authkeys as a list
+   */
+  auth_keys_get_auth_keys_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Search for specific AuthKeys.
+   * @description Search for specific AuthKeys by parameters.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the authkeys
+   */
+  search_auth_keys_auth_keys_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchAuthKeyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Edit an AuthKey.
+   * @description Edit an AuthKey by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the authkey
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the updated authkey
+   */
+  auth_keys_edit_auth_key_auth_keys__AuthKeyId__put: {
+    parameters: {
+      path: {
+        AuthKeyId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditAuthKeyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete given AuthKey.
+   * @description Delete AuthKey by AuthKeyId from the database.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the authkey
+   *
+   * Output:
+   *
+   * - the response from the api after the deleting request
+   */
+  auth_keys_delete_auth_key_auth_keys__AuthKeyId__delete: {
+    parameters: {
+      path: {
+        AuthKeyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View own AuthKeys
+   * @description View own Authkeys.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the user
+   *
+   * Output:
+   *
+   * - the auth keys
+   */
+  auth_keys_view_own_auth_keys_auth_keys_viewOwn_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SearchGetAuthKeysResponseItem'][];
+        };
+      };
+    };
+  };
+  /**
+   * View own AuthKeys
+   * @deprecated
+   * @description Deprecated. View own Authkeys by the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the user
+   *
+   * Output:
+   *
+   * - the auth keys
+   */
+  auth_keys_view_own_auth_keys_depr_auth_keys_index__userId__get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SearchGetAuthKeysResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Add an AuthKey.
+   * @deprecated
+   * @description Create an AuthKey for a specific user and write it to the database.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the user
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the added authkey
+   */
+  auth_keys_add_user_depr_auth_keys_add__userId__post: {
+    parameters: {
+      path: {
+        userId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddAuthKeyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        content: {
+          'application/json': components['schemas']['AddAuthKeyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Edit AuthKey
+   * @deprecated
+   * @description Edit AuthKey by AuthKey ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the authkey
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the updated authkey
+   */
+  auth_keys_edit_auth_key_depr_auth_keys_edit__AuthKeyId__post: {
+    parameters: {
+      path: {
+        AuthKeyId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditAuthKeyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['EditAuthKeyResponseCompl'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete given AuthKey.
+   * @deprecated
+   * @description Delete AuthKey by AuthKeyId from the database.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the authkey
+   *
+   * Output:
+   *
+   * - the response from the api after the deleting request
+   */
+  auth_keys_delete_auth_key_depr_auth_keys_delete__AuthKeyId__post: {
+    parameters: {
+      path: {
+        AuthKeyId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
    * Get all sightings
    * @description Retrieve a list of all sightings.
    *
@@ -16309,6 +16904,726 @@ export interface operations {
     };
   };
   /**
+   * Add new galaxy cluster
+   * @description Add a new galaxy cluster to an existing galaxy.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the new galaxy cluster
+   */
+  import_galaxy_cluster_galaxies_import_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ImportGalaxyBody'][];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Gets information from a galaxy cluster
+   * @description Returns information from a galaxy cluster selected by its id.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * Output:
+   *
+   * - the information of the galaxy cluster
+   */
+  get_galaxy_cluster_galaxies_clusters__clusterID__get: {
+    parameters: {
+      path: {
+        clusterID: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GalaxyClusterResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Export galaxy cluster
+   * @description Export galaxy cluster.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the exported galaxy cluster
+   */
+  export_galaxy_galaxies_export__galaxyId__post: {
+    parameters: {
+      path: {
+        galaxyId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ExportGalaxyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ExportGalaxyClusterResponse'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Attach Cluster to Galaxy.
+   * @description Attach a Galaxy Cluster to given Galaxy.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attach target
+   *
+   * - the type of the attach target
+   *
+   * - the request body
+   *
+   * - local
+   *
+   * Output:
+   *
+   * - the attached galaxy cluster and the attach target
+   */
+  galaxies_attachCluster_galaxies_attachCluster__attachTargetId___attachTargetType__local__local__post: {
+    parameters: {
+      path: {
+        attachTargetId: string;
+        attachTargetType: string;
+        local: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AttachClusterGalaxyBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AttachClusterGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Gets information from a galaxy cluster
+   * @deprecated
+   * @description Deprecated
+   * Returns information from a galaxy cluster selected by its id.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * Output:
+   *
+   * - the information of the galaxy cluster
+   */
+  get_galaxy_cluster_view_galaxy_clusters_view__galaxyClusterId__get: {
+    parameters: {
+      path: {
+        galaxyClusterId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GalaxyClusterResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Update galaxy cluster */
+  put_galaxy_cluster_galaxy_clusters_edit__galaxy_cluster_id__put: {
+    parameters: {
+      path: {
+        galaxy_cluster_id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PutGalaxyClusterRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GalaxyClusterResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Add new galaxy cluster */
+  add_galaxy_cluster_galaxy_clusters_add__galaxyId__post: {
+    parameters: {
+      path: {
+        galaxyId: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddGalaxyClusterRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GalaxyClusterResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Set user setting.
+   * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * - user_id: ID of the user for whom setting is to be set
+   *
+   * - user_setting_name: Name of the user setting to
+   *
+   * - body: SetUserSettingBody, Data for setting the user setting
+   *
+   * Output:
+   *
+   * - SetUserSettingResponse: Response indicating success or failure
+   */
+  set_user_settings_user_settings_setSetting_me__userSettingName__post: {
+    parameters: {
+      path: {
+        userSettingName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SetUserSettingBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SetUserSettingResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View UserSetting by ID.
+   * @description Displays a UserSetting by the UserSettingID.
+   *
+   * Input:
+   *
+   * - userSettingId: ID of the user setting to view
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - ViewUserSettingResponse: Response with details of the viewed user setting
+   */
+  view_user_settings_user_settings__userSettingId__get: {
+    parameters: {
+      path: {
+        userSettingId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ViewUserSettingResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Deletes a UserSetting.
+   * @description Deletes UserSetting by UserSetting ID.
+   *
+   * Input:
+   *
+   * - userSettingId: ID of the user setting to delete
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusIdentifiedResponse: Response indicating success or failure
+   */
+  delete_user_settings_user_settings__userSettingId__delete: {
+    parameters: {
+      path: {
+        userSettingId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View UserSetting.
+   * @description Displays a UserSetting by given userID and UserSetting name.
+   *
+   * Input:
+   *
+   * - userId: ID of the user for whom setting is to be viewed
+   *
+   * - userSettingName: Name of the user setting to view
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - ViewUserSettingResponse: Response with details of the viewed user setting
+   */
+  get_user_setting_by_id_user_settings_me__userSettingName__get: {
+    parameters: {
+      path: {
+        userSettingName: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ViewUserSettingResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Displays all UserSettings.
+   * @description Displays all UserSettings.
+   *
+   * Input:
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - list[UserSettingResponse]: List of UserSettingResponse objects
+   */
+  get_user_settings_user_settings_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['UserSettingResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Displays all UserSettings.
+   * @description Displays all UserSettings by specified parameters.
+   *
+   * Input:
+   *
+   * - body: SearchUserSettingBody, Data for searching user settings
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - list[UserSettingResponse]: List of UserSettingResponse objects
+   */
+  search_user_settings_user_settings_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchUserSettingBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['UserSettingResponse'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View UserSetting by ID.
+   * @deprecated
+   * @description Deprecated. View UserSetting by UserSettingID.
+   *
+   * Input:
+   *
+   * - userSettingId: ID of the user setting to view
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - ViewUserSettingResponse: Response with details of the viewed user setting
+   */
+  view_user_settings_depr_user_settings_view__userSettingId__get: {
+    parameters: {
+      path: {
+        userSettingId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ViewUserSettingResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View a UserSetting.
+   * @deprecated
+   * @description Deprecated. View a UserSetting by its userID and UserSetting name.
+   *
+   * Input:
+   *
+   * - userId: ID of the user for whom setting is to be viewed
+   *
+   * - userSettingName: Name of the user setting to view
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - GetUserSettingResponse: Response with details of the viewed user setting
+   */
+  get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get: {
+    parameters: {
+      path: {
+        userId: number;
+        userSettingName: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetUserSettingResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete UserSetting.
+   * @deprecated
+   * @description Deprecated. Delete a UserSetting by specified UserSettingID.
+   *
+   * Input:
+   *
+   * - userSettingId: ID of the user setting to delete
+   *
+   * - auth: Authentication details
+   *
+   * - db: Database session
+   *
+   * Output:
+   *
+   * - StandardStatusIdentifiedResponse: Response indicating success or failure
+   */
+  delete_user_settings_depr_user_settings_delete__userSettingId__delete: {
+    parameters: {
+      path: {
+        userSettingId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * List logs
+   * @description List logs, filter can be applied.
+   *
+   * - **page** the page for pagination
+   * - **limit** the limit for pagination
+   */
+  logs_index_get_logs_index_get: {
+    parameters: {
+      query?: {
+        page?: number;
+        limit?: number;
+        model?: string;
+        action?: string;
+        model_id?: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown[];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * List logs
+   * @description List logs, filter can be applied.
+   *
+   * - **model** the source for the log creation (f.e. 'User', 'Workflow', 'AuthKey', ...)
+   * - **action** the action in which the log was created
+   * - **model_id** the id of the model
+   * - **page** the page for pagination
+   * - **limit** the limit for pagination
+   */
+  logs_index_post_logs_index_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LogsRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown[];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get single log */
+  log_by_id_logs_index__logId__get: {
+    parameters: {
+      path: {
+        logId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get Job
+   * @description Gets a job.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the id
+   *
+   * Output:
+   *
+   * - dict
+   */
+  get_job_jobs__id__get: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
    * Gets a list of all usage-related statistics listed on the website
    * @description Gets all usage statistics as a list.
    *
@@ -16387,6 +17702,890 @@ export interface operations {
       200: {
         content: {
           'application/json': number;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get Galaxy Details
+   * @description "Gets the details of a galaxy.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * Output:
+   *
+   * - the details of the galaxy
+   */
+  get_galaxy_details_galaxies__galaxyId__get: {
+    parameters: {
+      path: {
+        galaxyId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete a galaxy
+   * @description "Delete a specific galaxy by its Id.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the deleted galaxy
+   */
+  delete_galaxy_galaxies__galaxyId__delete: {
+    parameters: {
+      path: {
+        galaxyId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update galaxies
+   * @description Force the galaxies to update with the JSON definitions, not yet implemented.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - the updated galaxies
+   */
+  update_galaxy_galaxies_update_post: {
+    responses: {
+      /** @description Successful Response */
+      501: {
+        content: {
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all galaxies
+   * @description Get a list with all existing galaxies.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * Output:
+   *
+   * - all galaxies
+   */
+  get_galaxies_galaxies_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Search galaxies
+   * @description Search galaxies by search term which matches with galaxy name, namespace, description, kill_chain_order or uuid."
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the request body
+   *
+   * Output:
+   *
+   * - the galaxies found by search
+   */
+  search_galaxies_galaxies_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchGalaxiesbyValue'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllSearchGalaxiesResponse'][];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * View Galaxy by ID.
+   * @deprecated
+   * @description View Galaxy by given Galaxy ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * Output:
+   *
+   * - the details of the galaxy
+   */
+  get_galaxy_details_depr_galaxies_view__galaxyId__get: {
+    parameters: {
+      path: {
+        galaxyId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete Galaxy by ID
+   * @deprecated
+   * @description Delete Galaxy by GalaxyID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the galaxy id
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the deleted galaxy
+   */
+  delete_galaxy_depr_galaxies_delete__galaxyId__delete: {
+    parameters: {
+      path: {
+        galaxyId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteForceUpdateImportGalaxyResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Search attributes
+   * @description Search for attributes based on various filters.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the search body
+   *
+   * Output:
+   *
+   * - the attributes the search finds
+   */
+  rest_search_attributes_attributes_restSearch_post: {
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SearchAttributesBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SearchAttributesResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add new attribute
+   * @description Add a new attribute with the given details.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the event
+   *
+   * - the body for adding an attribute
+   *
+   * Output:
+   *
+   * - the response of the added attribute from the api
+   */
+  add_attribute_attributes__eventId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddAttributeBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all attribute describe types
+   * @description Retrieve a list of all available attribute types and categories.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * Output:
+   *
+   * - the attributes describe types
+   */
+  get_attributes_describe_types_attributes_describeTypes_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetDescribeTypesResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Get attribute details
+   * @description Retrieve details of a specific attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * Output:
+   *
+   * - the attribute details
+   */
+  get_attribute_details_attributes__attributeId__get: {
+    parameters: {
+      path: {
+        attributeId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update an attribute
+   * @description Update an existing attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * - the body for editing the attribute
+   *
+   * Output:
+   *
+   * - the response from the api for the edit request
+   */
+  update_attribute_attributes__attributeId__put: {
+    parameters: {
+      path: {
+        attributeId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditAttributeBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['EditAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete an Attribute
+   * @description Delete an attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * Output:
+   *
+   * - the response from the api for the delete request
+   */
+  delete_attribute_attributes__attributeId__delete: {
+    parameters: {
+      path: {
+        attributeId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get all Attributes
+   * @description Retrieve a list of all attributes.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * Output:
+   *
+   * - the list of all attributes
+   */
+  get_attributes_attributes_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAllAttributesResponse'][];
+        };
+      };
+    };
+  };
+  /**
+   * Delete the selected attributes
+   * @description Deletes the attributes associated with the event from the list in the body.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the event
+   *
+   * - the body for deleting the selected attributes
+   *
+   * - the request
+   *
+   * Output:
+   *
+   * - the response from the api for the deleting of the selection
+   */
+  delete_selected_attributes_attributes_deleteSelected__eventId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['DeleteSelectedAttributeBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteSelectedAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get attribute statistics
+   * @description Get the count/percentage of attributes per category/type.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   * - the current database
+   * - percentage
+   *
+   * Output:
+   *
+   * - the attributes statistics for one category/type
+   */
+  get_attributes_type_statistics_attributes_attributeStatistics_type__percentage__get: {
+    parameters: {
+      path: {
+        percentage: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAttributeStatisticsTypesResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get attribute statistics
+   * @description Get the count/percentage of attributes per category/type.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   * - the current database
+   * - percentage
+   *
+   * Output:
+   *
+   * - the attributes statistics for one category/type
+   */
+  get_attributes_category_statistics_attributes_attributeStatistics_category__percentage__get: {
+    parameters: {
+      path: {
+        percentage: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAttributeStatisticsCategoriesResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Restore an attribute
+   * @description Restore an attribute by its ID.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * Output:
+   *
+   * - the restored attribute
+   */
+  restore_attribute_attributes_restore__attributeId__post: {
+    parameters: {
+      path: {
+        attributeId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add tag to attribute
+   * @description Add a tag to an attribute by there ids.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * - the id of the tag
+   *
+   * - local
+   *
+   * Output:
+   *
+   * - the response from the api for adding a tag to an attribute
+   */
+  add_tag_to_attribute_attributes_addTag__attributeId___tagId__local__local__post: {
+    parameters: {
+      path: {
+        attributeId: string;
+        tagId: string;
+        local: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Remove tag from attribute
+   * @description Remove a tag from an attribute by there ids.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * - the id of the tag
+   *
+   * Output:
+   *
+   * - the response from the api for removing a tag to an attribute
+   */
+  remove_tag_from_attribute_attributes_removeTag__attributeId___tagId__post: {
+    parameters: {
+      path: {
+        attributeId: string;
+        tagId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddRemoveTagAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Add new attribute (Deprecated)
+   * @deprecated
+   * @description Deprecated. Add a new attribute with the given details using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the event
+   *
+   * - the body
+   *
+   * Output:
+   *
+   * - the attribute
+   */
+  add_attribute_depr_attributes_add__eventId__post: {
+    parameters: {
+      path: {
+        eventId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AddAttributeBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AddAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Get attribute details (Deprecated)
+   * @deprecated
+   * @description Deprecated. Retrieve details of a specific attribute by its ID using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * Output:
+   *
+   * - the details of an attribute
+   */
+  get_attribute_details_depr_attributes_view__attributeId__get: {
+    parameters: {
+      path: {
+        attributeId: number;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GetAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Update an attribute (Deprecated)
+   * @deprecated
+   * @description Deprecated. Update an existing attribute by its ID using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * - the body
+   *
+   * Output:
+   *
+   * - the updated version af an attribute
+   */
+  update_attribute_depr_attributes_edit__attributeId__put: {
+    parameters: {
+      path: {
+        attributeId: string;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['EditAttributeBody'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['EditAttributeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Delete an Attribute (Deprecated)
+   * @deprecated
+   * @description Deprecated. Delete an attribute by its ID using the old route.
+   *
+   * Input:
+   *
+   * - the user's authentification status
+   *
+   * - the current database
+   *
+   * - the id of the attribute
+   *
+   * Output:
+   *
+   * - the response from the api for the deleting request
+   */
+  delete_attribute_depr_attributes_delete__attributeId__delete: {
+    parameters: {
+      path: {
+        attributeId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['DeleteAttributeResponse'];
         };
       };
       /** @description Validation Error */
@@ -16773,80 +18972,42 @@ export interface operations {
     };
   };
   /**
-   * Get all taxonomies
-   * @description Retrieve a list of all taxonomies.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - list[ViewTaxonomyResponse]: List of taxonomies
+   * Returns a list of all workflows
+   * @description Returns a list of all workflows in the JSON format.
    */
-  get_taxonomies_taxonomies_get: {
+  index_workflows_index_get: {
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ViewTaxonomyResponse'][];
+          'application/json': Record<string, never>[];
         };
       };
     };
   };
   /**
-   * Update taxonomies
-   * @description Update all taxonomies.
+   * Edits a workflow
+   * @description Edits a workflow.
    *
-   * Input:
+   * When a change it made this endpoints overrwrites the outdated workflow in the database.
+   * It is also used to add new workflows. The response is the edited workflow.
    *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Status response indicating success or failure
+   * - **workflow_id** The ID of the workflow to edit.
+   * - **workflow_name** The new name.
+   * - **workflow_description** The new description.
+   * - **workflow_graph** The new workflow graph.
    */
-  update_taxonomies_taxonomies_put: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Get taxonomy details
-   * @description Retrieve details of a specific taxonomy by its ID.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - taxonomy_id: ID of the taxonomy to retrieve
-   *
-   * Output:
-   *
-   * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
-   */
-  get_taxonomy_details_taxonomies__taxonomyId__get: {
+  edit_workflows_edit__workflowId__post: {
     parameters: {
       path: {
-        taxonomyId: number;
+        workflowId: number;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
+          'application/json': Record<string, never>;
         };
       };
       /** @description Validation Error */
@@ -16858,371 +19019,15 @@ export interface operations {
     };
   };
   /**
-   * Get taxonomy inclusive tags and attributes
-   * @description Retrieve details of a specific taxonomy and its tags and attributes by its ID.
+   * Deletes a workflow
+   * @description Deletes a workflow. It will be removed from the database.
    *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - taxonomy_id: ID of the taxonomy to retrieve extended details for
-   *
-   * Output:
-   *
-   * - GetTagTaxonomyResponse: Response containing taxonomy attributes
+   * - **workflow_id** The ID of the workflow to delete.
    */
-  get_taxonomy_details_extended_taxonomies_taxonomy_tags__taxonomyId__get: {
+  delete_workflows_delete__workflowId__delete: {
     parameters: {
       path: {
-        taxonomyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetTagTaxonomyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Export taxonomy
-   * @description Export taxonomy.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - taxonomy_id: ID of the taxonomy to export
-   *
-   * Output:
-   *
-   * - ExportTaxonomyResponse: Response containing exported taxonomy data
-   */
-  export_taxonomy_taxonomies_export__taxonomyId__get: {
-    parameters: {
-      path: {
-        taxonomyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ExportTaxonomyResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Enable taxonomy
-   * @description Enable a specific taxonomy by its ID.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - taxonomy_id: ID of the taxonomy to enable
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Status response indicating success or failure
-   */
-  enable_taxonomy_taxonomies_enable__taxonomyId__post: {
-    parameters: {
-      path: {
-        taxonomyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Disable taxonomy
-   * @description Disable a specific taxonomy by its ID.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - taxonomy_id: ID of the taxonomy to disable
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Status response indicating success or failure
-   */
-  disable_taxonomies_taxonomies_disable__taxonomyId__post: {
-    parameters: {
-      path: {
-        taxonomyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update taxonomies
-   * @deprecated
-   * @description Update all taxonomies.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Status response indicating success or failure
-   */
-  update_taxonomies_depr_taxonomies_update_post: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusResponse'];
-        };
-      };
-    };
-  };
-  /**
-   * Get taxonomy details
-   * @deprecated
-   * @description Retrieve details of a specific taxonomy by its ID.
-   *
-   * Input:
-   *
-   * - db: Database session
-   *
-   * - auth: Authentication details
-   *
-   * - taxonomy_id: ID of the taxonomy to get
-   *
-   * Output:
-   *
-   * - GetIdTaxonomyResponseWrapper: Wrapper containing taxonomy details
-   */
-  get_taxonomy_by_id_depr_taxonomies_view__taxonomyId__get: {
-    parameters: {
-      path: {
-        taxonomyId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetIdTaxonomyResponseWrapper'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add new user
-   * @description Adds a new user with the given details.
-   *
-   * Input:
-   *
-   * - Data representing the new user to be added
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the attributes of the new user
-   */
-  add_user_users_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddUserBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddUserResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get Logged In User Info
-   * @description Retrieves information about the logged in user.
-   *
-   * Input:
-   *
-   * - Authentication details of the logged in user
-   *
-   * Output:
-   *
-   * - Information about the logged in user
-   */
-  get_logged_in_user_info_users_view_me_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['PartialGetUsersElement'];
-        };
-      };
-    };
-  };
-  /**
-   * Get Logged In User Info
-   * @description Retrieves information about the logged in user.
-   *
-   * Input:
-   *
-   * - Authentication details of the logged in user
-   *
-   * Output:
-   *
-   * - Information about the logged in user
-   */
-  get_logged_in_user_info_users_view_me_json_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['PartialGetUsersElement'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all users
-   * @description Retrieves a list of all users.
-   *
-   * Input:
-   *
-   * - None
-   *
-   * Output:
-   *
-   * - List containing all users
-   */
-  get_all_users_users_view_all_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetUsersElement'][];
-        };
-      };
-    };
-  };
-  /**
-   * Get a user by id
-   * @description Retrieves a user specified by id.
-   *
-   * Input:
-   *
-   * - ID of the user to get
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the attributes of the searched user
-   */
-  get_user_by_id_users_view__userId__get: {
-    parameters: {
-      path: {
-        userId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetUsersElement'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete a user
-   * @description Deletes a user by their ID.
-   *
-   * Input:
-   *
-   * - ID of the user to delete
-   *
-   * - auth: Authentication details of the current user
-   *
-   * - The current database
-   *
-   * Output:
-   * - StandardStatusIdentifiedResponse: Response indicating success or failure
-   */
-  delete_user_users__user_id__delete: {
-    parameters: {
-      path: {
-        user_id: string;
+        workflowId: number;
       };
     };
     responses: {
@@ -17241,30 +19046,25 @@ export interface operations {
     };
   };
   /**
-   * Delete a users login token
-   * @description Deletes a users login token by their ID.
+   * Get a workflow
+   * @description Gets a workflow.
    *
-   * Input:
+   * Is called view because it is used to display the workflow in the visual editor
+   * but it just returns the data of a workflow.
    *
-   * - ID of the user with the token to delete
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Response indicating success or failure
+   * - **workflow_id** The ID of the workflow to view.
    */
-  delete_user_token_users_tokens__userId__delete: {
+  view_workflows_view__workflowId__get: {
     parameters: {
       path: {
-        userId: string;
+        workflowId: number;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': unknown;
+          'application/json': Record<string, never>;
         };
       };
       /** @description Validation Error */
@@ -17276,37 +19076,25 @@ export interface operations {
     };
   };
   /**
-   * Update a user
-   * @description Updates an existing user by their ID.
+   * Creates a new workflow
+   * @description Creates a new workflow.
+   * In MISP this loaded the editor and send the editor HTML.
+   * But it also created a workflow if you tried to edit a not-existing workflow.
+   * We use is ONLY for creating, because we don't need the rest.
    *
-   * Input:
-   *
-   * - ID of the user to update
-   *
-   * - Updated data for the user
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the updated attributes of the user
+   * - **workflow_id** The ID of the workflow to create.
    */
-  update_user_users__userId__put: {
+  editor_workflows_editor__triggerId__post: {
     parameters: {
       path: {
-        userId: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UserAttributesBody'];
+        triggerId: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['UserWithName'];
+          'application/json': components['schemas']['StandartResponse'];
         };
       };
       /** @description Validation Error */
@@ -17318,720 +19106,19 @@ export interface operations {
     };
   };
   /**
-   * Add new user
-   * @deprecated
-   * @description Adds a new user with the given details.
+   * Executes a workflow
+   * @description Executes a workflow.
    *
-   * Input:
+   * Is used for debugging.
    *
-   * - Data representing the new user to be added
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the attributes of the new user
+   * - **workflow_id** The ID of the workflow to execute.
    */
-  add_user_deprecated_admin_users_add_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['AddUserBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['AddUserResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update a user
-   * @deprecated
-   * @description Deprecated. Updates an existing user using the old route.
-   *
-   * Input:
-   *
-   * - ID of the user to update
-   *
-   * - Updated data for the user
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the updated attributes of the user
-   */
-  update_user_depr_admin_users_edit__userId__put: {
+  executeWorkflow_workflows_executeWorkflow__workflowId__post: {
     parameters: {
       path: {
-        userId: string;
+        workflowId: number;
       };
     };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UserAttributesBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserWithName'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get a user by id
-   * @deprecated
-   * @description Deprecated. Retrieves a user specified by id with the old route.
-   *
-   * Input:
-   *
-   * - ID of the user to get
-   *
-   * - The current database
-   *
-   * Output:
-   *
-   * - Data representing the attributes of the searched user
-   */
-  get_user_by_id_depr_admin_users_view__userId__get: {
-    parameters: {
-      path: {
-        userId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetUsersElement'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all users
-   * @deprecated
-   * @description Retrieves a list of all users.
-   *
-   * Input:
-   *
-   * - None
-   *
-   * Output:
-   *
-   * - List containing all users
-   */
-  get_all_users_deprecated_admin_users_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetUsersElement'][];
-        };
-      };
-    };
-  };
-  /**
-   * Delete a user
-   * @deprecated
-   * @description Deprecated. Deletes a user by their ID with the old route.
-   *
-   * Input:
-   *
-   * - ID of the user to delete
-   *
-   * - auth: Authentication details of the current user
-   *
-   * - The current database
-   *
-   * Output:
-   * - StandardStatusIdentifiedResponse: Response indicating success or failure
-   */
-  delete_user_depr_admin_users_delete__userId__delete: {
-    parameters: {
-      path: {
-        userId: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Set user setting.
-   * @description Create or Update a UserSetting by user ID and UserSettingName.     If specified UserSetting doesn't exist, it is created.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - user_id: ID of the user for whom setting is to be set
-   *
-   * - user_setting_name: Name of the user setting to
-   *
-   * - body: SetUserSettingBody, Data for setting the user setting
-   *
-   * Output:
-   *
-   * - SetUserSettingResponse: Response indicating success or failure
-   */
-  set_user_settings_user_settings_setSetting_me__userSettingName__post: {
-    parameters: {
-      path: {
-        userSettingName: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SetUserSettingBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['SetUserSettingResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View UserSetting by ID.
-   * @description Displays a UserSetting by the UserSettingID.
-   *
-   * Input:
-   *
-   * - userSettingId: ID of the user setting to view
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - ViewUserSettingResponse: Response with details of the viewed user setting
-   */
-  view_user_settings_user_settings__userSettingId__get: {
-    parameters: {
-      path: {
-        userSettingId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ViewUserSettingResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Deletes a UserSetting.
-   * @description Deletes UserSetting by UserSetting ID.
-   *
-   * Input:
-   *
-   * - userSettingId: ID of the user setting to delete
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusIdentifiedResponse: Response indicating success or failure
-   */
-  delete_user_settings_user_settings__userSettingId__delete: {
-    parameters: {
-      path: {
-        userSettingId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View UserSetting.
-   * @description Displays a UserSetting by given userID and UserSetting name.
-   *
-   * Input:
-   *
-   * - userId: ID of the user for whom setting is to be viewed
-   *
-   * - userSettingName: Name of the user setting to view
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - ViewUserSettingResponse: Response with details of the viewed user setting
-   */
-  get_user_setting_by_id_user_settings_me__userSettingName__get: {
-    parameters: {
-      path: {
-        userSettingName: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ViewUserSettingResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Displays all UserSettings.
-   * @description Displays all UserSettings.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - list[UserSettingResponse]: List of UserSettingResponse objects
-   */
-  get_user_settings_user_settings_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserSettingResponse'][];
-        };
-      };
-    };
-  };
-  /**
-   * Displays all UserSettings.
-   * @description Displays all UserSettings by specified parameters.
-   *
-   * Input:
-   *
-   * - body: SearchUserSettingBody, Data for searching user settings
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - list[UserSettingResponse]: List of UserSettingResponse objects
-   */
-  search_user_settings_user_settings_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['SearchUserSettingBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserSettingResponse'][];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View UserSetting by ID.
-   * @deprecated
-   * @description Deprecated. View UserSetting by UserSettingID.
-   *
-   * Input:
-   *
-   * - userSettingId: ID of the user setting to view
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - ViewUserSettingResponse: Response with details of the viewed user setting
-   */
-  view_user_settings_depr_user_settings_view__userSettingId__get: {
-    parameters: {
-      path: {
-        userSettingId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ViewUserSettingResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * View a UserSetting.
-   * @deprecated
-   * @description Deprecated. View a UserSetting by its userID and UserSetting name.
-   *
-   * Input:
-   *
-   * - userId: ID of the user for whom setting is to be viewed
-   *
-   * - userSettingName: Name of the user setting to view
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - GetUserSettingResponse: Response with details of the viewed user setting
-   */
-  get_user_setting_by_ids_user_settings_getSetting__userId___userSettingName__get: {
-    parameters: {
-      path: {
-        userId: number;
-        userSettingName: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetUserSettingResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete UserSetting.
-   * @deprecated
-   * @description Deprecated. Delete a UserSetting by specified UserSettingID.
-   *
-   * Input:
-   *
-   * - userSettingId: ID of the user setting to delete
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusIdentifiedResponse: Response indicating success or failure
-   */
-  delete_user_settings_depr_user_settings_delete__userSettingId__delete: {
-    parameters: {
-      path: {
-        userSettingId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Add a new warninglist
-   * @description Add a new warninglist with given details.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - body: CreateWarninglistBody, Data for creating the new warninglist
-   *
-   * Output:
-   *
-   * - WarninglistResponse: Response with details of the new warninglist
-   */
-  add_warninglist_warninglists_new_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateWarninglistBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        content: {
-          'application/json': components['schemas']['WarninglistResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get warninglist details
-   * @description Retrieve details of a specific warninglist by its ID.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - warninglist_id: ID of the warninglist to fetch
-   *
-   * Output:
-   *
-   * - WarninglistResponse: Response with details of the searched warninglist
-   */
-  get_warninglist_details_warninglists__warninglistId__get: {
-    parameters: {
-      path: {
-        warninglistId: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['WarninglistResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Disable/Enable warninglist
-   * @description Disable/Enable a specific warninglist by its ID or name.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db:Database session
-   *
-   * - body: ToggleEnableWarninglistsBody, Data to toggle enable status of the warninglist
-   *
-   * Output:
-   *
-   * - ToggleEnableWarninglistsResponse: Response showing success or failure
-   */
-  post_toggleEnable_warninglists_toggleEnable_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ToggleEnableWarninglistsBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ToggleEnableWarninglistsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Delete warninglist
-   * @description Delete a specific warninglist.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - warninglist_id: ID of the warninglist to delete
-   *
-   * Output:
-   *
-   * - WarninglistResponse: Response showing success or failure
-   */
-  delete_warninglist_warninglists__id__delete: {
-    parameters: {
-      path: {
-        id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['WarninglistResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Get all warninglists, or selected ones by value and status
-   * @description Receive a list of all warning lists, or when setting the path parameters value and enabled, receive a         list of warninglists for which the value matches either the name, description, or type and enabled matches         given parameter.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - value: str | None, Search term for filtering by value
-   *
-   * - enabled: bool | None, Status filter (enabled or disabled)
-   *
-   * Output:
-   *
-   * - GetSelectedAllWarninglistsResponse: Response containing filtered or all warninglists
-   */
-  get_all_or_selected_warninglists_warninglists_get: {
-    parameters: {
-      query?: {
-        value?: string;
-        enabled?: boolean;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /**
-   * Update warninglists
-   * @description Update all warninglists.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Response indicating success or failure
-   */
-  update_all_warninglists_warninglists_put: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -18039,38 +19126,6 @@ export interface operations {
           'application/json': components['schemas']['StandardStatusResponse'];
         };
       };
-    };
-  };
-  /**
-   * Get selected warninglists (Deprecated)
-   * @deprecated
-   * @description Retrieve a list of warninglists, which match given search terms using the old route.
-   *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - body: GetSelectedWarninglistsBody, Data for filtering warninglists
-   *
-   * Output:
-   *
-   * - GetSelectedAllWarninglistsResponse: Response containing filtered warninglists
-   */
-  search_warninglists_warninglists_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GetSelectedWarninglistsBody'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['GetSelectedAllWarninglistsResponse'];
-        };
-      };
       /** @description Validation Error */
       422: {
         content: {
@@ -18080,70 +19135,50 @@ export interface operations {
     };
   };
   /**
-   * Get a list of ID and name of enabled warninglists
-   * @description Retrieve a list of ID and name of enabled warninglists,         which match has the given search term as entry.
+   * Returns a list with all triggers
+   * @description Returns a list with triggers.
    *
-   * Input:
+   * A trigger starts a workflow. It is used for the trigger overview page.
    *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - body: CheckValueWarninglistsBody, Data for searching warninglists by value
-   *
-   * Output:
-   *
-   * - CheckValueResponse | dict: Response with searched warninglists
+   * - **scope** Filters for the scope of the triggers (attribute, event, log etc.)
+   * - **enabled** Filters whether the trigger is enabled/ disabled
+   * - **blocking** Filters for blocking/ non-blocking triggers
+   * - **limit**: The number of items to display per page (for pagination).
+   * - **page**: The page number to display (for pagination).
    */
-  get_warninglists_by_value_warninglists_checkValue_post: {
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CheckValueWarninglistsBody'];
-      };
-    };
+  triggers_workflows_triggers_get: {
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['CheckValueResponse'] | Record<string, never>;
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
+          'application/json': Record<string, never>[];
         };
       };
     };
   };
   /**
-   * Get warninglist details (Deprecated)
-   * @deprecated
-   * @description Deprecated. Retrieve details of a specific warninglist by its ID using the old route.
+   * Returns modules
+   * @description Retrieve modules with optional filtering.
    *
-   * Input:
+   * All filter parameters are optional. If no parameters are provided, no filtering will be applied.
    *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * - warninglist_id: ID of the warninglist to fetch
-   *
-   * Output:
-   *
-   * - WarninglistResponse: Response with details of the searched warninglist
+   * - **type**: Filter by type. Valid values are 'action', 'logic', 'custom', and 'all'.
+   * - **actiontype**: Filter by action type. Valid values are 'all', 'mispmodule', and 'blocking'.
+   * - **enabled**: If true, returns only enabled modules. If false, returns only disabled modules.
+   * - **limit**: The number of items to display per page (for pagination).
+   * - **page**: The page number to display (for pagination).
    */
-  get_warninglist_details_depr_warninglists_view__warninglistId__get: {
+  moduleIndex_workflows_moduleIndex_type__type__get: {
     parameters: {
       path: {
-        warninglistId: number;
+        type: string;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['WarninglistResponse'];
+          'application/json': Record<string, never>[];
         };
       };
       /** @description Validation Error */
@@ -18155,26 +19190,148 @@ export interface operations {
     };
   };
   /**
-   * Update warninglists (Deprecated)
-   * @deprecated
-   * @description Deprecated. Update all warninglists.
+   * Returns a singular module
+   * @description Returns a singular module.
    *
-   * Input:
-   *
-   * - auth: Authentication details
-   *
-   * - db: Database session
-   *
-   * Output:
-   *
-   * - StandardStatusResponse: Response indicating success or failure
+   * - **module_id** The ID of the module.
    */
-  update_all_warninglists_depr_warninglists_update_post: {
+  moduleView_workflows_moduleView__moduleId__get: {
+    parameters: {
+      path: {
+        moduleId: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Enables/ disables a module
+   * @description Enables/ disables a module. Respons with a success status.
+   *
+   * Disabled modules can't be used in the visual editor.
+   *
+   * Note that the legacy misp accepted all node ID's and never threw an error.
+   *
+   * - **module_id**: The ID of the module.
+   * - **enable**: Whether the module should be enabled or not.
+   * - **is_trigger**: Indicates if the module is a trigger module.
+   * Trigger modules have specific behaviors and usage within the system.
+   */
+  toggleModule_workflows_toggleModule__nodeId___enable___isTrigger__post: {
+    parameters: {
+      path: {
+        nodeId: string;
+        enable: boolean;
+        isTrigger: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandartResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Checks if the given graph is correct
+   * @description Checks if the given graph is correct.
+   *
+   * This will check if the graph is acyclic, if any node has multiple output connections
+   * and if there are path warnings.
+   *
+   * - **graph** The workflow graph to check.
+   */
+  checkGraph_workflows_checkGraph_post: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['CheckGraphResponse'];
+        };
+      };
+    };
+  };
+  /**
+   * Enable/ disable the workflow feature
+   * @description Enable/ disable the workflow feature. Respons with a success status.
+   *
+   * Globally enables/ disables the workflow feature in your MISP instance, not a single workflow.
+   * A single workflow is enabled through it's corresponding trigger.
+   */
+  toggleWorkflows_workflows_toggleWorkflows__enabled__post: {
+    parameters: {
+      path: {
+        enabled: boolean;
+      };
+    };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['StandardStatusResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /**
+   * Status whether the workflow setting is globally enabled/ disabled
+   * @description Returns whether the workflows are globally enabled/ disabled.
+   */
+  workflowsSetting_workflows_workflowsSetting_get: {
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': boolean;
+        };
+      };
+    };
+  };
+  /** Status whether the workflow setting is globally enabled/ disabled */
+  debugToggleField_workflows_debugToggleField__workflowId___enabled__post: {
+    parameters: {
+      path: {
+        workflowId: number;
+        enabled: boolean;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['StandardStatusIdentifiedResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
