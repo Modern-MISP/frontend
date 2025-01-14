@@ -86,6 +86,12 @@ export const routes: SideMenuRoute[] = [
     ]
   },
   {
+    name: 'Feeds',
+    icon: 'mdi:rss',
+    href: '/feeds/',
+    userAccess: 'none'
+  },
+  {
     name: 'Logs',
     icon: 'mdi:tag',
     href: '/logs',
