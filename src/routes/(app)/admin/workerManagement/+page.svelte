@@ -23,7 +23,7 @@
   @component
   Displays a list of all workers of the instance.
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerSettings/${x.id}`}
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerManagement/${x.name}`}
 ></ComplexTableLayout>
 
 <!-- Password Popup -->

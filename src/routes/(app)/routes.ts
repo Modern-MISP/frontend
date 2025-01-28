@@ -129,10 +129,10 @@ export const routes: SideMenuRoute[] = [
         href: '/admin/servers'
       },
       {
-        name: 'Workermanagment',
+        name: 'Worker Management',
         icon: 'mdi:bolt',
         userAccess: 'none',
-        href: '/admin/workerSettings'
+        href: '/admin/workerManagement'
       },
       {
         name: 'Workflow Settings',
