@@ -44,7 +44,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'Add Queues',
       icon: 'mdi:plus-circle',
       action: (x) => {
-        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
+        if (confirm(`Are you sure you want to add the selected queues?`)) {
           Promise.all(
             x.map((x) =>
               get(api).POST('/worker/addQueue/{id}', {
@@ -65,7 +65,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'Remove Queues',
       icon: 'mdi:minus-circle',
       action: (x) => {
-        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
+        if (confirm(`Are you sure you want to remove the selected queues?`)) {
           get(api);
           Promise.all(
             x.map((x) =>
