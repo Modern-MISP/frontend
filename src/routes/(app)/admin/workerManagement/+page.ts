@@ -71,13 +71,17 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Pause Workers',
       icon: 'mdi:pause-circle',
       action: (x) => {
-        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
-          get(api)
-            .POST('/worker/all', { fetch })
-            .then(() => {
-              notifications.add(successPill('Paused all Workers'));
-              invalidateAll();
-            });
+        if (
+          confirm(
+            `Are you sure you want to pause all selected Workers? No new jobs will be executed!`
+          )
+        ) {
+          Promise.all(
+            x.map((x) => get(api).POST('/worker/pause/{id}', { params: { path: { id: x.name } } }))
+          ).then(() => {
+            notifications.add(successPill('Paused Worker'));
+            invalidateAll();
+          });
         } else {
           notifications.add(errorPill('Pause failed'));
         }
@@ -87,13 +91,19 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Unpause Workers',
       icon: 'mdi:play-circle',
       action: (x) => {
-        if (confirm(`Are you sure you want to pause all Workers? No new jobs will be executed!`)) {
-          get(api)
-            .POST('/worker/all/unpause', { fetch })
-            .then(() => {
-              notifications.add(successPill('Unpause all Workers'));
-              invalidateAll();
-            });
+        if (
+          confirm(
+            `Are you sure you want to unpause all selected Workers? No new jobs will be executed!`
+          )
+        ) {
+          Promise.all(
+            x.map((x) =>
+              get(api).POST('/worker/unpause/{id}', { params: { path: { id: x.name } } })
+            )
+          ).then(() => {
+            notifications.add(successPill('Unpaused Worker'));
+            invalidateAll();
+          });
         } else {
           notifications.add(errorPill('Unpause failed'));
         }
