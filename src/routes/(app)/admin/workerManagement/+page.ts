@@ -78,12 +78,19 @@ export const load: PageLoad = async ({ fetch }) => {
         ) {
           Promise.all(
             x.map((x) => get(api).POST('/worker/pause/{id}', { params: { path: { id: x.name } } }))
-          ).then(() => {
-            notifications.add(successPill('Paused Worker'));
+          ).then((x) => {
+            for (const response of x) {
+              const name = response.response.headers.get('x-worker-name-header');
+              if (response.response.status == 200) {
+                notifications.add(successPill(`paused Worker: ${name}`));
+              } else {
+                notifications.add(errorPill(`Failed to pause Worker: ${name}`));
+              }
+            }
             invalidateAll();
           });
         } else {
-          notifications.add(errorPill('Pause failed'));
+          notifications.add(errorPill(`Pause interrupted`));
         }
       }
     },
@@ -100,12 +107,19 @@ export const load: PageLoad = async ({ fetch }) => {
             x.map((x) =>
               get(api).POST('/worker/unpause/{id}', { params: { path: { id: x.name } } })
             )
-          ).then(() => {
-            notifications.add(successPill('Unpaused Worker'));
+          ).then((x) => {
+            for (const response of x) {
+              const name = response.response.headers.get('x-worker-name-header');
+              if (response.response.status == 200) {
+                notifications.add(successPill(`Unpaused Worker: ${name}`));
+              } else {
+                notifications.add(errorPill(`Failed to unpause Worker: ${name}`));
+              }
+            }
             invalidateAll();
           });
         } else {
-          notifications.add(errorPill('Unpause failed'));
+          notifications.add(errorPill(`Unpause interrupted`));
         }
       }
     }

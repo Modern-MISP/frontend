@@ -12,24 +12,26 @@
   @component
   Displays information about a specific worker, specified by `id`.
 -->
-<div class="flex-wrap w-full h-full gap-2 lg:flex-nowrap">
-  <SideMenuEntry href="/logs/" name="Logs" icon="mdi:tag" isMenuOpen={true}></SideMenuEntry>
-  <div class="flex flex-wrap w-full h-full gap-2 lg:flex-nowrap">
-    <div>
-      <ComplexTableLayout
-        header={jobs_header}
-        tableData={jobs}
-        tableHref={() => undefined}
-        editActions={[]}
-      />
-    </div>
-    <div>
-      <ComplexTableLayout
-        header={jobqueues_header}
-        tableData={jobqueues}
-        tableHref={() => undefined}
-        editActions={queueEditActions}
-      />
-    </div>
+<div class="flex flex-col w-full h-full">
+  <div>
+    <SideMenuEntry href="/logs/" name="Logs" icon="mdi:tag" isMenuOpen={true}></SideMenuEntry>
+  </div>
+  <div class="flex flex-row gap-2 w-full h-full">
+    <ComplexTableLayout
+      pagination={false}
+      header={jobs_header}
+      tableData={jobs}
+      tableHref={() => undefined}
+      editActions={[]}
+      endpoint={undefined}
+      maxCount={jobs.length}
+    />
+    <ComplexTableLayout
+      header={jobqueues_header}
+      tableData={jobqueues}
+      tableHref={() => undefined}
+      editActions={queueEditActions}
+      maxCount={jobqueues.length}
+    />
   </div>
 </div>

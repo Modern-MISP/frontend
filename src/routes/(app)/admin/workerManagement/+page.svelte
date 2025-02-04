@@ -23,8 +23,8 @@
   @component
   Displays a list of all workers of the instance.
 -->
-<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerManagement/${x.name}`}
-></ComplexTableLayout>
+
+<ComplexTableLayout {...data} tableHref={(x) => `/admin/workerManagement/${x.name}`} />
 
 <!-- Password Popup -->
 <div id="password-popup" class="popup">

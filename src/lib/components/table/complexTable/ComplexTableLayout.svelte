@@ -66,7 +66,7 @@
    * max number of elements.
    */
   export let maxCount = tableData.length;
-  $: if (!endpoint) maxCount = tableData.length;
+  $: if (endpoint == undefined) maxCount = tableData.length;
 
   /**
    * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
@@ -106,7 +106,7 @@
       skipRequests++;
       return;
     }
-    if (!endpoint) return;
+    if (endpoint == undefined) return;
     const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
 
     if (mispError) {
@@ -143,78 +143,79 @@
   $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
 
   let sliced: typeof tableData = [];
-  $: if (!endpoint) sliced = tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
+  $: if (endpoint == undefined) sliced = tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
 </script>
 
+<!-- Feel free to change the css here because i don't have a clue what i am doing here if changed check if its still correct under /workerManagement/{id}-->
 <svelte:window use:actionBar={topMenuActions} />
-
-<div class="flex gap-4" id="filterRow">
-  <slot name="filter">
-    {#if filter.length > 0}
-      <FilterCard bind:currentFilter bind:filterOpen>
-        {#each fastFilter as fastFilterEntry, i}
-          <ActiveEntry
-            class="w-max"
-            {...fastFilterEntry}
-            active={activeFastFilter[i]}
-            on:click={() =>
-              // If the activeFastFilter is set, omit all values provided in ifActive. Else add them the the current filter
-              (currentFilter = !activeFastFilter[i]
-                ? { ...currentFilter, ...fastFilterEntry.ifActive }
-                : omitBy(
-                    currentFilter,
-                    (value, key) =>
-                      Object.keys(fastFilter[i].ifActive).includes(key) &&
-                      fastFilter[i].ifActive[key] === value
-                  ))}
-          ></ActiveEntry>
-        {/each}
-      </FilterCard>
-    {/if}
-  </slot>
-  <slot name="actionList">
-    {#if editActions.length > 0}
-      <!-- removes the selection when no action is defined to performe on the selectet rows-->
-      {#if $mode === 'edit'}
-        <SelectionCard
-          numSelected={activeRows.length}
-          selectAll={() => (activeRows = tableData)}
-          unselectAll={() => (activeRows = [])}
-        />
-        <slot name="editActions">
-          <DynActionCard
-            header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
-            data={activeRows}
-          ></DynActionCard>
-        </slot>
+<div class="flex flex-col h-full w-full gap-2">
+  <div class="flex gap-4 h-fit" id="filterRow">
+    <slot name="filter">
+      {#if filter.length > 0}
+        <FilterCard bind:currentFilter bind:filterOpen>
+          {#each fastFilter as fastFilterEntry, i}
+            <ActiveEntry
+              class="w-max"
+              {...fastFilterEntry}
+              active={activeFastFilter[i]}
+              on:click={() =>
+                // If the activeFastFilter is set, omit all values provided in ifActive. Else add them the the current filter
+                (currentFilter = !activeFastFilter[i]
+                  ? { ...currentFilter, ...fastFilterEntry.ifActive }
+                  : omitBy(
+                      currentFilter,
+                      (value, key) =>
+                        Object.keys(fastFilter[i].ifActive).includes(key) &&
+                        fastFilter[i].ifActive[key] === value
+                    ))}
+            ></ActiveEntry>
+          {/each}
+        </FilterCard>
       {/if}
-    {/if}
-  </slot>
-  <slot name="moreActions" />
-</div>
-<div class="relative flex h-full overflow-hidden">
-  <slot>
-    <slot name="table">
-      <DynTable
-        href={tableHref}
-        {header}
-        data={!endpoint ? sliced : tableData}
-        selectMode={$mode === 'edit'}
-        bind:activeRows
-        {groupInfo}
-      />
     </slot>
-    {#if filter.length > 0 && filterOpen}
-      <Filter header={filter} bind:currentFilter />
-    {/if}
-    <slot name="added" />
-  </slot>
+    <slot name="actionList">
+      {#if editActions.length > 0}
+        <!-- removes the selection when no action is defined to performe on the selectet rows-->
+        {#if $mode === 'edit'}
+          <SelectionCard
+            numSelected={activeRows.length}
+            selectAll={() => (activeRows = tableData)}
+            unselectAll={() => (activeRows = [])}
+          />
+          <slot name="editActions">
+            <DynActionCard
+              header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
+              data={activeRows}
+            ></DynActionCard>
+          </slot>
+        {/if}
+      {/if}
+    </slot>
+    <slot name="moreActions" />
+  </div>
+  <div class="relative flex h-fit overflow-hidden">
+    <slot>
+      <slot name="table">
+        <DynTable
+          href={tableHref}
+          {header}
+          data={endpoint == undefined ? sliced : tableData}
+          selectMode={$mode === 'edit'}
+          bind:activeRows
+          {groupInfo}
+        />
+      </slot>
+      {#if filter.length > 0 && filterOpen}
+        <Filter header={filter} bind:currentFilter />
+      {/if}
+      <slot name="added" />
+    </slot>
+  </div>
+  {#if maxCount > LIMIT}
+    <div class="h-full">
+      <slot name="pagination">
+        <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
+      </slot>
+    </div>
+  {/if}
 </div>
-
-{#if pagination}
-  <slot name="pagination">
-    {#if maxCount > LIMIT}
-      <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
-    {/if}
-  </slot>
-{/if}

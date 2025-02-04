@@ -53,11 +53,18 @@ export const load: PageLoad = async ({ params, fetch }) => {
               })
             )
           ).then(() => {
-            notifications.add(successPill('Queue added'));
+            for (const response of x) {
+              const name = response.response.headers.get('x-queue-name-header');
+              if (response.response.status == 200) {
+                notifications.add(successPill(`Added queue: ${name}`));
+              } else {
+                notifications.add(errorPill(`Failed to add queue: ${name} with error:`));
+              }
+            }
             invalidateAll();
           });
         } else {
-          notifications.add(errorPill('Failed to add Queue'));
+          notifications.add(errorPill('Interrupted to add Queue'));
         }
       }
     },
@@ -66,7 +73,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
       icon: 'mdi:minus-circle',
       action: (x) => {
         if (confirm(`Are you sure you want to remove the selected queues?`)) {
-          get(api);
           Promise.all(
             x.map((x) =>
               get(api).POST('/worker/removeQueue/{id}', {
@@ -75,11 +81,18 @@ export const load: PageLoad = async ({ params, fetch }) => {
               })
             )
           ).then(() => {
-            notifications.add(successPill('Queue removed'));
+            for (const response of x) {
+              const name = response.response.headers.get('x-queue-name-header');
+              if (response.response.status == 200) {
+                notifications.add(successPill(`Removed queue: ${name}`));
+              } else {
+                notifications.add(errorPill(`Failed to removed queue ${name} with error:`));
+              }
+            }
             invalidateAll();
           });
         } else {
-          notifications.add(errorPill('Failed to remove Queue'));
+          notifications.add(errorPill('Interrupted to remove Queue'));
         }
       }
     },
@@ -89,11 +102,11 @@ export const load: PageLoad = async ({ params, fetch }) => {
       action: (x) => {
         if (confirm(`Are you sure? All jobs in the queues will be lost!`)) {
           Promise.all(x).then(() => {
-            notifications.add(successPill('Not implemented'));
+            notifications.add(errorPill('Not implemented'));
             invalidateAll();
           });
         } else {
-          notifications.add(errorPill('Clear failed'));
+          notifications.add(errorPill('Clear interrupted'));
         }
       }
     }
