@@ -98,11 +98,7 @@ export const load: PageLoad = async ({ fetch }) => {
       label: 'Unpause Workers',
       icon: 'mdi:play-circle',
       action: (x) => {
-        if (
-          confirm(
-            `Are you sure you want to unpause all selected Workers? No new jobs will be executed!`
-          )
-        ) {
+        if (confirm(`Are you sure you want to unpause all selected Workers?`)) {
           Promise.all(
             x.map((x) =>
               get(api).POST('/worker/unpause/{id}', { params: { path: { id: x.name } } })
