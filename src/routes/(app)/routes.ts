@@ -92,6 +92,12 @@ export const routes: SideMenuRoute[] = [
     userAccess: 'none'
   },
   {
+    name: 'Sharing Groups',
+    icon: 'mdi:account-group-outline',
+    href: '/sharing_groups/',
+    userAccess: 'none'
+  },
+  {
     name: 'Logs',
     icon: 'mdi:tag',
     href: '/logs',
