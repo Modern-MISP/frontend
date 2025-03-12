@@ -110,8 +110,14 @@ export const routes: SideMenuRoute[] = [
     userAccess: 'none'
   },
   {
+    name: 'Object Templates',
+    icon: 'mdi:content-duplicate',
+    href: '/object_templates/',
+    userAccess: 'viewOnly'
+  },
+  {
     name: 'Logs',
-    icon: 'mdi:text-box-outline',
+    icon: 'mdi:script-text-outline',
     href: '/logs',
     userAccess: 'none'
   },

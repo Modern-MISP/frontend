@@ -5,6 +5,11 @@
   import { v4 as uuidv4 } from 'uuid';
 
   /**
+   * Datalist (values) of the input
+   */
+  export let datalist: string[] | undefined = undefined;
+
+  /**
    * Placeholder of the input.
    */
   export let placeholder: string | undefined = undefined;
@@ -34,6 +39,11 @@
   export let disabled: boolean = false;
 
   /**
+   * When true, the input is readonly, cannot be changed. Will still be submitted in a form
+   */
+  export let readonly: boolean = false;
+
+  /**
    * Whether the input is required.
    */
   export let required: boolean = false;
@@ -56,6 +66,11 @@
 
   let inputElement: HTMLInputElement;
 
+  let datalist_id = undefined;
+  $: if (datalist?.length > 0) {
+    datalist_id = uuidv4();
+  }
+
   /**
    * Sets the inner input's value.
    * @param value The value to use.
@@ -75,6 +90,13 @@
   You can also set the placeholder prop, if you want to set an placeholder. 
  -->
 
+{#if datalist}
+  <datalist id={datalist_id}>
+    {#each datalist as val}
+      <option value={val} />
+    {/each}
+  </datalist>
+{/if}
 <label
   class="relative flex items-center gap-2 px-4 py-2 text-ctp-text rounded-lg bg-ctp-surface1 cursor-text {clazz}"
   class:!bg-ctp-overlay0={disabled}
@@ -99,7 +121,9 @@
     {type}
     {value}
     {disabled}
+    {readonly}
     {required}
+    list={datalist_id}
     class="w-full placeholder-transparent rounded-lg outline-none bg-inherit peer cursor-inherit"
     bind:this={inputElement}
   />

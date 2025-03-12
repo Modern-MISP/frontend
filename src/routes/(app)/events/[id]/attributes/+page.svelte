@@ -138,6 +138,11 @@
       label: 'Add',
       action: `/events/${data.event.id}/attributes/new`
     },
+    {
+      icon: 'mdi:flag-plus', // TODO: find better icon
+      label: 'Add Object',
+      action: `/events/${data.event.id}/objects/new`
+    },
     freetextImport
       ? {
           icon: 'mdi:close-circle-outline',
