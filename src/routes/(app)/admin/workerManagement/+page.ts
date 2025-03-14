@@ -23,12 +23,6 @@ export const load: PageLoad = async ({ fetch }) => {
 
   const passwordStore = writable('');
 
-  function showPasswordPopup(password) {
-    passwordStore.set(password);
-    const popup = document.getElementById('password-popup');
-    if (popup) popup.style.display = 'block';
-  }
-
   const header = [
     col({
       icon: 'mdi:id-card',

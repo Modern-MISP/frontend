@@ -33,7 +33,11 @@ describe('Workermanagement tests', () => {
       cy.visit('/admin/workerManagement');
       // click on entry in list or open url directly
       cy.get('table tbody tr:first').click();
+
       cy.wait(300);
+
+      cy.get('table').should('exist');
+      cy.get('table > thead').should('exist');
       // check if rerout to logs is working
       cy.get('button:has(span:contains("Logs"))').click();
       cy.wait(500);
@@ -53,11 +57,13 @@ describe('Workermanagement tests', () => {
       cy.wait(1000); // this page is slow to load
       cy.get('table > thead').should('exist');
       cy.get('table > tbody').should('exist');
+      cy.get('table > tbody > tr').should('exist');
 
       cy.get('button:has(span:contains("Unpause Workers"))').click();
       cy.wait(1000); // this page is slow to load
       cy.get('table > thead').should('exist');
       cy.get('table > tbody').should('exist');
+      cy.get('table > tbody > tr').should('exist');
     }
   });
 });
