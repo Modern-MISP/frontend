@@ -20,7 +20,7 @@ describe('User tests', () => {
   it('should create a new user', () => {
     cy.visit('/admin/users/new');
 
-    if (!Cypress.env('legacy')) {
+    if (Cypress.env('legacy') === "false") {
       cy.get(cardRowRight('Name')).type(user_name);
     }
     cy.get(cardRowRight('Email')).type(email);
@@ -36,7 +36,7 @@ describe('User tests', () => {
     cy.toggleMode();
 
     cy.get(cardRowRight('Email')).should('contain.text', email);
-    if (!Cypress.env('legacy')) {
+    if (Cypress.env('legacy') === "false") {
       cy.get(cardRowRight('Name')).should('contain.text', user_name);
     }
   });

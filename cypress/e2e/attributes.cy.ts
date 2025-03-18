@@ -24,20 +24,18 @@ describe('filter attributes', () => {
     cy.get('button:contains("Add")').click();
     cy.get('button:contains("Filter")').click();
 
-    if (Cypress.env('legacy')) {
-      cy.get('body').then(($body) => {
-        if ($body.find('tbody').length > 0 && !$body.find('tbody').hasClass('bg-black')) {
-          cy.get('tbody')
-            .find('tr')
-            .each(($el) => {
-              if (!$el.hasClass('bg-blue')) {
-                cy.wrap($el)
-                  .invoke('text')
-                  .should('match', /(^$|^.*domain.*$)/);
-              }
-            });
-        }
-      });
-    }
+    cy.get('body').then(($body) => {
+      if ($body.find('tbody').length > 0 && !$body.find('tbody').hasClass('bg-black')) {
+        cy.get('tbody')
+          .find('tr')
+          .each(($el) => {
+            if (!$el.hasClass('bg-blue')) {
+              cy.wrap($el)
+                .invoke('text')
+                .should('match', /(^$|^.*domain.*$)/);
+            }
+          });
+      }
+    });
   });
 });
