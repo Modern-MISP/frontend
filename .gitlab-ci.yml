@@ -188,7 +188,6 @@ integration_tests:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - cat cypress.env.template.json | sed -e "s/<your admin token>/${MISP01_AUTH_TOKEN}/" -e "s/<true if legacy API, false if Modern API>/true/" > cypress.env.json
     - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_legacy --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
@@ -197,6 +196,8 @@ integration_tests:
     ELECTRON_ENABLE_LOGGING: 'true'
     REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
+    CYPRESS_adminToken: "${MISP01_AUTH_TOKEN}"
+    CYPRESS_legacy: "true"
   artifacts:
     expire_in: 1 day
     reports:
@@ -232,6 +233,7 @@ integration_tests_new_api:
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
         WORKER_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         WORKER_URL: http://worker-api:5000
+        DEBUG: true
     - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/worker:main
       alias: worker-api
       variables:
@@ -267,7 +269,6 @@ integration_tests_new_api:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - cat cypress.env.template.json | sed -e "s/<your admin token>/${MISP01_AUTH_TOKEN}/" -e "s/<true if legacy API, false if Modern API>/false/" > cypress.env.json
     - until wget -q -t1 http://new_api:4000; do rc="$?"; if [ $rc -eq 0 ] || [ $rc -eq 8 ]; then echo "MMISP API is ready"; break; else sleep 1; fi; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
@@ -277,6 +278,8 @@ integration_tests_new_api:
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
     MMISP_REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
+    CYPRESS_adminToken: "${MISP01_AUTH_TOKEN}"
+    CYPRESS_legacy: "false"
     #    CI_DEBUG_SERVICES: "true"
   artifacts:
     expire_in: 1 day
