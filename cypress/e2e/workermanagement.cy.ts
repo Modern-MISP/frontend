@@ -48,7 +48,7 @@ describe('Workermanagement tests', () => {
       cy.get('table').should('exist');
       cy.get('table > thead').should('exist');
       // check if rerout to logs is working
-      cy.get('button:has(span:contains("Logs"))').click();
+      cy.get('main').find("a[title='Logs']").click();
       cy.wait(500);
       cy.url().should('include', '/logs');
     }
