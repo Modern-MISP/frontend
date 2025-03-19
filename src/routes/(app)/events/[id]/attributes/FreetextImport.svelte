@@ -37,36 +37,49 @@
         })
         .then((resp) => {
           console.log(resp);
-          if (resp.error) {
-            if (resp['response']['status'] == 307) {
-              getResponseData(resp['error']['id']);
-            } else {
-              throw new Error(resp.error.detail);
-            }
+          console.log("Response is", resp.response);
+          console.log("Redirected is", resp.response.redirected);
+          console.log("Status is", resp.response.status);
+          if (resp.response.redirected && resp.response.status == 409) {
+            // get job id
+            console.log("Retrying...")
+            const job_id = resp.response.url.substring(resp.response.url.lastIndexOf('/') + 1);
+
+            getJobResult(job_id).then((result) => {
+              freetextData = result;
+            });
+          } else if (resp.error) {
+            throw new Error(resp.error.detail);
           } else {
-            freetextData = resp.data;
+            if(resp.data['attributes']) {
+              freetextData = resp.data['attributes'];
+            } else if (resp.data) {
+              freetextData = resp.data;
+            }
           }
         })
     );
   };
 
-  async function getResponseData(job_id: string) {
-    await $api
+  async function getJobResult(job_id: string) {
+    console.log("Retrieving job result from api");
+    const resp = await $api
       .GET('/jobs/{job_id}', {
         params: { path: { job_id } }
-      })
-      .then(async (resp) => {
-        if (resp.error) {
-          if (resp['response']['status'] == 409) {
-            await new Promise((f) => setTimeout(f, 1000));
-            getResponseData(job_id);
-          } else {
-            throw new Error(resp['error']['detail']);
-          }
-        } else if (resp.data['attributes']) {
-          freetextData = resp.data['attributes'];
-        }
       });
+    if (resp.error) {
+      console.log("Got an error from jobs api with response:", resp['response']);
+      if (resp['response']['status'] == 409) {
+        await new Promise((f) => setTimeout(f, 2000));
+        return await getJobResult(job_id);
+      } else {
+        throw new Error(resp['error']['detail']);
+      }
+    } else if(resp.data['attributes']) {
+      return resp.data['attributes'];
+    } else if (resp.data) {
+      return resp.data;
+    }
   }
 
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
