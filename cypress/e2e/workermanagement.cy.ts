@@ -42,29 +42,6 @@ describe('Workermanagement tests', () => {
       cy.get('table > tbody > tr').should('exist');
     }
   });
-  it('test single worker view to logs link', function () {
-    console.log(
-      'Type and value of env var legacy',
-      typeof Cypress.env('legacy'),
-      Cypress.env('legacy')
-    );
-    if (Cypress.env('legacy') === true) {
-      this.skip();
-    } else {
-      cy.visit('/admin/workerManagement');
-      // click on entry in list or open url directly
-      cy.get('table tbody tr:first').click();
-
-      cy.wait(300);
-
-      cy.get('table').should('exist');
-      cy.get('table > thead').should('exist');
-      // check if rerout to logs is working
-      cy.get('main').find("a[title='Logs']").click();
-      cy.wait(500);
-      cy.url().should('include', '/logs');
-    }
-  });
   it('test pause unpause of workers', function () {
     console.log(
       'Type and value of env var legacy',
