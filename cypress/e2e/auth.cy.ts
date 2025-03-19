@@ -39,23 +39,23 @@ const user_name2 = 'Cypress Test';
 
 const cardRowRight2 = (text: string) => `div:has(> span:contains("${text}")) > :last-child`;
 
-describe('login password', function() {
-  before(function() {
+describe('login password', function () {
+  before(function () {
     if (Cypress.env('legacy') === false) {
       cy.defaultLogin();
       cy.visit('/admin/users/new');
-  
+
       cy.get(cardRowRight2('Name')).type(user_name2);
       cy.get(cardRowRight2('Email')).type(email2);
       cy.get(cardRowRight2('Password')).clear().type(password);
       cy.get(cardRowRight2('Contact enables')).click();
       cy.get(cardRowRight2('Weekly notifications')).click();
       cy.get(cardRowRight2('Terms accepted')).click();
-  
+
       cy.get('button:has(span:contains("Save"))').click();
-  
+
       cy.url().should('match', /\/admin\/users\/\d+/);
-  
+
       cy.clearAllSessionStorage();
     }
   });
@@ -73,7 +73,7 @@ describe('login password', function() {
     }
   });
 
-  it('should login with password', function() {
+  it('should login with password', function () {
     if (Cypress.env('legacy') === true) {
       this.skip();
     }
@@ -98,8 +98,8 @@ describe('login password', function() {
   });
 });
 
-describe('reset password', function() {
-  it('should alert "Please Contact your Administrator to reset your password."', function() {
+describe('reset password', function () {
+  it('should alert "Please Contact your Administrator to reset your password."', function () {
     if (Cypress.env('legacy') === true) {
       this.skip();
     }
@@ -117,22 +117,22 @@ describe('reset password', function() {
 });
 
 describe('change password', () => {
-  before(function() {
+  before(function () {
     if (Cypress.env('legacy') === false) {
       cy.defaultLogin();
       cy.visit('/admin/users/new');
-  
+
       cy.get(cardRowRight2('Name')).type(user_name2);
       cy.get(cardRowRight2('Email')).type(email2);
       cy.get(cardRowRight2('Password')).clear().type(password);
       cy.get(cardRowRight2('Contact enables')).click();
       cy.get(cardRowRight2('Weekly notifications')).click();
       cy.get(cardRowRight2('Terms accepted')).click();
-  
+
       cy.get('button:has(span:contains("Save"))').click();
-  
+
       cy.url().should('match', /\/admin\/users\/\d+/);
-  
+
       cy.clearAllSessionStorage();
     }
   });
@@ -143,7 +143,7 @@ describe('change password', () => {
       cy.get('input[name="email"]').type(email2);
       cy.get('input[name="password"]').type(password);
       cy.get('button[type="submit"]').click();
-  
+
       cy.url().should('include', '/login/setPassword');
     }
   });
@@ -154,14 +154,14 @@ describe('change password', () => {
       cy.defaultLogin();
       cy.visit('/admin/users');
       cy.toggleMode();
-  
+
       cy.get('tbody > tr:last-child').click();
       cy.get('button:has(span:contains("Delete"))').click();
       cy.wait(1000);
     }
   });
 
-  it('should not allow to set the unsafe password', function() {
+  it('should not allow to set the unsafe password', function () {
     if (Cypress.env('legacy') === true) {
       this.skip();
     }
@@ -184,7 +184,7 @@ describe('change password', () => {
     cy.url().should('include', '/login/setPassword');
   });
 
-  it('should allow to set the safe password', function() {
+  it('should allow to set the safe password', function () {
     if (Cypress.env('legacy') === true) {
       this.skip();
     }

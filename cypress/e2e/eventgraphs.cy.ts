@@ -60,7 +60,7 @@ describe('eventgraphs', () => {
   });
 
   it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
-    if (Cypress.env('legacy') === "true") {
+    if (Cypress.env('legacy') === 'true') {
       this.skip();
     }
     const referenceTypes = [
@@ -107,9 +107,7 @@ describe('eventgraphs', () => {
       'div:has(> span:first-child:contains("Reference Type for new references")) select'
     ).select(reference.type); // select reference type
 
-    const sourceHandle = cy.get(
-      `div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`
-    ); // object's right handle
+    const sourceHandle = cy.get(`div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`); // object's right handle
     const destinationHandleSelector = 'div[data-id^="unreferenced"] .svelte-flow__handle-left'; // unreferenced attribute's left handle
     sourceHandle.drag(destinationHandleSelector); // connect both nodes
 

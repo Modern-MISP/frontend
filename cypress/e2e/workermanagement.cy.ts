@@ -3,8 +3,12 @@ beforeEach(() => {
 });
 
 describe('Workermanagement tests', () => {
-  it('should be reachable via side menu', function (){
-    console.log("Type and value of env var legacy", typeof Cypress.env('legacy'), Cypress.env('legacy'));
+  it('should be reachable via side menu', function () {
+    console.log(
+      'Type and value of env var legacy',
+      typeof Cypress.env('legacy'),
+      Cypress.env('legacy')
+    );
     if (Cypress.env('legacy') === true) {
       this.skip();
     } else {
@@ -20,8 +24,12 @@ describe('Workermanagement tests', () => {
       cy.get('table > tbody > tr').should('exist');
     }
   });
-  it('reachable from url', function() {
-    console.log("Type and value of env var legacy", typeof Cypress.env('legacy'), Cypress.env('legacy'));
+  it('reachable from url', function () {
+    console.log(
+      'Type and value of env var legacy',
+      typeof Cypress.env('legacy'),
+      Cypress.env('legacy')
+    );
     if (Cypress.env('legacy') === true) {
       this.skip();
     } else {
@@ -34,17 +42,21 @@ describe('Workermanagement tests', () => {
       cy.get('table > tbody > tr').should('exist');
     }
   });
-  it('test single worker view to logs link', function() {
-    console.log("Type and value of env var legacy", typeof Cypress.env('legacy'), Cypress.env('legacy'));
+  it('test single worker view to logs link', function () {
+    console.log(
+      'Type and value of env var legacy',
+      typeof Cypress.env('legacy'),
+      Cypress.env('legacy')
+    );
     if (Cypress.env('legacy') === true) {
       this.skip();
     } else {
       cy.visit('/admin/workerManagement');
       // click on entry in list or open url directly
       cy.get('table tbody tr:first').click();
-  
+
       cy.wait(300);
-  
+
       cy.get('table').should('exist');
       cy.get('table > thead').should('exist');
       // check if rerout to logs is working
@@ -54,7 +66,11 @@ describe('Workermanagement tests', () => {
     }
   });
   it('test pause unpause of workers', function () {
-    console.log("Type and value of env var legacy", typeof Cypress.env('legacy'), Cypress.env('legacy'));
+    console.log(
+      'Type and value of env var legacy',
+      typeof Cypress.env('legacy'),
+      Cypress.env('legacy')
+    );
     if (Cypress.env('legacy') === true) {
       this.skip();
     } else {
@@ -70,7 +86,7 @@ describe('Workermanagement tests', () => {
       cy.get('table > thead').should('exist');
       cy.get('table > tbody').should('exist');
       cy.get('table > tbody > tr').should('exist');
-  
+
       cy.get('button:has(span:contains("Unpause Workers"))').click();
       cy.wait(1000); // this page is slow to load
       cy.get('table > thead').should('exist');

@@ -196,8 +196,8 @@ integration_tests:
     ELECTRON_ENABLE_LOGGING: 'true'
     REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
-    CYPRESS_adminToken: "${MISP01_AUTH_TOKEN}"
-    CYPRESS_legacy: "true"
+    CYPRESS_adminToken: '${MISP01_AUTH_TOKEN}'
+    CYPRESS_legacy: 'true'
   artifacts:
     expire_in: 1 day
     reports:
@@ -278,8 +278,8 @@ integration_tests_new_api:
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
     MMISP_REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
-    CYPRESS_adminToken: "${MISP01_AUTH_TOKEN}"
-    CYPRESS_legacy: "false"
+    CYPRESS_adminToken: '${MISP01_AUTH_TOKEN}'
+    CYPRESS_legacy: 'false'
     #    CI_DEBUG_SERVICES: "true"
   artifacts:
     expire_in: 1 day

@@ -53,11 +53,9 @@ describe('galaxy cluster', () => {
     check('Name', cluster.name);
     check('Description', cluster.description);
     check('Source', cluster.source);
-    cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(
-      ($el, index) => {
-        cy.wrap($el).should('have.text', cluster.authors[index]);
-      }
-    );
+    cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
+      cy.wrap($el).should('have.text', cluster.authors[index]);
+    });
     check('Distribution', 'All communities');
   });
 
@@ -119,11 +117,9 @@ describe('galaxy cluster', () => {
     check('Name', newCluster.name);
     check('Description', newCluster.description);
     check('Source', newCluster.source);
-    cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(
-      ($el, index) => {
-        cy.wrap($el).should('have.text', newCluster.authors[index]);
-      }
-    );
+    cy.get('form div:has(> span:first-child:contains("Authors")) > div span').each(($el, index) => {
+      cy.wrap($el).should('have.text', newCluster.authors[index]);
+    });
     check('Distribution', 'Your organization only');
   });
 });
