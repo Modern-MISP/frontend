@@ -38,7 +38,7 @@
         feedback = ['New Password and Repeat Password do not match'];
       }
       passwordFeedback = feedback;
-    });
+    }).catch( (err) => console.error(err));
   }
 
   const options = {
