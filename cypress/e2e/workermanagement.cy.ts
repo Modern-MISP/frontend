@@ -9,7 +9,7 @@ describe('Workermanagement tests', () => {
       this.skip();
     } else {
       cy.visit('/events');
-      cy.get('aside > nav').find('a[href="/admin"]').click();
+      cy.get('aside > nav').find('div[title="Admin"] > button').first().click();
       cy.wait(100);
       cy.get('aside > nav').find('a[href="/admin/workerManagement"]').click();
       cy.wait(3000); // this page is slow to load
