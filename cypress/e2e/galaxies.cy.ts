@@ -44,7 +44,10 @@ describe('galaxy cluster', () => {
       i++;
     }
     cy.get('button:contains(Save)').click();
-    cy.wait('@addGalaxyCluster');
+    cy.wait('@addGalaxyCluster').then((interception) => {
+      console.log(interception.request.body);
+      console.log(interception.response.body);
+    });
 
     cy.url().should('include', '/galaxies/clusters/');
     cy.url().then((url) => (clusterId = url.split('/').at(-1)));
