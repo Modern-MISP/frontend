@@ -27,7 +27,10 @@ describe('galaxy cluster', () => {
         'test key': 'test value'
       }
     };
-
+    cy.intercept({
+      method: 'POST',
+      url: 'galaxy_clusters/add/2'
+    }).as('addGalaxyCluster')
     cy.visit('/galaxies/2/new_cluster');
     cy.get('input[name="value"]').type(cluster.name);
     cy.get('input[name="description"]').type(cluster.description);
@@ -41,7 +44,7 @@ describe('galaxy cluster', () => {
       i++;
     }
     cy.get('button:contains(Save)').click();
-    cy.wait(100);
+    cy.wait('@addGalaxyCluster');
 
     cy.url().should('include', '/galaxies/clusters/');
     cy.url().then((url) => (clusterId = url.split('/').at(-1)));
