@@ -54,7 +54,7 @@ export default defineConfig({
           launchOptions.args.push(`--window-size=${width},${height}`);
           launchOptions.args.push('--force-device-scale-factor=1');
           launchOptions.args.push('--disable-gpu');
-          launchOptions.args.push('--unsafely-treat-insecure-origin-as-secure=http://frontend:81')
+          launchOptions.args.push('--unsafely-treat-insecure-origin-as-secure=http://frontend:81');
         }
 
         return launchOptions;

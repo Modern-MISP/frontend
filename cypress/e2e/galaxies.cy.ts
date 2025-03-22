@@ -30,7 +30,7 @@ describe('galaxy cluster', () => {
     cy.intercept({
       method: 'POST',
       url: 'galaxy_clusters/add/2'
-    }).as('addGalaxyCluster')
+    }).as('addGalaxyCluster');
     cy.visit('/galaxies/2/new_cluster');
     cy.get('input[name="value"]').type(cluster.name);
     cy.get('input[name="description"]').type(cluster.description);

@@ -50,8 +50,8 @@ describe('Freetext import tool', () => {
     cy.wait('@startFreeTextImport').then((interception) => {
       console.log(interception.request.body);
       console.log(interception.response.body);
-      console.log("Status Code is:", interception.response.statusCode);
-      if (interception.response.statusCode != 200){
+      console.log('Status Code is:', interception.response.statusCode);
+      if (interception.response.statusCode != 200) {
         cy.wait('@jobsFreeTextImport').then((jobinterception) => {
           console.log(jobinterception.request.body);
           console.log(jobinterception.response.body);
