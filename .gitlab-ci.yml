@@ -264,6 +264,7 @@ integration_tests_new_api:
       alias: new-api
       variables:
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
+        WORKER_API_KEY: OIfY8nFQ9I6okbgGZZjSkOdUUDGZbp9H
         WORKER_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         WORKER_URL: http://worker-api:5000
         DEBUG: true
@@ -278,6 +279,7 @@ integration_tests_new_api:
         REDIS_HOST: redis
         DB_API_URL: 'http://new-api:4000'
         API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        WORKER_API_KEY: OIfY8nFQ9I6okbgGZZjSkOdUUDGZbp9H
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
         KUBERNETES_SERVICE_CPU_REQUEST: '100m'
         KUBERNETES_SERVICE_CPU_LIMIT: '200m'
@@ -291,6 +293,8 @@ integration_tests_new_api:
         DB_API_URL: 'http://new-api:4000'
         API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
+        WORKER_API_WEBSOCKET: ws://worker-api:5000/worker/ws
+        WORKER_API_KEY: OIfY8nFQ9I6okbgGZZjSkOdUUDGZbp9H
         KUBERNETES_SERVICE_CPU_REQUEST: '100m'
         KUBERNETES_SERVICE_CPU_LIMIT: '200m'
         KUBERNETES_SERVICE_MEMORY_REQUEST: '512Mi'
