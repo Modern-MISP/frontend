@@ -43,9 +43,11 @@
           if (resp.response.redirected && resp.response.status == 409) {
             // get job id
             console.log('Retrying...');
-            const job_id = resp.response.url.substring(resp.response.url.lastIndexOf('/') + 1);
+            const parts = resp.response.url.split('/');
+            const jobType = parts[parts.length - 2];
+            const jobId = parts[parts.length - 1];
 
-            getJobResult(job_id).then((result) => {
+            getJobResult(jobType, jobId).then((result) => {
               freetextData = result;
             });
           } else if (resp.error) {
@@ -61,16 +63,16 @@
     );
   };
 
-  async function getJobResult(job_id: string) {
+  async function getJobResult(jobType: string, jobId: string) {
     console.log('Retrieving job result from api');
-    const resp = await $api.GET('/jobs/{job_id}', {
-      params: { path: { job_id } }
+    const resp = await $api.GET('/jobs/{jobType}/{jobId}', {
+      params: { path: { jobType, jobId } }
     });
     if (resp.error) {
       console.log('Got an error from jobs api with response:', resp['response']);
       if (resp['response']['status'] == 409) {
         await new Promise((f) => setTimeout(f, 2000));
-        return await getJobResult(job_id);
+        return await getJobResult(jobType, jobId);
       } else {
         throw new Error(resp['error']['detail']);
       }
