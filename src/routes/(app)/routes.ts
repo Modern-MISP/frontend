@@ -135,6 +135,12 @@ export const routes: SideMenuRoute[] = [
         href: '/admin/servers'
       },
       {
+        name: 'Worker Management',
+        icon: 'mdi:bolt',
+        userAccess: 'none',
+        href: '/admin/workerManagement'
+      },
+      {
         name: 'Workflow Settings',
         icon: 'mdi:toggle-switch-outline',
         userAccess: 'none',

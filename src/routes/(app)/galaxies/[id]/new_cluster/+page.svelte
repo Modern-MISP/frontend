@@ -43,6 +43,7 @@
         })
         .then((resp) => {
           if (resp.error) {
+            console.log(resp);
             throw new Error(resp['error']['message']);
           } else {
             goto(`/galaxies/clusters/${resp.data.GalaxyCluster?.id}`);

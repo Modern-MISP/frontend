@@ -28,17 +28,19 @@
   }
 
   function getPasswordFeedback() {
-    zxcvbnAsync(password, [oldPassword]).then((result) => {
-      let feedback: string[] = [];
-      if (result.feedback.warning) {
-        feedback = [result.feedback.warning];
-      } else if (result.feedback.suggestions.length > 0) {
-        feedback = result.feedback.suggestions;
-      } else if (password != retypedPassword) {
-        feedback = ['New Password and Repeat Password do not match'];
-      }
-      passwordFeedback = feedback;
-    });
+    zxcvbnAsync(password, [oldPassword])
+      .then((result) => {
+        let feedback: string[] = [];
+        if (result.feedback.warning) {
+          feedback = [result.feedback.warning];
+        } else if (result.feedback.suggestions.length > 0) {
+          feedback = result.feedback.suggestions;
+        } else if (password != retypedPassword) {
+          feedback = ['New Password and Repeat Password do not match'];
+        }
+        passwordFeedback = feedback;
+      })
+      .catch((err) => console.error(err));
   }
 
   const options = {

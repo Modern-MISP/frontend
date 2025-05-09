@@ -1,0 +1,6 @@
+änderungen pflichtenheft:
+
+test T021 macht nicht viel sinn
+szenarien wurde auch zusammengefasst weil kaum unterschied
+
+bugs in api function worker/unpause/ and worker/pause/ in api return wrong status code and check for wrong

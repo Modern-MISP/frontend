@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 import createClient, { type FetchResponse } from 'openapi-fetch';
 import { derived } from 'svelte/store';
 import { objectEntries } from 'ts-extras';
-import type { paths } from './misp'; // generated from openapi-typescript
+import type { paths } from 'mmisp-api-client'; // generated from openapi-typescript
 
 function genDisabledFunction(message = 'The REST method you try to use is disabled') {
   return async (): Promise<FetchResponse<object>> => {
