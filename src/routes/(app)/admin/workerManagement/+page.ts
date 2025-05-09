@@ -14,7 +14,6 @@ import PillCollection from '$lib/components/pills/pillCollection/PillCollection.
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/worker/all', { fetch });
-  console.log(data);
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and message are not set, therefor .status an .message default to never
   if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['message']);
@@ -26,9 +25,9 @@ export const load: PageLoad = async ({ fetch }) => {
   const header = [
     col({
       icon: 'mdi:id-card',
-      key: 'id',
-      label: 'Worker ID',
-      value: (x) => ({ display: Info, props: { text: String(x?.id) ?? 'unknown' } })
+      key: 'name',
+      label: 'Worker Name',
+      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
     }),
     col({
       icon: 'mdi:id-card',
@@ -44,7 +43,6 @@ export const load: PageLoad = async ({ fetch }) => {
         display: PillCollection,
         props: {
           pills: x?.queues.map((x) => {
-            console.log(x);
             return {
               text: x ?? 'unknown'
             };

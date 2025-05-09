@@ -4,7 +4,7 @@
   import type { PageData } from './$types';
   import { successPill } from '$lib/util/pill.util';
 
-  /** Page data containing data of the users table.*/
+  /** Page data containing data of the workers table.*/
   export let data: PageData;
 
   let password = '';

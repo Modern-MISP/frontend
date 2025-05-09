@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
+  import SideMenuEntry from '$lib/components/menus/sidemenu/SideMenuEntry.svelte';
+  import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  /** Page data containing data of the users with the 'id' in the url */
+  /** Page data containing data of the worker with the 'id' in the url */
   export let data: PageData;
 
   $: ({ jobs, jobs_header, jobqueues, jobqueues_header, queueEditActions } = data);

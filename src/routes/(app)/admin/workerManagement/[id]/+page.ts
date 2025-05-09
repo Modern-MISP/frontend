@@ -35,9 +35,44 @@ export const load: PageLoad = async ({ params, fetch }) => {
     error(responseJobqueues.status as NumericRange<400, 599>, mispErrorJobqueues['message']);
   if (mispErrorJobs) error(responseJobs.status as NumericRange<400, 599>, mispErrorJobs['message']);
 
-  const left = [].filter((x) => typeof x !== 'undefined');
+  const job_col = createTableHeadGenerator<(typeof jobs)[number], DynTableHeadExtent>();
+  const job_queues_col = createTableHeadGenerator<(typeof jobqueues)[number], DynTableHeadExtent>();
 
-  const right = [];
+  const jobs_header = [
+    job_col({
+      icon: 'mdi:id-card',
+      key: 'name',
+      label: 'Job Name',
+      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
+    }),
+    job_col({
+      icon: 'mdi:id-card',
+      key: 'placeInQueue',
+      label: 'Queue Position',
+      value: (x) => ({ display: Info, props: { text: String(x?.placeInQueue) ?? 'unknown' } })
+    }),
+    job_col({
+      icon: 'mdi:queue-first-in-last-out',
+      key: 'queueName',
+      label: 'Queue Name',
+      value: (x) => ({ display: Info, props: { text: x?.queueName ?? 'unknown' } })
+    })
+  ];
+
+  const jobqueues_header = [
+    job_queues_col({
+      icon: 'mdi:id-card',
+      key: 'name',
+      label: 'Jobqueue Name',
+      value: (x) => ({ display: Info, props: { text: x?.name ?? 'unknown' } })
+    }),
+    job_queues_col({
+      icon: 'mdi:id-card',
+      key: 'activ',
+      label: 'Queue activ',
+      value: (x) => ({ display: Info, props: { text: String(x?.activ) ?? 'unknown' } })
+    })
+  ];
 
   const queueEditActions: DynCardActionHeader<typeof jobqueues>[] = [
     {
