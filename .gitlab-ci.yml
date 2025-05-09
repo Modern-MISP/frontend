@@ -275,9 +275,9 @@ integration_tests_new_api:
     - name: ${REGISTRY_DOMAIN}/${REGISTRY_PROJECT}/worker:main
       alias: worker-api
       variables:
-        MMISP_REDIS_HOST: redis
-        MMISP_DB_API_URL: 'http://new-api:4000'
-        MMISP_API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        REDIS_HOST: redis
+        DB_API_URL: 'http://new-api:4000'
+        API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
         KUBERNETES_SERVICE_CPU_REQUEST: '100m'
         KUBERNETES_SERVICE_CPU_LIMIT: '200m'
@@ -287,9 +287,9 @@ integration_tests_new_api:
       command: ['mmisp-worker']
       alias: worker
       variables:
-        MMISP_REDIS_HOST: redis
-        MMISP_DB_API_URL: 'http://new-api:4000'
-        MMISP_API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
+        REDIS_HOST: redis
+        DB_API_URL: 'http://new-api:4000'
+        API_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         DATABASE_URL: 'mysql+aiomysql://root:misp@db:3306/misp'
         KUBERNETES_SERVICE_CPU_REQUEST: '100m'
         KUBERNETES_SERVICE_CPU_LIMIT: '200m'
@@ -334,7 +334,6 @@ integration_tests_new_api:
     CYPRESS_VIDEO: 'true'
     ELECTRON_ENABLE_LOGGING: 'true'
     MISP_READY_FILE: '${CI_PROJECT_DIR}/misp_ready'
-    MMISP_REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     REDIS_PASSWORD: 1CA9kMhX6mcuhRlRAptZdQieSX6u25SJ
     CYPRESS_adminToken: '${MISP01_AUTH_TOKEN}'
     CYPRESS_legacy: 'false'
