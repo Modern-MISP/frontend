@@ -17,7 +17,7 @@
     {
       icon: 'mdi:close-circle-outline',
       label: 'Cancel',
-      class: 'hover:text-red',
+      class: 'hover:text-ctp-red',
       action: () => {
         history.back();
       }
@@ -25,7 +25,7 @@
     {
       icon: 'material-symbols:save-outline',
       label: 'Save',
-      class: 'hover:text-green',
+      class: 'hover:text-ctp-green',
       action: () => {
         form.requestSubmit();
       }

@@ -49,6 +49,6 @@
   
   A node representing a workflow frame.
 -->
-<div class="w-full h-full border-2 opacity-50 bg-surface0">
-  <span class="bg-surface2 text-text">{data.label}</span>
+<div class="w-full h-full border-2 opacity-50 bg-ctp-surface0">
+  <span class="bg-ctp-surface2 text-ctp-text">{data.label}</span>
 </div>

@@ -49,9 +49,9 @@
     class="flex items-center max-w-full gap-2 mx-auto w-fit"
     class:gap-8={length < BIG_GAPS_BEFORE}
   >
-    <button type="button" class="text-lg hover:text-sky" on:click={() => (page = 1)}>{1} </button>
+    <button type="button" class="text-lg hover:text-ctp-sky" on:click={() => (page = 1)}>{1} </button>
     <button type="button" on:click={() => (page > 1 ? page-- : undefined)} class="w-6 h-6 shrink-0">
-      <Icon icon="mdi:chevron-left" class="w-auto h-full hover:text-sky" />
+      <Icon icon="mdi:chevron-left" class="w-auto h-full hover:text-ctp-sky" />
     </button>
     <div
       class="flex w-full gap-4 overflow-auto text-ellipsis"
@@ -69,8 +69,8 @@
         {:else}
           <button
             type="button"
-            class="text-lg hover:text-sky"
-            class:text-sky={page == num}
+            class="text-lg hover:text-ctp-sky"
+            class:text-ctp-sky={page == num}
             on:click={() => (page = num)}>{num}</button
           >
         {/if}
@@ -81,9 +81,9 @@
       on:click={() => (page < length ? page++ : undefined)}
       class="w-6 h-6 shrink-0"
     >
-      <Icon icon="mdi:chevron-right" class="w-auto h-full hover:text-sky" />
+      <Icon icon="mdi:chevron-right" class="w-auto h-full hover:text-ctp-sky" />
     </button>
-    <button type="button" class="text-lg hover:text-sky" on:click={() => (page = length)}
+    <button type="button" class="text-lg hover:text-ctp-sky" on:click={() => (page = length)}
       >{length}
     </button>
   </div>

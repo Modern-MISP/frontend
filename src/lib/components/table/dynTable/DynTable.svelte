@@ -77,7 +77,7 @@
   {#each Object.entries(grouped) as [info, group], i}
     <tbody class:border-blue={info !== 'undefined'} class:border-8={info !== 'undefined'}>
       {#if info !== 'undefined'}
-        <tr class="bg-blue">
+        <tr class="bg-ctp-blue">
           <td colspan={$store.length} class="px-2 text-black">
             {info}
           </td>
@@ -86,8 +86,8 @@
       {#each group as row}
         {@const _href = href && href(row)}
         <tr
-          class="w-full hover:bg-surface2 border-l-surface0"
-          class:bg-surface2={activeRows.includes(row)}
+          class="w-full hover:bg-ctp-surface2 border-l-surface0"
+          class:bg-ctp-surface2={activeRows.includes(row)}
           class:!border-l-sky={activeRows.includes(row)}
           class:border-l-4={selectMode}
           on:click={() => (selectMode ? toggleRow(row) : undefined)}
@@ -110,7 +110,7 @@
     </tbody>
     <!-- Hack to display a "gap" between `tbody`s, is displayed after all but the last group -->
     {#if i < Object.keys(grouped).length - 1}
-      <tbody class="bg-black"><tr><td colspan={$store.length} /></tr></tbody>
+      <tbody class="bg-ctp-black"><tr><td colspan={$store.length} /></tr></tbody>
     {/if}
   {/each}
   <!-- </tbody> -->

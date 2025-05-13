@@ -41,9 +41,9 @@
 {#if $mode === 'edit'}
   <button type="button" class="absolute top-6 right-4" on:click={() => (add = !add)}>
     {#if add}
-      <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
+      <Icon icon="mdi:close-circle-outline" class="text-2xl text-ctp-red" />
     {:else}
-      <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
+      <Icon icon="mdi:plus-circle-outline" class="text-2xl text-ctp-sky" />
     {/if}
   </button>
 {/if}
@@ -52,7 +52,7 @@
     <slot />
   </div>
 
-  <div class="relative w-full rounded-md bg-surface0 h-fit">
+  <div class="relative w-full rounded-md bg-ctp-surface0 h-fit">
     <slot name="footer">
       <slot name="deletion">
         {#if deletion.length > 0 && $mode === 'edit'}
@@ -62,7 +62,7 @@
 
             <button
               on:click={_onDelete}
-              class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
+              class="absolute p-2 text-2xl text-white rounded-md bg-ctp-red right-2 bottom-2"
               type="button"
             >
               <Icon icon="mdi:delete-outline"></Icon>
@@ -77,7 +77,7 @@
             <PillCollection pills={selection}></PillCollection>
             <button
               on:click={_onSave}
-              class="absolute p-2 text-2xl text-white rounded-md bg-green right-2 bottom-2"
+              class="absolute p-2 text-2xl text-white rounded-md bg-ctp-green right-2 bottom-2"
               type="button"
             >
               <Icon icon="material-symbols:save-outline"></Icon>

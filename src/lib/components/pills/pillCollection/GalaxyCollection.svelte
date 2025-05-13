@@ -48,7 +48,7 @@
             if (includeAction)
               pill.action = {
                 icon: 'mdi:delete-outline',
-                class: 'hover:text-red',
+                class: 'hover:text-ctp-red',
                 onClick: () => {
                   pillsByGalaxy[x.id!] = pillsByGalaxy[x.id!].filter((x) => !isEqual(x, pill)); // Idk why x !== pill doesn't work. I guess the references are different. Anyway, this works.
                   const deletionPill = {
@@ -56,7 +56,7 @@
                     value: y.tag_id,
                     action: {
                       icon: 'mdi:restore',
-                      class: 'hover:text-green',
+                      class: 'hover:text-ctp-green',
                       onClick: () => {
                         deletion = deletion.filter((x) => x !== deletionPill);
                         pillsByGalaxy[x.id!] = [...pillsByGalaxy[x.id!], pill];

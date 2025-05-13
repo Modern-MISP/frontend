@@ -88,7 +88,7 @@
       >
       {#if data.moduleData.misp_core_format}
         <span
-          class="text-2xl text-sky"
+          class="text-2xl text-ctp-sky"
           title="The data passed by this trigger is compliant with the MISP core format"
         >
           <Icon icon="material-symbols:chat" />
@@ -97,7 +97,7 @@
       {#if fullData.disabled}
         <button
           type="button"
-          class="text-2xl text-red hover:mix-blend-hard-light"
+          class="text-2xl text-ctp-red hover:mix-blend-hard-light"
           title="Module disabled"
         >
           <Icon icon="fa6-solid:circle-exclamation" />
@@ -106,7 +106,7 @@
       {#if fullData.blocking}
         <button
           type="button"
-          class="text-2xl text-peach hover:mix-blend-hard-light"
+          class="text-2xl text-ctp-peach hover:mix-blend-hard-light"
           title="Blocking module might not work as intended"
         >
           <Icon icon="fa6-solid:triangle-exclamation" />
@@ -116,7 +116,7 @@
         <!-- Module filters are not yet supported -->
         <button
           type="button"
-          class="text-2xl text-sky hover:mix-blend-hard-light"
+          class="text-2xl text-ctp-sky hover:mix-blend-hard-light"
           title="module filtering conditions (not yet supported)"
           disabled
         >
@@ -145,7 +145,7 @@
       id={inputId}
       type="target"
       position={Position.Left}
-      class="bg-sky! rounded-none border-none w-4! h-4!"
+      class="bg-ctp-sky! rounded-none border-none w-4! h-4!"
       style="top: {i * dist + dist}px"
     />
   {/each}
@@ -154,7 +154,7 @@
       id={outputId}
       type="source"
       position={Position.Right}
-      class="bg-sky! rounded-none border-none w-4! h-4!"
+      class="bg-ctp-sky! rounded-none border-none w-4! h-4!"
       style="top: {i * dist + dist}px"
     />
   {/each}

@@ -149,7 +149,7 @@
 <!-- Feel free to change the css here because i don't have a clue what i am doing here if changed check if its still correct under /workerManagement/{id}-->
 <svelte:window use:actionBar={topMenuActions} />
 <div class="flex flex-col h-full w-full gap-2">
-  <div class="flex gap-4 h-9/10" id="filterRow">
+  <div class="flex gap-4 h-fit" id="filterRow">
     <slot name="filter">
       {#if filter.length > 0}
         <FilterCard bind:currentFilter bind:filterOpen>
@@ -193,7 +193,7 @@
     </slot>
     <slot name="moreActions" />
   </div>
-  <div class="relative flex h-fit overflow-hidden">
+  <div class="relative flex h-9/10 overflow-hidden">
     <slot>
       <slot name="table">
         <DynTable
@@ -212,7 +212,7 @@
     </slot>
   </div>
   {#if maxCount > LIMIT}
-    <div class="h-full">
+    <div class="h-fit">
       <slot name="pagination">
         <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
       </slot>

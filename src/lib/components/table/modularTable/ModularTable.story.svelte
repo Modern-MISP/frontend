@@ -20,7 +20,7 @@
       info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
       date: new Date(),
       tags: [
-        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-red! text-white!' },
+        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-ctp-red! text-white!' },
         { icon: 'mdi:email', text: 'asdf', class: 'bg-peach! text-white!' }
       ]
     },
@@ -31,7 +31,7 @@
       info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
       date: new Date(),
       tags: [
-        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-red! text-white!' },
+        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-ctp-red! text-white!' },
         { icon: 'mdi:email', text: 'asdf', class: 'bg-peach! text-white!' }
       ]
     },
@@ -42,7 +42,7 @@
       info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
       date: new Date(),
       tags: [
-        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-red! text-white!' },
+        { icon: 'mdi:email', text: 'admin@admin.test', class: 'bg-ctp-red! text-white!' },
         { icon: 'mdi:email', text: 'asdf', class: 'bg-peach! text-white!' }
       ]
     }

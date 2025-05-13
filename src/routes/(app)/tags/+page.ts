@@ -161,7 +161,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Delete',
       icon: 'mdi:delete-outline',
-      class: 'text-red',
+      class: 'text-ctp-red',
       action: (x) => {
         if (!x) return;
         if (

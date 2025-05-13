@@ -31,7 +31,7 @@
 
 <div>
   <div class="flex justify-between">
-    <CardHeading class="sticky top-0 z-20 px-2 py-6 text-2xl font-bold bg-surface0"
+    <CardHeading class="sticky top-0 z-20 px-2 py-6 text-2xl font-bold bg-ctp-surface0"
       >{title}</CardHeading
     >
     <slot name="moreHeader" />

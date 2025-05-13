@@ -119,8 +119,8 @@
   This component is a wrapper around the svelte-heatmap component.
  -->
 <div class="h-full">
-  <div class="gap-4 text-text w-full h-full p-4 rounded-lg bg-surface0 {clazz}">
-    <h1 class="text-2xl font-bold text-sky {clazz}">{title}</h1>
+  <div class="gap-4 text-ctp-text w-full h-full p-4 rounded-lg bg-ctp-surface0 {clazz}">
+    <h1 class="text-2xl font-bold text-ctp-sky {clazz}">{title}</h1>
     <span class="">{description}</span>
     {#if typeof dropdown !== 'undefined'}
       <svelte:component this={Select} {...dropdown} />

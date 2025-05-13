@@ -55,7 +55,7 @@
           <span>{v}</span>
         {/if}
       {:else}
-        <span class="text-red">undefined</span>
+        <span class="text-ctp-red">undefined</span>
       {/if}
     </CardRow>
   {/each}

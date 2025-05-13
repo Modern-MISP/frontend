@@ -25,13 +25,13 @@
 <button
   type="button"
   class="text-subtext0"
-  class:!text-yellow={info.length > 0}
+  class:!text-ctp-yellow={info.length > 0}
   use:melt={$trigger}
 >
   <Icon icon="mdi:information" width="30" />
 </button>
 {#if $open}
-  <div use:melt={$content} class="p-3 rounded-lg bg-surface1 text-text">
+  <div use:melt={$content} class="p-3 rounded-lg bg-ctp-surface1 text-ctp-text">
     <div use:melt={$arrow} />
     <div class="flex flex-col gap-2">
       {#each info as message}

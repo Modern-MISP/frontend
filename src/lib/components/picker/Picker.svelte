@@ -111,8 +111,8 @@
 <div class="box-border relative overflow-visible">
   <div
     class="flex flex-col items-start w-full gap-2 p-2 rounded-lg"
-    class:bg-surface1={!disabled}
-    class:bg-overlay0={disabled}
+    class:bg-ctp-surface1={!disabled}
+    class:bg-ctp-overlay0={disabled}
     class:cursor-not-allowed={disabled}
   >
     {#if pickedItems.length > 0}
@@ -123,7 +123,7 @@
             class="border-2 border-surface0 w-max {props.class}"
             action={!disabled
               ? {
-                  class: 'hover:text-red',
+                  class: 'hover:text-ctp-red',
                   onClick: () => {
                     [pickedItems, pickableItems] = removeFromAddToIndex(
                       pickedItems,
@@ -141,7 +141,7 @@
     {/if}
     <input
       bind:this={input}
-      class="w-full h-full m-2 outline-none bg-inherit text-text"
+      class="w-full h-full m-2 outline-none bg-inherit text-ctp-text"
       type="text"
       {placeholder}
       {disabled}
@@ -150,7 +150,7 @@
     />
     {#if value !== '' && autocomplete.length > 0}
       <div
-        class="absolute left-0 max-h-80 gap-1 mt-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-surface1 {popUpClass}"
+        class="absolute left-0 max-h-80 gap-1 mt-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-ctp-surface1 {popUpClass}"
       >
         {#each autocomplete as props}
           <button

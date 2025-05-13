@@ -26,26 +26,26 @@
 
 <div
   id={'object-' + id}
-  class="px-4 py-2 shadow-md rounded-md bg-surface0"
+  class="px-4 py-2 shadow-md rounded-md bg-ctp-surface0"
   title={name + ' : ' + comment}
 >
   <div class="flex">
-    <div class="rounded-full w-12 h-12 flex justify-center items-center bg-surface1">
+    <div class="rounded-full w-12 h-12 flex justify-center items-center bg-ctp-surface1">
       <Icon icon="mdi:web" />
     </div>
     <div class="ml-2">
       <div class="font-bold truncate max-w-28">{name}</div>
-      <div class="text-surface2 font-bold truncate max-w-28">{comment}</div>
+      <div class="text-ctp-surface2 font-bold truncate max-w-28">{comment}</div>
     </div>
   </div>
   <Handle
     type="target"
     position={Position.Left}
-    class="w-16 bg-teal-500! rounded-none border-none"
+    class="w-16 bg-ctp-teal-500! rounded-none border-none"
   />
   <Handle
     type="source"
     position={Position.Right}
-    class="w-16 bg-teal-500! rounded-none border-none"
+    class="w-16 bg-ctp-teal-500! rounded-none border-none"
   />
 </div>

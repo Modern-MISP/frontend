@@ -76,8 +76,8 @@
  -->
 
 <label
-  class="relative flex items-center gap-2 px-4 py-2 text-text rounded-lg bg-surface1 cursor-text {clazz}"
-  class:!bg-overlay0={disabled}
+  class="relative flex items-center gap-2 px-4 py-2 text-ctp-text rounded-lg bg-ctp-surface1 cursor-text {clazz}"
+  class:!bg-ctp-overlay0={disabled}
   class:!cursor-not-allowed={disabled}
   {title}
 >

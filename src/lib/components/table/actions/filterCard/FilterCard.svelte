@@ -31,7 +31,7 @@
           action={{
             icon: 'mdi:close-circle-outline',
             onClick: () => (currentFilter = omit(currentFilter, filterKey)),
-            class: 'hover:text-red'
+            class: 'hover:text-ctp-red'
           }}
         ></Pill>
       {/each}

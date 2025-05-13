@@ -13,12 +13,12 @@
     {
       text: 'ongoing',
       icon: 'mdi:progress-clock',
-      class: 'text-peach uppercase'
+      class: 'text-ctp-peach uppercase'
     },
     {
       text: 'complete',
       icon: 'mdi:progress-check',
-      class: 'text-green uppercase'
+      class: 'text-ctp-green uppercase'
     }
   ];
 </script>

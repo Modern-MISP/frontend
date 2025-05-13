@@ -43,7 +43,7 @@
   When setting a logo, do not forget to set the global `FADE_OPTIONS` constant, otherwise it may look weird.
  -->
 <aside
-  class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:flex! lg:w-20 rounded-xl bg-mantle text-text shrink-0 w-full"
+  class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:flex! lg:w-20 rounded-xl bg-ctp-mantle text-ctp-text shrink-0 w-full"
   class:lg:w-80={isOpen}
   class:hidden={!isOpen}
 >
@@ -62,9 +62,9 @@
   <nav class="flex flex-col w-full gap-2 overflow-auto overflow-x-hidden">
     <slot>
       {#if contextRoutes.length > 0}
-        <div class="flex flex-col justify-center w-full gap-2 bg-crust rounded-2xl">
+        <div class="flex flex-col justify-center w-full gap-2 bg-ctp-crust rounded-2xl">
           {#each contextRoutes as route}
-            <div class="flex-row rounded-2xl" class:bg-crust={isOpen}>
+            <div class="flex-row rounded-2xl" class:bg-ctp-crust={isOpen}>
               <SideMenuEntry
                 {...route}
                 isMenuOpen={isOpen}
@@ -76,7 +76,7 @@
         <SideMenuDivider />
       {/if}
       {#each routes as route}
-        <div class="flex flex-col rounded-2xl" class:bg-crust={isOpen}>
+        <div class="flex flex-col rounded-2xl" class:bg-ctp-crust={isOpen}>
           <SideMenuEntry
             {...route}
             isMenuOpen={isOpen}
@@ -89,13 +89,13 @@
   <SideMenuDivider class="mt-auto" />
   <div class="relative flex items-center w-full px-4">
     {#if isOpen}
-      <span class="absolute text-sky left-10 line-clamp-1" transition:fade={FADE_OPTIONS}
+      <span class="absolute text-ctp-sky left-10 line-clamp-1" transition:fade={FADE_OPTIONS}
         >Version: 0.1.0</span
       >
     {/if}
     <button
       type="button"
-      class="ml-auto text-4xl transition-all duration-500 cursor-pointer hover:text-sky"
+      class="ml-auto text-4xl transition-all duration-500 cursor-pointer hover:text-ctp-sky"
       on:click={() => (isOpen = !isOpen)}
       class:rotate-180={isOpen}
     >

@@ -169,7 +169,7 @@ export const load: PageLoad = async ({ fetch }) => {
     {
       label: 'Delete Server',
       icon: 'mdi:delete-outline',
-      class: 'text-red',
+      class: 'text-ctp-red',
       action: (x) => {
         Promise.all(
           x

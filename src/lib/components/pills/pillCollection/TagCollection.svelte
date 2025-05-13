@@ -45,7 +45,7 @@
       if (includeAction)
         pill.action = {
           icon: 'mdi:delete-outline',
-          class: 'hover:text-red',
+          class: 'hover:text-ctp-red',
 
           // On click remove pill from pills list and add to deletion list.
           onClick: () => {
@@ -57,7 +57,7 @@
               // Add an restore option, that adds the pill back to the pill array.
               action: {
                 icon: 'mdi:restore',
-                class: 'hover:text-green',
+                class: 'hover:text-ctp-green',
                 onClick: () => {
                   deletion = deletion.filter((x) => x !== deletionPill);
                   pills = [...pills, pill];

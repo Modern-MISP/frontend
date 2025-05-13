@@ -40,7 +40,7 @@
       <Select
         options={$store.map(({ label }) => ({ label, value: label }))}
         bind:value={currentOption}
-        class="bg-overlay0!"
+        class="bg-ctp-overlay0!"
       />
 
       {#if optionValue && typeof optionValue != 'string'}
@@ -50,7 +50,7 @@
       {/if}
 
       <Button
-        class="self-end py-2 mt-auto w-min text-sky"
+        class="self-end py-2 mt-auto w-min text-ctp-sky"
         suffixIcon="mdi:arrow-right"
         type="submit">Add</Button
       >
@@ -69,7 +69,7 @@
           action={{
             icon: 'mdi:delete-outline',
             onClick: () => (currentFilter = omit(currentFilter, filterKey)),
-            class: 'hover:text-red'
+            class: 'hover:text-ctp-red'
           }}
           title={currentFilter[filterKey]}
         ></Pill>

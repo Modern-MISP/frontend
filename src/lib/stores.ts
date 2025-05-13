@@ -21,8 +21,8 @@ export const themes = [
   { value: 'macchiato', label: 'Macchiato' },
   { value: 'frappe', label: 'Frappe' },
   { value: 'latte', label: 'Latte' },
-  { value: 'latte lighter', label: 'Brighter Latte ' },
-  { value: 'latte bright', label: 'Brightest Latte ' }
+/*  { value: 'latte lighter', label: 'Brighter Latte ' },
+  { value: 'latte bright', label: 'Brightest Latte ' }*/
 ] as const;
 
 export const mode = writable<Mode>('view');

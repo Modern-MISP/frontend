@@ -11,7 +11,7 @@
   
  -->
 
-<div class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-red">
+<div class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-ctp-red">
   <h2 class="text-9xl">
     {$page.status}
   </h2>
@@ -23,7 +23,7 @@
   {#if $page.status === 403}
     <span>
       Goto
-      <a href="/login" class="underline text-sky">login</a>
+      <a href="/login" class="underline text-ctp-sky">login</a>
     </span>
   {/if}
 </div>
