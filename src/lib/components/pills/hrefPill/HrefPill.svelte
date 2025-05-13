@@ -46,6 +46,6 @@
 
  -->
 
-<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? '!text-blue-400' : ''}>
+<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? 'text-blue-400!' : ''}>
   <a {href} {target}>{text}</a>
 </Pill>

@@ -16,7 +16,7 @@
   $: filterKeys = Object.keys(currentFilter);
 </script>
 
-<ActionCard class="!w-auto gap-4 flex flex-nowrap">
+<ActionCard class="w-auto! gap-4 flex flex-nowrap">
   <ActiveEntry label="Filter" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
   <slot />
   {#if filterKeys.length > 0}

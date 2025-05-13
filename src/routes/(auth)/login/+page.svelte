@@ -142,7 +142,7 @@
   {/if}
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
-  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+  <Button class="py-2 w-fit! self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
     >Login</Button
   >
 </form>

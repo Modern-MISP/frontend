@@ -35,10 +35,10 @@
   <meta charset="utf-8" />
 </svelte:head>
 
-<div id="layout" class="{$settings.theme} bg-base w-full h-screen flex flex-col">
-  <div class="relative w-full h-1 overflow-hidden bg-base">
+<div id="layout" class="{$settings.theme} bg-ctp-base w-full h-screen flex flex-col">
+  <div class="relative w-full h-1 overflow-hidden bg-ctp-base">
     <div
-      class="h-full w-full bg-sky/80 transition-transform duration-500
+      class="h-full w-full bg-ctp-sky/80 transition-transform duration-500
         ease-[cubic-bezier(0.65,0,0.35,1)]"
       class:hidden={$progressValue === 0}
       style={`transform: translateX(-${100 - (100 * ($progressValue ?? 0)) / (maxProgress ?? 1)}%)`}

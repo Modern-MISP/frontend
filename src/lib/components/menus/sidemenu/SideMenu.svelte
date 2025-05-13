@@ -43,7 +43,7 @@
   When setting a logo, do not forget to set the global `FADE_OPTIONS` constant, otherwise it may look weird.
  -->
 <aside
-  class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:!flex lg:w-20 rounded-xl bg-mantle text-text shrink-0 w-full"
+  class="relative z-20 flex flex-col h-full gap-4 p-2 py-6 overflow-hidden duration-200 ease-in lg:relative lg:flex! lg:w-20 rounded-xl bg-mantle text-text shrink-0 w-full"
   class:lg:w-80={isOpen}
   class:hidden={!isOpen}
 >

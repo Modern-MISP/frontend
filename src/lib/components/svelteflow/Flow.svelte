@@ -70,8 +70,8 @@
   elementsSelectable={$mode === 'edit'}
   proOptions={{ hideAttribution: true }}
 >
-  <div class="!text-base">
-    <Background class="!bg-base" variant={BackgroundVariant.Dots} size={2} />
+  <div class="text-base!">
+    <Background class="bg-base!" variant={BackgroundVariant.Dots} size={2} />
     <Controls position="top-right" showLock={false}>
       <slot name="controls" />
     </Controls>

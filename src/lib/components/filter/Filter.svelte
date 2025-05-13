@@ -40,7 +40,7 @@
       <Select
         options={$store.map(({ label }) => ({ label, value: label }))}
         bind:value={currentOption}
-        class="!bg-overlay0"
+        class="bg-overlay0!"
       />
 
       {#if optionValue && typeof optionValue != 'string'}
@@ -65,7 +65,7 @@
         <Pill
           label={filterKey}
           text={currentFilter[filterKey]}
-          class="!justify-between w-full h-10"
+          class="justify-between! w-full h-10"
           action={{
             icon: 'mdi:delete-outline',
             onClick: () => (currentFilter = omit(currentFilter, filterKey)),

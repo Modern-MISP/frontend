@@ -41,7 +41,7 @@
   pickableItems={tags.map((tag) => ({
     text: tag.name,
     value: tag.id,
-    class: '!border-none',
+    class: 'border-none!',
     style: `background-color: ${tag.colour}; color: ${
       shouldTextBeBlack(tag.colour ?? '') ? 'black' : 'white'
     }`

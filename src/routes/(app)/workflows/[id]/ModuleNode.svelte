@@ -145,7 +145,7 @@
       id={inputId}
       type="target"
       position={Position.Left}
-      class="!bg-sky rounded-none border-none !w-4 !h-4"
+      class="bg-sky! rounded-none border-none w-4! h-4!"
       style="top: {i * dist + dist}px"
     />
   {/each}
@@ -154,7 +154,7 @@
       id={outputId}
       type="source"
       position={Position.Right}
-      class="!bg-sky rounded-none border-none !w-4 !h-4"
+      class="bg-sky! rounded-none border-none w-4! h-4!"
       style="top: {i * dist + dist}px"
     />
   {/each}

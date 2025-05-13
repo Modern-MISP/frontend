@@ -78,7 +78,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
       label: 'Distribution',
       value: (x) => ({
         display: LookupPill,
-        props: { value: +x.distribution!, class: '!w-56', options: DISTRIBUTION_LOOKUP }
+        props: { value: +x.distribution!, class: 'w-56!', options: DISTRIBUTION_LOOKUP }
       })
     }),
     fac({

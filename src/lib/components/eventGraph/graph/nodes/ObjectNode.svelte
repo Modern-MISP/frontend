@@ -41,11 +41,11 @@
   <Handle
     type="target"
     position={Position.Left}
-    class="w-16 !bg-teal-500 rounded-none border-none"
+    class="w-16 bg-teal-500! rounded-none border-none"
   />
   <Handle
     type="source"
     position={Position.Right}
-    class="w-16 !bg-teal-500 rounded-none border-none"
+    class="w-16 bg-teal-500! rounded-none border-none"
   />
 </div>

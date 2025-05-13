@@ -89,7 +89,7 @@
     <div class="flex gap-1">
       <Input
         type="color"
-        class="w-32 !cursor-pointer"
+        class="w-32 cursor-pointer!"
         value={color}
         name="colour"
         on:value={({ detail }) => (color = detail)}

@@ -19,7 +19,7 @@ export const THREAT_LEVEL_LOOKUP: ComponentProps<Pill>[] = [
   {
     text: 'high',
     icon: 'mdi:chevron-triple-up',
-    class: '!text-red uppercase'
+    class: 'text-red! uppercase'
   }
 ];
 export const ANALYSIS_LOOKUP: ComponentProps<Pill>[] = [

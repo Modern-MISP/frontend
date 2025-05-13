@@ -145,7 +145,7 @@
       <br />
     {/each}
 
-    <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    <Button class="py-2 w-fit! self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
       >continue</Button
     >
   </span>

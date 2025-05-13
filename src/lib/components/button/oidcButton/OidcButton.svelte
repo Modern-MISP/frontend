@@ -20,6 +20,6 @@
   @component
   A button that represents an OIDC provider.
 -->
-<Button on:click={() => OidcLogin(url)} class="oidc-button py-2 !w-fit text-sky">
+<Button on:click={() => OidcLogin(url)} class="oidc-button py-2 w-fit! text-sky">
   {name}
 </Button>

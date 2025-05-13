@@ -31,7 +31,7 @@
   You can add classes to an element by passing a function to `elemClass`.
  -->
 
-<List {items} {elemClass} {title} bodyClass="!pl-0" let:item let:index>
+<List {items} {elemClass} {title} bodyClass="pl-0!" let:item let:index>
   <button type="button" slot="moreHeader" on:click={() => (items = ['', ...items])}>
     <Icon icon="mdi:plus-circle-outline" class="text-xl text-sky"></Icon>
   </button>

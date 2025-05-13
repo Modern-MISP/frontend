@@ -73,7 +73,7 @@
               <IconCard
                 icon="mdi:web"
                 text={object.name + ': ' + object.comment}
-                class="flex !flex-row"
+                class="flex flex-row!"
               ></IconCard>
             </div>
           {/each}
@@ -98,7 +98,7 @@
               <IconCard
                 icon="mdi:flag"
                 text={attribute.type + ': ' + attribute.value}
-                class="flex !flex-row"
+                class="flex flex-row!"
               ></IconCard>
             </div>
           {/each}

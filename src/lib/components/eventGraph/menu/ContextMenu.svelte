@@ -111,7 +111,7 @@
   {#if type === 'object'}
     <IconCardRow class="border-2 border-sky">
       <IconCard icon="bx:expand" text="Expand" on:click={expandNode} />
-      <IconCard icon="bx:collapse" text="Collapse" class="!text-red" on:click={collapseNode} />
+      <IconCard icon="bx:collapse" text="Collapse" class="text-red!" on:click={collapseNode} />
     </IconCardRow>
   {/if}
 
@@ -120,7 +120,7 @@
       {#if type === 'attribute'}
         <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />
       {/if}
-      <IconCard icon="mdi:delete" text="Delete" class="!text-red" on:click={deleteNode} />
+      <IconCard icon="mdi:delete" text="Delete" class="text-red!" on:click={deleteNode} />
     </IconCardRow>
   {/if}
 </div>
