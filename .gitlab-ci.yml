@@ -172,7 +172,7 @@ integration_tests:
   parallel: 2
   stage: test
   image:
-    name: cypress/included:13.13.2
+    name: cypress/included:14.3.3
     entrypoint: ['']
   needs:
     - build_image_node
@@ -258,7 +258,7 @@ integration_tests_new_api:
   parallel: 2
   stage: test
   image:
-    name: cypress/included:13.13.2
+    name: cypress/included:14.3.3
     entrypoint: ['']
   needs:
     - build_image_node
