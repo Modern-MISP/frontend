@@ -281,6 +281,7 @@ integration_tests_new_api:
         WORKER_API_KEY: OIfY8nFQ9I6okbgGZZjSkOdUUDGZbp9H
         WORKER_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         WORKER_URL: http://worker-api:5000
+        HASH_SECRET: abcdefghijklmnop
         DEBUG: true
         WORKER_COUNT: 1
         KUBERNETES_SERVICE_CPU_REQUEST: '500m'
