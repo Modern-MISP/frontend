@@ -226,7 +226,7 @@ integration_tests:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - svelte-kit sync
+    - npx svelte-kit sync
     - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_legacy --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
@@ -341,7 +341,7 @@ integration_tests_new_api:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
-    - svelte-kit sync
+    - npx svelte-kit sync
     - until wget -q -t1 http://new-api:4000; do rc="$?"; if [ $rc -eq 0 ] || [ $rc -eq 8 ]; then echo "MMISP API is ready"; break; else sleep 1; fi; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
