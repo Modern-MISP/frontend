@@ -11,7 +11,9 @@
   
  -->
 
-<div class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-ctp-red">
+<div
+  class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-ctp-red"
+>
   <h2 class="text-9xl">
     {$page.status}
   </h2>

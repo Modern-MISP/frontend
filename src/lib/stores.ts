@@ -20,8 +20,8 @@ export const themes = [
   { value: 'mocha', label: 'Mocha' },
   { value: 'macchiato', label: 'Macchiato' },
   { value: 'frappe', label: 'Frappe' },
-  { value: 'latte', label: 'Latte' },
-/*  { value: 'latte lighter', label: 'Brighter Latte ' },
+  { value: 'latte', label: 'Latte' }
+  /*  { value: 'latte lighter', label: 'Brighter Latte ' },
   { value: 'latte bright', label: 'Brightest Latte ' }*/
 ] as const;
 

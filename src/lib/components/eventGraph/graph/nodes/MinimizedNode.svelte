@@ -62,6 +62,14 @@
       <Icon icon="mdi:web" />
     </div>
   </div>
-  <Handle type="target" position={Position.Left} class="bg-ctp-surface0! rounded-none border-none" />
-  <Handle type="source" position={Position.Right} class="bg-ctp-surface0! rounded-none border-none" />
+  <Handle
+    type="target"
+    position={Position.Left}
+    class="bg-ctp-surface0! rounded-none border-none"
+  />
+  <Handle
+    type="source"
+    position={Position.Right}
+    class="bg-ctp-surface0! rounded-none border-none"
+  />
 </BaseNode>

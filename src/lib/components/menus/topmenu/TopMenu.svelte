@@ -31,7 +31,9 @@
   
  -->
 
-<div class="flex flex-row items-center justify-between gap-4 p-2 rounded-xl bg-ctp-mantle text-ctp-text">
+<div
+  class="flex flex-row items-center justify-between gap-4 p-2 rounded-xl bg-ctp-mantle text-ctp-text"
+>
   <div class="flex items-center gap-4">
     <button type="button" on:click={() => (isOpen = !isOpen)} class="lg:hidden">
       {#if isOpen}
@@ -46,7 +48,9 @@
     </Input> -->
   </div>
   <div class="flex items-center gap-6">
-    <div class="flex flex-row items-center justify-between gap-4 p-3 text-ctp-text rounded-xl bg-ctp-crust">
+    <div
+      class="flex flex-row items-center justify-between gap-4 p-3 text-ctp-text rounded-xl bg-ctp-crust"
+    >
       {#if mode === 'edit'}
         <ActionBar entries={$actionBarEntries} />
       {/if}

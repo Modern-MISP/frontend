@@ -1,10 +1,9 @@
 @import './fonts.css' layer(base);
 
 @import 'tailwindcss';
-@import "@catppuccin/tailwindcss/mocha.css";
-@import "@catppuccin/tailwindcss/frappe.css";
-@import "@catppuccin/tailwindcss/macchiato.css";
-
+@import '@catppuccin/tailwindcss/mocha.css';
+@import '@catppuccin/tailwindcss/frappe.css';
+@import '@catppuccin/tailwindcss/macchiato.css';
 
 *,
 *:before,

@@ -23,7 +23,11 @@
 -->
 
 {#if entries.length > 0}
-  <div id="actionBar" class="flex flex-row items-center justify-between gap-4 text-ctp-text" in:slide>
+  <div
+    id="actionBar"
+    class="flex flex-row items-center justify-between gap-4 text-ctp-text"
+    in:slide
+  >
     {#each entries as entry}
       <svelte:component this={entryFactory(entry)} {...entry} />
     {/each}

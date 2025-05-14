@@ -49,7 +49,9 @@
     class="flex items-center max-w-full gap-2 mx-auto w-fit"
     class:gap-8={length < BIG_GAPS_BEFORE}
   >
-    <button type="button" class="text-lg hover:text-ctp-sky" on:click={() => (page = 1)}>{1} </button>
+    <button type="button" class="text-lg hover:text-ctp-sky" on:click={() => (page = 1)}
+      >{1}
+    </button>
     <button type="button" on:click={() => (page > 1 ? page-- : undefined)} class="w-6 h-6 shrink-0">
       <Icon icon="mdi:chevron-left" class="w-auto h-full hover:text-ctp-sky" />
     </button>
