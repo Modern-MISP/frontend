@@ -29,7 +29,7 @@ describe('filter attributes', () => {
         cy.get('tbody')
           .find('tr')
           .each(($el) => {
-            if (!$el.hasClass('bg-blue')) {
+            if (!$el.hasClass('bg-ctp-blue')) {
               cy.wrap($el)
                 .invoke('text')
                 .should('match', /(^$|^.*domain.*$)/);
