@@ -24,6 +24,17 @@ workflow:
     on_new_commit: interruptible
 
 # build image stage
+build_website:
+  image: registry.cert.kit.edu/hub/library/node:24
+  stage: build_image
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build
+
 
 build_image_node:
   needs: []
