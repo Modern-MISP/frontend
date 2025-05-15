@@ -36,6 +36,6 @@
   <!-- To support boolean as form response => Checkbox would evaluate to "on" if set and nothing if not set -->
   <input type="hidden" bind:value={checked} {name} />
   <div
-    class="w-11 h-6 bg-ctp-crust rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-text after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main peer-checked:dark:bg-ctp-sky transition-colors"
+    class="w-11 h-6 bg-ctp-crust rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-ctp-text after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ctp-main peer-checked:dark:bg-ctp-sky transition-colors"
   />
 </label>
