@@ -60,6 +60,12 @@ export const routes: SideMenuRoute[] = [
     ]
   },
   {
+    name: 'Taxonomies',
+    icon: 'mdi:sitemap-outline',
+    href: '/taxonomies/',
+    userAccess: 'none'
+  },
+  {
     name: 'Workflows',
     icon: 'material-symbols:network-node',
     href: '/workflows',
@@ -92,6 +98,12 @@ export const routes: SideMenuRoute[] = [
     userAccess: 'none'
   },
   {
+    name: 'Organisations',
+    icon: 'mdi:home',
+    href: '/organisations/',
+    userAccess: 'none'
+  },
+  {
     name: 'Sharing Groups',
     icon: 'mdi:account-group-outline',
     href: '/sharing_groups/',
@@ -99,7 +111,7 @@ export const routes: SideMenuRoute[] = [
   },
   {
     name: 'Logs',
-    icon: 'mdi:tag',
+    icon: 'mdi:text-box-outline',
     href: '/logs',
     userAccess: 'none'
   },
