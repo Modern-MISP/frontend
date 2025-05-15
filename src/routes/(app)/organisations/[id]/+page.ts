@@ -82,7 +82,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
     })
   ];
 
-
   return {
     data: cardData,
     header

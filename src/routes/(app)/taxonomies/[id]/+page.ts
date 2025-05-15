@@ -3,7 +3,6 @@ import { get } from 'svelte/store';
 import { error, type NumericRange } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-import Boolean from '$lib/components/boolean/Boolean.svelte';
 import Info from '$lib/components/info/Info.svelte';
 
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -43,7 +42,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
       value: (x) => ({ display: Info, props: { text: x.description } })
     })
   ];
-
 
   return {
     data: cardData,
