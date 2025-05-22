@@ -21,7 +21,7 @@
   const col = createTableHeadGenerator();
   let selectedCategory = data.categories[0];
   let availableTemplates = [];
-  export let selectedTemplate = data.categoryToNameMap[selectedCategory][0].uuid;
+  export let selectedTemplate = data.categoryToNameMap[selectedCategory][0].id;
 
   $: availableTemplates = data.categoryToNameMap[selectedCategory] as string[];
 
@@ -33,7 +33,7 @@
       display: Select,
       props: {
         name: 'template',
-        options: availableTemplates.map((c) => ({ value: c.uuid, label: c.name })) ?? [],
+        options: availableTemplates.map((c) => ({ value: c.id, label: c.name })) ?? [],
         changeCallback: (e) => {
           const target = e.target as HTMLSelectElement;
           selectedTemplate = target.value;
@@ -55,15 +55,15 @@
           changeCallback: (e) => {
             const target = e.target as HTMLSelectElement;
             selectedCategory = target.value;
-            selectedTemplate = data.categoryToNameMap[selectedCategory][0].uuid;
+            selectedTemplate = data.categoryToNameMap[selectedCategory][0].id;
             templateCol.update((tc) => ({
               ...tc,
               value: () => ({
                 display: Select,
                 props: {
                   name: 'name',
-                  options: availableTemplates.map((c) => ({ value: c.uuid, label: c.name })),
-                  value: availableTemplates[0].uuid,
+                  options: availableTemplates.map((c) => ({ value: c.id, label: c.name })),
+                  value: availableTemplates[0].id,
                   changeCallback: (e) => {
                     const target = e.target as HTMLSelectElement;
                     selectedTemplate = target.value;
@@ -105,7 +105,7 @@
         comment: formData.comment[i],
         disable_correlation: formData.disable_correlation[i]
       };
-    });
+    }).filter(attr => attr.value !== undefined && attr.value !== null && attr.value !== '');
     let object = {
       distribution: 0,
       sharing_group_id: 0,
