@@ -15,6 +15,7 @@ default:
 
 variables:
   SOURCE_DATE_EPOCH: 0
+  GIT_LFS_SKIP_SMUDGE: 1
 
 generate_docs:
   stage: generate_docs
