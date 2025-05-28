@@ -31,5 +31,6 @@
   }}
   {...data}
   dataAccess={(x) => x.response?.Attribute}
-  groupInfo={(x) => ((String(x.object_id) === '0' || x.object_id === null) ? undefined : `Object: ${x.object_id}`)}
+  groupInfo={(x) =>
+    String(x.object_id) === '0' || x.object_id === null ? undefined : `Object: ${x.object_id}`}
 />

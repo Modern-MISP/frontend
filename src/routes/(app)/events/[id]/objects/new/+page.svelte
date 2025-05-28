@@ -95,17 +95,19 @@
   ];
 
   function editCallback(formData: Record<string, string>) {
-    let attributes = formData.category.map(function (e, i) {
-      return {
-        object_relation: formData.object_relation[i],
-        type: formData.type[i],
-        category: e,
-        value: formData.value[i],
-        distribution: formData.distribution[i],
-        comment: formData.comment[i],
-        disable_correlation: formData.disable_correlation[i]
-      };
-    }).filter(attr => attr.value !== undefined && attr.value !== null && attr.value !== '');
+    let attributes = formData.category
+      .map(function (e, i) {
+        return {
+          object_relation: formData.object_relation[i],
+          type: formData.type[i],
+          category: e,
+          value: formData.value[i],
+          distribution: formData.distribution[i],
+          comment: formData.comment[i],
+          disable_correlation: formData.disable_correlation[i]
+        };
+      })
+      .filter((attr) => attr.value !== undefined && attr.value !== null && attr.value !== '');
     let object = {
       distribution: 0,
       sharing_group_id: 0,
