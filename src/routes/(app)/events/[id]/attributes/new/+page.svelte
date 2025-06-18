@@ -40,8 +40,6 @@
     ...($currentRoute ?? []),
     { name: 'New Attribute', icon: 'mdi:flag-plus', href: 'new' }
   ];
-
-  let test = ['cookie', 'md5'];
 </script>
 
 <svelte:window use:lockEditMode={true} />
@@ -53,7 +51,7 @@ Displays the form for creating a new attribute.
 
 <Form callback={editCallback}>
   <AddAttribute
-    allAttributeTypes={test}
+    allAttributeTypes={data.attributeTypes.types}
     categoryTypeMapping={data.attributeTypes.category_type_mappings}
     categories={data.attributeTypes.categories}
   />
