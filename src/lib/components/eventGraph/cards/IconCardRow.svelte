@@ -14,6 +14,6 @@
   Sets the default padding and border radius. You can override this by passing your own classes.
   
  -->
-<CardRow class="rounded-lg bg-surface0 {clazz}">
+<CardRow class="rounded-lg bg-ctp-surface0 {clazz}">
   <slot />
 </CardRow>

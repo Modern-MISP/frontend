@@ -15,7 +15,7 @@ describe('Settings Page Tests', () => {
       'Detailed information about your user account. Only the name can be changed by you. For other changes, please contact your administrator.'
     );
 
-    if (!Cypress.env('legacy')) {
+    if (Cypress.env('legacy') === 'false') {
       cy.contains('Name');
     }
     cy.contains('Role');
@@ -41,8 +41,6 @@ describe('Settings Page Tests', () => {
     cy.get('select').select('Macchiato');
     cy.get('select').select('Frappe');
     cy.get('select').select('Latte');
-    cy.get('select').select('Brighter Latte');
-    cy.get('select').select('Brightest Latte');
 
     cy.contains('Menu is open per default')
       .parent()

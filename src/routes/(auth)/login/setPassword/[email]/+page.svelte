@@ -28,17 +28,19 @@
   }
 
   function getPasswordFeedback() {
-    zxcvbnAsync(password, [oldPassword]).then((result) => {
-      let feedback: string[] = [];
-      if (result.feedback.warning) {
-        feedback = [result.feedback.warning];
-      } else if (result.feedback.suggestions.length > 0) {
-        feedback = result.feedback.suggestions;
-      } else if (password != retypedPassword) {
-        feedback = ['New Password and Repeat Password do not match'];
-      }
-      passwordFeedback = feedback;
-    });
+    zxcvbnAsync(password, [oldPassword])
+      .then((result) => {
+        let feedback: string[] = [];
+        if (result.feedback.warning) {
+          feedback = [result.feedback.warning];
+        } else if (result.feedback.suggestions.length > 0) {
+          feedback = result.feedback.suggestions;
+        } else if (password != retypedPassword) {
+          feedback = ['New Password and Repeat Password do not match'];
+        }
+        passwordFeedback = feedback;
+      })
+      .catch((err) => console.error(err));
   }
 
   const options = {
@@ -103,7 +105,7 @@
     Displays the set password page. 
 -->
 <form
-  class="flex flex-col gap-4 m-auto w-80 text-text"
+  class="flex flex-col gap-4 m-auto w-80 text-ctp-text"
   method="post"
   on:submit|preventDefault={submit}
 >
@@ -137,13 +139,13 @@
     disabled={false}
   />
 
-  <span class="text-red">
+  <span class="text-ctp-red">
     {#each passwordFeedback as feedback}
       {feedback}
       <br />
     {/each}
 
-    <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    <Button class="py-2 w-fit! self-end text-ctp-sky" suffixIcon="mdi:chevron-right" type="submit"
       >continue</Button
     >
   </span>

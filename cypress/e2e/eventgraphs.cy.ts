@@ -58,63 +58,63 @@ describe('eventgraphs', () => {
     check('Comment', attribute.comment, 'span');
     check('Distribution', attribute.distribution.name, 'span');
   });
-  if (Cypress.env('legacy') == false) {
-    it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
-      const referenceTypes = [
-        'Acquaintance',
-        'Child',
-        'Co-resident',
-        'Co-worker',
-        'Colleague',
-        'Contact',
-        'Crush',
-        'Date',
-        'Friend',
-        'Kin',
-        'Me',
-        'Met',
-        'Muse'
-      ];
-      const randomReferenceTypeIndex = Math.floor(Math.random() * referenceTypes.length);
 
-      const eventId = 34;
+  it('should drag and drop unreferenced attribute and add new reference to an Event-Graph', () => {
+    if (Cypress.env('legacy') === 'true') {
+      this.skip();
+    }
+    const referenceTypes = [
+      'Acquaintance',
+      'Child',
+      'Co-resident',
+      'Co-worker',
+      'Colleague',
+      'Contact',
+      'Crush',
+      'Date',
+      'Friend',
+      'Kin',
+      'Me',
+      'Met',
+      'Muse'
+    ];
+    const randomReferenceTypeIndex = Math.floor(Math.random() * referenceTypes.length);
 
-      const reference = {
-        type: referenceTypes[randomReferenceTypeIndex]
-      };
+    const eventId = 34;
 
-      const object = {
-        name: 'object',
-        abbreviation: 'o',
-        id: '92'
-      };
+    const reference = {
+      type: referenceTypes[randomReferenceTypeIndex]
+    };
 
-      cy.visit('events/' + eventId + '/graph');
-      cy.toggleMode(); // enter edit mode
+    const object = {
+      name: 'object',
+      abbreviation: 'o',
+      id: '92'
+    };
 
-      cy.get('button:contains("Unreferenced Attributes")').click(); // open
+    cy.visit('events/' + eventId + '/graph');
+    cy.toggleMode(); // enter edit mode
 
-      const card = cy.get('.attribute-node:first'); // select first unreference attribute
+    cy.get('button:contains("Unreferenced Attributes")').click(); // open
 
-      card.drag('.svelte-flow__pane'); // drop in graph
+    const card = cy.get('.attribute-node:first'); // select first unreference attribute
 
-      cy.get('button:contains("Unreferenced Attributes")').click(); // close
+    card.drag('.svelte-flow__pane'); // drop in graph
 
-      cy.get(
-        'div:has(> span:first-child:contains("Reference Type for new references")) select'
-      ).select(reference.type); // select reference type
+    cy.get('button:contains("Unreferenced Attributes")').click(); // close
 
-      const sourceHandle = cy.get(
-        `div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`
-      ); // object's right handle
-      const destinationHandleSelector = 'div[data-id^="unreferenced"] .svelte-flow__handle-left'; // unreferenced attribute's left handle
-      sourceHandle.drag(destinationHandleSelector); // connect both nodes
+    cy.get(
+      'div:has(> span:first-child:contains("Reference Type for new references")) select'
+    ).select(reference.type); // select reference type
 
-      cy.reload();
+    const sourceHandle = cy.get(`div[id="${object.name}-${object.id}"] .svelte-flow__handle-right`); // object's right handle
+    const destinationHandleSelector = 'div[data-id^="unreferenced"] .svelte-flow__handle-left'; // unreferenced attribute's left handle
+    sourceHandle.drag(destinationHandleSelector); // connect both nodes
 
-      cy.get(
-        `.svelte-flow__edge[aria-label^="Edge from ${object.abbreviation}-${object.id} to"]`
-      ).should('exist');
-    });
-  }
+    cy.reload();
+
+    cy.get(
+      `.svelte-flow__edge[aria-label^="Edge from ${object.abbreviation}-${object.id} to"]`
+    ).should('exist');
+  });
 });

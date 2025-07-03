@@ -45,18 +45,18 @@
   <Card>
     <h1 class="text-xl">Import Galaxies</h1>
     {#if error}
-      <span class="text-red"><b>Error:</b> {error}</span>
+      <span class="text-ctp-red"><b>Error:</b> {error}</span>
     {/if}
     {#if success}
-      <span class="text-green"><b>Success:</b> {success}</span>
+      <span class="text-ctp-green"><b>Success:</b> {success}</span>
     {/if}
 
     <textarea
-      class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
+      class="w-full h-full p-2 border rounded-md outline-none bg-ctp-surface0 border-sky"
       name="galaxies"
     ></textarea>
 
-    <Button class="self-end gap-2 w-min text-sky" type="submit">
+    <Button class="self-end gap-2 w-min text-ctp-sky" type="submit">
       <Icon icon="mdi:import"></Icon>
       Import
     </Button>

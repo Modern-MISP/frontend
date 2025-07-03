@@ -6,7 +6,7 @@
   
   
  -->
-<div class="w-full h-full overflow-auto text-lg rounded-lg text-text bg-surface0">
+<div class="w-full h-full overflow-auto text-lg rounded-lg text-ctp-text bg-ctp-surface0">
   <table class="w-full border-collapse">
     <slot />
   </table>

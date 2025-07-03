@@ -56,7 +56,7 @@
     </CardRow>
     <div class="flex justify-center gap-4 mt-auto">
       <Button
-        class="w-min whitespace-nowrap bg-surface1"
+        class="w-min whitespace-nowrap bg-ctp-surface1"
         suffixIcon="mdi:plus-circle-outline"
         on:click={() => dispatch('createTag')}>Create new Tag</Button
       >

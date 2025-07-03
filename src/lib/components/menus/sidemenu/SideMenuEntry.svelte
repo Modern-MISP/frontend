@@ -74,8 +74,8 @@
  -->
 
 <div
-  class="flex items-center justify-between text-lg transition-all duration-200 cursor-pointer hover:text-sky"
-  class:text-sky={active}
+  class="flex items-center justify-between text-lg transition-all duration-200 cursor-pointer hover:text-ctp-sky"
+  class:text-ctp-sky={active}
   title={name}
 >
   <a class="flex items-center w-full h-16 gap-4 p-4" title={name} {href}>
@@ -92,7 +92,7 @@
     {#if isMenuOpen}
       <button
         type="button"
-        class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-sky"
+        class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-ctp-sky"
         class:rotate-180={isOpen}
         on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
       >
@@ -101,7 +101,7 @@
     {:else}
       <div
         use:melt={$content}
-        class="z-10 px-4 rounded-md shadow bg-surface0 text-text shadow-black"
+        class="z-10 px-4 rounded-md shadow bg-ctp-surface0 text-ctp-text shadow-black"
       >
         {#each children as child}
           <svelte:self {...child} isMenuOpen={true} isChild={true}></svelte:self>

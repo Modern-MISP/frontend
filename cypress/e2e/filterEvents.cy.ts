@@ -10,9 +10,9 @@ describe('filter Events', () => {
   });
   it('can add fast filter', () => {
     const filterToggle = cy.get('button:contains("My Organization")');
-    filterToggle.should('not.have.class', 'text-sky');
+    filterToggle.should('not.have.class', 'text-ctp-sky');
     filterToggle.click();
-    filterToggle.should('have.class', 'text-sky');
+    filterToggle.should('have.class', 'text-ctp-sky');
   });
 
   it('displays fast filter values inside of filter section and filter pill preview', () => {
@@ -63,9 +63,9 @@ describe('filter Events', () => {
 
 function addValueFilter() {
   const filterToggle = cy.get('button:contains("Filter")');
-  filterToggle.should('not.have.class', 'text-sky');
+  filterToggle.should('not.have.class', 'text-ctp-sky');
   filterToggle.click();
-  filterToggle.should('have.class', 'text-sky');
+  filterToggle.should('have.class', 'text-ctp-sky');
 
   cy.get('select:contains("Value")').first().select('Event Information');
 

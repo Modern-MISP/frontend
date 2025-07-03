@@ -3,6 +3,12 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { getFormValues } from '$lib/util/form.util';
 
+  let clazz = '';
+  /**
+   * Additional classes to be applied to this component.
+   */
+  export { clazz as class };
+
   /**
    * The callback to call on submit.
    */
@@ -17,7 +23,7 @@
     {
       icon: 'mdi:close-circle-outline',
       label: 'Cancel',
-      class: 'hover:text-red',
+      class: 'hover:text-ctp-red',
       action: () => {
         history.back();
       }
@@ -25,7 +31,7 @@
     {
       icon: 'material-symbols:save-outline',
       label: 'Save',
-      class: 'hover:text-green',
+      class: 'hover:text-ctp-green',
       action: () => {
         form.requestSubmit();
       }
@@ -39,6 +45,10 @@
 </script>
 
 <svelte:window use:actionBar={[...additionalActions, ...actions]} />
-<form bind:this={form} on:submit|preventDefault={(e) => callback(getFormValues(e))} class="h-full">
+<form
+  bind:this={form}
+  on:submit|preventDefault={(e) => callback(getFormValues(e))}
+  class="h-full {clazz}"
+>
   <slot />
 </form>

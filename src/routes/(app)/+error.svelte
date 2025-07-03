@@ -13,7 +13,7 @@
 -->
 <Card>
   <div
-    class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-red"
+    class="flex flex-col items-center justify-center w-full h-full gap-6 p-5 text-center text-ctp-red"
   >
     <h1 class="text-5xl font-bold">Error 404</h1>
     <p class="text-xl">{$page.error?.message ?? ''}</p>

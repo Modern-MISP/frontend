@@ -54,7 +54,7 @@ export const load = async ({ params, fetch }) => {
     data: serverData,
     error: mispError,
     response
-  } = await get(api).GET('/servers', { fetch });
+  } = await get(api).GET('/servers/', { fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

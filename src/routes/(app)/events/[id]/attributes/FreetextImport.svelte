@@ -37,36 +37,50 @@
         })
         .then((resp) => {
           console.log(resp);
-          if (resp.error) {
-            if (resp['response']['status'] == 307) {
-              getResponseData(resp['error']['id']);
-            } else {
-              throw new Error(resp.error.detail);
-            }
+          console.log('Response is', resp.response);
+          console.log('Redirected is', resp.response.redirected);
+          console.log('Status is', resp.response.status);
+          if (resp.response.redirected && resp.response.status == 409) {
+            // get job id
+            console.log('Retrying...');
+            const parts = resp.response.url.split('/');
+            const jobType = parts[parts.length - 2];
+            const jobId = parts[parts.length - 1];
+
+            getJobResult(jobType, jobId).then((result) => {
+              freetextData = result;
+            });
+          } else if (resp.error) {
+            throw new Error(resp.error.detail);
           } else {
-            freetextData = resp.data;
+            if (resp.data['attributes']) {
+              freetextData = resp.data['attributes'];
+            } else if (resp.data) {
+              freetextData = resp.data;
+            }
           }
         })
     );
   };
 
-  async function getResponseData(job_id: string) {
-    await $api
-      .GET('/jobs/{job_id}', {
-        params: { path: { job_id } }
-      })
-      .then(async (resp) => {
-        if (resp.error) {
-          if (resp['response']['status'] == 409) {
-            await new Promise((f) => setTimeout(f, 1000));
-            getResponseData(job_id);
-          } else {
-            throw new Error(resp['error']['detail']);
-          }
-        } else if (resp.data['attributes']) {
-          freetextData = resp.data['attributes'];
-        }
-      });
+  async function getJobResult(jobType: string, jobId: string) {
+    console.log('Retrieving job result from api');
+    const resp = await $api.GET('/jobs/{jobType}/{jobId}', {
+      params: { path: { jobType, jobId } }
+    });
+    if (resp.error) {
+      console.log('Got an error from jobs api with response:', resp['response']);
+      if (resp['response']['status'] == 409) {
+        await new Promise((f) => setTimeout(f, 2000));
+        return await getJobResult(jobType, jobId);
+      } else {
+        throw new Error(resp['error']['detail']);
+      }
+    } else if (resp.data['attributes']) {
+      return resp.data['attributes'];
+    } else if (resp.data) {
+      return resp.data;
+    }
   }
 
   const col = createTableHeadGenerator<ReturnData, DynTableHeadExtent>();
@@ -100,10 +114,10 @@
   {#if !freetextData}
     <form on:submit|preventDefault={submit} class="flex flex-col h-full gap-4">
       <textarea
-        class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
+        class="w-full h-full p-2 border rounded-md outline-none bg-ctp-surface0 border-sky"
         name="freetext"
       ></textarea>
-      <Button class="self-end w-min text-sky" suffixIcon="mdi:arrow-right" type="submit">
+      <Button class="self-end w-min text-ctp-sky" suffixIcon="mdi:arrow-right" type="submit">
         Submit
       </Button>
     </form>

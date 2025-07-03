@@ -41,9 +41,9 @@
     {#if $mode === 'edit'}
       <button type="button" on:click={() => (state = state === 'add' ? 'info' : 'add')}>
         {#if state === 'add'}
-          <Icon icon="mdi:close-circle-outline" class="text-2xl text-red" />
+          <Icon icon="mdi:close-circle-outline" class="text-2xl text-ctp-red" />
         {:else}
-          <Icon icon="mdi:plus-circle-outline" class="text-2xl text-sky" />
+          <Icon icon="mdi:plus-circle-outline" class="text-2xl text-ctp-sky" />
         {/if}
       </button>
     {/if}
@@ -61,7 +61,7 @@
           <button
             type="button"
             on:click={_onDelete}
-            class="absolute p-2 text-2xl text-white rounded-md bg-red right-2 bottom-2"
+            class="absolute p-2 text-2xl text-white rounded-md bg-ctp-red right-2 bottom-2"
           >
             <Icon icon="mdi:delete-outline"></Icon>
           </button>

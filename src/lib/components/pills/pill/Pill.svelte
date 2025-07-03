@@ -2,7 +2,7 @@
   import Icon from '@iconify/svelte';
 
   /**
-   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
+   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-ctp-crust`.
    */
   export let label: string | undefined = undefined;
   /**
@@ -43,13 +43,13 @@
  -->
 
 <div
-  class="flex gap-2 rounded-lg bg-surface1 text-text w-fit overflow-hidden {clazz}"
+  class="flex gap-2 rounded-lg bg-ctp-surface1 text-ctp-text w-fit overflow-hidden {clazz}"
   id="pill"
   {style}
   {title}
 >
   {#if icon || label}
-    <div class="flex items-center gap-2 px-2 py-1 text-text shrink-0 bg-crust">
+    <div class="flex items-center gap-2 px-2 py-1 text-ctp-text shrink-0 bg-ctp-crust">
       {#if icon}
         <Icon {icon} />
       {/if}

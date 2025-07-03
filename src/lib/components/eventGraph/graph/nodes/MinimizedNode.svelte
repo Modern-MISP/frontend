@@ -55,13 +55,21 @@
   {sourcePosition}
   {positionAbsoluteX}
   {positionAbsoluteY}
-  class="!p-1"
+  class="p-1!"
 >
   <div class="flex">
-    <div class="rounded-full flex justify-center items-center bg-surface1">
+    <div class="rounded-full flex justify-center items-center bg-ctp-surface1">
       <Icon icon="mdi:web" />
     </div>
   </div>
-  <Handle type="target" position={Position.Left} class="!bg-surface0 rounded-none border-none" />
-  <Handle type="source" position={Position.Right} class="!bg-surface0 rounded-none border-none" />
+  <Handle
+    type="target"
+    position={Position.Left}
+    class="bg-ctp-surface0! rounded-none border-none"
+  />
+  <Handle
+    type="source"
+    position={Position.Right}
+    class="bg-ctp-surface0! rounded-none border-none"
+  />
 </BaseNode>

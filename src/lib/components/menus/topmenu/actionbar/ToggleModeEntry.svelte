@@ -33,7 +33,7 @@
       />
     </div>
     <div
-      class="top-0 left-2 absolute text-red drop-shadow-md"
+      class="top-0 left-2 absolute text-ctp-red drop-shadow-md"
       class:hidden={!disabled}
       title="mode locked"
     >

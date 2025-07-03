@@ -31,7 +31,7 @@
   use:actionBar={[
     {
       label: 'Delete Tag',
-      class: 'hover:text-red',
+      class: 'hover:text-ctp-red',
       icon: 'mdi:delete-outline',
       action: () => {
         if (confirm('Are you sure you want to delete this tag?')) {

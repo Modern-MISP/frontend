@@ -9,17 +9,17 @@ export const THREAT_LEVEL_LOOKUP: ComponentProps<Pill>[] = [
   {
     text: 'low',
     icon: 'mdi:chevron-up',
-    class: 'text-green uppercase'
+    class: 'text-ctp-green uppercase'
   },
   {
     text: 'medium',
     icon: 'mdi:chevron-double-up',
-    class: 'text-peach uppercase'
+    class: 'text-ctp-peach uppercase'
   },
   {
     text: 'high',
     icon: 'mdi:chevron-triple-up',
-    class: '!text-red uppercase'
+    class: 'text-ctp-red! uppercase'
   }
 ];
 export const ANALYSIS_LOOKUP: ComponentProps<Pill>[] = [
@@ -30,12 +30,12 @@ export const ANALYSIS_LOOKUP: ComponentProps<Pill>[] = [
   {
     text: 'ongoing',
     icon: 'mdi:progress-clock',
-    class: 'text-peach uppercase'
+    class: 'text-ctp-peach uppercase'
   },
   {
     text: 'complete',
     icon: 'mdi:progress-check',
-    class: 'text-green uppercase'
+    class: 'text-ctp-green uppercase'
   }
 ];
 

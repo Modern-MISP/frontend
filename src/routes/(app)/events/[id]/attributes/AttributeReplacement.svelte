@@ -76,12 +76,12 @@
         name="type"
       ></Select>
       <textarea
-        class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
+        class="w-full h-full p-2 border rounded-md outline-none bg-ctp-surface0 border-sky"
         name="value"
       ></textarea>
 
       <Button
-        class="self-end w-min text-green bg-surface1"
+        class="self-end w-min text-ctp-green bg-ctp-surface1"
         suffixIcon="material-symbols:save-outline"
         type="submit">Submit</Button
       >

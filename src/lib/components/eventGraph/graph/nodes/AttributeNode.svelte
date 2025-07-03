@@ -33,7 +33,7 @@
   A node representing a generic event graph attribute node.
 -->
 
-<div id={'attribute-' + id} class="rounded-md bg-surface0" title={type + ' : ' + value}>
+<div id={'attribute-' + id} class="rounded-md bg-ctp-surface0" title={type + ' : ' + value}>
   <Handle type="target" position={Position.Left} />
   <HrefPill label={type} text={value} icon="mdi:flag" href={`/attributes/${id}`}></HrefPill>
 </div>

@@ -13,14 +13,14 @@
   Displays a [breadcrumb trail](https://en.wikipedia.org/wiki/Breadcrumb_navigation) with the given routes.
  -->
 
-<div class="flex items-center text-lg font-medium text-text">
+<div class="flex items-center text-lg font-medium text-ctp-text">
   {#each routes as { href, icon, name }, i}
-    <a {href} class="flex items-center gap-2 rounded-full cursor-pointer hover:text-sky">
+    <a {href} class="flex items-center gap-2 rounded-full cursor-pointer hover:text-ctp-sky">
       <Icon {icon} />
       {name}
     </a>
     {#if routes.length - 1 != i}
-      <Icon icon="mdi:chevron-right" class="w-8 h-8 text-sky " />
+      <Icon icon="mdi:chevron-right" class="w-8 h-8 text-ctp-sky " />
     {/if}
   {/each}
 </div>

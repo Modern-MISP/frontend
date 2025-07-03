@@ -89,14 +89,14 @@
     <div class="flex gap-1">
       <Input
         type="color"
-        class="w-32 !cursor-pointer"
+        class="w-32 cursor-pointer!"
         value={color}
         name="colour"
         on:value={({ detail }) => (color = detail)}
       />
       <Button
         prefixIcon="mdi:sync"
-        class="w-min text-sky"
+        class="w-min text-ctp-sky"
         on:click={() => (color = generateRandomPastelHex())}
       ></Button>
     </div>
@@ -116,12 +116,12 @@
   {/if}
   <div class="flex justify-center gap-4 mt-auto">
     <Button
-      class="w-min text-red bg-surface1"
+      class="w-min text-ctp-red bg-ctp-surface1"
       suffixIcon="mdi:close-circle-outline"
       on:click={() => dispatch('close')}>Cancel</Button
     >
     <Button
-      class="w-min text-green bg-surface1"
+      class="w-min text-ctp-green bg-ctp-surface1"
       suffixIcon="material-symbols:save-outline"
       type="submit"
       on:click>Save</Button

@@ -10,7 +10,7 @@
 </script>
 
 <label
-  class="flex flex-col min-w-[4rem] items-center gap-2 {clazz}"
+  class="flex flex-col min-w-16 items-center gap-2 {clazz}"
   class:cursor-pointer={!disabled}
   class:cursor-not-allowed={disabled}
   class:text-subtext0={disabled}
