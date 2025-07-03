@@ -202,7 +202,7 @@ async function loadTable(
     {
       label: 'Delete',
       icon: 'mdi:delete-outline',
-      class: 'text-red',
+      class: 'text-ctp-red',
       action: (x) => {
         if (
           confirm(

@@ -138,6 +138,11 @@
       label: 'Add',
       action: `/events/${data.event.id}/attributes/new`
     },
+    {
+      icon: 'mdi:flag-plus', // TODO: find better icon
+      label: 'Add Object',
+      action: `/events/${data.event.id}/objects/new`
+    },
     freetextImport
       ? {
           icon: 'mdi:close-circle-outline',
@@ -145,7 +150,7 @@
           action: () => {
             freetextImport = false;
           },
-          class: 'text-red'
+          class: 'text-ctp-red'
         }
       : {
           icon: 'mdi:pencil-outline',
@@ -162,7 +167,7 @@
           action: () => {
             attributeReplacement = false;
           },
-          class: 'text-red'
+          class: 'text-ctp-red'
         }
       : {
           icon: 'mdi:pencil-outline',
@@ -178,7 +183,7 @@
     {
       label: 'Delete Attribute',
       icon: 'mdi:delete-outline',
-      class: 'text-red',
+      class: 'text-ctp-red',
       action: (attributes) => {
         notifySave(
           Promise.all(

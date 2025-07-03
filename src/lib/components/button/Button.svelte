@@ -31,7 +31,7 @@
 
 <button
   on:click
-  class="flex gap-4 justify-between p-4 rounded-md bg-surface1 w-full items-center font-bold {clazz}"
+  class="flex gap-4 justify-between p-4 rounded-md bg-ctp-surface1 w-full items-center font-bold {clazz}"
   {type}
 >
   {#if prefixIcon}

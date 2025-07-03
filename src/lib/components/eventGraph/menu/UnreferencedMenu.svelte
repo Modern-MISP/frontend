@@ -62,7 +62,7 @@
         out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
-        <div class="flex flex-col rounded-lg bg-surface0">
+        <div class="flex flex-col rounded-lg bg-ctp-surface0">
           {#each objects as object}
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div
@@ -73,7 +73,7 @@
               <IconCard
                 icon="mdi:web"
                 text={object.name + ': ' + object.comment}
-                class="flex !flex-row"
+                class="flex flex-row!"
               ></IconCard>
             </div>
           {/each}
@@ -87,7 +87,7 @@
         out:fly={{ x: 200 }}
         class="w-full max-h-96 overflow-y-auto overflow-x-hidden absolute z-10"
       >
-        <div class="flex flex-col rounded-lg bg-surface0">
+        <div class="flex flex-col rounded-lg bg-ctp-surface0">
           <!-- svelte-ignore a11y-no-static-element-interactions -->
           {#each attributes as attribute}
             <div
@@ -98,7 +98,7 @@
               <IconCard
                 icon="mdi:flag"
                 text={attribute.type + ': ' + attribute.value}
-                class="flex !flex-row"
+                class="flex flex-row!"
               ></IconCard>
             </div>
           {/each}

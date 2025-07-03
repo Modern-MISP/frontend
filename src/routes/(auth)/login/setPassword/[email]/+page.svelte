@@ -105,7 +105,7 @@
     Displays the set password page. 
 -->
 <form
-  class="flex flex-col gap-4 m-auto w-80 text-text"
+  class="flex flex-col gap-4 m-auto w-80 text-ctp-text"
   method="post"
   on:submit|preventDefault={submit}
 >
@@ -139,13 +139,13 @@
     disabled={false}
   />
 
-  <span class="text-red">
+  <span class="text-ctp-red">
     {#each passwordFeedback as feedback}
       {feedback}
       <br />
     {/each}
 
-    <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+    <Button class="py-2 w-fit! self-end text-ctp-sky" suffixIcon="mdi:chevron-right" type="submit"
       >continue</Button
     >
   </span>

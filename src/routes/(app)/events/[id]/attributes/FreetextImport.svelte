@@ -114,10 +114,10 @@
   {#if !freetextData}
     <form on:submit|preventDefault={submit} class="flex flex-col h-full gap-4">
       <textarea
-        class="w-full h-full p-2 border rounded-md outline-none bg-surface0 border-sky"
+        class="w-full h-full p-2 border rounded-md outline-none bg-ctp-surface0 border-sky"
         name="freetext"
       ></textarea>
-      <Button class="self-end w-min text-sky" suffixIcon="mdi:arrow-right" type="submit">
+      <Button class="self-end w-min text-ctp-sky" suffixIcon="mdi:arrow-right" type="submit">
         Submit
       </Button>
     </form>

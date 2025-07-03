@@ -33,13 +33,13 @@
   {/if}
 </button>
 {#if $open}
-  <div use:melt={$content} class="bg-surface1 text-text rounded-lg p-3">
+  <div use:melt={$content} class="bg-ctp-surface1 text-ctp-text rounded-lg p-3">
     <div use:melt={$arrow} />
     <div class="flex flex-col gap-2">
       <Info text={userData.email}></Info>
       <Info text={userData.admin ? 'Administrator account' : 'User account'}></Info>
       <Button
-        class="text-red"
+        class="text-ctp-red"
         on:click={() => {
           token.set('');
           goto('/login');

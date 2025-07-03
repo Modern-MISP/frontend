@@ -1,8 +1,9 @@
-@import './fonts.css';
+@import './fonts.css' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import '@catppuccin/tailwindcss/mocha.css';
+@import '@catppuccin/tailwindcss/frappe.css';
+@import '@catppuccin/tailwindcss/macchiato.css';
 
 *,
 *:before,
@@ -18,25 +19,26 @@
 .overflow-initial {
   overflow: initial;
 }
-
+/*
 .bright {
-  --ctp-overlay0: 220, 220, 220;
-  --ctp-text: 110, 110, 120;
-  --ctp-surface2: 240, 240, 240;
-  --ctp-surface1: 250, 250, 255;
-  --ctp-mantle: 240, 240, 240;
-  --ctp-crust: 240, 245, 255;
-  --ctp-base: 248, 248, 248;
-  --ctp-surface0: 255, 255, 255;
+  --catppuccin-color-overlay0: 220, 220, 220;
+  --catppuccin-color-text: 110, 110, 120;
+  --catppuccin-color-surface2: 240, 240, 240;
+  --catppuccin-color-surface1: 250, 250, 255;
+  --catppuccin-color-mantle: 240, 240, 240;
+  --catppuccin-color-crust: 240, 245, 255;
+  --catppuccin-color-base: 248, 248, 248;
+  --catppuccin-color-surface0: 255, 255, 255;
 }
 
 .lighter {
-  --ctp-overlay0: 190, 190, 190;
-  --ctp-text: 70, 70, 80;
-  --ctp-surface2: 230, 230, 230;
-  --ctp-mantle: 245, 245, 245;
-  --ctp-crust: 220, 225, 255;
-  --ctp-base: 230, 230, 230;
-  --ctp-surface0: 255, 255, 255;
-  --ctp-surface1: 245, 245, 245;
+  --catppuccin-color-overlay0: 190, 190, 190;
+  --catppuccin-color-text: 70, 70, 80;
+  --catppuccin-color-surface2: 230, 230, 230;
+  --catppuccin-color-mantle: 245, 245, 245;
+  --catppuccin-color-crust: 220, 225, 255;
+  --catppuccin-color-base: 230, 230, 230;
+  --catppuccin-color-surface0: 255, 255, 255;
+  --catppuccin-color-surface1: 245, 245, 245;
 }
+*/

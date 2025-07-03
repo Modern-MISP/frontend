@@ -31,7 +31,7 @@
           icon: 'mdi:close-circle-outline',
           label: 'Close Create Tag',
           action: () => (addTag = false),
-          class: 'text-red'
+          class: 'text-ctp-red'
         }
       : {
           icon: 'mdi:tag-plus',

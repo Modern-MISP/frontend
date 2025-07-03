@@ -202,20 +202,20 @@
       {
         icon: 'mdi:cancel',
         label: 'Cancel',
-        class: 'text-red',
+        class: 'text-ctp-red',
         action: cancelEdit
       },
       {
         icon: 'material-symbols:save-outline-rounded',
         label: 'Save',
-        class: 'text-green',
+        class: 'text-ctp-green',
         action: () => data.saveWorkflow(workflow.name ?? '', workflow.description ?? '', saveData),
         disabled: !isModified
       },
       {
         icon: workflow.debug_enabled ? 'mdi:bug-check' : 'mdi:bug',
         label: 'Debug',
-        class: workflow.debug_enabled ? 'text-green' : 'text-text',
+        class: workflow.debug_enabled ? 'text-ctp-green' : 'text-ctp-text',
         action: () => data.toggleDebug(!(workflow.debug_enabled ?? false))
       }
     ];

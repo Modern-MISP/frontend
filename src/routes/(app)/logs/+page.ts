@@ -9,7 +9,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch }) => {
   // @ts-expect-error Not in the OpenAPI spec ;-;
-  const getResult = await get(api).POST('/logs/index/', {
+  const getResult = await get(api).POST('/logs/index', {
     fetch,
     body: { page: 1, limit: 50 }
   });

@@ -4,7 +4,7 @@
   import type { ComponentProps } from 'svelte';
 
   /**
-   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-crust`.
+   * The label of the pill. Will be placed on the left side of the pill. The background of the label is `bg-ctp-crust`.
    */
   export let label: string | undefined = undefined;
   /**
@@ -46,6 +46,6 @@
 
  -->
 
-<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? '!text-blue-400' : ''}>
+<Pill {label} {text} {icon} {action} {style} class={enforceTextColor ? 'text-ctp-blue-400!' : ''}>
   <a {href} {target}>{text}</a>
 </Pill>

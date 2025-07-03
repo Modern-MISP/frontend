@@ -5,6 +5,9 @@ stages:
   - test
   - deploy
 
+variables:
+  GIT_LFS_SKIP_SMUDGE: 1
+
 default:
   tags:
     - any-image-allowed
@@ -24,6 +27,19 @@ workflow:
     on_new_commit: interruptible
 
 # build image stage
+build_website:
+  image: registry.cert.kit.edu/hub/library/node:24
+  stage: build_image
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build
+  variables:
+    KUBERNETES_MEMORY_REQUEST: '2Gi'
+    KUBERNETES_MEMORY_LIMIT: '2Gi'
 
 build_image_node:
   needs: []
@@ -158,7 +174,7 @@ integration_tests:
   parallel: 2
   stage: test
   image:
-    name: cypress/included:13.13.2
+    name: cypress/included:14.3.3
     entrypoint: ['']
   needs:
     - build_image_node
@@ -213,9 +229,11 @@ integration_tests:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
+    - npx svelte-kit sync
     - while [ ! -f "$MISP_READY_FILE" ]; do sleep 10; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_legacy --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
+    GIT_LFS_SKIP_SMUDGE: 0
     KUBERNETES_CPU_REQUEST: '500m'
     KUBERNETES_CPU_LIMIT: '900m'
     KUBERNETES_MEMORY_REQUEST: '1024Mi'
@@ -244,7 +262,7 @@ integration_tests_new_api:
   parallel: 2
   stage: test
   image:
-    name: cypress/included:13.13.2
+    name: cypress/included:14.3.3
     entrypoint: ['']
   needs:
     - build_image_node
@@ -267,6 +285,7 @@ integration_tests_new_api:
         WORKER_API_KEY: OIfY8nFQ9I6okbgGZZjSkOdUUDGZbp9H
         WORKER_KEY: EU81IOLWsn8g37gK7xWToiQpUvYXdPDs
         WORKER_URL: http://worker-api:5000
+        HASH_SECRET: abcdefghijklmnop
         DEBUG: true
         WORKER_COUNT: 1
         KUBERNETES_SERVICE_CPU_REQUEST: '500m'
@@ -327,9 +346,11 @@ integration_tests_new_api:
     # Create environment files
     - mv misp-docker-override/dump01.sql misp-docker-override/dump.sql
     - npm ci
+    - npx svelte-kit sync
     - until wget -q -t1 http://new-api:4000; do rc="$?"; if [ $rc -eq 0 ] || [ $rc -eq 8 ]; then echo "MMISP API is ready"; break; else sleep 1; fi; done
     - npx cypress run --parallel --record --ci-build-id=${CI_PIPELINE_ID}_modern --browser chrome --reporter junit --reporter-options mochaFile=reports/report-[hash].xml
   variables:
+    GIT_LFS_SKIP_SMUDGE: 0
     KUBERNETES_CPU_REQUEST: '700m'
     KUBERNETES_CPU_LIMIT: '1200m'
     KUBERNETES_MEMORY_REQUEST: '1024Mi'

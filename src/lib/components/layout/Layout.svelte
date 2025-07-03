@@ -41,7 +41,7 @@
   You can also override the {@link SideMenu} by using the `sideMenu` slot.
  -->
 
-<div class="fixed w-[100vw] h-full flex flex-row bg-base text-text p-2">
+<div class="fixed w-screen h-full flex flex-row bg-ctp-base text-ctp-text p-2">
   <slot name="sideMenu">
     <SideMenu {routes} {contextRoutes} activeRoute={$page.url.pathname} bind:isOpen />
   </slot>

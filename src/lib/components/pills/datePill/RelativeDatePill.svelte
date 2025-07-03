@@ -22,10 +22,10 @@
    * @returns The class that should be applied to the pill.
    */
   function getClass(date: Date | null) {
-    if (!date) return '!text-green';
-    if (isAfter(today, date)) return '!text-red';
-    if (isAfter(addWeeks(date, -1), today)) return '!text-green';
-    return '!text-peach';
+    if (!date) return 'text-ctp-green!';
+    if (isAfter(today, date)) return 'text-ctp-red!';
+    if (isAfter(addWeeks(date, -1), today)) return 'text-ctp-green!';
+    return 'text-ctp-peach!';
   }
 </script>
 

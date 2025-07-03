@@ -41,8 +41,6 @@ describe('Settings Page Tests', () => {
     cy.get('select').select('Macchiato');
     cy.get('select').select('Frappe');
     cy.get('select').select('Latte');
-    cy.get('select').select('Brighter Latte');
-    cy.get('select').select('Brightest Latte');
 
     cy.contains('Menu is open per default')
       .parent()

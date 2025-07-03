@@ -91,7 +91,7 @@
 -->
 
 <form
-  class="flex flex-col gap-4 m-auto w-80 text-text"
+  class="flex flex-col gap-4 m-auto w-80 text-ctp-text"
   method="post"
   on:submit|preventDefault={submit}
 >
@@ -114,13 +114,13 @@
       <a
         on:click={forgot_password}
         href="/login"
-        class="text-sky"
+        class="text-ctp-sky"
         style="text-decoration: underline;">Forgot password?</a
       >
     </div>
 
     {#if error}
-      <span class="h-12 text-red">
+      <span class="h-12 text-ctp-red">
         {error}
       </span>
     {/if}
@@ -128,7 +128,7 @@
     <div class="relative flex items-center justify-center">
       <hr class="absolute w-full" />
 
-      <div class="z-10 px-2 bg-base">or</div>
+      <div class="z-10 px-2 bg-ctp-base">or</div>
     </div>
   {/if}
   {#if oidc}
@@ -137,12 +137,12 @@
     <div class="relative flex items-center justify-center">
       <hr class="absolute w-full" />
 
-      <div class="z-10 px-2 bg-base">or</div>
+      <div class="z-10 px-2 bg-ctp-base">or</div>
     </div>
   {/if}
 
   <Input name="token" placeholder="Token" icon="mdi:key-outline" />
-  <Button class="py-2 !w-fit self-end text-sky" suffixIcon="mdi:chevron-right" type="submit"
+  <Button class="py-2 w-fit! self-end text-ctp-sky" suffixIcon="mdi:chevron-right" type="submit"
     >Login</Button
   >
 </form>

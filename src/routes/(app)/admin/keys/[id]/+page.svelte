@@ -60,7 +60,8 @@
       <div class="grid grid-cols-2 gap-8">
         <List
           items={seenIps}
-          elemClass={(ip) => (!allowedIps || allowedIps.includes(ip) ? 'text-green' : 'text-red')}
+          elemClass={(ip) =>
+            !allowedIps || allowedIps.includes(ip) ? 'text-ctp-green' : 'text-ctp-red'}
           title="Seen Ips:"
         ></List>
 

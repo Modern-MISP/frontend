@@ -49,8 +49,8 @@
   
  -->
 <div
-  class="relative flex items-center rounded-md text-text bg-surface1 {clazz}"
-  class:!bg-overlay0={disabled}
+  class="relative flex items-center rounded-md text-ctp-text bg-ctp-surface1 {clazz}"
+  class:!bg-ctp-overlay0={disabled}
   class:cursor-not-allowed={disabled}
 >
   <select

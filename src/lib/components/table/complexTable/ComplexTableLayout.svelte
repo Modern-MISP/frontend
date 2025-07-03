@@ -193,7 +193,7 @@
     </slot>
     <slot name="moreActions" />
   </div>
-  <div class="relative flex h-fit overflow-hidden">
+  <div class="relative flex h-9/10 overflow-hidden">
     <slot>
       <slot name="table">
         <DynTable
@@ -212,7 +212,7 @@
     </slot>
   </div>
   {#if maxCount > LIMIT}
-    <div class="h-full">
+    <div class="h-fit">
       <slot name="pagination">
         <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
       </slot>

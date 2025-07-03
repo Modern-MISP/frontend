@@ -39,6 +39,6 @@
   <Card class="shadow-lg shadow-black">
     <span>{capitalize(type)}: {id}</span>
     <hr class="w-full border-text" />
-    <Button on:click={deleteTarget} prefixIcon="mdi:delete" class="text-red">Delete</Button>
+    <Button on:click={deleteTarget} prefixIcon="mdi:delete" class="text-ctp-red">Delete</Button>
   </Card>
 </div>

@@ -1,14 +1,20 @@
 <script lang="ts" generics="T">
   import CardHeading from '../CardHeading.svelte';
 
-  import { derived, type Readable } from 'svelte/store';
+  import { type Readable } from 'svelte/store';
   import type { TableHead } from '$lib/models/TableHead.interface';
   import Card from '$lib/components/card/Card.svelte';
-  import CardRow from '$lib/components/card/CardRow.svelte';
+  import DynCardContent from '$lib/components/card/dynCard/DynCardContent.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type DynTable from '$lib/components/table/dynTable/DynTable.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
+
+  let clazz = '';
+  /**
+   * Additional classes to be applied to this component.
+   */
+  export { clazz as class };
 
   /**
    * The header of the table. Also includes the icon and the href.
@@ -26,8 +32,6 @@
    * The description of the card.
    */
   export let description: string = '';
-
-  const store = derived(header, (arr) => arr);
 </script>
 
 <!-- 
@@ -37,26 +41,14 @@
   This works dynamically similar to the {@link DynTable} component. So you should probably use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function to create the header.
  -->
 
-<Card class="gap-4">
+<Card class="relative gap-4 {clazz}">
   {#if title != ''}
     <CardHeading>{title}</CardHeading>
     <span class="">{description}</span>
-    <br />
-    <p></p>
+    <!--    <br /> -->
+    <!--    <p></p> -->
   {/if}
-  {#each $store as { label, value } (label)}
-    <CardRow class="gap-2">
-      <span class="font-bold">{label}</span>
-      {@const v = value(data)}
-      {#if v !== null && v !== undefined}
-        {#if typeof v !== 'string'}
-          <svelte:component this={v.display} {...v.props} />
-        {:else}
-          <span>{v}</span>
-        {/if}
-      {:else}
-        <span class="text-red">undefined</span>
-      {/if}
-    </CardRow>
-  {/each}
+  <slot name="before" />
+  <DynCardContent {data} {header} />
+  <slot name="after" />
 </Card>
