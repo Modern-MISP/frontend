@@ -1,12 +1,17 @@
 <script lang="ts">
-  /**
-   * The tooltip to show
-   */
-  export let tooltip;
+  interface Props {
+    /**
+     * The tooltip to show
+     */
+    tooltip: any;
+    children?: import('svelte').Snippet;
+  }
+
+  let { tooltip, children }: Props = $props();
 </script>
 
 <div class="group">
-  <slot />
+  {@render children?.()}
   <div
     class="group-hover:opacity-100
     group-hover:w-[10em]

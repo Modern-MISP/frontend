@@ -4,34 +4,45 @@
   import SideMenu from '$lib/components/menus/sidemenu/SideMenu.svelte';
   import TopMenu from '$lib/components/menus/topmenu/TopMenu.svelte';
   import type { Route } from '$lib/models/Route.interface';
-  import { mode, settings } from '$lib/stores';
+  import { settings } from '$lib/stores.svelte.ts';
   import Breadcrumbs from '../breadcrumbs/Breadcrumbs.svelte';
   import type { SideMenuRoute } from '../menus/sidemenu/SideMenu.model';
   import { page } from '$app/stores';
-  /**
-   * The routes to be displayed in the side menu.
-   */
-  export let routes: SideMenuRoute[];
 
-  /**
-   * Context dependant routes to be displayed in a separate side menu section.
-   */
-  export let contextRoutes: SideMenuRoute[] = [];
+  interface Props {
+    /**
+     * The routes to be displayed in the side menu.
+     */
+    routes: SideMenuRoute[];
+    /**
+     * Context dependant routes to be displayed in a separate side menu section.
+     */
+    contextRoutes?: SideMenuRoute[];
+    /**
+     * The current route to be displayed in the {@link Breadcrumbs}.
+     */
+    currentRoute?: Route[];
+    /**
+     * Data about the current user
+     */
+    userData: { email: string; admin: boolean };
+    sideMenu?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+  }
 
-  /**
-   * The current route to be displayed in the {@link Breadcrumbs}.
-   */
-  export let currentRoute: Route[] = [];
+  let {
+    routes,
+    contextRoutes = [],
+    currentRoute = [],
+    userData,
+    sideMenu,
+    children
+  }: Props = $props();
 
-  /**
-   * Data about the current user
-   */
-  export let userData: { email: string; admin: boolean };
-
-  let isOpen = $settings.openOnInit;
+  let isOpen = $state($settings.openOnInit);
 </script>
 
-<!-- 
+<!--
   @component
   The basic component for the layout of the application.
 
@@ -42,13 +53,13 @@
  -->
 
 <div class="fixed w-screen h-full flex flex-row bg-ctp-base text-ctp-text p-2">
-  <slot name="sideMenu">
+  {#if sideMenu}{@render sideMenu()}{:else}
     <SideMenu {routes} {contextRoutes} activeRoute={$page.url.pathname} bind:isOpen />
-  </slot>
+  {/if}
 
   <div class="flex flex-col h-full min-w-0 grow">
     <div class="ml-0 lg:ml-4">
-      <TopMenu bind:mode={$mode} bind:isOpen {userData}>
+      <TopMenu bind:isOpen {userData}>
         <div class="pl-4">
           <Breadcrumbs routes={currentRoute} />
         </div>
@@ -58,7 +69,7 @@
     <div class="relative flex flex-col h-full gap-6 mt-6 overflow-hidden lg:m-8">
       <Notifications />
       <main class="relative flex flex-col max-h-full gap-4 overflow-hidden grow">
-        <slot />
+        {@render children?.()}
       </main>
     </div>
   </div>

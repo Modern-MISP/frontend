@@ -1,12 +1,16 @@
 <script lang="ts">
-  /** When true, the action cannot be clicked. */
-  export let disabled: boolean = false;
+  interface Props {
+    /** When true, the action cannot be clicked. */
+    disabled?: boolean;
+    class?: string;
+    children?: import('svelte').Snippet;
+    label?: import('svelte').Snippet;
+  }
 
-  let clazz = '';
+  let { disabled = false, class: clazz = '', children, label }: Props = $props();
   /**
    * The class of this ActionBar entry.
    */
-  export { clazz as class };
 </script>
 
 <label
@@ -15,6 +19,6 @@
   class:cursor-not-allowed={disabled}
   class:text-subtext0={disabled}
 >
-  <slot />
-  <span class="text-xs"><slot name="label" /></span>
+  {@render children?.()}
+  <span class="text-xs">{@render label?.()}</span>
 </label>

@@ -2,20 +2,24 @@
   import { lockEditMode } from '$lib/actions';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { notifySave } from '$lib/util/notifications.util';
   import { api } from '$lib/api';
-  import { settings } from '$lib/stores';
-  import { compatibility } from '$lib/stores';
+  import { settings } from '$lib/stores.svelte.ts';
+  import { compatibility } from '$lib/stores.svelte.ts';
   import { invalidateAll } from '$app/navigation';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
-  /**
-   * Page data containing visual information about the users preferences.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing visual information about the users preferences.
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   function mapThemeToNumber(theme: string) {
     switch (theme) {
@@ -63,7 +67,7 @@
     }
     return false;
   }
-  $: ({ header, title, description } = data);
+  let { header, title, description } = $derived(data);
   async function editCallback(formData: Record<string, string>) {
     $settings.theme = mapNumberToTheme(mapThemeToNumber(formData.theme));
     $settings.openOnInit = makeBool(formData.is_menu_open);
@@ -99,7 +103,7 @@
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the visual information settings page.
  -->

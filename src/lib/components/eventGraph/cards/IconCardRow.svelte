@@ -1,19 +1,23 @@
 <script lang="ts">
   import CardRow from '$lib/components/card/CardRow.svelte';
 
-  let clazz = '';
+  interface Props {
+    class?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { class: clazz = '', children }: Props = $props();
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 </script>
 
-<!-- 
+<!--
   @component
   A row of icon cards
   Sets the default padding and border radius. You can override this by passing your own classes.
-  
+
  -->
 <CardRow class="rounded-lg bg-ctp-surface0 {clazz}">
-  <slot />
+  {@render children?.()}
 </CardRow>

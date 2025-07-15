@@ -1,5 +1,5 @@
 import type { TableHead } from '$lib/models/TableHead.interface';
-import { mode } from '$lib/stores';
+import { mode } from '$lib/stores.svelte.ts';
 import type { SvelteComponent } from 'svelte';
 import { writable } from 'svelte/store';
 
@@ -29,6 +29,7 @@ export function createTableHeadGenerator<
   >(view: TableHead<T, K> & E, edit: Partial<TableHead<T, L> & E> = {}) {
     const store = writable<TableHead<T, K | L> & E>();
     mode.subscribe((m) => store.set(m === 'edit' ? { ...view, ...edit } : view));
+    //    store.set(appState.mode === 'edit' ? { ...view, ...edit } : view);
     return store;
   };
 }

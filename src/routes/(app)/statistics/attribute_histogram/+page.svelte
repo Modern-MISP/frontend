@@ -1,20 +1,24 @@
 <script lang="ts">
   import { lockViewMode } from '$lib/actions';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import Histogram from '$lib/components/histogram/Histogram.svelte';
-  $mode = 'view';
+  appState.mode = 'view';
 
-  /**
-   * Page data containing the Attribute Histogramm.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing the Attribute Histogramm.
+     */
+    data: any;
+  }
 
-  $: ({ histogramData, dataTypes } = data);
+  let { data }: Props = $props();
+
+  let { histogramData, dataTypes } = $derived(data);
 </script>
 
 <svelte:window use:lockViewMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the Attribute Histogramm.
  -->

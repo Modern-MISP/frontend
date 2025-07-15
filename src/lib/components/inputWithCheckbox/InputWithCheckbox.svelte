@@ -3,15 +3,18 @@
   import Input from '$lib/components/input/Input.svelte';
   import type { ComponentProps } from 'svelte';
 
-  /**
-   * The props for the input.
-   */
-  export let inputProps: ComponentProps<Input>;
+  interface Props {
+    /**
+     * The props for the input.
+     */
+    inputProps: ComponentProps<Input>;
+    /**
+     * Default value for the checkbox.
+     */
+    checked?: boolean;
+  }
 
-  /**
-   * Default value for the checkbox.
-   */
-  export let checked = false;
+  let { inputProps, checked = $bindable(false) }: Props = $props();
 </script>
 
 <div class="flex items-center gap-2 w-fit">

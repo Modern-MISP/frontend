@@ -1,7 +1,7 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  export let data;
+  let { data } = $props();
 </script>
 
 <!--

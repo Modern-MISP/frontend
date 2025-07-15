@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, preventDefault } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
@@ -14,18 +16,18 @@
 
   const email = $page.params.email;
 
-  let passwordFeedback: string[] = [];
+  let passwordFeedback: string[] = $state([]);
 
-  let password: string = '';
-  let retypedPassword: string = '';
-  let oldPassword: string = '';
+  let password: string = $state('');
+  let retypedPassword: string = $state('');
+  let oldPassword: string = $state('');
   const debouncedZxcvbn = debounce(getPasswordFeedback, 200);
 
-  $: {
+  run(() => {
     password;
     retypedPassword;
     debouncedZxcvbn();
-  }
+  });
 
   function getPasswordFeedback() {
     zxcvbnAsync(password, [oldPassword])
@@ -100,14 +102,14 @@
   }
 </script>
 
-<!-- 
+<!--
     @component
-    Displays the set password page. 
+    Displays the set password page.
 -->
 <form
   class="flex flex-col gap-4 m-auto w-80 text-ctp-text"
   method="post"
-  on:submit|preventDefault={submit}
+  onsubmit={preventDefault(submit)}
 >
   <h1 class="text-4xl font-bold leading-normal">
     New password

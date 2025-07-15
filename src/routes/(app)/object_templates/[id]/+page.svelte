@@ -4,13 +4,17 @@
   import type { PageData } from './$types';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  /** Page data containing the data of the object template */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data of the object template */
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
-  
+
   Information about a object template specified by 'id'.
 
 -->

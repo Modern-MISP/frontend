@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { run } from 'svelte/legacy';
+
+  import { page } from '$app/state';
   import { api } from '$lib/api';
   import Form from '$lib/components/form/Form.svelte';
   import { get } from 'svelte/store';
@@ -16,23 +18,25 @@
   import Select from '$lib/components/form/Select.svelte';
   import { goto } from '$app/navigation';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode } from '$lib/stores';
+  import { currentRoute, appState } from '$lib/stores.svelte.ts';
   import { lockEditMode } from '$lib/actions';
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Galaxy Cluster', href: 'new_cluster', icon: 'carbon:assembly-cluster' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Galaxy Cluster', href: 'new_cluster', icon: 'carbon:assembly-cluster' }
+    ];
+  });
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
-  let entries: [string, string][] = [];
+  let entries: [string, string][] = $state([]);
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       get(api)
         .POST('/galaxy_clusters/add/{galaxyId}', {
-          params: { path: { galaxyId: $page.params.id } },
+          params: { path: { galaxyId: page.params.id } },
           body: {
             ...formData,
             GalaxyElement: entries.map(([key, value]) => ({
@@ -160,7 +164,7 @@
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the form for creating a new galaxy cluster.
 

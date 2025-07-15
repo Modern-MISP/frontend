@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import Card from '$lib/components/card/Card.svelte';
@@ -11,27 +11,31 @@
   import AddTagForm from '$lib/components/tagForms/AddTagForm.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import type { EventState } from '../../events/[id]/_components/EventState.interface';
   import CreateTag from '../../tags/CreateTag.svelte';
   import type { PageData } from './$types';
   import { addTags, deleteTags } from './attribute.util';
 
-  /**
-   * Page data containing the data of the attribute with the 'id' in the url.
-   */
-  export let data: PageData;
+  interface Props {
+    /**
+     * Page data containing the data of the attribute with the 'id' in the url.
+     */
+    data: PageData;
+  }
 
-  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
+  let { data }: Props = $props();
 
-  let state: EventState = 'info';
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = $state([]);
+
+  let eventState: EventState = 'info';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .PUT('/attributes/edit/{attributeId}', {
-          params: { path: { attributeId: $page.params.id } },
+          params: { path: { attributeId: page.params.id } },
           body: { last_seen: '', first_seen: '', ...formData } // default last_seen and first_seen to empty to set to null, if disabled in form
         })
         .then((resp) => {
@@ -41,7 +45,7 @@
     );
   }
 
-  let formActions: ActionBarEntryProps[] = [];
+  let formActions: ActionBarEntryProps[] = $state([]);
 </script>
 
 <svelte:window
@@ -53,7 +57,7 @@
         notifySave(
           $api
             .POST('/sightings/add/{attributeId}', {
-              params: { path: { attributeId: $page.params.id } }
+              params: { path: { attributeId: page.params.id } }
             })
             .then((resp) => {
               if (resp.error) throw new Error(resp.error.message);
@@ -70,7 +74,7 @@
           notifySave(
             $api
               .DELETE('/attributes/delete/{attributeId}', {
-                params: { path: { attributeId: $page.params.id } }
+                params: { path: { attributeId: page.params.id } }
               })
               .then((resp) => {
                 if (resp.error) throw new Error(resp.error.message);
@@ -91,13 +95,13 @@
 <div class="h-full overflow-auto">
   <Form callback={editCallback} bind:actions={formActions}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'add' && $mode === 'edit'}
+      {#if eventState === 'add' && appState.mode === 'edit'}
         <AddTagForm
           bind:selection
           on:createTag={() => (state = 'create')}
           on:close={() => (state = 'info')}
         />
-      {:else if state === 'create' && $mode === 'edit'}
+      {:else if eventState === 'create' && appState.mode === 'edit'}
         <Card>
           <CardHeading>Create a Tag</CardHeading>
           <CreateTag on:close={() => (state = 'add')}></CreateTag>
@@ -116,12 +120,12 @@
             on:open={() => (state = 'add')}
             on:delete={({ detail }) => {
               deleteTags(
-                detail.map((x) => ({ attributeId: $page.params.id, value: x.value ?? '' }))
+                detail.map((x) => ({ attributeId: page.params.id, value: x.value ?? '' }))
               );
             }}
             on:save={({ detail }) => {
               // @ts-expect-error svelte error. Does not detect the generic correctly.
-              addTags(detail.map((x) => ({ ...x, attributeId: $page.params.id })));
+              addTags(detail.map((x) => ({ ...x, attributeId: page.params.id })));
             }}
             tags={data.attribute.Tag ?? []}
           ></TagCollection>

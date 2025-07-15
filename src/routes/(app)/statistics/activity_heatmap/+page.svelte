@@ -1,21 +1,25 @@
 <script lang="ts">
   import { lockViewMode } from '$lib/actions';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import Heatmap from '$lib/components/heatmap/Heatmap.svelte';
 
-  $mode = 'view';
+  appState.mode = 'view';
 
-  /**
-   * Page data containing the activity heatmap.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing the activity heatmap.
+     */
+    data: any;
+  }
 
-  $: ({ heatmapData, settings, title, description, dropdown } = data);
+  let { data }: Props = $props();
+
+  let { heatmapData, settings, title, description, dropdown } = $derived(data);
 </script>
 
 <svelte:window use:lockViewMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the activity heatmap.
  -->

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import TagPicker from './TagPicker.svelte';
 
   import Button from '$lib/components/button/Button.svelte';
@@ -17,24 +19,29 @@
     createTag: void;
   }>();
 
-  /**
-   * The tags that can be picked.
-   */
-  export let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
+  interface Props {
+    /**
+     * The tags that can be picked.
+     */
+    selection?: PickerPill<{ local_only: boolean; relation: string }>[];
+  }
 
-  let relation = TAG_RELATION_TYPES[0];
+  let { selection = $bindable([]) }: Props = $props();
 
-  let pickedItems: PickerPill[] = [];
+  let relation = $state(TAG_RELATION_TYPES[0]);
 
-  $: selection = pickedItems.map((x) => ({
-    ...x,
-    icon: local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
-    label: relation !== 'Unspecified' ? relation : undefined,
-    local_only,
-    relation
-  }));
+  let pickedItems: PickerPill[] = $state([]);
 
-  let local_only = false;
+  let local_only = $state(false);
+  run(() => {
+    selection = pickedItems.map((x) => ({
+      ...x,
+      icon: local_only ? 'mdi:cloud-off-outline' : 'mdi:earth',
+      label: relation !== 'Unspecified' ? relation : undefined,
+      local_only,
+      relation
+    }));
+  });
 </script>
 
 <div class="flex flex-col gap-1">

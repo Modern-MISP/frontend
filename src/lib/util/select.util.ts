@@ -12,7 +12,7 @@ export function genSelectProps(
         label: x?.name ?? 'unknown',
         value: x?.id ?? 'unknown'
       })) ?? [],
-    value: items && items.length > 0 ? items[0]?.id ?? '0' : '0'
+    value: items && items.length > 0 ? (items[0]?.id ?? '0') : '0'
   };
 }
 

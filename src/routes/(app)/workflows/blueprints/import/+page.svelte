@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import { lockEditMode } from '$lib/actions';
@@ -8,10 +10,10 @@
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode } from '$lib/stores';
+  import { currentRoute, appState } from '$lib/stores.svelte.ts';
   import type { Blueprint } from '../blueprint';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -39,10 +41,12 @@
     })
   ];
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'Import Blueprint', href: 'import', icon: 'mdi:layers-plus' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'Import Blueprint', href: 'import', icon: 'mdi:layers-plus' }
+    ];
+  });
 </script>
 
 <!--

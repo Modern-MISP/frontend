@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
@@ -6,17 +8,17 @@
   import { notifySave } from '$lib/util/notifications.util';
   import { get } from 'svelte/store';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode } from '$lib/stores';
+  import { currentRoute, appState } from '$lib/stores.svelte.ts';
   import { lockEditMode } from '$lib/actions';
-  import { notifications } from '$lib/stores';
+  import { notifications } from '$lib/stores.svelte.ts';
   import { errorPill } from '$lib/util/pill.util';
   import { invalidateAll } from '$app/navigation';
 
-  export let data;
+  let { data } = $props();
 
-  $: ({ roles, header } = data);
+  let { roles, header } = $derived(data);
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     console.log(formData);
@@ -44,16 +46,18 @@
     );
   }
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'Create a new User', href: 'new', icon: 'mdi:account-plus-outline' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'Create a new User', href: 'new', icon: 'mdi:account-plus-outline' }
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
-  @component 
+<!--
+  @component
   Displays a form to add a new user.
 -->
 <Form callback={editCallback}>

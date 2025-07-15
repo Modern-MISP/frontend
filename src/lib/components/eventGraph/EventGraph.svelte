@@ -14,7 +14,7 @@
   import { tweened } from 'svelte/motion';
   import { page } from '$app/stores';
   import { actionBar } from '$lib/actions';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { api } from '$lib/api';
   import { notifySave } from '$lib/util/notifications.util';
   import ObjectNode from './graph/nodes/ObjectNode.svelte';
@@ -31,18 +31,22 @@
   import referenceTypes from './referenceTypes';
   import Select from '../form/Select.svelte';
   import { fly } from 'svelte/transition';
-  /**
-   * The Event to be displayed on this page.
-   */
-  export let event: components['schemas']['ExtendedEvent'];
 
-  /**
-   * The event graph references for the event to be displayed.
-   */
-  export let eventGraphReferences: EventGraphReferences;
+  interface Props {
+    /**
+     * The Event to be displayed on this page.
+     */
+    event: components['schemas']['ExtendedEvent'];
+    /**
+     * The event graph references for the event to be displayed.
+     */
+    eventGraphReferences: EventGraphReferences;
+  }
+
+  let { event, eventGraphReferences }: Props = $props();
 
   // The currently selected reference type, will be used for new references
-  let referenceType = referenceTypes[0];
+  let referenceType = $state(referenceTypes[0]);
 
   const objects = event.Object ?? [];
   const attributes = event.Attribute ?? [];
@@ -238,7 +242,7 @@
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let menu: { id: string; data: any; type: string } | null;
+  let menu: { id: string; data: any; type: string } | null = $state();
 
   function handleContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     // Prevent native context menu from showing
@@ -336,7 +340,7 @@
 
 <!--
   @component
-  
+
   The Event Graph component. Uses the {@link Flow} component to render the graph.
   Uses the {@link IconCard} component to render action bar buttons.
 
@@ -350,14 +354,14 @@
       label: 'Add attribute'
     }
   ]}
-  on:focus={() => {
+  onfocus={() => {
     if ($nodes.length) layoutElements();
   }}
 />
 
 <header class="flex justify-between w-full gap-4">
   <div class="flex flex-col gap-1">
-    {#if $mode === 'edit'}
+    {#if appState.mode === 'edit'}
       <div in:fly={{ x: -200 }} out:fly={{ x: -200 }}>
         <span>Reference Type for new references</span>
         <Select

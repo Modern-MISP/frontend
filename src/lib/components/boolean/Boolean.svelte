@@ -2,26 +2,28 @@
   import Pill from '../pills/pill/Pill.svelte';
 
   /**
-   * Displays a boolean value as a text using the {@link Pill} component.
-   * Also parses strings to booleans. String must be either 'true' or 'false'.
-   */
-  export let isTrue: boolean | string = true;
-
-  /**
    * Additional classes to be applied to the {@link Pill} component.
    */
-  export { clazz as class };
 
-  let clazz = '';
+  interface Props {
+    /**
+     * Displays a boolean value as a text using the {@link Pill} component.
+     * Also parses strings to booleans. String must be either 'true' or 'false'.
+     */
+    isTrue?: boolean | string;
+    class?: string;
+  }
 
-  $: text = isTrue === 'true' || isTrue ? 'Yes' : 'No';
+  let { isTrue = true, class: clazz = '' }: Props = $props();
+
+  let text = $derived(isTrue === 'true' || isTrue ? 'Yes' : 'No');
 </script>
 
-<!-- 
+<!--
   @component
   Displays a boolean value as a text using the {@link Pill} component.
   The background is green if the value is true and red if the value is false.
-  
+
  -->
 
 <Pill

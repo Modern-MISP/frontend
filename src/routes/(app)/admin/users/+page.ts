@@ -6,7 +6,7 @@ import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import { error, type NumericRange } from '@sveltejs/kit';
@@ -17,7 +17,7 @@ import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { goto } from '$app/navigation';
-import { compatibility } from '$lib/stores';
+import { compatibility } from '$lib/stores.svelte.ts';
 import { writable } from 'svelte/store';
 
 export const load: PageLoad = async ({ fetch }) => {
@@ -165,7 +165,9 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to disable the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+            `Are you sure you want to disable the user with ids: ${x
+              .map((x) => x.User?.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(
@@ -192,7 +194,9 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to delete the user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+            `Are you sure you want to delete the user with ids: ${x
+              .map((x) => x.User?.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(
@@ -218,7 +222,9 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to disable the token for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+            `Are you sure you want to disable the token for user with ids: ${x
+              .map((x) => x.User?.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(
@@ -258,7 +264,9 @@ export const load: PageLoad = async ({ fetch }) => {
           action: (x) => {
             if (
               confirm(
-                `Are you sure you want to generate a new password for user with ids: ${x.map((x) => x.User?.id).join(', ')}`
+                `Are you sure you want to generate a new password for user with ids: ${x
+                  .map((x) => x.User?.id)
+                  .join(', ')}`
               )
             ) {
               const randomstring = Math.random().toString(36).slice(-12);
@@ -355,7 +363,7 @@ export const load: PageLoad = async ({ fetch }) => {
               label: x.Organisation?.name ?? 'unknown',
               value: x.Organisation?.id ?? 'unknown'
             })) ?? [],
-          value: orgData && orgData.length > 0 ? orgData[0].Organisation?.id ?? '0' : '0',
+          value: orgData && orgData.length > 0 ? (orgData[0].Organisation?.id ?? '0') : '0',
           name: 'org'
         }
       })
@@ -370,7 +378,7 @@ export const load: PageLoad = async ({ fetch }) => {
               label: x.Role?.name ?? 'unknown',
               value: x.Role?.id ?? 'unknown'
             })) ?? [],
-          value: roleData && roleData.length > 0 ? roleData[0].Role?.id ?? '0' : '0',
+          value: roleData && roleData.length > 0 ? (roleData[0].Role?.id ?? '0') : '0',
           name: 'role'
         }
       })

@@ -2,7 +2,7 @@ import { api } from '$lib/api';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
-import { compatibility } from '$lib/stores';
+import { compatibility } from '$lib/stores.svelte.ts';
 
 import idCardHeaders from '../idCardHeaders';
 

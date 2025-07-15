@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [sveltekit()],
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
@@ -16,15 +16,13 @@ export default defineConfig(({ mode }) => ({
     environment: 'jsdom',
     setupFiles: ['./vitest-setup.ts']
   },
-  resolve: {
-    conditions: mode === 'test' ? ['browser'] : []
-  },
   server: {
     fs: {
       allow: ['config.yaml']
     }
   },
   build: {
+    sourcemap: true,
     target: 'esnext'
   }
-}));
+});

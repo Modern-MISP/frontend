@@ -1,29 +1,39 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import AddObject from '$lib/components/addObject/AddObject.svelte';
   import { lockEditMode } from '$lib/actions';
-  import { mode } from '$lib/stores.js';
+  import { appState } from '$lib/stores.svelte.ts';
   import Select from '$lib/components/form/Select.svelte';
   import { api } from '$lib/api/index.js';
   import Form from '$lib/components/form/Form.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups.js';
   import { notifySave } from '$lib/util/notifications.util.js';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute } from '$lib/stores';
+  import { currentRoute } from '$lib/stores.svelte.ts';
 
-  /**Page data*/
-  export let data;
-
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   const col = createTableHeadGenerator();
-  let selectedCategory = data.categories[0];
-  let availableTemplates = [];
-  export let selectedTemplate = data.categoryToNameMap[selectedCategory][0].id;
+  let selectedCategory = $state(data.categories[0]);
+  let availableTemplates = $state([]);
+  interface Props {
+    /**Page data*/
+    data: any;
+    selectedTemplate?: any;
+  }
 
-  $: availableTemplates = data.categoryToNameMap[selectedCategory] as string[];
+  let {
+    data,
+    selectedTemplate = $bindable(data.categoryToNameMap[selectedCategory][0].id)
+  }: Props = $props();
+
+  run(() => {
+    availableTemplates = data.categoryToNameMap[selectedCategory] as string[];
+  });
 
   let templateCol = col({
     icon: 'mdi:circle',
@@ -123,7 +133,7 @@
             Object: object,
             Attribute: attributes
           },
-          params: { path: { eventId: $page.params.id, objectTemplateId: selectedTemplate } }
+          params: { path: { eventId: page.params.id, objectTemplateId: selectedTemplate } }
         })
         .then((resp) => {
           if (resp.error) {
@@ -140,10 +150,12 @@
     );
   }
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Object', icon: 'mdi:flag-plus', href: 'new' } // TODO: icon
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Object', icon: 'mdi:flag-plus', href: 'new' } // TODO: icon
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />

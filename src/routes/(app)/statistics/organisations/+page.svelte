@@ -3,24 +3,30 @@
 
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  /**
-   * Page data of the organisations table.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data of the organisations table.
+     */
+    data: any;
+  }
 
-  $: ({ tableData } = data);
+  let { data }: Props = $props();
 
-  let filtered: typeof tableData = [];
+  let { tableData } = $derived(data);
+
+  let filtered: typeof tableData = $state([]);
 </script>
 
 <!--
   @component
-  
+
   A list of all the organisations available to the user.
 -->
 
-<ComplexTableLayout {...data} tableData={filtered}>
-  <div slot="filter">
-    <LocalFilter bind:data={tableData} bind:filtered></LocalFilter>
-  </div>
+<ComplexTableLayout {...data}>
+  {#snippet filter()}
+    <div>
+      <LocalFilter bind:data={tableData} bind:filtered></LocalFilter>
+    </div>
+  {/snippet}
 </ComplexTableLayout>

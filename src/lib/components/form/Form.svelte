@@ -1,20 +1,15 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { actionBar } from '$lib/actions';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { getFormValues } from '$lib/util/form.util';
 
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * The callback to call on submit.
-   */
-  export let callback: (formData: Record<string, string>) => void;
-
-  let form: HTMLFormElement;
+  let form: HTMLFormElement = $state();
 
   /**
    * Default save action. You should bind to this.
@@ -38,17 +33,27 @@
     }
   ];
 
-  /**
-   * Additional actions to display.
-   */
-  export let additionalActions: ActionBarEntryProps[] = [];
+  interface Props {
+    class?: string;
+    /**
+     * The callback to call on submit.
+     */
+    callback: (formData: Record<string, string>) => void;
+    /**
+     * Additional actions to display.
+     */
+    additionalActions?: ActionBarEntryProps[];
+    children?: import('svelte').Snippet;
+  }
+
+  let { class: clazz = '', callback, additionalActions = [], children }: Props = $props();
 </script>
 
 <svelte:window use:actionBar={[...additionalActions, ...actions]} />
 <form
   bind:this={form}
-  on:submit|preventDefault={(e) => callback(getFormValues(e))}
+  onsubmit={preventDefault((e) => callback(getFormValues(e)))}
   class="h-full {clazz}"
 >
-  <slot />
+  {@render children?.()}
 </form>

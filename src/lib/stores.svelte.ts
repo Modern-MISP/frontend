@@ -26,6 +26,7 @@ export const themes = [
 ] as const;
 
 export const mode = writable<Mode>('view');
+//export const mode = $state({'mode': 'view'});
 export const lockModeToggle = writable<boolean>(false);
 
 // enforce view mode when in maintenance mode
@@ -39,3 +40,24 @@ export const currentRoute = writable<ComponentProps<BreadCrumbs>['routes']>();
 export const notifications = createTimeoutStore<ComponentProps<Pill>>(8000);
 
 export const compatibility = <boolean>cfg.COMPATIBILITY_MODE;
+
+let appMode: Mode = $state('view');
+
+export const appState = {
+  get mode() {
+    return appMode;
+  },
+  set mode(new_mode: Mode) {
+    appMode = new_mode;
+    mode.set(new_mode);
+  },
+  toggleMode() {
+    if (appMode === 'view') {
+      appMode = 'edit';
+      mode.set('edit');
+    } else {
+      appMode = 'view';
+      mode.set('view');
+    }
+  }
+};

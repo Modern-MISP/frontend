@@ -4,17 +4,21 @@
   import Form from '$lib/components/form/Form.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
-  /**
-   * Page data containing the data of the tag with the 'id' in the url
-   */
-  export let data;
-  $: ({ title, description } = data);
+  interface Props {
+    /**
+     * Page data containing the data of the tag with the 'id' in the url
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
+  let { title, description } = $derived(data);
 
   function editCallback(formData: Record<string, string>) {
     console.log('editCallback', formData);
   }
 
-  let formActions: ActionBarEntryProps[] = [];
+  let formActions: ActionBarEntryProps[] = $state([]);
 </script>
 
 <!--

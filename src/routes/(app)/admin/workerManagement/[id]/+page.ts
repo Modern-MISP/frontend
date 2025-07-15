@@ -6,7 +6,7 @@ import type { PageLoad } from './$types';
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { invalidateAll } from '$app/navigation';
 import Info from '$lib/components/info/Info.svelte';

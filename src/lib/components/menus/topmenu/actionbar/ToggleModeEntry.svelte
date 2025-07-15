@@ -1,21 +1,21 @@
 <script lang="ts">
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   import type { Mode } from '$lib/models/Mode';
+  import { appState } from '$lib/stores.svelte.ts';
   import { capitalize } from 'lodash-es';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type ActionBar from './ActionBar.svelte';
   import ActionBarEntryTemplate from './ActionBarEntryTemplate.svelte';
   import Icon from '@iconify/svelte';
 
-  /**
-   * The current mode of this Entry.
-   */
-  export let mode: Mode = 'view';
+  interface Props {
+    /**
+     * If true, the mode can't be toggled.
+     */
+    disabled?: boolean;
+  }
 
-  /**
-   * If true, the mode can't be toggled.
-   */
-  export let disabled: boolean = false;
+  let { disabled = false }: Props = $props();
 </script>
 
 <!--
@@ -26,11 +26,7 @@
 <ActionBarEntryTemplate>
   <div class="relative" class:cursor-not-allowed={disabled}>
     <div class:blur-[1px]={disabled}>
-      <Checkbox
-        {disabled}
-        checked={mode === 'edit'}
-        on:change={() => (mode = mode === 'view' ? 'edit' : 'view')}
-      />
+      <Checkbox {disabled} checked={appState.mode === 'edit'} on:change={appState.toggleMode} />
     </div>
     <div
       class="top-0 left-2 absolute text-ctp-red drop-shadow-md"
@@ -40,5 +36,7 @@
       <Icon icon="mdi:lock" width="30" />
     </div>
   </div>
-  <span slot="label">{capitalize(mode)} mode</span>
+  {#snippet label()}
+    <span>{capitalize(appState.mode)} mode</span>
+  {/snippet}
 </ActionBarEntryTemplate>

@@ -5,8 +5,12 @@
   import HrefEntry from './HrefEntry.svelte';
   import type { ComponentType, SvelteComponent } from 'svelte';
 
-  /** Actions that are displayed. */
-  export let entries: ActionBarEntryProps[];
+  interface Props {
+    /** Actions that are displayed. */
+    entries: ActionBarEntryProps[];
+  }
+
+  let { entries }: Props = $props();
 
   const entryFactory = (
     actionBarEntry: ActionBarEntryProps
@@ -18,7 +22,7 @@
 
 <!--
     @component
-    
+
     The action bar contains actions that can be performed when in edit mode.
 -->
 
@@ -29,7 +33,8 @@
     in:slide
   >
     {#each entries as entry}
-      <svelte:component this={entryFactory(entry)} {...entry} />
+      {@const SvelteComponent_1 = entryFactory(entry)}
+      <SvelteComponent_1 {...entry} />
     {/each}
   </div>
 {/if}

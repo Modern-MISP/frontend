@@ -1,28 +1,34 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import Button from '$lib/components/button/Button.svelte';
   import FilterCard from '$lib/components/filter/FilterCard.svelte';
   import Select from '$lib/components/form/Select.svelte';
   import type { TableHead } from '$lib/models/TableHead.interface';
   import { getFormValues } from '$lib/util/form.util';
   import { omit } from 'lodash-es';
-  import { derived, type Readable } from 'svelte/store';
+  import { derived as storeDerived, type Readable } from 'svelte/store';
   import Input from '../input/Input.svelte';
   import Pill from '../pills/pill/Pill.svelte';
-  /**
-   * All possible filter
-   */
-  export let header: Readable<TableHead<undefined>>[];
 
-  const store = derived(header, (arr) => arr);
+  const store = storeDerived(header, (arr) => arr);
 
-  /**
-   * The current filter values. You should probably bind this.
-   */
-  export let currentFilter: Record<string, string> = {};
+  interface Props {
+    /**
+     * All possible filter
+     */
+    header: Readable<TableHead<undefined>>[];
+    /**
+     * The current filter values. You should probably bind this.
+     */
+    currentFilter?: Record<string, string>;
+  }
 
-  let currentOption: string = $store[0].label;
-  $: option = $store.find(({ label }) => label === currentOption);
-  $: optionValue = option?.value(undefined);
+  let { header, currentFilter = $bindable({}) }: Props = $props();
+
+  let currentOption: string = $state($store[0].label);
+  let option = $derived($store.find(({ label }) => label === currentOption));
+  let optionValue = $derived(option?.value(undefined));
 </script>
 
 <div
@@ -30,12 +36,14 @@
   id="filter"
 >
   <form
-    on:submit|preventDefault={(e) => {
+    onsubmit={preventDefault((e) => {
       currentFilter = { ...currentFilter, ...getFormValues(e) };
-    }}
+    })}
   >
     <FilterCard>
-      <span slot="heading"> Add Filter </span>
+      {#snippet heading()}
+        <span> Add Filter </span>
+      {/snippet}
 
       <Select
         options={$store.map(({ label }) => ({ label, value: label }))}
@@ -44,7 +52,7 @@
       />
 
       {#if optionValue && typeof optionValue != 'string'}
-        <svelte:component this={optionValue.display} {...optionValue.props} />
+        <optionValue.display {...optionValue.props} />
       {:else}
         <Input name={optionValue} placeholder={option?.label} />
       {/if}
@@ -58,7 +66,9 @@
   </form>
 
   <FilterCard>
-    <span slot="heading"> Current Filter </span>
+    {#snippet heading()}
+      <span> Current Filter </span>
+    {/snippet}
 
     <div class="flex flex-col w-full gap-2">
       {#each Object.keys(currentFilter) as filterKey}

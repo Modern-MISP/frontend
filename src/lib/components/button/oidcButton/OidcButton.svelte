@@ -1,15 +1,18 @@
 <script lang="ts">
   import Button from '$lib/components/button/Button.svelte';
 
-  /**
-   * The name of the OIDC provider to be displayed.
-   */
-  export let name: string | null;
+  interface Props {
+    /**
+     * The name of the OIDC provider to be displayed.
+     */
+    name: string | null;
+    /**
+     * The OIDC provider's URL.
+     */
+    url: string;
+  }
 
-  /**
-   * The OIDC provider's URL.
-   */
-  export let url: string;
+  let { name, url }: Props = $props();
 
   function OidcLogin(url: string) {
     window.location.href = url;

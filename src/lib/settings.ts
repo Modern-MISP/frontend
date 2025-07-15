@@ -1,4 +1,4 @@
-import type { Themes } from './stores';
+import type { Themes } from './stores.svelte.ts';
 import { browser } from '$app/environment';
 import yaml from 'js-yaml';
 import createClient from 'openapi-fetch';

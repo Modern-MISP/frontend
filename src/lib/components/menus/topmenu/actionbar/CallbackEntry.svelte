@@ -1,27 +1,26 @@
 <script lang="ts">
   import ActionBarEntry from './ActionBarEntry.svelte';
 
-  /**
-   * The label of this ActionBar entry.
-   */
-  export let label: string;
+  interface Props {
+    /**
+     * The label of this ActionBar entry.
+     */
+    label: string;
+    /**
+     * The icon of this ActionBar entry.
+     */
+    icon: string;
+    /** Callback function that is executed on click. */
+    action: () => void;
+    /** When true, the action cannot be clicked. */
+    disabled?: boolean;
+    class?: string;
+  }
 
-  /**
-   * The icon of this ActionBar entry.
-   */
-  export let icon: string;
-
-  /** Callback function that is executed on click. */
-  export let action: () => void;
-
-  /** When true, the action cannot be clicked. */
-  export let disabled: boolean = false;
-
-  let clazz = '';
+  let { label, icon, action, disabled = false, class: clazz = '' }: Props = $props();
   /**
    * The class of this ActionBar entry.
    */
-  export { clazz as class };
 </script>
 
 <!--
@@ -29,6 +28,6 @@
   An {@link ActionBarEntry} with an `on:click` callback action associated with it.
 -->
 
-<button type="button" on:click={action} {disabled}>
+<button type="button" onclick={action} {disabled}>
   <ActionBarEntry {icon} {label} {disabled} class={clazz} />
 </button>

@@ -1,26 +1,32 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { run } from 'svelte/legacy';
+
+  import { page } from '$app/state';
   import { lockEditMode } from '$lib/actions';
-  import { mode } from '$lib/stores.js';
+  import { appState } from '$lib/stores.svelte.ts';
   import { api } from '$lib/api/index.js';
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util.js';
   import { goto } from '$app/navigation';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute } from '$lib/stores';
+  import { currentRoute } from '$lib/stores.svelte.ts';
   import AddAttribute from '$lib/components/addAttribute/AddAttribute.svelte';
 
-  /**Page data*/
-  export let data;
+  interface Props {
+    /**Page data*/
+    data: any;
+  }
 
-  $mode = 'edit';
+  let { data }: Props = $props();
+
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .POST('/attributes/add/{eventId}', {
           body: formData,
-          params: { path: { eventId: $page.params.id } }
+          params: { path: { eventId: page.params.id } }
         })
         .then((resp) => {
           if (resp.error) {
@@ -36,10 +42,12 @@
     );
   }
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Attribute', icon: 'mdi:flag-plus', href: 'new' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Attribute', icon: 'mdi:flag-plus', href: 'new' }
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />

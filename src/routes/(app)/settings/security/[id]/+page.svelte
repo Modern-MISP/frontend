@@ -7,18 +7,22 @@
   import { api } from '$lib/api';
   import { notifySave } from '$lib/util/notifications.util';
   import ListEdit from '$lib/components/list/ListEdit.svelte';
-  import { mode, notifications } from '$lib/stores';
+  import { appState, notifications } from '$lib/stores.svelte.ts';
   import { goto } from '$app/navigation';
   import { errorPill } from '$lib/util/pill.util';
 
-  /** Page data containing the data of the auth keys. */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data of the auth keys. */
+    data: PageData;
+  }
 
-  $: ({ left, key } = data);
+  let { data }: Props = $props();
+
+  let { left, key } = $derived(data);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  $: seenIps = (key.AuthKey as any)?.unique_ips ?? [];
-  $: allowedIps = key.AuthKey?.allowed_ips;
+  let seenIps = $derived((key.AuthKey as any)?.unique_ips ?? []);
+  let allowedIps = $derived(key.AuthKey?.allowed_ips);
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -50,7 +54,7 @@
 <!--
   @component
   Displays information about auth keys, specified by `id`.
-  
+
 -->
 <Form callback={editCallback}>
   <div class="flex flex-wrap w-full h-full gap-2 overflow-auto lg:flex-nowrap">
@@ -64,7 +68,7 @@
           title="Seen Ips:"
         ></List>
 
-        {#if $mode === 'edit'}
+        {#if appState.mode === 'edit'}
           <div>
             <ListEdit items={allowedIps ?? []} title="Allowed Ips:" name="allowed_ips"></ListEdit>
           </div>

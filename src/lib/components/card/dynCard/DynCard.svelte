@@ -10,31 +10,44 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * The header of the table. Also includes the icon and the href.
-   */
-  export let header: Readable<TableHead<T>>[];
-  /**
-   * The data that will be displayed in the table.
-   */
-  export let data: T;
-  /**
-   * The titel of the card.
-   */
-  export let title: string = '';
-  /**
-   * The description of the card.
-   */
-  export let description: string = '';
+  interface Props {
+    class?: string;
+    /**
+     * The header of the table. Also includes the icon and the href.
+     */
+    header: Readable<TableHead<T>>[];
+    /**
+     * The data that will be displayed in the table.
+     */
+    data: T;
+    /**
+     * The titel of the card.
+     */
+    title?: string;
+    /**
+     * The description of the card.
+     */
+    description?: string;
+    before?: import('svelte').Snippet;
+    after?: import('svelte').Snippet;
+  }
+
+  let {
+    class: clazz = '',
+    header,
+    data,
+    title = '',
+    description = '',
+    before,
+    after
+  }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   A card that displays the data of the given header.
 
@@ -48,7 +61,7 @@
     <!--    <br /> -->
     <!--    <p></p> -->
   {/if}
-  <slot name="before" />
+  {@render before?.()}
   <DynCardContent {data} {header} />
-  <slot name="after" />
+  {@render after?.()}
 </Card>

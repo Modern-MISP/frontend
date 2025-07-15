@@ -3,12 +3,12 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { error, type NumericRange } from '@sveltejs/kit';
   import { api } from '$lib/api';
   import { notifySave } from '$lib/util/notifications.util.js';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     console.log('formData', formData);
@@ -39,12 +39,16 @@
     }
   ];
 
-  /**
-   * Page data containing information about the user.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing information about the user.
+     */
+    data: any;
+  }
 
-  $: ({ header, title, description } = data);
+  let { data }: Props = $props();
+
+  let { header, title, description } = $derived(data);
 </script>
 
 <svelte:window use:lockEditMode={true} />

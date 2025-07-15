@@ -2,23 +2,25 @@
   import type { ComponentProps } from 'svelte';
   import Pill from '../pill/Pill.svelte';
 
-  /**
-   * The index corresponding to the entry in the `options` array.
-   */
-  export let value: number = 0;
-  /**
-   * Array with props of {@link Pill}s, indexed by `value`.
-   */
-  export let options: ComponentProps<Pill>[];
+  interface Props {
+    /**
+     * The index corresponding to the entry in the `options` array.
+     */
+    value?: number;
+    /**
+     * Array with props of {@link Pill}s, indexed by `value`.
+     */
+    options: ComponentProps<Pill>[];
+    class?: string;
+  }
 
-  let clazz = '';
+  let { value = 0, options, class: clazz = '' }: Props = $props();
   /**
    * The class of the pill.
    */
-  export { clazz as class };
 </script>
 
-<!-- 
+<!--
   @component
   Converts the value given by the `value` prop to an entry from the `options` lookup array and displays the result as a pill.
  -->

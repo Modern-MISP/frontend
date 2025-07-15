@@ -1,56 +1,70 @@
 <script lang="ts">
+  import SideMenuEntry from './SideMenuEntry.svelte';
   import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
   import { fade } from 'svelte/transition';
   import { FADE_OPTIONS } from './config';
   import { createTooltip, melt } from '@melt-ui/svelte';
 
-  /**
-   * The name to be displayed in this side menu entry.
-   */
-  export let name: string;
-  /**
-   * The icon to be displayed in this side menu entry.
-   */
-  export let icon: string;
-  /**
-   * The href to be used in this side menu entry.
-   *
-   * This is the URL of the page this entry links to.
-   */
-  export let href: string;
-  /**
-   * Whether this side menu entry is active or not.
-   *
-   * Active entries are highlighted visually.
-   */
-  export let active = false;
+  interface Props {
+    /**
+     * The name to be displayed in this side menu entry.
+     */
+    name: string;
+    /**
+     * The icon to be displayed in this side menu entry.
+     */
+    icon: string;
+    /**
+     * The href to be used in this side menu entry.
+     *
+     * This is the URL of the page this entry links to.
+     */
+    href: string;
+    /**
+     * Whether this side menu entry is active or not.
+     *
+     * Active entries are highlighted visually.
+     */
+    active?: boolean;
+    /**
+     * Whether the parent side menu is open or not.
+     */
+    isMenuOpen?: boolean;
+    /**
+     * The children of this side menu entry.
+     *
+     * Will be displayed as subentries.
+     */
+    children?: Route[] | undefined;
+    /**
+     * Whether this side menu entry is a child of another {@link SideMenuEntry}, meaning it is a subentry.
+     */
+    isChild?: boolean;
+  }
 
-  /**
-   * Whether the parent side menu is open or not.
-   */
-  export let isMenuOpen = false;
-
-  /**
-   * The children of this side menu entry.
-   *
-   * Will be displayed as subentries.
-   */
-  export let children: Route[] | undefined = undefined;
-  $: children = children?.every(({ hidden }) => hidden)
-    ? undefined
-    : children?.filter((x) => !x.hidden);
-
-  /**
-   * Whether this side menu entry is a child of another {@link SideMenuEntry}, meaning it is a subentry.
-   */
-  export let isChild = false;
+  let {
+    name,
+    icon,
+    href,
+    active = false,
+    isMenuOpen = false,
+    children = $bindable(undefined),
+    isChild = false
+  }: Props = $props();
   isChild;
 
-  let isOpen = false;
+  function filterChildren() {
+    return children?.every(({ hidden }) => hidden) ? undefined : children?.filter((x) => !x.hidden);
+  }
+  let visibleChildren = $derived(filterChildren());
+
+  let isOpen = $state(false);
 
   // Close submenus on main menu close
-  $: if (!isMenuOpen) isOpen = false;
+  $effect(() => {
+    if (!isMenuOpen) isOpen = false;
+  });
 
   const {
     elements: { content, trigger }
@@ -64,10 +78,10 @@
   });
 </script>
 
-<!-- 
+<!--
   @component
   The side menu entry component.
-  
+
   It can be opened by clicking on it when the parent side menu is open.
 
   When open, all the children will be displayed as subentries using this component.
@@ -88,13 +102,13 @@
       </span>
     {/if}
   </a>
-  {#if children}
+  {#if visibleChildren}
     {#if isMenuOpen}
       <button
         type="button"
         class="p-4 text-2xl transition-all duration-500 rounded-full cursor-pointer hover:text-ctp-sky"
         class:rotate-180={isOpen}
-        on:click={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
+        onclick={() => (isMenuOpen ? (isOpen = !isOpen) : null)}
       >
         <Icon icon="mdi:chevron-down" />
       </button>
@@ -103,15 +117,15 @@
         use:melt={$content}
         class="z-10 px-4 rounded-md shadow bg-ctp-surface0 text-ctp-text shadow-black"
       >
-        {#each children as child}
-          <svelte:self {...child} isMenuOpen={true} isChild={true}></svelte:self>
+        {#each visibleChildren as child}
+          <SideMenuEntry {...child} isMenuOpen={true} isChild={true}></SideMenuEntry>
         {/each}
       </div>
     {/if}
   {/if}
 </div>
-{#if children && isOpen}
-  {#each children as child}
-    <svelte:self {...child} {isMenuOpen} isChild={true} />
+{#if visibleChildren && isOpen}
+  {#each visibleChildren as child}
+    <SideMenuEntry {...child} {isMenuOpen} isChild={true} />
   {/each}
 {/if}

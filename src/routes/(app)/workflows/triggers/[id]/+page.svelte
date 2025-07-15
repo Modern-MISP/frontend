@@ -1,8 +1,12 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
 
-  /** Page data of a workflow trigger specified by `id` in the url */
-  export let data;
+  interface Props {
+    /** Page data of a workflow trigger specified by `id` in the url */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   const { trigger, infoHeader, workflowHeader } = data;
 </script>

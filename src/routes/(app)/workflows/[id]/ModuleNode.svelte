@@ -12,37 +12,56 @@
 
   type $$Props = NodeProps;
 
-  /** Node id */
-  export let id: $$Props['id'];
-  /** Node data */
-  export let data: $$Props['data'];
-  /** Node drag handle */
-  export let dragHandle: $$Props['dragHandle'];
-  /** Node type */
-  export let type: $$Props['type'] = undefined;
-  /** Node selected */
-  export let selected: $$Props['selected'] = undefined;
-  /** Node is connectable */
-  export let isConnectable: $$Props['isConnectable'] = undefined;
-  /** Node z index */
-  export let zIndex: $$Props['zIndex'] = undefined;
-  /** Node width */
-  export let width: $$Props['width'] = undefined;
-  /** Node height */
-  export let height: $$Props['height'] = undefined;
-  /** Node dragging */
-  export let dragging: $$Props['dragging'];
-  /** Node target position */
-  export let targetPosition: $$Props['targetPosition'] = undefined;
-  /** Node source position */
-  export let sourcePosition: $$Props['sourcePosition'] = undefined;
-  /** Node absolute x position */
-  export let positionAbsoluteX: $$Props['positionAbsoluteX'];
-  /** Node absolute y position */
-  export let positionAbsoluteY: $$Props['positionAbsoluteY'];
+  interface Props {
+    /** Node id */
+    id: $$Props['id'];
+    /** Node data */
+    data: $$Props['data'];
+    /** Node drag handle */
+    dragHandle: $$Props['dragHandle'];
+    /** Node type */
+    type?: $$Props['type'];
+    /** Node selected */
+    selected?: $$Props['selected'];
+    /** Node is connectable */
+    isConnectable?: $$Props['isConnectable'];
+    /** Node z index */
+    zIndex?: $$Props['zIndex'];
+    /** Node width */
+    width?: $$Props['width'];
+    /** Node height */
+    height?: $$Props['height'];
+    /** Node dragging */
+    dragging: $$Props['dragging'];
+    /** Node target position */
+    targetPosition?: $$Props['targetPosition'];
+    /** Node source position */
+    sourcePosition?: $$Props['sourcePosition'];
+    /** Node absolute x position */
+    positionAbsoluteX: $$Props['positionAbsoluteX'];
+    /** Node absolute y position */
+    positionAbsoluteY: $$Props['positionAbsoluteY'];
+  }
+
+  let {
+    id,
+    data = $bindable(),
+    dragHandle,
+    type = undefined,
+    selected = undefined,
+    isConnectable = undefined,
+    zIndex = undefined,
+    width = undefined,
+    height = undefined,
+    dragging,
+    targetPosition = undefined,
+    sourcePosition = undefined,
+    positionAbsoluteX,
+    positionAbsoluteY
+  }: Props = $props();
 
   /** Similar to `data.moduleData`, but with more and differently named properties. */
-  let fullData: Module = {};
+  let fullData: Module = $state({});
   get(api)
     // @ts-expect-error '/workflows/moduleView' is not specified within the OpenAPI spec
     .GET('/workflows/moduleView/{moduleId}', {
@@ -61,7 +80,7 @@
 
 <!--
   @component
-  
+
   A node representing a generic workflow module.
 -->
 <BaseNode

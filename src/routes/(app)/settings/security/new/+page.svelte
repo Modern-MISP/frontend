@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { lockEditMode } from '$lib/actions.js';
   import { api } from '$lib/api';
@@ -7,18 +9,22 @@
   import Form from '$lib/components/form/Form.svelte';
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode, notifications } from '$lib/stores.js';
+  import { currentRoute, appState, notifications } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
   import { writable } from 'svelte/store';
   import { successPill } from '$lib/util/pill.util.js';
 
-  /** Page data containing the form for new auth keys */
-  export let data;
-  $: ({ user } = data);
+  interface Props {
+    /** Page data containing the form for new auth keys */
+    data: any;
+  }
 
-  $mode = 'edit';
+  let { data }: Props = $props();
+  let { user } = $derived(data);
+
+  appState.mode = 'edit';
 
   const authKeyStore = writable('');
 
@@ -88,17 +94,17 @@
     })
   ];
 
-  $: {
+  run(() => {
     $currentRoute = [
       ...($currentRoute ?? []),
       { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
     ];
-  }
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the form for creating a new auth key.
 -->
@@ -115,7 +121,7 @@
       and generate a new one.
     </p>
     <p><strong>{$authKeyStore}</strong></p>
-    <button on:click={closePopup} class="save-button">I have noted down my key</button>
+    <button onclick={closePopup} class="save-button">I have noted down my key</button>
   </div>
 </div>
 

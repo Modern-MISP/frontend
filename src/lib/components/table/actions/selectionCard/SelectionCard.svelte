@@ -1,14 +1,18 @@
 <script lang="ts">
   import DynActionCard from '../dynCard/DynActionCard.svelte';
 
-  /** Number of rows that are currently selected. */
-  export let numSelected: number;
-  /** Callback for selecting all rows. */
-  export let selectAll: () => void;
-  /** Callback for unselecting all rows. */
-  export let unselectAll: () => void;
+  interface Props {
+    /** Number of rows that are currently selected. */
+    numSelected: number;
+    /** Callback for selecting all rows. */
+    selectAll: () => void;
+    /** Callback for unselecting all rows. */
+    unselectAll: () => void;
+  }
 
-  $: header = [
+  let { numSelected, selectAll, unselectAll }: Props = $props();
+
+  let header = $derived([
     numSelected === 0
       ? {
           label: 'select all',
@@ -20,12 +24,12 @@
           icon: 'material-symbols:check-box-outline-blank',
           action: unselectAll
         }
-  ];
+  ]);
 </script>
 
 <!--
   @component
-  
+
   Display number of selected rows alongside actions for
   selecting/unselecting all rows.
 -->

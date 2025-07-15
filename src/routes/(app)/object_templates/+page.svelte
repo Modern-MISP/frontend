@@ -3,16 +3,20 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import { get } from 'svelte/store';
 
-  /**
-   * Page data
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
   Displays a list of all object templates.
-  
+
 -->
 
 <ComplexTableLayout

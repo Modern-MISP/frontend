@@ -1,15 +1,40 @@
+import { format } from 'date-fns';
+
+const formLabel = (text: string) => `div:has(span:contains("${text}")) > label`;
+const formSelect = (text: string) => `div:has(span:contains("${text}")) > div > select`;
+
 beforeEach(() => {
   cy.defaultLogin();
   cy.visit('/events/');
-  cy.get('tbody').children().first().click();
-  cy.get('a:contains("Event Attributes")').click();
+  cy.wait(100);
 });
 
 describe('Open freetext import tool', () => {
   it('should open the freetext import tool', () => {
+    const event = {
+      date: '2014-04-03',
+      distribution: '3', // all communities
+      threat_level: '4', // high
+      analysis: '1', // initial
+      info: 'cypress test freetext-import'
+    };
+    cy.toggleMode(); //enter edit mode
+    cy.wait(100);
+    cy.get('#actionBar > :contains("Add Event")').click();
+    cy.wait(100);
+
+    cy.get(formLabel('Date')).type(format(event.date, 'yyyy-MM-dd'));
+    cy.get(formSelect('Distribution')).select(event.distribution);
+    cy.get(formSelect('Threat Level')).select(event.threat_level);
+    cy.get(formSelect('Analysis')).select(event.analysis);
+    cy.get(formLabel('Event info')).type(event.info);
+    cy.get('button:contains(Save)').click();
+    cy.wait(100);
+
+    cy.get('a:contains("Event Attributes")').click();
     cy.url().should('include', 'attributes');
 
-    cy.toggleMode();
+    //    cy.toggleMode();
 
     cy.get('#freetext-import').should('not.exist');
 
@@ -25,6 +50,29 @@ describe('Open freetext import tool', () => {
 
 describe('Freetext import tool', () => {
   it('should return as many attributes as were entered', () => {
+    const event = {
+      date: '2014-04-03',
+      distribution: '3', // all communities
+      threat_level: '4', // high
+      analysis: '1', // initial
+      info: 'cypress test freetext-import'
+    };
+    cy.toggleMode(); //enter edit mode
+    cy.wait(100);
+    cy.get('#actionBar > :contains("Add Event")').click();
+    cy.wait(100);
+
+    cy.get(formLabel('Date')).type(format(event.date, 'yyyy-MM-dd'));
+    cy.get(formSelect('Distribution')).select(event.distribution);
+    cy.get(formSelect('Threat Level')).select(event.threat_level);
+    cy.get(formSelect('Analysis')).select(event.analysis);
+    cy.get(formLabel('Event info')).type(event.info);
+    cy.get('button:contains(Save)').click();
+    cy.wait(100);
+
+    cy.get('a:contains("Event Attributes")').click();
+    cy.url().should('include', 'attributes');
+
     cy.intercept({
       method: 'POST',
       url: 'events/freeTextImport/**'
@@ -33,7 +81,6 @@ describe('Freetext import tool', () => {
       method: 'GET',
       url: '/jobs/**'
     }).as('jobsFreeTextImport');
-    cy.toggleMode();
 
     cy.get('button:contains(Freetext Import Tool)').should('exist').click();
 

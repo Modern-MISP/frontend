@@ -1,5 +1,5 @@
 import { errorPill, successPill } from './pill.util';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 
 export async function notifySave(response: Promise<unknown>, message = 'Saved') {
   return response

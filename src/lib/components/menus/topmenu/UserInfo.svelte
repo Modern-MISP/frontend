@@ -6,10 +6,14 @@
   import Icon from '@iconify/svelte';
   import { createPopover, melt } from '@melt-ui/svelte';
 
-  /**
-   * Information about the current user.
-   */
-  export let userData: { email: string; admin: boolean };
+  interface Props {
+    /**
+     * Information about the current user.
+     */
+    userData: { email: string; admin: boolean };
+  }
+
+  let { userData }: Props = $props();
 
   const {
     elements: { trigger, content, arrow },
@@ -22,7 +26,7 @@
 
 <!--
     @component
-    
+
     Indicate context specific information that is displayed as a popover on click.
   -->
 <button use:melt={$trigger}>
@@ -34,7 +38,7 @@
 </button>
 {#if $open}
   <div use:melt={$content} class="bg-ctp-surface1 text-ctp-text rounded-lg p-3">
-    <div use:melt={$arrow} />
+    <div use:melt={$arrow}></div>
     <div class="flex flex-col gap-2">
       <Info text={userData.email}></Info>
       <Info text={userData.admin ? 'Administrator account' : 'User account'}></Info>

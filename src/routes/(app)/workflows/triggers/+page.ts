@@ -14,7 +14,7 @@ import type { PageLoad } from './$types';
 import type { Trigger } from './trigger';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
 import { invalidateAll } from '$app/navigation';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
@@ -128,7 +128,9 @@ export const load: PageLoad = async ({ fetch }) => {
         if (!x) return;
         if (
           confirm(
-            `Are you sure you want to enable the following triggers?\n${x.map((x) => x.id).join(', ')}`
+            `Are you sure you want to enable the following triggers?\n${x
+              .map((x) => x.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(
@@ -150,7 +152,9 @@ export const load: PageLoad = async ({ fetch }) => {
         if (!x) return;
         if (
           confirm(
-            `Are you sure you want to disable the following triggers?\n${x.map((x) => x.id).join(', ')}`
+            `Are you sure you want to disable the following triggers?\n${x
+              .map((x) => x.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(

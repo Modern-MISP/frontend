@@ -6,32 +6,42 @@
   import { FADE_OPTIONS } from './config';
   import type { SideMenuRoute } from './SideMenu.model';
 
-  /**
-   * The current state of the side menu.
-   *
-   * Can be bound in order to change the state from other components.
-   */
-  export let isOpen = false;
+  interface Props {
+    /**
+     * The current state of the side menu.
+     *
+     * Can be bound in order to change the state from other components.
+     */
+    isOpen?: boolean;
+    /**
+     * The routes to be displayed in the side menu.
+     */
+    routes?: SideMenuRoute[];
+    /**
+     * Context dependant routes to be displayed in a separate section.
+     */
+    contextRoutes?: SideMenuRoute[];
+    /**
+     * The current route that is active.
+     *
+     * Should usually be the current URL provided by SvelteKit (`$page.url.href`).
+     */
+    activeRoute?: string | null;
+    logo?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+  }
 
-  /**
-   * The routes to be displayed in the side menu.
-   */
-  export let routes: SideMenuRoute[] = [];
-
-  /**
-   * Context dependant routes to be displayed in a separate section.
-   */
-  export let contextRoutes: SideMenuRoute[] = [];
-
-  /**
-   * The current route that is active.
-   *
-   * Should usually be the current URL provided by SvelteKit (`$page.url.href`).
-   */
-  export let activeRoute: string | null = null;
+  let {
+    isOpen = $bindable(false),
+    routes = [],
+    contextRoutes = [],
+    activeRoute = null,
+    logo,
+    children
+  }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   The side menu component. It contains the {@link SideMenuEntry} and {@link SideMenuDivider} components.
 
@@ -47,7 +57,7 @@
   class:lg:w-80={isOpen}
   class:hidden={!isOpen}
 >
-  <slot name="logo">
+  {#if logo}{@render logo()}{:else}
     <div class="flex h-10 gap-12 px-5 overflow-hidden text-2xl" class:text-4xl={isOpen}>
       <a href="/events">
         <Icon icon="mdi:home" class="text-inherit shrink-0" />
@@ -56,11 +66,11 @@
         <h1 class="font-bold line-clamp-1" transition:fade={FADE_OPTIONS}>MISP</h1>
       {/if}
     </div>
-  </slot>
+  {/if}
 
   <SideMenuDivider />
   <nav class="flex flex-col w-full gap-2 overflow-auto overflow-x-hidden">
-    <slot>
+    {#if children}{@render children()}{:else}
       {#if contextRoutes.length > 0}
         <div class="flex flex-col justify-center w-full gap-2 bg-ctp-crust rounded-2xl">
           {#each contextRoutes as route}
@@ -84,7 +94,7 @@
           />
         </div>
       {/each}
-    </slot>
+    {/if}
   </nav>
   <SideMenuDivider class="mt-auto" />
   <div class="relative flex items-center w-full px-4">
@@ -96,7 +106,7 @@
     <button
       type="button"
       class="ml-auto text-4xl transition-all duration-500 cursor-pointer hover:text-ctp-sky"
-      on:click={() => (isOpen = !isOpen)}
+      onclick={() => (isOpen = !isOpen)}
       class:rotate-180={isOpen}
     >
       <Icon icon="mdi:chevron-right" />

@@ -19,17 +19,21 @@
     >
   >;
 
-  /**
-   *
-   */
-  export let data: $$Props['data'];
+  interface Props {
+    /**
+     *
+     */
+    data: $$Props['data'];
+  }
+
+  let { data }: Props = $props();
 
   const { id, type, value } = data;
 </script>
 
 <!--
   @component
-  
+
   A node representing a generic event graph attribute node.
 -->
 

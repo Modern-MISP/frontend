@@ -2,10 +2,10 @@ import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import Select from '$lib/components/form/Select.svelte';
 import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
 import type { PageLoad } from './$types';
-import { themes } from '$lib/stores';
+import { themes } from '$lib/stores.svelte.ts';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
-import { settings } from '$lib/stores';
+import { settings } from '$lib/stores.svelte.ts';
 
 export const load: PageLoad = async ({ fetch }) => {
   const {

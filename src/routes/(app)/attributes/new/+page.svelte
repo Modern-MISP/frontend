@@ -1,9 +1,9 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import Card from '$lib/components/card/Card.svelte';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
   import TagCollection from '$lib/components/pills/pillCollection/TagCollection.svelte';
@@ -13,37 +13,41 @@
   import type { PickerPill } from '$lib/models/Picker.interface';
   import type { EventState } from '../../events/[id]/_components/EventState.interface';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
-  /** Page data */
-  export let data;
+  interface Props {
+    /** Page data */
+    data: any;
+  }
 
-  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
+  let { data }: Props = $props();
 
-  let state: EventState = 'info';
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = $state([]);
+
+  let eventState: EventState = 'info';
 
   function editCallback(formData: Record<string, string>) {
     console.log(formData);
   }
 
-  let formActions: ActionBarEntryProps[] = [];
+  let formActions: ActionBarEntryProps[] = $state([]);
 </script>
 
 <!--
-@component 
+@component
 Displays the form for creating a new attribute.
 
 -->
 <div class="h-full overflow-auto">
   <Form callback={editCallback} bind:actions={formActions}>
     <div class="grid h-full grid-cols-2 gap-2 lg:flex-nowrap">
-      {#if state === 'add' && $mode === 'edit'}
+      {#if eventState === 'add' && appState.mode === 'edit'}
         <AddTagForm
           bind:selection
           on:createTag={() => (state = 'create')}
           on:close={() => (state = 'info')}
         />
-      {:else if state === 'create' && $mode === 'edit'}
+      {:else if eventState === 'create' && appState.mode === 'edit'}
         <Card>
           <CardHeading>Create a Tag</CardHeading>
           <CreateTag on:close={() => (state = 'add')}></CreateTag>
@@ -62,12 +66,12 @@ Displays the form for creating a new attribute.
             on:open={() => (state = 'add')}
             on:delete={({ detail }) => {
               deleteTags(
-                detail.map((x) => ({ attributeId: $page.params.id, value: x.value ?? '' }))
+                detail.map((x) => ({ attributeId: page.params.id, value: x.value ?? '' }))
               );
             }}
             on:save={({ detail }) => {
               // @ts-expect-error svelte error. Does not detect the generic correctly.
-              addTags(detail.map((x) => ({ ...x, attributeId: $page.params.id })));
+              addTags(detail.map((x) => ({ ...x, attributeId: page.params.id })));
             }}
             tags={[]}
           ></TagCollection>

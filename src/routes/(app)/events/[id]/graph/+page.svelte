@@ -2,8 +2,12 @@
   import EventGraph from '$lib/components/eventGraph/EventGraph.svelte';
   import { SvelteFlowProvider } from '@xyflow/svelte';
 
-  /**Page data of the event graph */
-  export let data;
+  interface Props {
+    /**Page data of the event graph */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--

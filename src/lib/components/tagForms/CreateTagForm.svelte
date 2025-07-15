@@ -5,7 +5,7 @@
   import type { components } from '$lib/api/misp';
   import CheckBox from '$lib/components/checkbox/Checkbox.svelte';
   import Select from '$lib/components/form/Select.svelte';
-  import { notifications } from '$lib/stores';
+  import { notifications } from '$lib/stores.svelte.ts';
   import { generateRandomPastelHex, shouldTextBeBlack } from '$lib/util/color.util';
   import { errorPill } from '$lib/util/pill.util';
   import { createEventDispatcher } from 'svelte';
@@ -16,13 +16,14 @@
   const dispatch = createEventDispatcher<{
     close: void;
   }>();
-  let color = generateRandomPastelHex();
+  let color = $state(generateRandomPastelHex());
 
-  let text = '';
+  let text = $state('');
 
-  let local_only = false;
+  let local_only = $state(false);
 
-  let orgs: components['responses']['OrganisationListResponse']['content']['application/json'] = [];
+  let orgs: components['responses']['OrganisationListResponse']['content']['application/json'] =
+    $state([]);
   $api.GET('/organisations').then((res) => {
     if (res.error) {
       notifications.add(errorPill('failed loading organizations'));
@@ -31,7 +32,9 @@
     orgs = res.data;
   });
 
-  let users: components['responses']['UserListResponse']['content']['application/json'] = [];
+  let users: components['responses']['UserListResponse']['content']['application/json'] = $state(
+    []
+  );
   $api.GET('/admin/users').then((res) => {
     if (res.error) {
       notifications.add(errorPill('failed loading users'));

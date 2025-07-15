@@ -3,13 +3,17 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
 
-  /** Page data containing the data of the organisation */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data of the organisation */
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
-  
+
   Information about a organisation specified by 'id'.
 
 -->

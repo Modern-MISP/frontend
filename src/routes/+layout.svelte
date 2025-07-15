@@ -1,8 +1,15 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
   import { token } from '$lib/api';
-  import { settings } from '$lib/stores';
+  import { settings } from '$lib/stores.svelte.ts';
   import { tweened } from 'svelte/motion';
+  interface Props {
+    children?: import('svelte').Snippet<[any]>;
+  }
+
+  let { children }: Props = $props();
 
   const progressValue = tweened(0, { duration: 0 });
 
@@ -16,16 +23,18 @@
     $progressValue = 0;
   });
 
-  $: if (!$token) goto('/login');
+  run(() => {
+    if (!$token) goto('/login');
+  });
 </script>
 
 <!--
   @component
-  
-  Root layout. Used to apply the theme and render the full application. 
+
+  Root layout. Used to apply the theme and render the full application.
   The theme is based on css variables and [tailwindcss](https://tailwindcss.com/).
   Elements using the proper tailwind classes will be themed automatically according to the current theme when placed in this layout.
-  
+
 -->
 <svelte:head>
   <title>MMISP</title>
@@ -42,9 +51,9 @@
         ease-[cubic-bezier(0.65,0,0.35,1)]"
       class:hidden={$progressValue === 0}
       style={`transform: translateX(-${100 - (100 * ($progressValue ?? 0)) / (maxProgress ?? 1)}%)`}
-    />
+    ></div>
   </div>
   <main class="flex w-full h-full">
-    <slot {progressValue} />
+    {@render children?.({ progressValue })}
   </main>
 </div>

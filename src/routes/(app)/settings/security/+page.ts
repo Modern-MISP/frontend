@@ -11,7 +11,7 @@ import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
 import { goto, invalidateAll } from '$app/navigation';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { successPill } from '$lib/util/pill.util';
 
 export const load: PageLoad = async ({ fetch }) => {
@@ -206,7 +206,9 @@ async function loadTable(
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to delete the auth key with ids: ${x.map((x) => x.AuthKey?.id).join(', ')}`
+            `Are you sure you want to delete the auth key with ids: ${x
+              .map((x) => x.AuthKey?.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(

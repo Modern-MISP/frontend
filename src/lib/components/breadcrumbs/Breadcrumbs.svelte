@@ -2,13 +2,17 @@
   import type { Route } from '$lib/models/Route.interface';
   import Icon from '@iconify/svelte';
 
-  /**
-   * The route that will be displayed in the breadcrumbs.
-   */
-  export let routes: Route[] = [];
+  interface Props {
+    /**
+     * The route that will be displayed in the breadcrumbs.
+     */
+    routes?: Route[];
+  }
+
+  let { routes = [] }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   Displays a [breadcrumb trail](https://en.wikipedia.org/wiki/Breadcrumb_navigation) with the given routes.
  -->

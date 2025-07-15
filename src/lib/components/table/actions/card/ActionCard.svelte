@@ -1,12 +1,16 @@
-<script>
-  let clazz = '';
+<script lang="ts">
+  interface Props {
+    class?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { class: clazz = '', children }: Props = $props();
 
   /**
    * Class overload
    */
-  export { clazz as class };
 </script>
 
 <div class="rounded-md bg-ctp-surface0 flex flex-wrap items-center p-4 {clazz}">
-  <slot />
+  {@render children?.()}
 </div>

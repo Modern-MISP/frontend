@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import AddGalaxyClusterForm from '$lib/components/addGalaxyClusterForm/AddGalaxyClusterForm.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
   import EventGalaxies from '$lib/components/pills/pillCollection/GalaxyCollection.svelte';
@@ -9,13 +9,17 @@
   import Card from '$lib/components/card/Card.svelte';
   import CardHeading from '$lib/components/card/CardHeading.svelte';
 
-  /**
-   * Page data of the galaxy form.
-   */
-  export let data;
-  let state: EventState = 'info';
+  interface Props {
+    /**
+     * Page data of the galaxy form.
+     */
+    data: any;
+  }
 
-  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = [];
+  let { data }: Props = $props();
+  let eventState: EventState = $state('info');
+
+  let selection: PickerPill<{ local_only: boolean; relation: string }>[] = $state([]);
 </script>
 
 <!--
@@ -23,25 +27,25 @@
     Displays the form for editing the galaxy cluster of an event.
 -->
 
-<EventInfo {data} bind:state>
-  <svelte:fragment slot="add">
+<EventInfo {data} bind:eventState>
+  {#snippet add()}
     <AddGalaxyClusterForm
       bind:selection
-      on:createTag={() => (state = 'create')}
-      on:close={() => (state = 'info')}
+      on:createTag={() => (eventState = 'create')}
+      on:close={() => (evestState = 'info')}
     />
-  </svelte:fragment>
+  {/snippet}
 
   <Card>
     <CardHeading>Galaxies</CardHeading>
     <EventGalaxies
-      on:close={() => (state = 'info')}
-      on:open={() => (state = 'add')}
+      on:close={() => (evestState = 'info')}
+      on:open={() => (eventState = 'add')}
       on:delete={({ detail }) =>
-        detachCluster(detail.map((x) => ({ eventId: $page.params.id, id: x.value ?? '' })))}
+        detachCluster(detail.map((x) => ({ eventId: page.params.id, id: x.value ?? '' })))}
       on:save={({ detail }) =>
         // @ts-expect-error svelte error. Does not detect the generic correctly.
-        attachCluster(detail.map((x) => ({ ...x, eventId: $page.params.id })))}
+        attachCluster(detail.map((x) => ({ ...x, eventId: page.params.id })))}
       galaxies={data.event.Galaxy}
       bind:selection
     />

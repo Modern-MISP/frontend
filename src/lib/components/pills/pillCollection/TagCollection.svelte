@@ -1,30 +1,35 @@
 <script lang="ts" generics="T">
+  import { run } from 'svelte/legacy';
+
   import type { components } from '$lib/api/misp';
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { shouldTextBeBlack } from '$lib/util/color.util';
   import type { ComponentProps } from 'svelte';
   import EventPillCollectionCard from './PillCollectionWithDeleteAndAdd.svelte';
 
   /**
-   * The Page data.
-   */
-  export let tags: components['schemas']['Tag'][];
-
-  /**
    * The current mode of the page.
    */
 
-  /**
-   * The currently selected pills
-   */
-  export let selection: PickerPill<T>[] = [];
+  interface Props {
+    /**
+     * The Page data.
+     */
+    tags: components['schemas']['Tag'][];
+    /**
+     * The currently selected pills
+     */
+    selection?: PickerPill<T>[];
+  }
 
-  let deletion: PickerPill<T>[] = [];
+  let { tags, selection = $bindable([]) }: Props = $props();
 
-  let pills: ComponentProps<HrefPill>[] = [];
+  let deletion: PickerPill<T>[] = $state([]);
+
+  let pills: ComponentProps<HrefPill>[] = $state([]);
 
   function generatePills(includeAction: boolean) {
     pills = tags.map((y) => {
@@ -71,7 +76,9 @@
     });
   }
 
-  $: if (tags) generatePills($mode === 'edit');
+  run(() => {
+    if (tags) generatePills(appState.mode === 'edit');
+  });
 </script>
 
 <EventPillCollectionCard on:close on:save on:open bind:selection bind:deletion on:delete>

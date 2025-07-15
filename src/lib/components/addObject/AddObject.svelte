@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { api } from '$lib/api';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
@@ -16,35 +18,41 @@
     return resp.data.result;
   }
 
-  /**
-   * The object template uuid
-   */
-  export let objectTemplateUuid;
+  interface Props {
+    /**
+     * The object template uuid
+     */
+    objectTemplateUuid: any;
+  }
 
-  let template;
-  let sortedOte;
+  let { objectTemplateUuid }: Props = $props();
 
-  $: $api
-    .GET('/object_templates/view/{objectTemplateId}', {
-      params: { path: { objectTemplateId: objectTemplateUuid } }
-    })
-    .then((resp) => {
-      if (resp.error) {
-        throw new Error(
-          Object.values(
-            (resp.error as typeof resp.error & { errors: Record<string, string[]> }).errors
-          )[0][0] ?? []
+  let template = $state();
+  let sortedOte = $state();
+
+  run(() => {
+    $api
+      .GET('/object_templates/view/{objectTemplateId}', {
+        params: { path: { objectTemplateId: objectTemplateUuid } }
+      })
+      .then((resp) => {
+        if (resp.error) {
+          throw new Error(
+            Object.values(
+              (resp.error as typeof resp.error & { errors: Record<string, string[]> }).errors
+            )[0][0] ?? []
+          );
+        }
+        template = resp.data;
+        sortedOte = resp.data.ObjectTemplateElement.sort(
+          (a, b) => b['ui-priority'] - a['ui-priority']
         );
-      }
-      template = resp.data;
-      sortedOte = resp.data.ObjectTemplateElement.sort(
-        (a, b) => b['ui-priority'] - a['ui-priority']
-      );
-      //else {
-      //goto(`/attributes/${resp.data.Attribute?.id}`);
-      //}
-      console.log(resp.data);
-    });
+        //else {
+        //goto(`/attributes/${resp.data.Attribute?.id}`);
+        //}
+        console.log(resp.data);
+      });
+  });
   const fac = createTableHeadGenerator<NonNullable<typeof cardData>[number], DynTableHeadExtent>();
 
   const objectTemplateElementsHeader = [
@@ -71,38 +79,41 @@
           description={ote.description}
           data={ote}
         >
-          <div slot="before" class="flex justify-end space-x-5 absolute right-10 w-[10em]">
-            {#if template?.ObjectTemplate.requirements?.required?.includes(ote.object_relation)}
-              <Tooltip tooltip="This attribute is required">
-                <Icon icon="mdi:asterisk" class="text-2xl text-sky" />
-              </Tooltip>
-            {/if}
-            {#if template?.ObjectTemplate.requirements?.requiredOneOf?.includes(ote.object_relation)}
-              <Tooltip tooltip="This attribute is in a group of required attributes">
-                <Icon icon="mdi:asterisk-circle-outline" class="text-2xl text-sky" />
-              </Tooltip>
-            {/if}
-            {#if ote.multiple}
-              <Tooltip tooltip="Add an additional attribute of the same object relation">
-                <button
-                  type="button"
-                  on:click={() => (sortedOte = sortedOte.toSpliced(index, 0, ote))}
-                >
-                  <Icon icon="mdi:plus" class="text-2xl text-sky" />
-                </button>
-              </Tooltip>
-            {/if}
-          </div>
-          <AddAttribute
-            contentOnly="true"
-            slot="after"
-            allAttributeTypes={[ote.type]}
-            categoryTypeMapping={attributeTypes.category_type_mappings}
-            categories={ote.categories.length > 0 ? ote.categories : attributeTypes.categories}
-            saneDefault={ote.sane_default.length > 0 ? ote.sane_default : undefined}
-            valueList={ote.values_list}
-            disable_correlation={ote.disable_correlation}
-          />
+          {#snippet before()}
+            <div class="flex justify-end space-x-5 absolute right-10 w-[10em]">
+              {#if template?.ObjectTemplate.requirements?.required?.includes(ote.object_relation)}
+                <Tooltip tooltip="This attribute is required">
+                  <Icon icon="mdi:asterisk" class="text-2xl text-sky" />
+                </Tooltip>
+              {/if}
+              {#if template?.ObjectTemplate.requirements?.requiredOneOf?.includes(ote.object_relation)}
+                <Tooltip tooltip="This attribute is in a group of required attributes">
+                  <Icon icon="mdi:asterisk-circle-outline" class="text-2xl text-sky" />
+                </Tooltip>
+              {/if}
+              {#if ote.multiple}
+                <Tooltip tooltip="Add an additional attribute of the same object relation">
+                  <button
+                    type="button"
+                    onclick={() => (sortedOte = sortedOte.toSpliced(index, 0, ote))}
+                  >
+                    <Icon icon="mdi:plus" class="text-2xl text-sky" />
+                  </button>
+                </Tooltip>
+              {/if}
+            </div>
+          {/snippet}
+          {#snippet after()}
+            <AddAttribute
+              contentOnly="true"
+              allAttributeTypes={[ote.type]}
+              categoryTypeMapping={attributeTypes.category_type_mappings}
+              categories={ote.categories.length > 0 ? ote.categories : attributeTypes.categories}
+              saneDefault={ote.sane_default.length > 0 ? ote.sane_default : undefined}
+              valueList={ote.values_list}
+              disable_correlation={ote.disable_correlation}
+            />
+          {/snippet}
         </DynCard>
       {/each}
     {/if}

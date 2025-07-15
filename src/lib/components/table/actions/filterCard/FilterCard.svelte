@@ -4,21 +4,25 @@
   import ActionCard from '$lib/components/table/actions/card/ActionCard.svelte';
   import { omit } from 'lodash-es';
 
-  /**
-   * Are the Filter open
-   */
-  export let filterOpen = false;
+  interface Props {
+    /**
+     * Are the Filter open
+     */
+    filterOpen?: boolean;
+    /**
+     * Currently Filter
+     */
+    currentFilter?: Record<string, string>;
+    children?: import('svelte').Snippet;
+  }
 
-  /**
-   * Currently Filter
-   */
-  export let currentFilter: Record<string, string> = {};
-  $: filterKeys = Object.keys(currentFilter);
+  let { filterOpen = $bindable(false), currentFilter = $bindable({}), children }: Props = $props();
+  let filterKeys = $derived(Object.keys(currentFilter));
 </script>
 
 <ActionCard class="w-auto! gap-4 flex flex-nowrap">
   <ActiveEntry label="Filter" icon="mdi:filter-outline" bind:active={filterOpen}></ActiveEntry>
-  <slot />
+  {@render children?.()}
   {#if filterKeys.length > 0}
     <div class="flex flex-wrap items-center w-full h-full gap-2">
       {#each filterKeys as filterKey}

@@ -1,19 +1,21 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { token } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import { getFormValues } from '$lib/util/form.util';
-  import { compatibility } from '$lib/stores';
+  import { compatibility } from '$lib/stores.svelte.ts';
   import OidcButton from '$lib/components/button/oidcButton/OidcButton.svelte';
-  import { onMount } from 'svelte';
+  import { onMount, mount } from 'svelte';
   import { forEach } from 'lodash-es';
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
 
-  export let data;
+  let { data } = $props();
 
-  let error: string = '';
+  let error: string = $state('');
 
   async function submit(event: SubmitEvent) {
     const entries = getFormValues(event);
@@ -54,14 +56,14 @@
   }
 
   const visible = !compatibility;
-  let oidc = true;
+  let oidc = $state(true);
 
   onMount(() => {
     if ('data' in data.data || data.data.length === 0) oidc = false;
     if (!visible) oidc = false;
     if (!oidc) return;
     forEach(data.data, (item) => {
-      new OidcButton({
+      mount(OidcButton, {
         target: document.querySelector('.oidc') ?? document,
         props: {
           name: item['name'],
@@ -87,13 +89,13 @@
   Provides a login flow via username and password.
   Stores the generated authentication token in [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage),
   allowing the user to stay logged in after closing the page.
-  
+
 -->
 
 <form
   class="flex flex-col gap-4 m-auto w-80 text-ctp-text"
   method="post"
-  on:submit|preventDefault={submit}
+  onsubmit={preventDefault(submit)}
 >
   <h1 class="text-4xl font-bold leading-normal">
     Login
@@ -112,7 +114,7 @@
 
     <div class="flex">
       <a
-        on:click={forgot_password}
+        onclick={forgot_password}
         href="/login"
         class="text-ctp-sky"
         style="text-decoration: underline;">Forgot password?</a

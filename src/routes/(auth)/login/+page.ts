@@ -2,7 +2,7 @@ import type { PageLoad } from './$types';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { api } from '$lib/api';
 import { get } from 'svelte/store';
-import { compatibility } from '$lib/stores';
+import { compatibility } from '$lib/stores.svelte.ts';
 
 export const load: PageLoad = async ({ fetch }) => {
   if (compatibility) {

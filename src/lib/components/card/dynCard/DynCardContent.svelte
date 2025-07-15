@@ -3,14 +3,18 @@
   import type { TableHead } from '$lib/models/TableHead.interface';
   import CardRow from '$lib/components/card/CardRow.svelte';
 
-  /**
-   * The header of the table. Also includes the icon and the href.
-   */
-  export let header: Readable<TableHead<T>>[];
-  /**
-   * The data that will be displayed in the table.
-   */
-  export let data: T;
+  interface Props {
+    /**
+     * The header of the table. Also includes the icon and the href.
+     */
+    header: Readable<TableHead<T>>[];
+    /**
+     * The data that will be displayed in the table.
+     */
+    data: T;
+  }
+
+  let { header, data }: Props = $props();
   /**
    * The titel of the card.
    */
@@ -23,7 +27,7 @@
     {@const v = value(data)}
     {#if v !== null && v !== undefined}
       {#if typeof v !== 'string'}
-        <svelte:component this={v.display} {...v.props} />
+        <v.display {...v.props} />
       {:else}
         <span>{v}</span>
       {/if}
