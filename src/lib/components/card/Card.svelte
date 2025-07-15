@@ -1,25 +1,29 @@
 <script lang="ts">
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * Title of this component.
-   */
-  export let title = '';
+  interface Props {
+    class?: string;
+    /**
+     * Title of this component.
+     */
+    title?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { class: clazz = '', title = '', children }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   A card with a slot for content.
   Sets the default padding and border radius. You can override this by passing your own classes.
-  
+
  -->
 <div
   class="flex gap-4 flex-col text-ctp-text w-full h-full p-4 rounded-lg bg-ctp-surface0 overflow-auto {clazz}"
   {title}
 >
-  <slot />
+  {@render children?.()}
 </div>

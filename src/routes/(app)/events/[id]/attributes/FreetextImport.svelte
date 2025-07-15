@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { preventDefault } from 'svelte/legacy';
+
+  import { page } from '$app/state';
   import { api } from '$lib/api';
   import { getFormValues } from '$lib/util/form.util';
   import type { EventHandler } from 'svelte/elements';
@@ -20,7 +22,7 @@
     to_ids: boolean;
   };
 
-  let freetextData;
+  let freetextData = $state();
 
   const submit: EventHandler<SubmitEvent, HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@
       $api
         // @ts-expect-error Not in the OpenAPI spec
         .POST('/events/freeTextImport/{eventId}', {
-          params: { path: { eventId: $page.params.id } },
+          params: { path: { eventId: page.params.id } },
           body: {
             returnMetaAttributes: true,
             value: freetext
@@ -92,7 +94,7 @@
         x.forEach((y) => {
           get(api)
             .POST('/attributes/add/{eventId}', {
-              params: { path: { eventId: $page.params.id } },
+              params: { path: { eventId: page.params.id } },
               body: {
                 type: y.default_type,
                 value: y.value,
@@ -112,7 +114,7 @@
 
 <div class="h-full" id="freetext-import">
   {#if !freetextData}
-    <form on:submit|preventDefault={submit} class="flex flex-col h-full gap-4">
+    <form onsubmit={preventDefault(submit)} class="flex flex-col h-full gap-4">
       <textarea
         class="w-full h-full p-2 border rounded-md outline-none bg-ctp-surface0 border-sky"
         name="freetext"

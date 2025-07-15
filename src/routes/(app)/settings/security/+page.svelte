@@ -2,13 +2,13 @@
   import { lockEditMode } from '$lib/actions';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import { invalidateAll } from '$app/navigation';
   import { api } from '$lib/api';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -29,13 +29,17 @@
     );
   }
 
-  /**
-   * Page data containing security information about the user.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing security information about the user.
+     */
+    data: any;
+  }
 
-  $: ({ header } = data.card);
-  $: ({ tableData, topMenuActions } = data.table);
+  let { data }: Props = $props();
+
+  let { header } = $derived(data.card);
+  let { tableData, topMenuActions } = $derived(data.table);
 </script>
 
 <svelte:window use:lockEditMode={true} />

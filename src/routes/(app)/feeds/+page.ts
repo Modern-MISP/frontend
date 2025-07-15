@@ -9,7 +9,7 @@ import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable
 import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 

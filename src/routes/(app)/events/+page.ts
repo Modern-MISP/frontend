@@ -15,7 +15,7 @@ import TagPicker from '$lib/components/tagForms/TagPicker.svelte';
 import { ANALYSIS_LOOKUP, DISTRIBUTION_LOOKUP, THREAT_LEVEL_LOOKUP } from '$lib/consts/PillLookups';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { shouldTextBeBlack } from '$lib/util/color.util';
 import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
@@ -31,7 +31,7 @@ export const load: PageLoad = async ({ fetch }) => {
     data,
     error: mispError,
     response
-  } = await get(api).POST('/events/index', { body: { page: 1, limit: 50 }, fetch });
+  } = await get(api).POST('/events/index', { body: { page: 1, limit: 5 }, fetch });
 
   if (mispError) error(response.status as NumericRange<400, 599>, mispError.message);
 

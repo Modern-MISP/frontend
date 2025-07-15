@@ -3,7 +3,7 @@
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import Input from '$lib/components/input/Input.svelte';
   import { notifySave } from '$lib/util/notifications.util';
@@ -15,7 +15,7 @@
   } from '$lib/consts/PillLookups';
   import { goto } from '$app/navigation';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -107,10 +107,10 @@
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
-    @component 
+<!--
+    @component
     Displays the form for creating a new event.
- 
+
 -->
 
 <Form callback={editCallback}>

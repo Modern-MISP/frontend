@@ -10,10 +10,14 @@
   import CreateTag from './CreateTag.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  /**
-   * Page data containing the tags table.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing the tags table.
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   /* functions for search options
   $: ({ tableData } = data);
@@ -23,9 +27,9 @@
   $: filtered = tableData.filter((x) => x.name?.toLowerCase()?.includes(tagFilter.toLowerCase()));
   */
 
-  let addTag = false;
+  let addTag = $state(false);
 
-  $: topMenuActions = [
+  let topMenuActions = $derived([
     addTag
       ? {
           icon: 'mdi:close-circle-outline',
@@ -38,13 +42,13 @@
           label: 'Create Tag',
           action: () => (addTag = true)
         }
-  ];
+  ]);
 </script>
 
 <!--
   @component
   Displays a combined list of the tags of all events.
-  
+
 -->
 
 <ComplexTableLayout {...data} {topMenuActions}>
@@ -56,16 +60,18 @@
     </ActionCard>
   </div>
 -->
-  <svelte:fragment slot="added">
+  {#snippet added()}
     {#if addTag}
       <div
         class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1 lg:w-3/4 2xl:w-1/2"
       >
         <FilterCard>
-          <span slot="heading"> Create a new Tag</span>
+          {#snippet heading()}
+            <span> Create a new Tag</span>
+          {/snippet}
           <CreateTag on:close={() => (addTag = false)}></CreateTag>
         </FilterCard>
       </div>
     {/if}
-  </svelte:fragment>
+  {/snippet}
 </ComplexTableLayout>

@@ -4,7 +4,7 @@
   import { api } from '$lib/api';
   import { get } from 'svelte/store';
 
-  export let data;
+  let { data = $bindable() } = $props();
 
   function onchange() {
     //@ts-expect-error Not in Openapi spec.

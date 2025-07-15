@@ -5,18 +5,24 @@
   import Form from '$lib/components/form/Form.svelte';
   import KeyValueEditor from '$lib/components/keyValueEditor/KeyValueEditor.svelte';
   import DynTable from '$lib/components/table/dynTable/DynTable.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util.js';
   import { get } from 'svelte/store';
 
-  /** Page data containing the galaxy cluster to display with the 'id' in the url */
-  export let data;
+  interface Props {
+    /** Page data containing the galaxy cluster to display with the 'id' in the url */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   const { cardData, leftCardHeader, rightCardHeader, tableData, tableHeader } = data;
 
-  if (data.cardData?.default) $mode = 'view';
+  if (data.cardData?.default) appState.mode = 'view';
 
-  let entries: [string, string][] = tableData.map(({ key, value }) => [key ?? '', value ?? '']);
+  let entries: [string, string][] = $state(
+    tableData.map(({ key, value }) => [key ?? '', value ?? ''])
+  );
 
   function formCallback(formData: Record<string, string>) {
     notifySave(
@@ -59,7 +65,7 @@
   </div>
 </Form>
 
-{#if $mode === 'view'}
+{#if appState.mode === 'view'}
   <DynTable header={tableHeader} data={tableData} />
 {:else}
   <KeyValueEditor bind:entries></KeyValueEditor>

@@ -1,5 +1,11 @@
 import type { Action } from 'svelte/action';
-import { actionBarEntries, contextInfo, contextRouteEntries, lockModeToggle, mode } from './stores';
+import {
+  actionBarEntries,
+  contextInfo,
+  contextRouteEntries,
+  lockModeToggle,
+  mode
+} from './stores.svelte.ts';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
 import { get } from 'svelte/store';

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { api } from '$lib/api';
   import CreateTagForm from '$lib/components/tagForms/CreateTagForm.svelte';
   import { get } from 'svelte/store';
@@ -24,6 +26,6 @@
   }
 </script>
 
-<form on:submit|preventDefault={(e) => addTag(getFormValues(e))} class="h-full">
+<form onsubmit={preventDefault((e) => addTag(getFormValues(e)))} class="h-full">
   <CreateTagForm on:close />
 </form>

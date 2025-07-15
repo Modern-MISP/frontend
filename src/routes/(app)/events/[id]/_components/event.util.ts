@@ -1,6 +1,6 @@
 import { invalidateAll } from '$app/navigation';
 import { api } from '$lib/api';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { errorPill, successPill } from '$lib/util/pill.util';
 import { partition } from 'lodash-es';
 import { get } from 'svelte/store';

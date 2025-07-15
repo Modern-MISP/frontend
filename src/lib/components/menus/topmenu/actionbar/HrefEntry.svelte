@@ -1,27 +1,26 @@
 <script lang="ts">
   import ActionBarEntry from './ActionBarEntry.svelte';
 
-  /**
-   * The label of this ActionBar entry.
-   */
-  export let label: string;
+  interface Props {
+    /**
+     * The label of this ActionBar entry.
+     */
+    label: string;
+    /**
+     * The icon of this ActionBar entry.
+     */
+    icon: string;
+    /** URL for hyperlink */
+    action?: string | undefined;
+    /** When true, the action cannot be clicked. */
+    disabled?: boolean;
+    class?: string;
+  }
 
-  /**
-   * The icon of this ActionBar entry.
-   */
-  export let icon: string;
-
-  /** URL for hyperlink */
-  export let action: string | undefined = undefined;
-
-  /** When true, the action cannot be clicked. */
-  export let disabled: boolean = false;
-
-  let clazz = '';
+  let { label, icon, action = undefined, disabled = false, class: clazz = '' }: Props = $props();
   /**
    * The class of this ActionBar entry.
    */
-  export { clazz as class };
 </script>
 
 <!--

@@ -1,5 +1,10 @@
 <script lang="ts">
   import { SvelteFlowProvider } from '@xyflow/svelte';
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
-<SvelteFlowProvider><slot /></SvelteFlowProvider>
+<SvelteFlowProvider>{@render children?.()}</SvelteFlowProvider>

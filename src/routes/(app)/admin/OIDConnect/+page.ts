@@ -1,7 +1,7 @@
 import type { DynTableHeadExtent } from '$lib/components/table/dynTable/DynTable.model';
 import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { successPill } from '$lib/util/pill.util';
 import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 import type { PageLoad } from './$types';
@@ -66,7 +66,9 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to delete the provider with ids: ${x.map((x) => x.id).join(', ')}`
+            `Are you sure you want to delete the provider with ids: ${x
+              .map((x) => x.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(

@@ -11,36 +11,46 @@
     type EdgeTypes
   } from '@xyflow/svelte';
   import type { Writable } from 'svelte/store';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
 
-  /** Nodes that are rendered on the flow */
-  export let nodes: Writable<Node[]>;
+  interface Props {
+    /** Nodes that are rendered on the flow */
+    nodes: Writable<Node[]>;
+    /** Edges that are rendered on the flow */
+    edges: Writable<Edge[]>;
+    /**
+     * Custom node types to pass to SvelteFlow.
+     */
+    nodeTypes?: NodeTypes | undefined;
+    /**
+     * Custom edge types to pass to SvelteFlow.
+     */
+    edgeTypes?: EdgeTypes | undefined;
+    /** Dimensions of the grid that nodes will snap onto */
+    snapGrid?: [number, number];
+    /**
+     * Default options to set for edges.
+     */
+    defaultEdgeOptions?: DefaultEdgeOptions | undefined;
+    controls?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+  }
 
-  /** Edges that are rendered on the flow */
-  export let edges: Writable<Edge[]>;
-
-  /**
-   * Custom node types to pass to SvelteFlow.
-   */
-  export let nodeTypes: NodeTypes | undefined = undefined;
-
-  /**
-   * Custom edge types to pass to SvelteFlow.
-   */
-  export let edgeTypes: EdgeTypes | undefined = undefined;
-
-  /** Dimensions of the grid that nodes will snap onto */
-  export let snapGrid: [number, number] = [25, 25];
-
-  /**
-   * Default options to set for edges.
-   */
-  export let defaultEdgeOptions: DefaultEdgeOptions | undefined = undefined;
+  let {
+    nodes,
+    edges,
+    nodeTypes = undefined,
+    edgeTypes = undefined,
+    snapGrid = [25, 25],
+    defaultEdgeOptions = undefined,
+    controls,
+    children
+  }: Props = $props();
 </script>
 
 <!--
   @component
-  
+
   This component contains a node-based editor or interactive diagram provided by
   [SvelteFlow](https://svelteflow.dev/).
 
@@ -65,17 +75,17 @@
   on:drop
   {defaultEdgeOptions}
   class="text-ctp-text relative"
-  nodesDraggable={$mode === 'edit'}
-  nodesConnectable={$mode === 'edit'}
-  elementsSelectable={$mode === 'edit'}
+  nodesDraggable={appState.mode === 'edit'}
+  nodesConnectable={appState.mode === 'edit'}
+  elementsSelectable={appState.mode === 'edit'}
   proOptions={{ hideAttribution: true }}
 >
   <div class="text-base!">
     <Background class="bg-ctp-base!" variant={BackgroundVariant.Dots} size={2} />
     <Controls position="top-right" showLock={false}>
-      <slot name="controls" />
+      {@render controls?.()}
     </Controls>
-    <slot />
+    {@render children?.()}
   </div>
 </SvelteFlow>
 

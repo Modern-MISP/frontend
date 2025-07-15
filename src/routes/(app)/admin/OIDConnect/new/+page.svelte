@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { lockEditMode } from '$lib/actions';
   import { api } from '$lib/api';
@@ -7,11 +9,11 @@
   import Input from '$lib/components/input/Input.svelte';
   import Checkbox from '$lib/components/checkbox/Checkbox.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode } from '$lib/stores';
+  import { currentRoute, appState } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   interface OpenIDProviderFormData {
     name: string;
@@ -107,16 +109,18 @@
     })
   ];
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'Add Provider', href: 'new', icon: 'mdi:plus-outline' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'Add Provider', href: 'new', icon: 'mdi:plus-outline' }
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
-  @component 
+<!--
+  @component
   Displays a form to add a new OpenID provider.
 -->
 <Form callback={editCallback}>

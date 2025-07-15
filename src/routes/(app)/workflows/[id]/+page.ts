@@ -10,7 +10,7 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import type { Module } from '../modules/module';
 import type { CheckGraphResult, Workflow, WorkflowData } from '../workflow';
 import { invalidateAll } from '$app/navigation';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 
 export const load = async ({ params, fetch }) => {
   const {

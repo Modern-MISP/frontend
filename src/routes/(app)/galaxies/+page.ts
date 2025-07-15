@@ -16,7 +16,6 @@ import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/galaxies', { fetch });
-  console.log(mispError);
   // eslint-disable-next-line no-warning-comments
   //TODO: types of status and detail are not set, therefor .status an .detail default to never
   if (mispError) error(response['status'] as NumericRange<400, 599>, mispError['detail']);
@@ -127,7 +126,9 @@ export const load: PageLoad = async ({ fetch }) => {
       action: (x) => {
         if (
           confirm(
-            `Are you sure you want to delete the galaxies with ids: ${x.map((x) => x.id).join(', ')}`
+            `Are you sure you want to delete the galaxies with ids: ${x
+              .map((x) => x.id)
+              .join(', ')}`
           )
         ) {
           Promise.all(

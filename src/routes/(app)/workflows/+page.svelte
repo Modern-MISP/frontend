@@ -2,19 +2,23 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import EnableFilter from '../galaxies/EnableFilter.svelte';
 
-  /** Page data containing the workflows table */
-  export let data;
+  interface Props {
+    /** Page data containing the workflows table */
+    data: any;
+  }
 
-  $: ({ tableData, header, editActions } = data);
+  let { data }: Props = $props();
 
-  $: filterableTableData = tableData.map((d) => ({ ...d, enabled: d.enabled ?? true }));
+  let { tableData, header, editActions } = $derived(data);
 
-  let filtered: typeof filterableTableData = [];
+  let filterableTableData = $derived(tableData.map((d) => ({ ...d, enabled: d.enabled ?? true })));
+
+  let filtered: typeof filterableTableData = $state([]);
 </script>
 
 <!--
   @component
-  
+
   Displays a list of all workflows.
 -->
 <ComplexTableLayout
@@ -23,7 +27,9 @@
   tableData={filtered}
   {editActions}
 >
-  <div slot="filter">
-    <EnableFilter data={filterableTableData} bind:filtered></EnableFilter>
-  </div>
+  {#snippet filter()}
+    <div>
+      <EnableFilter data={filterableTableData} bind:filtered></EnableFilter>
+    </div>
+  {/snippet}
 </ComplexTableLayout>

@@ -2,15 +2,18 @@
   import { isAfter, addWeeks } from 'date-fns';
   import DatePill from './DatePill.svelte';
 
-  /**
-   * The date of the to be displayed.
-   */
-  export let date: Date | null;
+  interface Props {
+    /**
+     * The date of the to be displayed.
+     */
+    date: Date | null;
+    /**
+     * The text that should be displayed if the date is null.
+     */
+    onNullText?: string;
+  }
 
-  /**
-   * The text that should be displayed if the date is null.
-   */
-  export let onNullText = 'Never';
+  let { date, onNullText = 'Never' }: Props = $props();
 
   const today = new Date();
   /**
@@ -29,7 +32,7 @@
   }
 </script>
 
-<!-- 
+<!--
   @component
   Displays a relative date in a pill. The color of the pill is based on the date.
   - If the date is in the past, the pill will be red.

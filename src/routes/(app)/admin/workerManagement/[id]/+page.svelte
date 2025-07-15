@@ -3,10 +3,14 @@
   import SideMenuEntry from '$lib/components/menus/sidemenu/SideMenuEntry.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
 
-  /** Page data containing data of the worker with the 'id' in the url */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing data of the worker with the 'id' in the url */
+    data: PageData;
+  }
 
-  $: ({ jobs, jobs_header, jobqueues, jobqueues_header, queueEditActions } = data);
+  let { data }: Props = $props();
+
+  let { jobs, jobs_header, jobqueues, jobqueues_header, queueEditActions } = $derived(data);
 </script>
 
 <!--

@@ -1,7 +1,7 @@
 <script lang="ts">
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
 
-  export let data;
+  let { data } = $props();
 
   const { blueprint, infoHeader } = data;
 </script>

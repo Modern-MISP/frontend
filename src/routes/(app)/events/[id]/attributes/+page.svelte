@@ -20,10 +20,17 @@
   import AttributeReplacement from './AttributeReplacement.svelte';
   import FreetextImport from './FreetextImport.svelte';
 
-  /** Page data of the attribute for the specified event */
-  export let data;
+  interface Props {
+    /** Page data of the attribute for the specified event */
+    data: any;
+  }
 
-  $: tableData = [...data.event.Attribute!, ...data.event.Object!.flatMap((o) => o.Attribute!)];
+  let { data }: Props = $props();
+
+  let tableData = $derived([
+    ...data.event.Attribute!,
+    ...data.event.Object!.flatMap((o) => o.Attribute!)
+  ]);
 
   type Data = (typeof tableData)[number] & {
     Tag?: (components['schemas']['Tag'] & {
@@ -128,11 +135,10 @@
     })
   ];
 
-  let freetextImport = false;
-  let attributeReplacement = false;
+  let freetextImport = $state(false);
+  let attributeReplacement = $state(false);
 
-  let topMenuActions: ActionBarEntryProps[];
-  $: topMenuActions = [
+  let topMenuActions: ActionBarEntryProps[] = $derived([
     {
       icon: 'mdi:flag-plus',
       label: 'Add',
@@ -177,7 +183,7 @@
             freetextImport = false;
           }
         }
-  ];
+  ]);
 
   const editActions: DynCardActionHeader<Data[]>[] = [
     {
@@ -205,10 +211,10 @@
   ];
 </script>
 
-<!-- 
+<!--
     @component
     Displays attributes for an 'id' specified event.
-    
+
     -->
 
 <svelte:window use:lockEditMode={attributeReplacement || freetextImport} />
@@ -221,22 +227,26 @@
   {topMenuActions}
   groupInfo={(x) => (x.object_id && x.object_id !== '0' ? `Object: ${x.object_id}` : undefined)}
 >
-  <svelte:fragment slot="added">
+  {#snippet added()}
     {#if freetextImport || attributeReplacement}
       <div class="absolute top-0 left-0 z-30 grid w-full h-full grid-cols-2 gap-2 p-1">
         {#if freetextImport}
           <FilterCard>
-            <span slot="heading">Freetext Import</span>
+            {#snippet heading()}
+              <span>Freetext Import</span>
+            {/snippet}
             <FreetextImport on:close={() => (freetextImport = false)}></FreetextImport>
           </FilterCard>
         {:else if attributeReplacement}
           <FilterCard>
-            <span slot="heading">Attribute Replacement</span>
+            {#snippet heading()}
+              <span>Attribute Replacement</span>
+            {/snippet}
             <AttributeReplacement on:close={() => (attributeReplacement = false)}
             ></AttributeReplacement>
           </FilterCard>
         {/if}
       </div>
     {/if}
-  </svelte:fragment>
+  {/snippet}
 </ComplexTableLayout>

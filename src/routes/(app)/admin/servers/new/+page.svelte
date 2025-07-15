@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { lockEditMode } from '$lib/actions';
   import { api } from '$lib/api';
@@ -6,11 +8,11 @@
   import Form from '$lib/components/form/Form.svelte';
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode } from '$lib/stores';
+  import { currentRoute, appState } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
@@ -42,16 +44,18 @@
     })
   ];
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Remote Server', href: 'new', icon: 'mdi:server-plus' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Remote Server', href: 'new', icon: 'mdi:server-plus' }
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />
 
-<!-- 
-  @component 
+<!--
+  @component
   Displays a form to add a new remote server.
 -->
 <Form callback={editCallback}>

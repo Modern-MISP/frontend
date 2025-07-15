@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import {
     type Node,
@@ -9,7 +11,7 @@
   } from '@xyflow/svelte';
   import Flow from '$lib/components/svelteflow/Flow.svelte';
   import ModuleInfo from './ModuleInfo.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import Card from '$lib/components/card/Card.svelte';
   import ModuleCard from './ModuleCard.svelte';
   import { fly } from 'svelte/transition';
@@ -29,37 +31,26 @@
   import type { ComponentProps } from 'svelte';
   import { invalidateAll } from '$app/navigation';
 
-  /** Page data containing the data of the workflow with the 'id' in the url.*/
-  export let data;
+  interface Props {
+    /** Page data containing the data of the workflow with the 'id' in the url.*/
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   const svelteFlow = useSvelteFlow();
 
-  let { workflow } = data;
-  let wfData = workflow.data!;
-  let originalWfData = cloneDeep(wfData);
-  let modifiedWfData = wfData;
-  let isModified = false;
+  let { workflow } = $state(data);
+  let wfData = $state(workflow.data!);
+  let originalWfData = $state(cloneDeep(wfData));
+  let modifiedWfData = $state(wfData);
+  let isModified = $state(false);
 
-  let unsupportedModules = [] as string[];
+  let unsupportedModules = $state([] as string[]);
 
   const _generatedFlowContent = generateFlowContent(wfData, unsupportedModules, { onNodeUpdate });
   const nodes = writable(_generatedFlowContent.nodes);
   const edges = writable(_generatedFlowContent.edges);
-
-  $: {
-    // handle invalidateAll
-    workflow = data.workflow;
-    wfData = workflow.data!;
-    originalWfData = cloneDeep(wfData);
-    modifiedWfData = wfData;
-    const _generatedFlowContent = generateFlowContent(wfData, unsupportedModules, { onNodeUpdate });
-    $nodes = _generatedFlowContent.nodes;
-    $edges = _generatedFlowContent.edges;
-    updateAllFrames();
-  }
-
-  $: modifiedWfData = constructWorkflowData(wfData, $nodes, $edges) ?? modifiedWfData;
-  $: isModified = JSON.stringify(originalWfData) !== JSON.stringify(modifiedWfData);
 
   async function onNodeUpdate(nodeId: string) {
     $nodes.forEach((frameNode) => {
@@ -73,7 +64,7 @@
     onNodeUpdate(node.id);
   }
 
-  let nodeContext: ModuleNodeData | null = null;
+  let nodeContext: ModuleNodeData | null = $state(null);
   function onNodeClick({ detail: { node } }: Flow['$$events_def']['nodeclick']) {
     if (node.type !== 'frame') {
       nodeContext = node.data.moduleData;
@@ -188,11 +179,11 @@
 
   function cancelEdit() {
     if (!isModified) {
-      $mode = 'view';
+      appState.mode = 'view';
       return;
     }
     if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
-      $mode = 'view';
+      appState.mode = 'view';
       invalidateAll();
     }
   }
@@ -221,7 +212,7 @@
     ];
   }
 
-  let menu: ComponentProps<ContextMenu> | undefined;
+  let menu: ComponentProps<ContextMenu> | undefined = $state();
 
   const { domNode, width, height, viewport } = useStore();
 
@@ -247,7 +238,7 @@
   function onNodeContextMenu({ detail: { event, node } }: Flow['$$events_def']['nodecontextmenu']) {
     event.preventDefault();
 
-    if ($mode !== 'edit' || node.type === 'frame' || !$domNode) return;
+    if (appState.mode !== 'edit' || node.type === 'frame' || !$domNode) return;
 
     menu = {
       id: node.id,
@@ -259,7 +250,7 @@
   function onEdgeContextMenu({ detail: { event, edge } }: Flow['$$events_def']['edgecontextmenu']) {
     event.preventDefault();
 
-    if ($mode !== 'edit' || !$domNode) return;
+    if (appState.mode !== 'edit' || !$domNode) return;
 
     menu = {
       id: edge.id,
@@ -272,11 +263,6 @@
     menu = undefined;
   }
 
-  // reactively check graph when edges change
-  $: {
-    $edges;
-    applyGraphCheck();
-  }
   const nodeTypes: NodeTypes = {
     trigger: ModuleNode,
     action: ModuleNode,
@@ -291,17 +277,39 @@
     portal: '#layout',
     openDelay: 0
   });
+  run(() => {
+    // handle invalidateAll
+    workflow = data.workflow;
+    wfData = workflow.data!;
+    originalWfData = cloneDeep(wfData);
+    modifiedWfData = wfData;
+    const _generatedFlowContent = generateFlowContent(wfData, unsupportedModules, { onNodeUpdate });
+    $nodes = _generatedFlowContent.nodes;
+    $edges = _generatedFlowContent.edges;
+    updateAllFrames();
+  });
+  run(() => {
+    modifiedWfData = constructWorkflowData(wfData, $nodes, $edges) ?? modifiedWfData;
+  });
+  run(() => {
+    isModified = JSON.stringify(originalWfData) !== JSON.stringify(modifiedWfData);
+  });
+  // reactively check graph when edges change
+  run(() => {
+    $edges;
+    applyGraphCheck();
+  });
 </script>
 
 <!--
   @component
   Displays information of a workflow specified by 'id', including an interactive node-based diagram for visualization.
-  
+
 -->
 <svelte:window use:actionBar={getWorkflowActions(modifiedWfData)} use:lockEditMode={isModified} />
 <div class="flex flex-row h-full">
   <div class="flex flex-col max-w-md gap-1">
-    {#if $mode === 'view'}
+    {#if appState.mode === 'view'}
       <div class="flex-row basis-full">
         <DynCard header={data.infoHeader} data={workflow} />
       </div>
@@ -344,9 +352,11 @@
       on:edgecontextmenu={onEdgeContextMenu}
       on:drag={onDrag}
     >
-      <div slot="controls" use:melt={$helpTrigger}>
-        <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
-      </div>
+      {#snippet controls()}
+        <div use:melt={$helpTrigger}>
+          <ControlButton><Icon icon="mdi:help"></Icon></ControlButton>
+        </div>
+      {/snippet}
       {#if menu}
         <ContextMenu {...menu} on:close={() => (menu = undefined)}></ContextMenu>
       {/if}

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
   import { lockEditMode } from '$lib/actions.js';
   import { api } from '$lib/api';
@@ -8,18 +10,22 @@
   import Select from '$lib/components/form/Select.svelte';
   import Input from '$lib/components/input/Input.svelte';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode, notifications } from '$lib/stores.js';
+  import { currentRoute, appState, notifications } from '$lib/stores.svelte.ts';
   import { notifySave } from '$lib/util/notifications.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import InputWithCheckbox from '$lib/components/inputWithCheckbox/InputWithCheckbox.svelte';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { writable } from 'svelte/store';
   import { successPill } from '$lib/util/pill.util.js';
 
-  /** Page data */
-  export let data;
+  interface Props {
+    /** Page data */
+    data: any;
+  }
 
-  $mode = 'edit';
+  let { data }: Props = $props();
+
+  appState.mode = 'edit';
 
   const authKeyStore = writable('');
 
@@ -66,7 +72,7 @@
         display: Select,
         props: {
           options: data.users.map((u) => ({ label: u.User!.email!, value: u.User!.id! })),
-          value: data.users.find((u) => u.User!.id == $page.url.searchParams.get('id'))?.User!.id,
+          value: data.users.find((u) => u.User!.id == page.url.searchParams.get('id'))?.User!.id,
           name: 'user_id'
         }
       })
@@ -101,10 +107,12 @@
     })
   ];
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      { name: 'New Key', icon: 'mdi:key-add', href: 'new' }
+    ];
+  });
 </script>
 
 <svelte:window use:lockEditMode={true} />
@@ -126,7 +134,7 @@
       and generate a new one.
     </p>
     <p><strong>{$authKeyStore}</strong></p>
-    <button on:click={closePopup} class="save-button">I have noted down my key</button>
+    <button onclick={closePopup} class="save-button">I have noted down my key</button>
   </div>
 </div>
 

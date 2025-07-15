@@ -3,25 +3,28 @@
   import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
   import ActionCard from '../card/ActionCard.svelte';
 
-  /**
-   * The header of the table. Also includes the icon and the href.
-   */
-  export let header: DynCardActionHeader<T[]>[];
-  /**
-   * The data that will be displayed in the table.
-   */
-  export let data: T[];
+  interface Props {
+    /**
+     * The header of the table. Also includes the icon and the href.
+     */
+    header: DynCardActionHeader<T[]>[];
+    /**
+     * The data that will be displayed in the table.
+     */
+    data: T[];
+    class?: string;
+    children?: import('svelte').Snippet;
+  }
 
-  let clazz = '';
+  let { header, data, class: clazz = '', children }: Props = $props();
   /**
    * Class overload
    */
-  export { clazz as class };
 </script>
 
 {#if header.length > 0}
   <ActionCard class="{clazz} gap-4 ">
-    <slot />
+    {@render children?.()}
     {#each header as props}
       <CallbackEntry {...props} action={() => props.action(data)} class="w-max {props.class}"
       ></CallbackEntry>

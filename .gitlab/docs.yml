@@ -21,8 +21,14 @@ generate_docs:
   stage: generate_docs
   script:
     - cd /app
-    - echo @feathecutie:registry=https://gitlab.com/api/v4/projects/52994631/packages/npm/ >> .npmrc
-    - npx @feathecutie/svelte-to-uml@latest . ./docs/generated
+    - |
+      cat << EOF > "$HOME/.bunfig.toml"
+      [install.scopes]
+      "@feathecutie" = "https://gitlab.com/api/v4/projects/52994631/packages/npm/"
+
+      EOF
+    - cat $HOME/.bunfig.toml
+    - bunx @feathecutie/svelte-to-uml@latest . ./docs/generated
     - cp -r docs/generated $CI_PROJECT_DIR/docs
   artifacts:
     paths:

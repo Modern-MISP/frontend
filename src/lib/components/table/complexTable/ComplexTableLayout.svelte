@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord">
+  import { run } from 'svelte/legacy';
+
   import type { FastFilter } from '$lib/models/FastFilter.interface';
 
   import ActiveEntry from '$lib/components/menus/topmenu/actionbar/ActiveEntry.svelte';
@@ -29,84 +31,26 @@
   import SelectionCard from '$lib/components/table/actions/selectionCard/SelectionCard.svelte';
 
   import Filter from '$lib/components/filter/Filter.svelte';
-  import { mode, notifications } from '$lib/stores';
+  import { appState, notifications } from '$lib/stores.svelte.ts';
   import { constant, isMatch, merge, omitBy } from 'lodash-es';
 
-  const LIMIT = 50;
-
-  /**
-   * Your initial data
-   */
-  export let tableData: T[];
-  /**
-   * Your table header. {@link DynTable.header}
-   */
-  export let header: Readable<TableHead<T> & DynTableHeadExtent>[];
-  /**
-   * Your filter header. {@link Filter.header }
-   */
-  export let filter: Readable<TableHead<undefined>>[] = [];
-
-  /**
-   * Your edit actions. {@link DynActionCard.header}
-   */
-  export let editActions: DynCardActionHeader<T[]>[] = [];
-
-  /**
-   * Your top menu actions. {@link actionBar}
-   */
-  export let topMenuActions: ActionBarEntryProps[] = [];
-
-  /**
-   * Do you want to include pagination in the request and in the page. Default: true
-   */
-  export let pagination = true;
-
-  /**
-   * max number of elements.
-   */
-  export let maxCount = tableData.length;
-  $: if (endpoint == undefined) maxCount = tableData.length;
-
-  /**
-   * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
-   */
-  export let groupInfo: (x: T) => unknown | undefined = constant(undefined);
-
-  /**
-   * The href where the user will be navigated, if clicked on a row {@see DynTable.href}
-   * @param row The row the user clicked. Defaults to the id. You should define this, if your data does not include an id.
-   * @param row.id Defaults to the id of the row
-   * @returns The href the user will be navigated to
-   */
-  export let tableHref: ((row: T) => string | undefined) | undefined = ({ id }) =>
-    `${$page.url}/${id}`;
-
-  /**
-   * The endpoint where the requests will be sent to.
-   */
-  export let endpoint:
-    | ((body: Record<string, unknown>) => ReturnType<(typeof $api)['POST'] | (typeof $api)['GET']>)
-    | undefined = undefined;
+  const LIMIT = 5;
 
   /**
    * A transform function for the response data, after more data gets loaded (by pagination, filter). Default: (x) => x as T[] (no transformation)
    * @param x response data (untransformed)
    * @returns The transformed data
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Can not know the type of the response here. Depends on endpoint. Fixing this with a generic would be too much work.
-  export let dataAccess: (body: any) => T[] = (x) => x as T[];
 
   // first loadMore is unnecessary, because we fetch Data in page.ts
-  // second loadMore is triggered by reactivity bug in svelte 4, change this in svelte 5!
   let skipRequests = -1;
 
   const loadMore = async (bodyOptions: Record<string, unknown>) => {
+    if (endpoint == undefined) return;
     if (skipRequests < 0) {
-      skipRequests++;
+      skipRequests += 1;
       return;
     }
-    if (endpoint == undefined) return;
     const { data: _data, error: mispError, response } = await endpoint(bodyOptions);
 
     if (mispError) {
@@ -119,103 +63,186 @@
     }
   };
 
-  $: pagPage = 1;
+  let filterOpen = $state(false);
+  let currentFilter: Record<string, string> = $state({});
 
-  $: loadMore({ ...merge({}, currentFilter, pagination ? { page: pagPage, limit: LIMIT } : {}) });
-
-  let filterOpen = false;
-  let currentFilter: Record<string, string> = {};
-
-  let activeRows: typeof tableData = [];
+  let activeRows: typeof tableData = $state([]);
 
   // Reset selected rows, if tableData changed
-  let lastTableData: typeof tableData = [];
-  $: if (tableData !== lastTableData) {
-    lastTableData = tableData;
-    activeRows = [];
+  let lastTableData: typeof tableData = $state([]);
+
+  interface Props {
+    /**
+     * Your initial data
+     */
+    tableData: T[];
+    /**
+     * Your table header. {@link DynTable.header}
+     */
+    header: Readable<TableHead<T> & DynTableHeadExtent>[];
+    /**
+     * Your filter header. {@link Filter.header }
+     */
+    filter?: Readable<TableHead<undefined>>[];
+    /**
+     * Your edit actions. {@link DynActionCard.header}
+     */
+    editActions?: DynCardActionHeader<T[]>[];
+    /**
+     * Your top menu actions. {@link actionBar}
+     */
+    topMenuActions?: ActionBarEntryProps[];
+    /**
+     * Do you want to include pagination in the request and in the page. Default: true
+     */
+    pagination?: boolean;
+    /**
+     * max number of elements.
+     */
+    maxCount?: any;
+    /**
+     * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
+     */
+    groupInfo?: (x: T) => unknown | undefined;
+    /**
+     * The href where the user will be navigated, if clicked on a row {@see DynTable.href}
+     * @param row The row the user clicked. Defaults to the id. You should define this, if your data does not include an id.
+     * @param row.id Defaults to the id of the row
+     * @returns The href the user will be navigated to
+     */
+    tableHref?: ((row: T) => string | undefined) | undefined;
+    /**
+     * The endpoint where the requests will be sent to.
+     */
+    endpoint?:
+      | ((
+          body: Record<string, unknown>
+        ) => ReturnType<(typeof $api)['POST'] | (typeof $api)['GET']>)
+      | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Can not know the type of the response here. Depends on endpoint. Fixing this with a generic would be too much work.
+    dataAccess?: (body: any) => T[];
+    /**
+     * Defined some fast filter attributes
+     */
+    fastFilter?: FastFilter[];
+    s_filter?: import('svelte').Snippet;
+    actionList?: import('svelte').Snippet;
+    s_editActions?: import('svelte').Snippet;
+    moreActions?: import('svelte').Snippet;
+    children?: import('svelte').Snippet;
+    table?: import('svelte').Snippet;
+    added?: import('svelte').Snippet;
+    s_pagination?: import('svelte').Snippet;
   }
 
-  /**
-   * Defined some fast filter attributes
-   */
-  export let fastFilter: FastFilter[] = [];
-  // The fastFilter should be active if ifActive is a subset of currentFilter
-  $: activeFastFilter = fastFilter.map((x) => isMatch(currentFilter, x.ifActive));
+  let {
+    tableData = $bindable(),
+    header,
+    filter = [],
+    editActions = [],
+    topMenuActions = [],
+    pagination = true,
+    maxCount = tableData.length,
+    groupInfo = constant(undefined),
+    tableHref = ({ id }) => `${$page.url}/${id}`,
+    endpoint = undefined,
+    dataAccess = (x) => x as T[],
+    fastFilter = [],
+    s_filter,
+    actionList,
+    s_editActions,
+    moreActions,
+    children,
+    table,
+    added,
+    s_pagination
+  }: Props = $props();
 
-  let sliced: typeof tableData = [];
-  $: if (endpoint == undefined) sliced = tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
+  //  let sliced: typeof tableData = $state([]);
+  let pagPage = $state(1);
+
+  run(() => {
+    loadMore({ ...merge({}, currentFilter, pagination ? { page: pagPage, limit: LIMIT } : {}) });
+    activeRows = [];
+    if (endpoint === undefined) {
+      maxCount = tableData.length;
+    }
+  });
+
+  let pTableData = $derived.by(() => {
+    if (endpoint === undefined) return tableData.slice(LIMIT * pagPage - LIMIT, LIMIT * pagPage);
+    else return tableData;
+  });
+  // The fastFilter should be active if ifActive is a subset of currentFilter
+  let activeFastFilter = $derived(fastFilter.map((x) => isMatch(currentFilter, x.ifActive)));
 </script>
 
 <!-- Feel free to change the css here because i don't have a clue what i am doing here if changed check if its still correct under /workerManagement/{id}-->
 <svelte:window use:actionBar={topMenuActions} />
 <div class="flex flex-col h-full w-full gap-2">
   <div class="flex gap-4 h-fit" id="filterRow">
-    <slot name="filter">
-      {#if filter.length > 0}
-        <FilterCard bind:currentFilter bind:filterOpen>
-          {#each fastFilter as fastFilterEntry, i}
-            <ActiveEntry
-              class="w-max"
-              {...fastFilterEntry}
-              active={activeFastFilter[i]}
-              on:click={() =>
-                // If the activeFastFilter is set, omit all values provided in ifActive. Else add them the the current filter
-                (currentFilter = !activeFastFilter[i]
-                  ? { ...currentFilter, ...fastFilterEntry.ifActive }
-                  : omitBy(
-                      currentFilter,
-                      (value, key) =>
-                        Object.keys(fastFilter[i].ifActive).includes(key) &&
-                        fastFilter[i].ifActive[key] === value
-                    ))}
-            ></ActiveEntry>
-          {/each}
-        </FilterCard>
-      {/if}
-    </slot>
-    <slot name="actionList">
-      {#if editActions.length > 0}
-        <!-- removes the selection when no action is defined to performe on the selectet rows-->
-        {#if $mode === 'edit'}
-          <SelectionCard
-            numSelected={activeRows.length}
-            selectAll={() => (activeRows = tableData)}
-            unselectAll={() => (activeRows = [])}
-          />
-          <slot name="editActions">
-            <DynActionCard
-              header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
-              data={activeRows}
-            ></DynActionCard>
-          </slot>
+    {#if s_filter}{@render s_filter()}{:else if filter.length > 0}
+      <FilterCard bind:currentFilter bind:filterOpen>
+        {#each fastFilter as fastFilterEntry, i}
+          <ActiveEntry
+            class="w-max"
+            {...fastFilterEntry}
+            active={activeFastFilter[i]}
+            on:click={() =>
+              // If the activeFastFilter is set, omit all values provided in ifActive. Else add them the the current filter
+              (currentFilter = !activeFastFilter[i]
+                ? { ...currentFilter, ...fastFilterEntry.ifActive }
+                : omitBy(
+                    currentFilter,
+                    (value, key) =>
+                      Object.keys(fastFilter[i].ifActive).includes(key) &&
+                      fastFilter[i].ifActive[key] === value
+                  ))}
+          ></ActiveEntry>
+        {/each}
+      </FilterCard>
+    {/if}
+    {#if actionList}{@render actionList()}{:else if editActions.length > 0}
+      <!-- removes the selection when no action is defined to performe on the selectet rows-->
+      {#if appState.mode === 'edit'}
+        <SelectionCard
+          numSelected={activeRows.length}
+          selectAll={() => (activeRows = tableData)}
+          unselectAll={() => (activeRows = [])}
+        />
+        {#if s_editActions}{@render s_editActions()}{:else}
+          <DynActionCard
+            header={editActions.map((a) => ({ disabled: activeRows.length === 0, ...a }))}
+            data={activeRows}
+          ></DynActionCard>
         {/if}
       {/if}
-    </slot>
-    <slot name="moreActions" />
+    {/if}
+    {@render moreActions?.()}
   </div>
   <div class="relative flex h-9/10 overflow-hidden">
-    <slot>
-      <slot name="table">
+    {#if children}{@render children()}{:else}
+      {#if table}{@render table()}{:else}
         <DynTable
           href={tableHref}
           {header}
-          data={endpoint == undefined ? sliced : tableData}
-          selectMode={$mode === 'edit'}
+          data={pTableData}
+          selectMode={appState.mode === 'edit'}
           bind:activeRows
           {groupInfo}
         />
-      </slot>
+      {/if}
       {#if filter.length > 0 && filterOpen}
         <Filter header={filter} bind:currentFilter />
       {/if}
-      <slot name="added" />
-    </slot>
+      {@render added?.()}
+    {/if}
   </div>
   {#if maxCount > LIMIT}
     <div class="h-fit">
-      <slot name="pagination">
+      {#if s_pagination}{@render s_pagination()}{:else}
         <Pagination bind:page={pagPage} length={maxCount / LIMIT} />
-      </slot>
+      {/if}
     </div>
   {/if}
 </div>

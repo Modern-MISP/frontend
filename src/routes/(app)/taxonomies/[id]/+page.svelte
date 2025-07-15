@@ -3,13 +3,17 @@
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import type { PageData } from './$types';
 
-  /** Page data containing the data of the taxonomy */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data of the taxonomy */
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
-  
+
   Information about a taxonomy specified by 'id'.
 
 -->

@@ -3,8 +3,12 @@
   import Icon from '@iconify/svelte';
   import type { Module } from '../modules/module';
 
-  /** The module that is displayed in the card. */
-  export let module: Module;
+  interface Props {
+    /** The module that is displayed in the card. */
+    module: Module;
+  }
+
+  let { module }: Props = $props();
 
   function onDragStart(event: DragEvent) {
     if (!event.dataTransfer) {
@@ -18,11 +22,11 @@
 
 <!--
   @component
-  
+
   A module card that can be dragged inside the flow.
 -->
 <div
-  on:dragstart={onDragStart}
+  ondragstart={onDragStart}
   draggable={!module.disabled}
   role="listitem"
   class:shadow-none={module.disabled}

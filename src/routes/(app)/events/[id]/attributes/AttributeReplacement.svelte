@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { preventDefault } from 'svelte/legacy';
+
+  import { page } from '$app/state';
   import { api } from '$lib/api';
   import { getFormValues } from '$lib/util/form.util';
   import { error, type NumericRange } from '@sveltejs/kit';
@@ -7,7 +9,7 @@
   import type { ChangeEventHandler, EventHandler } from 'svelte/elements';
   import Select from '$lib/components/form/Select.svelte';
   import type { components } from '$lib/api/misp';
-  import { notifications } from '$lib/stores';
+  import { notifications } from '$lib/stores.svelte.ts';
   import { successPill } from '$lib/util/pill.util';
   import { invalidateAll } from '$app/navigation';
   import Button from '$lib/components/button/Button.svelte';
@@ -21,7 +23,7 @@
     category_type_mappings?: Record<string, string[]>;
   };
 
-  let attributeTypes: ResponseType;
+  let attributeTypes: ResponseType = $state();
 
   onMount(async () => {
     const { data, error: mispError, response } = await $api.GET('/attributes/describeTypes');
@@ -34,9 +36,9 @@
     $api
       // @ts-expect-error Not in the OpenAPI spec
       .POST('/attributes/attributeReplace/{eventId}', {
-        params: { path: { eventId: $page.params.id } },
+        params: { path: { eventId: page.params.id } },
         body: {
-          event_id: $page.params.id,
+          event_id: page.params.id,
           to_ids: '0',
           category,
           type,
@@ -50,7 +52,7 @@
     dispatch('close');
   };
 
-  let typeSelect: Select<string>;
+  let typeSelect: Select<string> = $state();
 
   const categorySelectCallback: ChangeEventHandler<HTMLSelectElement> = (e) => {
     typeSelect.options = (attributeTypes.category_type_mappings ?? {})[e.currentTarget.value].map(
@@ -62,7 +64,7 @@
 
 <div class="h-full">
   {#if attributeTypes}
-    <form on:submit|preventDefault={onSubmit} class="flex flex-col h-full gap-4">
+    <form onsubmit={preventDefault(onSubmit)} class="flex flex-col h-full gap-4">
       <Select
         options={(attributeTypes.categories ?? []).map((x) => ({ label: x, value: x }))}
         name="category"

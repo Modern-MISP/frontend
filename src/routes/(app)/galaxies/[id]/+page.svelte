@@ -1,21 +1,25 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { actionBar } from '$lib/actions';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import type { PageData } from './$types';
 
-  /** Page data containing the data and cluster overview of the galaxy with the 'id' in the url  */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data and cluster overview of the galaxy with the 'id' in the url  */
+    data: PageData;
+  }
 
-  $: ({ left, right, galaxy, header } = data);
+  let { data }: Props = $props();
 
-  $: galaxyData = galaxy.Galaxy!;
+  let { left, right, galaxy, header } = $derived(data);
+
+  let galaxyData = $derived(galaxy.Galaxy!);
 </script>
 
 <!--
   @component
-  
+
   Information about an galaxy specified by 'id', including a list of its clusters.
 
 -->
@@ -30,12 +34,12 @@
     {
       icon: 'mdi:plus-circle-outline',
       label: 'Add Cluster',
-      action: `/galaxies/${$page.params.id}/new_cluster`
+      action: `/galaxies/${page.params.id}/new_cluster`
     },
     {
       icon: 'mdi:export',
       label: 'Export Galaxy',
-      action: `/galaxies/${$page.params.id}/export`
+      action: `/galaxies/${page.params.id}/export`
     }
   ]}
 />

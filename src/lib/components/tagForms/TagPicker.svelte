@@ -2,14 +2,14 @@
   import { api } from '$lib/api';
   import type { components } from '$lib/api/misp';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { notifications } from '$lib/stores';
+  import { notifications } from '$lib/stores.svelte.ts';
   import { shouldTextBeBlack } from '$lib/util/color.util';
   import { errorPill } from '$lib/util/pill.util';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   import Picker from '../picker/Picker.svelte';
 
-  let tags: components['schemas']['TagList'] = [];
+  let tags: components['schemas']['TagList'] = $state([]);
   onMount(async () => {
     // Fetch tags
     const { data, error: mispError, response } = await get(api).GET('/tags');
@@ -23,15 +23,18 @@
     tags = data.Tag;
   });
 
-  /**
-   * The tags that got picket. Should probably bind to this.
-   */
-  export let pickedItems: PickerPill[] = [];
+  interface Props {
+    /**
+     * The tags that got picket. Should probably bind to this.
+     */
+    pickedItems?: PickerPill[];
+    /**
+     * Form name of the picker.
+     */
+    name?: string;
+  }
 
-  /**
-   * Form name of the picker.
-   */
-  export let name = 'tags';
+  let { pickedItems = $bindable([]), name = 'tags' }: Props = $props();
 </script>
 
 <Picker

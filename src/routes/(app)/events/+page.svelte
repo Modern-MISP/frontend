@@ -3,20 +3,23 @@
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import { get } from 'svelte/store';
 
-  /**
-   * Page data
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
   Displays a list of all events.
-  
+
 -->
 
 <ComplexTableLayout
   {...data}
-  endpoint={(bodyOptions) =>
-    get(api).POST('/events/index', { body: { limit: 50, ...bodyOptions } })}
+  endpoint={(bodyOptions) => get(api).POST('/events/index', { body: { limit: 5, ...bodyOptions } })}
 ></ComplexTableLayout>

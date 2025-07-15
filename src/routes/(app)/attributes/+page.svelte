@@ -5,8 +5,12 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { actionBar } from '$lib/actions';
 
-  /** Page data of the attribute table */
-  export let data;
+  interface Props {
+    /** Page data of the attribute table */
+    data: any;
+  }
+
+  let { data }: Props = $props();
 
   const Add_Attributes: ActionBarEntryProps[] = [
     {
@@ -19,8 +23,8 @@
 
 <!--
     @component
-    Displays a list of all attributes. 
-    
+    Displays a list of all attributes.
+
 -->
 
 <svelte:window use:actionBar={Add_Attributes} />

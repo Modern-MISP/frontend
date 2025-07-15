@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   type histogramData = {
     label: string;
     values: histogramDataTypeValue[];
@@ -14,41 +16,53 @@
   type colors = {
     [key: string]: string;
   };
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
-  /**
-   * Title of this component.
-   */
-  export let title = '';
-  /**
-   * The description of this component.
-   */
-  export let description: string = '';
-  /**
-   * The data that will be displayed in the histogram.
-   */
-  export let data: histogramData[] = [];
-  /**
-   * The types of data that will be displayed in the histogram.
-   */
-  export let dataTypes: histogramDataType[] = [];
-  /**
-   * the histogram dataType that will be displayed in the histogram.
-   */
-  export let dataType: string = 'all';
-  /**
-   * The maximum size of the lable text (in %)
-   */
-  export let maxLabelSize: number = 25.5;
 
-  let scale = 1;
+  interface Props {
+    class?: string;
+    /**
+     * Title of this component.
+     */
+    title?: string;
+    /**
+     * The description of this component.
+     */
+    description?: string;
+    /**
+     * The data that will be displayed in the histogram.
+     */
+    data?: histogramData[];
+    /**
+     * The types of data that will be displayed in the histogram.
+     */
+    dataTypes?: histogramDataType[];
+    /**
+     * the histogram dataType that will be displayed in the histogram.
+     */
+    dataType?: string;
+    /**
+     * The maximum size of the lable text (in %)
+     */
+    maxLabelSize?: number;
+  }
 
-  let colors: colors = {};
+  let {
+    class: clazz = '',
+    title = '',
+    description = '',
+    data = [],
+    dataTypes = [],
+    dataType = 'all',
+    maxLabelSize = 25.5
+  }: Props = $props();
 
-  $: {
+  let scale = $state(1);
+
+  let colors: colors = $state({});
+
+  run(() => {
     let total = 0;
     data.forEach(({ values }) => {
       values.forEach(({ value, label }) => {
@@ -62,7 +76,7 @@
     dataTypes.forEach(({ label, color }) => {
       colors[label] = color;
     });
-  }
+  });
 
   let offset = 0;
 

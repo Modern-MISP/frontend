@@ -3,17 +3,21 @@
   import { useEdges, useNodes } from '@xyflow/svelte';
   import IconCard from '../cards/IconCard.svelte';
   import IconCardRow from '../cards/IconCardRow.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { fly } from 'svelte/transition';
 
-  /**
-   *
-   */
-  export let id: string;
-  /**
-   *
-   */
-  export let type: string;
+  interface Props {
+    /**
+     *
+     */
+    id: string;
+    /**
+     *
+     */
+    type: string;
+  }
+
+  let { id, type }: Props = $props();
 
   const nodes = useNodes();
   const edges = useEdges();
@@ -101,7 +105,7 @@
   }
 </script>
 
-<!-- 
+<!--
   @component
   A ContextMenu component. A custom context menu is displayed when right-clicking a node.
 
@@ -115,7 +119,7 @@
     </IconCardRow>
   {/if}
 
-  {#if $mode === 'edit'}
+  {#if appState.mode === 'edit'}
     <IconCardRow class="border-2 border-sky">
       {#if type === 'attribute'}
         <IconCard icon="mdi:edit" text="Edit" on:click={editNode} />

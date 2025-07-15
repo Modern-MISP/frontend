@@ -1,53 +1,62 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import type { PickerPill } from '$lib/models/Picker.interface';
   import { remove, sortBy } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
   import Pill from '../pills/pill/Pill.svelte';
 
-  /** The items that have been picked. */
-  export let pickedItems: PickerPill[] = [];
-  /** The items that can be picked. */
-  export let pickableItems: PickerPill[] = [];
+  let value: string = $state('');
 
-  /**
-   * Placeholder of the input.
-   */
-  export let placeholder: string | undefined = undefined;
-  /**
-   * Popup Class Override
-   */
-  export let popUpClass: string = '';
-  /**
-   * The name of the input. Used for form submission.
-   */
-  export let name: string | undefined = undefined;
-  /**
-   * When true, the picker cannot be used.
-   */
-  export let disabled: boolean = false;
+  interface Props {
+    /** The items that have been picked. */
+    pickedItems?: PickerPill[];
+    /** The items that can be picked. */
+    pickableItems?: PickerPill[];
+    /**
+     * Placeholder of the input.
+     */
+    placeholder?: string | undefined;
+    /**
+     * Popup Class Override
+     */
+    popUpClass?: string;
+    /**
+     * The name of the input. Used for form submission.
+     */
+    name?: string | undefined;
+    /**
+     * When true, the picker cannot be used.
+     */
+    disabled?: boolean;
+    /**
+     * Max Elements to show for Autocomplete
+     */
+    maxAutoComplete?: number;
+    /**
+     * Allow inputting arbitrary
+     */
+    arbitraryInput?: ((x: string) => PickerPill) | undefined;
+    /**
+     * Override the match function while typing in the input
+     * @param pill The pill
+     * @param value the input value
+     * @returns true if the pill should match the value
+     */
+    matchFunction?: (pill: PickerPill, value: string) => boolean | undefined;
+  }
 
-  /**
-   * Max Elements to show for Autocomplete
-   */
-  export let maxAutoComplete = 50;
-
-  /**
-   * Allow inputting arbitrary
-   */
-  export let arbitraryInput: ((x: string) => PickerPill) | undefined = undefined;
-
-  let value: string = '';
-
-  /**
-   * Override the match function while typing in the input
-   * @param pill The pill
-   * @param value the input value
-   * @returns true if the pill should match the value
-   */
-  export let matchFunction: (pill: PickerPill, value: string) => boolean | undefined = (
-    pill: PickerPill,
-    value: string
-  ) => pill.text?.includes(value);
+  let {
+    pickedItems = $bindable([]),
+    pickableItems = $bindable([]),
+    placeholder = undefined,
+    popUpClass = '',
+    name = undefined,
+    disabled = false,
+    maxAutoComplete = 50,
+    arbitraryInput = undefined,
+    matchFunction = (pill: PickerPill, value: string) => pill.text?.includes(value)
+  }: Props = $props();
 
   const dispatch = createEventDispatcher<{
     formValue: Record<string, PickerPill[]>;
@@ -60,7 +69,7 @@
   function addValue() {
     if (!value) return;
     // Match should be  first element in the autocomplete.
-    const match = autocomplete[0];
+    const match = autocomplete.length === 0 ? arbitraryInput(value) : autocomplete[0];
     if (!match) return;
     pickedItems = [...pickedItems, match];
     pickableItems = pickableItems.filter((x) => x !== match);
@@ -92,20 +101,28 @@
     return [source, target];
   }
 
-  $: autocomplete = pickableItems.filter((x) => matchFunction(x, value)).slice(0, maxAutoComplete);
+  let autocomplete = $derived(
+    pickableItems.filter((x) => matchFunction(x, value)).slice(0, maxAutoComplete)
+  );
 
   // If you do not find any value, add the arbitrary Input.
-  $: if (autocomplete.length === 0 && arbitraryInput) autocomplete = [arbitraryInput(value)];
-  $: pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']); // enforce sorted order
+  /*  run(() => {
+    if (autocomplete.length === 0 && arbitraryInput) autocomplete = [arbitraryInput(value)];
+  }); */
+  run(() => {
+    pickableItems = sortBy(pickableItems, ['text', 'label', 'icon']);
+  }); // enforce sorted order
 
-  $: if (name) dispatch('formValue', { [name]: pickedItems });
+  run(() => {
+    if (name) dispatch('formValue', { [name]: pickedItems });
+  });
 
-  let input: HTMLInputElement;
+  let input: HTMLInputElement = $state();
 </script>
 
 <!--
   @component
-  
+
   An input for picking from a list of pre-defined items.
 -->
 <div class="box-border relative overflow-visible">
@@ -146,7 +163,7 @@
       {placeholder}
       {disabled}
       bind:value
-      on:keydown={onKeyDown}
+      onkeydown={onKeyDown}
     />
     {#if value !== '' && autocomplete.length > 0}
       <div
@@ -155,7 +172,7 @@
         {#each autocomplete as props}
           <button
             type="button"
-            on:click={() => {
+            onclick={() => {
               // if there is only one value, just add this one. No seed to search. Also handles arbitraryInput in a easy way
               if (autocomplete.length === 1) {
                 addValue();
@@ -175,6 +192,27 @@
             <Pill {...props} class="border-2 border-surface0 {props.class}"></Pill>
           </button>
         {/each}
+      </div>
+    {/if}
+    {#if value !== '' && autocomplete.length === 0}
+      <div
+        class="absolute left-0 max-h-80 gap-1 mt-1 flex-wrap w-full z-10 flex p-4 overflow-auto rounded-md top-full bg-ctp-surface1 {popUpClass}"
+      >
+        <button
+          type="button"
+          onclick={() => {
+            // if there is only one value, just add this one. No seed to search. Also handles arbitraryInput in a easy way
+            addValue();
+            // Always reset value and refocus
+            value = '';
+            input.focus();
+          }}
+        >
+          <Pill
+            {...arbitraryInput(value)}
+            class="border-2 border-surface0 {arbitraryInput(value).class}"
+          ></Pill>
+        </button>
       </div>
     {/if}
   </div>

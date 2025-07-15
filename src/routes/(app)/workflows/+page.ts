@@ -10,7 +10,7 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import type { Trigger } from './triggers/trigger.js';
 import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
 import type { DynCardActionHeader } from '$lib/models/DynCardActionHeader.interface';
-import { notifications } from '$lib/stores';
+import { notifications } from '$lib/stores.svelte.ts';
 import { successPill } from '$lib/util/pill.util';
 import { invalidateAll } from '$app/navigation';
 

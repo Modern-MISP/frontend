@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import { token } from '$lib/api';
 
-  export let data;
+  let { data } = $props();
   $token = data.token;
   goto('/events');
 </script>

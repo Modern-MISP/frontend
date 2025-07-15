@@ -1,13 +1,15 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { api } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
   import Card from '$lib/components/card/Card.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { getFormValues } from '$lib/util/form.util';
   import Icon from '@iconify/svelte';
   import { get } from 'svelte/store';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
   async function submit(event: SubmitEvent) {
     const { galaxies } = getFormValues(event);
@@ -33,15 +35,15 @@
       error = `Your input could not be parsed. Error is: ${JSON.stringify(_error, null, 2)}`;
     }
   }
-  let error = '';
-  let success = '';
+  let error = $state('');
+  let success = $state('');
 </script>
 
-<!-- 
+<!--
     @component
     Displays a freetext import for importing galaxies.
 -->
-<form class="h-full" on:submit|preventDefault={submit}>
+<form class="h-full" onsubmit={preventDefault(submit)}>
   <Card>
     <h1 class="text-xl">Import Galaxies</h1>
     {#if error}

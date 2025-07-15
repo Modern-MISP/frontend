@@ -6,7 +6,7 @@ import { get } from 'svelte/store';
 import Input from '$lib/components/input/Input.svelte';
 import DatePill from '$lib/components/pills/datePill/DatePill.svelte';
 import Pill from '$lib/components/pills/pill/Pill.svelte';
-import { compatibility } from '$lib/stores';
+import { compatibility } from '$lib/stores.svelte.ts';
 
 export const load: PageLoad = async ({ fetch }) => {
   const { data, error: mispError, response } = await get(api).GET('/users/view/me', { fetch });

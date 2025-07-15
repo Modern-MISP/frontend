@@ -3,10 +3,14 @@
   import Icon from '@iconify/svelte';
   import { createPopover, melt } from '@melt-ui/svelte';
 
-  /**
-   * Contextual info messages.
-   */
-  export let info: string[];
+  interface Props {
+    /**
+     * Contextual info messages.
+     */
+    info: string[];
+  }
+
+  let { info }: Props = $props();
 
   const {
     elements: { trigger, content, arrow },
@@ -19,7 +23,7 @@
 
 <!--
   @component
-  
+
   Indicate context specific information that is displayed as a popover on click.
 -->
 <button
@@ -32,7 +36,7 @@
 </button>
 {#if $open}
   <div use:melt={$content} class="p-3 rounded-lg bg-ctp-surface1 text-ctp-text">
-    <div use:melt={$arrow} />
+    <div use:melt={$arrow}></div>
     <div class="flex flex-col gap-2">
       {#each info as message}
         <Info class="w-full">{message}</Info>

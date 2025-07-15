@@ -1,6 +1,7 @@
-FROM node:24
+FROM registry.cert.kit.edu/hub/oven/bun:1-alpine
 
 WORKDIR /app
 COPY package*.json .
 COPY . .
-RUN npm ci
+RUN apk update && apk add git
+RUN bun install --frozen-lockfile

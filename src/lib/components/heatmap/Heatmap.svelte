@@ -31,32 +31,42 @@
     options: { label: string; value: string }[];
   };
 
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * Title of this component.
-   */
-  export let title = '';
-  /**
-   * The description of this component.
-   */
-  export let description: string = '';
-  /**
-   * The data that will be displayed in the heatmap.
-   */
-  export let data: dateData[];
-  /**
-   * The settings for the heatmap.
-   */
-  export let settings: settings = {};
-  /**
-   * The dropdown settings for the heatmap.
-   */
-  export let dropdown: dropdown | undefined;
+  interface Props {
+    class?: string;
+    /**
+     * Title of this component.
+     */
+    title?: string;
+    /**
+     * The description of this component.
+     */
+    description?: string;
+    /**
+     * The data that will be displayed in the heatmap.
+     */
+    data: dateData[];
+    /**
+     * The settings for the heatmap.
+     */
+    settings?: settings;
+    /**
+     * The dropdown settings for the heatmap.
+     */
+    dropdown: dropdown | undefined;
+  }
+
+  let {
+    class: clazz = '',
+    title = '',
+    description = '',
+    data,
+    settings = {},
+    dropdown
+  }: Props = $props();
 
   const defaultSettings = {
     data: data,
@@ -97,17 +107,19 @@
     ...settings
   };
 
-  $: height =
+  let height = $derived(
     6 * (heatmapData.cellSize + heatmapData.cellGap) -
-    heatmapData.cellGap +
-    heatmapData.monthLabelHeight +
-    heatmapData.fontSize;
-  $: width =
+      heatmapData.cellGap +
+      heatmapData.monthLabelHeight +
+      heatmapData.fontSize
+  );
+  let width = $derived(
     (7 * (heatmapData.cellSize + heatmapData.cellGap) -
       heatmapData.cellGap +
       heatmapData.monthGap) *
       7 -
-    heatmapData.monthGap;
+      heatmapData.monthGap
+  );
   function calcX(index: number) {
     return (heatmapData.cellSize + heatmapData.cellGap) * index;
   }
@@ -123,7 +135,7 @@
     <h1 class="text-2xl font-bold text-ctp-sky {clazz}">{title}</h1>
     <span class="">{description}</span>
     {#if typeof dropdown !== 'undefined'}
-      <svelte:component this={Select} {...dropdown} />
+      <Select {...dropdown} />
     {/if}
     <div style="margin: 3rem">
       <SvelteHeatmap {...heatmapData} />

@@ -1,6 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { actionBar, addContextInfo, contextRoutes, lockEditMode } from './actions';
-import { actionBarEntries, contextInfo, contextRouteEntries, lockModeToggle, mode } from './stores';
+import {
+  actionBarEntries,
+  contextInfo,
+  contextRouteEntries,
+  lockModeToggle,
+  appState
+} from './stores.svelte.ts';
 import { get } from 'svelte/store';
 import type { ActionBarEntryProps } from './models/ActionBarEntry.interface';
 import type { SideMenuRoute } from './components/menus/sidemenu/SideMenu.model';
@@ -89,7 +95,7 @@ describe('svelte actions', () => {
 
   describe('lockEditMode', () => {
     const element = document.createElement('div');
-    mode.set('edit');
+    appState.mode = 'edit';
     const { update, destroy } = lockEditMode(element, true)!;
     it('should initialize', () => {
       expect(get(lockModeToggle)).toStrictEqual(true);
@@ -99,9 +105,9 @@ describe('svelte actions', () => {
       expect(get(lockModeToggle)).toStrictEqual(false);
       update!(true);
       expect(get(lockModeToggle)).toStrictEqual(true);
-      mode.set('view');
+      appState.mode = 'view';
       expect(get(lockModeToggle)).toStrictEqual(false);
-      mode.set('edit');
+      appState.mode = 'edit';
       expect(get(lockModeToggle)).toStrictEqual(true);
     });
     it('should destroy', () => {

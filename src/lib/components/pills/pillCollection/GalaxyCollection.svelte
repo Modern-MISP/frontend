@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+  import { run } from 'svelte/legacy';
+
   import EventPillCollectionCard from '$lib/components/pills/pillCollection/PillCollectionWithDeleteAndAdd.svelte';
 
   import type { components } from '$lib/api/misp';
@@ -6,31 +8,34 @@
   import HrefPill from '$lib/components/pills/hrefPill/HrefPill.svelte';
   import PillCollection from '$lib/components/pills/pillCollection/PillCollection.svelte';
   import type { PickerPill } from '$lib/models/Picker.interface';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { isEqual, merge } from 'lodash-es';
   import { type ComponentProps } from 'svelte';
 
-  /**
-   * The Page data.
-   */
-  export let galaxies: (components['schemas']['Galaxy'] & {
-    GalaxyCluster?: (components['schemas']['GalaxyCluster'] & {
-      local?: boolean;
-      relationship_type?: string;
-      tag_id: string;
+  interface Props {
+    /**
+     * The Page data.
+     */
+    galaxies?: (components['schemas']['Galaxy'] & {
+      GalaxyCluster?: (components['schemas']['GalaxyCluster'] & {
+        local?: boolean;
+        relationship_type?: string;
+        tag_id: string;
+      })[];
     })[];
-  })[] = [];
+    /**
+     * The currently selected pills
+     */
+    selection?: PickerPill<T>[];
+    /**
+     * Pills that are marked for deletion
+     */
+    deletion?: PickerPill<T>[];
+  }
 
-  /**
-   * The currently selected pills
-   */
-  export let selection: PickerPill<T>[] = [];
-  /**
-   * Pills that are marked for deletion
-   */
-  export let deletion: PickerPill<T>[] = [];
+  let { galaxies = [], selection = $bindable([]), deletion = $bindable([]) }: Props = $props();
 
-  let pillsByGalaxy: Record<string, ComponentProps<HrefPill>[]>;
+  let pillsByGalaxy: Record<string, ComponentProps<HrefPill>[]> = $state();
 
   function generatePills(includeAction: boolean) {
     pillsByGalaxy = merge(
@@ -73,7 +78,9 @@
     );
   }
 
-  $: if (galaxies) generatePills($mode === 'edit');
+  run(() => {
+    if (galaxies) generatePills(appState.mode === 'edit');
+  });
 </script>
 
 <EventPillCollectionCard on:close on:open on:delete on:save bind:selection bind:deletion>

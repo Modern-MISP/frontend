@@ -2,25 +2,29 @@
   import { lockViewMode } from '$lib/actions';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
 
-  $mode = 'view';
+  appState.mode = 'view';
 
   function editCallback(formData: Record<string, string>) {
     console.log(formData);
   }
 
-  /**
-   * Page data containing usage data information.
-   */
-  export let data;
+  interface Props {
+    /**
+     * Page data containing usage data information.
+     */
+    data: any;
+  }
 
-  $: ({ header, title, description } = data);
+  let { data }: Props = $props();
+
+  let { header, title, description } = $derived(data);
 </script>
 
 <svelte:window use:lockViewMode={true} />
 
-<!-- 
+<!--
     @component
     Displays the statistics page.
  -->

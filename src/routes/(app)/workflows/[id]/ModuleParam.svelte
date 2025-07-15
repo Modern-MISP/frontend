@@ -1,19 +1,25 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import Select from '$lib/components/form/Select.svelte';
   import Input from '$lib/components/input/Input.svelte';
   import Picker from '$lib/components/picker/Picker.svelte';
-  import { mode } from '$lib/stores';
+  import { appState } from '$lib/stores.svelte.ts';
   import { objectEntries } from 'ts-extras';
   import type { ModuleParam as Param } from '../../../../routes/(app)/workflows/modules/module';
   import type { PickerPill } from '$lib/models/Picker.interface';
 
-  /** The parameter data from the workflow module. */
-  export let param: Param;
-  /** The already supplied value for an indexed parameter. */
-  export let value: string | string[] = '';
+  interface Props {
+    /** The parameter data from the workflow module. */
+    param: Param;
+    /** The already supplied value for an indexed parameter. */
+    value?: string | string[];
+  }
 
-  let stringValue: string = Array.isArray(value) ? '' : value;
-  let arrayValue: string[] = Array.isArray(value) ? value : [];
+  let { param, value = $bindable('') }: Props = $props();
+
+  let stringValue: string = $state(Array.isArray(value) ? '' : value);
+  let arrayValue: string[] = $state(Array.isArray(value) ? value : []);
 
   const selectOptions = objectEntries(param.options ?? {}).map(([k, v]) => ({
     value: k,
@@ -36,15 +42,19 @@
   const setValue = (newValue: string | string[]) => {
     if (JSON.stringify(value) !== JSON.stringify(newValue)) value = newValue;
   };
-  $: if (Array.isArray(value)) setValue(arrayValue);
-  $: if (!Array.isArray(value)) setValue(stringValue);
-  $: {
+  run(() => {
+    if (Array.isArray(value)) setValue(arrayValue);
+  });
+  run(() => {
+    if (!Array.isArray(value)) setValue(stringValue);
+  });
+  run(() => {
     if (Array.isArray(value)) {
       arrayValue = value;
     } else {
       stringValue = value;
     }
-  }
+  });
 
   function onPickerUpdate(event: CustomEvent<PickerPill[]>) {
     arrayValue = event.detail.map((p) => p.text!);
@@ -53,7 +63,7 @@
 
 <!--
   @component
-  
+
   Parameter of a workflow module.
 -->
 <div>
@@ -63,7 +73,7 @@
       name={param.id}
       options={selectOptions}
       bind:value={stringValue}
-      disabled={$mode === 'view'}
+      disabled={appState.mode === 'view'}
     />
   {:else if param.type === 'picker'}
     <Picker
@@ -71,7 +81,7 @@
       placeholder={param.placeholder}
       pickableItems={pickerOptions}
       pickedItems={getPickerPills(arrayValue)}
-      disabled={$mode === 'view'}
+      disabled={appState.mode === 'view'}
       on:update={onPickerUpdate}
     />
   {:else}
@@ -81,7 +91,7 @@
       placeholder={param.placeholder}
       bind:value={stringValue}
       on:value={(e) => (stringValue = e.detail)}
-      disabled={$mode === 'view'}
+      disabled={appState.mode === 'view'}
     />
   {/if}
 </div>

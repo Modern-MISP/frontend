@@ -5,10 +5,14 @@
   import Input from '../input/Input.svelte';
   import { onMount } from 'svelte';
 
-  /**
-   * The map of key value pairs.
-   */
-  export let entries: [string, string][];
+  interface Props {
+    /**
+     * The map of key value pairs.
+     */
+    entries: [string, string][];
+  }
+
+  let { entries = $bindable() }: Props = $props();
 
   onMount(() => {
     updateEntries();

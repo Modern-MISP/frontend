@@ -1,43 +1,53 @@
 <script lang="ts">
-  import Icon from '@iconify/svelte';
+  import { createBubbler } from 'svelte/legacy';
 
-  let clazz = '';
+  const bubble = createBubbler();
+  import Icon from '@iconify/svelte';
 
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * The prefix icon to be displayed inside of the input.
-   */
-  export let prefixIcon: string | undefined = undefined;
+  interface Props {
+    class?: string;
+    /**
+     * The prefix icon to be displayed inside of the input.
+     */
+    prefixIcon?: string | undefined;
+    /**
+     * The suffix icon to be displayed inside of the input.
+     */
+    suffixIcon?: string | undefined;
+    /**
+     * Specify the button type. Default is button
+     */
+    type?: 'submit' | 'reset' | 'button' | undefined | null;
+    children?: import('svelte').Snippet;
+  }
 
-  /**
-   * The suffix icon to be displayed inside of the input.
-   */
-  export let suffixIcon: string | undefined = undefined;
-
-  /**
-   * Specify the button type. Default is button
-   */
-  export let type: 'submit' | 'reset' | 'button' | undefined | null = 'button';
+  let {
+    class: clazz = '',
+    prefixIcon = undefined,
+    suffixIcon = undefined,
+    type = 'button',
+    children
+  }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   A button with a slot for content.
  -->
 
 <button
-  on:click
+  onclick={bubble('click')}
   class="flex gap-4 justify-between p-4 rounded-md bg-ctp-surface1 w-full items-center font-bold {clazz}"
   {type}
 >
   {#if prefixIcon}
     <Icon icon={prefixIcon} />
   {/if}
-  <slot />
+  {@render children?.()}
 
   {#if suffixIcon}
     <Icon icon={suffixIcon} />

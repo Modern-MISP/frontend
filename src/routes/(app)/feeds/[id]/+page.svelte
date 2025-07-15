@@ -1,18 +1,22 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { actionBar } from '$lib/actions';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
-  /** Page data containing the data of the feed */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing the data of the feed */
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <!--
   @component
-  
+
   Information about a feed specified by 'id'.
 
 -->
@@ -30,7 +34,7 @@
         notifySave(
           $api
             .POST('/feeds/fetchFromFeed/{feedId}', {
-              params: { path: { feedId: $page.params.id } }
+              params: { path: { feedId: page.params.id } }
             })
             .then((resp) => {
               if (resp.error) throw new Error(resp.error.message);

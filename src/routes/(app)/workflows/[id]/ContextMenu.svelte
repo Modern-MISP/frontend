@@ -5,18 +5,22 @@
   import { capitalize } from 'lodash-es';
   import { createEventDispatcher } from 'svelte';
 
-  /** Node or edge id */
-  export let id: string;
-  /** target type */
-  export let type: 'node' | 'edge';
-  /** absolute top distance in pixels */
-  export let top: number | undefined;
-  /** absolute bottom distance in pixels */
-  export let bottom: number | undefined;
-  /** absolute right distance in pixels */
-  export let right: number | undefined;
-  /** absolute left distance in pixels */
-  export let left: number | undefined;
+  interface Props {
+    /** Node or edge id */
+    id: string;
+    /** target type */
+    type: 'node' | 'edge';
+    /** absolute top distance in pixels */
+    top: number | undefined;
+    /** absolute bottom distance in pixels */
+    bottom: number | undefined;
+    /** absolute right distance in pixels */
+    right: number | undefined;
+    /** absolute left distance in pixels */
+    left: number | undefined;
+  }
+
+  let { id, type, top, bottom, right, left }: Props = $props();
 
   const dispatch = createEventDispatcher<{ close: void }>();
 

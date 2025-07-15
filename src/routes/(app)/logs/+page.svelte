@@ -2,7 +2,7 @@
   import { api } from '$lib/api';
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
   import { get } from 'svelte/store';
-  export let data;
+  let { data } = $props();
   let tableData = data.data.map((x) => x.Log);
   console.log(data);
 </script>

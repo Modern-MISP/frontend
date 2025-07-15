@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import DynCardContent from '$lib/components/card/dynCard/DynCardContent.svelte';
@@ -7,34 +9,46 @@
   import Input from '$lib/components/input/Input.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups.js';
 
-  /**
-   * All Attribute types that should be selectable
-   */
-  export let allAttributeTypes;
-  /**
-   * All categories
-   */
-  export let categories;
-  /**
-   * Mapping between categories and types
-   */
-  export let categoryTypeMapping;
-  /**
-   * sane defaults, are shown as suggestions
-   */
-  export let saneDefault = undefined;
-  /**
-   * a list of possible values. If set only they are selectable
-   */
-  export let valueList = [];
-  /**
-   * Whether to set the default of disable correlation
-   */
-  export let disable_correlation = false;
-  /**
-   * Whether to render DynCard or DynCardContent
-   */
-  export let contentOnly = false;
+  interface Props {
+    /**
+     * All Attribute types that should be selectable
+     */
+    allAttributeTypes: any;
+    /**
+     * All categories
+     */
+    categories: any;
+    /**
+     * Mapping between categories and types
+     */
+    categoryTypeMapping: any;
+    /**
+     * sane defaults, are shown as suggestions
+     */
+    saneDefault?: any;
+    /**
+     * a list of possible values. If set only they are selectable
+     */
+    valueList?: any;
+    /**
+     * Whether to set the default of disable correlation
+     */
+    disable_correlation?: boolean;
+    /**
+     * Whether to render DynCard or DynCardContent
+     */
+    contentOnly?: boolean;
+  }
+
+  let {
+    allAttributeTypes,
+    categories,
+    categoryTypeMapping,
+    saneDefault = undefined,
+    valueList = [],
+    disable_correlation = false,
+    contentOnly = false
+  }: Props = $props();
 
   const col = createTableHeadGenerator();
 
@@ -139,7 +153,9 @@
       })
     }));
   }
-  $: updateCols(allAttributeTypes, categories, categoryTypeMapping, saneDefault, valueList);
+  run(() => {
+    updateCols(allAttributeTypes, categories, categoryTypeMapping, saneDefault, valueList);
+  });
 
   const header = [
     valueCol,

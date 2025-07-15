@@ -1,35 +1,40 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import Card from '$lib/components/card/Card.svelte';
   import Icon from '@iconify/svelte';
 
-  let clazz = '';
   /**
    * Additional classes to be applied to this component.
    */
-  export { clazz as class };
 
-  /**
-   * The icon to be displayed in this card.
-   */
-  export let icon: string;
+  interface Props {
+    class?: string;
+    /**
+     * The icon to be displayed in this card.
+     */
+    icon: string;
+    /**
+     * The text to be displayed in this card.
+     */
+    text: string;
+    /**
+     * The target URL of the Card, which will be navigated to when the Card is clicked.
+     */
+    href?: string;
+  }
 
-  /**
-   * The text to be displayed in this card.
-   */
-  export let text: string;
-  /**
-   * The target URL of the Card, which will be navigated to when the Card is clicked.
-   */
-  export let href = '';
+  let { class: clazz = '', icon, text, href = '' }: Props = $props();
 </script>
 
-<!-- 
+<!--
   @component
   A card with a slot for content (Icon and Text).
   Sets the default padding and border radius. You can override this by passing your own classes.
-  
+
  -->
-<button on:click type="button">
+<button onclick={bubble('click')} type="button">
   <a {href}>
     <Card
       class="p-3 overflow-hidden items-center cursor-pointer hover:text-ctp-sky {clazz}"

@@ -2,7 +2,7 @@ ARG fromimage
 ARG fromtag
 FROM $fromimage:$fromtag AS builder
 
-RUN npm run build -- --minify false --debug --sourcemap true
+RUN bun run build -- --minify false --debug --sourcemap true
 
 
 FROM nginx:alpine-slim

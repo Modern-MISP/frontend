@@ -1,13 +1,17 @@
 <script lang="ts">
   import ComplexTableLayout from '$lib/components/table/complexTable/ComplexTableLayout.svelte';
-  import { notifications } from '$lib/stores';
+  import { notifications } from '$lib/stores.svelte.ts';
   import type { PageData } from './$types';
   import { successPill } from '$lib/util/pill.util';
 
-  /** Page data containing data of the workers table.*/
-  export let data: PageData;
+  interface Props {
+    /** Page data containing data of the workers table.*/
+    data: PageData;
+  }
 
-  let password = '';
+  let { data }: Props = $props();
+
+  let password = $state('');
   data.passwordStore.subscribe((value) => {
     password = value;
   });
@@ -35,7 +39,7 @@
       simply generate a new one.
     </p>
     <p><strong>{password}</strong></p>
-    <button on:click={closePopup} class="save-button">I have noted down the new password</button>
+    <button onclick={closePopup} class="save-button">I have noted down the new password</button>
   </div>
 </div>
 

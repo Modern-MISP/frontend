@@ -4,7 +4,7 @@ import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 import idCardHeaders from '../idCardHeaders';
-import { compatibility } from '$lib/stores';
+import { compatibility } from '$lib/stores.svelte.ts';
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const {

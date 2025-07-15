@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { run } from 'svelte/legacy';
+
+  import { page } from '$app/state';
   import { lockEditMode } from '$lib/actions';
   import { api } from '$lib/api';
   import Button from '$lib/components/button/Button.svelte';
@@ -9,24 +11,26 @@
   import Select from '$lib/components/form/Select.svelte';
   import { DISTRIBUTION_LOOKUP } from '$lib/consts/PillLookups';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  import { currentRoute, mode, notifications } from '$lib/stores';
+  import { currentRoute, appState, notifications } from '$lib/stores.svelte.ts';
   import { errorPill, successPill } from '$lib/util/pill.util';
   import { createTableHeadGenerator } from '$lib/util/tableBuilder.util';
 
-  $mode = 'edit';
+  appState.mode = 'edit';
 
-  let downloadURL: string | null = null;
+  let downloadURL: string | null = $state(null);
 
   const col = createTableHeadGenerator<null>();
 
-  $: $currentRoute = [
-    ...($currentRoute ?? []),
-    {
-      name: 'Export Galaxy',
-      href: 'export',
-      icon: 'mdi:export'
-    }
-  ];
+  run(() => {
+    $currentRoute = [
+      ...($currentRoute ?? []),
+      {
+        name: 'Export Galaxy',
+        href: 'export',
+        icon: 'mdi:export'
+      }
+    ];
+  });
 
   const header = [
     col(
@@ -117,7 +121,7 @@
   function onExport(formData: Record<string, string>) {
     $api
       .POST('/galaxies/export/{galaxyId}', {
-        params: { path: { galaxyId: $page.params.id } },
+        params: { path: { galaxyId: page.params.id } },
         body: { Galaxy: formData }
       })
       .then(async (result) => {
@@ -139,7 +143,7 @@
 
 <!--
   @component
-  
+
   Displays the form for exporting a galaxy.
 -->
 <svelte:window use:lockEditMode={true} />
@@ -147,7 +151,7 @@
   <DynCard {header} data={null} />
 </Form>
 {#if downloadURL !== null}
-  <a href={downloadURL} download={`galaxy_${$page.params.id}.json`} class="w-fit"
+  <a href={downloadURL} download={`galaxy_${page.params.id}.json`} class="w-fit"
     ><Button>Download</Button></a
   >
 {/if}

@@ -1,22 +1,26 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
-  /** Page data containing data of the providers with the 'id' in the url */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing data of the providers with the 'id' in the url */
+    data: PageData;
+  }
 
-  $: ({ left, provider } = data);
+  let { data }: Props = $props();
+
+  let { left, provider } = $derived(data);
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .POST('/auth/openID/editOpenIDConnectProvider/{openIDConnectProvider}', {
-          params: { path: { openIDConnectProvider: $page.params.id } },
+          params: { path: { openIDConnectProvider: page.params.id } },
           body: formData
         })
         .then((resp) => {
@@ -36,7 +40,7 @@
 <!--
   @component
   Displays information about a specific provider, specified by `id`.
-  
+
 -->
 
 <Form callback={editCallback}>

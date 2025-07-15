@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends IRecord[]">
+  import { run } from 'svelte/legacy';
+
   import { goto } from '$app/navigation';
 
   import { derived, type Readable } from 'svelte/store';
@@ -12,39 +14,50 @@
   import Td from '../modularTable/Td.svelte';
   import Th from '../modularTable/Th.svelte';
 
-  /**
-   * The header of the table. Also includes the icon and the href.
-   * When setting this, it's recommended to use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function.
-   */
-  export let header: Readable<TableHead<T[number]> & DynTableHeadExtent>[];
-  /**
-   * The data that will be displayed in the table.
-   */
-  export let data: T;
-  /**
-   * The callback that will be called when the user clicks on the row.
-   */
-  export let href: ((row: T[number]) => string | undefined) | undefined = undefined;
-  /**
-   * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
-   */
-  export let groupInfo: (x: T[number]) => unknown = constant(undefined);
-
   const store = derived(header, (arr) => arr);
 
-  /**
-   * Is the table in select mode. Aka. Select rows by single click. Navigate to href on double click
-   */
-  export let selectMode = false;
+  interface Props {
+    /**
+     * The header of the table. Also includes the icon and the href.
+     * When setting this, it's recommended to use the [`createTableHeadGenerator`](../dynRendering.md#createtableheadgenerator) util function.
+     */
+    header: Readable<TableHead<T[number]> & DynTableHeadExtent>[];
+    /**
+     * The data that will be displayed in the table.
+     */
+    data: T;
+    /**
+     * The callback that will be called when the user clicks on the row.
+     */
+    href?: ((row: T[number]) => string | undefined) | undefined;
+    /**
+     * The callback that will be called to determine if the row should be grouped with other rows, and what info to show
+     */
+    groupInfo?: (x: T[number]) => unknown;
+    /**
+     * Is the table in select mode. Aka. Select rows by single click. Navigate to href on double click
+     */
+    selectMode?: boolean;
+    /**
+     * currentlyActive rows. Should probably bind to this.
+     */
+    activeRows?: T; // Ts can not initialize Record<string, unknown>[] as []. I think this is a svelte error. Couldn't find a  better workaround
+  }
 
-  /**
-   * currentlyActive rows. Should probably bind to this.
-   */
-  export let activeRows: T = [] as unknown as T; // Ts can not initialize Record<string, unknown>[] as []. I think this is a svelte error. Couldn't find a  better workaround
+  let {
+    header,
+    data,
+    href = undefined,
+    groupInfo = constant(undefined),
+    selectMode = false,
+    activeRows = $bindable([] as unknown as T)
+  }: Props = $props();
 
   const toggleRow = (row: T[number]) => (activeRows = xor(activeRows, [row]) as T); // This cast is safe, because xor should have IRecord as generic parameter. But ts parses it wrong.
 
-  $: if (!selectMode) activeRows = [] as unknown as T;
+  run(() => {
+    if (!selectMode) activeRows = [] as unknown as T;
+  });
 </script>
 
 <!--
@@ -57,7 +70,7 @@
   Type safety of this is enforced at compile time using Typescript.
 
   Can enable selectMode. Where you can navigate to href by double click, and it adds the row to activeRows on click. Removes it, if it is present.
-  
+
 -->
 <Table>
   <thead>
@@ -90,15 +103,15 @@
           class:bg-ctp-surface2={activeRows.includes(row)}
           class:!border-l-sky={activeRows.includes(row)}
           class:border-l-4={selectMode}
-          on:click={() => (selectMode ? toggleRow(row) : undefined)}
-          on:dblclick={() => _href && goto(_href)}
+          onclick={() => (selectMode ? toggleRow(row) : undefined)}
+          ondblclick={() => _href && goto(_href)}
         >
           {#each $store as { value }}
             {@const v = value(row)}
             <Td href={selectMode ? undefined : _href}>
               <span class="text-lg">
                 {#if typeof v != 'string'}
-                  <svelte:component this={v.display} {...v.props} />
+                  <v.display {...v.props} />
                 {:else}
                   {v}
                 {/if}
@@ -110,7 +123,7 @@
     </tbody>
     <!-- Hack to display a "gap" between `tbody`s, is displayed after all but the last group -->
     {#if i < Object.keys(grouped).length - 1}
-      <tbody class="bg-ctp-black"><tr><td colspan={$store.length} /></tr></tbody>
+      <tbody class="bg-ctp-black"><tr><td colspan={$store.length}></td></tr></tbody>
     {/if}
   {/each}
   <!-- </tbody> -->

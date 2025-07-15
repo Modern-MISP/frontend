@@ -1,22 +1,26 @@
 <script lang="ts">
   import { goto, invalidateAll } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { api } from '$lib/api';
   import DynCard from '$lib/components/card/dynCard/DynCard.svelte';
   import Form from '$lib/components/form/Form.svelte';
   import { notifySave } from '$lib/util/notifications.util';
   import type { PageData } from './$types';
 
-  /** Page data containing data of the users with the 'id' in the url */
-  export let data: PageData;
+  interface Props {
+    /** Page data containing data of the users with the 'id' in the url */
+    data: PageData;
+  }
 
-  $: ({ left, right, user } = data);
+  let { data }: Props = $props();
+
+  let { left, right, user } = $derived(data);
 
   function editCallback(formData: Record<string, string>) {
     notifySave(
       $api
         .PUT('/admin/users/edit/{userId}', {
-          params: { path: { userId: $page.params.id } },
+          params: { path: { userId: page.params.id } },
           body: formData
         })
         .then((resp) => {
@@ -34,7 +38,7 @@
   function deleteUser() {
     notifySave(
       $api
-        .DELETE('/admin/users/delete/{userId}', { params: { path: { userId: $page.params.id } } })
+        .DELETE('/admin/users/delete/{userId}', { params: { path: { userId: page.params.id } } })
         .then((resp) => {
           if (resp.error) {
             // @ts-expect-error MISP API return custom errors object
@@ -51,7 +55,7 @@
 <!--
   @component
   Displays information about a specific user, specified by `id`.
-  
+
 -->
 
 <Form

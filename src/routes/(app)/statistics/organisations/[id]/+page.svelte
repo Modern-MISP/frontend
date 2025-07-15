@@ -4,17 +4,21 @@
   import type { ActionBarEntryProps } from '$lib/models/ActionBarEntry.interface';
   import { lockViewMode } from '$lib/actions';
 
-  /**
-   * Page data containing the data of the organisation with the 'id' in the url
-   */
-  export let data;
-  $: ({ title, description } = data);
+  interface Props {
+    /**
+     * Page data containing the data of the organisation with the 'id' in the url
+     */
+    data: any;
+  }
+
+  let { data }: Props = $props();
+  let { title, description } = $derived(data);
 
   function editCallback(formData: Record<string, string>) {
     console.log('editCallback', formData);
   }
 
-  let formActions: ActionBarEntryProps[] = [];
+  let formActions: ActionBarEntryProps[] = $state([]);
 </script>
 
 <!--
